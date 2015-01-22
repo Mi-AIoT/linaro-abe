@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_55f82ce5",
+        "filename": "config/boards/tcwg-buildqemu.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-01-22T07:32:08Z",
+      "side": 1,
+      "message": "What problem are you trying to solve?\n\nIn this testing scenario the testcases are compiled on one of build-0[23456] machines (HOST), but executed in qemu on build-01 machine (TARGET).\n\nThe /sysroot path here is on build-01 machine, and it is a fixed destination where sysroot from HOST is copied to TARGET.  The copying is done here: https://git.linaro.org/toolchain/abe.git/blob/HEAD:/scripts/test-schroot.sh#l339\n\nBecause we are using a schroot testing session, it is fine to have /sysroot at a hard-coded location.",
+      "revId": "2f2ec466f89503624b6e851824319e3c160860f0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
