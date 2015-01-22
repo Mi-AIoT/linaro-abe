@@ -1,4 +1,13 @@
 load_generic_config tcwg-common
 
 set_board_info hostname build-01
-set_board_info remote_sim "qemu-[lindex [split $target_triplet -] 0]-static -cpu any -L /sysroot"
+
+set compiler    "[find_gcc]"
+set ret [local_exec "$compiler --print-sysroot" "" "" $timeout]
+if { [lindex $ret 0] == 0 } {
+    set sysroot "[lindex $ret 1]"
+    # Strip the CR or LF off the end of the line as returned by GCC
+    regsub -all "\[\n\r\]+" $sysroot "" sysroot
+}
+ 
+set_board_info remote_sim "qemu-[lindex [split $target_triplet -] 0]-static -cpu any -L $sysroot"
