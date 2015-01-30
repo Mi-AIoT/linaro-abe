@@ -34,6 +34,24 @@
       "revId": "18887c7180d380f2b592cf783313db89a50c48e6",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_e773cd13",
+        "filename": "scripts/report.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-01-30T16:33:50Z",
+      "side": 1,
+      "message": "OK.  Make sure either of your patches adds quotes around argument of \"-name\" that has \"*\".",
+      "parentUuid": "1a9dcd25_a77e25e3",
+      "revId": "18887c7180d380f2b592cf783313db89a50c48e6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
