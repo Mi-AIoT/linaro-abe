@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_679edd58",
+        "filename": "scripts/report.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-01-30T06:24:19Z",
+      "side": 1,
+      "message": "Because sumname can come from input arguments, it is better to quote it to avoid problems with spaces in the arguments.",
+      "revId": "5aae5036af8eb987375b75e323be1192a9fcf023",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a9dcd25_07a3599f",
+        "filename": "scripts/report.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-01-30T06:24:19Z",
+      "side": 1,
+      "message": "Same comment about quoting here.",
+      "revId": "5aae5036af8eb987375b75e323be1192a9fcf023",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
