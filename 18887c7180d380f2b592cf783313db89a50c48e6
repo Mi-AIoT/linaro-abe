@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_a794e537",
+        "filename": "scripts/report.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-01-30T05:55:20Z",
+      "side": 1,
+      "message": "I think you can just use \n\"declare -a sums; sums\u003d($(find ${toplevel} -name \"gcc.sum*\"))\"\ninstead of the whole loop.  It should be in two statements, since it is preferable to have \"declare/local\" commands separate from non-trivial initializations (due to error-handling / return code issues).\nAlso, it is a good idea to quote any patterns with \u0027*\u0027 in them (gcc.sum* in this case) to avoid any possibility of shell * expansion.  If there happens to be gcc.sum-1 and gcc.sum-2 files in current directory, the command will be expanded into\n\"find ${toplevel} -name gcc.sum-1 gcc.sum-2\"",
+      "revId": "18887c7180d380f2b592cf783313db89a50c48e6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
