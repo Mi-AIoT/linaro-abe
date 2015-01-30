@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a9dcd25_276a151b",
+        "filename": "scripts/report.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 440,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-01-30T16:27:59Z",
+      "side": 1,
+      "message": "Same comment regarding quoting \"*\" to prevent unintentended shell expansions, but, I think, you are going to handle it in your other patch.",
+      "revId": "52556096504781cec5509b3e5d4369a1fd61b141",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
