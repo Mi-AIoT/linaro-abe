@@ -50,6 +50,9 @@ build_all()
         newlib_version="`grep ^latest= ${topdir}/config/newlib.conf | cut -d '\"' -f 2`"
         libgloss_version="`grep ^latest= ${topdir}/config/newlib.conf | cut -d '\"' -f 2`"
     fi
+    if test x"${mingw_version}" = x; then
+        mingw_version="`grep ^latest= ${topdir}/config/mingw-w64.conf | cut -d '\"' -f 2`"
+    fi    
     if test x"${glibc_version}" = x; then
         glibc_version="`grep ^latest= ${topdir}/config/glibc.conf | cut -d '\"' -f 2`"
     fi
@@ -90,6 +93,8 @@ build_all()
                 elif test x"${clibrary}" = x"newlib"; then
                     build ${newlib_version}
                     build ${newlib_version} libgloss
+                elif test x"${clibrary}" = x"mingw-w64"; then
+                    build ${mingw_version} mingw-crt
                 else
                     error "\${clibrary}=${clibrary} not supported."
                     return 1
@@ -235,11 +240,21 @@ build()
     tag="`get_git_tag ${gitinfo}`"
 
     local srcdir="`get_srcdir ${gitinfo} ${2:+$2}`"
-
+    
     local stamp=
     stamp="`get_stamp_name build ${gitinfo} ${2:+$2}`"
 
     local builddir="`get_builddir ${gitinfo} ${2:+$2}`"
+
+#		if test `echo $1 | grep -c "mingw-w64"` -gt 0; then 
+#    	local new_srcdir="`echo $srcdir | sed -e 's\code\mingw-w64\'`"
+#    	mv $srcdir $new_srcdir
+#    	srcdir=$new_srcdir
+#    	local new_builddir="`echo $builddir | sed -e 's\code\mingw-w64\'`"
+#    	mv $builddir $new_builddir
+#    	builddir=$new_builddir
+#    	tag="`echo $tag | sed -e 's\code\mingw-w64\'`"
+#    fi
 
     # The stamp is in the buildir's parent directory.
     local stampdir="`dirname ${builddir}`"
@@ -411,7 +426,7 @@ make_all()
     if test x"${tool}" = x"gdb" -a x"$2" == x"gdbserver"; then
        default_makeflags="gdbserver CFLAGS=--sysroot=${sysroots}"
     fi
-
+    
     if test x"${default_makeflags}" !=  x; then
         local make_flags="${make_flags} ${default_makeflags}"
     fi
@@ -588,6 +603,11 @@ make_install()
         dryrun "rm -f ${sysroots}/lib/ld-linux-aarch64.so.1"
         dryrun "ln -sfnT ${dynamic_linker_name} ${sysroots}/lib64/ld-linux-aarch64.so.1"
     fi
+   
+   	#mingw gcc configure will check mingw directory. make it now
+    if test "`echo ${tool} | grep -c mingw`" -gt 0 -a x"$2" = x"mingw-headers"; then
+        dryrun "ln -sfnT ${sysroots}/usr ${sysroots}/mingw"
+    fi 
 
     # FIXME: this is a seriously ugly hack required for building Canadian Crosses.
     # Basically the gcc/auto-host.h produced when configuring GCC stage2 has a
@@ -825,7 +845,7 @@ make_docs()
             dryrun "make SHELL=${bash_shell} ${make_flags} -i -k -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
-        *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
+        *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*|*mingw*)
             # the regular make install handles all the docs.
             ;;
         *libc*) # including eglibc

@@ -246,7 +246,11 @@ normalize_path()
 	    ;;
 	svn*)
 	    local node="`echo ${process} | sed -e 's@^.*/svn/@@'`"
-	    local node="`basename ${node}`"
+	    if test `echo $node | grep -c "mingw-w64"` -gt 0; then
+	    	local node=mingw-w64
+	    else
+	    	local node="`basename ${node}`"
+	    fi
 	    ;;
 	*.tar.*)
 	    local node="`echo ${process} | sed -e 's:\.tar.*::' -e 's:\+git:@:' -e 's:\.git/:.git-:'`"
@@ -275,8 +279,10 @@ get_builddir()
 
     if test x"$2" = x"libgloss"; then
      	echo "${local_builds}/${host}/${target}/${dir}/${target}/libgloss"
+    elif test `echo $1 | grep -c "mingw-w64"` -gt 0; then 
+    	echo "`echo ${local_builds}/${host}/${target}/${dir}${2:+-$2} | sed -e 's\code\mingw-w64\'`"
     else
-	echo "${local_builds}/${host}/${target}/${dir}${2:+-$2}"
+			echo "${local_builds}/${host}/${target}/${dir}${2:+-$2}"
     fi
 
     return 0
@@ -661,7 +667,13 @@ get_srcdir()
     if test x"$2" = x"libgloss"; then
 	local srcdir="${srcdir}/libgloss"
     fi
-
+    
+		if test `echo $1 | grep -c "mingw-w64"` -gt 0; then 
+    	local new_srcdir="`echo $srcdir | sed -e 's\code\mingw-w64\'`"
+    	mv $srcdir $new_srcdir
+    	srcdir=$new_srcdir
+    fi
+    
     echo ${srcdir}
 
     return 0

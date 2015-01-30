@@ -162,6 +162,8 @@ infrastructure()
      	files="${files} `grep /$i ${local_snapshots}/md5sums | cut -d ' ' -f3 | uniq`"
     done
 
+		
+
     # Store the current value so we can reset it after we're done.
     local nodep=${nodepends}
 
@@ -169,6 +171,10 @@ infrastructure()
     nodepends=yes
     local buildret=
     for i in ${files}; do
+	local name="`echo $i | sed -e 's:\.tar\..*::' -e 's:infrastructure/::'  -e 's:testcode/::'`"
+	if test "`echo $i | grep -c /linux`" -eq 1 -a x"${build}" = x"${target}"; then
+	    continue
+	fi
 	# if make 4.0 is already installed, we don't need to build it everytime.
 	if test $i = "make" -a "${makeversion}" = "4.0"; then
 	    continue
@@ -181,6 +187,15 @@ infrastructure()
 	    return 1
 	fi
     done
+
+
+	if test "`echo $target | grep -c mingw`" -gt 0; then
+	    build mingw-w64 mingw-headers
+	    if test ${buildret} -gt 0; then
+	    error "Building mingw-w64 headers failed."
+	    return 1
+	fi
+	fi
 
     # Reset to the stored value
     nodepends=${nodep}

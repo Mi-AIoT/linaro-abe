@@ -192,7 +192,11 @@ git_parser()
 	    repo|tool)
 		# Strip any trailing branch information.
 		local repo="`echo ${in} | sed -e 's:-[0-9].*::' -e 's:/trunk::'`"
-		repo="`basename ${repo}`"
+		if test `echo $repo | grep -c mingw-w64` -gt 0; then
+			repo=mingw-w64
+		else
+			repo="`basename ${repo}`"
+		fi
 		echo "${repo}"
 		;;
 	    url)
@@ -488,6 +492,11 @@ get_git_tag()
     branch="`echo ${branch} | sed 's:/:-:g'`"
 
     revision="`git_parser revision ${in}`"
-    echo "${repo}${branch:+~${branch}}${revision:+@${revision}}"
+    
+    if test `echo $1 | grep -c "mingw-w64"` -gt 0; then
+    	echo "mingw-w64"
+    else
+    	echo "${repo}${branch:+~${branch}}${revision:+@${revision}}"
+    fi
     return 0
 }

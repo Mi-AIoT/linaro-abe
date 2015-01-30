@@ -365,13 +365,20 @@ crosscheck_clibrary_target()
     local test_clibrary=$1
     local test_target=$2
     case ${test_target} in
-	arm*-eabi|aarch64*-*elf|*-mingw32)
+	arm*-eabi|aarch64*-*elf)
 	    # Bare metal targets only support newlib.
 	    if test x"${test_clibrary}" != x"newlib"; then
 		error "${test_target} is only compatible with newlib."
 		return 1
 	    fi
 	    ;;
+   *-mingw)
+      # Bare metal targets only support newlib.
+      if test x"${test_clibrary}" != x"mingw-w64"; then
+        error "${test_target} is only compatible with mingw-w64."
+        return 1
+      fi
+    ;;
 	*)
 	    # No specified target, or non-baremetal targets.
 	    ;;
@@ -761,9 +768,12 @@ while test $# -gt 0; do
 	    # user might try to override this with --set libc={glibc|eglibc}
 	    # or {glibc|eglibc}=<foo> but that will be caught elsewhere.
 	    case ${target} in
-		arm*-eabi*|arm*-elf|aarch64*-*elf|*-mingw32)
+		arm*-eabi*|arm*-elf|aarch64*-*elf)
 		    clibrary="newlib"
 		    ;;
+    *-mingw32)
+         clibrary="mingw-w64"
+     ;;		
 		 *)
 		    ;;
 	    esac

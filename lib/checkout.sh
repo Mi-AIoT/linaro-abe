@@ -107,6 +107,9 @@ checkout_all()
     if test x"${newlib_version}" = x; then
 	newlib_version="`grep ^latest= ${topdir}/config/newlib.conf | cut -d '\"' -f 2`"
     fi
+    if test x"${mingw-w64_version}" = x; then
+  mingw-w64_version="`grep ^latest= ${topdir}/config/mingw-w64.conf | cut -d '\"' -f 2`"
+    fi    
     if test x"${glibc_version}" = x; then
 	glibc_version="`grep ^latest= ${topdir}/config/glibc.conf | cut -d '\"' -f 2`"
     fi
@@ -138,6 +141,8 @@ checkout_all()
 		    package=${glibc_version}
 		elif test x"${clibrary}" = x"newlib"; then
 		    package=${newlib_version}
+		elif test x"${clibrary}" = x"mingw-w64"; then
+		    package=${mingw-w64_version}		    
 		else
 		    error "\${clibrary}=${clibrary} not supported."
 		    return 1

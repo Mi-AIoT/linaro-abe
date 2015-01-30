@@ -95,6 +95,8 @@ configure_build()
     local default_configure_flags=""
     local stage1_flags=""
     local stage2_flags=""
+    local mingw_headers_flags=""
+    local mingw_crt_flags=""
     local opts=""
     if test x"$2" = x"gdbserver"; then
 	local toolname="gdbserver"
@@ -246,6 +248,18 @@ configure_build()
 	dejagnu|gmp|mpc|mpfr|isl|ppl|cloog|qt-everywhere-opensource-src|ffmpeg)
 	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefix}"
 	    ;;
+	mingw*)
+			if test x"$2" != x; then
+		    case $2 in
+				mingw-headers)
+					local opts="${opts} ${mingw_headers_flags} --build=${build} --host=${target} --target=${target} --prefix=${sysroots}/usr"
+				;;
+				mingw-crt)
+					local opts="${opts} ${mingw_crt_flags} --build=${build} --host=${target} --target=${target} --prefix=${sysroots}/usr"
+				;;
+				esac
+				fi
+			;;
 	*)
 	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
 	    ;;
@@ -274,7 +288,24 @@ configure_build()
 #	    dryrun "(cd ${builddir} && ${CONFIG_SHELL} ./configure --prefix=${prefix})"
 #	else
         if test x"${configure}" = xyes; then
-	    dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure SHELL=${bash_shell} ${default_configure_flags} ${opts})"
+      case ${tool} in 
+      	mingw*)
+						if test x$2 = x"mingw-headers"; then
+							dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/mingw-w64-headers/configure SHELL=${bash_shell} ${default_configure_flags} ${opts})"
+						else 
+							if test x$2 = x"mingw-crt"; then 
+								dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/mingw-w64-crt/configure SHELL=${bash_shell} ${default_configure_flags} ${opts})"
+							else
+								error "mingw only support build headers and crt"
+							fi
+						fi
+      	;;
+      	*)
+      		    	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure SHELL=${bash_shell} ${default_configure_flags} ${opts})"
+      	;;
+      esac 
+#	    	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure SHELL=${bash_shell} ${default_configure_flags} ${opts})"
+
 	    if test $? -gt 0; then
 	        error "Configure of $1 failed."
 	        return $?
@@ -293,6 +324,8 @@ configure_build()
 	unset opts
 	unset stage1_flags
 	unset stage2_flags
+	unset mingw_headers_flags
+	unset mingw_crt_flags
     fi
 
     notice "Done configuring ${gitinfo}"
