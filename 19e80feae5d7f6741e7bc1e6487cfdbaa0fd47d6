@@ -16,6 +16,40 @@
       "revId": "19e80feae5d7f6741e7bc1e6487cfdbaa0fd47d6",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_c0ff94a9",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-05T13:31:32Z",
+      "side": 1,
+      "message": "My usual grumble about quoting \"*\" to avoid inadvertent shell expansion.  Or you can escape it with \u0027\\\u0027 as you do in rsyncs below.",
+      "revId": "19e80feae5d7f6741e7bc1e6487cfdbaa0fd47d6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_602c884b",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-05T13:31:32Z",
+      "side": 1,
+      "message": "I would prefer \"rsync -a ./ ${fileserver}:${basedir}/${dir}/\", but it is a matter of taste.",
+      "revId": "19e80feae5d7f6741e7bc1e6487cfdbaa0fd47d6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
