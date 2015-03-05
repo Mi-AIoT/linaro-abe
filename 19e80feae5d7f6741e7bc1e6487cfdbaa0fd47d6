@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_200f70e3",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-05T13:13:51Z",
+      "side": 1,
+      "message": "Should this be executed in a subshell due to the \u0027cd\u0027?\n\nsums\u003d\"`(cd ${user_workspace} ; find . -name *.sum`)\"\n\nOr does the backtick evaluation in the assignment effectively contain the \u0027cd\u0027 to the subshell?",
+      "revId": "19e80feae5d7f6741e7bc1e6487cfdbaa0fd47d6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
