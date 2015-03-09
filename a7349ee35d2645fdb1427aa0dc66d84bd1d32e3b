@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_abf12197",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T08:58:59Z",
+      "side": 1,
+      "message": "You can, actually, replace everything between pushd and popd with just this:\n\"(cd ${srcdir}; git checkout -B ${branch} origin/${branch})\"",
+      "revId": "a7349ee35d2645fdb1427aa0dc66d84bd1d32e3b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
