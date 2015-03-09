@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_4b1165ab",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:36:06Z",
+      "side": 1,
+      "message": "This can take a lot of time, especially on less-powerful aarch32 and aarch64 machines.  Would you please parallelize it with\n\"echo ${sums} ${logs} | xargs -r -n 1 -P `getconf _NPROCESSORS_ONLN` xz\"",
+      "revId": "3c4084342323df30dfee835cca099b7d02733543",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
