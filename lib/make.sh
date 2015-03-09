@@ -724,27 +724,23 @@ make_check()
 	esac
 
 	eval "schroot_make_opts="
-	eval "schroot_boards="
 
 	# Export SCHROOT_TEST so that we can choose correct boards
 	# in config/linaro.exp
 	export SCHROOT_TEST="$schroot_test"
 
-	local schroot_port
 	if $exec_tests && [ x"$schroot_test" = x"yes" ]; then
 	    # Start schroot sessions on target boards that support it
-	    schroot_port="$(print_schroot_port)"
 	    local schroot_sysroot
 	    case "${target}" in
-		*"-elf"*) schroot_sysroot="" ;;
+		*"-elf"*) schroot_sysroot="$(mktemp -d)" ;;
 		*) schroot_sysroot="$(make_target_sysroot)" ;;
 	    esac
-	    start_schroot_sessions "${target}" "${schroot_port}" "${schroot_sysroot}" "${builddir}"
+	    start_schroot_sessions "${target}" "${schroot_sysroot}" "${builddir}"
+	    rm -rf "$schroot_sysroot"
 	    if test "$?" != "0"; then
-		stop_schroot_sessions "${schroot_port}" ${schroot_boards}
 		return 1
 	    fi
-	    rm -rf "$schroot_sysroot"
 	fi
 
 	case ${tool} in
@@ -754,7 +750,7 @@ make_check()
 		;;
 	    gdb)
 	        # Stop schroot sessions
-	        stop_schroot_sessions "$schroot_port" ${schroot_boards}
+	        stop_schroot_sessions
 	        unset SCHROOT_TEST
 		#local dirs="/gdb"
 		#local check_targets="check-gdb"
@@ -775,7 +771,7 @@ make_check()
 	done
 
 	# Stop schroot sessions
-	stop_schroot_sessions "$schroot_port" ${schroot_boards}
+	stop_schroot_sessions
 	unset SCHROOT_TEST
        
         if test x"${tool}" = x"gcc"; then
