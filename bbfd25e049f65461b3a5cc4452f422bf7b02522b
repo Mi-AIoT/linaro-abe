@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_0b236d06",
+        "filename": "scripts/fedora_lsb_install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:48:43Z",
+      "side": 1,
+      "message": "What will happen if this script is run on aarch 32/64 machine?\n\nShould the script bail out with an error when run on non-x86_64 machine?",
+      "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_ab1fe1b6",
+        "filename": "scripts/fedora_lsb_install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:48:43Z",
+      "side": 1,
+      "message": "Ideally, should be made into a parameter, but can be improved in a later patch (i.e., when someone complains).",
+      "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_2b83d1cd",
+        "filename": "scripts/fedora_lsb_install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:48:43Z",
+      "side": 1,
+      "message": "Off-topic: Linux Foundation should be serving this over https; otherwise this is prone to man-in-the-middle attack.",
+      "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_4b8885e7",
+        "filename": "scripts/fedora_lsb_install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:48:43Z",
+      "side": 1,
+      "message": "Please use \u0027if test x\"$(FOO)\" !\u003d x\"BAR\"; then\u0027 idiom to avoid errors when FOO doesn\u0027t output anything.",
+      "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
