@@ -16,6 +16,24 @@
       "revId": "a7349ee35d2645fdb1427aa0dc66d84bd1d32e3b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_6b60e935",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-09T15:14:25Z",
+      "side": 1,
+      "message": "Indeed, since git checkout ... will work if ${branch} is a SHA1 and not an actual branch name, unlike git rebase",
+      "parentUuid": "9a6a9dd7_abf12197",
+      "revId": "a7349ee35d2645fdb1427aa0dc66d84bd1d32e3b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
