@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_2b351146",
+        "filename": "scripts/unstable-tests.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:22:24Z",
+      "side": 1,
+      "message": "We need a path to reducing the number of unstable tests on targets of interests (arm, aarch64, x86_64).  Especially with declaring all asan and ubsan tests unstable, we are, essentially, removing big chunk of sanitizer verification from our testing.\n\nI\u0027m OK with declaring any individual tests unstable, but not a whole directory.\n\nAlso, I think we should create \"enhancement\" bugzilla entries to investigate why each of above categories of tests are unstable (and add links to these bugzillas in the file).",
+      "revId": "363e134342b4e3860d73ffa60fae55b7f135307a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_4b3ac537",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:22:24Z",
+      "side": 1,
+      "message": "Instead of commenting out the above \"if test\", would you please save it \u0027diff1_ret\u003d\"$?\"\u0027?",
+      "revId": "363e134342b4e3860d73ffa60fae55b7f135307a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_eb3e3929",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-09T09:22:24Z",
+      "side": 1,
+      "message": "And here you do the same to save result into diff2_ret, and then print out something like:\n\u0027echo \"Comparison through report.sh returned $diff1_ret\"\u0027\n\u0027echo \"Comparison through compare_dg_tests.pl returned $diff2_ret\"\u0027\n?",
+      "revId": "363e134342b4e3860d73ffa60fae55b7f135307a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
