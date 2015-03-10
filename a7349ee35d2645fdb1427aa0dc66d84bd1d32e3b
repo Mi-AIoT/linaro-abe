@@ -34,6 +34,24 @@
       "revId": "a7349ee35d2645fdb1427aa0dc66d84bd1d32e3b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_664d8072",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-10T22:13:44Z",
+      "side": 1,
+      "message": "Hmmm after trying locally, it seems to me that\ngit checkout -B SHA1 origin/SHA1\nwill not work, so the \"detached HEAD\" test is still needed.\n\nRob: we are in detached head mode if ${branch} is a SHA1",
+      "parentUuid": "9a6a9dd7_6b60e935",
+      "revId": "a7349ee35d2645fdb1427aa0dc66d84bd1d32e3b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
