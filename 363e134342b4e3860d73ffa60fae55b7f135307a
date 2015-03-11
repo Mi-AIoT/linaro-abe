@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_b11c306c",
+        "filename": "scripts/unstable-tests.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-11T09:06:56Z",
+      "side": 1,
+      "message": "OK, I think it is fine to exclude sanitizer tests for now.  But please file a \"major\" bug to add ability to restrict above entries to a single target.\nI\u0027m thinking of a syntax similar to:\n\u003ctarget\u003e:\u003ctest\u003e\ne.g.,\narmeb-linux-gnueabihf:c-c++-common/asan/\nthen a comparison script can do\n\nunstable_target\u003d\"$(echo $line | sed -e \"s/\\(.*\\):.*/\\1/\")\"\nunstable_test\u003d\"$(echo $line | sed -e \"s/.*://\")\"\n\nif [ x\"$unstable_target\" !\u003d x\"\" -a x\"$unstable_target\" !\u003d x\"$target\" ]; then\n  # skip the check\n  continue\nfi",
+      "parentUuid": "9a6a9dd7_a6fb9846",
+      "revId": "363e134342b4e3860d73ffa60fae55b7f135307a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_4b3ac537",
         "filename": "test-backport.sh",
         "patchSetId": 1
