@@ -19,6 +19,23 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_f17628d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-12T12:11:08Z",
+      "side": 1,
+      "message": "Is newlib missing on purpose?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_517274e6",
         "filename": "abe.sh",
         "patchSetId": 1
@@ -30,6 +47,23 @@
       "writtenOn": "2015-03-12T10:20:34Z",
       "side": 1,
       "message": "Typo \"]]\" -\u003e \"]\"",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_2c20c79a",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-12T12:11:08Z",
+      "side": 1,
+      "message": "() not needed :-)",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -87,6 +121,23 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_8c523312",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-12T12:11:08Z",
+      "side": 1,
+      "message": "Is that sufficient? I mean: the full toolchain has to be in the PATH so that it\u0027s used to build binutils tests. Is it in the PATH at this point?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_7118d884",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -98,6 +149,23 @@
       "writtenOn": "2015-03-12T10:20:34Z",
       "side": 1,
       "message": "Nit-pick: consider renaming unit_test_package to something that sounds like a predicate, not an action.  Maybe unit_test_package_p?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_2c576704",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-12T12:11:08Z",
+      "side": 1,
+      "message": "What about handling the case where make_check returns 1?\nI thought you said your patch would address this case.",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
