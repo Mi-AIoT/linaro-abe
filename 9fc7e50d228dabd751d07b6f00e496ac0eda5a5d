@@ -36,6 +36,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_ec408f37",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "Probably not terribly difficult.  I did it this way because the existing directive parser functions in abe.sh were agreeable to this method.",
+      "parentUuid": "9a6a9dd7_316d8005",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_517274e6",
         "filename": "abe.sh",
         "patchSetId": 1
@@ -47,6 +65,24 @@
       "writtenOn": "2015-03-12T10:20:34Z",
       "side": 1,
       "message": "Typo \"]]\" -\u003e \"]\"",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_8c79d395",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "Actually it\u0027s not a type. The outer \u0027]\u0027 closes of --check.  The inner \u0027]\u0027 closes off the optional directives/arguments to --check.",
+      "parentUuid": "9a6a9dd7_517274e6",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -70,6 +106,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_2c6e87ca",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "Indeed.. I was just following the precedent of man pages. :)",
+      "parentUuid": "9a6a9dd7_2c20c79a",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_d1544423",
         "filename": "abe.sh",
         "patchSetId": 1
@@ -81,6 +135,24 @@
       "writtenOn": "2015-03-12T10:20:34Z",
       "side": 1,
       "message": "Shouldn\u0027t all these be \"local\" ?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_4c73bbb1",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "9a6a9dd7_d1544423",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -104,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_ec672fe9",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "This got me enough times where execute would just silently proceed that I had to put a stop to it.",
+      "parentUuid": "9a6a9dd7_f124e8c7",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_d12be492",
         "filename": "lib/common.sh",
         "patchSetId": 1
@@ -115,6 +205,24 @@
       "writtenOn": "2015-03-12T10:20:34Z",
       "side": 1,
       "message": "Below use in the for-loop implies that $unit_test has space-separated items in it.  Therefore you must quote \"$1\".\n\nGenerally, it is a good practice to always quote input arguments when assigning them to local variables.",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_0c3e23b9",
+        "filename": "lib/common.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9a6a9dd7_d12be492",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -138,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_cc5eeb12",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "This patch just moves where this code-block is executed and doesn\u0027t change the behavior in this regard. We need to check with Rob how to guarantee that binutils is built using the stage 2 compiler.",
+      "parentUuid": "9a6a9dd7_8c523312",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_7118d884",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -155,6 +281,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_cc47cb4a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "ack",
+      "parentUuid": "9a6a9dd7_7118d884",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_2c576704",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -166,6 +310,24 @@
       "writtenOn": "2015-03-12T12:11:08Z",
       "side": 1,
       "message": "What about handling the case where make_check returns 1?\nI thought you said your patch would address this case.",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_ac6137d5",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:22:55Z",
+      "side": 1,
+      "message": "I wanted to address this in a follow-on patch since it\u0027s separate from this issue.",
+      "parentUuid": "9a6a9dd7_2c576704",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
