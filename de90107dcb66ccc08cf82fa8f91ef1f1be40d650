@@ -16,6 +16,24 @@
       "revId": "de90107dcb66ccc08cf82fa8f91ef1f1be40d650",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_ccb58b32",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:43:45Z",
+      "side": 1,
+      "message": "I would say yes.  My patch removes it.",
+      "parentUuid": "9a6a9dd7_0cace3ec",
+      "revId": "de90107dcb66ccc08cf82fa8f91ef1f1be40d650",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
