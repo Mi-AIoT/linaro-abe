@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_ecdc0f77",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-12T13:24:34Z",
+      "side": 1,
+      "message": "Compared to the previous version, I removed $i (which I had kept for existing code) because at this point it just contains the last value of the previous loop, which is irrelevant here.",
+      "revId": "c0b3ff8a46eb942c93aabcc8759f827555a3552b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
