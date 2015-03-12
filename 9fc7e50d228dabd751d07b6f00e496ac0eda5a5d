@@ -54,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_f63dc0bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T15:45:04Z",
+      "side": 1,
+      "message": "I left it out because I never think of newlib.  I\u0027ll add it into a follow-on patch.",
+      "parentUuid": "9a6a9dd7_f17628d8",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_517274e6",
         "filename": "abe.sh",
         "patchSetId": 1
