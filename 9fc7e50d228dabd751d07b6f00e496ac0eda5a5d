@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a6a9dd7_316d8005",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T10:20:34Z",
+      "side": 1,
+      "message": "As a further improvement in a future patch, would it be difficult to change syntax to \"--[exclude]check item1[,item2]*\" ?  So that one can run \"--check binutils,gcc\" or \"--excludecheck gdb,glibc\"?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_517274e6",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T10:20:34Z",
+      "side": 1,
+      "message": "Typo \"]]\" -\u003e \"]\"",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_d1544423",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T10:20:34Z",
+      "side": 1,
+      "message": "Shouldn\u0027t all these be \"local\" ?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_f124e8c7",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T10:20:34Z",
+      "side": 1,
+      "message": "Nice touch!",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_d12be492",
+        "filename": "lib/common.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T10:20:34Z",
+      "side": 1,
+      "message": "Below use in the for-loop implies that $unit_test has space-separated items in it.  Therefore you must quote \"$1\".\n\nGenerally, it is a good practice to always quote input arguments when assigning them to local variables.",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_7118d884",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T10:20:34Z",
+      "side": 1,
+      "message": "Nit-pick: consider renaming unit_test_package to something that sounds like a predicate, not an action.  Maybe unit_test_package_p?",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
