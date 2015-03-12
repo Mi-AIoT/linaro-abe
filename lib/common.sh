@@ -779,8 +779,8 @@ create_release_tag()
 # 1 = package not found in runtests
 unit_test_package()
 {
-    local unit_test=$1
-    local package=$2
+    local unit_test="$1"
+    local package="$2"
 
     for i in ${unit_test}; do
         if test x"$i" = x"$package"; then

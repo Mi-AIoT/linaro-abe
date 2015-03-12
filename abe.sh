@@ -554,10 +554,10 @@ test_success()
 # parse the -- of the following switch.
 check_directive()
 {
-    switch="$1"
-    long="$2"
-    short="$3"
-    directive="$4"
+    local switch="$1"
+    local long="$2"
+    local short="$3"
+    local directive="$4"
 
     if test `echo ${switch} | grep -c "\-${short}.*=" ` -gt 0; then
 	error "A '=' is invalid after --${long}.  A space is expected between the switch and the directive."
@@ -584,11 +584,11 @@ check_directive()
 #	exit - Execution will abort if the input is invalid.
 check_optional_directive()
 {
-    switch="$1"
-    long="$2"
-    short="$3"
-    directive="$4"
-    default="$5"
+    local switch="$1"
+    local long="$2"
+    local short="$3"
+    local directive="$4"
+    local default="$5"
 
     if test `echo ${switch} | grep -c "\-${short}.*=" ` -gt 0; then
 	error "A '=' is invalid after --${long}.  A space is expected between the switch and the directive."
