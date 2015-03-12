@@ -177,6 +177,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_d66764e9",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T21:36:24Z",
+      "side": 1,
+      "message": "Done, corrected in: https://review.linaro.org/5065",
+      "parentUuid": "9a6a9dd7_4c73bbb1",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_f124e8c7",
         "filename": "abe.sh",
         "patchSetId": 1
@@ -247,6 +265,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_367338b3",
+        "filename": "lib/common.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 782,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T21:36:24Z",
+      "side": 1,
+      "message": "Done: Corrected in: https://review.linaro.org/5065",
+      "parentUuid": "9a6a9dd7_0c3e23b9",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_8c523312",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -300,6 +336,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_f692a09e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T21:36:24Z",
+      "side": 1,
+      "message": "This is always exported in lib/configure.sh:257 prior to actually running configure for any package:\n\nexport PATH\u003d\"${local_builds}/${host}/bin:$PATH\"\n\nIt is redundant, but it makes sure that the shell running configure is always picking up the latest version of the compiler.",
+      "parentUuid": "9a6a9dd7_0c9383a4",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_7118d884",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -329,6 +383,24 @@
       "side": 1,
       "message": "ack",
       "parentUuid": "9a6a9dd7_7118d884",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_b647484b",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T21:36:24Z",
+      "side": 1,
+      "message": "Done: https://review.linaro.org/#/c/5064/",
+      "parentUuid": "9a6a9dd7_cc47cb4a",
       "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
