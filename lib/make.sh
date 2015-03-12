@@ -157,17 +157,17 @@ build_all()
 	notice "Testing components ${runtests}..."
 	buildingall=no
 
-	unit_test_package "${runtests}" binutils
+	is_package_in_runtests "${runtests}" binutils
 	if test $? -eq 0; then
 	    make_check ${binutils_version}
 	fi
 
-	unit_test_package "${runtests}" gcc
+	is_package_in_runtests "${runtests}" gcc
 	if test $? -eq 0; then
 	    make_check ${gcc_version} stage2
 	fi
 
-	unit_test_package "${runtests}" gdb
+	is_package_in_runtests "${runtests}" gdb
 	if test $? -eq 0; then
 	    make_check ${gdb_version}
 	fi
@@ -175,13 +175,13 @@ build_all()
 	# Only perform unit tests on [e]glibc when we're building native.
         if test x"${target}" = x"${build}"; then
 	    # TODO: Get glibc make check working 'native'
-	    unit_test_package "${runtests}" glibc
+	    is_package_in_runtests "${runtests}" glibc
 	    if test $? -eq 0; then
 		# make_check ${glibc_version}
 		notice "make check on native glibc is not yet implemented."
 	    fi
 
-	    unit_test_package "${runtests}" eglibc
+	    is_package_in_runtests "${runtests}" eglibc
 	    if test $? -eq 0; then
 		#make_check ${eglibc_version}
 		notice "make check on native eglibc is not yet implemented."
@@ -413,7 +413,7 @@ build()
     if test x"${buildingall}" = xno -a x"${tarbin}" != xyes; then
 
 	# Skip make_check if it isn't designated to be executed in ${runtests}
-	unit_test_package "${runtests}" ${tool}
+	is_package_in_runtests "${runtests}" ${tool}
 	if test $? -eq 0 -a x"$2" != x"stage1" -a x"$2" != x"gdbserver"; then
 	    # We don't run make check on gcc stage1 or on gdbserver because
 	    # it's unnecessary.

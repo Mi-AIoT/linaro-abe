@@ -533,10 +533,10 @@ test_binary_toolchain()
 
     local testgcc=
     local testbin=
-    unit_test_package "${runtests}" gcc
+    is_package_in_runtests "${runtests}" gcc
     testgcc=$?
 
-    unit_test_package "${runtests}" binutils
+    is_package_in_runtests "${runtests}" binutils
     testbin=$?
 
     # Check early and bail if binutils or gcc aren't to be tested.  In reality

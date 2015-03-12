@@ -777,7 +777,7 @@ create_release_tag()
 # Return Value(s)
 # 0 = package found in runtests
 # 1 = package not found in runtests
-unit_test_package()
+is_package_in_runtests()
 {
     local unit_test=$1
     local package=$2

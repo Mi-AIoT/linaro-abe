@@ -132,85 +132,85 @@ totals()
 
 # ----------------------------------------------------------------------------------
 
-echo "=========== unit_test_package() tests ============="
+echo "=========== is_package_in_runtests() tests ============="
 
 
 # test the package at the beginning of the list
 in_runtests="glibc gdb gcc binutils"
-testing="unit_test_package \"${in_runtests}\" glibc"
+testing="is_package_in_runtests \"${in_runtests}\" glibc"
 in_package="glibc"
-out="`unit_test_package "${in_runtests}" ${in_package}`"
+out="`is_package_in_runtests "${in_runtests}" ${in_package}`"
 ret=$?
 if test ${ret} -eq 0; then
     pass "${testing}"
 else
     fail "${testing}"
-    fixme "unit_test_package \"${in_runtests}\" ${in_package} resulted in '${ret}'"
+    fixme "is_package_in_runtests \"${in_runtests}\" ${in_package} resulted in '${ret}'"
 fi
 
 # test the package at the end of the list
 in_runtests="glibc gdb gcc binutils"
-testing="unit_test_package \"${in_runtests}\" binutils"
+testing="is_package_in_runtests \"${in_runtests}\" binutils"
 in_package="binutils"
-out="`unit_test_package "${in_runtests}" ${in_package}`"
+out="`is_package_in_runtests "${in_runtests}" ${in_package}`"
 ret=$?
 if test ${ret} -eq 0; then
     pass "${testing}"
 else
     fail "${testing}"
-    fixme "unit_test_package \"${in_runtests}\" ${in_package} resulted in '${ret}'"
+    fixme "is_package_in_runtests \"${in_runtests}\" ${in_package} resulted in '${ret}'"
 fi
 
 # test the package in the middle of the list
 in_runtests="glibc gdb gcc binutils"
-testing="unit_test_package \"${in_runtests}\" gdb"
+testing="is_package_in_runtests \"${in_runtests}\" gdb"
 in_package="gdb"
-out="`unit_test_package "${in_runtests}" ${in_package}`"
+out="`is_package_in_runtests "${in_runtests}" ${in_package}`"
 ret=$?
 if test ${ret} -eq 0; then
     pass "${testing}"
 else
     fail "${testing}"
-    fixme "unit_test_package \"${in_runtests}\" ${in_package} resulted in '${ret}'"
+    fixme "is_package_in_runtests \"${in_runtests}\" ${in_package} resulted in '${ret}'"
 fi
 
 # test a package not in the list
 in_runtests="glibc gdb gcc binutils"
-testing="unit_test_package \"${in_runtests}\" foo"
+testing="is_package_in_runtests \"${in_runtests}\" foo"
 in_package="foo"
-out="`unit_test_package "${in_runtests}" ${in_package}`"
+out="`is_package_in_runtests "${in_runtests}" ${in_package}`"
 ret=$?
 if test ${ret} -eq 1; then
     pass "${testing}"
 else
     fail "${testing}"
-    fixme "unit_test_package \"${in_runtests}\" ${in_package} resulted in '${ret}' expected '1'"
+    fixme "is_package_in_runtests \"${in_runtests}\" ${in_package} resulted in '${ret}' expected '1'"
 fi
 
 # test a partial package name
 in_runtests="glibc gdb gcc binutils"
-testing="unit_test_package \"${in_runtests}\" gd"
+testing="is_package_in_runtests \"${in_runtests}\" gd"
 in_package="gd"
-out="`unit_test_package "${in_runtests}" ${in_package}`"
+out="`is_package_in_runtests "${in_runtests}" ${in_package}`"
 ret=$?
 if test ${ret} -eq 1; then
     pass "${testing}"
 else
     fail "${testing}"
-    fixme "unit_test_package \"${in_runtests}\" ${in_package} resulted in '${ret}' expected '1'"
+    fixme "is_package_in_runtests \"${in_runtests}\" ${in_package} resulted in '${ret}' expected '1'"
 fi
 
 # test that unquoted $runtests fails
 in_runtests="glibc gdb gcc binutils"
-testing="unit_test_package ${in_runtests} glibc (unquoted \${in_runtests})"
+testing="is_package_in_runtests ${in_runtests} glibc (unquoted \${in_runtests})"
 in_package="glibc"
-out="`unit_test_package ${in_runtests} ${in_package}`"
+out="`is_package_in_runtests ${in_runtests} ${in_package}`"
 ret=$?
 if test ${ret} -eq 1; then
     pass "${testing}"
 else
     fail "${testing}"
-    fixme "unit_test_package ${in_runtests} ${in_package} resulted in '${ret}'"
+    fixme "is_package_in_runtests ${in_runtests} ${in_package} resulted in '${ret}'"
 fi
 
 
