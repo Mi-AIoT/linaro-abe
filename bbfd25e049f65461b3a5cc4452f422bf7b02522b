@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_0b74cdcd",
+        "filename": "scripts/fedora_lsb_install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:16:11Z",
+      "side": 1,
+      "message": "I could query the available architectures supported by LSB and make a determination based on that.  None-the-less it should probably bail out when run on an Ubuntu machine as well.",
+      "parentUuid": "9a6a9dd7_0b236d06",
+      "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_ab1fe1b6",
         "filename": "scripts/fedora_lsb_install.sh",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-03-09T09:48:43Z",
       "side": 1,
       "message": "Ideally, should be made into a parameter, but can be improved in a later patch (i.e., when someone complains).",
+      "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a6a9dd7_ab80418c",
+        "filename": "scripts/fedora_lsb_install.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-03-12T12:16:11Z",
+      "side": 1,
+      "message": "I was wondering if the LSB version actually matters.  I checked the version on the build machines and it looks to support 4.1.",
+      "parentUuid": "9a6a9dd7_ab1fe1b6",
       "revId": "bbfd25e049f65461b3a5cc4452f422bf7b02522b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
