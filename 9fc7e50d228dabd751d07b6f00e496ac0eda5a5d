@@ -264,6 +264,24 @@
     },
     {
       "key": {
+        "uuid": "9a6a9dd7_0c9383a4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-12T12:55:44Z",
+      "side": 1,
+      "message": "I believe the reason it is working now is that \"configure\" will add --prefix\u003d to PATH.  I am for explicitly setting PATH to the destdir/",
+      "parentUuid": "9a6a9dd7_cc5eeb12",
+      "revId": "9fc7e50d228dabd751d07b6f00e496ac0eda5a5d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9a6a9dd7_7118d884",
         "filename": "lib/make.sh",
         "patchSetId": 1
