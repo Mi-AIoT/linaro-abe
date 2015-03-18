@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_bc8c0981",
+        "filename": "scripts/compare_tests",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-18T13:11:25Z",
+      "side": 1,
+      "message": "I was just conforming to the existing style :-)\n(IIRC, this script is derived from contrib/compare_tests)",
+      "parentUuid": "7a7fa997_1c7c1d72",
+      "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a7fa997_3c81d94a",
         "filename": "scripts/unstable-tests.txt",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "7a7fa997_5ce93519",
+        "filename": "scripts/unstable-tests.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-18T13:11:25Z",
+      "side": 1,
+      "message": "good catch!",
+      "parentUuid": "7a7fa997_3c81d94a",
+      "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a7fa997_dc954589",
         "filename": "scripts/unstable-tests.txt",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2015-03-18T12:49:30Z",
       "side": 1,
       "message": "Not all tests mentioned in https://bugs.linaro.org/show_bug.cgi?id\u003d838 and https://bugs.linaro.org/show_bug.cgi?id\u003d840 are present here.  Will they be added in a subsequent commit?",
+      "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_7cee7124",
+        "filename": "scripts/unstable-tests.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-18T13:11:25Z",
+      "side": 1,
+      "message": "Sorry, I forgot them.\n\nHowever, yes the plan is that this file will be updated regularly.",
+      "parentUuid": "7a7fa997_dc954589",
       "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
