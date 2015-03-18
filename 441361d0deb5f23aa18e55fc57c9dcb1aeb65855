@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_1c7c1d72",
+        "filename": "scripts/compare_tests",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-18T12:49:30Z",
+      "side": 1,
+      "message": "Fine for this patch, but this needs to be eventually converted to getopts.  See example at https://git.linaro.org/toolchain/abe.git/blob/74b2419452d606e6ad30a125bdcc7d207a4aba81:/test-backport.sh#l68 .",
+      "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_3c81d94a",
+        "filename": "scripts/unstable-tests.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-18T12:49:30Z",
+      "side": 1,
+      "message": "Empty space at the end can cause the pattern to fail.  Same below.",
+      "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_dc954589",
+        "filename": "scripts/unstable-tests.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-18T12:49:30Z",
+      "side": 1,
+      "message": "Not all tests mentioned in https://bugs.linaro.org/show_bug.cgi?id\u003d838 and https://bugs.linaro.org/show_bug.cgi?id\u003d840 are present here.  Will they be added in a subsequent commit?",
+      "revId": "441361d0deb5f23aa18e55fc57c9dcb1aeb65855",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
