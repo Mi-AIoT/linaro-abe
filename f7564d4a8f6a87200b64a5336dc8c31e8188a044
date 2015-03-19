@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_5c95b5e2",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-19T06:09:39Z",
+      "side": 1,
+      "message": "I see what your intent is, but this will break when multiple builds are run on the same machine.  For an acceptable workaround add \"lockfile ${snapshots_ref}/UPDATE_IN_PROGRESS\" before git clone and \"rm -f ${snapshots_ref}/UPDATE_IN_PROGRESS\" after the clone.\n\nI will bump priority of auditing and fixing usage of snapshots_ref.",
+      "revId": "f7564d4a8f6a87200b64a5336dc8c31e8188a044",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_7c9af115",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-19T06:09:39Z",
+      "side": 1,
+      "message": "Why re-set CONFIG_SHELL if it was setup earlier?",
+      "revId": "f7564d4a8f6a87200b64a5336dc8c31e8188a044",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_1c9f3d05",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-19T06:09:39Z",
+      "side": 1,
+      "message": "trailing spaces.",
+      "revId": "f7564d4a8f6a87200b64a5336dc8c31e8188a044",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
