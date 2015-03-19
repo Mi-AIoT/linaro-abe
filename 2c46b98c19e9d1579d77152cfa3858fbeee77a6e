@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_3ff8ebe4",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-19T15:02:56Z",
+      "side": 1,
+      "message": "An idea with the test stopped passing?",
+      "revId": "2c46b98c19e9d1579d77152cfa3858fbeee77a6e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
