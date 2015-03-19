@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_1f7c0f72",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-19T15:01:08Z",
+      "side": 1,
+      "message": "How can we reach this point since we are already in $name \u003d\neglibc|glibc|newlib?",
+      "revId": "bc788768c518f6b5985a6d62178e18f47867056d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_9f8fbf75",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-19T15:01:08Z",
+      "side": 1,
+      "message": "I suspect --set libc\u003dXXX is checked somewhere else?",
+      "revId": "bc788768c518f6b5985a6d62178e18f47867056d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
