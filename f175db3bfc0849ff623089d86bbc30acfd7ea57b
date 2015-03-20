@@ -16,6 +16,24 @@
       "revId": "f175db3bfc0849ff623089d86bbc30acfd7ea57b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_bf739b14",
+        "filename": "lib/schroot.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-03-20T15:25:51Z",
+      "side": 1,
+      "message": "Currently -- no such case.  This is because dejagnu serializes testing on boards, it does not run them in parallel -- so adding testing on 2 boards would be twice the time.\n\nI still wanted to support a general case, since it is only a change in linaro.exp away.",
+      "parentUuid": "7a7fa997_bfd71bed",
+      "revId": "f175db3bfc0849ff623089d86bbc30acfd7ea57b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
