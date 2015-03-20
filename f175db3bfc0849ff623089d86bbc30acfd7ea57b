@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_bfd71bed",
+        "filename": "lib/schroot.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-20T13:28:32Z",
+      "side": 1,
+      "message": "In which case do we have more than one relevant board?",
+      "revId": "f175db3bfc0849ff623089d86bbc30acfd7ea57b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
