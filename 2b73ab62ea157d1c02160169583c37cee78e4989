@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_3fed4b8c",
+        "filename": "scripts/test-schroot.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-03-20T17:29:00Z",
+      "side": 1,
+      "message": "Why not add this flag to target_ssh_opts above?",
+      "revId": "2b73ab62ea157d1c02160169583c37cee78e4989",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
