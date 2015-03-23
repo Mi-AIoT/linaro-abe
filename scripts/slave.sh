@@ -6,7 +6,7 @@ apt-get update
 # Optionally use a package list from another machine of the same distribution and type
 # apt-get install `cat /tmp/packages.lst`
 apt-get build-dep gcc gdb
-packages="texinfo git-core build-essential openssh-server openjdk-6-jre-headless iptables flex bison autogen autoconf automake libtool dejagnu lsyncd gawk gcc-multilib g++-multilib libncurses5-dev lsb ccrypt nagios-nrpe-server sendmail git"
+packages="texinfo git-core build-essential openssh-server openjdk-6-jre-headless iptables flex bison autogen autoconf automake libtool dejagnu lsyncd gawk libncurses5-dev lsb ccrypt nagios-nrpe-server sendmail git"
 if test `uname -m | egrep -c "x86_64|i686"` -gt 0;
     packages="${packages} qemu  mingw-w64"
 fi
