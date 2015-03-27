@@ -100,7 +100,11 @@ revision_str=""
 user_options=""
 local_builds="${PWD}"
 
-OPTS="`getopt -o s:r:f:w:o:t:b:g:c:h -l target:,fileserver:,help,snapshots:,branch:,gitref:,repo:,workspace:,revisions:,options,check" -- "$@"`"
+OPTS="`getopt -o s:r:f:w:o:t:b:g:c:h -l target:,fileserver:,help,snapshots:,branch:,gitref:,repo:,workspace:,revisions:,options,check,checkgdb" -- "$@"`"
+
+# Whether to run GDB tests
+checkgdb=false
+
 while test $# -gt 0; do
     case $1 in
         -s|--snapshots) user_snapshots=$2 ;;
@@ -113,6 +117,7 @@ while test $# -gt 0; do
 	-t|--target) target=$2 ;;
 	-c|--check) check=$2 ;;
         -h|--help) usage ;;
+	--checkgdb) checkgdb="true" ;;
 	*) branch=$1;;
 	--) break ;;
     esac
@@ -130,13 +135,15 @@ fi
 if test x"${target}" != x"native" -a x"${target}" != x; then
     platform="--target ${target}"
     targetname=${target}
-    check="--check ${check:-all}"
 else
     # For native builds, we need to know the effective target name to
     # be able to find the results
     targetname=${build}
-    # For native builds, we don't check gdb because it is too slow
-    check="--check all --excludecheck gdb"
+fi
+
+check="--check ${check:-all}"
+if test x"${checkgdb}" != xtrue; then
+    check="${check} --excludecheck gdb"
 fi
 
 if test "`echo ${branch} | grep -c gcc.git`" -gt 0; then
