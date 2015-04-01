@@ -16,6 +16,24 @@
       "revId": "957f5d11e3eb8de5a4e9828cccf5be92f9b29b35",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_ddee9cb4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-01T21:22:37Z",
+      "side": 1,
+      "message": "*ugh* This is a REALLY unfortunate find/catch.  It means that almost all instances of return value checking are wrong.  The proper way to fix this is to put the following into dry-run:\n(\n set -o pipefail\n  \u003ccommand\u003e 2\u003e\u00261 | tee \u003cbar\u003e\n)\n\nAnd to also use it _everywhere_ that a command is performed in front of a | tee but without \u0027dryrun\u0027.",
+      "parentUuid": "7a7fa997_1df5f482",
+      "revId": "957f5d11e3eb8de5a4e9828cccf5be92f9b29b35",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
