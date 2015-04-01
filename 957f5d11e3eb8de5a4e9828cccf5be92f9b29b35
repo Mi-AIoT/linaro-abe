@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_1df5f482",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-01T21:10:01Z",
+      "side": 1,
+      "message": "This is testing tee\u0027s return code, not make\u0027s. Same comment below.",
+      "revId": "957f5d11e3eb8de5a4e9828cccf5be92f9b29b35",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
