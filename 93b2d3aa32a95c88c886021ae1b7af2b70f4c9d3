@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a7fa997_fd5d9849",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-03T08:31:00Z",
+      "side": 1,
+      "message": "Not related to this patch, but just realizing it now: does this mean that in \u0027make_check_installed\u0027 we want to check only gas and ld, and not binutils? why?",
+      "revId": "93b2d3aa32a95c88c886021ae1b7af2b70f4c9d3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a7fa997_1d5bb455",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-03T08:31:00Z",
+      "side": 1,
+      "message": "Again, not related to this patch: why only c and c++?\nThe comment before make_check_installed mentions fortran at least. What about lib*?",
+      "revId": "93b2d3aa32a95c88c886021ae1b7af2b70f4c9d3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
