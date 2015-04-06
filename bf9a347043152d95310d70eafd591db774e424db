@@ -16,6 +16,24 @@
       "revId": "bf9a347043152d95310d70eafd591db774e424db",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_b5bae008",
+        "filename": "lib/common.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-06T22:19:51Z",
+      "side": 1,
+      "message": "The parenthesis block restricts the pipefail to the code between them.",
+      "parentUuid": "5a7ca5a3_f5c0587e",
+      "revId": "bf9a347043152d95310d70eafd591db774e424db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
