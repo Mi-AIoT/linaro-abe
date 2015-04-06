@@ -100,7 +100,10 @@ revision_str=""
 user_options=""
 local_builds="${PWD}"
 
-OPTS="`getopt -o s:r:f:w:o:t:b:g:c:h -l target:,fileserver:,help,snapshots:,branch:,gitref:,repo:,workspace:,revisions:,options,check" -- "$@"`"
+# Whether to exclude some component from 'make check'
+excludecheck=
+
+OPTS="`getopt -o s:r:f:w:o:t:b:g:c:h -l target:,fileserver:,help,snapshots:,branch:,gitref:,repo:,workspace:,revisions:,options,check,excludecheck:" -- "$@"`"
 while test $# -gt 0; do
     case $1 in
         -s|--snapshots) user_snapshots=$2; shift ;;
@@ -113,6 +116,7 @@ while test $# -gt 0; do
 	-t|--target) target=$2; shift ;;
 	-c|--check) check=$2; shift ;;
         -h|--help) usage ;;
+	--excludecheck) excludecheck=$2; shift ;;
 	*) branch=$1;;
 	--) break ;;
     esac
@@ -135,9 +139,9 @@ else
     # For native builds, we need to know the effective target name to
     # be able to find the results
     targetname=${build}
-    # For native builds, we don't check gdb because it is too slow
-    check="--check all --excludecheck gdb"
 fi
+
+check="${check}${excludecheck:+ --excludecheck ${excludecheck}}"
 
 if test "`echo ${branch} | grep -c gcc.git`" -gt 0; then
     branch="`echo ${branch} | sed -e 's:gcc.git~::'`"
