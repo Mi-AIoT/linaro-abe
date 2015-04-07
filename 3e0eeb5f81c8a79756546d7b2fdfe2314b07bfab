@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7ca5a3_15b074dc",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-07T13:24:46Z",
+      "side": 1,
+      "message": "You can remove this if check and just do:\ncheck\u003d\"${check}${excludecheck:+ --excludecheck ${excludecheck}}\"",
+      "revId": "3e0eeb5f81c8a79756546d7b2fdfe2314b07bfab",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_95ac848e",
+        "filename": "scripts/Backport.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-07T13:24:46Z",
+      "side": 1,
+      "message": "Remove this block",
+      "revId": "3e0eeb5f81c8a79756546d7b2fdfe2314b07bfab",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_55b6ecdd",
+        "filename": "scripts/Backport.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-07T13:24:46Z",
+      "side": 1,
+      "message": "just use ${gcc_branch}${excludecheck:+ --excludecheck ${excludecheck}}",
+      "revId": "3e0eeb5f81c8a79756546d7b2fdfe2314b07bfab",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_359ed057",
+        "filename": "scripts/BuildFarm.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-07T13:24:46Z",
+      "side": 1,
+      "message": "Remove this block",
+      "revId": "3e0eeb5f81c8a79756546d7b2fdfe2314b07bfab",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_d5a2fc99",
+        "filename": "scripts/BuildFarm.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-07T13:24:46Z",
+      "side": 1,
+      "message": "Just do: ...$[bootstrap}${excludecheck:+ --excludecheck ${excludecheck}}",
+      "revId": "3e0eeb5f81c8a79756546d7b2fdfe2314b07bfab",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_1599546e",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-04-07T13:24:46Z",
+      "side": 1,
+      "message": "You can get rid of the \u0027if\u0027 test and just do the following:\n\ncheck\u003d\"${check}${excludecheck:+ --excludecheck ${excludecheck}}\"",
+      "revId": "3e0eeb5f81c8a79756546d7b2fdfe2314b07bfab",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
