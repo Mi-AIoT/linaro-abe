@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7ca5a3_b5542022",
+        "filename": "config/boards/arm-qemu.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-08T08:00:58Z",
+      "side": 0,
+      "message": "Are you sure this is the right one to remove?\n$sysroot may have been modified just above, which would change the value of QEMU_LD_PREFIX.\nAm I missing something?",
+      "revId": "4500e7d2457564af3ea6b4a0f3f509f319e13683",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
