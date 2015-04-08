@@ -16,6 +16,24 @@
       "revId": "4500e7d2457564af3ea6b4a0f3f509f319e13683",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_de53f96a",
+        "filename": "config/boards/arm-qemu.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000132
+      },
+      "writtenOn": "2015-04-08T15:21:59Z",
+      "side": 0,
+      "message": "I missed that sysroot was set here.\n\nI see that lib/make.sh sets SYSROOT_UNDER_TEST, and config/linaro.exp sets sysroot to SYSROOT_UNDER_TEST.  So it works because we are setting sysroot twice also.  The two sysroot values should be the same, because the lib/make.sh value gets passed to gcc configure via --with-sysroot, and then we are querying the gcc value here.\n\nI agree it looks funny to use sysroot and then set it.  I could just move the QEMU_LD_PREFIX set to after the sysroot set and not worry about the fact that syroot is set twice.\n\nI\u0027d also need the same change in my pending aarch64-qemu.exp file.",
+      "parentUuid": "5a7ca5a3_b5542022",
+      "revId": "4500e7d2457564af3ea6b4a0f3f509f319e13683",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
