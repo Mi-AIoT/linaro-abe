@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a7ca5a3_e995dd88",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-09T09:46:22Z",
+      "side": 1,
+      "message": "Could you add a comment before this block, to explain why we want to checkout first, and then run all the subsequent builds with --disable update?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_49817149",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-09T09:46:22Z",
+      "side": 1,
+      "message": "Any reason you did not remove --parallel here, unlike other calls to abe.sh?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_a98fe574",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-09T09:46:22Z",
+      "side": 1,
+      "message": "Why doesn\u0027t jenkins.sh need the same workaround? Is it because ${change} in jenkins.sh avoids bug #1338?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_099379a4",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-04-09T09:46:22Z",
+      "side": 1,
+      "message": "Shouldn\u0027t \u0027!\u0027 and \u0027[\u0027 be swapped?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
