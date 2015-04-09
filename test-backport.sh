@@ -58,6 +58,10 @@ topdir="`dirname ${which_dir}`"
 
 # since host.conf isn't loaded, get the build architecture
 build="`${topdir}/config.guess`"
+user_snapshots="${WORKSPACE}/snapshots"
+shared="/home/buildslave/workspace/shared/"
+snapshots_ref="${HOME}/snapshots-ref"
+snapshots_ref_lock=${snapshots_ref}.lock
 
 # Configure Abe itself. Force the use of bash instead of the Ubuntu
 # default of dash as some configure scripts go into an infinite loop with
@@ -185,6 +189,23 @@ pushd ${topbuild}
 
 $CONFIG_SHELL ${abe_dir}/configure --enable-schroot-test --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${snapshots_ref} --with-fileserver=${fileserver} --with-remote-snapshots=/snapshots-ref
 
+rm -rf ${user_snapshots}
+mkdir -p ${user_snapshots}
+# Checkout all sources now to avoid grabbing lock for 1-2h while building and
+# testing runs.  We configure ABE to use reference snapshots, which are shared
+# across all builds and are updated by an external process.  The lock protects
+# us from looking into an inconsistent state of reference snapshots.
+(
+    flock -s 9
+    bash -x ${topdir}/abe.sh ${platform} --checkout all ${user_options}
+
+    # Workaround broken --checkout all
+    # See https://bugs.linaro.org/show_bug.cgi?id=1338
+    if ! [ -d ${user_snapshots}/gcc.git ]; then
+	git clone --reference=${snapshots_ref}/gcc.git http://git.linaro.org/toolchain/gcc.git ${user_snapshots}/gcc.git
+    fi
+) 9>${snapshots_ref_lock}
+
 # If Gerrit is specifing the two git revisions, don't try to extract them.
 if test x"${gerrit_trigger}" != xyes; then
     checkout "`get_URL gcc.git`"
@@ -238,11 +259,6 @@ while test $i -lt ${#revisions[@]}; do
     if test $? -gt 0; then
 	echo "ERROR: Abe failed!"
 	exit 1
-    fi
-
-    # Don't update any sources for the other revision.
-    if test x"${update}" = x; then
-	update="--disable update"
     fi
 
     # Compress .sum and .log files
