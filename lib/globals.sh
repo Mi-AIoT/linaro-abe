@@ -36,6 +36,8 @@ dbpasswd="default"
 
 # Don't set this unless you need to modify it.
 default_march=
+default_mcpu=
+default_mtune=
 
 manifest=
 

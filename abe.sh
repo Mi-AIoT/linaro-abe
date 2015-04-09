@@ -29,6 +29,7 @@ usage()
              [--excludecheck {all|glibc|gcc|gdb|binutils}]
              [--fetch <url>] [--force] [--host <host_triple>] [--help]
              [--list] [--march <march>] [--manifest <manifest_file>]
+             [--mcpu <mcpu>] [--mtune <mtune> ]
              [--parallel] [--release <release_version_string>]
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
@@ -220,6 +221,31 @@ OPTIONS
 
 		Note: There is no cross-checking to make sure that the passed
 		--target value is compatible with the passed --march value.
+
+  --mcpu <mcpu>
+
+                Specify <mcpu> to be the default target processor for a
+                specific toolchain, overriding the default.  Example:
+
+                    --target arm-linux-gnueabihf --mcpu cortex-a57
+
+		For most targets, specifying --mcpu is equivalent to specifying
+		both --march and --mtune, and hence those options should not be
+		used with --mcpu.
+
+		Note: There is no cross-checking to make sure that the passed
+		--target value is compatible with the passed --mcpu value.
+
+  --mtune <mtune>
+
+                Specify <mtune> to be the default target processor for
+		performance tuning for a specific toolchain, overriding the
+		default.  Example:
+
+                    --target arm-linux-gnueabihf --mtune cortex-a57
+
+		Note: There is no cross-checking to make sure that the passed
+		--target value is compatible with the passed --mtune value.
 
   --manifest <manifest_file>
 
@@ -703,6 +729,12 @@ dump()
     if test x"${default_march}" != x; then
 	echo "Default march      ${default_march}"
     fi
+    if test x"${default_mcpu}" != x; then
+	echo "Default mcpu       ${default_mcpu}"
+    fi
+    if test x"${default_mtune}" != x; then
+	echo "Default mtune      ${default_mtune}"
+    fi
 
     if test x"${release}" != x; then
         echo "Release Name       ${release}"
@@ -813,6 +845,16 @@ while test $# -gt 0; do
 	--march*|-march*)
 	    check_directive $1 march "march" $2
 	    default_march=$2
+	    shift
+	    ;;
+	--mcpu*|-mcpu*)
+	    check_directive $1 mcpu "mcpu" $2
+	    default_mcpu=$2
+	    shift
+	    ;;
+	--mtune*|-mtune*)
+	    check_directive $1 mtune "mtune" $2
+	    default_mtune=$2
 	    shift
 	    ;;
 	--host|-h*)
