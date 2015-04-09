@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "5a7ca5a3_49cf31b1",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-04-09T11:54:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a7ca5a3_e995dd88",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7ca5a3_49817149",
         "filename": "jenkins.sh",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-04-09T09:46:22Z",
       "side": 1,
       "message": "Any reason you did not remove --parallel here, unlike other calls to abe.sh?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_e9c39d88",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-04-09T11:54:45Z",
+      "side": 1,
+      "message": "No particular reason, just missed it.",
+      "parentUuid": "5a7ca5a3_49817149",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "5a7ca5a3_09c13980",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-04-09T11:54:45Z",
+      "side": 1,
+      "message": "Because test-backport.sh uses gcc.git repo to convert branch names to revisions few lines below.  Jenkins.sh does not use git repos outside of abe.sh",
+      "parentUuid": "5a7ca5a3_a98fe574",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7ca5a3_099379a4",
         "filename": "test-backport.sh",
         "patchSetId": 1
@@ -64,6 +118,24 @@
       "writtenOn": "2015-04-09T09:46:22Z",
       "side": 1,
       "message": "Shouldn\u0027t \u0027!\u0027 and \u0027[\u0027 be swapped?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a7ca5a3_a9bda504",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-04-09T11:54:45Z",
+      "side": 1,
+      "message": "It will work either way.  I didn\u0027t realize that \"test\" / \"[\" accepts \"!\" as an argument.",
+      "parentUuid": "5a7ca5a3_099379a4",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
