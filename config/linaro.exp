@@ -41,6 +41,23 @@ if { "$tcl_platform(user)" == "buildslave" } {
 }
 
 case "$target_triplet" in { 
+    { "*-qemu-linux-gnu*" } {
+	if { [info exists env(SCHROOT_TEST)] && $env(SCHROOT_TEST) == "yes" } {
+	    case "$myname" in {
+		{ tcwg-ex40-* } {
+		    set target_list [list $machine_prefix-tcwgex40qemu]
+		}
+		default {
+		    set target_list [list $machine_prefix-tcwgex40qemu]
+		}
+	    }
+	} else {
+	    global SIM
+	    set target_list { "arm-sim" }
+	    set board_info(arm-sim,sim,options) "-cpu any -R 0 -L $sysroot"
+	    set SIM "setarch x86_64 -R qemu-[lindex [split $target_triplet -] 0]"
+	}
+    }
     { "arm-*linux-gnueabi*" } {
 	case "$native$myname" in {
 	    { tcwgrob* ripple* darkstar* } {
@@ -118,23 +135,6 @@ case "$target_triplet" in {
 		    set target_list { unix }
 		}
 	    }
-	}
-    }
-    { "*linux-gnu*" } {
-	if { [info exists env(SCHROOT_TEST)] && $env(SCHROOT_TEST) == "yes" } {
-	    case "$myname" in {
-		{ tcwg-ex40-* } {
-		    set target_list [list $machine_prefix-tcwgex40qemu]
-		}
-		default {
-		    set target_list [list $machine_prefix-tcwgex40qemu]
-		}
-	    }
-	} else {
-	    global SIM
-	    set target_list { "arm-sim" }
-	    set board_info(arm-sim,sim,options) "-cpu any -R 0 -L $sysroot"
-	    set SIM "setarch x86_64 -R qemu-[lindex [split $target_triplet -] 0]"
 	}
     }
     default {
