@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a79b1b5_3e5a2684",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "Update the copyright year.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_fe534e6a",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "Is there a reason this isn\u0027t called git_reference_dir like it is in the files within ABE instead of git_reference?",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7ca5a3_e995dd88",
         "filename": "jenkins.sh",
         "patchSetId": 1
@@ -37,6 +71,40 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_be763605",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "If ${platform} and ${change} might NOT be set I would be inclined to use ${platform:+ ${platform}} and ${change:+ $change}} as to keep extraneous whitespace out of the logged invocation line.  This is just a nit.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_de73f213",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "Same nit for ${check} ${tars} ${releasestr} ${platform} ${change} and ${try_bootstrap} but I realize that your change isn\u0027t modifying any of these, so just a nit.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7ca5a3_49817149",
         "filename": "jenkins.sh",
         "patchSetId": 1
@@ -66,6 +134,75 @@
       "side": 1,
       "message": "No particular reason, just missed it.",
       "parentUuid": "5a7ca5a3_49817149",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_7e609e35",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "What\u0027s the reason for removing --parallel at this stage?  Would this be better served in a separate patch or is it part of this patch?",
+      "parentUuid": "5a7ca5a3_e9c39d88",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_9e657a47",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "Update the copyright year.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_5e5fe272",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "A necessary error to add, but it occurs to me that it\u0027s probably silly to allow configure to pass without confirming that wget is installed.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_1e516a62",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "Please add a comment about why the flock is necessary.",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -136,6 +273,23 @@
       "side": 1,
       "message": "It will work either way.  I didn\u0027t realize that \"test\" / \"[\" accepts \"!\" as an argument.",
       "parentUuid": "5a7ca5a3_099379a4",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_be4dd6c6",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-07T23:04:24Z",
+      "side": 1,
+      "message": "Do we intend to only have a reference or did you expect the cloned repository to actually contain the files?  If the latter we need to repack and remove the references: see http://randyfay.com/content/git-clone-reference-considered-harmful",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
