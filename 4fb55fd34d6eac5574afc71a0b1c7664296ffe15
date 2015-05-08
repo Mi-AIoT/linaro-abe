@@ -105,6 +105,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_714d2f72",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-08T15:31:53Z",
+      "side": 1,
+      "message": "Agreed, will be, eventually, cleaned up in a separate patch.",
+      "parentUuid": "3a79b1b5_de73f213",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "5a7ca5a3_49817149",
         "filename": "jenkins.sh",
         "patchSetId": 1
@@ -158,6 +176,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_3157b704",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-08T15:31:53Z",
+      "side": 1,
+      "message": "I\u0027ve removed --parallel throughout in the subsequent version of the patch.  The reason is to make all \"abe.sh\" invocations\nlooking as similar as possible.",
+      "parentUuid": "3a79b1b5_7e609e35",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_9e657a47",
         "filename": "lib/fetch.sh",
         "patchSetId": 1
@@ -169,6 +205,24 @@
       "writtenOn": "2015-05-07T23:04:24Z",
       "side": 1,
       "message": "Update the copyright year.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_515cb325",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-08T15:31:53Z",
+      "side": 1,
+      "message": "I believe copyright year should be updated in a coordinated manner on Jan 1st each year.  Let\u0027s make it a stand-alone patch.",
+      "parentUuid": "3a79b1b5_9e657a47",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -192,6 +246,24 @@
     },
     {
       "key": {
+        "uuid": "3a79b1b5_f1405f37",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-08T15:31:53Z",
+      "side": 1,
+      "message": "Agree.  Still, should be a separate patch.",
+      "parentUuid": "3a79b1b5_5e5fe272",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_1e516a62",
         "filename": "scripts/MakeRelease.job",
         "patchSetId": 1
@@ -203,6 +275,24 @@
       "writtenOn": "2015-05-07T23:04:24Z",
       "side": 1,
       "message": "Please add a comment about why the flock is necessary.",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_113e3bb9",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-08T15:31:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a79b1b5_1e516a62",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -290,6 +380,24 @@
       "writtenOn": "2015-05-07T23:04:24Z",
       "side": 1,
       "message": "Do we intend to only have a reference or did you expect the cloned repository to actually contain the files?  If the latter we need to repack and remove the references: see http://randyfay.com/content/git-clone-reference-considered-harmful",
+      "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_9179eb95",
+        "filename": "test-backport.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-08T15:31:53Z",
+      "side": 1,
+      "message": "You may be missing the main point of us using reference repos -- we delete \"our\" snapshots before every build and then make a clean download of them, using reference repos to speed up the process.  We don\u0027t care about \"our\" repos being self-sufficient or stand-alone; therefore, no need to repack.  We purposefully delete them to avoid hitting source update paths in ABE, which proven to be unstable.\n\nThe cloned repository will have all the SHA1s and branches of the upstream repo.\n\nDoes this make sense?",
+      "parentUuid": "3a79b1b5_be4dd6c6",
       "revId": "4fb55fd34d6eac5574afc71a0b1c7664296ffe15",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
