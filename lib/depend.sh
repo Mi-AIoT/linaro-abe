@@ -139,7 +139,9 @@ infrastructure()
     trace "$*"
 
     rm -f ${local_snapshots}/infrastructure/ChangeLog
-    fetch_http infrastructure/ChangeLog
+    if test x"${supdate}" = x"yes"; then
+	fetch_http infrastructure/ChangeLog
+    fi
 
     source_config infrastructure
 
