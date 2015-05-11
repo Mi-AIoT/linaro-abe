@@ -37,7 +37,7 @@ fetch()
     if test x"$1" = x"md5sums"; then
 	# Move the existing file to force a fresh copy to be downloaded.
 	# Otherwise this file can get stale, and new tarballs not found.
-	if test -f ${local_snapshots}/md5sums; then
+	if test -f ${local_snapshots}/md5sums -a x"${supdate}" = x"yes"; then
 	    mv -f ${local_snapshots}/md5sums ${local_snapshots}/md5sums.bak
 	fi
 	fetch_http md5sums
@@ -123,9 +123,6 @@ fetch()
 fetch_http()
 {
 #    trace "$*"
-    if test x"${supdate}" = xno; then
-	return 0
-    fi
 
     local getfile=$1
     local dir="`dirname $1`/"
@@ -137,12 +134,17 @@ fetch_http()
 	fi
     fi
 
-    if test x"${supdate}" = xno -a -e ${local_snapshots}/${getfile}; then
+    if test -e ${local_snapshots}/${getfile}; then
 	notice "${getfile} already exists."
 	return 0
     else
-	error "${getfile} doesn't exist and you disabled updating."
-	return 0
+	if test x"${supdate}" = xno; then
+	    error "${getfile} doesn't exist and you disabled updating."
+	else
+	    if test x"${getfile}" != x"md5sums"; then
+		warning "${getfile} doesn't exist!."
+	    fi
+	fi
     fi
 
     if test ! -e ${local_snapshots}/${getfile} -o x"${force}" = xyes; then
