@@ -2,6 +2,23 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a79b1b5_f1013f3a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-11T22:59:35Z",
+      "side": 1,
+      "message": "What\u0027s the intention of the improvement?",
+      "revId": "c95a60a1f5c487905f0e0b3467738c9d169e02bd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a79b1b5_310c9794",
         "filename": "lib/depend.sh",
         "patchSetId": 1
@@ -13,6 +30,40 @@
       "writtenOn": "2015-05-11T20:13:11Z",
       "side": 1,
       "message": "If updates are disabled, infrastructure/ChangeLog will be removed, is this intended?",
+      "revId": "c95a60a1f5c487905f0e0b3467738c9d169e02bd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_518833e7",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-11T22:59:35Z",
+      "side": 1,
+      "message": "Why doesn\u0027t this return non-zero?",
+      "revId": "c95a60a1f5c487905f0e0b3467738c9d169e02bd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_51ed938a",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-11T22:59:35Z",
+      "side": 1,
+      "message": "Why is this a warning?  Won\u0027t this leg be reached the first time fetch_http is called on a tarball (that isn\u0027t md5sums) that hasn\u0027t been downloaded yet?",
       "revId": "c95a60a1f5c487905f0e0b3467738c9d169e02bd",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
