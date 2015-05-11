@@ -1,4 +1,3 @@
-                        README
 
 Abe is a bourne shell rewrite of the existing Cbuildv1 system as
 used by Linaro. While being oriented to the Linaro way of doing
@@ -31,7 +30,7 @@ used. It is also possible to change those values at configure
 time. For example:
 
 $ABE-PATH/configure
---with-local-snapshots=$ABE_PATH/snapshots 
+--with-local-snapshots=$ABE_PATH/snapshots
 --with-local-builds=$ABE-PATH/destdir
 --with-remote-snapshots=abe@toolchain64.lab:/home/abe/var/snapshots/
 
@@ -182,7 +181,7 @@ General ideas
 Use a shell script as config file, ala *.conf and set global
 variables or custom functions. A good naming convention to avoid
 collisions is important. It should be able to be download from a
-remote host. 
+remote host.
 
 Rather than Makefiles, it should use bourne shell scripts for more
 functionality. Both Android and Chromium use this technique.
@@ -196,7 +195,7 @@ is recorded into the database for each build and test run.
 Cross building G++ is complex, there is a stage 1 build of the
 compiler, which is only used to build the C library. Then the C
 library is compiled. After that G++ can be built.
- 
+
 Analysis
 --------
 
@@ -220,7 +219,7 @@ management planning.
    and several versions.
  * Plot all test states as a percentage of total test results
  * Plot all test states of the actual totals for each
- * 
+ *
 CoreMark
  * Compiler and version
  * Operating Speed in Mhz
