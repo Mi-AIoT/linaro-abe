@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a79b1b5_54e26104",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-12T19:40:03Z",
+      "side": 1,
+      "message": "What is the motivation/benefit?",
+      "revId": "c1d5b1970ff45630ff362f12af753ff193d44de8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a79b1b5_34dd6543",
+        "filename": "config/linux.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-12T19:40:03Z",
+      "side": 1,
+      "message": "Can we safely use an rc* kernel, rather than an official release?",
+      "revId": "c1d5b1970ff45630ff362f12af753ff193d44de8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
