@@ -33,6 +33,24 @@
       "revId": "c1d5b1970ff45630ff362f12af753ff193d44de8",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_f13dc8bc",
+        "filename": "config/linux.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-14T15:50:22Z",
+      "side": 1,
+      "message": "This should be ok.  Since eglibc 2.19 is significantly old enough that it won\u0027t even recognize or use any API additions that _might_ be present in this rc kernel.  Even if the release kernel revoked an API that was presented in the rc kernel, our binaries wouldn\u0027t be impacted.",
+      "parentUuid": "3a79b1b5_34dd6543",
+      "revId": "c1d5b1970ff45630ff362f12af753ff193d44de8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
