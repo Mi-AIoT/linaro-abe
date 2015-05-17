@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_71f31874",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-17T21:02:06Z",
+      "side": 1,
+      "message": "The changes related to ${supdate} are not mentioned in the commit message.",
+      "revId": "1a69ca35e8f28dc12c7e131a6b704d6908a6ab9b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
