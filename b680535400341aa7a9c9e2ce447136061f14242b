@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dad5f5cf_94922af5",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T20:37:37Z",
+      "side": 1,
+      "message": "You are right. I read too fast: I thought ${getfile} was only the filename, and ${dir} the dirname.",
+      "parentUuid": "dad5f5cf_b4f88e4a",
+      "revId": "b680535400341aa7a9c9e2ce447136061f14242b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dad5f5cf_34ed7e8c",
         "filename": "lib/fetch.sh",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I think it\u0027s less confusing if the space is in the conditional inclusion so that you don\u0027t mistake ${overwrite} as being appended to ${getfile}.  Though, I\u0027ve wondered whether it\u0027s even worth trying suppress the spurious \u0027 \u0027 and maybe just adding more confusion.",
       "parentUuid": "dad5f5cf_34ed7e8c",
+      "revId": "b680535400341aa7a9c9e2ce447136061f14242b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_b48f2ecc",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T20:37:37Z",
+      "side": 1,
+      "message": "Yep, I think we can leave with extra spaces, and have more readable code.",
+      "parentUuid": "dad5f5cf_5495a2e2",
       "revId": "b680535400341aa7a9c9e2ce447136061f14242b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
