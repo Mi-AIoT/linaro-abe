@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_54884222",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T12:21:45Z",
+      "side": 1,
+      "message": "What is the purpose of the \u0027return 1\u0027 ?\n\nIsn\u0027t it preventing the execution of the code below?",
+      "revId": "a054e9d04155c80de4c9631a490fa2985c498a6e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
