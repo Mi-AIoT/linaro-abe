@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_b4e16e9c",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T20:26:39Z",
+      "side": 1,
+      "message": "What do you mean by \"so often\". Isn\u0027t it once per ABE invocation?",
+      "revId": "0c34d72b5e31b1b49b6605f8d7a50307d3ebb87d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
