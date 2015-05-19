@@ -16,6 +16,24 @@
       "revId": "0c34d72b5e31b1b49b6605f8d7a50307d3ebb87d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_d488b2c8",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-05-19T20:35:40Z",
+      "side": 1,
+      "message": "Yes.  I was kind of thinking we should just leave those messages in, but I inherited the squelching from further down in the code and just kept it up.  I can remove this if we feel it\u0027s beneficial. The only reason these messages have been squelched in the past is that they\u0027re annoying to ABE developers who rebuild in the same build directory very often.",
+      "parentUuid": "dad5f5cf_b4e16e9c",
+      "revId": "0c34d72b5e31b1b49b6605f8d7a50307d3ebb87d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
