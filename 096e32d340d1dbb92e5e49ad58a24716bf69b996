@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_149f1a05",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T20:33:53Z",
+      "side": 1,
+      "message": "What is the purpose of ${ret}? I don\u0027t see where it is used?",
+      "revId": "096e32d340d1dbb92e5e49ad58a24716bf69b996",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
