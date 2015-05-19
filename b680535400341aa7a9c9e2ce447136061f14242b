@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dad5f5cf_d401923a",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T20:24:52Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be ${local_snapshots}/${dir}/${getfile} ?",
+      "revId": "b680535400341aa7a9c9e2ce447136061f14242b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dad5f5cf_34ed7e8c",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-19T20:24:52Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it be easier to read if you prefixed overwrite with a space: overwrite\u003d\" -O .....\" and then just use ${overwrite} here?",
+      "revId": "b680535400341aa7a9c9e2ce447136061f14242b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
