@@ -164,6 +164,10 @@ if test x"${libc}" != x; then
     esac
 fi
 
+# Path to remote snapshots on $fileserver.
+# Extract "path" from $fileserver's "server:path".
+remote_snapshots="${fileserver#*:}"
+
 # This is the top level directory where builds go.
 if test x"${user_workspace}" = x; then
     user_workspace="${WORKSPACE}"
@@ -189,7 +193,7 @@ fi
 if test x"${abe_dir}" = x; then
     abe_dir=${topdir}
 fi
-$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${user_git_repo} --with-languages=${languages} --enable-schroot-test
+$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${user_git_repo} --with-languages=${languages} --enable-schroot-test --with-fileserver=${fileserver} --with-remote-snapshots=${remote_snapshots}
 
 # Double parallelism for tcwg-ex40-* machines to compensate for really-remote
 # target execution.  GCC testsuites will run with -j 32.
