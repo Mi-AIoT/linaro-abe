@@ -16,6 +16,41 @@
       "revId": "ed005475e0e3e748617106f262f13a456a03582b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bada0100_b347424b",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-25T11:40:17Z",
+      "side": 1,
+      "message": "Because wget will not resolve http://tcwg-ex40-01/... .  However, it will resolve ex40-01.tcwglab.linaro.org -- so I will use that instead.  Thanks!",
+      "parentUuid": "bada0100_f3362ae7",
+      "revId": "ed005475e0e3e748617106f262f13a456a03582b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bada0100_5374d69b",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-25T11:40:17Z",
+      "side": 1,
+      "message": "Incidentally, using ex40-01.tcwglab.linaro.org here too should work.",
+      "revId": "ed005475e0e3e748617106f262f13a456a03582b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
