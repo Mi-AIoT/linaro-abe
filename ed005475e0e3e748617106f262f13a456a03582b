@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bada0100_f3362ae7",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-05-25T11:22:56Z",
+      "side": 1,
+      "message": "Why not use tcwg-ex40-01 instead of the IP address?",
+      "revId": "ed005475e0e3e748617106f262f13a456a03582b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
