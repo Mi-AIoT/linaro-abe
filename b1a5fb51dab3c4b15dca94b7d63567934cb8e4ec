@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "bada0100_50184c84",
+        "filename": "lib/common.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-25T09:12:20Z",
+      "side": 1,
+      "message": "This can be simplified as:\nif `echo $1 | grep -q glibc`; then",
+      "revId": "b1a5fb51dab3c4b15dca94b7d63567934cb8e4ec",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bada0100_701d5073",
+        "filename": "lib/common.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-25T09:12:20Z",
+      "side": 1,
+      "message": "Why don\u0027t use \"_\" as $delim unconditionally?\n\nMy concern is that the above test can have both false positives and false negatives as it relies on specific pattern (\"glibc\") to appear in the URL.  A gcc branch named \"gcc.git@glibc-bug123\" will cause a false positive.  Custom glibc repo named \"http://git.linaro.org/people/maxim.kuvyrkov/new-libc.git\" will cause a false negative.",
+      "revId": "b1a5fb51dab3c4b15dca94b7d63567934cb8e4ec",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
