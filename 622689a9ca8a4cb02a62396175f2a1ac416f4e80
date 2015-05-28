@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9adffdf1_b5ee48b3",
+        "filename": "jenkins.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-28T07:47:00Z",
+      "side": 1,
+      "message": "Yes, --with-remote-snapshots is redundant as abe never uses $remote_snapshots by itself, only in conjuction with $fileserver.",
+      "parentUuid": "9adffdf1_0fd145cd",
+      "revId": "622689a9ca8a4cb02a62396175f2a1ac416f4e80",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9adffdf1_2fd689c6",
         "filename": "jenkins.sh",
         "patchSetId": 3
@@ -30,6 +48,24 @@
       "writtenOn": "2015-05-27T20:08:19Z",
       "side": 1,
       "message": "And what happens if the mkdir fails due to permissions or lack of space?  I realize handling this would be asking for an improvement over the existing code.",
+      "revId": "622689a9ca8a4cb02a62396175f2a1ac416f4e80",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9adffdf1_552b5ceb",
+        "filename": "jenkins.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-05-28T07:47:00Z",
+      "side": 1,
+      "message": "Bad things will go unnoticed.  I\u0027ll post a followup patch to address this.",
+      "parentUuid": "9adffdf1_2fd689c6",
       "revId": "622689a9ca8a4cb02a62396175f2a1ac416f4e80",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
