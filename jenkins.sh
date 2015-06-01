@@ -60,7 +60,7 @@ user_snapshots="${user_workspace}/snapshots"
 fileserver="ex40-01.tcwglab.linaro.org/snapshots-ref"
 
 # Server to store results on.
-logserver="ex40-01.tcwglab.linaro.org:logs"
+logserver=""
 
 # Compiler languages to build
 languages=default
@@ -319,7 +319,7 @@ else
 fi
 
 # This becomes the path on the remote file server    
-if test x"${runtests}" = xtrue; then
+if test x"${logserver}" != x"" -a x"${runtests}" = xtrue; then
     # Split $logserver into "server:path".
     basedir="${logserver#*:}"
     logserver="${logserver%:*}"
@@ -354,7 +354,7 @@ sums="`find ${user_workspace} -name \*.sum`"
 
 # Canadian Crosses are a win32 hosted cross toolchain built on a Linux
 # machine.
-if test x"${canadian}" = x"true"; then
+if test x"${logserver}" != x"" -a x"${canadian}" = x"true"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${platform} --build all
     distro="`lsb_release -sc`"
     # Ubuntu Lucid uses an older version of Mingw32
@@ -366,7 +366,7 @@ if test x"${canadian}" = x"true"; then
 fi
 
 # This setups all the files needed by tcwgweb
-if test x"${sums}" != x -o x"${runtests}" != x"true"; then
+if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"true"; then
     if test x"${sums}" != x; then
 	test_logs=""
 	for s in ${sums}; do
