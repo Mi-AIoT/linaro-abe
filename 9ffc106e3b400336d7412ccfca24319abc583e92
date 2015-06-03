@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac10518_507932fb",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-03T20:22:39Z",
+      "side": 1,
+      "message": "Why do you check gcc.git only?\nBuz #1338 mentions binutils, glibc and gdb too.",
+      "revId": "9ffc106e3b400336d7412ccfca24319abc583e92",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
