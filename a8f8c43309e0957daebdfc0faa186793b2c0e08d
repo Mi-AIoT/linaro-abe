@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac10518_f0f4de88",
+        "filename": "jenkins.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-03T19:38:13Z",
+      "side": 1,
+      "message": "Why is that change needed? Is it to save build time when testing ABE?",
+      "revId": "a8f8c43309e0957daebdfc0faa186793b2c0e08d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
