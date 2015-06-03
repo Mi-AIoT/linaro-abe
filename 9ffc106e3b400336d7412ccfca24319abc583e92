@@ -34,6 +34,24 @@
       "revId": "9ffc106e3b400336d7412ccfca24319abc583e92",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac10518_9076ba05",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-03T20:31:08Z",
+      "side": 1,
+      "message": "Then I think I don\u0027t fully understand bug #1338. I thought on some cases it completely failed to checkout some of binutils, gcc, gdb or glibc, which are required for the build to complete, even if we are only checking gcc.",
+      "parentUuid": "5ac10518_308826e7",
+      "revId": "9ffc106e3b400336d7412ccfca24319abc583e92",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
