@@ -52,6 +52,24 @@
       "revId": "9ffc106e3b400336d7412ccfca24319abc583e92",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5ac10518_96fb1247",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-05T09:50:20Z",
+      "side": 1,
+      "message": "Your understanding of bug #1338 is correct.  The reason why absence of binutils, gdb, glibc, etc is not the issue here is because all those components (and gcc, if absent) are checked out during \"--build all\" phase.  Does this answer your question?",
+      "parentUuid": "5ac10518_9076ba05",
+      "revId": "9ffc106e3b400336d7412ccfca24319abc583e92",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
