@@ -68,19 +68,13 @@ fetch()
 	return 1
     fi
 
-    if test -e "${local_snapshots}/${md5file}"; then 
-	local ret=
-    	# If the tarball hasn't changed, then don't fetch anything
-	check_stamp "${stampdir}" ${stamp} ${local_snapshots}/${md5file} fetch ${force}
-	ret=$?
-	if test $ret -eq 0; then
-	    return 0 
-	elif test $ret -eq 255; then
-	    # The compare file ${local_snapshots}/${md5file} is not there.
-	    return 1
-	fi
-    else
-	notice "${local_snapshots}/${md5file} does not exist.  Downloading."
+    if test x"${supdate}" = xno; then
+        if test -e "${local_snapshots}/${getfile}"; then
+    	    notice "${getfile} already exists and updating has been disabled."
+    	    return 0
+        fi
+        error "${getfile} doesn't exist and updating has been disabled."
+        return 1
     fi
 
     # FIXME: Stash the md5sum for this tarball in the build directory. Compare
