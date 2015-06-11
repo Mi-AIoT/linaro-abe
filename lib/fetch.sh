@@ -1,4 +1,5 @@
 #!/bin/sh
+#Bernie's change
 # 
 #   Copyright (C) 2013, 2014 Linaro, Inc
 # 
