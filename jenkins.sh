@@ -35,9 +35,8 @@ if test $# -lt 1; then
 #    exit
 fi
 
-# load commonly used functions
-which_dir="`which $0`"
-topdir="`dirname ${which_dir}`"
+# Directory of ABE source files
+abe_dir="$(cd $(dirname $0); pwd)"
 
 # This is where all the builds go
 if test x"${WORKSPACE}" = x; then
@@ -48,14 +47,23 @@ user_workspace="${WORKSPACE}"
 # The files in this directory are shared across all platforms 
 shared="${HOME}/workspace/shared"
 
-# This is an optional directory for the master copy of the git repositories.
-user_git_repo="${shared}/snapshots"
+# This is an optional directory for the reference copy of the git repositories.
+git_reference="${HOME}/snapshots-ref"
+
+# GCC branch to build
+gcc_branch="latest"
 
 # set default values for options to make life easier
 user_snapshots="${user_workspace}/snapshots"
 
+# Server to wget snapshots from.
+fileserver="ex40-01.tcwglab.linaro.org/snapshots-ref"
+
 # Server to store results on.
-fileserver="abe.tcwglab.linaro.org"
+logserver=""
+
+# Template of logs' directory name
+logname='gcc-linaro-${version}/${branch}${revision}/${arch}.${target}-${job}${BUILD_NUMBER}'
 
 # Compiler languages to build
 languages=default
@@ -75,24 +83,49 @@ status=0
 # Whether to exclude some component from 'make check'
 excludecheck=
 
-OPTS="`getopt -o s:g:c:w:o:f:l:rt:b:h -l snapshots:,gitrepo:,abe:,workspace:,options:,fileserver:,languages:,runtests,target:,bootstrap,help,excludecheck: -- "$@"`"
+# Whether to rebuild the toolchain even if logs are already present.
+# Note that the check is done on logserver/logname pair, so logname should not
+# be relying on variables that this script sets for match to succeed.
+# In practice, --norebuild option should be accompanied by something like
+# --logname gcc-<sha1>
+rebuild=true
+
+OPTS="`getopt -o s:g:c:w:o:f:l:rt:b:h -l gcc-branch:,snapshots:,gitrepo:,abe:,workspace:,options:,fileserver:,logserver:,logname:,languages:,runtests,target:,bootstrap,help,excludecheck:,norebuild -- "$@"`"
 while test $# -gt 0; do
     case $1 in
+	--gcc-branch) gcc_branch=$2; shift ;;
         -s|--snapshots) user_snapshots=$2; shift ;;
-        -g|--gitrepo) user_git_repo=$2; shift ;;
+        -g|--gitrepo) git_reference=$2; shift ;;
         -c|--abe) abe_dir=$2; shift ;;
 	-t|--target) target=$2; shift ;;
         -w|--workspace) user_workspace=$2; shift ;;
         -o|--options) user_options=$2; shift ;;
         -f|--fileserver) fileserver=$2; shift ;;
+        --logserver) logserver=$2; shift ;;
+        --logname) logname=$2; shift ;;
         -l|--languages) languages=$2; shift ;;
         -r|--runtests) runtests="true" ;;
         -b|--bootstrap) try_bootstrap="true" ;;
 	--excludecheck) excludecheck=$2; shift ;;
+	--norebuild) rebuild=false ;;
 	-h|--help) usage ;;
     esac
     shift
 done
+
+# Split $logserver into "server:path".
+basedir="${logserver#*:}"
+logserver="${logserver%:*}"
+eval dir="$logname"
+
+# Check whether we should skip this build if artifacts are already in place
+if [ x"$logserver" != x"" ] && ssh $logserver test -d $basedir/$dir; then
+    echo "Logs are already present in $logserver:$basedir/$dir"
+    if ! $rebuild; then
+	echo "Nothing to be done"
+	exit 0
+    fi
+fi
 
 # Test the config parameters from the Jenkins Build Now page
 
@@ -186,10 +219,7 @@ if test x"${debug}" = x"true"; then
     export CONFIG_SHELL="/bin/bash -x"
 fi
 
-if test x"${abe_dir}" = x; then
-    abe_dir=${topdir}
-fi
-$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${user_git_repo} --with-languages=${languages} --enable-schroot-test
+$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --enable-schroot-test --with-fileserver=${fileserver}
 
 # Double parallelism for tcwg-ex40-* machines to compensate for really-remote
 # target execution.  GCC testsuites will run with -j 32.
@@ -221,9 +251,26 @@ else
     try_bootstrap=""
 fi
 
+# Checkout all sources now to avoid grabbing lock for 1-2h while building and
+# testing runs.  We configure ABE to use reference snapshots, which are shared
+# across all builds and are updated by an external process.  The lock protects
+# us from looking into an inconsistent state of reference snapshots.
+(
+    flock -s 9
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${platform} ${change} --checkout all
+    # Workaround "--checkout all" bug.
+    # See https://bugs.linaro.org/show_bug.cgi?id=1338 .
+    if ! [ -d $user_snapshots/gcc.git ]; then
+	git clone --reference $git_reference/gcc.git http://git.linaro.org/toolchain/gcc.git $user_snapshots/gcc.git
+    fi
+) 9>${git_reference}.lock
+
+# Also fetch changes from gerrit
+(cd $user_snapshots/gcc.git; git fetch origin '+refs/changes/*:refs/remotes/gerrit/changes/*')
+
 # Now we build the cross compiler, for a native compiler this becomes
 # the stage2 bootstrap build.
-$CONFIG_SHELL ${abe_dir}/abe.sh --parallel ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2)
+$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2)
 
 # If abe returned an error, make jenkins see this as a build failure
 if test $? -gt 0; then
@@ -306,12 +353,12 @@ else
 fi
 
 # This becomes the path on the remote file server    
-if test x"${runtests}" = xtrue; then
-    basedir="/work/logs"
-    dir="gcc-linaro-${version}/${branch}${revision}/${arch}.${target}-${job}${BUILD_NUMBER}"
-    ssh ${fileserver} mkdir -p ${basedir}/${dir}
+if test x"${logserver}" != x"" -a x"${runtests}" = xtrue; then
+    # Re-eval $dir as we now have full range of variables available.
+    eval dir="$logname"
+    ssh ${logserver} mkdir -p ${basedir}/${dir}
     if test x"${manifest}" != x; then
-	scp ${manifest} ${fileserver}:${basedir}/${dir}/
+	scp ${manifest} ${logserver}:${basedir}/${dir}/
     fi
 
 # If 'make check' works, we get .sum files with the results. These we
@@ -340,18 +387,18 @@ sums="`find ${user_workspace} -name \*.sum`"
 # Canadian Crosses are a win32 hosted cross toolchain built on a Linux
 # machine.
 if test x"${canadian}" = x"true"; then
-    $CONFIG_SHELL ${abe_dir}/abe.sh --nodepends --parallel ${change} ${platform} --build all
+    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${platform} --build all
     distro="`lsb_release -sc`"
     # Ubuntu Lucid uses an older version of Mingw32
     if test x"${distro}" = x"lucid"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh --nodepends --parallel ${change} ${tars} --host=i586-mingw32msvc ${platform} --build all
+	$CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${tars} --host=i586-mingw32msvc ${platform} --build all
     else
-	$CONFIG_SHELL ${abe_dir}/abe.sh --nodepends --parallel ${change} ${tars} --host=i686-w64-mingw32 ${platform} --build all
+	$CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${tars} --host=i686-w64-mingw32 ${platform} --build all
     fi
 fi
 
 # This setups all the files needed by tcwgweb
-if test x"${sums}" != x -o x"${runtests}" != x"true"; then
+if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"true"; then
     if test x"${sums}" != x; then
 	test_logs=""
 	for s in ${sums}; do
@@ -373,25 +420,25 @@ if test x"${sums}" != x -o x"${runtests}" != x"true"; then
 	cp build.out build.err ${logs_dir}/ || status=1
 
 	xz ${logs_dir}/* || status=1
-	scp ${logs_dir}/* ${fileserver}:${basedir}/${dir}/ || status=1
+	scp ${logs_dir}/* ${logserver}:${basedir}/${dir}/ || status=1
 	rm -rf ${logs_dir} || status=1
-#	scp ${abe_dir}/tcwgweb.sh ${fileserver}:/tmp/tcwgweb$$.sh
-#	ssh ${fileserver} /tmp/tcwgweb$$.sh --email --base ${basedir}/${dir}
-#	ssh ${fileserver} rm -f /tmp/tcwgweb$$.sh
+#	scp ${abe_dir}/tcwgweb.sh ${logserver}:/tmp/tcwgweb$$.sh
+#	ssh ${logserver} /tmp/tcwgweb$$.sh --email --base ${basedir}/${dir}
+#	ssh ${logserver} rm -f /tmp/tcwgweb$$.sh
 
 	echo "Sent test results"
     fi
     if test x"${tarsrc}" = xtrue -a x"${release}" != x; then
-	allfiles="`ls ${shared}/snapshots/*${release}*.xz`"
+	allfiles="`ls ${user_snapshots}/*${release}*.xz`"
 	srcfiles="`echo ${allfiles} | egrep -v "arm|aarch"`"
-	scp ${srcfiles} ${fileserver}:/home/abe/var/snapshots/ || status=1
+	scp ${srcfiles} ${logserver}:/home/abe/var/snapshots/ || status=1
 	rm -f ${srcfiles} || status=1
     fi
 
     if test x"${tarbin}" = xtrue -a x"${release}" != x; then
-	allfiles="`ls ${shared}/snapshots/*${release}*.xz`"
+	allfiles="`ls ${user_snapshots}/*${release}*.xz`"
 	binfiles="`echo ${allfiles} | egrep "arm|aarch"`"
-	scp ${binfiles} ${fileserver}:/work/space/binaries/ || status=1
+	scp ${binfiles} ${logserver}:/work/space/binaries/ || status=1
 	rm -f ${binfiles} || status=1
     fi
 

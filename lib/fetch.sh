@@ -16,11 +16,34 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 # 
 
+# The fetch_md5sums() function is special because the md5sums file is used by
+# abe for knowing where to fetch other files, i.e. it's used by fetch(). This
+# function should only be called once at the start of every ABE run.
+fetch_md5sums()
+{
+    if test -e "${git_reference_dir}/${getfile}" = xyes; then
+	# The user specified that they want to fetch from the reference dir.  This
+	# will always fetch if the version in the reference dir is newer.
+	fetch_reference md5sums
+    else
+	# The fetch_http function will always attempt to fetch the remote file
+	# if the version on the server is newer than the local version.
+	fetch_http md5sums
+    fi
+
+    # If the fetch_*() fails we should still have the previous version
+    # of md5sums.  If we don't then this means the fetch of md5sums the first
+    # hasn't yet succeeded.
+    if test ! -s ${local_snapshots}/md5sums; then
+	return 1
+    fi
+    return 0
+}
+
 # Fetch a file from a remote machine
 fetch()
 {
 #    trace "$*"
-
     if test x"$1" = x; then
 	error "No file name specified to fetch!"
 	return 1
@@ -28,104 +51,69 @@ fetch()
 	local file="`basename $1`"
     fi
 
-#    if test x"${supdate}" = xno; then
-#	warning "Updating files disabled by user, not downloading $1"
-#	return 0
-#    fi
-
-    # The md5sums file is a special case as it's used to find all
-    # the other names of the tarballs for remote downloading.
-    if test x"$1" = x"md5sums"; then
-	# Move the existing file to force a fresh copy to be downloaded.
-	# Otherwise this file can get stale, and new tarballs not found.
-	if test -f ${local_snapshots}/md5sums; then
-	    mv -f ${local_snapshots}/md5sums ${local_snapshots}/md5sums.bak
-	fi
-	fetch_http md5sums
-	if test ! -s ${local_snapshots}/md5sums; then
-	    cp -f ${local_snapshots}/md5sums.bak ${local_snapshots}/md5sums
-	fi
-	return $?
+    # The md5sums file should have been downloaded before fetch() was
+    # ever called.
+    if test ! -e "${local_snapshots}/md5sums"; then
+	error "${local_snapshots}/md5sums is missing."
+	return 1
     fi
-
-    # This will be ${local_snapshots} or ${local_snapshots}/infrastructure.
-    local srcdir=
-    srcdir="`get_srcdir $1`"
-
-    local stamp=
-    stamp="`get_stamp_name fetch $1`"
-
-    # Fetch stamps go into srcdir's parent directory.
-    local stampdir="`dirname ${srcdir}`"
 
     # We can grab the full file name by searching for it in the md5sums file.
     # This is better than guessing, which we do anyway if for some reason the
     # file isn't listed in the md5sums file.  This might be prepended with the
     # 'infrastructure/' directory name if it's an infrastructure file.
-    local md5file="`grep ${file} ${local_snapshots}/md5sums | cut -d ' ' -f 3`"
-    if test x"${md5file}" = x; then
+    local getfile="`grep ${file} ${local_snapshots}/md5sums | cut -d ' ' -f 3`"
+    if test x"${getfile}" = x; then
 	error "${file} not in md5sum!"
 	return 1
     fi
 
-    if test -e "${local_snapshots}/${md5file}"; then 
-	local ret=
-    	# If the tarball hasn't changed, then don't fetch anything
-	check_stamp "${stampdir}" ${stamp} ${local_snapshots}/${md5file} fetch ${force}
-	ret=$?
-	if test $ret -eq 0; then
-	    return 0 
-	elif test $ret -eq 255; then
-	    # The compare file ${local_snapshots}/${md5file} is not there.
-	    return 1
-	fi
-    else
-	notice "${local_snapshots}/${md5file} does not exist.  Downloading."
+    if test x"${supdate}" = xno; then
+        if test -e "${local_snapshots}/${getfile}"; then
+    	    notice "${getfile} already exists and updating has been disabled."
+    	    return 0
+        fi
+        error "${getfile} doesn't exist and updating has been disabled."
+        return 1
     fi
+    # else we'll update the file if the version in the reference dir or on
+    # the server is newer than the local copy (if it exists).
 
-    # FIXME: Stash the md5sum for this tarball in the build directory. Compare
-    # the current one we just got with the stored one to determine if we should
-    # download it.
-    if test x"$2" = x; then
+    # If the user has specified a git_reference_dir, then we'll use it.
+    if test -e "${git_reference_dir}/${getfile}" -a x"${force}" != xyes;
+	# This will always fetch if the version in the reference dir is newer.
+	local protocol=reference
+    else
+	# Otherwise attempt to fetch remotely.
 	local protocol=http
-    else
-	local protocol=$2
     fi
 
-    local getfile="${md5file}"
-    # download the file
+    # download from the file server or copy the file from the reference dir
     fetch_${protocol} ${getfile}
     if test $? -gt 0; then
-	warning "couldn't fetch $1, trying xdelta3 instead"
-	local getfile=${file}.tar.xdelta3.xz
-	fetch_${protocol} ${file}
-	if test $? -gt 0; then
-	    warning "couldn't fetch ${getfile}, trying .bz2 instead"
-	    local getfile=${file}.tar.bz2
-	    fetch_${protocol} ${getfile}
-	    if test $? -gt 0; then
-		error "couldn't fetch ${getfile}"
-		return 1
-	    fi
-	fi
 	return 1
     fi
 
     dryrun "check_md5sum ${getfile}"
-#    if test $? -gt 0; then
-#	return 1
-#    fi
+    if test $? -gt 0; then
+	error "md5sums don't match!"
+	return 1
+    fi
 
-    create_stamp "${stampdir}" "${stamp}"
-
+    notice "md5sums matched"
     return 0
 }
 
+# This function trusts that we know that we want to fetch a file from the
+# server.  Unless $force=yes, wget will only download a copy if the version
+# on the server is newer than the destination file.
 fetch_http()
 {
 #    trace "$*"
 
     local getfile=$1
+
+    # This provides the infrastructure/ directory if ${getfile} contains it.
     local dir="`dirname $1`/"
     if test x"${dir}" = x"./"; then
 	local dir=""
@@ -135,95 +123,93 @@ fetch_http()
 	fi
     fi
 
-    if test ! -e ${local_snapshots}/${getfile} -o x"${force}" = xyes; then
-	notice "Downloading ${getfile} to ${local_snapshots}"
-	if test x"${wget_bin}" != x; then
-	    # --continue --progress=bar
-	    # NOTE: the timeout is short, and we only try twice to access the
-	    # remote host. This is to improve performance when offline, or
-	    # the remote host is offline.
-	    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/${dir} ${remote_snapshots}/${getfile}"
-	    if test x"${dryrun}" != xyes -a ! -s ${local_snapshots}/${getfile}; then
-		warning "downloaded file ${getfile} has zero data!"
-		return 1
-	    fi
-	fi
-    else
-	# We don't want this message for md5sums, since it's so often
-	# downloaded.
-	if test x"${getfile}" != x"md5sums"; then
-	    notice "${getfile} already exists in ${local_snapshots}"
-	fi
-    fi
-    return 0
-}
-
-fetch_scp()
-{
-    error "unimplemented"
-}
-
-fetch_rsync()
-{
-    local getfile="`basename $1`"
-
-    dryrun "${rsync_bin} $1 ${local_snapshots}"
-    if test ! -e ${local_snapshots}/${getfile}; then
-	warning "${getfile} didn't download via rsync!"
+    # You MUST have " " around ${wget_bin} or test ! -x will
+    # 'succeed' if ${wget_bin} is an empty string.
+    if test ! -x "${wget_bin}"; then
+	error "wget executable not available (or not executable)."
 	return 1
     fi
-    
+
+    # Force will cause us to overwrite the version in local_snapshots unconditionally.
+    local overwrite_or_timestamp=
+    if test x${force} = xyes; then
+	# This is the only way to explicitly overwrite the destination file
+	# with wget.
+	overwrite_or_timestamp="-O ${local_snapshots}/${getfile}"
+        notice "Downloading ${getfile} to ${local_snapshots} unconditionally."
+    else
+	# We only every download if the version on the server is newer than
+	# the local version.
+	overwrite_or_timestamp="-N"
+        notice "Downloading ${getfile} to ${local_snapshots} if version on server is newer than local version."
+    fi
+
+    # NOTE: the timeout is short, and we only try twice to access the
+    # remote host. This is to improve performance when offline, or
+    # the remote host is offline.
+    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/${dir} http://${fileserver}/${remote_snapshots}/${getfile} ${overwrite_or_timestamp}"
+    if test x"${dryrun}" != xyes -a ! -s ${local_snapshots}/${getfile}; then
+       warning "downloaded file ${getfile} has zero data!"
+       return 1
+    fi
+
     return 0
+}
+
+# This function trusts that we know that we want to copy a file from the
+# reference snapshots.  It only copies the file if the reference dir file is
+# newer than the destination file (or if the destination file doesn't exist).
+# If ${force}=yes then it will overwrite any existing file in local_snapshots
+# whether it is newer or not.
+fetch_reference()
+{
+#    trace "$*"
+    local getfile=$1
+
+    # Prevent error with empty variable-expansion.
+    if test x"${getfile}" = x""; then
+	error "fetch_reference() must be called with a parameter designating the file to fetch."
+	return 0;
+    fi
+
+    # Force will cause an overwrite.
+    if test x"${force}" != xyes; then
+	local update_on_change="-u"
+	notice "Copying ${getfile} from reference dir to ${local_snapshots} if reference copy is newer or ${getfile} doesn't exist."
+    else
+	notice "Copying ${getfile} from reference dir to ${local_snapshots} unconditionally."
+    fi
+
+    # Only copy if the source file in the reference dir is newer than
+    # that file in the local_snapshots directory (if it exists).
+    dryrun "cp${update_on_change:+ ${update_on_change}} ${git_reference_dir}/${getfile} ${local_snapshots}/${getfile}"
+    if test $? -gt 0; then
+	error "Copying ${getfile} from reference dir to ${local_snapshots} failed."
+	return 1
+    fi
 }
 
 check_md5sum()
 {
 #    trace "$*"
 
+    # ${local_snapshots}/md5sums is a pre-requisite.
     if test ! -e ${local_snapshots}/md5sums; then
-	fetch_http md5sums
-	if test $? -gt 0; then
-	    error "couldn't fetch md5sums"
-	    return 1
-	fi
+	error "${local_snapshots}/md5sums is missing."
+	return 1
     fi
 
-    local dir="`dirname $1`/"
-    if test x"${dir}" = x"."; then
-	local dir=""
-    fi
-
-    # Drop the file name from .tar to the end to keep grep happy
-    local getfile=`echo ${1}`
-
-    newsum="`md5sum ${local_snapshots}/$1 | cut -d ' ' -f 1`"
-    oldsum="`grep ${getfile} ${local_snapshots}/md5sums | cut -d ' ' -f 1`"
-    # if there isn't an entry in the md5sum file, we're probably downloading
-    # something else that's less critical.
-    if test x"${oldsum}" = x; then
+    local entry=
+    entry="`grep ${1} ${local_snapshots}/md5sums`"
+    if test x"${entry}" = x; then
 	warning "No md5sum entry for $1!"
 	return 0
     fi
 
-    if test x"${oldsum}" = x"${newsum}"; then
-	notice "md5sums matched"
-	# We don't need to pass $2 to get_builddir() in this case because the
-	# builddir is always based on a tarball and therefore we don't have a
-	# special builddir for a combined binutils and gdb.
-	local builddir="`get_builddir $1`"
-	rm -f ${builddir}/md5sum
-	echo "${newsum} > ${builddir}/md5sum"
-	return 0
-    else
-	error "md5sums don't match!"
-	if test x"${force}" = x"yes"; then
-	    return 0
-	else
-	    return 1
-	fi
-    fi
-
-    return 0
+    # Ask md5sum to verify the md5sum of the downloaded file
+    # against the hash in the index.
+    dryrun "echo ${entry} | md5sum --status --check -"
+    return $?
 }
 
 # decompress and untar a fetched tarball
@@ -311,29 +297,4 @@ extract()
 
     create_stamp "${stampdir}" "${stamp}"
     return 0
-}
-
-# This updates an existing checked out source tree 
-update_source()
-{
-    # Figure out which DCCS it uses
-    dccs=
-    if test -f .git; then
-	dccs="git pull"
-    fi
-    if test -f .bzr; then
-	dccs="bzr pull"
-    fi
-    if test -f .svn; then
-	dccs="svn update"
-    fi
-    if test x"${dccs}" != x; then
-	echo "Update sources with: ${dccs}"
-    else
-	echo "ERROR: can't determine DCCS!"
-	return
-    fi
-
-    # update the source
-    (cd $1 && ${dccs})
 }

@@ -26,7 +26,13 @@ build_all()
     
     # Specify the components, in order to get a full toolchain build
     if test x"${target}" != x"${build}"; then
-        local builds="infrastructure binutils stage1 libc stage2 gdb"
+	if test "`echo ${host} | grep -c mingw`" -gt 0; then
+	    # As Mingw32 requires a cross compiler to be already built, so we don't need
+	    # to rebuilt the sysroot.
+            local builds="infrastructure binutils libc stage2 gdb"
+	else
+            local builds="infrastructure binutils stage1 libc stage2 gdb"
+	fi
 	if test "`echo ${target} | grep -c -- -linux-`" -eq 1; then
 	    local builds="${builds} gdbserver"
 	fi
@@ -70,6 +76,8 @@ build_all()
         return 1;
     fi
 
+    manifest
+
     # build each component
     for i in ${builds}; do
         notice "Building all, current component $i"
@@ -107,18 +115,33 @@ build_all()
                 if test ${build_all_ret} -lt 1; then
                     # If we don't install the sysroot, link to the one we built so
                     # we can use the GCC we just built.
-                    # FIXME: if ${dryrun} ${target}-gcc doesn't exist so this will error.
-                    local sysroot="`${target}-gcc -print-sysroot`"
-                    if test ! -d ${sysroot}; then
-                        dryrun "mkdir -p /opt/linaro"
-                        dryrun "ln -sfnT ${abe_top}/sysroots/${target} ${sysroot}"
-                    fi
+		    if test x"${dryrun}" != xyes; then
+			local sysroot="`${target}-gcc -print-sysroot`"
+			if test ! -d ${sysroot}; then
+			    dryrun "mkdir -p /opt/linaro"
+			    dryrun "ln -sfnT ${abe_top}/sysroots/${target} ${sysroot}"
+			fi
+		    fi
                 fi
                 ;; 
             # Build stage 2 of GCC, which is the actual and fully functional compiler
             stage2)
+		# FIXME: this is a seriously ugly hack required for building Canadian Crosses.
+		# Basically the gcc/auto-host.h produced when configuring GCC stage2 has a
+		# conflict as sys/types.h defines a typedef for caddr_t, and autoheader screws
+		# up, and then tries to redefine caddr_t yet again. We modify the installed
+		# types.h instead of the one in the source tree to be a tiny bit less ugly.
+		# After libgcc is built with the modified file, it needs to be changed back.
+		if test  `echo ${host} | grep -c mingw` -eq 1; then
+		    sed -i -e 's/typedef __caddr_t caddr_t/\/\/ FIXME: typedef __caddr_t caddr_t/' ${sysroots}/usr/include/sys/types.h
+		fi
+
                 build ${gcc_version} stage2
                 build_all_ret=$?
+		# Reverse the ugly hack
+		if test `echo ${host} | grep -c mingw` -eq 1; then
+		    sed -i -e 's/.*FIXME: //' ${sysroots}/usr/include/sys/types.h
+		fi
                 ;;
             gdb)
                 build ${gdb_version} gdb
@@ -140,8 +163,6 @@ build_all()
             return 1
         fi
     done
-
-    manifest
 
     # Notify that the build completed successfully
     build_success
@@ -475,6 +496,15 @@ make_all()
 	local make_flags="${make_flags} -j ${cpus}"
     fi
 
+    # Enable an errata fix for aarch64 that effects the linker
+    if test "`echo ${tool} | grep -c glibc`" -gt 0 -a `echo ${target} | grep -c aarch64` -gt 0; then
+	local make_flags="${make_flags} LDFLAGS=\"-Wl,--fix-cortex-a53-843419\" "
+    fi
+
+    if test "`echo ${target} | grep -c aarch64`" -gt 0; then
+	local make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"-Wl,-fix-cortex-a53-843419\" "
+    fi
+
     # Use pipes instead of /tmp for temporary files.
     if test x"${override_cflags}" != x -a x"${tool}" != x"eglibc"; then
 	local make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe -g -O2\" CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"-pipe -g -O2\""
@@ -519,7 +549,7 @@ make_all()
     local logfile="${builddir}/make-${tool}${2:+-$2}.log"
     dryrun "make SHELL=${bash_shell} -w -C ${builddir} ${make_flags} 2>&1 | tee ${logfile}"
     local makeret=$?
-
+    
 #    local errors="`dryrun \"egrep '[Ff]atal error:|configure: error:|Error' ${logfile}\"`"
 #    if test x"${errors}" != x -a ${makeret} -gt 0; then
 #       if test "`echo ${errors} | egrep -c "ignored"`" -eq 0; then
@@ -662,30 +692,6 @@ make_install()
 
     if test x"${tool}" = x"gcc"; then
 	dryrun "copy_gcc_libs_to_sysroot \"${local_builds}/destdir/${host}/bin/${target}-gcc --sysroot=${sysroots}\""
-    fi
-
-    if test "`echo ${tool} | grep -c glibc`" -gt 0 -a "`echo ${target} | grep -c aarch64`" -gt 0; then
-        local dynamic_linker
-        dynamic_linker="$(find_dynamic_linker "$sysroots" true)"
-        local dynamic_linker_name="`basename ${dynamic_linker}`"
-
-        # 64 bit architectures don't populate sysroot/lib, which unfortunately other
-        # things look in for shared libraries.
-        dryrun "rsync -a ${sysroots}/lib/ ${sysroots}/lib64/"
-        dryrun "rm -rf ${sysroots}/lib"
-        dryrun "(cd ${sysroots} && ln -sfnT lib64 lib)"
-#        dryrun "(mv ${sysroots}/lib/ld-linux-aarch64.so.1 ${sysroots}/lib/ld-linux-aarch64.so.1.symlink)"
-        dryrun "rm -f ${sysroots}/lib/ld-linux-aarch64.so.1"
-        dryrun "ln -sfnT ${dynamic_linker_name} ${sysroots}/lib64/ld-linux-aarch64.so.1"
-    fi
-
-    # FIXME: this is a seriously ugly hack required for building Canadian Crosses.
-    # Basically the gcc/auto-host.h produced when configuring GCC stage2 has a
-    # conflict as sys/types.h defines a typedef for caddr_t, and autoheader screws
-    # up, and then tries to redefine caddr_t yet again. We modify the installed
-    # types.h instead of the one in the source tree to be a tiny bit less ugly.
-    if test "`echo ${tool} | grep -c glibc`" -gt 0 -a `echo ${host} | grep -c mingw` -eq 1; then
-        sed -i -e '/typedef __caddr_t caddr_t/d' ${sysroots}/usr/include/sys/types.h
     fi
 
     return 0
@@ -947,8 +953,12 @@ copy_gcc_libs_to_sysroot()
 	libgcc="libgcc.a"
     fi
 
-    gcc_exe="`find -name ${target}-gcc`"
-    libgcc="`${gcc_exe} -print-file-name=${libgcc}`"
+    # Make sure the compiler built before trying to use it
+    if test ! -e ${local_builds}/destdir/${host}/bin/${target}-gcc; then
+	error "${target}-gcc doesn't exist!"
+	return 1
+    fi
+    libgcc="`${local_builds}/destdir/${host}/bin/${target}-gcc -print-file-name=${libgcc}`"
     if test x"${libgcc}" = xlibgcc.so; then
 	error "GCC doesn't exist!"
 	return 1
