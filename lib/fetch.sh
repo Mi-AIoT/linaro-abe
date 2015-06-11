@@ -68,7 +68,6 @@ fetch()
 	return 1
     fi
 
-    # Forcing trumps ${supdate} and always results in sources being updated.
     if test x"${supdate}" = xno; then
         if test -e "${local_snapshots}/${getfile}"; then
     	    notice "${getfile} already exists and updating has been disabled."
