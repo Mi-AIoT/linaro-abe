@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5ac10518_16939da4",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-11T08:58:47Z",
+      "side": 1,
+      "message": "this is my comment.",
+      "revId": "2bfb6fd2ac374720a11d0bcbf75906062d57666b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
