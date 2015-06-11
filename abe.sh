@@ -140,6 +140,8 @@ OPTIONS
 
 		update
 			Don't update source repositories before building.
+                        Otherwise packages are always updated if there is
+                        a newer version available.
 
                 make_docs
                         Don't make the toolchain package documentation.
@@ -198,7 +200,9 @@ OPTIONS
 
   		Fetch the specified URL into the snapshots directory.
 
-  --force	Force download packages and force rebuild packages.
+  --force	Force download packages and force rebuild packages.  If the
+                packages are already downloaded, --force will cause them to
+                be downloaded again.
 
   --help|-h	Display this usage information.
 
@@ -1184,7 +1188,8 @@ fi
 timeout_save=${wget_timeout}
 wget_timeout=10
 # Get the md5sums file, which is used later to get the URL for remote files
-fetch md5sums
+#fetch md5sums
+fetch_md5sums
 wget_timeout=${timeout_save}
 
 if test ! -z "${do_makecheck}"; then
@@ -1226,6 +1231,10 @@ if test ! -z "${do_excludecheck}"; then
 	# Strip white space from the end of the string
 	runtests=${runtests% }
     fi
+fi
+
+if test x"${force}" = xyes -a x"$supdate" = xno; then
+    warning "You have specified \"--force\" and \"--disable update\".  \"--force\" trumps \"--disable update\".  Sources will be redownloaded."
 fi
 
 # Process 'dump' after we process 'check' and 'excludecheck' so that the list
