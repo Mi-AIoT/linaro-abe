@@ -58,7 +58,7 @@ generate_snapshots ()
     )
 
     for t in "${targets[@]}"; do
-	./abe.sh --target $t --checkout all
+	./abe.sh --target $t --build all
     done
 }
 
