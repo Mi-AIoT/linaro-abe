@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fab9d9a7_6d949137",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-18T19:55:29Z",
+      "side": 1,
+      "message": "How is this related to RPM support?",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_4d8f4d24",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-18T19:55:29Z",
+      "side": 1,
+      "message": "Why change this? Is it related to RPM support?",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_cda25d9a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-18T19:55:29Z",
+      "side": 1,
+      "message": "Why isn\u0027t ${with_packages} necessary anymore?",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_0d99556e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-18T19:55:29Z",
+      "side": 1,
+      "message": "So, we don\u0027t build RPM binary runtime \u0026 sysroot?",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_ed9f214f",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-18T19:55:29Z",
+      "side": 1,
+      "message": "There is no global snapshots variable in tcwg.spec.in.",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_2d9e9957",
+        "filename": "packaging/redhat/tcwg.spec.in",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-18T19:55:29Z",
+      "side": 1,
+      "message": "I think the version should be %{gcc_version}",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
