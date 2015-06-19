@@ -118,14 +118,45 @@ basedir="${logserver#*:}"
 logserver="${logserver%:*}"
 eval dir="$logname"
 
-# Check whether we should skip this build if artifacts are already in place
-if [ x"$logserver" != x"" ] && ssh $logserver test -d $basedir/$dir; then
-    echo "Logs are already present in $logserver:$basedir/$dir"
-    if ! $rebuild; then
-	echo "Nothing to be done"
-	exit 0
+# Check status of logs on $logserver and rebuild if appropriate.
+while [ x"$logserver" != x"" ]; do
+    status=$(ssh $logserver flock -ns $basedir/$dir.lock -c \
+	"\"if [ -e $basedir/$dir ]; then exit 0; else exit 2; fi\""; echo $?)
+
+    case $status in
+	0)
+	    echo "Logs are already present in $logserver:$basedir/$dir"
+	    if ! $rebuild; then
+		exit 0
+	    fi
+	    echo "But we are asked to rebuild them anyway"
+	    ;;
+	1)
+	    echo "Can't obtain read lock; waiting for another build to finish"
+	    sleep 60
+	    continue
+	    ;;
+	2)
+	    echo "Logs don't exist in $basedir/$dir, trying to rebuild"
+	    ;;
+	*)
+	    echo "ERROR: Unexpected status of logs: $status"
+	    exit 1
+	    ;;
+    esac
+
+    # Acquire the lock for the duration of the build.  The lock is released
+    # in the "trap" cleanup below on signal or normal exit.
+    ssh $logserver flock -nx $basedir/$dir.lock -c \
+	"\"echo $(hostname)-$$-$BUILD_URL > $basedir/$dir.lock; while [ -e $basedir/$dir.lock ]; do sleep 10; done\"" & pid=$!; sleep 10
+    if [ x"$(ssh $logserver cat $basedir/$dir.lock)" \
+	= x"$(hostname)-$$-$BUILD_URL" ]; then
+	trap "ssh $logserver rm -f $basedir/$dir.lock" 0 1 2 3 5 9 13 15
+	break
     fi
-fi
+
+    kill $pid || true
+done
 
 # Test the config parameters from the Jenkins Build Now page
 
