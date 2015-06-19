@@ -2,6 +2,40 @@
   "comments": [
     {
       "key": {
+        "uuid": "fab9d9a7_10572c04",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T14:36:33Z",
+      "side": 1,
+      "message": "Whitespace issues.  It should be all spaces so that the formatting doesn\u0027t get messed up if a user\u0027s shell doesn\u0027t use 8-space tabs.",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_d040b437",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1270,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T14:36:33Z",
+      "side": 1,
+      "message": "Why replace tabs with spaces in this case?  Emacs?",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fab9d9a7_6d949137",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -70,6 +104,24 @@
     },
     {
       "key": {
+        "uuid": "fab9d9a7_70522815",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T14:36:33Z",
+      "side": 1,
+      "message": "I believe it\u0027s all packaged in one rpm.",
+      "parentUuid": "fab9d9a7_0d99556e",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fab9d9a7_ed9f214f",
         "filename": "lib/package.sh",
         "patchSetId": 1
@@ -81,6 +133,40 @@
       "writtenOn": "2015-06-18T19:55:29Z",
       "side": 1,
       "message": "There is no global snapshots variable in tcwg.spec.in.",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_504da471",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T14:36:33Z",
+      "side": 1,
+      "message": "Removal of: local txt\u003d\"`manifest`\" seems to be out of place in this patch.",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_f03618e7",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T14:36:33Z",
+      "side": 1,
+      "message": "Whitespace pollution",
       "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
