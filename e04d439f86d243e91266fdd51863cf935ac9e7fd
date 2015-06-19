@@ -70,6 +70,24 @@
     },
     {
       "key": {
+        "uuid": "fab9d9a7_509b64c9",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T21:03:26Z",
+      "side": 1,
+      "message": "This change shouldn\u0027t be in here.",
+      "parentUuid": "fab9d9a7_4d8f4d24",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fab9d9a7_cda25d9a",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -81,6 +99,24 @@
       "writtenOn": "2015-06-18T19:55:29Z",
       "side": 1,
       "message": "Why isn\u0027t ${with_packages} necessary anymore?",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_b05e6011",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T21:03:26Z",
+      "side": 1,
+      "message": "I presume it\u0027s because you always want to build the toolchain tarball, so it\u0027s redundant to check if you want to.",
+      "parentUuid": "fab9d9a7_cda25d9a",
       "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -139,6 +175,41 @@
     },
     {
       "key": {
+        "uuid": "fab9d9a7_d0ae74e7",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T21:03:26Z",
+      "side": 1,
+      "message": "Since tcwg.spec.in uses the snapshots variable it certainly should have a snapshots global.",
+      "parentUuid": "fab9d9a7_ed9f214f",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_30aa70d5",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T21:03:26Z",
+      "side": 1,
+      "message": "Since this is new code, I don\u0027t think this should be here, unless there\u0027s a FIXME that says why this isn\u0027t being used.",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fab9d9a7_504da471",
         "filename": "lib/package.sh",
         "patchSetId": 1
@@ -167,6 +238,23 @@
       "writtenOn": "2015-06-19T14:36:33Z",
       "side": 1,
       "message": "Whitespace pollution",
+      "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fab9d9a7_f0ab78d4",
+        "filename": "packaging/redhat/tcwg.spec.in",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-06-19T21:03:26Z",
+      "side": 1,
+      "message": "This needs: %global snapshots",
       "revId": "e04d439f86d243e91266fdd51863cf935ac9e7fd",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
