@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dabed58f_090ce993",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-22T17:48:41Z",
+      "side": 0,
+      "message": "Here, the possibility of $build and $ref being null was accounted for, which could happen if the previous grep -v \u0027*\u0027 took effect. -z should become -d.",
+      "revId": "3b2700de1a9c9863fc96eda1e79bfebe476d2575",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}

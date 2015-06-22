@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dabed58f_c925710b",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-22T17:48:41Z",
+      "side": 1,
+      "message": "is there a cleaner way to handle the possibility that $ref_logs points at an empty directory?",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_89ac598e",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-22T17:48:41Z",
+      "side": 1,
+      "message": "I think the |grep -v \u0027*\u0027 is redundant here, and it is sufficient to write:\nref\u003d\"${ref_logs}/${buildtarget}\"\nbuild\u003d\"${new_logs}/${buildtarget}\"",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_c971f178",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-22T17:48:41Z",
+      "side": 1,
+      "message": "This message no longer displays the full path\necho \"REF \u003d $ref\" would be more similar to the old message.",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
