@@ -966,6 +966,9 @@ copy_gcc_libs_to_sysroot()
     gcc_lib_path="$(dirname "${libgcc}")"
     if ! test -z "${ldso}"; then
 	sysroot_lib_dir="$(dirname ${ldso})"
+	mkdir -p ${sysroots}/lib
+	local symlink="`ls ${sysroot_lib_dir}/ld-linux*`"
+	cp ${ldso} ${sysroots}/lib/$(basename ${symlink})
     else
 	sysroot_lib_dir="${sysroots}/usr/lib"
     fi
