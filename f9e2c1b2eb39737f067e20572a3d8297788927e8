@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dabed58f_29144df4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-22T12:37:22Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be\nlibgcc_found\u003d\"`${local_builds}/destdir/${host}/bin/${target}-gcc -print-file-name\u003d${libgcc}`\"\nif test x\"${libgcc_found}\" \u003d x\"${libgcc}\"; then\n?\nThis way we check that we found exactly what we have been looking for.",
+      "revId": "f9e2c1b2eb39737f067e20572a3d8297788927e8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
