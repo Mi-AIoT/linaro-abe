@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_c90b312a",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T09:02:11Z",
+      "side": 1,
+      "message": "I\u0027ll try, but you need to be specific about things that are not clear.",
+      "parentUuid": "dabed58f_e9cdd55e",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_89da1916",
         "filename": "jenkins.sh",
         "patchSetId": 2
@@ -30,6 +48,24 @@
       "writtenOn": "2015-06-22T15:07:47Z",
       "side": 1,
       "message": "This can only fail when $basedir does not exist, right?",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_e908752f",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T09:02:11Z",
+      "side": 1,
+      "message": "This can happen for a variety of reasons, from manual log cleanup to adding a new target triplet to testing coverage.",
+      "parentUuid": "dabed58f_89da1916",
       "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -53,6 +89,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_89053916",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T09:02:11Z",
+      "side": 1,
+      "message": "In the \"ssh flock\" above we can\u0027t get exit code from flock, so the way we figure out whether we got the lock or not is by looking for a unique marker inside it.",
+      "parentUuid": "dabed58f_a9d7ddec",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_c9d011fa",
         "filename": "jenkins.sh",
         "patchSetId": 2
@@ -64,6 +118,24 @@
       "writtenOn": "2015-06-22T15:07:47Z",
       "side": 1,
       "message": "Could you add a comment to highlight that this \u0027break\u0027 is what makes the script jump to the actual build code?\nIt took me a while to notice it :-(",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_a9027d09",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T09:02:11Z",
+      "side": 1,
+      "message": "OK.",
+      "parentUuid": "dabed58f_c9d011fa",
       "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
