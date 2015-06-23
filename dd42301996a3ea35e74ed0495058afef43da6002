@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_4931810a",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T08:46:02Z",
+      "side": 1,
+      "message": "I don\u0027t know of one off-hand; something like $(ls -d \"$ref_logs/*\") maybe?\n\nIn any case, that\u0027s an existing shortcoming, outside of scope of this patch.",
+      "parentUuid": "dabed58f_c925710b",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_89ac598e",
         "filename": "scripts/compare_jobs.sh",
         "patchSetId": 6
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_6936c505",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T08:46:02Z",
+      "side": 1,
+      "message": "Again, I agree, but this is an existing behavior.  Christophe, can you comment why you used grep here in the first place?",
+      "parentUuid": "dabed58f_89ac598e",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_c971f178",
         "filename": "scripts/compare_jobs.sh",
         "patchSetId": 6
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-22T17:48:41Z",
       "side": 1,
       "message": "This message no longer displays the full path\necho \"REF \u003d $ref\" would be more similar to the old message.",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_093b89ec",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T08:46:02Z",
+      "side": 1,
+      "message": "Right, I\u0027m not sure why I stopped using $ref and $build here.  I\u0027ll revert these lines.",
+      "parentUuid": "dabed58f_c971f178",
       "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
