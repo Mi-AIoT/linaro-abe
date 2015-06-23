@@ -55,6 +55,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_ec3643e7",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T09:27:55Z",
+      "side": 1,
+      "message": "The condition is, essentially, \"while true;\", but we need to skip this part if $logserver is not specified.\n\nThe \"-n\" option to flock makes it non-block.  I tried to make locking blocking, but that is more difficult to get right and avoid dead-locks.  I opted for busy-wait style instead, which is easier to debug.",
+      "parentUuid": "dabed58f_0c20779a",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_89da1916",
         "filename": "jenkins.sh",
         "patchSetId": 2
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Why not? Doesn\u0027t ssh return the exit code from flock?",
       "parentUuid": "dabed58f_89053916",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_ac304be9",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T09:27:55Z",
+      "side": 1,
+      "message": "Because ssh will return only when the lock ceases to exist -- at the end of the build.  Note the \"\u0026\" in the invocation of ssh.  I\u0027ll add a comment about this.",
+      "parentUuid": "dabed58f_6c2b3383",
       "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
