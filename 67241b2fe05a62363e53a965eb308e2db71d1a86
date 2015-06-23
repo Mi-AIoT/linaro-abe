@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_0c20779a",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-23T09:23:15Z",
+      "side": 1,
+      "message": "For instance, why loop with x\"$logserver\" !\u003d x\"\" condition?\n\nWhen using flock -nx, the script is blocked until the lock is granted, right?",
+      "parentUuid": "dabed58f_c90b312a",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_89da1916",
         "filename": "jenkins.sh",
         "patchSetId": 2
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "In the \"ssh flock\" above we can\u0027t get exit code from flock, so the way we figure out whether we got the lock or not is by looking for a unique marker inside it.",
       "parentUuid": "dabed58f_a9d7ddec",
+      "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_6c2b3383",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-23T09:23:15Z",
+      "side": 1,
+      "message": "Why not? Doesn\u0027t ssh return the exit code from flock?",
+      "parentUuid": "dabed58f_89053916",
       "revId": "67241b2fe05a62363e53a965eb308e2db71d1a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
