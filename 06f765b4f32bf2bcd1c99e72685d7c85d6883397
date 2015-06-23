@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_a92b5d93",
+        "filename": "scripts/update-snapshots-ref.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T08:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dabed58f_492bc1eb",
+      "revId": "06f765b4f32bf2bcd1c99e72685d7c85d6883397",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_69300557",
         "filename": "scripts/update-snapshots-ref.sh",
         "patchSetId": 3
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_691d6573",
+        "filename": "scripts/update-snapshots-ref.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T08:49:30Z",
+      "side": 1,
+      "message": "Abe\u0027s checkout process checks out git repos, and then creates working directories with git-new-workdir in form of \u003crepo\u003e~\u003cbranch\u003e.  This line removes those workdirs.",
+      "parentUuid": "dabed58f_69300557",
+      "revId": "06f765b4f32bf2bcd1c99e72685d7c85d6883397",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_0935c945",
         "filename": "scripts/update-snapshots-ref.sh",
         "patchSetId": 3
@@ -47,6 +83,24 @@
       "writtenOn": "2015-06-22T15:39:20Z",
       "side": 1,
       "message": "Maybe you should add $M, to make it clear which machine failed to update, for cases where you dont\u0027 use -verbose.",
+      "revId": "06f765b4f32bf2bcd1c99e72685d7c85d6883397",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_0912a962",
+        "filename": "scripts/update-snapshots-ref.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-23T08:49:30Z",
+      "side": 1,
+      "message": "That\u0027s exactly what \u0027echo \"$result: $M\"\u0027 below does.",
+      "parentUuid": "dabed58f_0935c945",
       "revId": "06f765b4f32bf2bcd1c99e72685d7c85d6883397",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
