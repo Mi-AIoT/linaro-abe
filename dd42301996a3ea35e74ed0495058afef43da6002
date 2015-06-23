@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "dabed58f_8c19c724",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-23T13:01:54Z",
+      "side": 1,
+      "message": "google suggests: for dir in \"$ref_logs\"/*; do if [ ! -e \"$dir\" ]; then break; fi; ... slightly more robust, but still ugly. I\u0027ll let you decide :)",
+      "parentUuid": "dabed58f_4931810a",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "dabed58f_89ac598e",
         "filename": "scripts/compare_jobs.sh",
         "patchSetId": 6
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "Again, I agree, but this is an existing behavior.  Christophe, can you comment why you used grep here in the first place?",
       "parentUuid": "dabed58f_89ac598e",
+      "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_ec1c0316",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-23T13:01:54Z",
+      "side": 1,
+      "message": "The |grep -v \u0027*\u0027 idiom is used to give an empty string as the result when the glob results in no matches. (see comment at line 93/89)\n\nSince you\u0027ve removed the glob, the values of $ref and $build can now be non-existent directories. This should either be handled here, (something like if [ ! -d \"$ref\" ]; then ref\u003d\"\"; fi) or with the solution suggested in my comment at line 131/127.",
+      "parentUuid": "dabed58f_6936c505",
       "revId": "dd42301996a3ea35e74ed0495058afef43da6002",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false

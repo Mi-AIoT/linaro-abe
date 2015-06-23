@@ -16,6 +16,24 @@
       "revId": "3b2700de1a9c9863fc96eda1e79bfebe476d2575",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "dabed58f_0cddd742",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-06-23T13:01:54Z",
+      "side": 0,
+      "message": "that should read \"! -z\" should become \"-d\"",
+      "parentUuid": "dabed58f_090ce993",
+      "revId": "3b2700de1a9c9863fc96eda1e79bfebe476d2575",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
