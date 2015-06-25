@@ -16,6 +16,24 @@
       "revId": "7b9107e916d8775d3106a64c3d3c5b89b170ec29",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bab3e1c7_cbaec9e7",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-06-25T14:08:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bab3e1c7_6ba0fdf4",
+      "revId": "7b9107e916d8775d3106a64c3d3c5b89b170ec29",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
