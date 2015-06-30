@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9ab8dda7_8ac3eb37",
+        "filename": "jenkins.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-30T14:01:59Z",
+      "side": 1,
+      "message": "There is a typo/missing word in the last sentence.",
+      "revId": "3356efc2c3f7cdeab9410395d31ad421b0f1e0da",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ab8dda7_aac02f2b",
+        "filename": "jenkins.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-06-30T14:01:59Z",
+      "side": 1,
+      "message": "I think putting pid\u003d$! and sleep 10 on separate lines would make the code easier to read, but that\u0027s personal opinion.",
+      "revId": "3356efc2c3f7cdeab9410395d31ad421b0f1e0da",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
