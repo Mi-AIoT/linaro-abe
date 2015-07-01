@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "9ab8dda7_30bb4e74",
+        "filename": "config/linaro.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-07-01T16:37:08Z",
+      "side": 1,
+      "message": "I thought \"-R 0\" disables ASLR, but I now see that this is not the case.  I\u0027ll add setarch.",
+      "parentUuid": "9ab8dda7_d0daf2e8",
+      "revId": "8ccd9afa3550a0c4373c1b7be796c4849e012f79",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "9ab8dda7_f0d7f6bd",
         "filename": "config/linaro.exp",
         "patchSetId": 1
@@ -30,6 +48,24 @@
       "writtenOn": "2015-07-01T14:54:16Z",
       "side": 1,
       "message": "When is that case reached?\nWe already have arm-linux, aarch64-linux and x86_64-linux above.",
+      "revId": "8ccd9afa3550a0c4373c1b7be796c4849e012f79",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9ab8dda7_d0af522a",
+        "filename": "config/linaro.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-07-01T16:37:08Z",
+      "side": 1,
+      "message": "PowerPC, MIPS, SPARC, and everything else that QEMU supports.  I, personally, used this for powerpc and mips testing.",
+      "parentUuid": "9ab8dda7_f0d7f6bd",
       "revId": "8ccd9afa3550a0c4373c1b7be796c4849e012f79",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
