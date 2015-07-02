@@ -261,7 +261,7 @@ fi
     # Workaround "--checkout all" bug.
     # See https://bugs.linaro.org/show_bug.cgi?id=1338 .
     if ! [ -d $user_snapshots/gcc.git ]; then
-	git clone --reference $git_reference/gcc.git http://git.linaro.org/toolchain/gcc.git $user_snapshots/gcc.git
+	git clone --reference $git_reference/gcc.git http://git.linaro.org/toolchain/gcc.git $user_snapshots/gcc.git || exit 1
     fi
 ) 9>${git_reference}.lock
 
