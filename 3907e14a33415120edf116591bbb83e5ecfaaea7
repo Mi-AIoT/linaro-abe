@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_06e85a7b",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-07-03T16:01:31Z",
+      "side": 0,
+      "message": "why doesn\u0027t this git command also require || exit 1?",
+      "revId": "3907e14a33415120edf116591bbb83e5ecfaaea7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}

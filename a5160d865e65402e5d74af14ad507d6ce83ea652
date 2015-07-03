@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_66f34e74",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2015-07-03T16:01:31Z",
+      "side": 1,
+      "message": "this is executed in a subshell, so the exit will only exit the subshell here, not the whole script",
+      "revId": "a5160d865e65402e5d74af14ad507d6ce83ea652",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
