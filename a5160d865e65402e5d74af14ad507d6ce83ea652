@@ -34,6 +34,24 @@
       "revId": "a5160d865e65402e5d74af14ad507d6ce83ea652",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_690a41d4",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-07-07T10:45:19Z",
+      "side": 1,
+      "message": "I would say this is bug in my original patch, and I should have added \"set -e\" as the first command in the sub-shell.",
+      "parentUuid": "7aade967_09586df9",
+      "revId": "a5160d865e65402e5d74af14ad507d6ce83ea652",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
