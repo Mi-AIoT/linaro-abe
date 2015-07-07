@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_c9a2559a",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-07-07T19:29:46Z",
+      "side": 1,
+      "message": "Why do we explicitly disable-multlib on armeb and not on arm-linux*?\n\nAnd BTW, don\u0027t we want to explicitly disable multilib on *linux* targets? (I\u0027m not sure what the default is).",
+      "revId": "2d8fa739d3637bf5f288bad4870b3be12be5ff7a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
