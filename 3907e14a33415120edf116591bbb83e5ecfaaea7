@@ -16,6 +16,24 @@
       "revId": "3907e14a33415120edf116591bbb83e5ecfaaea7",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_c971f578",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-07-07T10:23:36Z",
+      "side": 0,
+      "message": "It probably does, it\u0027s just that I didn\u0027t see a build failure here yet.",
+      "parentUuid": "7aade967_06e85a7b",
+      "revId": "3907e14a33415120edf116591bbb83e5ecfaaea7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }

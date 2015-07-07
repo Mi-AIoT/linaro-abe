@@ -16,6 +16,24 @@
       "revId": "a5160d865e65402e5d74af14ad507d6ce83ea652",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_09586df9",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-07-07T10:23:36Z",
+      "side": 1,
+      "message": "Looks like you are right.\nI wasn\u0027t careful enough, and just wanted to fix quickly another-unexpected-build-failure.",
+      "parentUuid": "7aade967_66f34e74",
+      "revId": "a5160d865e65402e5d74af14ad507d6ce83ea652",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
