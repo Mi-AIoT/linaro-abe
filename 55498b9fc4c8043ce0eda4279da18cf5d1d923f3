@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_0c3b9bec",
+        "filename": "jenkins.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-07-09T09:20:03Z",
+      "side": 1,
+      "message": "Where is ${change} initialized? (but see below)",
+      "revId": "55498b9fc4c8043ce0eda4279da18cf5d1d923f3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_2c40d755",
+        "filename": "jenkins.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-07-09T09:20:03Z",
+      "side": 1,
+      "message": "Looks like there is a typo here: ${changes} isn\u0027t used elsewhere. Should it be:\nchange\u003d\"\"\ninstead?\nIf so, this is the answer to my question above.",
+      "revId": "55498b9fc4c8043ce0eda4279da18cf5d1d923f3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
