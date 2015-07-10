@@ -85,6 +85,10 @@ if test x"${clibrary}" != x; then
 	# ELF and EABI based targets are bare metal only
 	libc="--set libc=newlib"
     fi
+else
+    if test "`echo ${gcc_src} | grep -c "-5\.1-" -gt 0; then
+	libc="--set libc=glibc"
+    fi
 fi
 
 # Build a toolchain, run the tests, and the create a source release as a tarball
