@@ -182,7 +182,15 @@ while [ x"$logserver" != x"" ]; do
     # when lock file is deleted by the "trap" cleanup.
     # We place a unique marker into the lock file to check on our side who
     # has the lock, since we can't inspect return value of the ssh command.
-    ssh $logserver flock -nx $basedir/$dir.lock -c \
+    #
+    # Note on '-tt': We forcefully allocate pseudo-tty for the flock command
+    # so that flock dies (through SIGHUP) and releases the lock when this
+    # script is cancelled or terminated for whatever reason.  Without SIGHUP
+    # reaching flock we risk situations when a lock will hang forever preventing
+    # any subsequent builds to progress.  There are a couple of options as to
+    # exactly how enable delivery of SIGHUP (e.g., set +m), and 'ssh -tt' seems
+    # like the simplest one.
+    ssh -tt $logserver flock -nx $basedir/$dir.lock -c \
 	"\"echo $(hostname)-$$-$BUILD_URL > $basedir/$dir.lock; while [ -e $basedir/$dir.lock ]; do sleep 10; done\"" &
     pid=$!
     # This is borderline fragile, since we are giving the above ssh command
