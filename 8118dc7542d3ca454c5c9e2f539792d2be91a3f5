@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_17107b4d",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-07-29T14:18:32Z",
+      "side": 1,
+      "message": "Consider adding \" | head -n 1\" or some other method of handling potential multi-line output from grep.  Also encase \"$()\" into quotes to handle output with spaces.",
+      "revId": "8118dc7542d3ca454c5c9e2f539792d2be91a3f5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
