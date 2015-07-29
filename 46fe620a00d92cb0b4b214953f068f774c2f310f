@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_17371be5",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 430,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-07-29T14:53:47Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this refer to \"${binutils_branch}\" ?\n\nAlso, this and following if-clauses are mis-indented.",
+      "revId": "46fe620a00d92cb0b4b214953f068f774c2f310f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7aade967_b733a7f5",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-07-29T14:53:47Z",
+      "side": 1,
+      "message": "Trailing whitespace here, and in other instances of \u003c\u003cEOF",
+      "revId": "46fe620a00d92cb0b4b214953f068f774c2f310f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
