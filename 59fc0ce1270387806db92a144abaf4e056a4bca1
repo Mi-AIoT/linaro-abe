@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7aade967_17515b62",
+        "filename": "lib/depend.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-08-03T12:52:50Z",
+      "side": 1,
+      "message": "We are cross-building for mingw here, don\u0027t we?\nSo ${PYTHONHOME} will expand to the build machine path, not the one the user will need under MingW.\nI mean this warning message might not be very helpful, but maybe I\u0027m mistaken.",
+      "revId": "59fc0ce1270387806db92a144abaf4e056a4bca1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
