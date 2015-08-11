@@ -3646,7 +3646,7 @@ fi
 #fi
 
 #packages="git-svn bzr-fastimport svn-all-fast-exp libncurses5-dev texinfo"
-packages="texinfo gawk"
+packages="texinfo gawk libpython2.7-dev"
 
 ### Debian packages ###
 dpkg="`which dpkg 2> /dev/null`"

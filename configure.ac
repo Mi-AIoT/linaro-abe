@@ -151,7 +151,7 @@ dnl Look for packages that do not have executables, so we are forced
 dnl to ask the packaging system if they are installed. This is more
 dnl reliable and portble than using pkg-config.
 #packages="git-svn bzr-fastimport svn-all-fast-exp libncurses5-dev texinfo"
-packages="texinfo gawk"
+packages="texinfo gawk libpython2.7-dev"
 
 ### Debian packages ###
 dpkg="`which dpkg 2> /dev/null`"
