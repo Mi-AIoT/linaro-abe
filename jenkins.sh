@@ -144,6 +144,11 @@ eval dir="$logname"
 basedir="${logserver#*:}"
 logserver="${logserver%:*}"
 
+if test x"${logserver}" = x""; then
+    echo "ERROR: Empty/no value passed to --logserver."
+    exit 1
+fi
+
 # Check status of logs on $logserver and rebuild if appropriate.
 ssh $logserver mkdir -p $(dirname $basedir/$dir)
 # Loop and wait until we successfully grabbed the lock.  The while condition is,
