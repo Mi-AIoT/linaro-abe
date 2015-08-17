@@ -38,6 +38,8 @@ fetch_md5sums()
     if test ! -s ${local_snapshots}/md5sums; then
 	return 1
     fi
+    echo "DEBUG: md5sums contents:"
+    cat ${local_snapshots}/md5sums
     return 0
 }
 

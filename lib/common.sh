@@ -331,6 +331,7 @@ get_config()
 # $1 - the tool component that the config file needs to be sourced
 source_config()
 {
+set -x
     # clear the existing values so we can avoid inheriting config setting
     # from previously sourced config files.
     depends=""
@@ -344,10 +345,12 @@ source_config()
     conf="`get_config $1`"
     if test $? -eq 0; then
         . "${conf}"
+        echo "DEBUG: after get_config $1, depends=${depends}"
         return 0
     else
         return 1
     fi
+set +x
 }
 
 read_config()
