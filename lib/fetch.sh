@@ -26,6 +26,8 @@ fetch_md5sums()
     if test "${git_reference_dir:+set}" = "set" -a -e "${git_reference_dir}/md5sums"; then
 	# The user specified that they want to fetch from the reference dir.  This
 	# will always fetch if the version in the reference dir is newer.
+        echo "DEBUG: snapshots contents:"
+        ls -l ${local_snapshots}
 	fetch_reference md5sums
     else
 	# The fetch_http function will always attempt to fetch the remote file
@@ -38,6 +40,8 @@ fetch_md5sums()
     if test ! -s ${local_snapshots}/md5sums; then
 	return 1
     fi
+    echo "DEBUG: md5sums contents:"
+    cat ${local_snapshots}/md5sums
     return 0
 }
 
@@ -292,6 +296,10 @@ fetch_reference()
 
     # Only copy if the source file in the reference dir is newer than
     # that file in the local_snapshots directory (if it exists).
+    echo DEBUG:
+    ls -l ${git_reference_dir}/${getfile}
+    ls -l ${local_snapshots}/${getfile}
+    ls -l ${local_snapshots}
     dryrun "cp${update_on_change:+ ${update_on_change}} ${git_reference_dir}/${getfile} ${local_snapshots}/${getfile}"
     if test $? -gt 0; then
 	error "Copying ${getfile} from reference dir to ${local_snapshots} failed."

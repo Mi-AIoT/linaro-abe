@@ -294,6 +294,9 @@ if test x"${debug}" = x"true"; then
 fi
 
 $CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --enable-schroot-test --with-fileserver=${fileserver}
+echo $DEBUG: snapshots contents after configure
+ls -l ${user_snapshots}
+cat ${user_snapshots}/md5sums
 
 # Double parallelism for tcwg-ex40-* machines to compensate for really-remote
 # target execution.  GCC testsuites will run with -j 32.
@@ -331,7 +334,8 @@ fi
 # us from looking into an inconsistent state of reference snapshots.
 (
     flock -s 9
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${platform} ${change} --checkout all
+    $CONFIG_SHELL -x ${abe_dir}/abe.sh ${platform} ${change} --checkout all
+    cat ${user_snapshots}/md5sums
     # Workaround "--checkout all" bug.
     # See https://bugs.linaro.org/show_bug.cgi?id=1338 .
     if ! [ -d $user_snapshots/gcc.git ]; then
@@ -344,6 +348,9 @@ fi
 
 # Now we build the cross compiler, for a native compiler this becomes
 # the stage2 bootstrap build.
+echo $DEBUG: snapshots contents before build
+ls -l ${user_snapshots}
+cat ${user_snapshots}/md5sums
 $CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2)
 
 # If abe returned an error, make jenkins see this as a build failure
