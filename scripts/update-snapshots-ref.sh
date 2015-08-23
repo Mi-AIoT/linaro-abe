@@ -64,10 +64,14 @@ generate_snapshots ()
 
 if $generate; then
     generate_snapshots
+
+    # Remove checked-out branch directories
+    rm -rf ${snapshots_dir}-new/*~*
+
+    # Remove md5sums to force ABE to fetch canonical version via http://.
+    rm ${snapshots_dir}-new/md5sums
 fi
 
-# Remove checked-out branch directories
-rm -rf $snapshots_dir-new/*~*
 
 # Cleanup stale branches
 for repo in $snapshots_dir-new/*.git; do
