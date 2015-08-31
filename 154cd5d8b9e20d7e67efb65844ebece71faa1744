@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3aa7f18b_f83d99bc",
+        "filename": "lib/merge.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-08-31T13:36:58Z",
+      "side": 1,
+      "message": "I don\u0027t think \"git merge\" will accept svn-specific arguments, so this will fail.  We, presently, are not exercising this code path, so it is becoming no worse than it was before.",
+      "revId": "154cd5d8b9e20d7e67efb65844ebece71faa1744",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
