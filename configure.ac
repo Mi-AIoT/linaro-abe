@@ -1,5 +1,5 @@
 # 
-#   Copyright (C) 2013, 2014 Linaro, Inc
+#   Copyright (C) 2013, 2014, 2015 Linaro, Inc
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -130,6 +130,18 @@ if test x"${QEMU_AARCH64}" = x; then
 #   missing="${missing} qemu"
 fi
 
+AC_PATH_PROG(FAKEROOT, fakeroot)
+if test x"${FAKEROOT}" = x; then
+   AC_MSG_WARN([You need 'fakeroot' to build binary Deb packages !])
+#   missing="${missing} fakeroot"
+fi
+
+AC_PATH_PROG(ALIEN, alien)
+if test x"${ALIEN}" = x; then
+   AC_MSG_WARN([You need 'alien' to build binary Deb packages !])
+#   missing="${missing} alien"
+fi
+
 dnl Building GDB requires ncurses and termcap
 #AC_CHECK_LIB(ncurses, doupdate)
 #if test x${ac_cv_lib_ncurses_doupdate} != x"yes"; then
@@ -153,10 +165,18 @@ dnl reliable and portble than using pkg-config.
 #packages="git-svn bzr-fastimport svn-all-fast-exp libncurses5-dev texinfo"
 packages="texinfo gawk"
 
-### Debian packages ###
+# Check for all of these right away since we might have RPM based systems
+# with alien installed which would then find dpkg.
+
 dpkg="`which dpkg 2> /dev/null`"
-result=$?
-if test ${result} -eq 0; then
+dpkgresult=$?
+yum="`which yum 2> /dev/null`"
+yumresult=$?
+pacman="`which pacman 2> /dev/null`"
+pacmanresult=$?
+
+### Debian packages ###
+if test ${dpkgresult} -eq 0 -a ${yumresult} -ne 0 -a ${pacmanresult} -ne 0; then
     # add Ubuntu specific packages
     if test x"${BUILD_ARCH}" != xaarch64; then
        packages="${packages} gcc-multilib g++-multilib libncurses5-dev libpython2.7-dev"
@@ -175,9 +195,7 @@ if test ${result} -eq 0; then
 
 ### RPM Packages ###
 else
-yum="`which yum 2> /dev/null`"
-result=$?
-if test ${result} -eq 0; then
+if test ${yumresult} -eq 0; then
     packages="${packages} ncurses-devel python-devel"
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
@@ -195,9 +213,7 @@ if test ${result} -eq 0; then
 
 ### Arch Packages ###
 else
-pacman="`which pacman 2> /dev/null`"
-result=$?
-if test ${result} -eq 0; then
+if test ${pacmanresult} -eq 0; then
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
         exists="`pacman -Qs ${i} | wc -l`"
