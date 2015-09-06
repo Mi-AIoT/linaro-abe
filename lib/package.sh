@@ -31,8 +31,9 @@ build_rpm()
 
     local infile="${abe_path}/packaging/redhat/tcwg.spec.in"
     local arch="`echo ${target} | tr '-' '_'`"
-    local version="`echo ${gcc_version} | cut -d '~' -f 2 | grep -o "[4-6][\._][0-9\.]*" | tr '_' '.'`"
 
+    local srcdir="`get_srcdir ${gcc_version}`"
+    local version="`cat ${srcdir}/gcc/BASE-VER`"
     rm -f /tmp/tcwg$$.spec
     sed -e "s:%global triplet.*:%global triplet ${arch}:" \
 	-e "s:%global destdir.*:%global destdir $1:" \
@@ -41,6 +42,24 @@ build_rpm()
 	 ${infile} >> /tmp/tcwg$$.spec
 
     rpmbuild -bb -v /tmp/tcwg$$.spec
+    if test $? -gt 0; then
+	error "Couldn't build Toolchain RPM package!"
+	return 1
+    fi
+
+    rm -f /tmp/abe$$.spec
+    local infile="${abe_path}/packaging/redhat/abe.spec.in"
+    local srcdir="${abe_path}"
+    local version="`cd ${srcdir} && git log --format=format:%h -n 1`"
+    sed -e "s:%global srcdir.*:%global srcdir ${srcdir}:" \
+	-e "s:%global abe_version.*:%global abe_version ${version}:" \
+	 ${infile} >> /tmp/abe$$.spec
+
+    rpmbuild -bb -v /tmp/abe$$.spec
+    if test $? -gt 0; then
+	error "Couldn't build ABE RPM package!"
+	return 1
+    fi
     return $?
 }
 
