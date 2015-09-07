@@ -20,15 +20,31 @@
 
 build_deb()
 {
-    trace "$*"
+#    trace "$*"
 
-    warning "unimplemented"
+    notice "RPMS must already be built before this function will work."
+
+    local destdir="${local_builds}/destdir/DEBS"
+    local rpmbuild="${local_builds}/destdir/RPMS"
+    mkdir -p ${destdir}
+    local rpms="`find ${rpmbuild} -name *.rpm`"
+    for i in ${rpms}; do
+	pushd ${destdir} && fakeroot alien -v --to-deb $i && popd
+	if test $? -gt 0; then
+	    warning "Alien couldn't convert $i to a deb file!"
+	    return 1
+	fi
+    done
+
+    return 0
 }
 
 build_rpm()
 {
-    trace "$*"
+#    trace "$*"
 
+    local destdir="${local_builds}/destdir/RPMS"
+    mkdir -p ${destdir}/noarch ${destdir}/x86_64
     local infile="${abe_path}/packaging/redhat/tcwg.spec.in"
     local arch="`echo ${target} | tr '-' '_'`"
 
@@ -41,11 +57,12 @@ build_rpm()
 	-e "s:%global snapshots.*:%global snapshots ${local_snapshots}:" \
 	 ${infile} >> /tmp/tcwg$$.spec
 
-    rpmbuild -bb -v /tmp/tcwg$$.spec
+    rpmbuild --buildroot=${local_builds}/rpmbuild$$ -bb -v /tmp/tcwg$$.spec
     if test $? -gt 0; then
 	error "Couldn't build Toolchain RPM package!"
 	return 1
     fi
+    cp -f ${local_builds}/rpmbuild$$/RPMS/noarch/gcc-linaro*.rpm ${destdir}/x86_64/
 
     rm -f /tmp/abe$$.spec
     local infile="${abe_path}/packaging/redhat/abe.spec.in"
@@ -55,11 +72,13 @@ build_rpm()
 	-e "s:%global abe_version.*:%global abe_version ${version}:" \
 	 ${infile} >> /tmp/abe$$.spec
 
-    rpmbuild -bb -v /tmp/abe$$.spec
+    rpmbuild  --buildroot=${local_builds}/rpmbuild$$ -bb -v /tmp/abe$$.spec
     if test $? -gt 0; then
 	error "Couldn't build ABE RPM package!"
 	return 1
     fi
+    cp -f ${local_builds}/rpmbuild$$/RPMS/noarch/abe*.rpm ${destdir}/noarch/
+
     return $?
 }
 
@@ -260,10 +279,6 @@ binary_toolchain()
 	cp /usr/${host}/lib/libwinpthread-1.dll ${local_builds}/destdir/${host}/bin/
     fi
 
-    if test x"${rpmbin}" = x"yes"; then
-	notice "Making binary RPM for toolchain, please wait..."
-	build_rpm ${destdir}
-    fi
     if test x"${tarbin}" = x"yes"; then
 	if test `echo ${host} | grep -c mingw` -eq 0; then
 	    # make the tarball from the tree we just created.
