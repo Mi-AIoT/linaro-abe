@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fa2e39b8_82a57a06",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-09-07T07:26:35Z",
+      "side": 1,
+      "message": "Why push noarch rpms to x86_64 dir?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "5e09e3b77fa4fc7e586843b58f3e7802fa9ac29e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
