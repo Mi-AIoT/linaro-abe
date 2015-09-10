@@ -90,8 +90,7 @@ checkout_infrastructure()
     # GDB now has python support, for mingw we have to download a
     # pre-built win2 binary that works with mingw32.
     if test `echo ${host} | grep -c mingw` -eq 1; then
-	fetch infrastructure/python-2.7.4-mingw32.tar.xz
-	extract infrastructure/python-2.7.4-mingw32.tar.xz
+	files="${files} python-2.7.4-mingw32.tar.xz"
 	# The mingw package of python contains a script used by GDB to
 	# configure itself, this is used to specify that path so we don't
 	# have to modify the GDB configure script.
@@ -108,9 +107,8 @@ checkout_infrastructure()
 	warning "You must set PYTHONPATH in your environment to ${PYTHONPATH}"
     fi
 
-    # Reset to the stored value
-    if test `echo ${host} | grep -c mingw` -eq 1 -a x"${tarbin}" = xyes; then
-	files="${files} installjammer-1.2.15.tar.gz"
+    if test `echo ${host} | grep -c mingw` -eq 1; then
+	files="${files} installjammer-1.2.15.tar.xz"
     fi
 
     for i in ${files}; do
