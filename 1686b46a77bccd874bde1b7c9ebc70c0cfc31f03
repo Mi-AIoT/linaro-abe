@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da33351e_a136bee5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-09-11T15:31:22Z",
+      "side": 1,
+      "message": "s/install/installed/",
+      "range": {
+        "startLine": 14,
+        "startChar": 30,
+        "endLine": 14,
+        "endChar": 37
+      },
+      "revId": "1686b46a77bccd874bde1b7c9ebc70c0cfc31f03",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
