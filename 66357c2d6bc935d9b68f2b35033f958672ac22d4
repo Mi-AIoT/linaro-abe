@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_7e99f16d",
+        "filename": "lib/package.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-09-15T10:49:31Z",
+      "side": 1,
+      "message": "Why prefer to use sed and edit the spec file rather then use \"--define\" rpmbuild command (like is done for \"respin\" variable)?",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 10
+      },
+      "revId": "66357c2d6bc935d9b68f2b35033f958672ac22d4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
