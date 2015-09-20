@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_7225a0aa",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-09-20T04:03:45Z",
+      "side": 1,
+      "message": "What is the purpose of this mkdir? (the created dir is not used elsewhere in this patch)",
+      "range": {
+        "startLine": 92,
+        "startChar": 45,
+        "endLine": 92,
+        "endChar": 46
+      },
+      "revId": "493a2285cc0664f7c1c34b8959f05170b09edf7c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
