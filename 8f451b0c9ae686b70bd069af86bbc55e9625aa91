@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_6d030174",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-09-30T14:09:22Z",
+      "side": 1,
+      "message": "I can still see these failures under Jenkins:\n\nFAIL: \u0027VALID --target armeb-linux-gnueabihf --dump\u0027\nFAIL: \u0027VALID --target armeb-linux-gnueabihf --dump\u0027\nFAIL: \u0027VALID --target armeb-linux-gnueabi --dump\u0027\nFAIL: \u0027VALID --target armeb-linux-gnueabi --dump\u0027\nFAIL: \u0027VALID --target armeb-linux-gnueabi --dump\u0027\n\nSo the commit message should not say \"fix all test cases\" yet :-)",
+      "range": {
+        "startLine": 7,
+        "startChar": 25,
+        "endLine": 7,
+        "endChar": 33
+      },
+      "revId": "8f451b0c9ae686b70bd069af86bbc55e9625aa91",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}

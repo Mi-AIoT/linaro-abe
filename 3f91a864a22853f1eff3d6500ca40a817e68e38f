@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a42497e_8dfe4d6a",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-09-30T14:09:22Z",
+      "side": 0,
+      "message": "Why do you remove this test? How is it related to svn/bzr?",
+      "range": {
+        "startLine": 815,
+        "startChar": 42,
+        "endLine": 815,
+        "endChar": 44
+      },
+      "revId": "3f91a864a22853f1eff3d6500ca40a817e68e38f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
