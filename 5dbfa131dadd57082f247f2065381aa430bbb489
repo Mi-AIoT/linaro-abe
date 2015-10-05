@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_bdaedfe5",
+        "filename": "configure.ac",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-10-05T09:21:34Z",
+      "side": 1,
+      "message": "Do I understand correctly that this won\u0027t work on anything else than Fedora and Ubuntu (Redhat, Suse, Debian, etc...)?\n\nI guess it doesn\u0027t matter yet, since this is purely for us to build release packages, right?",
+      "range": {
+        "startLine": 165,
+        "startChar": 6,
+        "endLine": 165,
+        "endChar": 11
+      },
+      "revId": "5dbfa131dadd57082f247f2065381aa430bbb489",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
