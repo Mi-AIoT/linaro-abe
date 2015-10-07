@@ -45,6 +45,30 @@
       "revId": "a130672bf5fbc54a73adfa325e404baff7fa1236",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_006cc89b",
+        "filename": "packaging/redhat/abe.spec.in",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2015-10-07T14:29:52Z",
+      "side": 1,
+      "message": "This only addresses the requirements for building the rpm, not an entire toolchain.",
+      "parentUuid": "fa2e39b8_4274129c",
+      "range": {
+        "startLine": 32,
+        "startChar": 53,
+        "endLine": 32,
+        "endChar": 55
+      },
+      "revId": "a130672bf5fbc54a73adfa325e404baff7fa1236",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
