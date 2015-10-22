@@ -20,27 +20,70 @@
 
 build_deb()
 {
-    trace "$*"
+#    trace "$*"
 
-    warning "unimplemented"
+    notice "RPMS must already be built before this function will work."
+
+    local destdir="${local_builds}/destdir/DEBS"
+    local rpmbuild="${HOME}/rpmbuild/RPMS"
+    mkdir -p ${destdir}
+    local rpms="`find ${rpmbuild} -name *.rpm`"
+    for i in ${rpms}; do
+	pushd ${destdir} && fakeroot alien -v --to-deb $i && popd
+	if test $? -gt 0; then
+	    warning "Alien couldn't convert $i to a deb file!"
+	    return 1
+	fi
+    done
+
+    return 0
 }
 
 build_rpm()
 {
-    trace "$*"
+#    trace "$*"
 
+    local destdir="${local_builds}/destdir/${build}"
+    mkdir -p ${destdir}/noarch ${destdir}/${build_arch}
     local infile="${abe_path}/packaging/redhat/tcwg.spec.in"
     local arch="`echo ${target} | tr '-' '_'`"
-    local version="`echo ${gcc_version} | cut -d '~' -f 2 | grep -o "[4-6][\._][0-9\.]*" | tr '_' '.'`"
 
+    local srcdir="`get_srcdir ${gcc_version}`"
+    local version="`cat ${srcdir}/gcc/BASE-VER`"
+    local gcc_tag="`create_release_tag ${gcc_version}`_${arch}"
     rm -f /tmp/tcwg$$.spec
     sed -e "s:%global triplet.*:%global triplet ${arch}:" \
-	-e "s:%global destdir.*:%global destdir $1:" \
+	-e "s:%global rtag.*:%global rtag ${gcc_tag}:" \
+	-e "s:%global destdir.*:%global destdir ${destdir}:" \
+	-e "s:%global arch*:%global arch ${build_arch}:" \
 	-e "s:%global gcc_version.*:%global gcc_version ${version}_${arch}:" \
 	-e "s:%global snapshots.*:%global snapshots ${local_snapshots}:" \
 	 ${infile} >> /tmp/tcwg$$.spec
 
-    rpmbuild -bb -v /tmp/tcwg$$.spec
+    rpmbuild --buildroot ${local_builds}/rpmbuild$$ -bb -v /tmp/tcwg$$.spec
+    if test $? -gt 0; then
+	error "Couldn't build Toolchain RPM package!"
+	return 1
+    fi
+#    cp -fr ${local_builds}/rpmbuild$$/RPMS/${build_arch} ${destdir}/RPMS/
+
+    rm -f /tmp/abe$$.spec
+    local abe_tag="`create_release_tag abe`"
+    local infile="${abe_path}/packaging/redhat/abe.spec.in"
+    local srcdir="${abe_path}"
+    local version="`cd ${srcdir} && git log --format=format:%h -n 1`"
+    sed -e "s:%global srcdir.*:%global srcdir ${srcdir}:" \
+	-e "s:%global abe_version.*:%global abe_version ${version}:" \
+	-e "s:%global rtag.*:%global rtag ${abe_tag}:" \
+	 ${infile} >> /tmp/abe$$.spec
+
+    rpmbuild  --buildroot ${local_builds}/rpmbuild$$ -bb -v /tmp/abe$$.spec
+    if test $? -gt 0; then
+	error "Couldn't build ABE RPM package!"
+	return 1
+    fi
+#    cp -fr ${local_builds}/rpmbuild$$/RPMS/noarch ${destdir}/
+
     return $?
 }
 
@@ -241,10 +284,6 @@ binary_toolchain()
 	cp /usr/${host}/lib/libwinpthread-1.dll ${local_builds}/destdir/${host}/bin/
     fi
 
-    if test x"${rpmbin}" = x"yes"; then
-	notice "Making binary RPM for toolchain, please wait..."
-	build_rpm ${destdir}
-    fi
     if test x"${tarbin}" = x"yes"; then
 #	if test `echo ${host} | grep -c mingw` -eq 0; then
 	    # make the tarball from the tree we just created.

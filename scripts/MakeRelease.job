@@ -9,6 +9,8 @@ fi
 target=""
 tarsrc=""
 tarbin=""
+rpmbin=""
+debbin=""
 check=""
 ref="snapshots-ref"
 nocheck="no"
@@ -22,6 +24,8 @@ while test $# -gt 0; do
 	-w|--workspace) user_workspace=$2 ;;
 	-s|--tarsrc) tarsrc=yes ;;
 	-b|--tarbin) tarbin=yes ;;
+	-r|--rpm) rpmbin="--rpm" ;;
+	-e|--deb) debbin="--deb" ;;
 	-t|--target) target=$2 ;;
 	-d|--date) date=$2 ;;
 	-r|--ref) ref=$2 ;;
@@ -101,7 +105,7 @@ gcc=${gcc_src:+gcc=${gcc_src}}
 # Build a toolchain, run the tests, and the create a source release as a tarball
 if test x"${tarsrc}" = x"yes"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} \
-	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc}
+	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc} ${rpmbin} ${debbin}
 fi
 
 # Build a binary release tarball, then run the tests on the installed binaries

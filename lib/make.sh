@@ -1,6 +1,6 @@
 #!/bin/bash
 # 
-#   Copyright (C) 2013, 2014 Linaro, Inc
+#   Copyright (C) 2013, 2014, 2015 Linaro, Inc
 # 
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -272,7 +272,7 @@ build_all()
         fi
     fi
 
-    if test x"${tarbin}" = x"yes" -o x"${rpmbin}" = x"yes"; then
+    if test x"${tarbin}" = x"yes" -o x"${rpmbin}" = x"yes" -o x"${debbin}" = x"yes"; then
         # Delete any previous release files
         # First delete the symbolic links first, so we don't delete the
         # actual files
@@ -285,6 +285,15 @@ build_all()
             binary_runtime
         fi
         binary_toolchain
+	if test x"${rpmbin}" = x"yes" -a $? -eq 0; then
+	    notice "Making binary RPM for toolchain, please wait..."
+	    build_rpm
+	fi
+	
+	if test x"${debbin}" = x"yes" -a $? -eq 0; then
+	    notice "Making binary DEB for toolchain, please wait..."
+	    build_deb
+	fi
 
 	if test x"${tarbin}" = x"yes"; then
 	    binary_sysroot
@@ -303,6 +312,7 @@ build_all()
             fi
             notice "Testing packaging took ${SECONDS} seconds"
 	fi
+	
     fi
     
     return 0

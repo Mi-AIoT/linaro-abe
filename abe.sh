@@ -37,7 +37,7 @@ usage()
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
              [--set {package}={toolchain|gdb|sysroot}]
-             [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc] [--rpm]
+             [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc] [--rpm] [--deb]
              [--target {<target_triple>|''}] [--timeout <timeout_value>]
              [--usage]
              [{binutils|gcc|gmp|mpfr|mpc|eglibc|glibc|newlib}
@@ -300,6 +300,9 @@ OPTIONS
 
   --rpm
 		Build binary RPM package after a successful build.
+
+  --deb
+		Build binary DEB package after a successful build.
 
   --target	{<target_triple>|''}
 
@@ -968,6 +971,9 @@ while test $# -gt 0; do
 	    ;;
 	--rpm|-rpm*)
 	    rpmbin=yes
+	    ;;
+	--deb|-deb*)
+	    debbin=yes
 	    ;;
 	--targ*|-targ*)			# target
 	    check_directive $1 target targ $2
