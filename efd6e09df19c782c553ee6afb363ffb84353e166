@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_70bc716d",
+        "filename": "scripts/compare_tests",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-10-26T14:10:24Z",
+      "side": 1,
+      "message": "Rq: backticks notation is obsoleted and replaced by $(...) one, but anyway there is no notation consistency in this script ;)",
+      "revId": "efd6e09df19c782c553ee6afb363ffb84353e166",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
