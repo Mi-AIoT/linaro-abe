@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_abca089f",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-10-27T10:36:46Z",
+      "side": 1,
+      "message": "Please avoid trailing white-spaces.",
+      "revId": "e66a0800f3d63bce52035c122a638e9b6085f7d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_4bd54442",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-10-27T10:36:46Z",
+      "side": 1,
+      "message": "This check is always \"true\".  You need to save exit code of binary_toolchain() in a local variable as $? is clobbered by the above if-statement.",
+      "range": {
+        "startLine": 293,
+        "startChar": 31,
+        "endLine": 293,
+        "endChar": 42
+      },
+      "revId": "e66a0800f3d63bce52035c122a638e9b6085f7d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_8bcf4cb0",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-10-27T10:36:46Z",
+      "side": 1,
+      "message": "Please avoid trailing white-spaces.",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 1
+      },
+      "revId": "e66a0800f3d63bce52035c122a638e9b6085f7d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_ebc37088",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-10-27T10:36:46Z",
+      "side": 1,
+      "message": "Using a single hard-coded directory will break parallel builds.  Can this be parametrized?",
+      "range": {
+        "startLine": 28,
+        "startChar": 22,
+        "endLine": 28,
+        "endChar": 26
+      },
+      "revId": "e66a0800f3d63bce52035c122a638e9b6085f7d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_cbc0347f",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-10-27T10:36:46Z",
+      "side": 1,
+      "message": "This will break if current directory has files matching *.rpm.  Shell will expand *.rpm into the list of files in current directory, and the command will become \"find ${rpmbuild} -name FILE1.rpm FILE2.rpm ...\".\n\nYou need to use instead:\n local rpms\u003d\"`find ${rpmbuild} -name \"*.rpm\"`\"",
+      "range": {
+        "startLine": 30,
+        "startChar": 40,
+        "endLine": 30,
+        "endChar": 45
+      },
+      "revId": "e66a0800f3d63bce52035c122a638e9b6085f7d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_2bbef8ff",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-10-27T10:36:46Z",
+      "side": 1,
+      "message": "If fakeroot fails then ABE will find itself in $destdir because popd didn\u0027t happen.  Better to wrap this into a sub-shell.",
+      "range": {
+        "startLine": 32,
+        "startChar": 1,
+        "endLine": 32,
+        "endChar": 58
+      },
+      "revId": "e66a0800f3d63bce52035c122a638e9b6085f7d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
