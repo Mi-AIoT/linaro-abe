@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_919bfec8",
+        "filename": "configure.ac",
+        "patchSetId": 3
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-10-30T14:52:17Z",
+      "side": 1,
+      "message": "Do we also want to support RHEL?",
+      "range": {
+        "startLine": 164,
+        "startChar": 36,
+        "endLine": 164,
+        "endChar": 44
+      },
+      "revId": "219159870e10577edb4ffff0f1a8c3931bb33a35",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_315f8a10",
+        "filename": "configure.ac",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-10-30T14:52:17Z",
+      "side": 1,
+      "message": "single quotes are not necessary around ubuntu and debian, but that\u0027s a matter of taste.",
+      "range": {
+        "startLine": 166,
+        "startChar": 42,
+        "endLine": 166,
+        "endChar": 46
+      },
+      "revId": "219159870e10577edb4ffff0f1a8c3931bb33a35",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_71a0f2f4",
+        "filename": "configure.ac",
+        "patchSetId": 3
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-10-30T14:52:17Z",
+      "side": 1,
+      "message": "Can we actually have $deb \u003e 1 ?\nI mean: can \u0027uname -a\u0027 return both ubuntu and debian?",
+      "range": {
+        "startLine": 175,
+        "startChar": 22,
+        "endLine": 175,
+        "endChar": 26
+      },
+      "revId": "219159870e10577edb4ffff0f1a8c3931bb33a35",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
