@@ -22,6 +22,30 @@
       "revId": "14b8d0d3671f5f6b456cb81ee22fda9bcbd85e62",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_71ee3224",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2015-10-30T17:55:00Z",
+      "side": 1,
+      "message": "No, because then the test would fail.",
+      "parentUuid": "5a3f45e8_ab996870",
+      "range": {
+        "startLine": 595,
+        "startChar": 32,
+        "endLine": 595,
+        "endChar": 48
+      },
+      "revId": "14b8d0d3671f5f6b456cb81ee22fda9bcbd85e62",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
