@@ -22,6 +22,52 @@
       "revId": "8f451b0c9ae686b70bd069af86bbc55e9625aa91",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_31730a4f",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1195,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-02T09:33:23Z",
+      "side": 1,
+      "message": "Is that \u00279\u0027 insertion on purpose to make the test xfail?",
+      "range": {
+        "startLine": 1195,
+        "startChar": 36,
+        "endLine": 1195,
+        "endChar": 37
+      },
+      "revId": "8f451b0c9ae686b70bd069af86bbc55e9625aa91",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_918f7e23",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1212,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-02T09:33:23Z",
+      "side": 1,
+      "message": "Not sure to understand why these cases are now xpass/xfail?",
+      "range": {
+        "startLine": 1212,
+        "startChar": 22,
+        "endLine": 1212,
+        "endChar": 24
+      },
+      "revId": "8f451b0c9ae686b70bd069af86bbc55e9625aa91",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
