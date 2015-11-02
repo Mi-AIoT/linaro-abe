@@ -1,4 +1,5 @@
 #!/bin/bash
+set -x
 
 # Improve debug logs
 PRGNAME=`basename $0`
