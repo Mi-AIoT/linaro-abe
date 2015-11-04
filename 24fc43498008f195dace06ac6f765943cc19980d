@@ -46,6 +46,30 @@
       "revId": "24fc43498008f195dace06ac6f765943cc19980d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_14023c3e",
+        "filename": "scripts/compare_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-11-04T10:14:52Z",
+      "side": 1,
+      "message": "I think that that it\u0027d be cleaner when we will have to deal with different GCC version to retrieve the good unstable file instead of the whole repo, as it is a one shot usage (the directory is removed on the previous line)",
+      "parentUuid": "5a3f45e8_74f3c073",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 10
+      },
+      "revId": "24fc43498008f195dace06ac6f765943cc19980d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
