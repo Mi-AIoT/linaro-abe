@@ -88,13 +88,13 @@ EOF
 # Build list of all build-targets validated for ${ref_logs}
 # Use grep -v '*' to skip the case where the first regexp does not
 # match any directory.
-for dir in `echo ${ref_logs}/* | grep -v '*'`
+for dir in `find ${ref_logs}/ -maxdepth 1 -type d`
 do
     basename ${dir} >> ${tmptargets}
 done
 
 # Build list of all build-targets validated for ${new_logs}
-for dir in `echo ${new_logs}/* | grep -v '*'`
+for dir in `find ${new_logs}/ -maxdepth 1 -type d`
 do
     basename ${dir} >> ${tmptargets}
 done
