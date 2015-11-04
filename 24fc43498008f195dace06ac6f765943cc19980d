@@ -22,6 +22,30 @@
       "revId": "24fc43498008f195dace06ac6f765943cc19980d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_74f3c073",
+        "filename": "scripts/compare_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-04T10:08:02Z",
+      "side": 1,
+      "message": "It\u0027s probably overkill for now yes, but I imagined we might want to maintain different versions of the files for different versions/branches of GCC. So it could be handy to have all the data.",
+      "parentUuid": "5a3f45e8_b4d6e8c3",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 10
+      },
+      "revId": "24fc43498008f195dace06ac6f765943cc19980d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
