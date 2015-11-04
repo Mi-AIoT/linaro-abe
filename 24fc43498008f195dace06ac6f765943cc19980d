@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_b4d6e8c3",
+        "filename": "scripts/compare_tests",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-11-04T09:57:13Z",
+      "side": 1,
+      "message": "Consider using git-archive instead of git-clone here.  All you want is to fetch a file (or a dir) at the latest revisions, and cloning the whole history for this is unnecessary.",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 118,
+        "endChar": 10
+      },
+      "revId": "24fc43498008f195dace06ac6f765943cc19980d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
