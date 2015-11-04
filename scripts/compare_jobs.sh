@@ -100,7 +100,8 @@ do
 done
 
 if [ -s ${tmptargets} ]; then
-    buildtargets=`sort -u ${tmptargets}`
+    # Ignore .lock files
+    buildtargets=`sort -u ${tmptargets} | grep -v '.lock$'`
 fi
 rm -f ${tmptargets}
 
