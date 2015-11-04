@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_bf20819c",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-11-04T14:25:07Z",
+      "side": 1,
+      "message": "Maybe use `find ${new_logs}/ -type d -maxdepth 1` instead?  Then you don\u0027t have to worry that $tmptargets has regular files such as *.lock.",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 44
+      },
+      "revId": "61d8fddda7f70717094834dc0a6d2256eebdfcd6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
