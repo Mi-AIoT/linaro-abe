@@ -312,7 +312,7 @@ check_md5sum()
     fi
 
     local entry=
-    entry=$(grep "${1}" ${local_snapshots}/md5sums)
+    entry=$(grep "${1}"  ${local_snapshots}/md5sums)
     if test x"${entry}" = x; then
         error "No md5sum entry for $1!"
         return 1
