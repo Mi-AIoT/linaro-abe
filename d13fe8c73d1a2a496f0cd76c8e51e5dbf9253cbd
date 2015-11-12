@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_77629dd9",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-11-12T09:25:14Z",
+      "side": 1,
+      "message": "This change is a no-op.  If you need to grep for 2 spaces you need to add those inside quotes of the grep expression.  I.e.,\nentry\u003d$(grep \"$1  \" ${local_snapshots}/md5sums)",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 51
+      },
+      "revId": "d13fe8c73d1a2a496f0cd76c8e51e5dbf9253cbd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
