@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_0ac16c80",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-11-13T14:46:07Z",
+      "side": 1,
+      "message": "Given that targets\u0027 dir only contain files, I think -maxdeph is overkill, but it can be kept if we changed our layout at some point.",
+      "range": {
+        "startLine": 89,
+        "startChar": 42,
+        "endLine": 89,
+        "endChar": 53
+      },
+      "revId": "b6ebfb55a511fcbbd71932c8b141449bd7a5fbc4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
