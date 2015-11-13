@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_17d879ee",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-11-13T09:34:04Z",
+      "side": 1,
+      "message": "Comment has to be changed to match the changes in the code.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 90,
+        "endChar": 22
+      },
+      "revId": "c6b98ca9a3d01cd88195be4aae5b5515fb8f657a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5a3f45e8_b7eee589",
+        "filename": "scripts/compare_jobs.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-11-13T09:34:04Z",
+      "side": 1,
+      "message": "this command will include the basename of $ref_logs in the list and not only the validated targets",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 50
+      },
+      "revId": "c6b98ca9a3d01cd88195be4aae5b5515fb8f657a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
