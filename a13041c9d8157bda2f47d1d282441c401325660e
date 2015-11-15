@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5a3f45e8_4a46d4c0",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2015-11-15T10:45:47Z",
+      "side": 1,
+      "message": "My gut feeling tells me that this will change directory layout.\n\nBefore this change we had same set of files under ${destdir} as under ${local_builds}/destdir/${host}.  After this change we will have same sets of files under ${destdir}/${host} as under ${local_builds}/destdir/${host}.\n\nIf my eye-balling of this change is correct, then you want to add \"/\" at the end of ${local_builds}/destdir/${host} to keep the directory layout.\n\nBTW, rsync\u0027s -a implies -r, so you can change \"-avr\" to \"-av\" with no difference in semantics.",
+      "revId": "a13041c9d8157bda2f47d1d282441c401325660e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
