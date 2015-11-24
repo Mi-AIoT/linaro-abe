@@ -22,6 +22,30 @@
       "revId": "d13fe8c73d1a2a496f0cd76c8e51e5dbf9253cbd",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_3fa123aa",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-24T20:33:26Z",
+      "side": 1,
+      "message": "If I understood correctly, the goal is in fact to make sure that $entry contains 2 spaces for the next call to \u0027md5sum --check\u0027 below to succeed.\n\nThis patch is not doing that.\n\nA dumb way of achieving the result is:\nentry1\u003d$(echo ${entry} | awk \u0027{print $1;}\u0027)\nentry2\u003d$(echo ${entry} | awk \u0027{print $2;}\u0027)\nentry\u003d\"${entry1}  ${entry2}\"",
+      "parentUuid": "5a3f45e8_77629dd9",
+      "range": {
+        "startLine": 315,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 51
+      },
+      "revId": "d13fe8c73d1a2a496f0cd76c8e51e5dbf9253cbd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
