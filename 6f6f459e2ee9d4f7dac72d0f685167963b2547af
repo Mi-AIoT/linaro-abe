@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a4c51b2_bfcd3389",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-24T20:28:51Z",
+      "side": 1,
+      "message": "Are we sure to have the right gcc in the path at this point?\nI mean if we are in a i686 container, are we sure gcc is not pointing to the x86_64 gcc?\n\nFor instance, on my x86_64:\n$ gcc -dumpmachine\nx86_64-linux-gnu\n$ setarch i386 gcc -dumpmachine\nbut\n$ setarch i386 uname -m\ni686\n\nIt seems to me that this relies on the PATH to be right. I guess it\u0027d better be right, but isn\u0027t this fragile?",
+      "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_1fbf07d2",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-24T20:28:51Z",
+      "side": 1,
+      "message": "Isn\u0027t this going to start a shell, and wait forever?",
+      "range": {
+        "startLine": 354,
+        "startChar": 9,
+        "endLine": 354,
+        "endChar": 13
+      },
+      "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
