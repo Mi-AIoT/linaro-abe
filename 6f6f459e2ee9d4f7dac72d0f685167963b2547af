@@ -63,6 +63,30 @@
       "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_e2ed62f1",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-11-25T16:56:54Z",
+      "side": 1,
+      "message": "Ha. Then it doesn\u0027t match the description in the manpage, nor this sample script:\n#!/bin/bash\necho 1\nsetarch i386\necho 2\n\nWhen I execute this from my shell, it prints \"1\", and then starts another shell, waiting for me to exit it, and only then prints \"2\".",
+      "parentUuid": "3a4c51b2_c2e66616",
+      "range": {
+        "startLine": 354,
+        "startChar": 9,
+        "endLine": 354,
+        "endChar": 13
+      },
+      "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
