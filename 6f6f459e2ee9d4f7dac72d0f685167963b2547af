@@ -39,6 +39,30 @@
       "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a4c51b2_c2e66616",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2015-11-25T16:51:05Z",
+      "side": 1,
+      "message": "No, the setarch commands returns immediately. All it does is make uname return the correct architecture, which is required for configure to work right.",
+      "parentUuid": "3a4c51b2_1fbf07d2",
+      "range": {
+        "startLine": 354,
+        "startChar": 9,
+        "endLine": 354,
+        "endChar": 13
+      },
+      "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
