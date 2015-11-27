@@ -321,7 +321,7 @@ check_md5sum()
     # Ask md5sum to verify the md5sum of the downloaded file against the hash in
     # the index.  md5sum must be executed from the snapshots directory.
     pushd ${local_snapshots} &>/dev/null
-    dryrun "echo \"${entry}\" | md5sum --status --check -"
+    dryrun "echo \"${entry}\" &> md5sum --status --check -"
     md5sum_ret=$?
     popd &>/dev/null
 
