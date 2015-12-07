@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a494da4_db7db3b3",
+        "filename": "configure",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-12-07T20:17:38Z",
+      "side": 1,
+      "message": "Any reason to switch to an older autoconf (2.68 vs 2.69 for the previous version of configure) ?",
+      "range": {
+        "startLine": 3,
+        "startChar": 47,
+        "endLine": 3,
+        "endChar": 48
+      },
+      "revId": "28adbd5783072ee68c7d2ad946d5f8a462203f43",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
