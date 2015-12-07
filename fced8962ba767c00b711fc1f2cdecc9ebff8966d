@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a494da4_3bee578c",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2015-12-07T17:02:11Z",
+      "side": 1,
+      "message": "small typo I think as we don\u0027t want to override packages value:\n\npackages\u003d\"${packages} gcc-multilib g++-multilib\"",
+      "range": {
+        "startLine": 180,
+        "startChar": 11,
+        "endLine": 180,
+        "endChar": 47
+      },
+      "revId": "fced8962ba767c00b711fc1f2cdecc9ebff8966d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
