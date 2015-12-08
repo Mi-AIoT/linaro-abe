@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "1a494da4_3e8f6525",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2015-12-08T23:38:29Z",
+      "side": 1,
+      "message": "If GCC isn\u0027t in the PATH anyway, it\u0027d never work, so isn\u0027t really fragile. What it does do is it get the build architecture right when running in a foreign container.",
+      "parentUuid": "3a4c51b2_bfcd3389",
+      "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a4c51b2_1fbf07d2",
         "filename": "lib/make.sh",
         "patchSetId": 1
