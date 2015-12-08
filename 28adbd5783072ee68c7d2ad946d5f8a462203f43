@@ -22,6 +22,30 @@
       "revId": "28adbd5783072ee68c7d2ad946d5f8a462203f43",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_1ebf09d2",
+        "filename": "configure",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2015-12-08T18:54:10Z",
+      "side": 1,
+      "message": "Actually I should regenerate the configure script on a different machine. It just happened that the machine I was testing the patch on had the older autoconf.",
+      "parentUuid": "1a494da4_db7db3b3",
+      "range": {
+        "startLine": 3,
+        "startChar": 47,
+        "endLine": 3,
+        "endChar": 48
+      },
+      "revId": "28adbd5783072ee68c7d2ad946d5f8a462203f43",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
