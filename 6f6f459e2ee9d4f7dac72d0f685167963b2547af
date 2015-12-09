@@ -105,6 +105,30 @@
       "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_fec33d36",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-12-09T09:45:18Z",
+      "side": 1,
+      "message": "Sorry to insist, here. I have patched abe to force\nhost\u003di386-linux-gnu\nset -x\nright before this test.\n\nI ran ../abe.sh --target arm-none-eabi --build all and it just stopped on:\n+ setarch i386\n$\n\n[and it waits for me to hit ^D]\n\nI ran this command on ex40-01, not using any schroot. I just forced host\u003di386-linux-gnu to force abe to reach the setarch statement.",
+      "parentUuid": "3a4c51b2_e2ed62f1",
+      "range": {
+        "startLine": 354,
+        "startChar": 9,
+        "endLine": 354,
+        "endChar": 13
+      },
+      "revId": "6f6f459e2ee9d4f7dac72d0f685167963b2547af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
