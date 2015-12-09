@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a494da4_3edda515",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-12-09T10:06:27Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \u0027-o\u0027 instead of \u0027-a\u0027 ?",
+      "range": {
+        "startLine": 36,
+        "startChar": 24,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "66978b04c8db793baac2e29b142bd3fedb327733",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_1ee269d5",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-12-09T10:06:27Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be ${CC} instead of gcc?",
+      "range": {
+        "startLine": 61,
+        "startChar": 21,
+        "endLine": 61,
+        "endChar": 32
+      },
+      "revId": "66978b04c8db793baac2e29b142bd3fedb327733",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a494da4_7ee72de5",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2015-12-09T10:06:27Z",
+      "side": 1,
+      "message": "Is the else clause useful? If CC is not set, the build should abort soon, if not yet, right?",
+      "range": {
+        "startLine": 65,
+        "startChar": 24,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "66978b04c8db793baac2e29b142bd3fedb327733",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
