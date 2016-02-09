@@ -92,6 +92,9 @@ excludecheck_opt=""
 # --logname gcc-<sha1>
 rebuild=true
 
+# Override default versions of components
+change=""
+
 OPTS="`getopt -o s:g:c:w:o:f:l:rt:b:h -l gcc-branch:,snapshots:,gitrepo:,abe:,workspace:,options:,fileserver:,logserver:,logname:,languages:,runtests,target:,bootstrap,help,excludecheck:,norebuild -- "$@"`"
 while test $# -gt 0; do
     case $1 in
@@ -110,6 +113,7 @@ while test $# -gt 0; do
         -b|--bootstrap) try_bootstrap="true" ;;
 	--excludecheck) excludecheck_opt="$excludecheck_opt --excludecheck $2"; shift ;;
 	--norebuild) rebuild=false ;;
+	--change) change="$2"; shift ;;
 	-h|--help) usage ;;
     esac
     shift
@@ -125,7 +129,6 @@ else
 fi
 
 # Get the version of GCC we're supposed to build
-change=""
 if test x"${gcc_branch}" = x""; then
     echo "ERROR: Empty value passed to --gcc-branch."
     echo "Maybe you meant to pass '--gcc-branch latest' ?"
