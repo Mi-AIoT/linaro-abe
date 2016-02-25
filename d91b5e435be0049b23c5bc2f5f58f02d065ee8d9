@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_b63e0628",
+        "filename": "lib/depend.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-02-25T12:54:35Z",
+      "side": 1,
+      "message": "Don\u0027t we want to handle dejagnu_version here too?\nIIUC, it wouldn\u0027t change the behaviour since the \u0027runtest\u0027 binary does not have a version number, but I think it would be better for consistency with the other components.",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 8
+      },
+      "revId": "d91b5e435be0049b23c5bc2f5f58f02d065ee8d9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
