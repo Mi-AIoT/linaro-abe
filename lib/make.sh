@@ -677,12 +677,12 @@ make_install()
     local default_makeflags="`read_config $1 default_makeflags | sed -e 's:\ball-:install-:g'`"
     if test x"${tool}" = x"gdb" ; then
 	if test x"$2" != x"gdbserver" ; then
-            dryrun "make install-gdb ${make_flags} ${default_makeflags} -i -k -w -C ${builddir} 2>&1 | tee ${builddir}/install.log"
+            dryrun "make install-gdb ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${builddir}/install.log"
         else
-            dryrun "make install ${make_flags} -i -k -w -C ${builddir} 2>&1 | tee ${builddir}/install.log"
+            dryrun "make install ${make_flags} -w -C ${builddir} 2>&1 | tee ${builddir}/install.log"
         fi
     else
-	dryrun "make install ${make_flags} ${default_makeflags} -i -k -w -C ${builddir} 2>&1 | tee ${builddir}/install.log"
+	dryrun "make install ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${builddir}/install.log"
     fi
     if test $? != "0"; then
         warning "Make install failed!"
@@ -851,13 +851,13 @@ make_clean()
     notice "Making clean in ${builddir}"
 
     if test x"$2" = "dist"; then
-        dryrun "make distclean ${make_flags} -w -i -k -C ${builddir}"
+        dryrun "make distclean ${make_flags} -w -C ${builddir}"
     else
-        dryrun "make clean ${make_flags} -w -i -k -C ${builddir}"
+        dryrun "make clean ${make_flags} -w -C ${builddir}"
     fi
     if test $? != "0"; then
         warning "Make clean failed!"
-        #return 1
+        return 1
     fi
 
     return 0
@@ -883,12 +883,12 @@ make_docs()
             return $?
             ;;
         *gdb*)
-            dryrun "make SHELL=${bash_shell} ${make_flags} -i -k -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *gcc*)
             #dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} doc html info man 2>&1 | tee -a ${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -i -k -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
