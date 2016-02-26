@@ -627,15 +627,15 @@ make_install()
     fi
 
     local default_makeflags= #"`get_component_makeflags ${component}`"
+    local log="`dirname ${builddir}`/install.log"
     if test x"${component}" = x"gdb" ; then
-	local log="`dirname ${builddir}`/install.log"
 	if test x"$2" != x"gdbserver" ; then
-            dryrun "make install-gdb ${make_flags} ${default_makeflags} -i -k -w -C ${builddir} 2>&1 | tee ${log}"
+            dryrun "make install-gdb ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${log}"
         else
-            dryrun "make install ${make_flags} -i -k -w -C ${builddir} 2>&1 | tee ${log}"
+            dryrun "make install ${make_flags} -w -C ${builddir} 2>&1 | tee ${log}"
         fi
     else
-	dryrun "make install ${make_flags} ${default_makeflags} -i -k -w -C ${builddir} 2>&1 | tee ${log}"
+	dryrun "make install ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${log}"
     fi
     if test $? != "0"; then
         warning "Make install failed!"
@@ -709,7 +709,7 @@ make_check()
     if test x"${build}" = x"${target}" -a x"${tarbin}" != x"yes"; then
 	# Overwrite ${checklog} in order to provide a clean log file
 	# if make check has been run more than once on a build tree.
-	dryrun "make check RUNTESTFLAGS=\"${runtest_flags} --xml=${component}.xml \" ${make_flags} -w -i -k -C ${builddir} 2>&1 | tee ${checklog}"
+	dryrun "make check RUNTESTFLAGS=\"${runtest_flags} --xml=${component}.xml \" ${make_flags} -w -C ${builddir} 2>&1 | tee ${checklog}"
 	if test $? -gt 0; then
 	    error "make check -C ${builddir} failed."
 	    return 1
@@ -781,7 +781,7 @@ make_check()
 
 	for i in ${dirs}; do
 	    # Always append "tee -a" to the log when building components individually
-            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots} FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" RUNTESTFLAGS=\"${runtest_flags}\" ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots} FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" RUNTESTFLAGS=\"${runtest_flags}\" ${schroot_make_opts} ${make_flags} -w -C ${builddir}$i 2>&1 | tee -a ${checklog}"
 	    if test $? -gt 0; then
 		error "make ${check_targets} -C ${builddir}$i failed."
 		return 1
@@ -808,13 +808,13 @@ make_clean()
     notice "Making clean in ${builddir}"
 
     if test x"$2" = "dist"; then
-        dryrun "make distclean ${make_flags} -w -i -k -C ${builddir}"
+        dryrun "make distclean ${make_flags} -w -C ${builddir}"
     else
-        dryrun "make clean ${make_flags} -w -i -k -C ${builddir}"
+        dryrun "make clean ${make_flags} -w -C ${builddir}"
     fi
     if test $? != "0"; then
         warning "Make clean failed!"
-        #return 1
+        return 1
     fi
 
     return 0
@@ -844,12 +844,12 @@ make_docs()
             return 0
             ;;
         *gdb)
-            dryrun "make SHELL=${bash_shell} ${make_flags} -i -k -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *gcc*)
             #dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} doc html info man 2>&1 | tee -a ${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -i -k -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
