@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_19a60bc2",
+        "filename": "config/boards/tcwg-common.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-02-28T11:35:02Z",
+      "side": 1,
+      "message": "600 is 10 minutes, not 6.  Same applies below.",
+      "range": {
+        "startLine": 7,
+        "startChar": 22,
+        "endLine": 7,
+        "endChar": 23
+      },
+      "revId": "9516eacfc9d051cabcaefef389623521ccf34d18",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
