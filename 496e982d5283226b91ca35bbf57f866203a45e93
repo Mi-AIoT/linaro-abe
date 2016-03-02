@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_1c4f1994",
+        "filename": "config/binutils.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-02T08:59:36Z",
+      "side": 1,
+      "message": "Why force bugurl here?\nShouldn\u0027t this be a setting common to all our packages and set in one place only?",
+      "range": {
+        "startLine": 22,
+        "startChar": 145,
+        "endLine": 22,
+        "endChar": 182
+      },
+      "revId": "496e982d5283226b91ca35bbf57f866203a45e93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_7c444d74",
+        "filename": "config/gdb.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-02T08:59:36Z",
+      "side": 1,
+      "message": "Same comment as for binutils, and there is a typo in the URL (.orgy).",
+      "range": {
+        "startLine": 10,
+        "startChar": 69,
+        "endLine": 10,
+        "endChar": 107
+      },
+      "revId": "496e982d5283226b91ca35bbf57f866203a45e93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_5c49918a",
+        "filename": "config/gdb.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-02T08:59:36Z",
+      "side": 1,
+      "message": "This change is not related to the commit message, and should be in a separate commit.",
+      "range": {
+        "startLine": 18,
+        "startChar": 32,
+        "endLine": 18,
+        "endChar": 83
+      },
+      "revId": "496e982d5283226b91ca35bbf57f866203a45e93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
