@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_47889e22",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-03T09:56:32Z",
+      "side": 1,
+      "message": "This would exit with 0 (echo\u0027s return code)",
+      "range": {
+        "startLine": 50,
+        "startChar": 6,
+        "endLine": 50,
+        "endChar": 8
+      },
+      "revId": "047774545a2bb505d81e8c163f0bf735c5a043fb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_278da232",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-03T09:56:32Z",
+      "side": 1,
+      "message": "Again, the exit code would be the one from \u0027echo\u0027 not from \u0027tar\u0027",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 8
+      },
+      "revId": "047774545a2bb505d81e8c163f0bf735c5a043fb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_8782b6fe",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-03T09:56:32Z",
+      "side": 1,
+      "message": "shouldn\u0027t that be \u0027rdimon.spec\u0027 instead?",
+      "range": {
+        "startLine": 81,
+        "startChar": 32,
+        "endLine": 81,
+        "endChar": 42
+      },
+      "revId": "047774545a2bb505d81e8c163f0bf735c5a043fb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
