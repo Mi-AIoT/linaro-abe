@@ -133,6 +133,17 @@ configure_build()
 	exit 1
     fi
   
+    local extraconfig_name=extraconfig_${toolname}
+    local extraconfig_val=`eval echo \\${${extraconfig_name}}`
+    if test -n "$extraconfig_val"; then
+	if test -e "${extraconfig_val}"; then
+	    notice "Sourcing extra config: ${extraconfig_val}"
+	    . ${extraconfig_val}
+	else
+	    error "Warning: extraconfig file does not exist: ${extraconfig_val}"
+	    exit 1
+	fi
+    fi
 
     # See if this component depends on other components. They then need to be
     # built first.
