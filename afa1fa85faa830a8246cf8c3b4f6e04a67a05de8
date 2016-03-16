@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_ed2b8992",
+        "filename": "config/linaro.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-16T09:21:55Z",
+      "side": 1,
+      "message": "What is the purpose of this change?",
+      "range": {
+        "startLine": 110,
+        "startChar": 0,
+        "endLine": 110,
+        "endChar": 84
+      },
+      "revId": "afa1fa85faa830a8246cf8c3b4f6e04a67a05de8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
