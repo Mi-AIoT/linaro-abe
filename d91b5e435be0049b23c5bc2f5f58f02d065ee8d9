@@ -22,6 +22,24 @@
       "revId": "d91b5e435be0049b23c5bc2f5f58f02d065ee8d9",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_5cc7cc12",
+        "filename": "lib/depend.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-03-21T19:42:30Z",
+      "side": 1,
+      "message": "Actually. DejaGnu does have a version number accesible via runtest. ie...\nruntest -V\nDejaGnu version is\t1.5.1\nExpect version is\t5.45\nTcl version is\t\t8.6",
+      "parentUuid": "1a622d24_b63e0628",
+      "revId": "d91b5e435be0049b23c5bc2f5f58f02d065ee8d9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
