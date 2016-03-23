@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_bf3b7237",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-23T20:25:57Z",
+      "side": 1,
+      "message": "Don\u0027t we want to remove this test too?",
+      "range": {
+        "startLine": 458,
+        "startChar": 36,
+        "endLine": 458,
+        "endChar": 59
+      },
+      "revId": "be42a511049ecb864c73ddc061d8eabc1d1feaa9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_1f49c6d0",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-03-23T20:25:57Z",
+      "side": 1,
+      "message": "Don\u0027t we want to remove this test too?",
+      "range": {
+        "startLine": 752,
+        "startChar": 39,
+        "endLine": 752,
+        "endChar": 63
+      },
+      "revId": "be42a511049ecb864c73ddc061d8eabc1d1feaa9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
