@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_7f88bae7",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 772,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-03-24T10:14:07Z",
+      "side": 1,
+      "message": "this seems to be unused. Can it be removed?",
+      "revId": "30fd6112b82a290211685c5aad9d2fa58c4b4988",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_df6c6e39",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-03-24T10:14:07Z",
+      "side": 1,
+      "message": "this looks unsafe wrt quoting, and eval is risky.\n\nIt would be better to follow the lead of the \u0027array\u0027 branch and use associative arrays here.",
+      "revId": "30fd6112b82a290211685c5aad9d2fa58c4b4988",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_bf69b227",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-03-24T10:14:07Z",
+      "side": 1,
+      "message": "this would be cleaner if extraconfig used associative arrays, but the use of eval can be avoided with\n   local extraconfig_val\u003d${!extraconfig_name}",
+      "revId": "30fd6112b82a290211685c5aad9d2fa58c4b4988",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
