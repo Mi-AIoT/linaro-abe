@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_f219a17a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-03-25T17:18:13Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "1a622d24_df53ce6a",
+      "revId": "be42a511049ecb864c73ddc061d8eabc1d1feaa9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_bf3b7237",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -48,6 +66,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_b20f292e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-03-25T17:18:13Z",
+      "side": 1,
+      "message": "No, because it applies to only running tests for a single component.",
+      "parentUuid": "1a622d24_bf3b7237",
+      "revId": "be42a511049ecb864c73ddc061d8eabc1d1feaa9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_1f49c6d0",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -65,6 +101,24 @@
         "endLine": 752,
         "endChar": 63
       },
+      "revId": "be42a511049ecb864c73ddc061d8eabc1d1feaa9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_121d3d67",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 752,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-03-25T17:18:13Z",
+      "side": 1,
+      "message": "This applies only to native builds, and only two repeated builds in the same build tree. neither of which we do via Jenkins.",
+      "parentUuid": "1a622d24_1f49c6d0",
       "revId": "be42a511049ecb864c73ddc061d8eabc1d1feaa9",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
