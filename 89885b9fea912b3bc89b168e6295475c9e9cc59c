@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_52e97519",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-03-28T13:44:21Z",
+      "side": 1,
+      "message": "Should this be \"1\"?",
+      "range": {
+        "startLine": 60,
+        "startChar": 6,
+        "endLine": 60,
+        "endChar": 7
+      },
+      "revId": "89885b9fea912b3bc89b168e6295475c9e9cc59c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_32ee7923",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-03-28T13:44:21Z",
+      "side": 1,
+      "message": "Please remove the trailing white-space",
+      "revId": "89885b9fea912b3bc89b168e6295475c9e9cc59c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
