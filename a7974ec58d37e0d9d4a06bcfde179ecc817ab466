@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_f2e36131",
+        "filename": "config/linaro.exp",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-03-28T14:51:42Z",
+      "side": 1,
+      "message": "Please correct indentation.",
+      "range": {
+        "startLine": 96,
+        "startChar": 3,
+        "endLine": 96,
+        "endChar": 4
+      },
+      "revId": "a7974ec58d37e0d9d4a06bcfde179ecc817ab466",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
