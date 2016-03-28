@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_72aab1d5",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-03-28T13:10:46Z",
+      "side": 1,
+      "message": "You can simplify this with\nchange\u003d\"$change --extraconfig $2\"\nand then you don\u0027t need to update various abe.sh invocations below.\nIf you are going to make the above change, please move handling of --extraconfig higher, just after the --override.",
+      "range": {
+        "startLine": 120,
+        "startChar": 16,
+        "endLine": 120,
+        "endChar": 61
+      },
+      "revId": "72519085b24e54a82e260afa667d236752f53b33",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
