@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_cb9f904f",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-05T15:53:28Z",
+      "side": 1,
+      "message": "This is useless, tarball_name is re-defined below.",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 33
+      },
+      "revId": "97517d7e70cf481f11e47e82211ed8aba77f75c2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_c178112e",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 4
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-05T15:53:28Z",
+      "side": 1,
+      "message": "I don\u0027t think tarball_name has the right value if protocol is http/https. Do you want to use ${file} instead?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 47
+      },
+      "revId": "97517d7e70cf481f11e47e82211ed8aba77f75c2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
