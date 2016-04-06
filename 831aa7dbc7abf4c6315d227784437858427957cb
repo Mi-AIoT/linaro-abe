@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_854d8475",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-06T15:36:40Z",
+      "side": 1,
+      "message": "The comment says it\u0027s because it\u0027s taking too long, but I don\u0027t really understand the problem...\n\nIn your previous comment, do you mean: abe.sh --build binutils --check binutils --tarbin will not actually run the tests (that is when building a single component)?",
+      "range": {
+        "startLine": 455,
+        "startChar": 36,
+        "endLine": 455,
+        "endChar": 57
+      },
+      "revId": "831aa7dbc7abf4c6315d227784437858427957cb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_c5577c01",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-06T15:36:40Z",
+      "side": 1,
+      "message": "I don\u0027t understand why you said \"only two repeated builds\" in your previous comment. Can you explain?",
+      "range": {
+        "startLine": 749,
+        "startChar": 38,
+        "endLine": 749,
+        "endChar": 63
+      },
+      "revId": "831aa7dbc7abf4c6315d227784437858427957cb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
