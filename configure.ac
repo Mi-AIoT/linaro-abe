@@ -487,8 +487,8 @@ fi
 rm -f Makefile
 cat<<EOF > Makefile
 check:
-	${srcdir}/testsuite/test.sh
-	${srcdir}/test.sh
+	bash -x ${srcdir}/testsuite/test.sh
+	bash -x ${srcdir}/test.sh
 
 clean:
 	rm -fr builds/* sysroot/*
