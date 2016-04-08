@@ -1,0 +1,316 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_e86ecd95",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] \"--manifest create\" would be better as a separate option",
+      "range": {
+        "startLine": 219,
+        "startChar": 29,
+        "endLine": 219,
+        "endChar": 35
+      },
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_486c219d",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[trivial] \"deprecated\"",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_2869e58b",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[bug] This reintroduces https://bugs.linaro.org/show_bug.cgi?id\u003d718\n\nBuilding with gcc\u003dgcc.git~master means gcc -v returns:\n    gcc version 6.0.0 20160407 (experimental) (Linaro_GCC-2016.04.08)\n\nbut master is not Linaro GCC.",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_a8b975eb",
+        "filename": "config/gdb.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[bug?] Looks like a missed merge of c085b4ead2dd8ac928978f2d1b3ca6d26582dd85.\n\nOr do other changes mean this isn\u0027t necessary?",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_882c794c",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[bug?] This looks strange. What command does $? refer to here?",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_c8267168",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[bug?] Possible typo. Is the } in \"gdbserver}\" intentional?",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_a82b352f",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] better to use the ${! interpolation syntax than eval here?",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_08206948",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] get get_component_* functions are used in backticks, so echoing the warning will not work - it will be hidden in a variable value somewhere. use the warning or error functions from lib/common.sh instead. (same for the set_* functions too)",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_281725ef",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[unsure] this doesn\u0027t seem to correspond with the use of $2 in the function",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_481a6118",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] it\u0027s probably a good idea to do this stuff with --dry-run too",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_e81c0d16",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] this should be prefixed with dryrun so that the appropriate RUN: line is displayed in the logs.",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_88d3d937",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[unsure] according to the comment above the function $2 is \"which GCC stage to build\". How does this work?",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_68d8fd53",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] abe has too much knowledge of the components here. this should come from the components .conf files",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_c8ddd144",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] with --force, this should be reported as a warning rather than ignored.",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_08e7c913",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] this should be an error (perhaps can ignore it with --force)",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_48f1c1cc",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] the warning needs to be before the return 1",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_68bf5dd1",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[cleanup] this sed expression is common to several lines in this function, so should be extracted out to something like\n\nreplace_local_builds()\n{\n   sed -e \"s:${localbuilds}...\"\n}\n\nand \nlocal configure\u003d\"`get_component_configure ${component} | replace_local_builds",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_c8b4b1f4",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-08T11:17:17Z",
+      "side": 1,
+      "message": "[bug] diff doesn\u0027t output \"differ\" unless -q is specified, but it also depends on locale settings. Better to write:\n\n    if ! diff -q $manifest $outfile \u003e/dev/null; then",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
