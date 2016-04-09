@@ -76,6 +76,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_e8088d2f",
+        "filename": "config/gdb.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-09T17:16:37Z",
+      "side": 1,
+      "message": "Nope all files now get downloaded to the same directory, so infrastructure isn\u0027t used except for the remote file path. The code to deal with tarballs is less ugly this way.",
+      "parentUuid": "1a622d24_a8b975eb",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_882c794c",
         "filename": "lib/checkout.sh",
         "patchSetId": 1
@@ -127,6 +145,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_4806e121",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-09T17:16:37Z",
+      "side": 1,
+      "message": "I think that is just a matter of personal preference. I think \u0027eval\u0027 is clearer.",
+      "parentUuid": "1a622d24_a82b352f",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_08206948",
         "filename": "lib/component.sh",
         "patchSetId": 1
@@ -161,6 +197,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_8bff5301",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-09T17:16:37Z",
+      "side": 1,
+      "message": "I fixed the comment, the code is correct.",
+      "parentUuid": "1a622d24_281725ef",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_481a6118",
         "filename": "lib/configure.sh",
         "patchSetId": 1
@@ -172,6 +226,24 @@
       "writtenOn": "2016-04-08T11:17:17Z",
       "side": 1,
       "message": "[cleanup] it\u0027s probably a good idea to do this stuff with --dry-run too",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_2803a510",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-09T17:16:37Z",
+      "side": 1,
+      "message": "Do what ? That whole block of code is under \u0027dryrun\u0027. We don\u0027t want to run autogen is in dryrun mode.",
+      "parentUuid": "1a622d24_481a6118",
       "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -223,6 +295,24 @@
       "writtenOn": "2016-04-08T11:17:17Z",
       "side": 1,
       "message": "[cleanup] abe has too much knowledge of the components here. this should come from the components .conf files",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_6b047715",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-09T17:16:37Z",
+      "side": 1,
+      "message": "Maybe a future enhancement, but it\u0027s not a bug.",
+      "parentUuid": "1a622d24_68d8fd53",
       "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -291,6 +381,24 @@
       "writtenOn": "2016-04-08T11:17:17Z",
       "side": 1,
       "message": "[cleanup] this sed expression is common to several lines in this function, so should be extracted out to something like\n\nreplace_local_builds()\n{\n   sed -e \"s:${localbuilds}...\"\n}\n\nand \nlocal configure\u003d\"`get_component_configure ${component} | replace_local_builds",
+      "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_cb094b2e",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-09T17:16:37Z",
+      "side": 1,
+      "message": "A future enhancement, but at the same tie the debug log is cleaner without the additional function call.",
+      "parentUuid": "1a622d24_68bf5dd1",
       "revId": "91fce0b5965807eaa85bfc2aaa06473c888978db",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
