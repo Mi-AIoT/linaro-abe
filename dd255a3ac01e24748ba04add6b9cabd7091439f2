@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_4b625bd9",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-04-10T09:19:00Z",
+      "side": 1,
+      "message": "Please incorporate fixes from https://review.linaro.org/#/c/10798/5/scripts/TestRelease.job .",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
