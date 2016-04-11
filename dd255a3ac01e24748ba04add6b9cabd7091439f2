@@ -2,6 +2,52 @@
   "comments": [
     {
       "key": {
+        "uuid": "1a622d24_2bef1fb2",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:27:12Z",
+      "side": 1,
+      "message": "Have you decided not to document --manifest create? I thought Charles suggested to make a separate entry to document it.",
+      "range": {
+        "startLine": 224,
+        "startChar": 8,
+        "endLine": 224,
+        "endChar": 9
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_ab3a0f34",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:27:12Z",
+      "side": 1,
+      "message": "As Charles mentioned in the previous version of the patch, I don\u0027t think we want to override pkgversion here.",
+      "range": {
+        "startLine": 15,
+        "startChar": 366,
+        "endLine": 15,
+        "endChar": 413
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_4b625bd9",
         "filename": "scripts/TestRelease.job",
         "patchSetId": 2
