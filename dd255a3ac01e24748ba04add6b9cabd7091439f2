@@ -48,6 +48,121 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_0b6d0333",
+        "filename": "config/newlib.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:44:58Z",
+      "side": 1,
+      "message": "Why not just \u0027all\u0027 ?",
+      "range": {
+        "startLine": 11,
+        "startChar": 19,
+        "endLine": 11,
+        "endChar": 56
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_eb69a726",
+        "filename": "configure.ac",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:44:58Z",
+      "side": 1,
+      "message": "Do we want to keep this fragment?",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 279,
+        "endChar": 46
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_4b77fb02",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:44:58Z",
+      "side": 1,
+      "message": "Should be 2016 actually :)",
+      "range": {
+        "startLine": 3,
+        "startChar": 30,
+        "endLine": 3,
+        "endChar": 34
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_2b743ffc",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:44:58Z",
+      "side": 1,
+      "message": "Is it possible that any of these git/git_robust commands fails? If so, it looks like errors would be ignored.",
+      "range": {
+        "startLine": 214,
+        "startChar": 30,
+        "endLine": 214,
+        "endChar": 48
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_8b60f336",
+        "filename": "lib/package.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:44:58Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 165,
+        "startChar": 17,
+        "endLine": 165,
+        "endChar": 18
+      },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_4b625bd9",
         "filename": "scripts/TestRelease.job",
         "patchSetId": 2
@@ -59,6 +174,29 @@
       "writtenOn": "2016-04-10T09:19:00Z",
       "side": 1,
       "message": "Please incorporate fixes from https://review.linaro.org/#/c/10798/5/scripts/TestRelease.job .",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_6b659744",
+        "filename": "testsuite/stamp-tests.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-11T19:44:58Z",
+      "side": 1,
+      "message": "Is this a typo?",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 22
+      },
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
