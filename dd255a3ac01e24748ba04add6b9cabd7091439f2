@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_4b4edbc2",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "It actually was a debugging thing, and not really implemented, so documenting is unnecessary unless we want such functionality. If so, that would be a feature enhancement.",
+      "parentUuid": "1a622d24_2bef1fb2",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_ab3a0f34",
         "filename": "config/gcc.conf",
         "patchSetId": 2
@@ -42,6 +60,24 @@
         "endLine": 15,
         "endChar": 413
       },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_ceddd944",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "This isn\u0027t overriding pkgversion, it\u0027s setting it. configure.sh had a generic pkgvesion setting, but it\u0027s better to set this in the config file for each component.",
+      "parentUuid": "1a622d24_ab3a0f34",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -71,6 +107,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_6ec125e4",
+        "filename": "config/newlib.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "Ah, merge error. Yes, currently no arguments at all are required.",
+      "parentUuid": "1a622d24_0b6d0333",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_eb69a726",
         "filename": "configure.ac",
         "patchSetId": 2
@@ -88,6 +142,24 @@
         "endLine": 279,
         "endChar": 46
       },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_6bcc7736",
+        "filename": "configure.ac",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "I think we do for a little while longer just cause I\u0027m paranoid. It can go away shortly.",
+      "parentUuid": "1a622d24_eb69a726",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -117,6 +189,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_abd68fc3",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "Yes, now it\u0027s 2016. As many files need the copyright date updated, that should be a separate patchset.",
+      "parentUuid": "1a622d24_4b77fb02",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_2b743ffc",
         "filename": "lib/checkout.sh",
         "patchSetId": 2
@@ -134,6 +224,24 @@
         "endLine": 214,
         "endChar": 48
       },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_cbd14bcf",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "This code hasn\u0027t changed from master.",
+      "parentUuid": "1a622d24_2b743ffc",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -163,6 +271,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_0bdb43ee",
+        "filename": "lib/package.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "Fixed in the next patchset.",
+      "parentUuid": "1a622d24_8b60f336",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_4b625bd9",
         "filename": "scripts/TestRelease.job",
         "patchSetId": 2
@@ -174,6 +300,24 @@
       "writtenOn": "2016-04-10T09:19:00Z",
       "side": 1,
       "message": "Please incorporate fixes from https://review.linaro.org/#/c/10798/5/scripts/TestRelease.job .",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_8bc75312",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "Now that TestRelease.job script has been approved, I can replace this version. It\u0027s in the branch as I was using it for testing.",
+      "parentUuid": "1a622d24_4b625bd9",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -197,6 +341,24 @@
         "endLine": 105,
         "endChar": 22
       },
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_2b4b9fb1",
+        "filename": "testsuite/stamp-tests.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-12T23:16:39Z",
+      "side": 1,
+      "message": "The ABE tests need to be fixed after the merge, as there have been many changes. But yes, that is a typo, which should be fixed in patchset 2.",
+      "parentUuid": "1a622d24_6b659744",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
