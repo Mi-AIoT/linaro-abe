@@ -43,6 +43,40 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_b96d4507",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 755,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-13T16:30:07Z",
+      "side": 1,
+      "message": "this would be better as an error which stopped further exectution, so that users who are using their own fileserver aren\u0027t surprised when it is not used.",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_f9afbd29",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-13T16:30:07Z",
+      "side": 1,
+      "message": "since \"--manifest create\" has an odd interface, and is \"not really implemented\" it should be removed from here.",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_ab3a0f34",
         "filename": "config/gcc.conf",
         "patchSetId": 2
@@ -78,6 +112,24 @@
       "side": 1,
       "message": "This isn\u0027t overriding pkgversion, it\u0027s setting it. configure.sh had a generic pkgvesion setting, but it\u0027s better to set this in the config file for each component.",
       "parentUuid": "1a622d24_ab3a0f34",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_39813590",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-13T16:30:07Z",
+      "side": 1,
+      "message": "it\u0027s still a regression of bug #718. Building GCC master results in a version string which claims to be Linaro GCC, but it isn\u0027t.",
+      "parentUuid": "1a622d24_ceddd944",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -242,6 +294,23 @@
       "side": 1,
       "message": "This code hasn\u0027t changed from master.",
       "parentUuid": "1a622d24_2b743ffc",
+      "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_794a8d84",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-13T16:30:07Z",
+      "side": 1,
+      "message": "this should be a notice, because it doesn\u0027t indicate a problem",
       "revId": "dd255a3ac01e24748ba04add6b9cabd7091439f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
