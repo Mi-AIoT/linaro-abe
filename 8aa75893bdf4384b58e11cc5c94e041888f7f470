@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_0e37cce4",
+        "filename": "abe.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-19T00:24:29Z",
+      "side": 1,
+      "message": "create is now obsolete",
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_2e41e839",
+        "filename": "lib/globals.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-19T00:24:29Z",
+      "side": 1,
+      "message": "sorry, should have caught this earlier.\n\nmissing error handling - should have a \"build_failure\" and \"return 1\" here",
+      "range": {
+        "startLine": 159,
+        "startChar": 5,
+        "endLine": 159,
+        "endChar": 66
+      },
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_ae74d89c",
+        "filename": "lib/package.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-19T00:24:29Z",
+      "side": 1,
+      "message": "This can cause a spurious warning, because of differences in directory names in the \"informational purposes\" section.\n\nThe manifest test suite fails due to this warning, but if this warning is useful then I can filter it out in the test suite, because both manifests are already checked more thoroughly there.",
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
