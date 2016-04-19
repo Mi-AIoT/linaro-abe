@@ -19,6 +19,75 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_4eeee4ed",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-04-19T13:25:49Z",
+      "side": 1,
+      "message": "This does not work.  \"local\" will always return success.  You need to separate declaring a variable \"local\" and setting it:\n\u003d\u003d\nlocal url\nurl\u003d\"`get_component_url ${component}`\" || return 1\n\u003d\u003d\nThis way you can do error handling.\nE.g., try:\n$ cat ./bash-local.sh\n#!/bin/bash\n\nf()\n{\n    local a\u003d\"`false`\" || echo \"ERROR\"\n    echo \"NO ERROR\"\n    a\u003d\"`false`\" || echo \"ERROR 2\"\n    echo \"NO ERROR 2\"\n}\n\nf\n\n$ ./bash-local.sh \nNO ERROR\nERROR 2\nNO ERROR 2",
+      "range": {
+        "startLine": 141,
+        "startChar": 48,
+        "endLine": 141,
+        "endChar": 60
+      },
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_2ece0884",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-04-19T13:25:49Z",
+      "side": 1,
+      "message": "As a future improvement, we need to get rid of \"flock git$$.lock\".  It is useless since abe.sh is single-threaded, and, thus, guaranteed to never contend the \"git$$.lock\".",
+      "range": {
+        "startLine": 168,
+        "startChar": 28,
+        "endLine": 168,
+        "endChar": 38
+      },
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_4ec5445a",
+        "filename": "lib/configure.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-04-19T13:25:49Z",
+      "side": 1,
+      "message": "This should be either \"+\" or \"-\".  I\u0027m guessing -- \"+\".",
+      "range": {
+        "startLine": 40,
+        "startChar": 61,
+        "endLine": 40,
+        "endChar": 63
+      },
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_2e41e839",
         "filename": "lib/globals.sh",
         "patchSetId": 4
@@ -35,6 +104,29 @@
         "startChar": 5,
         "endLine": 159,
         "endChar": 66
+      },
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_6e764040",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-04-19T13:25:49Z",
+      "side": 1,
+      "message": "Is \"+-\" a typo?  If not, what is the semantics of it?",
+      "range": {
+        "startLine": 286,
+        "startChar": 61,
+        "endLine": 286,
+        "endChar": 63
       },
       "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
