@@ -88,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_91793d96",
+        "filename": "lib/configure.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-20T15:54:33Z",
+      "side": 1,
+      "message": "It is a +, the - is part of the returned string, for example\n-stage1 on the builddir path.",
+      "parentUuid": "1a622d24_4ec5445a",
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_2e41e839",
         "filename": "lib/globals.sh",
         "patchSetId": 4
@@ -105,6 +123,24 @@
         "endLine": 159,
         "endChar": 66
       },
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_5148455b",
+        "filename": "lib/globals.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-20T15:54:33Z",
+      "side": 1,
+      "message": "It should return 1, but abe.sh catches the return value and calls build_failure there.",
+      "parentUuid": "1a622d24_2e41e839",
       "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -134,6 +170,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_f16eb1c8",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-20T15:54:33Z",
+      "side": 1,
+      "message": "It is a +, the - is part of the returned string, for example\n-stage1 on the builddir path.",
+      "parentUuid": "1a622d24_6e764040",
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_ae74d89c",
         "filename": "lib/package.sh",
         "patchSetId": 4
@@ -145,6 +199,24 @@
       "writtenOn": "2016-04-19T00:24:29Z",
       "side": 1,
       "message": "This can cause a spurious warning, because of differences in directory names in the \"informational purposes\" section.\n\nThe manifest test suite fails due to this warning, but if this warning is useful then I can filter it out in the test suite, because both manifests are already checked more thoroughly there.",
+      "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_b174399d",
+        "filename": "lib/package.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-20T15:54:33Z",
+      "side": 1,
+      "message": "I think for now you should filter it out.",
+      "parentUuid": "1a622d24_ae74d89c",
       "revId": "8aa75893bdf4384b58e11cc5c94e041888f7f470",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
