@@ -480,6 +480,13 @@ AC_SUBST(NEWWORKDIR)
 
 AC_OUTPUT(host.conf)
 
+# Print some information about the build machine
+AC_MSG_NOTICE([Running on: $HOSTNAME])
+UNAME="`uname -a`"
+AC_MSG_NOTICE([$UNAME])
+LSBINFO="`lsb_release -a`"
+AC_MSG_NOTICE([$LSBINFO])
+
 if test x"${missing}" != x; then
     AC_MSG_ERROR([You need to install these packages: ${missing}])
 fi
