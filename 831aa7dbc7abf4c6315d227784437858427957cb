@@ -25,6 +25,24 @@
     },
     {
       "key": {
+        "uuid": "1a622d24_38aac670",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-26T13:58:31Z",
+      "side": 1,
+      "message": "I didn\u0027t write the comment, but yes, if --tarbin is specified, no tests are run as that code never worked right anyway. Now we use another Jenkins job for testing the binary tarball.",
+      "parentUuid": "1a622d24_854d8475",
+      "revId": "831aa7dbc7abf4c6315d227784437858427957cb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "1a622d24_c5577c01",
         "filename": "lib/make.sh",
         "patchSetId": 2
