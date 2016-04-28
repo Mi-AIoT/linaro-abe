@@ -430,6 +430,10 @@ command_line_arguments=$*
 
 # Initialize an entry in the data array for components
 collect_data abe
+if [ $? -ne 0 ]; then
+    error "collect_data failed"
+    return 1
+fi
 
 #
 # These functions actually do something
