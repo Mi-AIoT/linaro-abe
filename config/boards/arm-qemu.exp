@@ -29,6 +29,8 @@ if { [board_info $board obj_format] == "pe" } {
     set additional_options ""
 }
 
+set_board_info compiler [find_gcc]
+
 # basic-sim.exp is a basic description for the standard Cygnus simulator.
 load_base_board_description "basic-sim"
 
@@ -54,9 +56,9 @@ set env(QEMU_LD_PREFIX) $sysroot
 # board. This board uses libgloss and newlib.
 
 # For bare metal we use libgloss, but for linux hosts this is wrong.
-if { [ istarget "arm*-none-*"] } {
-    set_board_info cflags  "-specs=$specdir/rdimon.specs"
-    set_board_info ldflags 	"[libgloss_link_flags] [newlib_link_flags] $additional_options"
+if { [ istarget "arm*-*eabi*"] } {
+    set_board_info cflags  "-specs=rdimon.specs"
+    set_board_info ldflags "[libgloss_link_flags] [newlib_link_flags]"
 } else {
     set_board_info ldflags "-lpthread -ldl"
 }

@@ -20,6 +20,13 @@ load_generic_config "aarch64-fv8"
 # Use the ARM Foundation Model for the armv8
 set_board_info protocol v8model
 
+if { [board_info $board obj_format] == "pe" } {
+    set additional_options "-Wl,-oformat,pe-aarch64-little,--image-base,0"
+    #    set_board_info uses_underscores 1
+} else {
+    set additional_options ""
+}
+
 # This is the model itself. It's bit brain dead in that it only can be executed with a
 # full absolute path, and can be installed anywhere in the file system.
 if {[info exists env(FOUNDATION_MODEL)]} {
@@ -32,8 +39,18 @@ if {[info exists env(SYSROOT_UNDER_TEST)]} {
     set specdir "$env(SYSROOT_UNDER_TEST)/usr/lib"
 }
 
-set_board_info cflags  "-specs=${specdir}/aem-ve.specs [libgloss_include_flags]"
-set_board_info ldflags 	"[libgloss_link_flags] [newlib_link_flags]"
+# For bare metal we use libgloss, but for linux hosts this is wrong.
+if { [ istarget "aarch64*-elf"] } {
+    set_board_info cflags  "[libgloss_include_flags]"
+    set_board_info ldflags "[libgloss_link_flags] [newlib_link_flags] -specs=aem-ve.specs $additional_options"
+} else {
+    set_board_info ldflags "-lpthread -ldl"
+}
+
+set_board_info compiler [find_gcc]
+
+# This board doesn't use a linker script.
+set_board_info ldscript ""
 
 # Can't pass arguments to the program.
 set_board_info noargs 1
