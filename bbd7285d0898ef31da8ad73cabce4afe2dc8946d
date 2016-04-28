@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_1389adca",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-04-28T07:08:44Z",
+      "side": 1,
+      "message": "This looks mis-indented.  Would you please check that indentation is as expected?",
+      "range": {
+        "startLine": 583,
+        "startChar": 0,
+        "endLine": 583,
+        "endChar": 4
+      },
+      "revId": "bbd7285d0898ef31da8ad73cabce4afe2dc8946d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
