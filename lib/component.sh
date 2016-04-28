@@ -503,7 +503,11 @@ collect_data ()
 	local configure="`grep ${srcdir}/configure ${abe_top}/config.log | tr -s ' ' | cut -d ' ' -f 4-10| tr ' ' '%'`"
 	popd
 	component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${data:+DATE=${date}} ${srcdir:+SRCDIR=${srcdir}} ${configure:+CONFIGURE=${configure}}
- 	return 0
+	if [ $? -ne 0 ]; then
+            error "component_init failed"
+	    return 1
+	fi
+	return 0
     fi
 
     if test -d ${local_builds}/${host}/${target}; then
@@ -595,6 +599,10 @@ collect_data ()
     fi
     confvars="${confvars} ${runtest_flags:+RUNTESTFLAGS=\"`echo ${runtest_flags} | tr ' ' '%'`\"}"
     component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${confvars}
+    if [ $? -ne 0 ]; then
+        error "component_init failed"
+        return 1
+    fi
 
     default_makeflags=
     default_configure_flags=
