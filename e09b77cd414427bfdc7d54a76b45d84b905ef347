@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_b7bb84c3",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-04-28T16:55:11Z",
+      "side": 1,
+      "message": "Is there a default DEJAGNU value? I mean: what happens when component \u003d newlib? Is DEJAGNU empty? Is it OK?",
+      "range": {
+        "startLine": 716,
+        "startChar": 8,
+        "endLine": 716,
+        "endChar": 43
+      },
+      "revId": "e09b77cd414427bfdc7d54a76b45d84b905ef347",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
