@@ -141,6 +141,17 @@ build_all()
 	local check_ret=0
 	local check_failed=
 
+	if test x"${clibrary}" = x"newlib"; then
+            is_package_in_runtests "${runtests}" newlib
+            if test $? -eq 0; then
+		make_check newlib
+		if test $? -ne 0; then
+                    check_ret=1
+                    check_failed="${check_failed} newlib"
+		fi
+            fi
+        fi
+
 	is_package_in_runtests "${runtests}" binutils
 	if test $? -eq 0; then
 	    make_check binutils
@@ -684,8 +695,13 @@ make_check()
 	esac
     fi
 
-    # load the config file for Linaro build farms
-    export DEJAGNU=${topdir}/config/linaro.exp
+    # load the config file for Linaro build farms. Newlib tests are compilation
+    # only, so we don't want to specifiy the board name.
+    if test x"${component}" = x"newlib"; then
+        unset DEJAGNU
+    else
+	export DEJAGNU=${topdir}/config/linaro.exp
+    fi
 
     # Run tests
     local checklog="${builddir}/check-${component}.log"
