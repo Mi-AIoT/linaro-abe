@@ -22,6 +22,24 @@
       "revId": "e09b77cd414427bfdc7d54a76b45d84b905ef347",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "1a622d24_573f9025",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 716,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-04-28T18:33:29Z",
+      "side": 1,
+      "message": "Basically for newlib tests, don\u0027t use what\u0027s in linaro,exp, as it confuses newlib. For all other components we use linaro.exp to get the proper config for the target board. Newlib doesn\u0027t need to do that. DEJAGNU is usuallly always empty, it points to the board config file, ie... linaro.exp.",
+      "parentUuid": "1a622d24_b7bb84c3",
+      "revId": "e09b77cd414427bfdc7d54a76b45d84b905ef347",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
