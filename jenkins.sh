@@ -479,7 +479,24 @@ if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"tr
 	    test_logs="$test_logs ${s%.sum}.log"
 	done
 
-	cp ${sums} ${test_logs} ${logs_dir}/ || status=1
+	# bare metal testing of toolchains that support multilibs generate test
+	# result files with naming conflicts. So extract the combination of options
+	# and create  new name with those that can also later be parsed to know
+	# the configuration of that library.
+	for file in ${sums} ${test_logs}; do
+	    final=
+	    suffix="`echo ${file} | egrep -o "\.(sum|log)$"`"
+	    libs="`echo ${file} | egrep -o "(elf|eabi)/[a-z0-9A-Z/-]*/newlib/" | tr '/' ' '`"
+	    for j in ${libs}; do
+		if test `echo $j | egrep -c "eabi|elf|newlib"` -gt 0; then
+		    continue
+		fi
+		final="${final:+${final}_}$j"
+	    done
+	    outname="${final:+${final}_}newlib${suffix}"
+	    echo "Renaming ${file} to ${outname}"
+	    cp ${file} ${logs_dir}/${outname} || status=1
+	done
 	
 	# Copy over the logs from make check, which we need to find testcase errors.
 	checks="`find ${user_workspace} -name check\*.log`"
@@ -512,7 +529,6 @@ if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"tr
 	scp ${binfiles} ${logserver}:/work/space/binaries/ || status=1
 	rm -f ${binfiles} || status=1
     fi
-
 fi
 
 exit $status
