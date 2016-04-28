@@ -16,6 +16,8 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 # 
 
+set -x
+
 usage()
 {
     # Format this section with 75 columns.
@@ -430,6 +432,10 @@ command_line_arguments=$*
 
 # Initialize an entry in the data array for components
 collect_data abe
+if [ $? -ne 0 ]; then
+    error "collect_data failed"
+    build_failure
+fi
 
 #
 # These functions actually do something
@@ -563,41 +569,6 @@ set_package()
     esac
 
     return 1
-}
-
-build_failure()
-{
-    local time="`expr ${SECONDS} / 60`"
-    error "Build process failed after ${time} minutes"
-    
-    if test x"${gerrit}" = xyes; then
-	gerrit_build_status ${gcc_version} 1
-    fi
-    exit 1
-}
-
-build_success()
-{
-    local time="`expr ${SECONDS} / 60`"
-    notice "Build process succeeded after ${time} minutes"
-    
-    if test x"${gerrit}" = xyes; then
-	gerrit_build_status ${gcc_version} 0
-    fi
-
-    return 0
-}
-
-test_success()
-{
-    local time="`expr ${SECONDS} / 60`"
-    notice "Test run completed after ${time} minutes"
-    
-    if test x"${gerrit}" = xyes; then
-	gerrit_build_status ${gcc_version} 6
-    fi
-
-    return 0
 }
 
 # Switches that require a following directive need to make sure they don't
