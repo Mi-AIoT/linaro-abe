@@ -25,8 +25,8 @@ usage()
              [--checkout {<package>[~branch][@revision]|all}]
              [--disable {install|update|make_docs|building}] [--dryrun]
              [--dump] [--enable {bootstrap|gerrit}]
-             [--excludecheck {all|glibc|gcc|gdb|binutils}]
-             [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
+             [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
+             [--extraconfig <tool>=<path>]
              [--fetch <url>] [--force] [--help] [--host <host_triple>]
              [--infrastructure] [--interactive]
              [--manifest <manifest_file>]
@@ -108,12 +108,12 @@ OPTIONS
 
   --ccache	Use ccache when building packages.
 
-  --check [{all|glibc|gcc|gdb|binutils}]
+  --check [{all|glibc|gcc|gdb|binutils|newlib}]
 
                 For cross builds this will run package unit-tests on native
                 hardware
 
-                glibc|gcc|gdb|binutils
+                glibc|gcc|gdb|binutils|newlib
                         Run make check on the specified package only.
                 all
                         Run make check on all supported packages.
@@ -166,9 +166,9 @@ OPTIONS
                         Enable posting comments to Gerrit on the build
                         progress.
 
-  --excludecheck {all|glibc|gcc|gdb|binutils}
+  --excludecheck {all|glibc|gcc|gdb|binutils|newlib}
 
-                {glibc|gcc|gdb|binutils}
+                {glibc|gcc|gdb|binutils|newlib}
                         When used with --check this will remove the
                         specified package from having its unit-tests
                         executed during make check.  When used without
@@ -197,9 +197,6 @@ OPTIONS
 
   --extraconfig <tool>=<path>
                 Use an additional configuration file for tool.
-
-  --extraconfigdir <dir>
-                Use a directory of additional configuration files.
 
   --fetch <url>
 

@@ -674,32 +674,32 @@ test_pass "${cb_commands}" "${match}"
 
 # This should explicitly add all tests to runtests but NOT include 'all' in the text
 cb_commands="--check all --dump"
-match='checking           glibc gcc gdb binutils'
+match='checking           glibc newlib gcc gdb binutils'
 test_pass "${cb_commands}" "${match}"
 
 # Simply exclude 'gdb' from the list of all runtests.
 cb_commands="--check all --excludecheck gdb --dump"
-match='checking           glibc gcc binutils'
+match='checking           glibc newlib gcc binutils'
 test_pass "${cb_commands}" "${match}"
 
 # This should be the same as --check all --excludecheck gdb
 cb_commands="--check  --excludecheck gdb --dump"
-match='checking           glibc gcc binutils'
+match='checking           glibc newlib gcc binutils'
 test_pass "${cb_commands}" "${match}"
 
 # 'binutils' is on the end of the list which might have some whitespace issues.
 cb_commands="--check all --excludecheck binutils --dump"
-match='checking           glibc gcc gdb'
+match='checking           glibc newlib gcc gdb'
 test_pass "${cb_commands}" "${match}"
 
 # 'glibc' is at the beginning of the list which might have some whitespace issues.
 cb_commands="--check all --excludecheck glibc --dump"
-match='checking           gcc gdb binutils'
+match='checking           newlib gcc gdb binutils'
 test_pass "${cb_commands}" "${match}"
 
 # Make sure both are accounted for.
 cb_commands="--check all --excludecheck glibc --excludecheck binutils --dump"
-match='checking           gcc gdb'
+match='checking           newlib gcc gdb'
 test_pass "${cb_commands}" "${match}"
 
 # Check a single test
@@ -739,46 +739,46 @@ test_pass "${cb_commands}" "${match}"
 
 # what if you mix 'all' and individual tests?  It should be all tests in all_unit_tests and no redundant tests.
 cb_commands="--check all --check gdb --check glibc --dump"
-match='checking           glibc gcc gdb binutils'
+match='checking           glibc newlib gcc gdb binutils'
 test_pass "${cb_commands}" "${match}"
 
 # Make sure we get the same result with --check (without a directive) since this is the same as 'all'.
 # It should be all tests in all_unit_tests and no redundant tests.
 cb_commands="--check --check gdb --check glibc --dump"
-match='checking           glibc gcc gdb binutils'
+match='checking           glibc newlib gcc gdb binutils'
 test_pass "${cb_commands}" "${match}"
 
 # Make sure we can exclude binutils when 'all' is mixed with individual tests.
 cb_commands="--check all --check gdb --check glibc --excludecheck binutils --dump"
-match='checking           glibc gcc gdb'
+match='checking           glibc newlib gcc gdb'
 test_pass "${cb_commands}" "${match}"
 
 # Make sure we can exclude several packages when 'all' is mixed with individual tests.
 cb_commands="--check all --check gdb --check glibc --excludecheck binutils --excludecheck gdb --dump"
-match='checking           glibc gcc'
+match='checking           glibc newlib gcc'
 test_pass "${cb_commands}" "${match}"
 
 # Order of where --check all shows up shouldn't affect outcome.
 # Make sure we can exclude several packages when 'all' is mixed with individual tests.
 cb_commands="--check gdb --check glibc --excludecheck binutils --excludecheck gdb --check all --dump"
-match='checking           glibc gcc'
+match='checking           glibc newlib gcc'
 test_pass "${cb_commands}" "${match}"
 
 # Order of where --check shows up shouldn't affect outcome.
 # Make sure we can exclude several packages when 'all' is mixed with individual tests.
 cb_commands="--check gdb --check glibc --excludecheck binutils --excludecheck gdb --check --dump"
-match='checking           glibc gcc'
+match='checking           glibc newlib gcc'
 test_pass "${cb_commands}" "${match}"
 
 # Make sure we can exclude several packages when 'all' is implicitly mixed with individual tests.
 cb_commands="--check --check gdb --check glibc --excludecheck binutils --excludecheck gdb --dump"
-match='checking           glibc gcc'
+match='checking           glibc newlib gcc'
 test_pass "${cb_commands}" "${match}"
 
 # Order of --check and --excludecheck doesn't matter.  We always 'exclude' after we process 'check'.
 # If we add --check gdb after we've already excluded it, it'll remain excluded.
 cb_commands="--check --check gdb --check glibc --excludecheck binutils --excludecheck gdb --check gdb --dump"
-match='checking           glibc gcc'
+match='checking           glibc newlib gcc'
 test_pass "${cb_commands}" "${match}"
 
 # Removing everything that was added should result in no unit tests being run.
@@ -823,7 +823,7 @@ test_pass "${cb_commands}" "${match}"
 
 # excluding this combination shouldn't leave extraneous spaces in runtests.
 cb_commands="--check --excludecheck gcc --excludecheck gdb --dump"
-match='checking           glibc binutils'
+match='checking           glibc newlib binutils'
 test_pass "${cb_commands}" "${match}"
 
 
