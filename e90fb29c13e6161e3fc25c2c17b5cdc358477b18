@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_5ace9584",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-29T19:53:02Z",
+      "side": 1,
+      "message": "this doesn\u0027t work on my PC...\n\n    [cgb23@stando ~]$ bash setarch i386 ls\n    /usr/bin/setarch: /usr/bin/setarch: cannot execute binary file\n\nyou need:\n\n    CONFIG_SHELL\u003d\"setarch ${arch} ${CONFIG_SHELL}\"",
+      "revId": "e90fb29c13e6161e3fc25c2c17b5cdc358477b18",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
