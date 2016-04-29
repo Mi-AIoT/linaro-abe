@@ -64,6 +64,12 @@ if test x"${runtests}" = xtrue; then
     chroot="--enable-schroot-test"
 fi
 
+guess="`${abe_dir}/config.guess`"
+machine="`gcc -dumpmachine`"
+if test x"${guess}" != x"${machine}"; then
+    CONFIG_SHELL="${CONFIG_SHELL} setarch ${machine}"
+fi
+
 # Use the newly created build directory
 cd ${user_workspace}/_build
 
