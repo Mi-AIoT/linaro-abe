@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1a622d24_da2c654d",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-04-29T19:38:23Z",
+      "side": 1,
+      "message": "setarch doesn\u0027t take gcc target names. Perhaps something like this is better:\n\n    arch_name\u003d$(echo $machine | sed -e \u0027s/-.*//\u0027)\n\nsetarch isn\u0027t a shell script, so shouldn\u0027t be run with the shell:\n\n    CONFIG_SHELL\u003d\"setarch ${arch_name} ${CONFIG_SHELL}\"",
+      "revId": "31f15c95008a32aa50196de0ed027039560c26c8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
