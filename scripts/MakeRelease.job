@@ -109,7 +109,16 @@ if test x"${tarbin}" = x"yes"; then
     # Canadian cross builds require a Linux hosted cross compiler first
     if test x"${canadian}" = x"true"; then
 	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc}
-	host="--host i686-w64-mingw32"
+	which i586-mingw32msvc-gcc
+	if test $? -eq 0; then
+            mingw="i586-mingw32msvc"
+	else
+            which i686-w64-mingw32-gcc
+            if test $? -eq 0; then
+		mingw="i686-w64-mingw32"
+            fi
+	fi
+	host="--host ${mingw}"
 	rm -fr ${local_builds}/${host}/${target}/
 #	update="--disable update"
     else
