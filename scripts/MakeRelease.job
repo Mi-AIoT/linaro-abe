@@ -102,6 +102,8 @@ else
     libc="--set libc=newlib"
 fi
 
+mfile=${manifest:+--manifest ${manifest}}
+glibc=${glibc_src:+glibc=${glibc_src}}
 binutils=${binutils_src:+binutils=${binutils_src}}
 gcc=${gcc_src:+gcc=${gcc_src}}
 
@@ -122,7 +124,7 @@ if test x"${tarbin}" = x"yes"; then
     else
 	host=""
     fi
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc}
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${glibc} ${platform} ${host} --build all ${libc} 
 fi
 
 # force a failure if abe has build problems.
