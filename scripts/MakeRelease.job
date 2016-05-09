@@ -10,23 +10,31 @@ target=""
 tarsrc=""
 tarbin=""
 check=""
+manifest=""
+glibc_src=""
+binutils_src=""
+gcc_src=""
 ref="snapshots-ref"
 nocheck="no"
 fileserver="148.251.136.42"
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
 
-OPTS="`getopt -o r:t:f:d:bs:w:nh -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,help`"
+OPTS="`getopt -o r:t:f:d:bs:w:nh:b:gl:gc -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,help:,glibc:,gcc:,binutils:,manifest`"
 while test $# -gt 0; do
     echo 1 = "$1"
     case $1 in
 	-w|--workspace) user_workspace=$2 ;;
 	-s|--tarsrc) tarsrc=yes ;;
-	-b|--tarbin) tarbin=yes ;;
+	-a|--tarbin) tarbin=yes ;;
 	-t|--target) target=$2 ;;
 	-d|--date) date=$2 ;;
 	-r|--ref) ref=$2 ;;
         -f|--fileserver) fileserver=$2 ;;
 	-n|--nocheck) nocheck=yes ;;
+	-m|--manifest) manifest=yes ;;
+	-gl|--glibc) glibc_src=yes ;;
+	-gc|--gcc) gcc_src=yes ;;
+	-b|--binutils) binutils_src=yes ;;
         -h|--help) usage ;;
 	--) break ;;
     esac
@@ -102,27 +110,29 @@ else
     libc="--set libc=newlib"
 fi
 
+manifest=${manifest:+--manifest ${manifest}}
+glibc=${glibc_src:+glibc=${glibc_src}}
 binutils=${binutils_src:+binutils=${binutils_src}}
 gcc=${gcc_src:+gcc=${gcc_src}}
 
 # Build a toolchain, run the tests, and the create a source release as a tarball
 if test x"${tarsrc}" = x"yes"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} \
-	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc}
+	--tarsrc ${check} ${gcc} ${binutils} ${glibc} ${manifest} ${platform} -build all ${libc}
 fi
 
 # Build a binary release tarball, then run the tests on the installed binaries
 if test x"${tarbin}" = x"yes"; then
     # Canadian cross builds require a Linux hosted cross compiler first
     if test x"${canadian}" = x"true"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc}
+	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${glibc} ${manifest} ${platform} --build all ${libc}
 	host="--host i686-w64-mingw32"
 	rm -fr ${local_builds}/${host}/${target}/
 #	update="--disable update"
     else
 	host=""
     fi
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc}
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${glibc} ${platform} ${host} ${manifest} --build all ${libc} 
 fi
 
 # force a failure if abe has build problems.
