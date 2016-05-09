@@ -1,4 +1,19 @@
 #!/bin/bash
+usage() {
+    echo "MakeRelease: [options]"
+    echo "	--workspace - Specify an alternate workspace"
+    echo "	--tarbin - Build a binary tarball"
+    echo "	--target XXX - Specify the target triplet to build"
+    echo "	--date XXX - Specify a date, which becmes part pf the release name"
+    echo "	--ref XXX - Specufy a Git reference directory"
+    echo "	--fileserver XXX - Specify the fileserver for tarballs"
+    echo "	--manifest XXX - Optionally use a manifest as input"
+    echo "	--glibc XXX - Specify Glibc version to build"
+    echo "	--gcc XXX - Specify GCC version to build"
+    echo "	--binutils XXX - Specify Binutils version to build"
+    echo "	--help"
+    exit
+}
 
 # Set defaults
 if test x"${debug}" = x"true"; then
@@ -15,18 +30,22 @@ nocheck="no"
 fileserver="148.251.136.42"
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
 
-OPTS="`getopt -o r:t:f:d:bs:w:nh -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,help`"
+OPTS="`getopt -o h -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,help:,glibc:,gcc:,binutils:,manifest`"
 while test $# -gt 0; do
     echo 1 = "$1"
     case $1 in
-	-w|--workspace) user_workspace=$2 ;;
-	-s|--tarsrc) tarsrc=yes ;;
-	-b|--tarbin) tarbin=yes ;;
-	-t|--target) target=$2 ;;
-	-d|--date) date=$2 ;;
-	-r|--ref) ref=$2 ;;
-        -f|--fileserver) fileserver=$2 ;;
-	-n|--nocheck) nocheck=yes ;;
+	--workspace) user_workspace=$2 ;;
+	--tarsrc) tarsrc=yes ;;
+	--tarbin) tarbin=yes ;;
+	--target) target=$2 ;;
+	--date) date=$2 ;;
+	--ref) ref=$2 ;;
+        --fileserver) fileserver=$2 ;;
+	--nocheck) nocheck=yes ;;
+	--manifest) manifest=yes ;;
+	--glibc) glibc_src=yes ;;
+	--gcc) gcc_src=yes ;;
+	--binutils) binutils_src=yes ;;
         -h|--help) usage ;;
 	--) break ;;
     esac
@@ -102,27 +121,29 @@ else
     libc="--set libc=newlib"
 fi
 
+manifest=${manifest:+--manifest ${manifest}}
+glibc=${glibc_src:+glibc=${glibc_src}}
 binutils=${binutils_src:+binutils=${binutils_src}}
 gcc=${gcc_src:+gcc=${gcc_src}}
 
 # Build a toolchain, run the tests, and the create a source release as a tarball
 if test x"${tarsrc}" = x"yes"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} \
-	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc}
+	--tarsrc ${check} ${gcc} ${binutils} ${glibc} ${manifest} ${platform} -build all ${libc}
 fi
 
 # Build a binary release tarball, then run the tests on the installed binaries
 if test x"${tarbin}" = x"yes"; then
     # Canadian cross builds require a Linux hosted cross compiler first
     if test x"${canadian}" = x"true"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc} --set languages=c,c++
+	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${glibc} ${manifest} ${platform}  --set languages=c,c++ --build all ${libc}
 	host="--host i686-w64-mingw32"
 	rm -fr ${local_builds}/${host}/${target}/
 #	update="--disable update"
     else
 	host=""
     fi
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc}
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${glibc} ${platform} ${host} ${manifest} --build all ${libc} 
 fi
 
 # force a failure if abe has build problems.
