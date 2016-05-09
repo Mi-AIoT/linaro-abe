@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_a6923e9d",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-09T20:37:44Z",
+      "side": 1,
+      "message": "I think you forgot to add ${mfile} ?",
+      "range": {
+        "startLine": 127,
+        "startChar": 105,
+        "endLine": 127,
+        "endChar": 112
+      },
+      "revId": "8b8a78f5ace847c20ddf115b32debc1e4599a69d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
