@@ -40,6 +40,24 @@
       "revId": "4c1318f7f038bb7daf7d26f4f3f2cee226f2233f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_ac9fbf4f",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-11T19:33:13Z",
+      "side": 1,
+      "message": "Sorry I still dont\u0027 get it :)\nThe syntax is --extraconfig tool\u003dpath, so at this stage we have $2\u003d\u0027tool\u003dpath\u0027. So we want to extract the tool name as the word before \u0027\u003d\u0027 in $2.\nAm I missing something?",
+      "parentUuid": "fafc7978_2ca62fc2",
+      "revId": "4c1318f7f038bb7daf7d26f4f3f2cee226f2233f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
