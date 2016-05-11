@@ -413,7 +413,8 @@ fi
 if test x"${logserver}" != x""; then
     # Re-eval $dir as we now have full range of variables available.
     eval dir="$logname"
-    ssh ${logserver} mkdir -p ${basedir}/${dir}
+    ssh-add -l
+    ssh -v ${logserver} mkdir -p ${basedir}/${dir}
     if test x"${manifest}" != x; then
 	scp ${manifest} ${logserver}:${basedir}/${dir}/
     fi
