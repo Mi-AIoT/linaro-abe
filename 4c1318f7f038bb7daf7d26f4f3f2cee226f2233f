@@ -22,6 +22,24 @@
       "revId": "4c1318f7f038bb7daf7d26f4f3f2cee226f2233f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_2ca62fc2",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 821,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-05-11T18:11:14Z",
+      "side": 1,
+      "message": "Because the index foe the array has changed. Rather than use the entire file name, now the component is used so it works like everything else.So if ip32-gcc.conf is specified, it;s gets ;gcc\u0027.",
+      "parentUuid": "fafc7978_a1d98885",
+      "revId": "4c1318f7f038bb7daf7d26f4f3f2cee226f2233f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
