@@ -828,6 +828,11 @@ while test $# -gt 0; do
 	    shift
 	    ;;
 	--manifest*|-m*)
+	    if [ "x$target" != "x" ]; then
+	      # see https://bugs.linaro.org/show_bug.cgi?id=2059
+	      error "setting --target with --manifest is not supported"
+	      build_failure
+            fi
 	    check_directive $1 manifest "m" $2
 	    import_manifest $2
 	    if test $? -gt 0; then
@@ -951,6 +956,13 @@ while test $# -gt 0; do
 	    rpmbin=yes
 	    ;;
 	--targ*|-targ*)			# target
+	    if [ "x$target" != "x" ]; then
+	      # catch use of --manifest with --target
+	      # see https://bugs.linaro.org/show_bug.cgi?id=2059
+	      error "target already set"
+	      build_failure
+            fi
+
 	    check_directive $1 target targ $2
 
 	    target=$2
