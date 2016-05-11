@@ -142,7 +142,8 @@ basedir="${logserver#*:}"
 logserver="${logserver%:*}"
 
 # Check status of logs on $logserver and rebuild if appropriate.
-[ x"$logserver" != x"" ] && ssh $logserver mkdir -p $(dirname $basedir/$dir)
+ssh-add -l
+[ x"$logserver" != x"" ] && ssh -v $logserver mkdir -p $(dirname $basedir/$dir)
 # Loop and wait until we successfully grabbed the lock.  The while condition is,
 # effectively, "while true;" with a provision to skip if $logserver is not set.
 while [ x"$logserver" != x"" ]; do
