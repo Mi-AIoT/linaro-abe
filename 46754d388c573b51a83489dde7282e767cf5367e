@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_6cb5d7cc",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-11T19:44:04Z",
+      "side": 1,
+      "message": "Isn\u0027t this overriding and clearing the values set in Jenkins?",
+      "range": {
+        "startLine": 15,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 10
+      },
+      "revId": "46754d388c573b51a83489dde7282e767cf5367e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_8cb0fbde",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-11T19:44:04Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we use $2 instead of \u0027yes\u0027? I\u0027m not sure to understand the purpose.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "46754d388c573b51a83489dde7282e767cf5367e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
