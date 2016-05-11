@@ -818,7 +818,7 @@ while test $# -gt 0; do
 	    ;;
 	--extraconfig|-extraconfig)
 	    check_directive $1 extraconfig extraconfig $2
-	    extraconfig_tool=`echo $2 | sed 's/\(.*\)=.*/\1/'`
+	    extraconfig_tool=`echo $2 | cut -d '=' -f 2 | egrep -o "binutils|gcc|gdb|newlib|glibc|eglibc|gmp|mpc|mpfr"`
 	    extraconfig_val=`echo $2 | sed 's/.*=\(.*\)/\1/'`
 	    extraconfig[${extraconfig_tool}]="${extraconfig_val}"
 	    shift
