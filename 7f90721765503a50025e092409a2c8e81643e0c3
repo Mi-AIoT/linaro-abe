@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_c11f6c08",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-11T08:25:49Z",
+      "side": 1,
+      "message": "-t is already used below for --target.",
+      "range": {
+        "startLine": 28,
+        "startChar": 1,
+        "endLine": 28,
+        "endChar": 3
+      },
+      "revId": "7f90721765503a50025e092409a2c8e81643e0c3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_a11ce814",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-11T08:25:49Z",
+      "side": 1,
+      "message": "Do we need these at configure time?",
+      "range": {
+        "startLine": 87,
+        "startChar": 115,
+        "endLine": 87,
+        "endChar": 153
+      },
+      "revId": "7f90721765503a50025e092409a2c8e81643e0c3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
