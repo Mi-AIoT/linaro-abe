@@ -302,6 +302,8 @@ fi
 
 echo "============= fetch() tests ================"
 
+component_init gmp MD5SUM="5a874d7aea7b007d942ab60af08df3ad"
+
 # Fetch with no file name should error.
 out="`fetch 2>/dev/null`"
 if test $? -gt 0; then
@@ -327,6 +329,7 @@ else
 fi
 
 rm -f ${local_snapshots}/gmp-* &>/dev/null
+
 
 # Replace with a marked version so we can tell if it's copied the reference
 # versions erroneously.
