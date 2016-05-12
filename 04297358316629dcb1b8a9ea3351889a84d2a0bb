@@ -53,6 +53,24 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_07e7c441",
+        "filename": "sum2junit.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-05-12T15:39:56Z",
+      "side": 1,
+      "message": "Note that this script is unused, as the official version is now in DejaGnu.",
+      "parentUuid": "fafc7978_47ff0c02",
+      "revId": "04297358316629dcb1b8a9ea3351889a84d2a0bb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_ec02670a",
         "filename": "tcwgweb.sh",
         "patchSetId": 1
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "fafc7978_e7e3a031",
+        "filename": "tcwgweb.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-05-12T15:39:56Z",
+      "side": 1,
+      "message": "This fie is also unused, and should probably be deleted.",
+      "parentUuid": "fafc7978_ec02670a",
+      "revId": "04297358316629dcb1b8a9ea3351889a84d2a0bb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "fafc7978_0c06cb20",
         "filename": "validate.sh",
         "patchSetId": 1
@@ -81,6 +117,24 @@
       "writtenOn": "2016-05-12T11:19:43Z",
       "side": 1,
       "message": "this file was added in 2014",
+      "revId": "04297358316629dcb1b8a9ea3351889a84d2a0bb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_47d0ac53",
+        "filename": "validate.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-05-12T15:39:56Z",
+      "side": 1,
+      "message": "This file has also never been used.",
+      "parentUuid": "fafc7978_0c06cb20",
       "revId": "04297358316629dcb1b8a9ea3351889a84d2a0bb",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
