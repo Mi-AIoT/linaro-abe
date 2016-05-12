@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_47826c53",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-12T14:40:36Z",
+      "side": 1,
+      "message": "Comments wrong?\n\nMD5SUM presumably isn\u0027t extracted from config/[component].conf",
+      "revId": "fd9cf5bbb467df7ca58054943cb2338df1366871",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
