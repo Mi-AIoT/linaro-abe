@@ -70,7 +70,7 @@ fetch()
 
     # Fetch only supports fetching files which have an entry in the md5sums file.
     # An unlisted file should never get this far anyway.
-    dryrun "check_md5sum ${component}"
+    check_md5sum ${component}
     if test $? -gt 0; then
 	  error "md5sums don't match!"
       if test x"${force}" != xyes; then
@@ -304,26 +304,22 @@ check_md5sum()
 
     local tool="`basename $1`"
 
-    local file="`get_component_filespec ${tool}`.asc"
+    local filespec="`get_component_filespec ${tool}`"
+    local file="${filespec}.asc"
     local url="`get_component_url ${tool}`"
-
-#    if test "`echo ${url} | grep -c infrastructure`" -gt 0; then
-#	local dir="/infrastructure/"
-#    else
-	local dir=""
-#    fi
-
-    if test ! -e "${local_snapshots}${dir}/${file}"; then
-        error "No md5sum file for ${tool}!"
-        return 1
+    local dir=""
+    if test -e ${local_snapshots}/${filespec}.asc ; then
+	local md5sum="`cat ${local_snapshots}/${filespec}.asc | cut -d ' ' -f 1`"
+    fi
+    if test x"${md5sum}" != x; then
+	set_component_md5sum ${tool} ${md5sum}
+    else
+	error "No ${filespec}.asc file found!"
+	return 1
     fi
 
-    # Ask md5sum to verify the md5sum of the downloaded file against the hash in
-    # the index.  md5sum must be executed from the snapshots directory.
-    pushd ${local_snapshots}${dir} &>/dev/null
-    dryrun "md5sum --status --check ${file}"
+    dryrun "echo ${md5sum} ${local_snapshots}/${filespec} | md5sum --status --check -"
     md5sum_ret=$?
-    popd &>/dev/null
 
     return $md5sum_ret
 }
