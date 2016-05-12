@@ -291,6 +291,11 @@ manifest()
 	    echo "${component}_filespec=${filespec}" >> ${outfile}
 	fi
 
+	local md5sum="`get_component_md5sum ${component}`"
+	if test x"${md5sum}" != x; then
+	    echo "${component}_md5sum=${md5sum}" >> ${outfile}
+	fi
+
 	local makeflags="`get_component_makeflags ${component} | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g"`"
 	if test x"${makeflags}" != x; then
 	    echo "${component}_makeflags=\"${makeflags}\"" >> ${outfile}
