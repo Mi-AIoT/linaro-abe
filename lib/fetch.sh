@@ -304,8 +304,10 @@ check_md5sum()
 
     local tool="`basename $1`"
 
-    local file="`get_component_filespec ${tool}`.asc"
+    local filespec="`get_component_filespec ${tool}`"
+    local file="${filespec}.asc"
     local url="`get_component_url ${tool}`"
+    local md5="`get_component_md5sum ${tool}` ${filespec}"
 
 #    if test "`echo ${url} | grep -c infrastructure`" -gt 0; then
 #	local dir="/infrastructure/"
@@ -313,15 +315,19 @@ check_md5sum()
 	local dir=""
 #    fi
 
-    if test ! -e "${local_snapshots}${dir}/${file}"; then
-        error "No md5sum file for ${tool}!"
-        return 1
+    if test x"${md5}" = x; then
+	if test ! -e "${local_snapshots}${dir}/${file}"; then
+            error "No md5sum file for ${tool}!"
+            return 1
+	fi
+	# Ask md5sum to verify the md5sum of the downloaded file against the hash in
+	# the index.  md5sum must be executed from the snapshots directory.
+	pushd ${local_snapshots}${dir} &>/dev/null
+	dryrun "md5sum --status --check ${file}"
+    else
+	pushd ${local_snapshots}${dir} &>/dev/null
+	dryrun "echo ${md5} | md5sum --status --check -"	
     fi
-
-    # Ask md5sum to verify the md5sum of the downloaded file against the hash in
-    # the index.  md5sum must be executed from the snapshots directory.
-    pushd ${local_snapshots}${dir} &>/dev/null
-    dryrun "md5sum --status --check ${file}"
     md5sum_ret=$?
     popd &>/dev/null
 
