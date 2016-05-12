@@ -68,14 +68,12 @@ fetch()
 	return 1
     fi
 
-    # Fetch only supports fetching files which have an entry in the md5sums file.
-    # An unlisted file should never get this far anyway.
-    dryrun "check_md5sum ${component}"
+    check_md5sum ${component}
     if test $? -gt 0; then
-	  error "md5sums don't match!"
-      if test x"${force}" != xyes; then
+	error "md5sums don't match!"
+	if test x"${force}" != xyes; then
 	    return 1
-      fi
+	fi
     fi
 
     notice "md5sums matched"
@@ -241,6 +239,17 @@ fetch_http()
        warning "downloaded file ${getfile}.asc has zero data!"
     fi
 
+    local md5sum="`get_component_md5sum ${component}`"
+    if test -e ${local_snapshots}/${filespec}.asc -a x"${md5sum}" = x; then
+	local md5sum="`cat ${local_snapshots}/${getfile}.asc | cut -d ' ' -f 1`"
+	if test x"${md5sum}" != x -a x"${manifest}" = x; then
+	    set_component_md5sum ${component} ${md5sum}
+	else
+	    error "No ${getfile}.asc file found!"
+	    return 1
+	fi
+    fi
+
     return 0
 }
 
@@ -301,28 +310,20 @@ check_md5sum()
 {
 #    trace "$*"
 
-    local tool="`basename $1`"
+    local component="`basename $1`"
 
-    local file="`get_component_filespec ${tool}`.asc"
-    local url="`get_component_url ${tool}`"
+    local filespec="`get_component_filespec ${component}`"
+    local file="${filespec}.asc"
+    local url="`get_component_url ${component}`"
+    local md5sum="`get_component_md5sum ${component}`"
+    local dir=""
 
-#    if test "`echo ${url} | grep -c infrastructure`" -gt 0; then
-#	local dir="/infrastructure/"
-#    else
-	local dir=""
-#    fi
+    pushd ${local_snapshots}
+    # Note that there must be two spaces between the SHA1 and the filename
+    echo "${md5sum}  ${filespec}" | md5sum --check --status -
+    popd
 
-    if test ! -e "${local_snapshots}${dir}/${file}"; then
-        error "No md5sum file for ${tool}!"
-        return 1
-    fi
-
-    # Ask md5sum to verify the md5sum of the downloaded file against the hash in
-    # the index.  md5sum must be executed from the snapshots directory.
-    pushd ${local_snapshots}${dir} &>/dev/null
-    dryrun "md5sum --status --check ${file}"
-    md5sum_ret=$?
-    popd &>/dev/null
+    exit
 
     return $md5sum_ret
 }
