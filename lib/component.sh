@@ -16,7 +16,7 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 # 
 
-declare -ag toolchain
+declare -agx toolchain
 
 # This file attempts to turn an associative array into a semblance of a
 # data structure. Note that this will only work with the bash shell.
@@ -28,6 +28,7 @@ declare -ag toolchain
 # SRCDIR
 # BUILDDIR
 # FILESPEC
+# MD5SUM
 # These values are extracted from the config/[component].conf files
 # BRANCH
 # MAKEFLAGS
@@ -213,6 +214,22 @@ set_component_configure ()
     return 0
 }
 
+set_component_md5sum ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    declare -p ${component} 2>&1 > /dev/null
+    if test $? -gt 0; then
+	warning "${component} does not exist!"
+	return 1
+    else
+	eval ${component}[MD5SUM]="$2"
+    fi
+
+    return 0
+}
+
 # BRANCH is parsed from the config file for each component, but can be redefined
 # on the command line at runtime.
 #
@@ -358,6 +375,21 @@ get_component_configure ()
 	return 1
     else
 	eval "echo \${${component}[CONFIGURE]} ${sopts}"
+    fi
+
+    return 0
+}
+
+get_component_md5sum ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    if test "${component:+set}" != "set"; then
+	warning "${component} does not exist!"
+	return 1
+    else
+	eval "echo \${${component}[MD5SUM]}"
     fi
 
     return 0
@@ -546,8 +578,11 @@ collect_data ()
 	    local url="`dirname ${latest}`"
 	    local filespec="`basename ${latest}`"
 	fi
-
 	local dir="`echo ${filespec} | sed -e 's:\.tar.*::'| tr '@' '_'`"
+	local md5sum=""
+	if test -e ${local_snapshots}/${filespec}.asc -a x"${manifest}" = x; then
+	    md5sum="`cat ${local_snapshots}/${filespec}.asc | cut -d ' ' -f 1`"
+	fi
     else
 	# If a manifest file has been imported, use those values
 	local filespec="`get_component_filespec ${component}`"
@@ -603,7 +638,7 @@ collect_data ()
 	confvars="${confvars} ${stage2_flags:+STAGE2=\"`echo ${stage2_flags} | tr ' ' '%'`\"}"
     fi
     confvars="${confvars} ${runtest_flags:+RUNTESTFLAGS=\"`echo ${runtest_flags} | tr ' ' '%'`\"}"
-    component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${confvars}
+    component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${md5sum:+MD5SUM=${md5sum}} ${url:+URL=${url}} ${confvars}
     if [ $? -ne 0 ]; then
         error "component_init failed"
         return 1
