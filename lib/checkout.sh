@@ -154,6 +154,8 @@ checkout()
     url="`get_component_url ${component}`" || return 1
     local branch=
     branch="`get_component_branch ${component}`" || return 1
+    local gittag=
+    gittag="`get_component_gittag ${component}`" || return 1
     local revision=
     revision="`get_component_revision ${component}`" || return 1
     local srcdir=
@@ -211,13 +213,25 @@ checkout()
 			return 1
 		    fi
 	        else
-		    notice "Checking out branch ${branch} for ${component} in ${srcdir}"
-		    if test x${dryrun} != xyes; then
-			${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${branch}
-			if test $? -gt 0; then
-			    error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
-			    rm -f ${local_builds}/git$$.lock
-			    return 1
+		    if test x"${gittag}" != x; then
+			notice "Checking out gittag ${gittag} for ${component} in ${srcdir}"
+			if test x${dryrun} != xyes; then
+			    ${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${gittag}
+			    if test $? -gt 0; then
+				error "Gittag ${gittag} likely doesn't exist in git repo ${repo}!"
+				rm -f ${local_builds}/git$$.lock
+				return 1
+			    fi
+			fi
+		    else
+			notice "Checking out branch ${branch} for ${component} in ${srcdir}"
+			if test x${dryrun} != xyes; then
+			    ${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${branch}
+			    if test $? -gt 0; then
+				error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
+				rm -f ${local_builds}/git$$.lock
+				return 1
+			    fi
 			fi
 		    fi
 		fi
@@ -260,12 +274,18 @@ checkout()
 		    # Make sure we are on the correct branch.
 		    # This is a no-op if $branch is empty and it
 		    # just gets master.
-		    dryrun "(cd ${srcdir} && git_robust checkout -B ${branch} origin/${branch})"
+		    if test x"${gittag}" != x; then
+			dryrun "(cd ${srcdir} && git_robust checkout ${gittag})"
+		    else
+			dryrun "(cd ${srcdir} && git_robust checkout -B ${branch} origin/${branch})"
+		    fi
 		    if test $? -gt 0; then
 			error "Can't checkout ${revision}"
 			return 1
 		    fi
-		    dryrun "(cd ${srcdir} && git_robust pull)"
+		    if test x"${gittag}" = x; then
+			dryrun "(cd ${srcdir} && git_robust pull)"
+		    fi
 		fi
 	    fi
 

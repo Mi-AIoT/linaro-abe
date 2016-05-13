@@ -28,6 +28,7 @@ declare -ag toolchain
 # SRCDIR
 # BUILDDIR
 # FILESPEC
+# GITTAG
 # These values are extracted from the config/[component].conf files
 # BRANCH
 # MAKEFLAGS
@@ -50,7 +51,7 @@ component_init ()
     for index in $*; do
 	if test "`echo ${index} | grep -c '='`" -gt 0; then
 	    name="`echo ${index} | cut -d '=' -f 1`"
-	    value="`echo ${index} | cut -d '=' -f2-20 | sed -e 's:^[a-zA-Z]*=::' | tr '%' ' '`"
+	    value="`echo ${index} | cut -d '=' -f2-20 | sed -e 's:^[a-zA-Z]*=::' | tr '^' ' '`"
 	    eval "local ifset=\${${component}[${name}]:-notset}"
 	    if test x"${ifset}" = x"notset"; then
 		# $value is supposed to be safe for bare shell expansion
@@ -208,6 +209,23 @@ set_component_configure ()
 	return 1
     else
 	eval ${component}[CONFIGURE]="$2"
+    fi
+
+    return 0
+}
+
+
+set_component_gittag ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    declare -p ${component} 2>&1 > /dev/null
+    if test $? -gt 0; then
+	warning "${component} does not exist!"
+	return 1
+    else
+	eval ${component}[GITTAG]="$2"
     fi
 
     return 0
@@ -393,6 +411,21 @@ get_component_runtestflags ()
     return 0
 }
 
+get_component_gittag ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    if test "${component:+set}" != "set"; then
+	warning "${component} does not exist!"
+	return 1
+    else
+	eval "echo \${${component}[GITTAG]}"
+    fi
+
+    return 0
+}
+
 # Note that this function is GCC specific.
 get_component_stage ()
 {
@@ -499,10 +532,10 @@ collect_data ()
 	fi
 	local url="`git config --get remote.origin.url`"
 	local url="`dirname ${url}`"
-	local date="`git log -n 1 --format=%aD | tr ' ' '%'`"
+	local date="`git log -n 1 --format=%aD | tr ' ' '^'`"
 	local filespec="abe.git"
 	local srcdir="${abe_path}"
-	local configure=\""`grep ${srcdir}/configure ${abe_top}/config.log | tr -s ' ' | cut -d ' ' -f 4-10| tr ' ' '%'`"\"
+	local configure="`grep ${srcdir}/configure ${abe_top}/config.log | tr -s ' ' | cut -d ' ' -f 4-10| tr ' ' '^'`"
 	popd
 	component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${data:+DATE=${date}} ${srcdir:+SRCDIR=${srcdir}} ${configure:+CONFIGURE=${configure}}
 	if [ $? -ne 0 ]; then
@@ -552,8 +585,10 @@ collect_data ()
 	# If a manifest file has been imported, use those values
 	local filespec="`get_component_filespec ${component}`"
 	local gitinfo="${!version}"
-	local branch="`get_git_branch ${gitinfo}`"
-	local revision="`get_git_revision ${gitinfo}`"
+	local branch="`echo ${gitinfo} | grep -o "[~/][[:alnum:]_\/\.\-]*" | tr -d '~' | sed -e 's:^/::'`"
+	local gittag="`echo ${gitinfo} | grep -o "%[[:alnum:]_\.\-]*" | tr -d '%'`"
+	local revision="`echo ${gitinfo} | grep -o "@[[:alnum:]_\-]*" | tr -d '@'`"
+
 	local search=
 	case ${component} in
 	    binutils*|gdb*) search="binutils-gdb.git" ;;
@@ -569,8 +604,12 @@ collect_data ()
 	# Builds will fail if there is an @ in the build directory path.
 	# This is unfortunately, as @ is used to deliminate the revision
 	# string.
-	local fixbranch="`echo ${branch} | tr '/' '~' | tr '@' '_'`"
-	local dir=${search}${branch:+~${fixbranch}}${revision:+_rev_${revision}}
+	if test x"${gittag}" != x; then
+	    local dir=${search}%${gittag}${revision:+_rev_${revision}}
+	else
+	    local fixbranch="`echo ${branch} | tr '/' '~' | tr '@' '_'`"
+	    local dir=${search}${branch:+~${fixbranch}}${revision:+_rev_${revision}}
+	fi
     fi
 
     # configured and built as a separate way.
@@ -596,14 +635,14 @@ collect_data ()
     # Extract a few other data variables from the conf file and store them so
     # the conf file only needs to be sourced once.
     local confvars="${static_link:+STATICLINK=${static_link}}"
-    confvars="${confvars} ${default_makeflags:+MAKEFLAGS=\"`echo ${default_makeflags} | tr ' ' '%'`\"}"
-    confvars="${confvars} ${default_configure_flags:+CONFIGURE=\"`echo ${default_configure_flags} | tr ' ' '%'`\"}"
+    confvars="${confvars} ${default_makeflags:+MAKEFLAGS=\"`echo ${default_makeflags} | tr ' ' '^'`\"}"
+    confvars="${confvars} ${default_configure_flags:+CONFIGURE=\"`echo ${default_configure_flags} | tr ' ' '^'`\"}"
     if test x"${component}" = "xgcc"; then
-	confvars="${confvars} ${stage1_flags:+STAGE1=\"`echo ${stage1_flags} | tr ' ' '%'`\"}"
-	confvars="${confvars} ${stage2_flags:+STAGE2=\"`echo ${stage2_flags} | tr ' ' '%'`\"}"
+	confvars="${confvars} ${stage1_flags:+STAGE1=\"`echo ${stage1_flags} | tr ' ' '^'`\"}"
+	confvars="${confvars} ${stage2_flags:+STAGE2=\"`echo ${stage2_flags} | tr ' ' '^'`\"}"
     fi
-    confvars="${confvars} ${runtest_flags:+RUNTESTFLAGS=\"`echo ${runtest_flags} | tr ' ' '%'`\"}"
-    component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${confvars}
+    confvars="${confvars} ${runtest_flags:+RUNTESTFLAGS=\"`echo ${runtest_flags} | tr ' ' '^'`\"}"
+    component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${gittag:+GITTAG=${gittag}} ${confvars}
     if [ $? -ne 0 ]; then
         error "component_init failed"
         return 1
