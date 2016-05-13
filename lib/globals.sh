@@ -40,7 +40,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.0
+manifest_version=1.1
 
 # The prefix for installing the toolchain
 prefix=
@@ -167,23 +167,28 @@ import_manifest()
 	local variables=
 	local i=0
 	for i in ${components}; do
+	    local gittag="`grep "^${i}_gittag" ${manifest} | cut -d '=' -f 2`"
 	    local url="`grep "^${i}_url" ${manifest} | cut -d '=' -f 2`"
 	    local branch="`grep "^${i}_branch" ${manifest} | cut -d '=' -f 2`"
 	    local filespec="`grep "^${i}_filespec" ${manifest} | cut -d '=' -f 2`"
 	    local static="`grep "^${i}_staticlink" ${manifest} | cut -d '=' -f 2`"
 	    # Any embedded spaces in the value have to be converted to a '%'
 	    # character. for component_init().
-	    local makeflags="`grep "^${i}_makeflags" ${manifest} | cut -d '=' -f 2-20 | tr ' ' '%'`"
+	    local makeflags="`grep "^${i}_makeflags" ${manifest} | cut -d '=' -f 2-20 | tr ' ' '^'`"
 	    eval "makeflags=${makeflags}"
-	    local configure="`grep "^${i}_configure" ${manifest} | cut -d '=' -f 2-20 | tr ' ' '%'| tr -d '\"'`"
+	    local configure="`grep "^${i}_configure" ${manifest} | cut -d '=' -f 2-20 | tr ' ' '^'| tr -d '\"'`"
 	    eval "configure=${configure}"
 	    local revision="`grep "^${i}_revision" ${manifest} | cut -d '=' -f 2`"
 	    if test "`echo ${filespec} | grep -c \.tar\.`" -gt 0; then
 		local version="`echo ${filespec} | sed -e 's:\.tar\..*$::'`"
 		local dir=${version}
 	    else
-		local fixbranch="`echo ${branch} | tr '/@' '_'`"
-		local dir=${i}.git~${fixbranch}${revision:+_rev_${revision}}
+		if test x"${gittag}" != x; then
+		    local dir=${i}.git%${gittag}${revision:+_rev_${revision}}
+		else
+		    local fixbranch="`echo ${branch} | tr '/@' '_'`"
+		    local dir=${i}.git~${fixbranch}${revision:+_rev_${revision}}
+		fi
 	    fi
 	    local srcdir="${local_snapshots}/${dir}"
 	    local builddir="${local_builds}/${host}/${target}/${dir}"
@@ -206,22 +211,21 @@ import_manifest()
 		    ;;
 		gcc)
 		    local configure=
-		    local stage1_flags="`grep ^gcc_stage1_flags= ${manifest} | cut -d '=' -f 2-20 | tr ' ' '%' | tr -d '\"'`"
+		    local stage1_flags="`grep ^gcc_stage1_flags= ${manifest} | cut -d '=' -f 2-20 | tr ' ' '^' | tr -d '\"'`"
 		    eval "stage1_flags=${stage1_flags}"
-		    local stage2_flags="`grep ^gcc_stage2_flags= ${manifest} | cut -d '=' -f 2-20 | tr ' ' '%' | tr -d '\"'`"
+		    local stage2_flags="`grep ^gcc_stage2_flags= ${manifest} | cut -d '=' -f 2-20 | tr ' ' '^' | tr -d '\"'`"
 		    eval "stage2_flags=${stage2_flags}"
 		    ;;
 		*)
 		    ;;
 	    esac
 
-	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}}
+	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${gittag:+GITTAG=${gittag}}
 	    if [ $? -ne 0 ]; then
 		error "component_init failed while parsing manifest"
 		build_failure
 		return 1
 	    fi
-
 	    unset stage1_flags
 	    unset stage2_flags
 	    unset url
