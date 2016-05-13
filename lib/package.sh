@@ -286,7 +286,6 @@ manifest()
 	    echo "${component}_revision=${revision}" >> ${outfile}
 	fi
 
-	echo "FOO"
 	local gittag="`get_component_gittag ${component}`"
 	if test x"${gittag}" != x; then
 	    echo "${component}_gittag=${gittag}" >> ${outfile}
