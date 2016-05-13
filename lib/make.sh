@@ -264,15 +264,17 @@ build()
     trace "$*"
 
     local component="`echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::'`"
- 
     if test "`echo $2 | grep -c gdb`" -gt 0; then
 	local component="$2"
     fi
     local url="`get_component_url ${component}`"
     local srcdir="`get_component_srcdir ${component}`"
     local builddir="`get_component_builddir ${component}`${2:+-$2}"
+    if test x"${srcdir}" = x -o x"${builddir}" = x; then
+	error "ERROR Malformed input. No url found"
+	return 1
+    fi
     local version="`basename ${srcdir}`"
-
     local stamp=
     stamp="`get_stamp_name build ${version} ${2:+$2}`"
 
