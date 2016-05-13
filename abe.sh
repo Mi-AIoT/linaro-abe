@@ -441,11 +441,18 @@ crosscheck_clibrary_target()
 {
     local test_clibrary="$1"
     local test_target="$2"
+    local warn_or_error="$3"
+
+    case ${warn_or_error} in
+	warning|error) ;;
+	*) warn_or_error=error ;;
+    esac
+
     case ${test_target} in
 	arm*-eabi|aarch64*-*elf|*-mingw32)
 	    # Bare metal targets only support newlib.
 	    if test x"${test_clibrary}" != x"newlib"; then
-		error "${test_target} is only compatible with newlib."
+		${warn_or_error} "${test_target} is only compatible with newlib."
 		return 1
 	    fi
 	    ;;
@@ -528,7 +535,7 @@ set_package()
 
 		    # Verify that the user specified libc is compatible with
 		    # the user specified target.
-		    crosscheck_clibrary_target ${setting} ${target}
+		    crosscheck_clibrary_target ${setting} ${target} error
 		    if test $? -gt 0; then
 			return 1
 		    fi
@@ -1108,22 +1115,24 @@ while test $# -gt 0; do
 			fi
 
 			# Only allow valid combinations of target and clibrary.
-			crosscheck_clibrary_target ${name} ${target}
-			if test $? -gt 0; then
-			    build_failure
-			fi
+
+			# Do not fail in case of possible
+			# incompatibility: --set libc= is required to
+			# trigger a failure. This way, building a
+			# bare-metal toolchain with glibc=XXX will
+			# succeed, using newlib and ignoring the glibc
+			# setting.
+			crosscheck_clibrary_target ${name} ${target} warning
+
 			# Continue to process individually.
 			case ${name} in
 			    eglibc)
-				clibrary="eglibc"
 				eglibc_version="${value}"
 				;;
 			    glibc)
-				clibrary="glibc"
 				glibc_version="${value}"
 				;;
 			    n*|newlib)
-				clibrary="newlib"
 				newlib_version="${value}"
 				;;
 			    *)

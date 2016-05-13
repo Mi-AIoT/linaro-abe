@@ -167,6 +167,18 @@ test_failure()
     cbtest ${testlineno} "${out}" "ERROR ${match}" "ERROR ${cb_commands}"
 }
 
+test_warning()
+{
+    local testlineno=$BASH_LINENO
+    local cb_commands=$1
+    local match=$2
+    local out=
+
+    # Continue to search for error so we don't get false positives.
+    out="`(${runintmpdir:+cd ${tmpdir}} && ${abe_path}/abe.sh --space 4960 ${cb_commands} 2>&1 | tee ${testlogs}/${testlineno}.log | grep "${match}" | sed -e 's:\(^ERROR\).*\('"${match}"'\).*:\1 \2:')`"
+    cbtest ${testlineno} "${out}" "WARNING: * ${match}" "WARNING ${cb_commands}"
+}
+
 test_pass()
 {
     local testlineno=$BASH_LINENO
@@ -459,14 +471,14 @@ test_pass "${cb_commands}" "${match}"
 
 # Verify that setting glibc=glibc.git will fail for baremetal.
 cb_commands="--dryrun --target aarch64-none-elf glibc=glibc.git"
-match='crosscheck_clibrary_target'
-test_failure "${cb_commands}" "${match}"
+match='is only compatible with newlib'
+test_warning "${cb_commands}" "${match}"
 
-# Verify that glibc=glibc.git will fail when se before the target
+# Verify that glibc=glibc.git will fail when set before the target
 # for baremetal.
 cb_commands="--dryrun glibc=glibc.git --target aarch64-none-elf"
-match='crosscheck_clibrary_target'
-test_failure "${cb_commands}" "${match}"
+match='is only compatible with newlib'
+test_warning "${cb_commands}" "${match}"
 
 cb_commands="--snapshots"
 match='requires a directive'
@@ -588,13 +600,13 @@ test_pass "${cb_commands}" "${match}"
 
 target="aarch64-none-elf"
 cb_commands="--target ${target} glibc=glibc.git"
-match="crosscheck_clibrary_target"
-test_failure "${cb_commands}" "${match}"
+match="is only compatible with newlib"
+test_warning "${cb_commands}" "${match}"
 
 target="aarch64-none-elf"
 cb_commands="--target ${target} glibc=eglibc.git"
-match="crosscheck_clibrary_target"
-test_failure "${cb_commands}" "${match}"
+match="is only compatible with newlib"
+test_warning "${cb_commands}" "${match}"
 
 target="aarch64-none-elf"
 cb_commands="--target ${target} newlib=newlib.git"
