@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_392b1084",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-16T10:49:36Z",
+      "side": 1,
+      "message": "Would you please check indentation and also move this clause to its [roughly] alphabetical place?",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 10
+      },
+      "revId": "62f416bfdfc29dee38c44ca48a2b849c72498a92",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
