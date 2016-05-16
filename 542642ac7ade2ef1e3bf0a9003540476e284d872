@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_c7249cc8",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-16T10:32:09Z",
+      "side": 1,
+      "message": "Option parsing is wrong for every single new option.\n\n-a option is not mentioned in the short options;\n-m option is not mentioned in the short options;\n--manifest option will result in \"--manifest yes\" passed to abe.sh\n-gl specification in the short options is, actually, two new options: -g and -l\n--glibc option\u0027s argument is ignored, abe.sh will get \"glibc\u003dyes\" instead of \"glibc\u003dglibc.git~something\" \n-gc specification in the short options is, actually, two new options: -g and -c\n--gcc option\u0027s argument is ignored, abe.sh will get \"gcc\u003dyes\" instead of \"gcc\u003dgcc.git~something\"\n--binutils option\u0027s argument is ignored, abe.sh will get \"binutils\u003dyes\" instead of \"binutils\u003dbintutils-gdb.git~something\"\n\nI recommend completely dropping the short options, and use only long-style options in our automation scripts.  They are much more descriptive and less error-prone.",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 4
+      },
+      "revId": "542642ac7ade2ef1e3bf0a9003540476e284d872",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
