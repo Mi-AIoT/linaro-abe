@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_e7a60053",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-16T09:57:20Z",
+      "side": 1,
+      "message": "My preference is to just remove this check and update documentation to say that \u003ccomponent\u003e\u003dFOO option tells ABE to use FOO version of the component _if component is required during the build_.   Otherwise the option has no effect.",
+      "range": {
+        "startLine": 1117,
+        "startChar": 3,
+        "endLine": 1125,
+        "endChar": 55
+      },
+      "revId": "5ba97bbb350e3ac5c0957aa4fe443da2a2ced918",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
