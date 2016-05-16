@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_4718ac84",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1156,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-16T10:39:04Z",
+      "side": 1,
+      "message": "Won\u0027t this fail when abe.sh is called without both --target and --manifest?\n\nI suggest using the standard\nif [ x\"${target_set}${manifest_set}\" \u003d x\"11\" ]; then",
+      "range": {
+        "startLine": 1156,
+        "startChar": 5,
+        "endLine": 1156,
+        "endChar": 40
+      },
+      "revId": "9d837ae6164605c9dd692e352b2591574aa59ff8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
