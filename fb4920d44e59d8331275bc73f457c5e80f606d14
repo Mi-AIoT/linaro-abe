@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_efed36f1",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-19T00:26:04Z",
+      "side": 1,
+      "message": "what is this for?",
+      "revId": "fb4920d44e59d8331275bc73f457c5e80f606d14",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_4fba82e2",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-19T00:26:04Z",
+      "side": 1,
+      "message": "looks like this can result in errors when doing dryrun at line 317",
+      "range": {
+        "startLine": 73,
+        "startChar": 9,
+        "endLine": 73,
+        "endChar": 10
+      },
+      "revId": "fb4920d44e59d8331275bc73f457c5e80f606d14",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_6fb946e9",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-19T00:26:04Z",
+      "side": 1,
+      "message": "doesn\u0027t this overwrite the md5sum set in the manifest?",
+      "revId": "fb4920d44e59d8331275bc73f457c5e80f606d14",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
