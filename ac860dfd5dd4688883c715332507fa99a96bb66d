@@ -22,6 +22,30 @@
       "revId": "ac860dfd5dd4688883c715332507fa99a96bb66d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_ad3b36ea",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-23T12:24:01Z",
+      "side": 1,
+      "message": "This is me being pedantic and respecting $dryrun.  I can merge it if you prefer.",
+      "parentUuid": "fafc7978_6d4aee84",
+      "range": {
+        "startLine": 224,
+        "startChar": 3,
+        "endLine": 224,
+        "endChar": 18
+      },
+      "revId": "ac860dfd5dd4688883c715332507fa99a96bb66d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
