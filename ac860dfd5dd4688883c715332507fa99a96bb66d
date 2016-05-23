@@ -46,6 +46,30 @@
       "revId": "ac860dfd5dd4688883c715332507fa99a96bb66d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_8d175251",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-23T12:34:18Z",
+      "side": 1,
+      "message": "Well it seems to me that the other places do not take $dryrun into account.\n\nTo me, the less code duplication, the better. I fear we forget to move/update one of these statements should we need to update this area sooner or later :)",
+      "parentUuid": "fafc7978_ad3b36ea",
+      "range": {
+        "startLine": 224,
+        "startChar": 3,
+        "endLine": 224,
+        "endChar": 18
+      },
+      "revId": "ac860dfd5dd4688883c715332507fa99a96bb66d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
