@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_e8408c37",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-23T14:52:54Z",
+      "side": 1,
+      "message": "Can you add a sanity check that \"$makeflags\" don\u0027t have \"-j\" setting, and issue a warning?  Something like\nif echo \"$makeflags\" | grep -q -e \"-j\"; then\n  warning \"AAAHHH!\"\nfi",
+      "range": {
+        "startLine": 542,
+        "startChar": 25,
+        "endLine": 542,
+        "endChar": 37
+      },
+      "revId": "c91a155084ad0f6d93bfbe4bf08e8ae0e27d8814",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
