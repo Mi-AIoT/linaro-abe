@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_6d4aee84",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-23T12:17:44Z",
+      "side": 1,
+      "message": "Why not merge lines 214 and 224, and move it line 227 below?",
+      "range": {
+        "startLine": 224,
+        "startChar": 3,
+        "endLine": 224,
+        "endChar": 18
+      },
+      "revId": "ac860dfd5dd4688883c715332507fa99a96bb66d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
