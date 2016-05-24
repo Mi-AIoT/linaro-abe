@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_2893b4fb",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-24T07:59:01Z",
+      "side": 1,
+      "message": "Consider removing this check, as it is extraneous.",
+      "range": {
+        "startLine": 332,
+        "startChar": 10,
+        "endLine": 332,
+        "endChar": 37
+      },
+      "revId": "ad9fc4765533fc4072f6f9f515370e03d2eb1f96",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
