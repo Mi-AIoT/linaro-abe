@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_3e2bee83",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-05-25T14:40:53Z",
+      "side": 1,
+      "message": "Isn\u0027t this a GDB equivalent of running contrib/gcc_update?  If so, then this clause should be right beside call to gcc_update.",
+      "range": {
+        "startLine": 341,
+        "startChar": 2,
+        "endLine": 341,
+        "endChar": 31
+      },
+      "revId": "89c3841e45e6616a139fb0fa4bdcb540b76adf8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
