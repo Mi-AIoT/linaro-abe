@@ -22,6 +22,30 @@
       "revId": "89c3841e45e6616a139fb0fa4bdcb540b76adf8a",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "fafc7978_be47de1c",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-05-25T18:26:09Z",
+      "side": 1,
+      "message": "Yes, it\u0027s the equivalent.\nBut if my patch https://review.linaro.org/#/c/12123/ is committed they\u0027ll be next to each other :)",
+      "parentUuid": "fafc7978_3e2bee83",
+      "range": {
+        "startLine": 341,
+        "startChar": 2,
+        "endLine": 341,
+        "endChar": 31
+      },
+      "revId": "89c3841e45e6616a139fb0fa4bdcb540b76adf8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
