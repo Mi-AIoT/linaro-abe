@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "fafc7978_2069088c",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-05-26T21:40:49Z",
+      "side": 1,
+      "message": "Is this supposed to work for GCC trunk as well ?",
+      "revId": "46ab0e4dfd1ebdb141a0deda13f65c8b9dbae65f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
