@@ -167,7 +167,11 @@ if test x"${tarsrc}" = x"yes"; then
 fi
 
 # Copy the binary test results to the fileserver
-binaries="/work/space/binaries/${release}/${target}"
+gcc_ver="$(echo $gcc_src | sed -e "s/^gcc-linaro-\([0-9\.]\+\).*\$/gcc-linaro-\1/")"
+if [ x"$gcc_ver" = x"$gcc_src" ]; then
+    gcc_ver="$release"
+fi
+binaries="/work/space/binaries/${gcc_ver}/${target}"
 if test x"${tarbin}" = xyes; then
     manifest="`find ${user_workspace} -name \*manifest.txt`"
     ssh ${fileserver} "if test ! -d ${binaries}; then mkdir -p ${binaries}; fi"
