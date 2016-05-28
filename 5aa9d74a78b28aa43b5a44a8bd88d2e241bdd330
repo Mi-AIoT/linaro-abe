@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_910f7c2e",
+        "filename": "lib/git-parser.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-28T16:18:47Z",
+      "side": 0,
+      "message": "I think the removal of this code warrants separate discussion, and should be submitted separately",
+      "revId": "5aa9d74a78b28aa43b5a44a8bd88d2e241bdd330",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}

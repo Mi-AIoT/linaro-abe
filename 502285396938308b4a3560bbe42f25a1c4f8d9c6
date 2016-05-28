@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_b1128056",
+        "filename": "config/binutils.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-28T16:18:47Z",
+      "side": 1,
+      "message": "is this related to the other git tag changes?",
+      "revId": "502285396938308b4a3560bbe42f25a1c4f8d9c6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_510eb435",
+        "filename": "lib/globals.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-28T16:18:47Z",
+      "side": 1,
+      "message": "this isn\u0027t OK, we can\u0027t invalidate old manifests like this - the point of the manifest version is to allow abe to enable special treatment to parse older manifest versions. abe must continue to accept 1.0 format manifests so that users who have them can continue to use them.",
+      "revId": "502285396938308b4a3560bbe42f25a1c4f8d9c6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_f11c086d",
+        "filename": "lib/package.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-05-28T16:18:47Z",
+      "side": 1,
+      "message": "What is the use of putting the tag name in the manifest.\n\nThe build revision should already be recorded. What happens if the tag is subsequently moved to point to a different revision?",
+      "revId": "502285396938308b4a3560bbe42f25a1c4f8d9c6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
