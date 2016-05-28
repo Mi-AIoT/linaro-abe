@@ -195,7 +195,7 @@ checkout()
 		if test x"${revision}" != x""; then
 		    notice "Checking out revision for ${component} in ${srcdir}"
 		    if test x${dryrun} != xyes; then
-			${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${revision}
+			dryrun ${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${revision}
 			if test $? -gt 0; then
 			    error "Revision ${revision} likely doesn't exist in git repo ${repo}!"
 			     rm -f ${local_builds}/git$$.lock
@@ -213,7 +213,7 @@ checkout()
 	        else
 		    notice "Checking out branch ${branch} for ${component} in ${srcdir}"
 		    if test x${dryrun} != xyes; then
-			${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${branch}
+			dryrun ${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${branch}
 			if test $? -gt 0; then
 			    error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
 			    rm -f ${local_builds}/git$$.lock
