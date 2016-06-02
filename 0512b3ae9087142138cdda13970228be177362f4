@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_1a63a1b2",
+        "filename": "scripts/test-schroot.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-02T21:40:28Z",
+      "side": 1,
+      "message": "What is this?",
+      "range": {
+        "startLine": 171,
+        "startChar": 30,
+        "endLine": 171,
+        "endChar": 51
+      },
+      "revId": "0512b3ae9087142138cdda13970228be177362f4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
