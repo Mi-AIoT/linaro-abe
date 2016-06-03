@@ -529,9 +529,21 @@ collect_data ()
 	. "${topdir}/config/${component}.conf"
     fi
 
+    local default_conf="${topdir}/config/default/${component}.conf"
+    if test -f "$default_conf"; then
+	if grep -qv "^latest=" "$default_conf" \
+		|| ! grep -q "^latest=" "$default_conf"; then
+	    error "$default_conf should have only \"latest=\" and nothing else"
+	    exit 1
+	fi
+
+	notice "Sourcing config: $default_conf"
+	. "$default_conf"
+    fi
+
     local this_extraconfig
     for this_extraconfig in ${extraconfig[${component}]}; do
-	if test -e "${this_extraconfig}"; then
+	if test -f "${this_extraconfig}"; then
 	    notice "Sourcing extra config: ${this_extraconfig}"
 	    . "${this_extraconfig}"
 	else
