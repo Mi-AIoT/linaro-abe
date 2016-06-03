@@ -795,7 +795,12 @@ while test $# -gt 0; do
 	    check_directive $1 extraconfig extraconfig $2
 	    extraconfig_tool="`echo $2 | cut -d '=' -f 1`"
 	    extraconfig_val="`echo $2 | cut -d '=' -f 2`"
-	    extraconfig[${extraconfig_tool}]="${extraconfig_val}"
+	    if [ x"$extraconfig_val" != x"" ]; then
+		extraconfig[${extraconfig_tool}]="${extraconfig[${extraconfig_tool}]} ${extraconfig_val}"
+	    else
+		# Reset extraconfig for this component
+		extraconfig[${extraconfig_tool}]=""
+	    fi
 	    shift
             ;;
 	--extraconfigdir)
@@ -807,7 +812,7 @@ while test $# -gt 0; do
 	    for i in `ls $2 | grep "\.conf\$"`; do
 		extraconfig_tool="$(basename $i .conf)"
 		extraconfig_val="$2/$i"
-		extraconfig[${extraconfig_tool}]="${extraconfig_val}"
+		extraconfig[${extraconfig_tool}]="${extraconfig[${extraconfig_tool}]} ${extraconfig_val}"
 	    done
 	    shift
 	    ;;
