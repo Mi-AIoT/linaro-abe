@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_7a83cdcc",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-03T13:06:42Z",
+      "side": 1,
+      "message": "You can simplify this:\nlocal newref\u003d\"`cd ${srcdir}; git log ....`\"\nNo need to use pushd/popd since you are starting a subshell.",
+      "range": {
+        "startLine": 276,
+        "startChar": 20,
+        "endLine": 276,
+        "endChar": 112
+      },
+      "revId": "bdfa021570e0c11e77988346f78395da28513c19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_5a8889e7",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-03T13:06:42Z",
+      "side": 1,
+      "message": "Error handling to check that newrev is non-empty would be nice.",
+      "range": {
+        "startLine": 277,
+        "startChar": 43,
+        "endLine": 277,
+        "endChar": 49
+      },
+      "revId": "bdfa021570e0c11e77988346f78395da28513c19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
