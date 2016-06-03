@@ -45,6 +45,23 @@
       "revId": "bdfa021570e0c11e77988346f78395da28513c19",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_da4ab9ab",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-03T14:16:20Z",
+      "side": 1,
+      "message": "This looks wrong to me. The manifest should reflect the content of the $component hash. If a value isn\u0027t in the hash, then it didn\u0027t affect the build.",
+      "revId": "bdfa021570e0c11e77988346f78395da28513c19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
