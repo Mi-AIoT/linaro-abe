@@ -282,9 +282,6 @@ manifest()
 	fi
 
 	local revision="`get_component_revision ${component}`"
-	if test x"${component}" = x"gdbserver"; then
-	    local revision="`get_component_revision gdb`"
-	fi
 	if test x"${revision}" != x; then
 	    echo "${component}_revision=${revision}" >> ${outfile}
 	fi

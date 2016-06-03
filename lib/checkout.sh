@@ -144,6 +144,8 @@ checkout()
 
     # gdbserver is already checked out in the GDB source tree.
     if test x"${component}" = x"gdbserver"; then
+	local revision="`get_component_revision gdb`"
+	set_component_revision gdbserver ${revision}
 	return 0
     fi
 
