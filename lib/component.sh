@@ -529,6 +529,11 @@ collect_data ()
 	. "${topdir}/config/${component}.conf"
     fi
 
+    if test -e "${topdir}/config/default/${component}.conf"; then
+	notice "Sourcing config: ${topdir}/config/default/${component}.conf"
+	. "${topdir}/config/default/${component}.conf"
+    fi
+
     local this_extraconfig
     for this_extraconfig in ${extraconfig[${component}]}; do
 	if test -e "${this_extraconfig}"; then
