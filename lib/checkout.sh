@@ -269,8 +269,8 @@ checkout()
 		fi
 	    fi
 
-#	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
-#	    set_component_revision ${component} ${newrev}
+	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
+	    set_component_revision ${component} ${newrev}
 	    ;;
 	*)
 	    error "proper URL required"
