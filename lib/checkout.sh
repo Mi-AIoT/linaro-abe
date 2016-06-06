@@ -142,11 +142,6 @@ checkout()
 
     local component="$1"
 
-    # gdbserver is already checked out in the GDB source tree.
-    if test x"${component}" = x"gdbserver"; then
-	return 0
-    fi
-
     # None of the following should be able to fail with the code as it is
     # written today (and failures are therefore untestable) but propagate
     # errors anyway, in case that situation changes.
@@ -269,8 +264,8 @@ checkout()
 		fi
 	    fi
 
-#	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
-#	    set_component_revision ${component} ${newrev}
+	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
+	    set_component_revision ${component} ${newrev}
 	    ;;
 	*)
 	    error "proper URL required"
