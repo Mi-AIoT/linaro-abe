@@ -142,9 +142,20 @@ checkout()
 
     local component="$1"
 
-    # gdbserver is already checked out in the GDB source tree.
-    if test x"${component}" = x"gdbserver"; then
-	return 0
+    # gdbserver may already be checked out in the GDB source tree.
+    if [ x"${component}" = x"gdbserver" ]; then
+        local gdb_srcdir
+        local gdbserver_srcdir
+        local gdb_revision
+        local gdbserver_revision
+        gdb_srcdir="`get_component_srcdir gdb`" || return 1
+        gdbserver_srcdir="`get_component_srcdir gdbserver`" || return 1
+        gdb_revision="`get_component_revision gdb`" || return 1
+        gdbserver_revision="`get_component_revision gdbserver`" || return 1
+        if [ x"${gdb_srcdir}" = x"${gdbserver_srcdir}" -a -z "$gdbserver_revision" ]; then
+	    set_component_revision ${component} ${newrev}
+            return 0
+        fi
     fi
 
     # None of the following should be able to fail with the code as it is
@@ -269,8 +280,8 @@ checkout()
 		fi
 	    fi
 
-#	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
-#	    set_component_revision ${component} ${newrev}
+	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
+	    set_component_revision ${component} ${newrev}
 	    ;;
 	*)
 	    error "proper URL required"
