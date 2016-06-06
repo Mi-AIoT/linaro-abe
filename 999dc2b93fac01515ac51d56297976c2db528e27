@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_25364604",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-06-06T16:22:52Z",
+      "side": 1,
+      "message": "You shouldn\u0027t need to reset the _srcdir for gdbserver, just the revision.",
+      "revId": "999dc2b93fac01515ac51d56297976c2db528e27",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
