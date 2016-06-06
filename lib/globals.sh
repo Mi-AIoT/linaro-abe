@@ -40,7 +40,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.0
+manifest_version=1.1
 
 # The prefix for installing the toolchain
 prefix=

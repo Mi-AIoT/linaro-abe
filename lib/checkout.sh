@@ -142,11 +142,6 @@ checkout()
 
     local component="$1"
 
-    # gdbserver is already checked out in the GDB source tree.
-    if test x"${component}" = x"gdbserver"; then
-	return 0
-    fi
-
     # None of the following should be able to fail with the code as it is
     # written today (and failures are therefore untestable) but propagate
     # errors anyway, in case that situation changes.
@@ -162,6 +157,23 @@ checkout()
     repo="`get_component_filespec ${component}`" || return 1
     local protocol="`echo ${url} | cut -d ':' -f 1`"    
     local repodir="${url}/${repo}"
+
+    # gdbserver is already checked out in the GDB source tree.
+    if test x"${component}" = x"gdbserver"; then
+        local gdbsrcdir;
+        gdbsrcdir="`get_component_srcdir gdb`" || return 1
+        if [ x"${srcdir}" != x"${gdbsrcdir}/gdb/gdbserver" ]; then
+            error "gdb and gdbserver srcdirs don't match"
+            return 1
+        fi
+	local gdbrevision="`get_component_revision gdb`"
+        if [ x"${gdbrevision}" = x"" ]; then
+            error "no gdb revision found"
+            return 1
+        fi
+	set_component_revision gdbserver ${gdbrevision}
+        return 0
+    fi
 
     git ls-remote ${repodir} > /dev/null 2>&1
     if test $? -ne 0; then
@@ -269,8 +281,8 @@ checkout()
 		fi
 	    fi
 
-#	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
-#	    set_component_revision ${component} ${newrev}
+	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
+	    set_component_revision ${component} ${newrev}
 	    ;;
 	*)
 	    error "proper URL required"
