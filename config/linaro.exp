@@ -33,6 +33,7 @@ if {[info exists env(SYSROOT_UNDER_TEST)]} {
 }
 
 set myname [get_local_hostname]
+set hostname [info hostname]
 
 proc linaro_lab { kind } {
     global tcl_platform myname board_info target_triplet
@@ -108,6 +109,12 @@ case "$target_triplet" in {
     { "aarch64*-*elf*" } {
 	set target_list { "v8model" } 
 	set env(FOUNDATION_MODEL) "/linaro/Foundation_Platformpkg/models/Linux64_GCC-4.7/Foundation_Platform"
+	case "$hostname" in {
+	    { *.moongulch.net *.senecass.com } {
+		set env(FOUNDATION_MODEL) "/work/linaro/foundation_v8pkg/Foundation_v8"
+		set target_list { "aarch64-qemu" }
+	    }
+	}
     }
     { "aarch64-*linux*" } {
 	case "$native$myname" in {
