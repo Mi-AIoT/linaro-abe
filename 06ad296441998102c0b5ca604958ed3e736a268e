@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_2030f455",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-06-07T15:48:11Z",
+      "side": 0,
+      "message": "There is no reason to checkout gdbserver, as it\u0027s sources are a subdirectory of gdb. Checking gdbserver out could create a mismatch of revisions.",
+      "revId": "06ad296441998102c0b5ca604958ed3e736a268e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
