@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "da01753e_e0542c23",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-06-08T03:38:09Z",
+      "side": 1,
+      "message": "GDB and the GDBSERVER should always be built frm the same sources, or you can get remote protocol errors. The revisions are checked in this patch when importing a manifest. Supporting a gdbserver build from different sources would be a future feature enhancement, and not part of this bug fix, which is a relase blocker.",
+      "parentUuid": "da01753e_809f2003",
+      "revId": "51889150340e9a8adbc687ce97a2a23bd600a444",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da01753e_c08808c9",
         "filename": "lib/globals.sh",
         "patchSetId": 1
