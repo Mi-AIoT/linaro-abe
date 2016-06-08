@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_809f2003",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-08T03:01:50Z",
+      "side": 1,
+      "message": "you can only safely do this if gdb and gdbserver are to be built from the same sources, but nothing checks that they are, and they can be different",
+      "revId": "51889150340e9a8adbc687ce97a2a23bd600a444",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_c08808c9",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-08T03:01:50Z",
+      "side": 1,
+      "message": "we need to bump this so that existing 1.0 manifests which have missing _revision fields are rejected",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 1
+      },
+      "revId": "51889150340e9a8adbc687ce97a2a23bd600a444",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_80e8c07d",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-08T03:01:50Z",
+      "side": 1,
+      "message": "why is this here?",
+      "revId": "51889150340e9a8adbc687ce97a2a23bd600a444",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_60eddc8b",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-08T03:01:50Z",
+      "side": 1,
+      "message": "why does this use \"exit 1\" while the error above uses \"build_failure; return 1\"?",
+      "revId": "51889150340e9a8adbc687ce97a2a23bd600a444",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
