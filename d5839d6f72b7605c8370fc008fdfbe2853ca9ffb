@@ -45,6 +45,23 @@
       "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_6b493d8b",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-09T09:13:50Z",
+      "side": 1,
+      "message": "Perhaps consider doing something like this here:\n\nif ! grep -q ^latest\u003d \"${topdir}/config/default/${component}.conf\"; then\n   error \"default/${component}.conf file must define latest\"\nfi",
+      "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
