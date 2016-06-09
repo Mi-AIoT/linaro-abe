@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_8b446175",
+        "filename": "config/gcc5/binutils.conf",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-09T09:11:30Z",
+      "side": 1,
+      "message": "This is a cut \u0026 paste from the original file, but shouldn\u0027t the \u0027/\u0027 be a \u0027~\u0027 ? (or is this equivalent?)",
+      "range": {
+        "startLine": 1,
+        "startChar": 24,
+        "endLine": 1,
+        "endChar": 25
+      },
+      "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_061d0867",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-09T09:11:30Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be done before sourcing ${conf} or ${topdir}/config/${component}.conf ?",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 6
+      },
+      "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
