@@ -26,6 +26,17 @@ AC_CONFIG_SRCDIR([abe.sh])
 dnl AC_CONFIG_HEADERS([config.h])
 dnl AC_CONFIG_MACRO_DIR([macros])
 
+# Print some information about the build machine
+AC_MSG_NOTICE([Running on: $HOSTNAME])
+UNAME="`uname -a`"
+AC_MSG_NOTICE([$UNAME])
+LSBINFO="`lsb_release -a`"
+AC_MSG_NOTICE([$LSBINFO])
+CPUINFO="`cat /proc/cpuinfo`"
+AC_MSG_NOTICE([$CPUINFO])
+MEMINFO="`cat /proc/meminfo`"
+AC_MSG_NOTICE([$MEMINFO])
+
 dnl --------------------------------------------------------
 dnl Figure out development tool stuff
 dnl --------------------------------------------------------
@@ -479,17 +490,6 @@ AC_SUBST(NEWWORKDIR)
 #fi
 
 AC_OUTPUT(host.conf)
-
-# Print some information about the build machine
-AC_MSG_NOTICE([Running on: $HOSTNAME])
-UNAME="`uname -a`"
-AC_MSG_NOTICE([$UNAME])
-LSBINFO="`lsb_release -a`"
-AC_MSG_NOTICE([$LSBINFO])
-CPUINFO="`cat /proc/cpuinfo`"
-AC_MSG_NOTICE([$CPUINFO])
-MEMINFO="`cat /proc/meminfo`"
-AC_MSG_NOTICE([$MEMINFO])
 
 if test x"${missing}" != x; then
     AC_MSG_ERROR([You need to install these packages: ${missing}])
