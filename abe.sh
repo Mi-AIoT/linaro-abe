@@ -715,7 +715,7 @@ do_dump=
 do_checkout=
 do_makecheck=
 do_excludecheck=
-do_build=
+do_build=all
 do_build_stage=stage2
 
 declare -A extraconfig
