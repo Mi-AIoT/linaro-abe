@@ -715,7 +715,7 @@ do_dump=
 do_checkout=
 do_makecheck=
 do_excludecheck=
-do_build=
+do_build=all
 do_build_stage=stage2
 
 declare -A extraconfig
@@ -1239,6 +1239,7 @@ if test ! -z ${do_checkout}; then
 	    error "--checkout ${url} failed."
 	    build_failure
 	fi
+	notice "Done checking out files."
     else
 	infrastructure="`grep ^depends ${topdir}/config/infrastructure.conf | tr -d '\"' | sed -e 's:^depends=::'`"
 	builds="${infrastructure} binutils gcc gdb libc"
@@ -1248,6 +1249,7 @@ if test ! -z ${do_checkout}; then
 	    build_failure
 	fi
     fi
+    exit 0
 fi
 
 if test ! -z ${do_build}; then
