@@ -14,7 +14,10 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-# 
+#
+
+# Force LSB to use the older version of the compatability libraries.
+export LSBCC_LSBVERSION=4.1
 
 # These store all the data used for this test run that can be overwritten by
 # command line options.
@@ -148,6 +151,15 @@ import_manifest()
 
     manifest=$1
     if test -f ${manifest} ; then
+	if test x"`grep "^gdb_revision" ${manifest} | cut -d '=' -f 2`" != x"`grep "^gdbserver_revision" ${manifest} | cut -d '=' -f 2`"; then
+	   error "GDB and GDBSERVER have different revisions! Do you want to continue ?
+ Hit Y or N"
+	   read -t 10 ans
+	   if test x"${ans}" != x"Y" -a x"${ans}" != x"y"; then
+	       exit 1
+	   fi
+	fi
+
 	local components="`grep "^# Component data for " ${manifest} | cut -d ' ' -f 5`"
 
 	clibrary="`grep "^clibrary=" ${manifest} | cut -d '=' -f 2`"
@@ -191,12 +203,11 @@ import_manifest()
 		gdb|binutils)
 		    local dir="`echo ${dir} | sed -e 's:^.*\.git:binutils-gdb.git:'`"
 		    local srcdir=${local_snapshots}/${dir}
-		    local builddir="${local_builds}/${host}/${target}/${dir}"
 		    ;;
 		gdbserver)
 		    local dir="`echo ${dir} | sed -e 's:^.*\.git:binutils-gdb.git:'`"
-		    local srcdir=${local_snapshots}/${dir}/gdb/gdbserver
- 		    local builddir="${local_builds}/${host}/${target}/${dir}-gdbserver"
+		    local srcdir="${local_snapshots}/${dir}/gdb/gdbserver"
+		    local builddir="${builddir}/gdb/gdbserver"
 		    ;;
 		*glibc)
 		    # Glibc builds will fail if there is an @ in the path. This is
