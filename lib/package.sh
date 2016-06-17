@@ -253,8 +253,10 @@ manifest()
 	local component="$i"
 	# ABE build data goes in the documentation sxection
 	if test x"${component}" = x"abe"; then
-	    echo "${component}_url=`get_component_url ${component}`" > ${tmpfile}
+	    echo "# Invoked as: abe.sh ${command_line_arguments}" > ${tmpfile}
+	    echo "${component}_url=`get_component_url ${component}`" >> ${tmpfile}
 	    echo "${component}_branch=branch=`get_component_branch ${component}`" >> ${tmpfile}
+	    local revision="`get_component_revision ${component}`"
 	    echo "${component}_revision=`get_component_revision ${component}`" >> ${tmpfile}
 	    echo "${component}_filespec=`get_component_filespec ${component}`" >> ${tmpfile}
 	    local configure="`get_component_configure ${component} | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g"`"
@@ -360,7 +362,7 @@ EOF
 	rm "${tmpfile}"
     fi
 
-    for i in gcc binutils ${clibrary} abe; do
+    for i in gcc binutils ${clibrary} gdb abe; do
 	if test "`component_is_tar ${i}`" = no; then
 	    echo "--------------------- $i ----------------------" >> ${outfile}
 	    local srcdir="`get_component_srcdir $i`"

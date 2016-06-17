@@ -1073,8 +1073,12 @@ while test $# -gt 0; do
 		    gm*|gmp)
 			gmp_version="${value}"
 			;;
-		    gd*|gdb)
+		    gdb)
 			gdb_version="${value}"
+			gdbserver_version="${value}"
+			;;
+		    gdbs*|gdbserver)
+			gdbserver_version="${value}"
 			;;
 		    mpf*|mpfr)
 			mpfr_version="${value}"

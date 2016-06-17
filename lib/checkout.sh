@@ -142,9 +142,16 @@ checkout()
 
     local component="$1"
 
-    # gdbserver is already checked out in the GDB source tree.
+    # gdbserver is usually already checked out in the GDB source tree. While gdb
+    # and gdbserver should be built from the same revision of the source code to
+    # avoid breaking the remote protocol, it's possible some developer *might*
+    # want to build these with differing revisions.
     if test x"${component}" = x"gdbserver"; then
-	return 0
+	if test x"`get_component_revision gdb`" = x"`get_component_revision gdbserver`"; then
+	    return 0
+	else
+	    warning "Building gdb and gdbserver with different revisions is a bad idea!"
+	fi
     fi
 
     # None of the following should be able to fail with the code as it is
@@ -269,8 +276,10 @@ checkout()
 		fi
 	    fi
 
-#	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
-#	    set_component_revision ${component} ${newrev}
+	    if test x"`get_component_revision ${component}`" = x; then
+		local newrev="`cd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1`"
+		set_component_revision ${component} ${newrev}
+	    fi
 	    ;;
 	*)
 	    error "proper URL required"

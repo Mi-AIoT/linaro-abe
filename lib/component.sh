@@ -484,7 +484,7 @@ collect_data ()
     local component="`echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::'`"
 
     if test x"${manifest}" != x; then
-	notice "Reading data from Manifest file."
+	notice "Using data for ${component} from Manifest file ${manifest}."
 	return 0
     fi
 
@@ -597,8 +597,17 @@ collect_data ()
 	    ;;
 	gdbserver)
 	    local dir="`echo ${dir} | sed -e 's:^.*\.git:binutils-gdb.git:'`"
-	    local srcdir=${srcdir}/gdb/gdbserver
-	    local builddir="${builddir}-gdbserver"
+	    local srcdir="${local_snapshots}/${dir}/gdb/gdbserver"
+	    local builddir="${builddir}/gdb/gdbserver"
+	    # gdb and gdbserver should always be built from the same revision
+	    # of the sources, but it's possible some developer *might* want
+	    # to build these with differing revisions.
+	    if test x"${revision}" = x; then
+		revision="`get_component_revision gdb`"
+	    fi
+	    if test x"${branch}" = x; then
+		branch="`get_component_branch gdb`"
+	    fi
 	    ;;
 	eglibc)
             local srcdir=${srcdir}/libc
