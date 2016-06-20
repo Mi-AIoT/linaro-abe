@@ -62,6 +62,48 @@
       "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_6ea146a9",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-20T08:24:17Z",
+      "side": 1,
+      "message": "I see your point, but it is more robust to source from config/default just before sourcing from $extraconfig.\n\nIf the code in config/${component}.conf depends on $latest (or anything else that config/default/*.conf define, then it is going to cause unexpected behavior when extraconfig is used.  Sourcing config/default/*.conf in its current place is more likely to expose problems early.",
+      "parentUuid": "da01753e_061d0867",
+      "range": {
+        "startLine": 532,
+        "startChar": 0,
+        "endLine": 535,
+        "endChar": 6
+      },
+      "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_4ea602c3",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-20T08:24:17Z",
+      "side": 1,
+      "message": "I would prefer this as a \"warning\", but I\u0027ll make it an \"error\" as you suggest.  We can change to \"warning\" when we have a case for config/default/${component}.conf to not define \"latest\".",
+      "parentUuid": "da01753e_6b493d8b",
+      "revId": "d5839d6f72b7605c8370fc008fdfbe2853ca9ffb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
