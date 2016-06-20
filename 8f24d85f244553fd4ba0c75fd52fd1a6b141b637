@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_6e602636",
+        "filename": "lib/component.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-20T12:09:06Z",
+      "side": 1,
+      "message": "perhaps \"test -f\"?",
+      "revId": "8f24d85f244553fd4ba0c75fd52fd1a6b141b637",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_0e74fafb",
+        "filename": "lib/component.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-20T12:09:06Z",
+      "side": 1,
+      "message": "\"exit 1\" after error",
+      "revId": "8f24d85f244553fd4ba0c75fd52fd1a6b141b637",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
