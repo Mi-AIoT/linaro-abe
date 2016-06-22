@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_44a0a3f4",
+        "filename": "config/gcc6/gmp.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-22T12:02:18Z",
+      "side": 1,
+      "message": "I think this should be a version specifier (just latest\u003dgmp-6.1.0.tar.xz), not a full URL.\n\nconfig/gcc5/gmp.conf doesn\u0027t have the full URL here, just the leaf name.",
+      "revId": "0701d6fa0c65ef267b9390f17cfd88b619a83f93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_a4a50f06",
+        "filename": "config/gcc6/linux.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-22T12:02:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "0701d6fa0c65ef267b9390f17cfd88b619a83f93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_84aa8bd2",
+        "filename": "config/gcc6/mpfr.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-22T12:02:18Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "0701d6fa0c65ef267b9390f17cfd88b619a83f93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
