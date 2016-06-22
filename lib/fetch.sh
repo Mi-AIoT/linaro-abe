@@ -219,9 +219,8 @@ fetch_http()
 	overwrite_or_timestamp="-O ${local_snapshots}/${getfile}"
         notice "Downloading ${getfile} to ${local_snapshots} unconditionally."
     else
-	# We only every download if the version on the server is newer than
-	# the local version.
-	overwrite_or_timestamp="-N"
+	# We only every download if the local version is absent or incomplete.
+	overwrite_or_timestamp="-c"
         notice "Downloading ${getfile} to ${local_snapshots} if version on server is newer than local version."
     fi
 
