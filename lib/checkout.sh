@@ -163,7 +163,7 @@ checkout()
     local protocol="`echo ${url} | cut -d ':' -f 1`"    
     local repodir="${url}/${repo}"
 
-    git ls-remote ${repodir} > /dev/null 2>&1
+    git ls-remote --exit-code ${repodir} > /dev/null 2>&1
     if test $? -ne 0; then
 	error "proper URL required"
 	return 1
@@ -174,6 +174,7 @@ checkout()
 #	    local revision= `echo ${gcc_version} | grep -o "[~@][0-9a-z]*\$" | tr -d '~@'`"
 	    # If the master branch doesn't exist, clone it. If it exists,
 	    # update the sources.
+	    local topgit="`echo ${srcdir} | sed -e 's:\.git.*$:.git:'`"
 	    if test ! -d ${local_snapshots}/${repo}; then
 		local git_reference_opt=
 		if test -d "${git_reference_dir}/${repo}"; then
@@ -185,6 +186,20 @@ checkout()
 		    error "Failed to clone master branch from ${url} to ${srcdir}"
 		    rm -f ${local_builds}/git$$.lock
 		    return 1
+		fi
+		# If there are submodules, initialize them
+		if test -e ${topgit}/.gitmodules; then
+		    dryrun "cd ${topgit} && git submodule init"
+		    if test $? -gt 0; then
+			error "Couldn't update submodules in ${srcdir}!"
+		    fi
+		fi
+	    fi
+	    # If there are submodules, update them before any other operations
+	    if test -e ${topgit}/.gitmodules; then
+		dryrun "cd ${srcdir} && git submodule update"
+		if test $? -gt 0; then
+		    error "Couldn't update submodules in ${srcdir}!"
 		fi
 	    fi
 
