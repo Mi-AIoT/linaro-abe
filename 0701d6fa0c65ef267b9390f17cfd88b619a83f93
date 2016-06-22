@@ -37,6 +37,24 @@
     },
     {
       "key": {
+        "uuid": "da01753e_a47cef73",
+        "filename": "config/gcc6/gmp.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-06-22T12:19:22Z",
+      "side": 1,
+      "message": "the only reason I can see is a potentially confusing redundancy with config/sources.conf.\n\nIt looks like it should work fine either way",
+      "parentUuid": "da01753e_c4abf3d4",
+      "revId": "0701d6fa0c65ef267b9390f17cfd88b619a83f93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da01753e_a4a50f06",
         "filename": "config/gcc6/linux.conf",
         "patchSetId": 4
