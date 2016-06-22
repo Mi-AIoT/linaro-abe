@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "da01753e_6405e7c1",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1086,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-22T15:33:47Z",
+      "side": 1,
+      "message": "This will produce unexpected result for options\ngdbserver\u003dFOO gdb\u003dBAR\nsince gdb\u003dBAR will also set gdbserver to BAR.\n\nBut rather than fixing the options, I think we should just ban custom versions of gdbserver, and error-out on gdbserver\u003d option.\n\nSimilarly, IMO, in manifests we should assert that gdbserver revision and branch match GDB\u0027s.",
+      "range": {
+        "startLine": 1083,
+        "startChar": 0,
+        "endLine": 1086,
+        "endChar": 31
+      },
+      "revId": "b5e8be1b63e5a987115601b95e19fdf76bb24b59",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da01753e_84cf2bb0",
         "filename": "lib/checkout.sh",
         "patchSetId": 3
