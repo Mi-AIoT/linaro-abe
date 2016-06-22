@@ -176,7 +176,7 @@ checkout()
         return 0
     fi
 
-    git ls-remote ${repodir} > /dev/null 2>&1
+    git ls-remote --exit-code ${repodir} > /dev/null 2>&1
     if test $? -ne 0; then
 	error "proper URL required"
 	return 1
@@ -187,6 +187,7 @@ checkout()
 #	    local revision= `echo ${gcc_version} | grep -o "[~@][0-9a-z]*\$" | tr -d '~@'`"
 	    # If the master branch doesn't exist, clone it. If it exists,
 	    # update the sources.
+	    local topgit="`echo ${srcdir} | sed -e 's:\.git.*$:.git:'`"
 	    if test ! -d ${local_snapshots}/${repo}; then
 		local git_reference_opt=
 		if test -d "${git_reference_dir}/${repo}"; then
@@ -207,7 +208,6 @@ checkout()
 		    return 1
 		fi
 	    fi
-
 	    if test ! -d ${srcdir}; then
 		# By definition a git commit resides on a branch.  Therefore specifying a
 		# branch AND a commit is redundant and potentially contradictory.  For this
@@ -219,6 +219,16 @@ checkout()
 			error "Revision ${revision} likely doesn't exist in git repo ${repo}!"
 			rm -f ${local_builds}/git$$.lock
 			return 1
+		    fi
+		    if test -e ${srcdir}/.gitmodules; then
+			dryrun "(cd ${srcdir} && git submodule init)"
+			if test $? -gt 0; then
+			    error "Couldn't init submodules in ${srcdir}!"
+			fi
+			dryrun "(cd ${srcdir} && git submodule update)"
+			if test $? -gt 0; then
+			    error "Couldn't update submodules in ${srcdir}!"
+			fi
 		    fi
 		    # git checkout of a commit leaves the head in detached state so we need to
 		    # give the current checkout a name.  Use -B so that it's only created if
@@ -235,6 +245,16 @@ checkout()
 			error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
 			rm -f ${local_builds}/git$$.lock
 			return 1
+		    fi
+		fi
+		if test -e ${srcdir}/.gitmodules; then
+		    dryrun "(cd ${srcdir} && git submodule init)"
+		    if test $? -gt 0; then
+			error "Couldn't init submodules in ${srcdir}!"
+		    fi
+		    dryrun "(cd ${srcdir} && git submodule update)"
+		    if test $? -gt 0; then
+			error "Couldn't update submodules in ${srcdir}!"
 		    fi
 		fi
 		new_srcdir=true
@@ -262,6 +282,12 @@ checkout()
 		    # directory)
 		    dryrun "(cd ${srcdir} && git stash --all)"
 		    dryrun "(cd ${srcdir} && git reset --hard)"
+		    if test -e ${srcdir}/.gitmodules; then
+			dryrun "(cd ${srcdir} && git submodule update)"
+			if test $? -gt 0; then
+			    error "Couldn't update submodules in ${srcdir}!"
+			fi
+		    fi
 		fi
 		if test x"${revision}" != x""; then
 		    # No need to pull.  A commit is a single moment in time
