@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_84cf2bb0",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-22T13:27:31Z",
+      "side": 1,
+      "message": "IIUC, this condition will always be false since gdbserver didn\u0027t have its set_component_revision call yet.\n\nAm I missing something?",
+      "range": {
+        "startLine": 150,
+        "startChar": 46,
+        "endLine": 150,
+        "endChar": 78
+      },
+      "revId": "b5e8be1b63e5a987115601b95e19fdf76bb24b59",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_e4c39788",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-22T13:27:31Z",
+      "side": 1,
+      "message": "The purpose of this comment is not clear in view of what the code following it does.  The comment implies at least partial support for gdbserver having its own revision/branch freedom, but the code forces GDB revision/branch for gdbserver.",
+      "range": {
+        "startLine": 614,
+        "startChar": 5,
+        "endLine": 616,
+        "endChar": 47
+      },
+      "revId": "b5e8be1b63e5a987115601b95e19fdf76bb24b59",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_04bb3b0f",
+        "filename": "lib/globals.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-22T13:27:31Z",
+      "side": 1,
+      "message": "This is an unrelated change.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 27
+      },
+      "revId": "b5e8be1b63e5a987115601b95e19fdf76bb24b59",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_24be3f00",
+        "filename": "lib/package.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-06-22T13:27:31Z",
+      "side": 1,
+      "message": "Is this left-over debug code?  Or is this used somewhere?",
+      "range": {
+        "startLine": 259,
+        "startChar": 5,
+        "endLine": 259,
+        "endChar": 59
+      },
+      "revId": "b5e8be1b63e5a987115601b95e19fdf76bb24b59",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
