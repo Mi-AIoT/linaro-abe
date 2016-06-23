@@ -27,7 +27,7 @@ usage()
              [--dump] [--enable {bootstrap|gerrit}]
              [--excludecheck {all|glibc|gcc|gdb|binutils}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
-             [--fetch <url>] [--force] [--help] [--host <host_triple>]
+             [--force] [--help] [--host <host_triple>]
              [--infrastructure] [--interactive]
              [--manifest <manifest_file>]
              [--space <space needed>]
@@ -200,10 +200,6 @@ OPTIONS
 
   --extraconfigdir <dir>
                 Use a directory of additional configuration files.
-
-  --fetch <url>
-
-  		Fetch the specified URL into the snapshots directory.
 
   --force	Force download packages and force rebuild packages.
 
@@ -671,8 +667,6 @@ dump()
     echo "Binutils is:       ${binutils}"
     echo "Config file is:    ${configfile}"
     echo "Snapshot URL is:   ${local_snapshots}"
-    echo "DB User name is:   ${dbuser}"
-    echo "DB Password is:    ${dbpasswd}"
 
     echo "Build # cpus is:   ${cpus}"
     echo "Kernel:            ${kernel}"
@@ -838,28 +832,8 @@ while test $# -gt 0; do
 	    prefix=$2
 	    shift
 	    ;;
-	--sy*)			# sysroot
-            set_sysroot ${url}
-	    shift
-            ;;
 	--ccache|-cc*)
             use_ccache=yes
-            ;;
-	--clean|-cl*)
-            clean_build ${url}
-	    shift
-            ;;
-	--config)
-            set_config ${url}
-	    shift
-            ;;
-	--db-user)
-            set_dbuser ${url}
-	    shift
-            ;;
-	--db-passwd)
-            set_dbpasswd ${url}
-	    shift
             ;;
 	--dry*|-dry*)
             dryrun=yes
@@ -869,18 +843,11 @@ while test $# -gt 0; do
             #dump ${url}
 	    #shift
             ;;
-	--fetch|-d)
-            fetch ${url}
-	    shift
-            ;;
 	--force|-f)
 	    force=yes
 	    ;;
 	--interactive|-i)
 	    interactive=yes
-	    ;;
-	--nodepends|-n)		# nodepends
-	    nodepends=yes
 	    ;;
 	--parallel|-par*)			# parallel
 	    parallel=yes
@@ -1002,17 +969,11 @@ while test $# -gt 0; do
 		    gerrit_trigger="${value}"
 		    # Initialize settings for gerrit
 		    ;;
-		alltests)
-		    alltests="${value}"
-		    ;;
 		install)
 		    install="${value}"
 		    ;;
 		building)
 		    building="${value}"
-		    ;;
-		parallel)
-		    parallel="$value"
 		    ;;
 		schroot_test)
 		    schroot_test="${value}"
@@ -1020,7 +981,6 @@ while test $# -gt 0; do
 		update)
 		    supdate="${value}"
 		    ;;
-
 		make_docs)
 		    make_docs="${value}"
 		    ;;
@@ -1031,19 +991,6 @@ while test $# -gt 0; do
 	    esac
 	    shift
 	    ;;
-	--merge*)
-	    check_directive $1 merge merge $2
-	    merge_branch $2
-	    shift
-	    ;;
-	--merge-diff*)
-	    check_directive $1 "merge-diff" "merge-diff" $2
-	    merge_diff $2
-	    shift
-	    ;;
-	--clobber)
-            clobber=yes
-            ;;
 	--help|-h|--h)
 	    help 
 	    exit 0
