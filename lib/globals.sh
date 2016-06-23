@@ -86,7 +86,6 @@ if test x"${ABE_DBPASSWD}" != x; then
     dbpasswd="${ABE_DBPASSWD}"
 fi
 
-clobber=no
 force=no
 interactive=no
 nodepends=no

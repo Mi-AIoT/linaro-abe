@@ -38,23 +38,6 @@ set -o pipefail
 # All the set* functions set global variables used by the other functions.
 # This way there can be some error recovery and handing.
 #
-set_config()
-{
-    echo "Set config file to $1..."
-    configfile="$1"
-}
-
-set_dbuser()
-{
-    echo "Setting MySQL user to $1..."
-    dbuser="$1"
-}
-
-set_dbpasswd()
-{
-    echo "Setting MySQL password to $1..."
-    dbpasswd="$1"
-}
 
 # if --dryrun is passed to abe.sh, then commands are echoed instead of
 # of executed.

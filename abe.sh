@@ -845,22 +845,6 @@ while test $# -gt 0; do
 	--ccache|-cc*)
             use_ccache=yes
             ;;
-	--clean|-cl*)
-            clean_build ${url}
-	    shift
-            ;;
-	--config)
-            set_config ${url}
-	    shift
-            ;;
-	--db-user)
-            set_dbuser ${url}
-	    shift
-            ;;
-	--db-passwd)
-            set_dbpasswd ${url}
-	    shift
-            ;;
 	--dry*|-dry*)
             dryrun=yes
             ;;
@@ -1002,17 +986,11 @@ while test $# -gt 0; do
 		    gerrit_trigger="${value}"
 		    # Initialize settings for gerrit
 		    ;;
-		alltests)
-		    alltests="${value}"
-		    ;;
 		install)
 		    install="${value}"
 		    ;;
 		building)
 		    building="${value}"
-		    ;;
-		parallel)
-		    parallel="$value"
 		    ;;
 		schroot_test)
 		    schroot_test="${value}"
@@ -1020,7 +998,6 @@ while test $# -gt 0; do
 		update)
 		    supdate="${value}"
 		    ;;
-
 		make_docs)
 		    make_docs="${value}"
 		    ;;
@@ -1031,19 +1008,6 @@ while test $# -gt 0; do
 	    esac
 	    shift
 	    ;;
-	--merge*)
-	    check_directive $1 merge merge $2
-	    merge_branch $2
-	    shift
-	    ;;
-	--merge-diff*)
-	    check_directive $1 "merge-diff" "merge-diff" $2
-	    merge_diff $2
-	    shift
-	    ;;
-	--clobber)
-            clobber=yes
-            ;;
 	--help|-h|--h)
 	    help 
 	    exit 0
