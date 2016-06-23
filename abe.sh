@@ -1066,25 +1066,25 @@ while test $# -gt 0; do
 		name="`echo $1 | cut -d '=' -f 1`"
 		value="`echo $1 | cut -d '=' -f 2`"
 		case ${name} in
-		    b*|binutils)
+		    binutils)
 			binutils_version="`echo ${value}`"
 			;;
 		    dejagnu)
 			dejagnu_version="${value}"
 			;;
-		    gc*|gcc)
+		    gcc)
 			gcc_version="${value}"
 			;;
-		    gm*|gmp)
+		    gmp)
 			gmp_version="${value}"
 			;;
-		    gd*|gdb)
+		    gdb)
 			gdb_version="${value}"
 			;;
-		    mpf*|mpfr)
+		    mpfr)
 			mpfr_version="${value}"
 			;;
-                    lin*|linux)
+                    linux)
 			linux_version="${value}"
 			;;
 		    mpc)
