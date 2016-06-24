@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_bf57d901",
+        "filename": "lib/component.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T13:02:51Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "range": {
+        "startLine": 19,
+        "startChar": 11,
+        "endLine": 19,
+        "endChar": 13
+      },
+      "revId": "df71bae0b4ac5dccd1b8d6cf1da96b17b0092540",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_1f48a55a",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T13:02:51Z",
+      "side": 1,
+      "message": "This should not be here.",
+      "range": {
+        "startLine": 326,
+        "startChar": 3,
+        "endLine": 326,
+        "endChar": 8
+      },
+      "revId": "df71bae0b4ac5dccd1b8d6cf1da96b17b0092540",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
