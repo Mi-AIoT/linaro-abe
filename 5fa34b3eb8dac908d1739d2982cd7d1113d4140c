@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_3f364a04",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "You need to remove this.",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 28
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_9f3bf6ea",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "You need to remove this",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 57
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_7f40d256",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "You can also remove the set_config function from lib/common.sh",
+      "range": {
+        "startLine": 853,
+        "startChar": 12,
+        "endLine": 853,
+        "endChar": 22
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_df245ec8",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "You can also remove the set_dbuser fonction from lib/common.sh",
+      "range": {
+        "startLine": 857,
+        "startChar": 12,
+        "endLine": 857,
+        "endChar": 22
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_ff2b2292",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "You can also remove the seT_dbpasswd function from lib/common.sh\n\nWhat about the --with-dbuser/--withdbpasswd configure options? Are they useful?",
+      "range": {
+        "startLine": 861,
+        "startChar": 12,
+        "endLine": 861,
+        "endChar": 24
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_bf219ab6",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "Why do you remove this? It seems that jenkins.sh is using it.",
+      "range": {
+        "startLine": 882,
+        "startChar": 1,
+        "endLine": 883,
+        "endChar": 18
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_1f2f06a3",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1045,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-24T10:21:23Z",
+      "side": 0,
+      "message": "You can remove the clobber\u003dno in lib/global.sh.",
+      "range": {
+        "startLine": 1045,
+        "startChar": 0,
+        "endLine": 1045,
+        "endChar": 23
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
