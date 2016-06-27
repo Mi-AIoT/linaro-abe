@@ -969,11 +969,9 @@ while test $# -gt 0; do
 	    ;;
        --time*|-time*)
 	    check_directive $1 timeout "time" $2
-	    if test $2 -lt 11; then
-		wget_timeout=$2
-	    else
-		# FIXME: Range check for non-numerical values.
-		wget_timeout=10
+	    tmptime="`echo $2 | grep -o "[0-9]*"`"
+	    if test x"${tmptime}" != x; then
+		wget_timeout=${tmptime}
 	    fi
             shift
             ;;
