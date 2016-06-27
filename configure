@@ -3652,7 +3652,10 @@ if test ${deb} -ge 1; then
     if test x"${BUILD_ARCH}" != xaarch64; then
        packages="${packages} libncurses5-dev libpython2.7-dev"
        if test x"${BUILD_ARCH}" = x"x86_64"; then
-           packages="${packages} gcc-multilib g++-multilib"
+	   version="`grep VERSION_ID /etc/os-release | tr -d '"' | cut -d '=' -f 2 | cut -d '.' -f 1`"
+	   if test "${version}" -lt 16; then
+             packages="${packages} gcc-multilib g++-multilib"
+           fi
        fi
     fi
     for i in ${packages}; do
