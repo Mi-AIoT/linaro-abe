@@ -303,6 +303,14 @@ if test x"${debug}" = x"true"; then
     export CONFIG_SHELL="/bin/bash -x"
 fi
 
+# Get latest QEMU
+wget http://people.linaro.org/~peter.maydell/qemu-wip.tgz
+tar xf qemu-wip.tgz
+export PATH="`pwd`/qemu-wip:$PATH"
+for i in aarch64 arm armeb; do
+    qemu-$i --version
+done
+
 # Print some information about the build machine
 echo Running on `hostname`
 uname -a
