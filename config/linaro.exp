@@ -41,6 +41,9 @@ proc tcwg_local { } {
     set board_info(unix,gcc,timeout) 600
     # Execution timeout 3min.
     set board_info(unix,timeout) 180
+    # Unfortunatelly, current DejaGNU can't reliably kill timed-out
+    # processes, so wrap them in timeout.
+    set board_info(unix,exec_shell) "timeout --preserve-status -k 30s 210s"
 
     return "unix"
 }
