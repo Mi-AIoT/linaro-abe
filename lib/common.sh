@@ -256,12 +256,11 @@ create_release_tag()
     local version=
     if test x"${component}" = x"gcc"; then
 	local version="`cat ${srcdir}/gcc/BASE-VER`"
-    else
-	if test x"${component}" = x"glibc"; then
-	    local version="`grep VERSION ${srcdir}/version.h | cut -d ' ' -f 3 | tr -d '\"'`"
-	fi
+    elif test x"${component}" = x"glibc" -o x"${component}" = x"eglibc"; then
+	local version="`grep VERSION ${srcdir}/version.h | cut -d ' ' -f 3 | tr -d '\"'`"
     fi
-    local rtag="${component}-linaro-${version}"
+    # newlib doesn't have a version.  Only expand ${version} if it exists.
+    local rtag="${component}-linaro${version:+-${version}}"
     if test x"${release}" = x; then
 	local date="`date +%Y%m%d`"
 	if test x"${component}" = x"glibc"; then
