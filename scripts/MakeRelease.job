@@ -13,9 +13,10 @@ check=""
 ref="snapshots-ref"
 nocheck="no"
 fileserver="148.251.136.42"
+extra=
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
 
-OPTS="`getopt -o r:t:f:d:bs:w:nh -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,help`"
+OPTS="`getopt -o e:r:t:f:d:bs:w:nh -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,extra:,help`"
 while test $# -gt 0; do
     echo 1 = "$1"
     case $1 in
@@ -25,6 +26,7 @@ while test $# -gt 0; do
 	-t|--target) target=$2 ;;
 	-d|--date) date=$2 ;;
 	-r|--ref) ref=$2 ;;
+	-e|--extra) extra=$2 ;;
         -f|--fileserver) fileserver=$2 ;;
 	-n|--nocheck) nocheck=yes ;;
         -h|--help) usage ;;
@@ -59,6 +61,10 @@ fi
 
 # By default, always update all sources
 update=""
+
+if test x"${extra}" != x; then
+    extra="--extraconfig ${extra}"
+fi
 
 if test x"${runtests}" = xtrue; then
     chroot="--enable-schroot-test"
@@ -107,7 +113,7 @@ gcc=${gcc_src:+gcc=${gcc_src}}
 
 # Build a toolchain, run the tests, and the create a source release as a tarball
 if test x"${tarsrc}" = x"yes"; then
-    $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} \
+    $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} ${extra} \
 	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc}
 fi
 
@@ -115,14 +121,14 @@ fi
 if test x"${tarbin}" = x"yes"; then
     # Canadian cross builds require a Linux hosted cross compiler first
     if test x"${canadian}" = x"true"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc}
+	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc} ${extra}
 	host="--host i686-w64-mingw32"
 	rm -fr ${local_builds}/${host}/${target}/
 #	update="--disable update"
     else
 	host=""
     fi
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc}
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc} ${extra}
 fi
 
 # force a failure if abe has build problems.
