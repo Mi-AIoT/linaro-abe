@@ -14,6 +14,7 @@ ref="snapshots-ref"
 nocheck="no"
 fileserver="148.251.136.42"
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
+logfile=${user_workspace}/MakeRelease-${BUILD_NUMBER}.log
 
 OPTS="`getopt -o r:t:f:d:bs:w:nh -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,help`"
 while test $# -gt 0; do
@@ -108,22 +109,24 @@ gcc=${gcc_src:+gcc=${gcc_src}}
 # Build a toolchain, run the tests, and the create a source release as a tarball
 if test x"${tarsrc}" = x"yes"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} \
-	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc}
+	--tarsrc ${check} ${gcc} ${binutils} ${platform} -build all ${libc} > ${logfile}
 fi
 
 # Build a binary release tarball, then run the tests on the installed binaries
 if test x"${tarbin}" = x"yes"; then
     # Canadian cross builds require a Linux hosted cross compiler first
     if test x"${canadian}" = x"true"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc}
+	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${gcc} ${binutils} ${platform} --build all ${libc} > ${logfile}
 	host="--host i686-w64-mingw32"
 	rm -fr ${local_builds}/${host}/${target}/
 #	update="--disable update"
     else
 	host=""
     fi
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc}
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${gcc} ${binutils} ${platform} ${host} --build all ${libc} > ${logfile}
 fi
+
+echo "Compressing log file..."
 
 # force a failure if abe has build problems.
 if test $? -gt 0; then
@@ -137,7 +140,14 @@ fi
 
 # Copy the source build test results and tarballs to the fileserver
 bases="/work/abe/baselines/${release}/${target}"
-snaps="/home/abe/var/snapshots/"
+naps="/home/abe/var/snapshots/"
+
+# Copy the build log to the fileserver
+if test -e ${logfile}; then
+    xv ${logfile}
+    scp ${logfile}.xz ${fileserver}:${bases}/
+fi
+
 if test x"${tarsrc}" = x"yes"; then
     manifest="`find ${user_workspace} -name \*manifest.txt`"
     scp ${manifest} ${fileserver}:${bases}/
