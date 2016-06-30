@@ -195,7 +195,7 @@ binary_sysroot()
 {
 #    trace "$*"
 
-    local rtag="`create_release_tag glibc`"
+    local rtag="`create_release_tag ${clibrary}`"
     local tag="sysroot-${rtag}-${target}"
 
     local destdir="${local_builds}/tmp.$$/${tag}"
