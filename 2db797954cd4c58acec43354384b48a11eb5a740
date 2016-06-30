@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_656320b2",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-30T15:10:39Z",
+      "side": 1,
+      "message": "Why not just use ${host} ?",
+      "range": {
+        "startLine": 238,
+        "startChar": 56,
+        "endLine": 238,
+        "endChar": 66
+      },
+      "revId": "2db797954cd4c58acec43354384b48a11eb5a740",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
