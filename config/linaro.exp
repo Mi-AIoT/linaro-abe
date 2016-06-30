@@ -64,8 +64,8 @@ proc linaro_lab { kind } {
 		set qemu_arch "arm"
 	    }
 	}
-	set board_info(unix,exec_shell) "setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
-	return "unix"
+	set board_info(tcwg-local,exec_shell) "setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
+	return "tcwg-local"
     }
 
     return "$user-$lab-$kind"
@@ -78,7 +78,7 @@ case "$target_triplet" in {
 		set target_list { "tk1" }
 	    }
 	    { native* } {
-		set target_list { unix }
+		set target_list { "tcwg-local" }
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
@@ -121,7 +121,7 @@ case "$target_triplet" in {
 		set target_list { "tx1" }
 	    }
 	    { native* } {
-		set target_list { unix }
+		set target_list { "tcwg-local" }
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
@@ -137,14 +137,14 @@ case "$target_triplet" in {
     { "x86_64-*linux-gnu" "i686-*linux-gnu" } {
 	case "$native$myname" in {
 	    { native* } {
-		set target_list { unix }
+		set target_list { "tcwg-local" }
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
 		     && $env(SCHROOT_TEST) == "yes" } {
 		    set target_list [linaro_lab x86_64]
 		} else {
-		    set target_list { unix }
+		    set target_list { "tcwg-local" }
 		}
 	    }
 	}
