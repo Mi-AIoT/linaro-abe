@@ -230,7 +230,12 @@ manifest()
     if test x"$1" = x; then
 	mtag="`create_release_tag gcc`"
 	mkdir -p ${local_builds}/${host}/${target}
-	local outfile=${local_builds}/${host}/${target}/${mtag}-manifest.txt
+	if test `echo ${host} | grep -c mingw` -eq 1; then
+	    local build="win32"
+	else
+	    local build="linux"
+	fi
+	local outfile=${local_builds}/${host}/${target}/${mtag}-${build}-manifest.txt
     else
 	local outfile=$1
     fi
