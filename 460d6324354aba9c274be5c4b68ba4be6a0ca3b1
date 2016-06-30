@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_05a3349f",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-30T20:02:34Z",
+      "side": 1,
+      "message": "should be \u0027\u003e\u003e\u0027",
+      "range": {
+        "startLine": 126,
+        "startChar": 144,
+        "endLine": 126,
+        "endChar": 146
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_a59ea854",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-06-30T20:02:34Z",
+      "side": 1,
+      "message": "typo: should be xz",
+      "range": {
+        "startLine": 147,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 6
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
