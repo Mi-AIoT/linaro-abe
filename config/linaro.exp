@@ -32,6 +32,19 @@ if {[info exists env(SYSROOT_UNDER_TEST)]} {
     set native "native"
 }
 
+# Configure "unix" board, which is what DJ uses for native testing.
+# This is a similar board to tcwg-remote.exp, but we can't name board
+# tcwg-local.exp, because DejaGNU hard-wired to use "unix" for local testing.
+proc tcwg_local { } {
+    global board_info
+    # Compilation timeout 10min
+    set board_info(unix,gcc,timeout) 600
+    # Execution timeout 3min.
+    set board_info(unix,timeout) 180
+
+    return "unix"
+}
+
 set myname [get_local_hostname]
 set hostname [info hostname]
 
@@ -78,7 +91,7 @@ case "$target_triplet" in {
 		set target_list { "tk1" }
 	    }
 	    { native* } {
-		set target_list { unix }
+		set target_list [tcwg_local]
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
@@ -121,7 +134,7 @@ case "$target_triplet" in {
 		set target_list { "tx1" }
 	    }
 	    { native* } {
-		set target_list { unix }
+		set target_list [tcwg_local]
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
@@ -137,14 +150,14 @@ case "$target_triplet" in {
     { "x86_64-*linux-gnu" "i686-*linux-gnu" } {
 	case "$native$myname" in {
 	    { native* } {
-		set target_list { unix }
+		set target_list [tcwg_local]
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
 		     && $env(SCHROOT_TEST) == "yes" } {
 		    set target_list [linaro_lab x86_64]
 		} else {
-		    set target_list { unix }
+		    set target_list [tcwg_local]
 		}
 	    }
 	}
