@@ -64,7 +64,9 @@ proc linaro_lab { kind } {
 		set qemu_arch "arm"
 	    }
 	}
-	set board_info(tcwg-local,exec_shell) "setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
+	# Unfortunatelly, current DejaGNU can't reliably kill timed-out
+	# processes, so wrap them in timeout.
+	set board_info(tcwg-local,exec_shell) "timeout --preserve-status 330s -k 30s setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
 	return "tcwg-local"
     }
 
