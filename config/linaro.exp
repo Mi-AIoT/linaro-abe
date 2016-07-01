@@ -45,11 +45,26 @@ proc tcwg_local { } {
     return "unix"
 }
 
+# Configure "qemu" board to run locally and use user-mode QEMU.
+proc qemu { } {
+    global board_info target_triplet sysroot
+    set qemu_arch "[lindex [split $target_triplet -] 0]"
+    case "$qemu_arch" in {
+	{ armv[78]l } {
+	    set qemu_arch "arm"
+	}
+    }
+    set target [tcwg_local]
+    set board_info($target,exec_shell) "$board_info($target,exec_shell) setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
+
+    return $target
+}
+
 set myname [get_local_hostname]
 set hostname [info hostname]
 
 proc linaro_lab { kind } {
-    global tcl_platform myname board_info target_triplet
+    global tcl_platform myname
 
     case "$tcl_platform(user)" in {
 	{ *buildslave } {
@@ -69,18 +84,6 @@ proc linaro_lab { kind } {
 	}
     }
 
-    if { "$kind" == "qemu" } {
-	global sysroot
-	set qemu_arch "[lindex [split $target_triplet -] 0]"
-	case "$qemu_arch" in {
-	    { armv[78]l } {
-		set qemu_arch "arm"
-	    }
-	}
-	set board_info(unix,exec_shell) "setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
-	return "unix"
-    }
-
     return "$user-$lab-$kind"
 }
 
@@ -98,10 +101,7 @@ case "$target_triplet" in {
 		     && $env(SCHROOT_TEST) == "yes" } {
 		    set target_list [linaro_lab armv8]
 		} else {
-		    global SIM
-		    # CPU and sysroot are set through the environment
-		    set SIM "qemu-arm"
-		    set target_list { "arm-qemu" }
+		    set target_list [qemu]
 		}
             }
 	}
@@ -141,8 +141,7 @@ case "$target_triplet" in {
 		     && $env(SCHROOT_TEST) == "yes" } {
 		    set target_list [linaro_lab armv8]
 		} else {
-		    set SIM "qemu-aarch64"
-		    set target_list { aarch64-qemu }
+		    set target_list [qemu]
 		}
             }
 	}
@@ -163,14 +162,7 @@ case "$target_triplet" in {
 	}
     }
     { "*linux-gnu*" } {
-	if { [info exists env(SCHROOT_TEST)] && $env(SCHROOT_TEST) == "yes" } {
-	    set target_list [linaro_lab qemu]
-	} else {
-	    global SIM
-	    set target_list { "arm-sim" }
-	    set board_info(arm-sim,sim,options) "-cpu any -R 0 -L $sysroot"
-	    set SIM "setarch x86_64 -R qemu-[lindex [split $target_triplet -] 0]"
-	}
+	set target_list [qemu]
     }
     default {
 	puts "No target hardware for $target_triplet"
