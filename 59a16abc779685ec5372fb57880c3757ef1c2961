@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_a8e2fd00",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-01T18:22:02Z",
+      "side": 1,
+      "message": "This should be ${manifest} not ${manifest_src}.  I\u0027ll fix in my rebase.",
+      "range": {
+        "startLine": 132,
+        "startChar": 34,
+        "endLine": 132,
+        "endChar": 49
+      },
+      "revId": "59a16abc779685ec5372fb57880c3757ef1c2961",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_68d81554",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-01T18:22:02Z",
+      "side": 1,
+      "message": "Spurious \u0027}\u0027.. I\u0027ll fix in my rebase.",
+      "range": {
+        "startLine": 144,
+        "startChar": 72,
+        "endLine": 144,
+        "endChar": 73
+      },
+      "revId": "59a16abc779685ec5372fb57880c3757ef1c2961",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_c8ddc144",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-01T18:22:02Z",
+      "side": 1,
+      "message": "Spurious \u0027}\u0027.. I\u0027ll fix in my rebase.",
+      "range": {
+        "startLine": 151,
+        "startChar": 84,
+        "endLine": 151,
+        "endChar": 85
+      },
+      "revId": "59a16abc779685ec5372fb57880c3757ef1c2961",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
