@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "da01753e_25a75851",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-01T08:23:23Z",
+      "side": 1,
+      "message": "To be safe, in general I add a \u0027rm -f ${logfile}\u0027 at the beginning of my scripts.",
+      "parentUuid": "da01753e_254638c0",
+      "range": {
+        "startLine": 126,
+        "startChar": 144,
+        "endLine": 126,
+        "endChar": 146
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da01753e_851284b2",
         "filename": "scripts/MakeRelease.job",
         "patchSetId": 1
@@ -83,6 +107,30 @@
       "writtenOn": "2016-07-01T05:47:25Z",
       "side": 1,
       "message": "Move the compression before the (\"$nocheck\" \u003d\u003d yes) clause above.  We want the compressed build log even when not testing.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 38
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_8563a419",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-01T08:23:23Z",
+      "side": 1,
+      "message": "Indeed, and move the scp too.",
+      "parentUuid": "da01753e_6517a0a4",
       "range": {
         "startLine": 145,
         "startChar": 0,
