@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_68301557",
+        "filename": "lib/common.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-01T19:02:52Z",
+      "side": 1,
+      "message": "This comment should be removed as it no longer has relevant code under it.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 1
+      },
+      "revId": "f21247b0ac1559e869d0ec9056202d50319399b5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
