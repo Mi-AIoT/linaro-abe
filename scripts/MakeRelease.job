@@ -131,40 +131,51 @@ srcs="${gcc} ${binutils} ${glibc} ${manifest}"
 # Build a binary release tarball
 # Remove logfile if present (for some unknown reason)
 rm -f ${logfile}
+local abe_ret=0
 # Canadian cross builds require a Linux hosted cross compiler first
 if test x"${canadian}" = x"true"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${srcs} ${platform} --build all ${libc} ${extra} >> ${logfile}
+    abe_ret=$?
     host="--host i686-w64-mingw32"
     rm -fr ${local_builds}/${host}/${target}/
 else
     host=""
 fi
-$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${srcs} ${platform} ${host} --build all ${libc} ${extra} >> ${logfile}
 
-# force a failure if abe has build problems.
-if test $? -gt 0; then
-  exit 1
+# If we're not building the mingw32 compiler 'abe_ret' will be zero and the
+# following conditional will build the linux cross-compiler.  Otherwise it'll
+# build the mingw32 compiler only if the previous cross-compiler build was
+# successful.
+if test ${abe_ret} -eq 0; then
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${srcs} ${platform} ${host} --build all ${libc} ${extra} >> ${logfile}
+    abe_ret=$?
 fi
+
+gcc_ver="$(echo $gcc_src | sed -e "s/^gcc-linaro-\([0-9\.]\+\).*\$/gcc-linaro-\1/")"
+if [ x"$gcc_ver" = x"$gcc_src" ]; then
+    gcc_ver="$release"
+fi
+
+# Fileserver location of binary tarballs and build logfiles
+binaries="/work/space/binaries/${gcc_ver}/${target}"
+logs="/work/space/logs/${gcc_ver}/${target}"
+snaps="/home/abe/var/snapshots/"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
     echo "Compressing log file..."
     xz ${logfile}
-    echo "Copying compressed log file ${logfile}.xz to ${fileserver}:${bases}..."
-    scp ${logfile}.xz ${fileserver}:${bases}/
+    ssh ${fileserver} "if test ! -d ${logs}; then mkdir -p ${logs}; fi"
+    echo "Copying compressed log file ${logfile}.xz to ${fileserver}:${logs}..."
+    scp ${logfile}.xz ${fileserver}:${logs}/
 fi
 
-# Copy the source build test results and tarballs to the fileserver
-bases="/work/abe/baselines/${release}/${target}"
-snaps="/home/abe/var/snapshots/"
+# force a failure if abe has build problems.
+if test ${abe_ret} -ne 0; then
+  exit 1
+fi
 
 # Copy the binary test results to the fileserver
-gcc_ver="$(echo $gcc_src | sed -e "s/^gcc-linaro-\([0-9\.]\+\).*\$/gcc-linaro-\1/")"
-if [ x"$gcc_ver" = x"$gcc_src" ]; then
-    gcc_ver="$release"
-fi
-binaries="/work/space/binaries/${gcc_ver}/${target}"
-
 manifest="`find ${user_workspace} -name \*manifest.txt`"
 ssh ${fileserver} "if test ! -d ${binaries}; then mkdir -p ${binaries}; fi"
 scp ${manifest} ${fileserver}:${binaries}/
