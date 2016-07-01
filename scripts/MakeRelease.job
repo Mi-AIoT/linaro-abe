@@ -1,5 +1,30 @@
 #!/bin/bash
 
+usage() {
+    echo "MakeRelease: [options]"
+    echo "     --workspace - Specify an alternate workspace"
+    echo "     --tarbin - Build a binary tarball"
+    echo "     --target XXX - Specify the target triplet to build"
+    echo "     --date XXX - Specify a date, which becmes part pf the release name"
+    echo "     --ref XXX - Specify a Git reference directory"
+    echo "     --toolchainconfig XXX - [Optional] Explicitly define which toolchain"
+    echo "                             to build, e.g., 'default', 'gcc5', 'gcc6'.  "
+    echo "                             If not specified, 'default' is the default"
+    echo "     --fileserver XXX - Specify the fileserver for tarballs"
+    echo "     --manifest XXX - Optionally use a manifest as input"
+    echo "     --glibc XXX - Specify Glibc version to build"
+    echo "     --gcc XXX - Specify GCC version to build"
+    echo "     --binutils XXX - Specify Binutils version to build"
+    echo "     --help"
+    exit
+}
+
+# Jenkins may run only using environment variables, a user needs to always
+# supply some command line arguments.
+if test $# -eq 0 -a x"${JENKINS_SERVER_COOKIE}" = x; then
+    usage
+fi
+
 # Set defaults
 if test x"${debug}" = x"true"; then
     export CONFIG_SHELL="/bin/bash -x"
