@@ -251,20 +251,29 @@ create_release_tag()
 	local revision="@`get_component_revision ${component} | grep -o '[0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z]' | head -1`"
     fi
 
-    # GCC stores it's version number in BASE-VER, while GLIBC uses version.h
     local srcdir="`get_component_srcdir ${component}`"
     local version=
-    if test x"${component}" = x"gcc"; then
-	local version="`cat ${srcdir}/gcc/BASE-VER`"
-    elif test x"${component}" = x"glibc" -o x"${component}" = x"eglibc"; then
-	local version="`grep VERSION ${srcdir}/version.h | cut -d ' ' -f 3 | tr -d '\"'`"
-    fi
-    # newlib doesn't have a version.  Only expand ${version} if it exists.
+
+    case ${component} in
+	gcc)
+	    local version="`cat ${srcdir}/gcc/BASE-VER`"
+	    ;;
+	glibc|eglibc)
+	    local version="`grep VERSION ${srcdir}/version.h | cut -d ' ' -f 3 | tr -d '\"'`"
+	    ;;
+	newlib)
+	    # newlib doesn't have a version.
+	    ;;
+	*)
+	    ;;
+    esac
+
+    # Only expand ${version} if it exists, so we don't get a spurious '-'.
     local rtag="${component}-linaro${version:+-${version}}"
     if test x"${release}" = x; then
 	local date="`date +%Y%m%d`"
 	if test x"${component}" = x"glibc"; then
-        local branch="`echo ${branch} | tr '/' '-'`"
+	    local branch="`echo ${branch} | tr '/' '-'`"
 	fi
 	local rtag="${rtag}${branch}${revision}-${date}"
     else
