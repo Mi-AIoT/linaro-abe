@@ -25,6 +25,76 @@
     },
     {
       "key": {
+        "uuid": "da01753e_254638c0",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-01T05:47:25Z",
+      "side": 1,
+      "message": "Given that $logfile is not expected to be present, it is best to use \"\u003e\u003e\" throughout the MakeRelease.job file.",
+      "parentUuid": "da01753e_05a3349f",
+      "range": {
+        "startLine": 126,
+        "startChar": 144,
+        "endLine": 126,
+        "endChar": 146
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_851284b2",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-01T05:47:25Z",
+      "side": 1,
+      "message": "This info output will clobber $? that you use in the next clause.  Move it to just before compressing the file.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 4
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "da01753e_6517a0a4",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-01T05:47:25Z",
+      "side": 1,
+      "message": "Move the compression before the (\"$nocheck\" \u003d\u003d yes) clause above.  We want the compressed build log even when not testing.",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 38
+      },
+      "revId": "460d6324354aba9c274be5c4b68ba4be6a0ca3b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da01753e_a59ea854",
         "filename": "scripts/MakeRelease.job",
         "patchSetId": 1
