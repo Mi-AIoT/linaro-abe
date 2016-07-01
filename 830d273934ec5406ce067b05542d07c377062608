@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "da01753e_05b0548a",
+        "filename": "lib/common.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-01T08:13:59Z",
+      "side": 1,
+      "message": "This does the trick, but maybe we should rewrite this as a case/esac, it would be easier to read \u0026 maintain.\n\nAs a follow-up patch?",
+      "range": {
+        "startLine": 259,
+        "startChar": 2,
+        "endLine": 259,
+        "endChar": 77
+      },
+      "revId": "830d273934ec5406ce067b05542d07c377062608",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
