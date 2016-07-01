@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_b06718ea",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-01T22:22:19Z",
+      "side": 1,
+      "message": "So, if the build failed for some reason, the previous \u0027if\u0027 will have exited before the log was uploaded.\nI think we want to save the $? status, upload the logs, and exit depending on the value of abe.sh\u0027s $?",
+      "range": {
+        "startLine": 167,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 2
+      },
+      "revId": "2be48683f5299fe1bca93b9d2f1816862a4ffbb3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
