@@ -11,13 +11,12 @@ tarsrc=""
 tarbin=""
 check=""
 ref="snapshots-ref"
-nocheck="no"
 fileserver="148.251.136.42"
 extra=
 toolchain_config=""
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
 
-OPTS="`getopt -o r:t:f:d:bs:w:nm:l:g:u:h -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
+OPTS="`getopt -o r:t:f:d:bs:w:m:l:g:u:h -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
 while test $# -gt 0; do
     case $1 in
 	-w|--workspace) user_workspace=$2 ;;
@@ -32,7 +31,6 @@ while test $# -gt 0; do
         -l|--glibc) glibc_src=$2 ;;
         -g|--gcc) gcc_src=$2 ;;
         -u|--binutils) binutils_src=$2 ;;
-	-n|--nocheck) nocheck=yes ;;
         -h|--help) usage ;;
 	--) break ;;
     esac
@@ -144,11 +142,6 @@ fi
 # force a failure if abe has build problems.
 if test $? -gt 0; then
   exit 1
-fi
-
-# If not running the testsuites, just exit.
-if test x"${nocheck}" = xyes; then
-    exit 0
 fi
 
 # Copy the source build test results and tarballs to the fileserver
