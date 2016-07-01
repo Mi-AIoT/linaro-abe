@@ -143,19 +143,23 @@ srcs="${gcc} ${binutils} ${glibc} ${manifest}"
 # Build a binary release tarball, then run the tests on the installed binaries
 # Remove if present (for some unknown reason)
 rm -f ${logfile}
+local abe_ret=
 # Canadian cross builds require a Linux hosted cross compiler first
 if test x"${canadian}" = x"true"; then
     $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${check} ${srcs} ${platform} --build all ${libc} ${extra} >> ${logfile}
+    abe_ret=$?
     host="--host i686-w64-mingw32"
     rm -fr ${local_builds}/${host}/${target}/
 else
     host=""
 fi
-$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${srcs} ${platform} ${host} --build all ${libc} ${extra} >> ${logfile}
 
-# force a failure if abe has build problems.
-if test $? -gt 0; then
-  exit 1
+# If we're building Canadian Cross and the previous Linux hosted cross-compiler
+# build failed we don't want to build the mingw toolchain.  Just drop to the
+# fail case.
+if test ${abe_ret} -le 0; then
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${check} ${srcs} ${platform} ${host} --build all ${libc} ${extra} >> ${logfile}
+    abe_ret=$?
 fi
 
 # Copy the build log to the fileserver
@@ -165,6 +169,13 @@ if test -e ${logfile}; then
     echo "Copying compressed log file ${logfile}.xz to ${fileserver}:${bases}..."
     scp ${logfile}.xz ${fileserver}:${bases}/
 fi
+
+# force a failure if abe has build problems.
+if test ${abe_ret} -gt 0; then
+  exit 1
+fi
+
+
 
 # Copy the source build test results and tarballs to the fileserver
 bases="/work/abe/baselines/${release}/${target}"
