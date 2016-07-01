@@ -61,6 +61,24 @@
     },
     {
       "key": {
+        "uuid": "ba068154_903654e6",
+        "filename": "lib/component.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-01T20:48:22Z",
+      "side": 1,
+      "message": "From man bash:\n\nThe export and declare -x commands allow parameters and functions  to  be  added  to  and deleted  from  the  environment.  If the value of a parameter in the environment is modified, the new value becomes part of the environment, replacing the old.  The  environment inherited by any executed command consists of the shell\u0027s initial environment, whose values may be modified in the shell, less any pairs removed by the unset command,  plus  any additions via the export and declare -x commands.\n\nI think this implies that the -x exports \u0027toolchain\u0027 to the environment.  In grepping the source I don\u0027t see anywhere that \"\\$toolchain\" is used.",
+      "parentUuid": "da01753e_9fedb58e",
+      "revId": "df71bae0b4ac5dccd1b8d6cf1da96b17b0092540",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "da01753e_1f48a55a",
         "filename": "lib/fetch.sh",
         "patchSetId": 8
