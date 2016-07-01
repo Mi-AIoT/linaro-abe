@@ -7,7 +7,6 @@ else
     export CONFIG_SHELL="/bin/bash"
 fi
 target=""
-tarsrc=""
 tarbin=""
 check=""
 ref="snapshots-ref"
@@ -16,11 +15,10 @@ extra=
 toolchain_config=""
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
 
-OPTS="`getopt -o r:t:f:d:bs:w:m:l:g:u:h -l target:,ref:,date:,fileserver:,tarbin:,tarsrc:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
+OPTS="`getopt -o r:t:f:d:bw:m:l:g:u:h -l target:,ref:,date:,fileserver:,tarbin:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
 while test $# -gt 0; do
     case $1 in
 	-w|--workspace) user_workspace=$2 ;;
-	-s|--tarsrc) tarsrc=yes ;;
 	-b|--tarbin) tarbin=yes ;;
 	-t|--target) target=$2 ;;
 	-d|--date) date=$2 ;;
@@ -119,12 +117,6 @@ binutils=${binutils_src:+binutils=${binutils_src}}
 gcc=${gcc_src:+gcc=${gcc_src}}
 srcs="${gcc} ${binutils} ${glibc} ${manifest}"
 
-# Build a toolchain, run the tests, and the create a source release as a tarball
-if test x"${tarsrc}" = x"yes"; then
-    $CONFIG_SHELL ${abe_dir}/abe.sh --release ${release} ${extra} \
-	--tarsrc ${check} ${srcs} ${platform} -build all ${libc}
-fi
-
 # Build a binary release tarball, then run the tests on the installed binaries
 if test x"${tarbin}" = x"yes"; then
     # Canadian cross builds require a Linux hosted cross compiler first
@@ -147,33 +139,6 @@ fi
 # Copy the source build test results and tarballs to the fileserver
 bases="/work/abe/baselines/${release}/${target}"
 snaps="/home/abe/var/snapshots/"
-if test x"${tarsrc}" = x"yes"; then
-    manifest="`find ${user_workspace} -name \*manifest.txt`"
-    scp ${manifest} ${fileserver}:${bases}/
-    if test x"${check}" != x; then
-	sums="`find ${user_workspace} -name \*.sum`"
-	logs="`find ${user_workspace} -name \*.log`"
-	if test x"${sums}" != x; then
-	    ssh ${fileserver} "mkdir -p ${bases}"
-	    xz ${sums} ${logs}
-	    sums="`echo ${sums} | sed -e 's/\.sum/\.sum.xz/g'`"
-	    logs="`echo ${logs} | sed -e 's/\.log/\.log.xz/g'`"
-	    scp ${sums} ${logs} ${fileserver}:${bases}/
-	else
-	    echo "ERROR: No test results were found!"
-	fi
-    fi
-    tarballs="`find ${user_snapshots} -name \*${release}\*.xz -o -name \*${release}\*.asc`"
-    if test x"${tarballs}" != x; then
-	scp ${tarballs} ${fileserver}:${snaps}/
-	if test $? -gt 0; then
-	    echo "ERROR: Couldn't copy files to ${fileserver}!"
-	    exit 1
-	fi
-    else
-	echo "ERROR: No source tarballs were found!"
-    fi
-fi
 
 # Copy the binary test results to the fileserver
 binaries="/work/space/binaries/${release}/${target}"
