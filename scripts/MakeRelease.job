@@ -164,7 +164,6 @@ fi
 
 # Fileserver location of sum files, tarballs, and logfiles
 bases="/work/abe/baselines/${release}/${target}"
-snaps="/home/abe/var/snapshots/"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
