@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_10d8a452",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-02T09:29:58Z",
+      "side": 1,
+      "message": "Since you are changing this anyway, you might as well fix the actual copying: $bases is only defined several lines below, so the current code fails with \"permissions denied\" due to trying to copy log into \"/\".",
+      "range": {
+        "startLine": 169,
+        "startChar": 69,
+        "endLine": 169,
+        "endChar": 77
+      },
+      "revId": "ac5ee0e3a3c96daf124c248b48c7854146b12c73",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
