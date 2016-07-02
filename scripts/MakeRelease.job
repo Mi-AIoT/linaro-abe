@@ -159,7 +159,6 @@ fi
 # Fileserver location of binary tarballs and build logfiles
 binaries="/work/space/binaries/${gcc_ver}/${target}"
 logs="/work/space/logs/${gcc_ver}/${target}"
-snaps="/home/abe/var/snapshots/"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
