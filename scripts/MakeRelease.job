@@ -4,7 +4,7 @@ usage() {
     echo "MakeRelease: [options]"
     echo "     --workspace - Specify an alternate workspace"
     echo "     --target XXX - Specify the target triplet to build"
-    echo "     --date XXX - Specify a date, which becmes part pf the release name"
+    echo "     --date XXX - Specify a date, which becomes part of the release name"
     echo "     --ref XXX - Specify a Git reference directory"
     echo "     --toolchainconfig XXX - [Optional] Explicitly define which toolchain"
     echo "                             to build, e.g., 'default', 'gcc5', 'gcc6'.  "
@@ -104,7 +104,6 @@ cd ${user_workspace}/_build
 if ! test -e host.conf; then
   $CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} \
       --with-git-reference-dir=${shared}/snapshots --with-fileserver=${fileserver} --with-remote-snapshots=${ref}
-
 fi
 
 if test x"${date}" != x; then
