@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_503a2c37",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-03T21:17:38Z",
+      "side": 1,
+      "message": "Why -le? Shouldn\u0027t this be -ne ?",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 22
+      },
+      "revId": "1110d21942b16610f051f75c9a642758b545a06f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
