@@ -1,0 +1,211 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_90d774bf",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "You should remove this",
+      "range": {
+        "startLine": 30,
+        "startChar": 13,
+        "endLine": 30,
+        "endChar": 29
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_f0e400ae",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "You should remove this.",
+      "range": {
+        "startLine": 204,
+        "startChar": 2,
+        "endLine": 206,
+        "endChar": 57
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_b001d83b",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "You can remove this.",
+      "range": {
+        "startLine": 672,
+        "startChar": 3,
+        "endLine": 672,
+        "endChar": 43
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_d0e1fc9b",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "Can you remove that too?",
+      "range": {
+        "startLine": 674,
+        "startChar": 3,
+        "endLine": 675,
+        "endChar": 41
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_50d6acc6",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "Why no longer remove this? (set_sysroot does not exist)",
+      "range": {
+        "startLine": 841,
+        "startChar": 1,
+        "endLine": 844,
+        "endChar": 14
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_b0da78e7",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "Why not remove this?",
+      "range": {
+        "startLine": 856,
+        "startChar": 1,
+        "endLine": 857,
+        "endChar": 24
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_10f38474",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 867,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "This needs a documentation entry.",
+      "range": {
+        "startLine": 866,
+        "startChar": 1,
+        "endLine": 867,
+        "endChar": 18
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_70e8107d",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "As stated in bug #1509, all these options are not documented.",
+      "range": {
+        "startLine": 989,
+        "startChar": 0,
+        "endLine": 1003,
+        "endChar": 8
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_50ed0c8b",
+        "filename": "lib/globals.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 1,
+      "message": "You can remove these",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 18
+      },
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}

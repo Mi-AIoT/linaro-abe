@@ -160,6 +160,29 @@
       "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_30ee888c",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1046,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-04T10:34:59Z",
+      "side": 0,
+      "message": "You can remove the merge_branch and merge_diff functions from lib/merge.sh",
+      "range": {
+        "startLine": 1035,
+        "startChar": 0,
+        "endLine": 1046,
+        "endChar": 14
+      },
+      "revId": "5fa34b3eb8dac908d1739d2982cd7d1113d4140c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
