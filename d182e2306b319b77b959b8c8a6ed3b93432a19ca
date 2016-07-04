@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_1068a4f4",
+        "filename": "config/linaro.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-07-04T11:57:05Z",
+      "side": 1,
+      "message": "is it correct here for arm-*linux-gnuabi* triplet as qemu routine set qemu-arch to arm only for armv[78]l ?",
+      "revId": "d182e2306b319b77b959b8c8a6ed3b93432a19ca",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
