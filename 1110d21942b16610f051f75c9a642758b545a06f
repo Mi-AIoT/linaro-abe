@@ -45,6 +45,30 @@
       "revId": "1110d21942b16610f051f75c9a642758b545a06f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_b3ae02e6",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-04T17:08:56Z",
+      "side": 1,
+      "message": "Do you have a suggestion for a better place?",
+      "parentUuid": "ba068154_332692bb",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 48
+      },
+      "revId": "1110d21942b16610f051f75c9a642758b545a06f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
