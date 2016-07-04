@@ -69,6 +69,30 @@
       "revId": "1110d21942b16610f051f75c9a642758b545a06f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_73f3fa0a",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-04T19:19:58Z",
+      "side": 1,
+      "message": "/home/tcwg-buildslave/logs-releases/${release}/${target}\n\nThen the release logs will also be backed up by https://ci.linaro.org/view/tcwg-ci/job/tcwg-backup-files/ , which backs up everything matching /home/tcwg-buildslave/logs* .",
+      "parentUuid": "ba068154_b3ae02e6",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 48
+      },
+      "revId": "1110d21942b16610f051f75c9a642758b545a06f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
