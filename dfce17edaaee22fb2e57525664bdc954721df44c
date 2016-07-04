@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_d08f3ccb",
+        "filename": "jenkins.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-04T11:44:48Z",
+      "side": 1,
+      "message": "this tarball is part of our infrastructure, so it should really be in a tcwg area, not a personal dir on p.l.o.\n\nIt also appears to be a build of a git snapshot not a release version which isn\u0027t ideal.",
+      "revId": "dfce17edaaee22fb2e57525664bdc954721df44c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
