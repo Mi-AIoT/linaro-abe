@@ -133,7 +133,7 @@ rm -f ${logfile}
 local abe_ret=0
 # Canadian cross builds require a Linux hosted cross compiler first
 if test x"${canadian}" = x"true"; then
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${srcs} ${platform} --build all ${libc} ${extra} >> ${logfile}
+    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${srcs} ${platform} --build all ${libc} ${extra} --tarbin >> ${logfile}
     abe_ret=$?
     host="--host i686-w64-mingw32"
     rm -fr ${local_builds}/${host}/${target}/
