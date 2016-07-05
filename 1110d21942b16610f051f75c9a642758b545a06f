@@ -93,6 +93,30 @@
       "revId": "1110d21942b16610f051f75c9a642758b545a06f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_539eb657",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-05T13:32:23Z",
+      "side": 1,
+      "message": "To expand on my previous comment, I think the logs should be uploaded to dev-01.tcwglab:$HOME/logs-releases/${release}/${target} .\n\nThis also involves changing fileserver to dev-01.tcwglab, for which I\u0027ll send a patch.",
+      "parentUuid": "ba068154_73f3fa0a",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 48
+      },
+      "revId": "1110d21942b16610f051f75c9a642758b545a06f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
