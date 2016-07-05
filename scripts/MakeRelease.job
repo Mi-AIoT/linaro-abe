@@ -137,7 +137,7 @@ if test x"${tarbin}" = x"yes"; then
     rm -f ${logfile}
     # Canadian cross builds require a Linux hosted cross compiler first
     if test x"${canadian}" = x"true"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${srcs} ${platform} --build all ${libc} ${extra} >> ${logfile}
+	$CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} ${srcs} ${platform} --build all ${libc} ${extra} --tarbin >> ${logfile}
 	host="--host i686-w64-mingw32"
 	rm -fr ${local_builds}/${host}/${target}/
 #	update="--disable update"
