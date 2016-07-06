@@ -22,6 +22,30 @@
       "revId": "0a801c311b1014a2c783ffe565554ea229b054c5",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_5349968a",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-06T08:57:04Z",
+      "side": 1,
+      "message": "What do you mean?\n\nWhen inside container \"uname -m\" returns i686, so x86_64 qemu binaries will not be used.",
+      "parentUuid": "ba068154_134f0e94",
+      "range": {
+        "startLine": 308,
+        "startChar": 24,
+        "endLine": 308,
+        "endChar": 30
+      },
+      "revId": "0a801c311b1014a2c783ffe565554ea229b054c5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
