@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_537236e6",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-06T08:26:27Z",
+      "side": 1,
+      "message": "Rob, did you merged unrelated changes to this patch by accident?\n\nIf so, please restore this patch to Ryan\u0027s original.",
+      "range": {
+        "startLine": 95,
+        "startChar": 0,
+        "endLine": 97,
+        "endChar": 2
+      },
+      "revId": "972f7e1f8e19c9a545bc9cf06b18fde5b3ef7168",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
