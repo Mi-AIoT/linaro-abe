@@ -12,8 +12,9 @@ set_board_info rsh_opts "-t"
 # Compilation timeout 10min
 set_board_info gcc,timeout 600
 # Execution timeout 5min.
-# It seems this timeout is ignored, and "default" timeout of 300 (5min) is used.
+# DJ seems to ignore these and uses default timeout of 300.
 set_board_info timeout 300
+set test_timeout 300
 
 # Unfortunatelly, current DejaGNU can't reliably kill timed-out
 # processes, so wrap them in timeout.
