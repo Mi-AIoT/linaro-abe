@@ -32,40 +32,6 @@ if {[info exists env(SYSROOT_UNDER_TEST)]} {
     set native "native"
 }
 
-# Configure "unix" board, which is what DJ uses for native testing.
-# This is a similar board to tcwg-remote.exp, but we can't name board
-# tcwg-local.exp, because DejaGNU hard-wired to use "unix" for local testing.
-proc tcwg_local { } {
-    global board_info
-    # Compilation timeout 10min
-    set board_info(unix,gcc,timeout) 600
-    # Execution timeout 3min.
-    set board_info(unix,timeout) 180
-    # Unfortunatelly, current DejaGNU can't reliably kill timed-out
-    # processes, so wrap them in timeout.
-    set board_info(unix,exec_shell) "timeout --preserve-status -k 30s 210s"
-
-    return "unix"
-}
-
-# Configure "qemu" board to run locally and use user-mode QEMU.
-proc qemu { } {
-    global board_info target_triplet sysroot
-    set qemu_arch "[lindex [split $target_triplet -] 0]"
-    case "$qemu_arch" in {
-	{ armv[78]l } {
-	    set qemu_arch "arm"
-	}
-    }
-    set target [tcwg_local]
-    set board_info($target,exec_shell) "$board_info($target,exec_shell) setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
-    # Some tests inherently aren't situable for simulators, and they use this
-    # property to mark themselves UNSUPPORTED.
-    set board_info($target,is_simulator) 1
-
-    return $target
-}
-
 set myname [get_local_hostname]
 set hostname [info hostname]
 
@@ -107,7 +73,7 @@ case "$target_triplet" in {
 		     && $env(SCHROOT_TEST) == "yes" } {
 		    set target_list [linaro_lab armv8]
 		} else {
-		    set target_list [qemu]
+		    set target_list { "qemu" }
 		}
             }
 	}
@@ -140,14 +106,14 @@ case "$target_triplet" in {
 		set target_list { "tx1" }
 	    }
 	    { native* } {
-		set target_list [tcwg_local]
+		set target_list { "tcwg-local" }
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
 		     && $env(SCHROOT_TEST) == "yes" } {
 		    set target_list [linaro_lab armv8]
 		} else {
-		    set target_list [qemu]
+		    set target_list { "qemu" }
 		}
             }
 	}
@@ -155,7 +121,7 @@ case "$target_triplet" in {
     { "x86_64-*linux-gnu" "i686-*linux-gnu" } {
 	case "$native$myname" in {
 	    { native* } {
-		set target_list [tcwg_local]
+		set target_list { "tcwg-local" }
 	    }
 	    default {
 		if { [info exists env(SCHROOT_TEST)]
@@ -168,7 +134,7 @@ case "$target_triplet" in {
 	}
     }
     { "*linux-gnu*" } {
-	set target_list [qemu]
+	set target_list { "qemu" }
     }
     default {
 	puts "No target hardware for $target_triplet"

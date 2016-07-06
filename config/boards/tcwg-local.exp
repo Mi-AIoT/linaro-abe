@@ -1,0 +1,14 @@
+load_generic_config unix
+
+# Compilation timeout 10min
+set_board_info gcc,timeout 600
+# Execution timeout 3min.
+set_board_info timeout 180
+
+# Unfortunatelly, current DejaGNU can't reliably kill timed-out
+# processes, so wrap them in timeout.
+set_board_info exec_shell "timeout --preserve-status -k 30s 210s"
+
+# Mark this board as one for local testing
+unset_board_info isremote
+set_board_info isremote 0
