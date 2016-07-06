@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_134f0e94",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-06T08:55:02Z",
+      "side": 1,
+      "message": "Don\u0027t we need to check i386/i686 too, when we run in x86 32-bits containers?",
+      "range": {
+        "startLine": 308,
+        "startChar": 24,
+        "endLine": 308,
+        "endChar": 30
+      },
+      "revId": "0a801c311b1014a2c783ffe565554ea229b054c5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
