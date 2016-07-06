@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_f60238b3",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-06T16:41:08Z",
+      "side": 1,
+      "message": "Why didn\u0027t you finally used what Maxim suggested in an earlier review?",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 44
+      },
+      "revId": "994396789cfdedb110b078b98245a57b0bdba672",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_760f68e2",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 5
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-06T16:41:08Z",
+      "side": 1,
+      "message": "wasn\u0027t this dropped in another recent patch?",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 32
+      },
+      "revId": "994396789cfdedb110b078b98245a57b0bdba672",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
