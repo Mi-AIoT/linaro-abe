@@ -17,4 +17,4 @@ set_board_info timeout 300
 
 # Unfortunatelly, current DejaGNU can't reliably kill timed-out
 # processes, so wrap them in timeout.
-set_board_info exec_shell "timeout --preserve-status -k 30s 330s"
+set_board_info exec_shell "timeout -k 30s 330s"
