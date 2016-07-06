@@ -46,6 +46,30 @@
       "revId": "0a801c311b1014a2c783ffe565554ea229b054c5",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_935ade4e",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-06T09:00:55Z",
+      "side": 1,
+      "message": "OK, since we run only native i686 tests, we do not need i686 qemu binaries (we do not run tests when we build the i686-hosted releases).",
+      "parentUuid": "ba068154_5349968a",
+      "range": {
+        "startLine": 308,
+        "startChar": 24,
+        "endLine": 308,
+        "endChar": 30
+      },
+      "revId": "0a801c311b1014a2c783ffe565554ea229b054c5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
