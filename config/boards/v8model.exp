@@ -10,7 +10,9 @@ if {[info exists env(FOUNDATION_MODEL)]} {
 
 set_board_info is_simulator 1
 
-set board_info($board,exec_shell) "[board_info $board exec_shell] $env(FOUNDATION_MODEL) --quiet --image"
+# --gicv3 option below is to avoid a FV's warning, which looks like an error:
+# ERROR: cpu0.gicv3_cpu_if ....
+set board_info($board,exec_shell) "[board_info $board exec_shell] $env(FOUNDATION_MODEL) --quiet --gicv3 --image"
 
 set specdir "$sysroot/usr/lib"
 
