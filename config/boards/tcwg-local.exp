@@ -4,6 +4,7 @@ load_generic_config unix
 set_board_info gcc,timeout 600
 # Execution timeout 3min.
 set_board_info timeout 180
+set_board_info test_timeout 180
 
 # Unfortunatelly, current DejaGNU can't reliably kill timed-out
 # processes, so wrap them in timeout.
