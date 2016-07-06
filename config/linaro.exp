@@ -59,6 +59,9 @@ proc qemu { } {
     }
     set target [tcwg_local]
     set board_info($target,exec_shell) "$board_info($target,exec_shell) setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
+    # Some tests inherently aren't situable for simulators, and they use this
+    # property to mark themselves UNSUPPORTED.
+    set board_info($target,is_simulator) 1
 
     return $target
 }
