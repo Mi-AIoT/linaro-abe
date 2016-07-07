@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_d64a94ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-07T08:14:08Z",
+      "side": 1,
+      "message": "I think this is done in runtest.exp, this seems to be the default unless ${board_name} \u003d\u003d [get_local_hostname]",
+      "range": {
+        "startLine": 8,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 68
+      },
+      "revId": "dd9f917eebcb899a893baf4f060abf2077885d8b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
