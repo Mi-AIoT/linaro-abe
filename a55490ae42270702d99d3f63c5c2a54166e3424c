@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_36bcc06c",
+        "filename": "config/boards/v8model.exp",
+        "patchSetId": 3
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-07T08:31:18Z",
+      "side": 0,
+      "message": "Is it safe not to set_board_info model anymore?",
+      "range": {
+        "startLine": 6,
+        "startChar": 4,
+        "endLine": 6,
+        "endChar": 24
+      },
+      "revId": "a55490ae42270702d99d3f63c5c2a54166e3424c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
