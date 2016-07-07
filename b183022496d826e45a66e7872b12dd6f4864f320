@@ -22,6 +22,30 @@
       "revId": "b183022496d826e45a66e7872b12dd6f4864f320",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_96ac8c37",
+        "filename": "config/boards/v8model.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-07T08:35:44Z",
+      "side": 1,
+      "message": "Asan sub-testsuite fails with a tcl error of referring to an undefined variable.",
+      "parentUuid": "ba068154_d6f8d44b",
+      "range": {
+        "startLine": 26,
+        "startChar": 2,
+        "endLine": 27,
+        "endChar": 19
+      },
+      "revId": "b183022496d826e45a66e7872b12dd6f4864f320",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
