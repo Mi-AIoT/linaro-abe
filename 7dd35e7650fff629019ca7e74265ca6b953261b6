@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_7683e8cc",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-07T06:51:35Z",
+      "side": 1,
+      "message": "So, you count on abe doing nothing for this 2nd invocation if $host\u003d\"\" ?\nJust to be sure....",
+      "revId": "7dd35e7650fff629019ca7e74265ca6b953261b6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
