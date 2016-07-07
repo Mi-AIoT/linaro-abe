@@ -321,7 +321,7 @@ lsb_release -a
 cat /proc/cpuinfo
 cat /proc/meminfo
 
-$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --enable-schroot-test --with-fileserver=${fileserver}
+$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --disable-schroot-test --with-fileserver=${fileserver}
 
 # Reduce parallelism of individual builds in Cambridge lab to try reduce
 # variability in sanitizer testsuite.
