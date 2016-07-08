@@ -16,6 +16,24 @@
       "revId": "7dd35e7650fff629019ca7e74265ca6b953261b6",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_c495be89",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 7
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-07-08T18:08:15Z",
+      "side": 1,
+      "message": "No.  If host\u003d\"\" [this] second invocation of ABE will build the linux cross-compiler with this statement (as host will naturally be selected as x86_64 by config.guess).  In other words, the previous ABE invocation will not have been invoked in such a situation.\n\nWritten this way saves an abe.sh invocation.  Perhaps there\u0027s a more clear way to write this in a follow on patch.",
+      "parentUuid": "ba068154_7683e8cc",
+      "revId": "7dd35e7650fff629019ca7e74265ca6b953261b6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
