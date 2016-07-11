@@ -30,7 +30,7 @@ print_schroot_board_files()
 
     # Run dummy runtest to figure out which target boards load schroot-ssh.exp
     runtest $target --tool none 2>&1 | awk '
-/^Using .* as board description file for target\.$/ { board=$2 }
+/^Using .* as board description file for target\.$/ { if (board == "") { board=$2 } }
 /^Using .*\/schroot-ssh.exp as generic interface file for target\.$/ { print board }
 '
     rm -f none.log none.sum
@@ -74,7 +74,7 @@ start_schroot_session()
     hostname="$(grep "^set_board_info hostname " $board_exp | sed -e "s/^set_board_info hostname //")"
     if [ -z "$hostname" ]; then
 	error "Board file $board_exp uses schroot testing, but does not define \"set_board_info hostname\""
-	continue
+	return 1
     fi
 
     local target_opt
