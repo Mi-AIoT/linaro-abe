@@ -1,4 +1,4 @@
-load_generic_config unix
+load_base_board_description unix
 
 # Compilation timeout 10min
 set_board_info gcc,timeout 600
