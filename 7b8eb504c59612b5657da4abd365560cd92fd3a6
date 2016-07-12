@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_0a4b4f5a",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-07-12T14:34:58Z",
+      "side": 1,
+      "message": "Why can you remove /gerrit/ from the path?",
+      "range": {
+        "startLine": 200,
+        "startChar": 99,
+        "endLine": 200,
+        "endChar": 114
+      },
+      "revId": "7b8eb504c59612b5657da4abd365560cd92fd3a6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
