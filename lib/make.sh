@@ -38,6 +38,8 @@ build_all()
 	fi
 	if test "`echo ${target} | grep -c -- -linux-`" -eq 1; then
 	    local builds="${builds} gdbserver"
+	else
+	    builds="`echo ${builds} | sed -e 's: linux::'`"
 	fi
         notice "Buildall: Building \"${builds}\" for cross target ${target}."
     else
