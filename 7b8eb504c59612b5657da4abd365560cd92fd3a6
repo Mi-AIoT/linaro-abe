@@ -22,6 +22,30 @@
       "revId": "7b8eb504c59612b5657da4abd365560cd92fd3a6",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_2a79f393",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-12T14:38:09Z",
+      "side": 1,
+      "message": "Because I can use any reasonable path here.  E.g., I can change this to +refs/changes/*:refs/remotes/christophe-lives-in-grenoble/ha-ha-ha/and-yvan-too/*.\n\nSeriously speaking, refs/remotes/changes/* is convenient because one just needs to add \"remotes/\" to the refspec copy-paste from gerrit web-UI.",
+      "parentUuid": "ba068154_0a4b4f5a",
+      "range": {
+        "startLine": 200,
+        "startChar": 99,
+        "endLine": 200,
+        "endChar": 114
+      },
+      "revId": "7b8eb504c59612b5657da4abd365560cd92fd3a6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
