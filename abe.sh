@@ -492,7 +492,7 @@ crosscheck_unit_test()
 set_package()
 {
     local package="`echo $1 | cut -d '=' -f 1`"
-    local setting="`echo $* | cut -d '=' -f 2-3`"
+    local setting="`echo $* | cut -d '=' -f 2-10`"
 
     case ${package} in
 	languages|la*)
@@ -512,7 +512,7 @@ set_package()
 	    ;;
 	makeflags|ma*)
 #	    override_makeflags="${setting}"
-	    set make_flags="${make_flags} ${setting}"
+	    make_flags="${make_flags} ${setting}"
 	    notice "Overriding ${setting} to MAKEFLAGS"
 	    return 0
 	    ;;
