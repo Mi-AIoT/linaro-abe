@@ -186,6 +186,24 @@
     },
     {
       "key": {
+        "uuid": "ba068154_251764a5",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1003,
+      "author": {
+        "id": 1000040
+      },
+      "writtenOn": "2016-07-13T15:23:57Z",
+      "side": 1,
+      "message": "These are primarily for ABE developers, and really shouldn\u0027t be used by end users, so are undocumented.",
+      "parentUuid": "ba068154_70e8107d",
+      "revId": "e08052604e119bc93b7bd4afdcc5f7420ba24c37",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba068154_50ed0c8b",
         "filename": "lib/globals.sh",
         "patchSetId": 3
