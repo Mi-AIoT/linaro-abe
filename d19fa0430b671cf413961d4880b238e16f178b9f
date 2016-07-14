@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_97576302",
+        "filename": "lib/globals.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-14T10:14:51Z",
+      "side": 1,
+      "message": "This will cause abe to accept manifest_format\u003d1.0, but we actually want an error for those, because we want to reject manifests which have missing *_revision lines.\n\nI think we should have something like:\ncase \"$manifest_format\" in\n   1.1) ;;\n   1.2) ;;\n     *) error \"Imported manifest has unsupported format\"\n        return 1\n        ;;\nesac",
+      "revId": "d19fa0430b671cf413961d4880b238e16f178b9f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_775c7f26",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 11
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-14T10:14:51Z",
+      "side": 1,
+      "message": "If I understood correctly, this change means that the testsuite doesn\u0027t test the handling of *.asc files.\n\nIt might be simpler to test if lib/fetch.sh tests both the md5sums in .asc and in the manifest (when they are both available)",
+      "revId": "d19fa0430b671cf413961d4880b238e16f178b9f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
