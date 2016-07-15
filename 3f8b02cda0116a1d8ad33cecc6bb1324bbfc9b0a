@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_77b59fcc",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-15T07:54:01Z",
+      "side": 1,
+      "message": "use of $? is incompatible with \"set -e\", if an error occurs the script will terminate here...",
+      "revId": "3f8b02cda0116a1d8ad33cecc6bb1324bbfc9b0a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_d7d0cbf9",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-15T07:54:01Z",
+      "side": 1,
+      "message": "... or here...",
+      "revId": "3f8b02cda0116a1d8ad33cecc6bb1324bbfc9b0a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_77ec7fc8",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-15T07:54:01Z",
+      "side": 1,
+      "message": ".... and therefore these logs won\u0027t be copied",
+      "revId": "3f8b02cda0116a1d8ad33cecc6bb1324bbfc9b0a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
