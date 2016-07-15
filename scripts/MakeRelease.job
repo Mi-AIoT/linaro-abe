@@ -7,7 +7,6 @@ usage() {
     echo "     --workspace - Specify an alternate workspace"
     echo "     --target XXX - Specify the target triplet to build"
     echo "     --date XXX - Specify a date, which becomes part of the release name"
-    echo "     --ref XXX - Specify a Git reference directory"
     echo "     --toolchainconfig XXX - [Optional] Explicitly define which toolchain"
     echo "                             to build, e.g., 'default', 'gcc5', 'gcc6'.  "
     echo "                             If not specified, 'default' is the default"
@@ -33,20 +32,18 @@ else
     export CONFIG_SHELL="/bin/bash"
 fi
 target=""
-ref="snapshots-ref"
 fileserver="148.251.136.42"
 extra=
 toolchain_config=""
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
 logfile=${user_workspace}/MakeRelease-${BUILD_NUMBER}.log
 
-OPTS="`getopt -o r:t:f:d:w:m:l:g:u:h -l target:,ref:,date:,fileserver:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
+OPTS="`getopt -o t:f:d:w:m:l:g:u:h -l target:,date:,fileserver:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
 while test $# -gt 0; do
     case $1 in
 	-w|--workspace) user_workspace=$2 ;;
 	-t|--target) target=$2 ;;
 	-d|--date) date=$2 ;;
-	-r|--ref) ref=$2 ;;
 	--toolchainconfig) toolchain_config=$2 ;;
         -f|--fileserver) fileserver=$2 ;;
         -m|--manifest) manifest_src=$2 ;;
@@ -103,7 +100,7 @@ cd ${user_workspace}/_build
 
 if ! test -e host.conf; then
   $CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} \
-      --with-git-reference-dir=${shared}/snapshots --with-fileserver=${fileserver} --with-remote-snapshots=${ref}
+      --with-git-reference-dir=/home/tcwg-buildslave/snapshots-ref
 fi
 
 if test x"${date}" != x; then
