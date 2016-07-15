@@ -58,9 +58,6 @@ change=""
 # set default values for options to make life easier
 user_snapshots="${user_workspace}/snapshots"
 
-# Server to wget snapshots from.
-fileserver="ex40-01.tcwglab.linaro.org/snapshots-ref"
-
 # Server to store results on.
 logserver=""
 
@@ -94,7 +91,7 @@ rebuild=true
 
 orig_parameters="$@"
 
-OPTS="`getopt -o s:g:c:w:o:f:l:rt:b:h -l override:,gcc-branch:,snapshots:,gitrepo:,abe:,workspace:,options:,fileserver:,logserver:,logname:,languages:,runtests,target:,bootstrap,help,excludecheck:,norebuild,extraconfig: -- "$@"`"
+OPTS="`getopt -o s:g:c:w:o:l:rt:b:h -l override:,gcc-branch:,snapshots:,gitrepo:,abe:,workspace:,options:,logserver:,logname:,languages:,runtests,target:,bootstrap,help,excludecheck:,norebuild,extraconfig: -- "$@"`"
 while test $# -gt 0; do
     case $1 in
 	--gcc-branch) change="$change gcc=$2"; shift ;;
@@ -106,7 +103,6 @@ while test $# -gt 0; do
 	-t|--target) target=$2; shift ;;
         -w|--workspace) user_workspace=$2; shift ;;
         -o|--options) user_options=$2; shift ;;
-        -f|--fileserver) fileserver=$2; shift ;;
         --logserver) logserver=$2; shift ;;
         --logname) logname=$2; shift ;;
         -l|--languages) languages=$2; shift ;;
@@ -321,7 +317,7 @@ lsb_release -a
 cat /proc/cpuinfo
 cat /proc/meminfo
 
-$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --enable-schroot-test --with-fileserver=${fileserver}
+$CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --enable-schroot-test
 
 # Reduce parallelism of individual builds in Cambridge lab to try reduce
 # variability in sanitizer testsuite.
