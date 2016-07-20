@@ -27,7 +27,7 @@ while getopts "a:bd:e:fh:l:mo:p:P:qu:v" OPTION; do
 	h) multilib_path="$OPTARG" ;;
 	l) sysroot=$OPTARG ;;
 	m) ssh_master=true ;;
-	o) target_ssh_opts="$OPTARG" ;;
+	o) target_ssh_opts="$target_ssh_opts -o $OPTARG" ;;
 	p) host_ssh_opts="$OPTARG" ;;
 	P) profile="$OPTARG" ;;
 	q) exec > /dev/null ;;
