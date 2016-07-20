@@ -37,9 +37,6 @@ while getopts "a:bd:fh:l:mo:p:P:qu:v" OPTION; do
 done
 shift $((OPTIND-1))
 
-target="${1%:*}"
-port="$(echo $1 | grep ":" | sed -e "s/.*://")"
-
 triplet_to_deb_arch()
 {
     set -e
@@ -64,7 +61,11 @@ triplet_to_deb_dist()
     esac
 }
 
-if [ -z "$target" ]; then
+user="$(echo $1 | grep "@" | sed -e "s/@.*//")"
+machine="$(echo $1 | sed -e "s/.*@//g" -e "s/:.*//g")"
+port="$(echo $1 | grep ":" | sed -e "s/.*://")"
+
+if [ -z "$machine" ]; then
     echo ERROR: no target specified
     exit 1
 fi
@@ -73,6 +74,16 @@ if [ -z "$port" ]; then
     echo "ERROR: no custom [ssh] port specified"
     exit 1
 fi
+
+if [ x"$user" = x"" ]; then
+    if $begin_session; then
+	user="$(ssh $target_ssh_opts $machine echo \$USER)"
+    else
+	user="$(ssh -o Port=$port $target_ssh_opts $machine echo \$USER)"
+    fi
+fi
+
+target="$user@$machine"
 
 use_qemu=false
 if ! triplet_to_deb_arch "$arch" >/dev/null 2>&1; then
@@ -123,7 +134,6 @@ schroot_id=$profile-$deb_arch-$deb_dist
 schroot="ssh $target_ssh_opts $target schroot -r -c session:$profile-$port -d / -u root --"
 rsh_opts="$target_ssh_opts -o Port=$port -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 rsh="ssh $rsh_opts"
-user="$(ssh $target_ssh_opts $target echo \$USER)"
 home="$(ssh $target_ssh_opts $target pwd)"
 
 if $begin_session; then
@@ -146,25 +156,25 @@ if $begin_session; then
     if ssh $target_ssh_opts $target test -f .ssh/authorized_keys; then
 	ssh $target_ssh_opts $target cat .ssh/authorized_keys
     else
-	ssh $target_ssh_opts $target sss_ssh_authorizedkeys \$USER
+	ssh $target_ssh_opts $target sss_ssh_authorizedkeys $user
     fi \
 	| $schroot bash -c "'cat > /root/.ssh/authorized_keys'"
     $schroot chmod 0600 /root/.ssh/authorized_keys
 
-    $rsh root@$target echo "Can login as root!"
+    $rsh root@$machine echo "Can login as root!"
 
-    $rsh root@$target getent passwd $user | true
+    $rsh root@$machine getent passwd $user | true
     if [ x"${PIPESTATUS[0]}" != x"0" ]; then
 	user_data="$(ssh $target_ssh_opts $target getent passwd $user)"
 	target_uid="$(echo "$user_data" | cut -d: -f 3)"
-	$rsh root@$target useradd -m -u $target_uid $user
+	$rsh root@$machine useradd -m -u $target_uid $user
     fi
 
-    $rsh root@$target rsync -a /root/ $home/
-    $rsh root@$target chown -R $user $home/
+    $rsh root@$machine rsync -a /root/ $home/
+    $rsh root@$machine chown -R $user $home/
 
-    $rsh root@$target "echo 1 > /dont_keep_session"
-    $rsh root@$target chmod 0666 /dont_keep_session
+    $rsh root@$machine "echo 1 > /dont_keep_session"
+    $rsh root@$machine chmod 0666 /dont_keep_session
 
     echo $target:$port started schroot: $rsh $target
 fi
@@ -176,11 +186,11 @@ if ! [ -z "$shared_dir" ]; then
     cat ~/.ssh/id_rsa-test-schroot.$$.pub >> ~/.ssh/authorized_keys
     scp $rsh_opts ~/.ssh/id_rsa-test-schroot.$$ $target:.ssh/
 
-    $rsh root@$target mkdir -p "$shared_dir"
-    $rsh root@$target chown -R $user "$shared_dir"
+    $rsh root@$machine mkdir -p "$shared_dir"
+    $rsh root@$machine chown -R $user "$shared_dir"
 
-    $rsh root@$target rm -f /etc/mtab
-    $rsh root@$target ln -s /proc/mounts /etc/mtab
+    $rsh root@$machine rm -f /etc/mtab
+    $rsh root@$machine ln -s /proc/mounts /etc/mtab
     tmp_ssh_port="$(($port-10000))"
     host_ssh_port="$(grep "^Port" /etc/ssh/sshd_config | sed -e "s/^Port //")"
     test -z "$host_ssh_port" && host_ssh_port="22"
@@ -212,34 +222,34 @@ if ! [ -z "$shared_dir" ]; then
 fi
 
 if ! [ -z "$sysroot" ]; then
-    rsync -az -e "$rsh" $sysroot/ root@$target:/sysroot/
-    $rsh root@$target chown -R root:root /sysroot/
+    rsync -az -e "$rsh" $sysroot/ root@$machine:/sysroot/
+    $rsh root@$machine chown -R root:root /sysroot/
 
     if [ -e $sysroot/lib64/ld-linux-aarch64.so.1 ]; then
 	# Our aarch64 sysroot has everything in /lib64, but executables
 	# still expect to find dynamic linker under /lib/ld-linux-aarch64.so.1
 	if [ -h $sysroot/lib ]; then
-	    $rsh root@$target "rm /sysroot/lib"
+	    $rsh root@$machine "rm /sysroot/lib"
 	fi
 	if [ -h $sysroot/lib ] \
 	    || ! [ -e $sysroot/lib/ld-linux-aarch64.so.1 ]; then
-	    $rsh root@$target "mkdir -p /sysroot/lib/"
-	    $rsh root@$target "cd /sysroot/lib; ln -s ../lib64/ld-linux-aarch64.so.1 ."
+	    $rsh root@$machine "mkdir -p /sysroot/lib/"
+	    $rsh root@$machine "cd /sysroot/lib; ln -s ../lib64/ld-linux-aarch64.so.1 ."
 	fi
     fi
 
     if ! $use_qemu; then
 	# Make sure that sysroot libraries are searched before any other.
-	$rsh root@$target "cat > /etc/ld.so.conf.new" <<EOF
+	$rsh root@$machine "cat > /etc/ld.so.conf.new" <<EOF
 /$multilib_path
 /usr/$multilib_path
 EOF
-	$rsh root@$target "cat /etc/ld.so.conf >> /etc/ld.so.conf.new"
-	$rsh root@$target "mv /etc/ld.so.conf.new /etc/ld.so.conf && rsync -a --exclude=/sysroot /sysroot/ / && ldconfig"
+	$rsh root@$machine "cat /etc/ld.so.conf >> /etc/ld.so.conf.new"
+	$rsh root@$machine "mv /etc/ld.so.conf.new /etc/ld.so.conf && rsync -a --exclude=/sysroot /sysroot/ / && ldconfig"
     else
 	# Remove /etc/ld.so.cache to workaround QEMU problem for targets with
 	# different endianness (i.e., /etc/ld.so.cache is endian-dependent).
-	$rsh root@$target "rm /etc/ld.so.cache"
+	$rsh root@$machine "rm /etc/ld.so.cache"
 	# Cleanup runaway QEMU processes that ran for more than 2 minutes.
 	# Note the "-S none" option -- ssh does not always detach from process
 	# when multiplexing is used.  I think this is a bug in ssh.
@@ -252,15 +262,15 @@ EOF
 fi
 
 if [ x"$uname" != x"" ]; then
-    old_uname="$($rsh root@$target "uname -m")"
-    $rsh root@$target "mv /bin/uname /bin/uname.real"
-    $rsh root@$target "cat > /bin/uname" <<EOF
+    old_uname="$($rsh root@$machine "uname -m")"
+    $rsh root@$machine "mv /bin/uname /bin/uname.real"
+    $rsh root@$machine "cat > /bin/uname" <<EOF
 #!/bin/bash
 
 /bin/uname.real "\$@" | sed -e "s/$old_uname/$uname/g"
 exit \${PIPESTATUS[0]}
 EOF
-    $rsh root@$target "chmod a+x /bin/uname"
+    $rsh root@$machine "chmod a+x /bin/uname"
 fi
 
 if $ssh_master; then
