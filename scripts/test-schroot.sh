@@ -81,7 +81,7 @@ if ! triplet_to_deb_arch "$arch" >/dev/null 2>&1; then
 fi
 
 # Use '|| true' to avoid early exit if $target does not answer.
-cpu="$(ssh $target uname -m)" || true
+cpu="$(ssh $target_ssh_opts $target uname -m)" || true
 case "$cpu" in
     aarch64) native_arch=aarch64-linux-gnu ;;
     armv7l) native_arch=arm-linux-gnueabihf ;;
