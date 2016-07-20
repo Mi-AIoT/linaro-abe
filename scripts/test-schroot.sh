@@ -18,7 +18,7 @@ profile="tcwg-test"
 multilib_path="lib"
 uname=""
 
-while getopts "a:bd:e:fh:l:mo:p:P:qu:v" OPTION; do
+while getopts "a:bd:fh:l:mo:p:P:qu:v" OPTION; do
     case $OPTION in
 	a) arch=$OPTARG ;;
 	b) begin_session=true ;;
