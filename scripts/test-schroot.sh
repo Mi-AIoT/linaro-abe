@@ -9,7 +9,6 @@ set -e
 arch="native"
 begin_session=false
 shared_dir=""
-board_exp=""
 finish_session=false
 sysroot=""
 ssh_master=false
@@ -24,7 +23,6 @@ while getopts "a:bd:e:fh:l:mo:p:P:qu:v" OPTION; do
 	a) arch=$OPTARG ;;
 	b) begin_session=true ;;
 	d) shared_dir=$OPTARG ;;
-	e) board_exp="$OPTARG" ;;
 	f) finish_session=true ;;
 	h) multilib_path="$OPTARG" ;;
 	l) sysroot=$OPTARG ;;
@@ -116,26 +114,6 @@ esac
 
 deb_arch="$(triplet_to_deb_arch $arch)"
 deb_dist="$(triplet_to_deb_dist $arch)"
-
-if [ "x$board_exp" != "x" ] ; then
-    lava_json="$(grep "^set_board_info lava_json " $board_exp | sed -e "s/^set_board_info lava_json //")"
-    if [ "x$lava_json" != "x" ] && $begin_session; then
-	job_id="$(lava-tool submit-job http://maxim-kuvyrkov@validation.linaro.org/RPC2/ "$lava_json" | sed -e "s/submitted as job id: //")"
-	while sleep 60; do
-	    if lava-tool job-output -o - http://maxim-kuvyrkov@validation.linaro.org/RPC2/ $job_id | grep "^Hacking session active" >/dev/null; then
-		lava_ssh_opts="$(lava-tool job-output -o - http://maxim-kuvyrkov@validation.linaro.org/RPC2/ $job_id | grep -a "^Please connect to" | sed -e "s/.* ssh \(.*\) \([^ ]*\) (.*$/\1/")"
-		lava_target="$(lava-tool job-output -o - http://maxim-kuvyrkov@validation.linaro.org/RPC2/ $job_id | grep -a "^Please connect to" | sed -e "s/.* ssh \(.*\) \([^ ]*\) (.*$/\2/")"
-		sed -i -e "s/^set_board_info hostname .*/set_board_info hostname $lava_target/" "$board_exp"
-		echo "set_board_info lava_ssh_opts \"$lava_ssh_opts\"" >> "$board_exp"
-		echo "set_board_info lava_job_id $job_id" >> "$board_exp"
-
-		target="$lava_target"
-		target_ssh_opts="$target_ssh_opts $lava_ssh_opts"
-		break
-	    fi
-	done
-    fi
-fi
 
 orig_target_ssh_opts="$target_ssh_opts"
 target_ssh_opts="$target_ssh_opts -o ControlMaster=auto -o ControlPersist=1m -o ControlPath=/tmp/ssh-$profile-$port-%u-%r@%h:%p"
@@ -310,11 +288,4 @@ if $finish_session; then
 	ssh $target_ssh_opts $target schroot -f -e -c session:$profile-$port
     fi
     echo $target:$port finished session
-fi
-
-if [ "x$board_exp" != "x" ] ; then
-    lava_job_id="$(grep "^set_board_info lava_job_id " $board_exp | sed -e "s/^set_board_info lava_job_id //")"
-    if [ "x$lava_job_id" != "x" ] && $finish_session; then
-	lava-tool cancel-job http://maxim-kuvyrkov@validation.linaro.org/RPC2/ $lava_job_id
-    fi
 fi
