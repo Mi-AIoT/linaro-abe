@@ -85,6 +85,12 @@ fi
 
 target="$user@$machine"
 
+if $begin_session || $finish_session; then
+    initial_ssh="ssh $target_ssh_opts $target"
+else
+    initial_ssh="ssh -o Port=$port $target_ssh_opts $target"
+fi
+
 use_qemu=false
 if ! triplet_to_deb_arch "$arch" >/dev/null 2>&1; then
     use_qemu=true
@@ -92,7 +98,7 @@ if ! triplet_to_deb_arch "$arch" >/dev/null 2>&1; then
 fi
 
 # Use '|| true' to avoid early exit if $target does not answer.
-cpu="$(ssh $target_ssh_opts $target uname -m)" || true
+cpu="$($initial_ssh uname -m)" || true
 case "$cpu" in
     aarch64) native_arch=aarch64-linux-gnu ;;
     armv7l) native_arch=arm-linux-gnueabihf ;;
@@ -131,13 +137,13 @@ target_ssh_opts="$target_ssh_opts -o ControlMaster=auto -o ControlPersist=1m -o 
 
 schroot_id=$profile-$deb_arch-$deb_dist
 
-schroot="ssh $target_ssh_opts $target schroot -r -c session:$profile-$port -d / -u root --"
+schroot="$initial_ssh schroot -r -c session:$profile-$port -d / -u root --"
 rsh_opts="$target_ssh_opts -o Port=$port -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
 rsh="ssh $rsh_opts"
-home="$(ssh $target_ssh_opts $target pwd)"
+home="$($initial_ssh pwd)"
 
 if $begin_session; then
-    ssh $target_ssh_opts $target schroot -b -c chroot:$schroot_id -n $profile-$port -d /
+    $initial_ssh schroot -b -c chroot:$schroot_id -n $profile-$port -d /
     # Start ssh server on custom port
     $schroot sed -i -e "\"s/^Port 22/Port $port/\"" /etc/ssh/sshd_config
     # Run as root
@@ -153,10 +159,10 @@ if $begin_session; then
     $schroot iptables -I INPUT -p tcp --dport $port -j ACCEPT >/dev/null 2>&1 || true
 
     $schroot mkdir -p /root/.ssh
-    if ssh $target_ssh_opts $target test -f .ssh/authorized_keys; then
-	ssh $target_ssh_opts $target cat .ssh/authorized_keys
+    if $initial_ssh test -f .ssh/authorized_keys; then
+	$initial_ssh cat .ssh/authorized_keys
     else
-	ssh $target_ssh_opts $target sss_ssh_authorizedkeys $user
+	$initial_ssh sss_ssh_authorizedkeys $user
     fi \
 	| $schroot bash -c "'cat > /root/.ssh/authorized_keys'"
     $schroot chmod 0600 /root/.ssh/authorized_keys
@@ -165,7 +171,7 @@ if $begin_session; then
 
     $rsh root@$machine getent passwd $user | true
     if [ x"${PIPESTATUS[0]}" != x"0" ]; then
-	user_data="$(ssh $target_ssh_opts $target getent passwd $user)"
+	user_data="$($initial_ssh getent passwd $user)"
 	target_uid="$(echo "$user_data" | cut -d: -f 3)"
 	$rsh root@$machine useradd -m -u $target_uid $user
     fi
@@ -281,21 +287,21 @@ fi
 if $finish_session; then
     # Perform all operations from outside of schroot session since the inside
     # may be completely broken (e.g., bash doesn't start).
-    schroot_location="$(ssh $target_ssh_opts $target schroot --location -c session:$profile-$port)"
-    if [ x"$(ssh $target_ssh_opts $target cat $schroot_location/dont_keep_session)" != x"1" ]; then
+    schroot_location="$($initial_ssh schroot --location -c session:$profile-$port)"
+    if [ x"$($initial_ssh cat $schroot_location/dont_keep_session)" != x"1" ]; then
 	finish_session=false
     fi
 fi
 
 if $finish_session; then
     $schroot iptables -I INPUT -p tcp --dport $port -j REJECT >/dev/null 2>&1 || true
-    ssh $target_ssh_opts $target schroot -f -e -c session:$profile-$port | true
+    $initial_ssh schroot -f -e -c session:$profile-$port | true
     if [ x"${PIPESTATUS[0]}" != x"0" ]; then
 	# tcwgbuildXX machines have a kernel problem that a bind mount will be
 	# forever busy if it had an sshfs under it.  Seems like fuse is not
 	# cleaning up somethings.  The workaround is to lazy unmount the bind.
 	$schroot umount -l /
-	ssh $target_ssh_opts $target schroot -f -e -c session:$profile-$port
+	$initial_ssh schroot -f -e -c session:$profile-$port
     fi
     echo $target:$port finished session
 fi
