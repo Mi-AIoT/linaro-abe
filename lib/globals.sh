@@ -91,7 +91,6 @@ force=no
 interactive=no
 nodepends=no
 verbose=1
-network=""
 
 # Don't modify this in this file unless you're adding to it.  This is the list
 # of packages that have make check run against them.  It will be queried for
@@ -132,6 +131,14 @@ gerrit_event_type=""
 jenkins_job_name=""
 jenkins_job_url=""
 sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"
+
+# If we are offline, we can't do much
+git ls-remote git://git.savannah.gnu.org/dejagnu.git 2>&1 /dev/null
+if test $? -gt 0; then
+    network="no"
+else
+    network="yes"
+fi
 
 # source a user specific config file for commonly used configure options.
 # These overide any of the above values.
