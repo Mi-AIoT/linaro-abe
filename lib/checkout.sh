@@ -176,14 +176,28 @@ checkout()
         return 0
     fi
 
-    git ls-remote ${repodir} > /dev/null 2>&1
-    if test $? -ne 0; then
-	error "proper URL required"
-	return 1
-    fi
-
     case ${protocol} in
 	git*|http*|ssh*)
+            if test x"${network}" = x"no"; then
+		if test x"${supdate}" = xno; then
+		    warning "No network connection, so can't clone git repository for ${repo} !"
+		    return 0
+		else
+		    if test ! -e ${local_snapshots}/${repo}; then
+			error "No network connection, so can't clone git reposito ${repo} !"
+			return 1
+		    else
+			warning "No network connection, but ${local_snapshots}/${repo} already exists."
+		    fi
+		fi
+            fi
+
+            git ls-remote ${repodir} > /dev/null 2>&1
+            if test $? -ne 0; then
+	        error "proper URL required"
+		return 1
+            fi
+
 #	    local revision= `echo ${gcc_version} | grep -o "[~@][0-9a-z]*\$" | tr -d '~@'`"
 	    # If the master branch doesn't exist, clone it. If it exists,
 	    # update the sources.
