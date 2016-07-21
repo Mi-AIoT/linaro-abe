@@ -75,11 +75,18 @@ if [ -z "$port" ]; then
     exit 1
 fi
 
+# See https://git.linaro.org/ci/dockerfiles.git/blob/HEAD:/tcwg-buildslave/.ssh/config
+# for the master copy of these settings.
+# We need to duplicate them here to handle bare IP addresses of containers.
+ssh_opts="-o Port=$port -o BatchMode=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=FATAL -o ControlMaster=auto -o ControlPersist=5m -o ControlPath=/tmp/ssh-$profile-%r@%h:%p.$$ $target_ssh_opts"
+rsh="ssh $ssh_opts"
+rcp="scp $ssh_opts"
+
 if [ x"$user" = x"" ]; then
-    if $begin_session; then
+    if $begin_session || $finish_session; then
 	user="$(ssh $target_ssh_opts $machine echo \$USER)"
     else
-	user="$(ssh -o Port=$port $target_ssh_opts $machine echo \$USER)"
+	user="$($rsh $machine echo \$USER)"
     fi
 fi
 
@@ -88,7 +95,7 @@ target="$user@$machine"
 if $begin_session || $finish_session; then
     initial_ssh="ssh $target_ssh_opts $target"
 else
-    initial_ssh="ssh -o Port=$port $target_ssh_opts $target"
+    initial_ssh="ssh $ssh_opts $target"
 fi
 
 use_qemu=false
@@ -132,14 +139,9 @@ esac
 deb_arch="$(triplet_to_deb_arch $arch)"
 deb_dist="$(triplet_to_deb_dist $arch)"
 
-orig_target_ssh_opts="$target_ssh_opts"
-target_ssh_opts="$target_ssh_opts -o ControlMaster=auto -o ControlPersist=1m -o ControlPath=/tmp/ssh-$profile-$port-%u-%r@%h:%p"
-
 schroot_id=$profile-$deb_arch-$deb_dist
 
 schroot="$initial_ssh schroot -r -c session:$profile-$port -d / -u root --"
-rsh_opts="$target_ssh_opts -o Port=$port -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"
-rsh="ssh $rsh_opts"
 home="$($initial_ssh pwd)"
 
 if $begin_session; then
@@ -190,7 +192,7 @@ if ! [ -z "$shared_dir" ]; then
     ssh-keygen -t rsa -N "" -C "test-schroot.$$" -f ~/.ssh/id_rsa-test-schroot.$$
     echo >> ~/.ssh/authorized_keys
     cat ~/.ssh/id_rsa-test-schroot.$$.pub >> ~/.ssh/authorized_keys
-    scp $rsh_opts ~/.ssh/id_rsa-test-schroot.$$ $target:.ssh/
+    $rcp ~/.ssh/id_rsa-test-schroot.$$ $target:.ssh/
 
     $rsh root@$machine mkdir -p "$shared_dir"
     $rsh root@$machine chown -R $user "$shared_dir"
@@ -280,7 +282,8 @@ EOF
 fi
 
 if $ssh_master; then
-    ssh $orig_target_ssh_opts -o Port=$port -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -fMN $target
+    ssh -o ControlMaster=yes -o ControlPath=/tmp/ssh-%u-%r@%h:%p $ssh_opts -fN $target
+    ssh -v -o ControlMaster=no -o ControlPath=/tmp/ssh-%u-%r@%h:%p $ssh_opts $target echo "Can ssh using master connection if the above log is short"
 fi
 
 # Keep the session alive when file /dont_kill_me is present
@@ -305,3 +308,6 @@ if $finish_session; then
     fi
     echo $target:$port finished session
 fi
+
+$rsh -O exit $user@$machine || true
+$rsh -O exit root@$machine || true
