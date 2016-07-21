@@ -227,6 +227,14 @@ if ! [ -z "$shared_dir" ]; then
     else
 	echo "$target:$port shared directory $shared_dir: FAIL"
     fi
+else
+    # GCC's profiling tests expect read-write access to the mirror path
+    # on the remote as the path they are on the build host.
+    # When we are not sharing the build directory, create at least mirror
+    # ABE's top-dir path in the testing session owned by remote user
+    # to accomodate profiling tests.
+    $rsh root@$machine mkdir -p $(pwd)
+    $rsh root@$machine chown -R $user $(pwd)
 fi
 
 if ! [ -z "$sysroot" ]; then
