@@ -39,7 +39,9 @@ usage()
              [--set {linker}={ld|gold}]
              [--set {package}={toolchain|gdb|sysroot}]
              [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc] [--rpm]
-             [--target {<target_triple>|''}] [--timeout <timeout_value>]
+             [--target {<target_triple>|''}]
+             [--testcontainer user@ipaddress:ssh_port]
+             [--timeout <timeout_value>]
              [--usage]
              [{binutils|dejagnu|gcc|gmp|mpfr|mpc|eglibc|glibc|newlib}
                =<id|snapshot|url>]]
@@ -332,6 +334,13 @@ OPTIONS
 			If <target_triple> is not the same as the hardware
 			that ${abe} is running on then build the
 			toolchain as a cross toolchain.
+
+  --testcontainer <user>@<ipaddress>:<ssh_port>
+
+		Specify container to use for running cross-tests for
+		supported configurations.  The container should be
+		configured to allow passwordless ssh on port <ssh_port>
+		for <user> and "root" users.
 
   --timeout <timeout_value>
 
@@ -967,7 +976,15 @@ while test $# -gt 0; do
 	--testcode|te*)
 	    testcode
 	    ;;
-       --time*|-time*)
+	--testcontainer)
+	    check_directive $1 testcontainer testcontainer $2
+	    test_container=$2
+	    shift
+	    # We need to use environment variable to communicate to dejagnu's
+	    # config/linaro.exp to select the board made for container testing.
+	    export ABE_TEST_CONTAINER="$test_container"
+	    ;;
+	--time*|-time*)
 	    check_directive $1 timeout "time" $2
 	    tmptime="`echo $2 | grep -o "[0-9]*"`"
 	    if test x"${tmptime}" != x; then

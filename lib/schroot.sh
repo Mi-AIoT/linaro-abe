@@ -41,6 +41,18 @@ print_schroot_port()
 {
 #    trace "$*"
 
+    local port
+
+    if [ x"$test_container" != x"" ]; then
+	port="$(echo $test_container | grep ":" | sed -e "s/.*://")"
+	if [ x"$port" = x"" ]; then
+	   error "Wrong format of test_container: $test_container"
+	   return 1
+	fi
+	echo $port
+	return 0
+    fi
+
     # Set build_n to the last digit appearing in hostname.
     # E.g., tcwgbuild04 becomes "4" (and so does x86_64).
     # This is purely for convenience when determining which hosts use
@@ -75,6 +87,22 @@ start_schroot_session()
     if [ -z "$hostname" ]; then
 	error "Board file $board_exp uses schroot testing, but does not define \"set_board_info hostname\""
 	return 1
+    elif [ x"$hostname" = x"[getenv ABE_TEST_CONTAINER_USER]@[getenv ABE_TEST_CONTAINER_MACHINE]" ]; then
+	# Set $hostname to a container marker: "@".
+	hostname="@"
+    fi
+    if [ x"$hostname" = x"@" -a x"$test_container" = x"" ]; then
+	error "Board file $board_exp relies on [docker] container, but test_container is not defined"
+	return 1
+    fi
+
+    local begin_session_opt machine_opt
+    if [ x"$hostname" != x"@" ]; then
+	begin_session_opt="-b"
+	machine_opt="$hostname:$schroot_port"
+    else
+	begin_session_opt=""
+	machine_opt="$test_container"
     fi
 
     local target_opt
@@ -96,7 +124,7 @@ start_schroot_session()
     local was_verbose="${-//[^x]/}"
     if [ x"$was_verbose" != x"x" ]; then set -x; fi
     # Start testing schroot session.
-    dryrun "$topdir/scripts/test-schroot.sh -v -b $target_opt -m $sysroot_opt $hostname:$schroot_port" > $log 2>&1; result="$?"
+    dryrun "$topdir/scripts/test-schroot.sh -v $begin_session_opt $target_opt -m $sysroot_opt $machine_opt" > $log 2>&1; result="$?"
     if [ x"$was_verbose" != x"x" ]; then set +x; fi
 
     cat $log >&2
@@ -104,9 +132,11 @@ start_schroot_session()
     if grep -q "Failed to write session file: File exists" $log; then
 	result="2"
     else
-	# Add $hostname to the list of boards to cleanup in
-	# stop_schroot_sessions
-	schroot_boards="$schroot_boards $hostname"
+	if [ x"$hostname" != x"@" ]; then
+	    # Add $hostname to the list of boards to cleanup in
+	    # stop_schroot_sessions
+	    schroot_boards="$schroot_boards $hostname"
+	fi
 
 	if test x"$result" != x"0"; then
 	    result="1"
@@ -181,6 +211,13 @@ start_schroot_sessions()
     schroot_make_opts="SCHROOT_PORT=$schroot_port"
     if $shared_dir_ok; then
 	schroot_make_opts="$schroot_make_opts SCHROOT_SHARED_DIR=$shared_dir"
+    fi
+    if [ x"$test_container" != x"" ]; then
+	local user machine
+	user="$(echo $test_container | grep "@" | sed -e "s/@.*//")"
+	machine="$(echo $test_container | sed -e "s/.*@//g" -e "s/:.*//g")"
+
+	schroot_make_opts="$schroot_make_opts ABE_TEST_CONTAINER_USER=$user ABE_TEST_CONTAINER_MACHINE=$machine"
     fi
 }
 

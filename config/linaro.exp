@@ -36,7 +36,11 @@ set myname [get_local_hostname]
 set hostname [info hostname]
 
 proc linaro_lab { kind } {
-    global tcl_platform myname
+    global env tcl_platform myname
+
+    if {[info exists env(ABE_TEST_CONTAINER)]} {
+	return "abe-container"
+    }
 
     case "$tcl_platform(user)" in {
 	{ *buildslave } {

@@ -103,6 +103,9 @@ all_unit_tests="glibc gcc gdb binutils"
 # this parameter manually.
 runtests=
 
+# Container <user>@<ipaddress>:<ssh_port> to be used in cross-testing.
+test_container=
+
 ccache=no
 #gerrit=no
 
