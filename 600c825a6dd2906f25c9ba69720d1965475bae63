@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_2bc8d273",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-25T11:43:21Z",
+      "side": 1,
+      "message": "This hunk is inside build_all() function, which means that we are likely to fetch/checkout linux kernel sources even when not building it.\n\nRather than removing \"linux\" from $builds it is better to not add it there in the first place.  E.g., condition adding \"linux\" to $depends inside config/infrastructure.conf on whether $target is bare-metal.  That should prevent any part of ABE from dealing with \"linux\".",
+      "range": {
+        "startLine": 42,
+        "startChar": 5,
+        "endLine": 42,
+        "endChar": 11
+      },
+      "revId": "600c825a6dd2906f25c9ba69720d1965475bae63",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
