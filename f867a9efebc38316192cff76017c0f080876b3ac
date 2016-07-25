@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_2bf1f2cd",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-25T11:35:58Z",
+      "side": 1,
+      "message": "It\u0027s better to specify \"2-\" instead of \"2-10\" to avoid corner cases.",
+      "range": {
+        "startLine": 495,
+        "startChar": 44,
+        "endLine": 495,
+        "endChar": 48
+      },
+      "revId": "f867a9efebc38316192cff76017c0f080876b3ac",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
