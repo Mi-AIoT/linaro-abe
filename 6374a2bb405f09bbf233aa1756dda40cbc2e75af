@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_cb1ca616",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-25T11:16:40Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"init\", not \"update\"?",
+      "range": {
+        "startLine": 207,
+        "startChar": 19,
+        "endLine": 207,
+        "endChar": 25
+      },
+      "revId": "6374a2bb405f09bbf233aa1756dda40cbc2e75af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
