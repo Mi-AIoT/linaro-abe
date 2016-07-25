@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_8b2bbe2f",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1252,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-25T11:12:34Z",
+      "side": 1,
+      "message": "This hunk clearly does something else than making \"--build all\" the default argument.  It should be in a separate patch.",
+      "range": {
+        "startLine": 1242,
+        "startChar": 0,
+        "endLine": 1252,
+        "endChar": 10
+      },
+      "revId": "e16bbac4fa7a333479da882ffce1c62d133b0940",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
