@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_abdde244",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-07-25T11:27:11Z",
+      "side": 1,
+      "message": "Why is this part of stage1_flags, where we disable, rather than enable options?  Shouldn\u0027t it be part of default_configure_flags?",
+      "range": {
+        "startLine": 64,
+        "startChar": 394,
+        "endLine": 64,
+        "endChar": 424
+      },
+      "revId": "a100bb5940850bc9bf18103e669909002af48447",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
