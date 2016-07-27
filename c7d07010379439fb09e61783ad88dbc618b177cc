@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_211d9167",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-27T14:51:09Z",
+      "side": 1,
+      "message": "git submodule init should use ${git_reference_opt} so that the git reference dir is used\n\nor:\n\n(optional cleanup) instead of \"git submodule init\" here, we could use --recursive in the git clone above.",
+      "revId": "c7d07010379439fb09e61783ad88dbc618b177cc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_011a0d6e",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-27T14:51:09Z",
+      "side": 1,
+      "message": "again, use ${git_reference_opt} for git submodule update\n\nit looks wrong to do \"git submodule update\" even when the user has \"--disable update\", so this should probably be under:\n \n     elif test x\"${supdate}\" \u003d xyes; then",
+      "revId": "c7d07010379439fb09e61783ad88dbc618b177cc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_a120619c",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-07-27T14:51:09Z",
+      "side": 1,
+      "message": "according to my tests, git new-workdir doesn\u0027t copy submodules. Are the submodules actually present in the source dir after this runs?",
+      "revId": "c7d07010379439fb09e61783ad88dbc618b177cc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
