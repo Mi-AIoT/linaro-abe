@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_e23b8836",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-01T15:27:08Z",
+      "side": 1,
+      "message": "Would we prefer to hardcode /home/tcwg-buildslave instead, in case a real user needs to run this script?",
+      "range": {
+        "startLine": 103,
+        "startChar": 32,
+        "endLine": 103,
+        "endChar": 36
+      },
+      "revId": "b12fed45ad3b965a640c03b9a3ef75ff3cf9e2c7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
