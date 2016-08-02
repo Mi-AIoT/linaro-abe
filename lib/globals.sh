@@ -40,7 +40,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.1
+manifest_version=1.2
 
 # The prefix for installing the toolchain
 prefix=
@@ -168,6 +168,7 @@ import_manifest()
 	for i in ${components}; do
 	    local url="`grep "^${i}_url" ${manifest} | cut -d '=' -f 2`"
 	    local branch="`grep "^${i}_branch" ${manifest} | cut -d '=' -f 2`"
+	    local gittag="`grep "^${i}_gittag" ${manifest} | cut -d '=' -f 2`"
 	    local filespec="`grep "^${i}_filespec" ${manifest} | cut -d '=' -f 2`"
 	    local static="`grep "^${i}_staticlink" ${manifest} | cut -d '=' -f 2`"
 	    # Any embedded spaces in the value have to be converted to a '%'

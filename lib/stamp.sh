@@ -24,9 +24,13 @@
 #
 get_stamp_name()
 {
-    local stamptype=$1
-    local git_or_tar=$2
-    local suffix=$3
+    local stamptype="$1"
+    local component="$2"
+    local suffix="$3"
+
+    if test `echo ${component} | egrep -c "^http|^ssh|^git"` -gt 0; then
+	component="`basename ${component}`"
+    fi
 
     local validstamp="`echo ${stamptype} | egrep -c "^configure$|^build$|^extract$|^fetch$"`" 
     if test ${validstamp} -lt 1; then
@@ -34,23 +38,8 @@ get_stamp_name()
 	return 1
     fi
 
-    local name_fragment=
-    if test "`echo "${git_or_tar}" | grep -c "\.tar"`" -gt 0; then
-	# Strip the .tar.* from the archive file to get the stamp name.
-	name_fragment="`echo "${git_or_tar}" | sed -e 's:\.tar.*::'`"
-	# Strip any preceding directory information,
-	# e.g., infrastructure/gmp-2.1.2.tar.xz -> gmp-2.1.2
-	name_fragment="`basename ${name_fragment}`"
-    else
-	name_fragment="`get_git_tag ${git_or_tar}`" || return 1
-	if test x"${name_fragment}" = x; then
-	    error "Couldn't determine stamp name."
-	    return 1
-	fi
-    fi
-
     #local stamp_name="stamp-${stamptype}-${name_fragment}${suffix:+-${suffix}}"
-    local stamp_name="${name_fragment}${suffix:+-${suffix}}-${stamptype}.stamp"
+    local stamp_name="${component}${suffix:+-${suffix}}-${stamptype}.stamp"
     echo "${stamp_name}"
     return 0
 }

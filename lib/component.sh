@@ -28,6 +28,7 @@ declare -ag toolchain
 # SRCDIR
 # BUILDDIR
 # FILESPEC
+# GITTAG
 # These values are extracted from the config/[component].conf files
 # BRANCH
 # MAKEFLAGS
@@ -177,6 +178,21 @@ set_component_branch ()
     else
 	eval ${component}[BRANCH]="$2"
     fi
+    return 0
+}
+
+set_component_gittag ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    declare -p ${component} 2>&1 > /dev/null
+    if test $? -gt 0; then
+	warning "${component} does not exist!"
+	return 1
+    else
+	eval ${component}[GITTAG]="$2"
+    fi
 
     return 0
 }
@@ -318,6 +334,21 @@ get_component_branch ()
 	return 1
     else
 	eval "echo \${${component}[BRANCH]}"
+    fi
+
+    return 0
+}
+
+get_component_gittag ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    if test "${component:+set}" != "set"; then
+	warning "${component} does not exist!"
+	return 1
+    else
+	eval "echo \${${component}[GITTAG]}"
     fi
 
     return 0
@@ -575,11 +606,10 @@ collect_data ()
 	# If a manifest file has been imported, use those values
 	local filespec="`get_component_filespec ${component}`"
 	local gitinfo="${!version}"
-	local branch="`get_git_branch ${gitinfo}`"
-	if test x"${branch}" = x; then
-	    branch="master"
-	fi
-	local revision="`get_git_revision ${gitinfo}`"
+	local branch="`echo ${gitinfo} | grep -o "[~/][[:alnum:]_\/\.\-]*" | tr -d '~' | sed -e 's:^/::'`"
+#	local gittag="`echo ${gitinfo} | grep -o "%[[:alnum:]_\.\-]*" | tr -d '%'`"
+	local revision="`echo ${gitinfo} | grep -o "@[[:alnum:]_\-]*" | tr -d '@'`"
+
 	local search=
 	case ${component} in
 	    binutils*|gdb*) search="binutils-gdb.git" ;;
