@@ -241,7 +241,13 @@ checkout()
 	    elif test x"${supdate}" = xyes; then
 		# Some packages allow the build to modify the source directory and
 		# that might screw up abe's state so we restore a pristine branch.
-		notice "Updating sources for ${component} in ${srcdir}"
+		# determine if the desired checkout is a branch or a tag
+		if test x"`dryrun "(cd ${srcdir} && git tag -l ${branch})"`" != x; then
+		    notice "Not updating sources for ${component} in ${srcdir} since it's a tag"
+		    return 0
+		else
+		    notice "Updating sources for ${component} in ${srcdir}"
+		fi
 		local current_branch="`cd ${srcdir} && git branch`"
 		if test "`echo ${current_branch} | grep -c local_`" -eq 0; then
 		    dryrun "(cd ${srcdir} && git stash --all)"

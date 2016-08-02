@@ -270,6 +270,10 @@ build()
     fi
     local url="`get_component_url ${component}`"
     local srcdir="`get_component_srcdir ${component}`"
+    if test x"${srcdir}" = x -a x"${url}" = x; then
+	error "Malformed input. No url found"
+	return 1
+    fi
     local builddir="`get_component_builddir ${component}`${2:+-$2}"
     local version="`basename ${srcdir}`"
 
