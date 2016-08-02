@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_e25a684f",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-08-02T08:50:41Z",
+      "side": 1,
+      "message": "unneeded indentation here",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 191,
+        "endChar": 4
+      },
+      "revId": "676170f930de71d369b1359bf9e096506fa4fd34",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_42589456",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-08-02T08:50:41Z",
+      "side": 1,
+      "message": "same here",
+      "range": {
+        "startLine": 194,
+        "startChar": 0,
+        "endLine": 194,
+        "endChar": 4
+      },
+      "revId": "676170f930de71d369b1359bf9e096506fa4fd34",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
