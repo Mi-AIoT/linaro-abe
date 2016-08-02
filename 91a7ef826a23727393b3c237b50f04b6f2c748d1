@@ -57,6 +57,24 @@
       "revId": "91a7ef826a23727393b3c237b50f04b6f2c748d1",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_c56e4ec9",
+        "filename": "scripts/test-schroot.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-08-02T11:14:18Z",
+      "side": 1,
+      "message": "yes sure, it depends what is mandatory in the argument, and something like that would work )\n\n[[ @$1: \u003d~ (.*)@(.*):(.*) ]]\nuser\u003d${BASH_REMATCH[1]#@} \nhost\u003d${BASH_REMATCH[2]} \nport\u003d${BASH_REMATCH[3]%:}\n\nbut as I said I\u0027m fine with that version.",
+      "parentUuid": "ba068154_852606b9",
+      "revId": "91a7ef826a23727393b3c237b50f04b6f2c748d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
