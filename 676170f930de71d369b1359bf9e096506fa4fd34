@@ -45,6 +45,57 @@
       "revId": "676170f930de71d369b1359bf9e096506fa4fd34",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_e50f122d",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-02T11:08:18Z",
+      "side": 1,
+      "message": "move \"git ls-remote\" check to here?",
+      "revId": "676170f930de71d369b1359bf9e096506fa4fd34",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_2203d010",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-02T11:08:18Z",
+      "side": 1,
+      "message": "this can be a fragile way to check the network connection. It can give an incorrect answer when:\n. the firewall drops ping packets\n. user is on a free wifi connection which allows ping but requires a web login before connections can be made\n. the network is up but the ping packet is randomly dropped\n. running in a container which doesn\u0027t have a ping program\n\n(the last one affects our builds)",
+      "revId": "676170f930de71d369b1359bf9e096506fa4fd34",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_85ff2601",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-02T11:08:18Z",
+      "side": 1,
+      "message": "at the time this runs, the warning function is not defined.",
+      "revId": "676170f930de71d369b1359bf9e096506fa4fd34",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
