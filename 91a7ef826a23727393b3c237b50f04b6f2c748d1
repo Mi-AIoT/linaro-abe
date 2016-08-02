@@ -39,6 +39,24 @@
       "revId": "91a7ef826a23727393b3c237b50f04b6f2c748d1",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_852606b9",
+        "filename": "scripts/test-schroot.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-08-02T11:04:32Z",
+      "side": 1,
+      "message": "Bash parameter expansion will leave the operand as-is when it doesn\u0027t match -- e.g., one will get port\u003d\"test-armv8-02\" instead of port\u003d\"\" -- which is not as convenient when sanitizing inputs below.",
+      "parentUuid": "ba068154_451d3e66",
+      "revId": "91a7ef826a23727393b3c237b50f04b6f2c748d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
