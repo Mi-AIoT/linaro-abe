@@ -27,7 +27,6 @@ set -o pipefail
 . "${topdir}/lib/make.sh" || exit 1
 . "${topdir}/lib/package.sh" || exit 1
 . "${topdir}/lib/testcode.sh" || exit 1
-. "${topdir}/lib/git-parser.sh" || exit 1
 . "${topdir}/lib/stamp.sh" || exit 1
 . "${topdir}/lib/schroot.sh" || exit 1
 . "${topdir}/lib/gerrit.sh" || exit 1
