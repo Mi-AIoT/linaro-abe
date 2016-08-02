@@ -117,6 +117,8 @@ checkout_all()
     # Set this to no, since all the sources are now checked out
     supdate=no
 
+    manifest="`manifest`"
+
     return 0
 }
 
@@ -236,12 +238,35 @@ checkout()
 			rm -f ${local_builds}/git$$.lock
 			return 1
 		    fi
+		    if test x"`dryrun "(cd ${srcdir} && git tag -l ${branch:-XXX})"`" != x; then
+			set_component_gittag ${component} ${branch}
+			branch="`dryrun "(cd ${srcdir} && git branch --list ${branch:-XXX})"`"
+			set_component_branch ${component} ${branch}
+			local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
+			set_component_revision ${component} ${newrev}
+			return 0
+		    fi
 		fi
 		new_srcdir=true
 	    elif test x"${supdate}" = xyes; then
 		# Some packages allow the build to modify the source directory and
 		# that might screw up abe's state so we restore a pristine branch.
-		notice "Updating sources for ${component} in ${srcdir}"
+		# determine if the desired checkout is a branch or a tag
+		if test x"`dryrun "(cd ${srcdir} && git tag -l ${branch:-XXX})"`" != x; then
+		    notice "Not updating sources for ${component} in ${srcdir} since it's a tag"
+		    set_component_gittag ${component} ${branch}
+		    branch="`dryrun "(cd ${srcdir} && git branch --list ${branch:-XXX})"`"
+		    set_component_branch ${component} ${branch}
+#		    local newrev="`dryrun "(cd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1)`"
+		    set_component_revision ${component} ${newrev}
+		    return 0
+		else
+		    if test x"`dryrun "(cd ${srcdir} && git branch --list ${branch})"`" != x; then
+			error "branch does not exist"
+#			return 1
+		    fi
+		    notice "Updating sources for ${component} in ${srcdir}"
+		fi
 		local current_branch="`cd ${srcdir} && git branch`"
 		if test "`echo ${current_branch} | grep -c local_`" -eq 0; then
 		    dryrun "(cd ${srcdir} && git stash --all)"

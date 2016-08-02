@@ -254,7 +254,7 @@ manifest()
 	# ABE build data goes in the documentation sxection
 	if test x"${component}" = x"abe"; then
 	    echo "${component}_url=`get_component_url ${component}`" > ${tmpfile}
-	    echo "${component}_branch=branch=`get_component_branch ${component}`" >> ${tmpfile}
+	    echo "# ${component}_branch=branch=`get_component_branch ${component}`" >> ${tmpfile}
 	    echo "${component}_revision=`get_component_revision ${component}`" >> ${tmpfile}
 	    echo "${component}_filespec=`get_component_filespec ${component}`" >> ${tmpfile}
 	    local configure="`get_component_configure ${component} | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g"`"
@@ -278,7 +278,12 @@ manifest()
 
 	local branch="`get_component_branch ${component}`"
 	if test x"${branch}" != x; then
-	    echo "${component}_branch=${branch}" >> ${outfile}
+	    echo "# ${component}_branch=${branch}" >> ${outfile}
+	fi
+
+	local gittag="`get_component_gittag ${component}`"
+	if test x"${gittag}" != x; then
+	    echo "# ${component}_gittag=${gittag}" >> ${outfile}
 	fi
 
 	local revision="`get_component_revision ${component}`"

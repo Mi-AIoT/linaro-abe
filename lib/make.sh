@@ -57,15 +57,6 @@ build_all()
         return 1;
     fi
 
-    if test x"${manifest}" = x"create"; then
-	notice "Exiting after creating"
-	local exitflag=true
-    fi
-    manifest="`manifest`"
-    if test x"${exitflag}" = xtrue; then
-	exit 0
-    fi
-
     # build each component
     for i in ${builds}; do
         notice "Building all, current component $i"
@@ -270,6 +261,10 @@ build()
     fi
     local url="`get_component_url ${component}`"
     local srcdir="`get_component_srcdir ${component}`"
+    if test x"${srcdir}" = x -a x"${url}" = x; then
+	error "Malformed input. No url found"
+	return 1
+    fi
     local builddir="`get_component_builddir ${component}`${2:+-$2}"
     local version="`basename ${srcdir}`"
 

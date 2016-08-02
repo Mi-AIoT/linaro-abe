@@ -61,8 +61,8 @@ in="configure gcc.git"
 match="gcc.git-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure infrastructure/mpc-1.0.1.tar.xz"
-match="mpc-1.0.1-configure.stamp"
+in="configure mpc-1.0.1.tar.xz"
+match="mpc-1.0.1.tar.xz-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc.git stage2"
@@ -70,11 +70,11 @@ match="gcc.git-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc.git~bzr/custom_branch"
-match="gcc.git~bzr-custom_branch-configure.stamp"
+match="gcc.git~bzr/custom_branch-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc.git~bzr/custom_branch stage2"
-match="gcc.git~bzr-custom_branch-stage2-configure.stamp"
+match="gcc.git~bzr/custom_branch-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc.git@1234567"
@@ -86,19 +86,19 @@ match="gcc.git@1234567-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc.git~bzr/custom_branch@1234567"
-match="gcc.git~bzr-custom_branch@1234567-configure.stamp"
+match="gcc.git~bzr/custom_branch@1234567-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc.git~bzr/custom_branch@1234567 stage2"
-match="gcc.git~bzr-custom_branch@1234567-stage2-configure.stamp"
+match="gcc.git~bzr/custom_branch@1234567-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="configure gcc-4.8-foo-bar_fiddle.diddle.tar.bz2"
-match="gcc-4.8-foo-bar_fiddle.diddle-configure.stamp"
+match="gcc-4.8-foo-bar_fiddle.diddle.tar.bz2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="build infrastructure/linux-linaro-3.11-rc6-2013.08.tar.bz2"
-match="linux-linaro-3.11-rc6-2013.08-build.stamp"
+in="build linux-linaro-3.11-rc6-2013.08.tar.bz2"
+match="linux-linaro-3.11-rc6-2013.08.tar.bz2-build.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 errmatch=0
@@ -106,17 +106,16 @@ in="configure http://.git.linaro.org/git/toolchain/gcc.git"
 match="gcc.git-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-
 in="build gcc.git"
 match="gcc.git-build.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="fetch mpc.1.4.tar.gz"
-match="mpc.1.4-fetch.stamp"
+match="mpc.1.4.tar.gz-fetch.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 in="extract mpc.1.4.tar.gz"
-match="mpc.1.4-extract.stamp"
+match="mpc.1.4.tar.gz-extract.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 errmatch=1
@@ -137,9 +136,9 @@ match=""
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 # Partial match of a valid stamp SHOULDN'T match.
-errmatch=1
+errmatch=0
 in="build http://@revision"
-match=""
+match="@revision-build.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 echo "============= check_stamp () and create_stamp () tests ================"
