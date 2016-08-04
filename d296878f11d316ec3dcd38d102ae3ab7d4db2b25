@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_68cc9936",
+        "filename": "jenkins.sh",
+        "patchSetId": 13
+      },
+      "lineNbr": 496,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-04T12:17:44Z",
+      "side": 1,
+      "message": "This does not work: it renames unrelated files into newlib.sum/newlib.log.\n\nFor instance:\nRenaming ./builds/x86_64-unknown-linux-gnu/arm-none-eabi/binutils-gdb.git~linaro_binutils-2_25-branch/gas/testsuite/gas.sum to newlib.sum",
+      "range": {
+        "startLine": 496,
+        "startChar": 5,
+        "endLine": 496,
+        "endChar": 49
+      },
+      "revId": "d296878f11d316ec3dcd38d102ae3ab7d4db2b25",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
