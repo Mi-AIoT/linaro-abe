@@ -319,13 +319,6 @@ cat /proc/meminfo
 
 $CONFIG_SHELL ${abe_dir}/configure --with-local-snapshots=${user_snapshots} --with-git-reference-dir=${git_reference} --with-languages=${languages} --enable-schroot-test
 
-# Reduce parallelism of individual builds in Cambridge lab to try reduce
-# variability in sanitizer testsuite.
-# Note that GCC testsuites will run with double parallelism setting.
-case "$(hostname)" in
-    "build-"*) sed -i -e "s/cpus=32/cpus=8/" host.conf ;;
-esac
-
 # load commonly used varibles set by configure
 if test -e "${PWD}/host.conf"; then
     . "${PWD}/host.conf"
