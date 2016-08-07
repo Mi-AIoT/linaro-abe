@@ -227,21 +227,21 @@ collect_data gmp
 
 # Download the first time without force.
 out="`fetch_http gmp 2>/dev/null`"
-if test $? -eq 0 -a -e ${local_snapshots}/gmp-6.0.0a.tar.xz; then
+if test $? -eq 0 -a -e ${local_snapshots}/gmp-6.1.0.tar.xz; then
     pass "fetch_http gmp"
 else
     fail "fetch_http gmp"
 fi
 
 # Get the timestamp of the file.
-gmp_stamp1=`stat -c %X ${local_snapshots}/gmp-6.0.0a.tar.xz`
+gmp_stamp1=`stat -c %X ${local_snapshots}/gmp-6.1.0.tar.xz`
 
 # Download it again
 out="`fetch_http gmp 2>/dev/null`"
 ret=$?
 
 # Get the timestamp of the file after another fetch.
-gmp_stamp2=`stat -c %X ${local_snapshots}/gmp-6.0.0a.tar.xz`
+gmp_stamp2=`stat -c %X ${local_snapshots}/gmp-6.1.0.tar.xz`
 
 # They should be the same timestamp.
 if test $ret -eq 0 -a ${gmp_stamp1} -eq ${gmp_stamp2}; then
@@ -263,7 +263,7 @@ else
 fi
 
 # Get the timestamp of the file after another fetch.
-gmp_stamp3=`stat -c %X ${local_snapshots}/gmp-6.0.0a.tar.xz`
+gmp_stamp3=`stat -c %X ${local_snapshots}/gmp-6.1.0.tar.xz`
 
 if test ${gmp_stamp1} -eq ${gmp_stamp3}; then
     fail "fetch_http gmp with \${force}=yes has unexpected matching timestamps"
@@ -272,7 +272,7 @@ else
 fi
 
 # Make sure force doesn't get in the way of a clean download.
-rm ${local_snapshots}/gmp-6.0.0a.tar.xz
+rm ${local_snapshots}/gmp-6.1.0.tar.xz
 
 # force should override supdate and this should download for the first time.
 out="`force=yes fetch_http gmp 2>/dev/null`"
@@ -283,7 +283,7 @@ else
 fi
 
 # Test the case where wget_bin isn't set.
-rm ${local_snapshots}/gmp-6.0.0a.tar.xz
+rm ${local_snapshots}/gmp-6.1.0.tar.xz
 
 out="`unset wget_bin; fetch_http gmp 2>/dev/null`"
 if test $? -gt 0; then
@@ -320,7 +320,7 @@ rm -f ${local_snapshots}/gmp-* &>/dev/null
 rm -f ${local_snapshots}/gmp-* &>/dev/null
 # Use fetch that goes to a reference dir using a longname
 out="`git_reference_dir=${local_refdir} fetch gmp &>/dev/null`"
-if test $? -gt 0 -o ! -e "${local_snapshots}/gmp-6.0.0a.tar.xz"; then
+if test $? -gt 0 -o ! -e "${local_snapshots}/gmp-6.1.0.tar.xz"; then
     fail "fetch gmp (with full name) from reference dir failed unexpectedly."
 else
     pass "fetch gmp (with full name) from reference dir passed as expected."
@@ -330,22 +330,22 @@ rm -f ${local_snapshots}/gmp-* &>/dev/null
 
 # Replace with a marked version so we can tell if it's copied the reference
 # versions erroneously.
-rm -f ${local_refdir}/gmp-6.0.0a.tar.xz
-echo "DEADBEEF" > ${local_refdir}/gmp-6.0.0a.tar.xz
+rm -f ${local_refdir}/gmp-6.1.0.tar.xz
+echo "DEADBEEF" > ${local_refdir}/gmp-6.1.0.tar.xz
 
 # Use fetch that finds a git reference dir but is forced to use the server.
 out="`force=yes git_reference_dir=${local_refdir} fetch gmp 2>/dev/null`"
 if test $? -gt 0; then
     fail "fetch gmp (with full name) from reference dir failed unexpectedly."
-elif test x"$(grep DEADBEEF ${local_snapshots}/gmp-6.0.0a.tar.xz)" != x""; then
+elif test x"$(grep DEADBEEF ${local_snapshots}/gmp-6.1.0.tar.xz)" != x""; then
     fail "fetch gmp pulled from reference dir instead of server."
 else
     pass "fetch gmp (with full name) from reference dir passed as expected."
 fi
 
 # Make sure supdate=no where source doesn't exist fails
-rm ${local_snapshots}/gmp-6.0.0a.tar.xz
-rm ${local_refdir}/gmp-6.0.0a.tar.xz
+rm ${local_snapshots}/gmp-6.1.0.tar.xz
+rm ${local_refdir}/gmp-6.1.0.tar.xz
 out="`supdate=no fetch gmp 2>/dev/null`"
 if test $? -gt 0; then
     pass "fetch gmp --supdate=no failed as expected when there's no source downloaded."
@@ -355,10 +355,10 @@ fi
 
 # Make sure supdate=no --force=yes where source doesn't exist passes by forcing
 # a download
-rm ${local_snapshots}/gmp-6.0.0a.tar.xz &>/dev/null
-rm ${local_refdir}/gmp-6.0.0a.tar.xz &>/dev/null
+rm ${local_snapshots}/gmp-6.1.0.tar.xz &>/dev/null
+rm ${local_refdir}/gmp-6.1.0.tar.xz &>/dev/null
 out="`force=yes supdate=no fetch gmp 2>/dev/null`"
-if test $? -eq 0 -a -e "${local_snapshots}/gmp-6.0.0a.tar.xz"; then
+if test $? -eq 0 -a -e "${local_snapshots}/gmp-6.1.0.tar.xz"; then
     pass "fetch gmp --supdate=no --force=yes passed as expected when there's no source downloaded."
 else
     fail "fetch gmp --supdate=no --force=yes failed unexpectedly when there's no source downloaded."
@@ -366,16 +366,16 @@ fi
 
 # Make sure supdate=no where source does exist passes
 out="`supdate=no fetch gmp 2>/dev/null`"
-if test $? -eq 0 -a -e "${local_snapshots}/gmp-6.0.0a.tar.xz"; then
+if test $? -eq 0 -a -e "${local_snapshots}/gmp-6.1.0.tar.xz"; then
     pass "fetch gmp --supdate=no --force=yes passed as expected because the source already exists."
 else
     fail "fetch gmp --supdate=no --force=yes failed unexpectedly when the source exists."
 fi
 
-cp ${local_snapshots}/gmp-6.0.0a.tar.xz ${local_refdir}/ &>/dev/null
+cp ${local_snapshots}/gmp-6.1.0.tar.xz ${local_refdir}/ &>/dev/null
 
 # Download a clean/new copy for the check_md5sum tests
-rm ${local_snapshots}/gmp-6.0.0a.tar.xz* &>/dev/null
+rm ${local_snapshots}/gmp-6.1.0.tar.xz* &>/dev/null
 fetch_http gmp 2>/dev/null
 
 out="`check_md5sum 'gmp' 2>/dev/null`"
@@ -393,8 +393,8 @@ else
     fail "check_md5sum passed as expected for 'foo"
 fi
 
-mv ${local_snapshots}/gmp-6.0.0a.tar.xz ${local_snapshots}/gmp-6.0.0a.tar.xz.back
-echo "empty file" > ${local_snapshots}/gmp-6.0.0a.tar.xz
+mv ${local_snapshots}/gmp-6.1.0.tar.xz ${local_snapshots}/gmp-6.1.0.tar.xz.back
+echo "empty file" > ${local_snapshots}/gmp-6.1.0.tar.xz
 
 # Test an expected failure case.
 out="`check_md5sum 'gmp' 2>/dev/null`"
@@ -404,7 +404,7 @@ else
     fail "check_md5sum passed unexpectedly for nonmatching 'gmp file"
 fi
 
-mv ${local_snapshots}/gmp-6.0.0a.tar.xz.back ${local_snapshots}/gmp-6.0.0a.tar.xz
+mv ${local_snapshots}/gmp-6.1.0.tar.xz.back ${local_snapshots}/gmp-6.1.0.tar.xz
 
 # ----------------------------------------------------------------------------------
 #
