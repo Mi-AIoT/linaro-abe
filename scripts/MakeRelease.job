@@ -118,7 +118,16 @@ else
     libc="--set libc=newlib"
 fi
 
-manifest=${manifest:+--manifest ${manifest_src}}
+# the manifest is a URL, so it can be downloaded
+if test x"${manifest_src}" != x; then
+    if test "`echo ${manifest_src} | grep -c ^http`" -gt 0; then
+       wget ${manifest_src} --tries=2 --directory-prefix=/tmp/${BUILD_NUMBER}-
+       manifest="--manifest /tmp/${BUILD_NUMBER}-`basename ${manifest_src}`"
+    else
+       manifest="--manifest ${manifest}"
+    fi
+fi
+
 glibc=${glibc_src:+glibc=${glibc_src}}
 binutils=${binutils_src:+binutils=${binutils_src}}
 gcc=${gcc_src:+gcc=${gcc_src}}
