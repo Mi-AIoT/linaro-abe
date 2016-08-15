@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_7cc73713",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-08-15T16:30:09Z",
+      "side": 1,
+      "message": "This part of the condition needs to be an assert, and the build needs to fail if ABE can\u0027t locate libwinpthread-1.dll to put in the tarball.",
+      "range": {
+        "startLine": 161,
+        "startChar": 51,
+        "endLine": 161,
+        "endChar": 93
+      },
+      "revId": "f284fba233c3b5137e0a39be7b7d379e01839ff7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_5cccf335",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-08-15T16:30:09Z",
+      "side": 1,
+      "message": "Similar to other commands, this \"cp\" needs to be wrapped in dryrun.",
+      "range": {
+        "startLine": 162,
+        "startChar": 1,
+        "endLine": 162,
+        "endChar": 3
+      },
+      "revId": "f284fba233c3b5137e0a39be7b7d379e01839ff7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
