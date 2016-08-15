@@ -25,6 +25,23 @@
     },
     {
       "key": {
+        "uuid": "ba068154_9cd65bc4",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-15T16:35:09Z",
+      "side": 1,
+      "message": "remove the -a -e \u003cpath\u003e part. If the file isn\u0027t present, we can detect that by checking the return code from cp",
+      "revId": "f284fba233c3b5137e0a39be7b7d379e01839ff7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba068154_5cccf335",
         "filename": "lib/package.sh",
         "patchSetId": 1
@@ -42,6 +59,23 @@
         "endLine": 162,
         "endChar": 3
       },
+      "revId": "f284fba233c3b5137e0a39be7b7d379e01839ff7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_dcd743be",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-15T16:35:09Z",
+      "side": 1,
+      "message": "this should be \"dryrun cp ...\"\n\nshould also check that cp succeeds, and return with an error if not.",
       "revId": "f284fba233c3b5137e0a39be7b7d379e01839ff7",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
