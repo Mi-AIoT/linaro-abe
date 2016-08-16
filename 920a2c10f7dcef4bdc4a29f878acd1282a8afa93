@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_5c1d1373",
+        "filename": "lib/package.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-16T10:23:27Z",
+      "side": 1,
+      "message": "fix typos here.\n\nAfter error, there should be \"return 1\"",
+      "revId": "920a2c10f7dcef4bdc4a29f878acd1282a8afa93",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
