@@ -63,7 +63,11 @@ dryrun()
 	    set -o pipefail
 	    eval $1
 	)
-	return $?
+	local result=$?
+	if test $result -gt 0; then
+	    ERROR_DETECTED=1
+	fi
+	return $result
     fi
 
     return 0
@@ -99,6 +103,7 @@ fixme()
 error()
 {
     echo "ERROR (#${BASH_LINENO}): ${FUNCNAME[1]} ($1)" 1>&2
+    ERROR_DETECTED=1
     return 1
 }
 

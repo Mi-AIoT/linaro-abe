@@ -1242,4 +1242,9 @@ if test ! -z ${do_build}; then
 elif test ! -z ${do_checkout}; then
     notice "Complete checkout process took ${time} minutes"
 fi
+
+if [ ! -z "$ERROR_DETECTED" ]; then
+    error "Unhandled error occurred during build."
+    exit 1
+fi
 exit 0
