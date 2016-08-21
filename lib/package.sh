@@ -166,6 +166,11 @@ binary_toolchain()
 	fi
     fi
 
+    # Copy the licenses into the binary tarball
+    if test -d /usr/share/common-licenses; then
+	dryrun "cp -r /usr/share/common-licenses ${local_builds}/destdir/${host}/"
+    fi
+
     # The manifest file records the versions of all of the components used to
     # build toolchain.
     dryrun "cp ${manifest} ${local_builds}/destdir/${host}/"
