@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ba068154_dff3b208",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-22T13:27:03Z",
+      "side": 1,
+      "message": "This suggestion needs a bit of rework, since dpkg -S returns something like:\nmingw-w64-i686-dev: /usr/i686-w64-mingw32/lib/libwinpthread-1.dll\n\nThe copyright file is at: /usr/share/doc/mingw-w64-i686-dev/copyright",
+      "parentUuid": "ba068154_8c4f4a92",
+      "revId": "152b090f1e797cf3c4210231008e38700f361ba1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba068154_8cc10ae7",
         "filename": "lib/package.sh",
         "patchSetId": 1
