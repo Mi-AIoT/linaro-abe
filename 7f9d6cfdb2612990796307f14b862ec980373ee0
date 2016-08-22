@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_bfaa2ed2",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-22T13:05:23Z",
+      "side": 1,
+      "message": "What about AArch64 targets? IIRC, it supports multilibs too (for ilp32)",
+      "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
