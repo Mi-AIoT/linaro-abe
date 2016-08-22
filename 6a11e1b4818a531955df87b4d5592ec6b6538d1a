@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_7fa0c6f4",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-22T13:00:55Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have a more descriptive name (eg /tmp/make-release-${BUILD_NUMBER}-)",
+      "range": {
+        "startLine": 124,
+        "startChar": 57,
+        "endLine": 124,
+        "endChar": 78
+      },
+      "revId": "6a11e1b4818a531955df87b4d5592ec6b6538d1a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
