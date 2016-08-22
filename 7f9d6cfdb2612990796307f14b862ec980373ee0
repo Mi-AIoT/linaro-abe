@@ -16,6 +16,24 @@
       "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_7f872662",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-08-22T13:19:48Z",
+      "side": 1,
+      "message": "I believe aarch64 newlib doesn\u0027t support ILP32.  I doubt it ever will.  For aarch64-linux targets ABE doesn\u0027t support multilibs, since that involves building multiple instances of glibc.",
+      "parentUuid": "ba068154_bfaa2ed2",
+      "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
