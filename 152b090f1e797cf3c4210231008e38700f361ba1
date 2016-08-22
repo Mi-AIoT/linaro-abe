@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_8c4f4a92",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-22T10:46:32Z",
+      "side": 1,
+      "message": "mingw license info should be copied here.\n\n(untested code follows)\n--------\n\n# also use the same var in cp command line 162\nLIBWINPTHREAD_PATH\u003d/usr/$host/lib/libwinpthread-1.dll\n\nMINGW_PKG\u003d`dpkg -S \"$LIBWINPTHREAD_PATH\"`\nif test $? -ne 0; then\n   error \"could not identify package for libwinpthread-1.dll\"\n   return 1\nfi\n\nif test -f \"$MINGW_PKG/copyright\"; then\n   cp \"$MINGW_PKG/copyright\" \"${local_builds}/destdir/${host}/${MINGW_PKG}.copyright\"\nelse\n   error \"Could not find copyright file for $MINGW_PKG\"\n   return 1\nfi",
+      "revId": "152b090f1e797cf3c4210231008e38700f361ba1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_8cc10ae7",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-22T10:46:32Z",
+      "side": 1,
+      "message": "if this directory isn\u0027t present, then abe will silently produce a tarball which does not include the licence information. We should report an error here so that we can\u0027t accidentally release a tarball without licence info.",
+      "revId": "152b090f1e797cf3c4210231008e38700f361ba1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_0cad1a32",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-22T10:46:32Z",
+      "side": 1,
+      "message": "These common licences don\u0027t include the licences which apply to mingw or newlib.\n\nthe newlib licence should be copied from the source tree if newlib was one of the built components.\n\nThe sysroot and runtime libs tarballs should also include licences.",
+      "revId": "152b090f1e797cf3c4210231008e38700f361ba1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
