@@ -48,7 +48,7 @@ if test x${protocol} = x"file"; then
 else
     # Download the toolchain binary tarball
     if test ! -e ${testdir}/${file}; then
-	wget ${tarball} --directory=${testdir}
+	wget ${tarball} --directory=${testdir} --progress=dot:giga
 	if test $? -gt 0; then
 	    echo "ERROR: ${tarball} doesn't exist on remote machine!"
 	    exit 1
@@ -58,7 +58,7 @@ fi
 
 # Extract the tarball
 dir="`echo ${file} | sed -e 's:.tar.xz::'`"
-tar Jxvf ${tarball_name} --directory=${testdir}
+tar Jxf ${tarball_name} --directory=${testdir}
 if test $? -gt 0; then
     echo "ERROR: ${tarball} is corrupted!"
     exit 1
