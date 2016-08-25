@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_d882a8ff",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-25T20:57:54Z",
+      "side": 1,
+      "message": "(optional nitpick) could avoid the duplication with for loop?",
+      "revId": "2c1333aeac2670b027b9553f08d6b0ae96c099d0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
