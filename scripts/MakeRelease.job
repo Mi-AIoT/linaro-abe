@@ -149,14 +149,45 @@ if test ${abe_ret} -eq 0; then
     abe_ret=$?
 fi
 
-gcc_ver="$(echo $gcc_src | sed -e "s/^gcc-linaro-\([0-9\.]\+\).*\$/gcc-linaro-\1/")"
-if [ x"$gcc_ver" = x"$gcc_src" ]; then
-    gcc_ver="$release"
+# MakeRelease.job doesn't require an input gcc_src parameter (it'll invoke ABE
+# with the default) so we can't rely on it for the gcc version.  Parse the
+# generated manifest file name instead, e.g.,
+#    gcc-linaro-6.1.1-2016.08-rc1-linux-manifest.txt
+#    gcc-linaro-6.1.1-2016.08-rc1-win32-manifest.txt
+manifest_match="*-manifest.txt"
+
+# Read the found manifests into an array.
+read -a manifests <<<`find ${user_workspace} -name "${manifest_match}"`
+
+# Make sure we have at least one manifest file found.
+if test -z "${manifests[0]}"; then
+    echo "Couldn't find a manifest file for the recent build."
+    exit 1
 fi
 
+# Major.Minor.Point
+gcc_full_version=`basename ${manifests[0]} | awk -F '-' '{ print $3 }'`
+
+# Before GCC 5 the GCC release name was Major.Minor.  With GCC 5 and later
+# the GCC release name is Major only.
+gcc_release="`echo $gcc_full_version | awk -F '.' '{ print $1 }'`"
+if test ${gcc_release} -lt 5; then
+    gcc_minor="`echo $gcc_full_version | awk -F '.' '{ print $2 }'`"
+    gcc_release="${gcc_release}.${gcc_minor}"
+fi
+
+# Strip off everything but the DATE[-SPIN][-RC], complicated by the fact
+# that the spin and rc are both optional and not mutually exclusive.
+series_date=${manifests[0]##*-${gcc_full_version}-}
+series_date=${series_date%${manifest_match}}
+
+# We aren't sure if we're getting the linux or win32 manifest so strip both.
+series_date=${series_date%-linux}
+series_date=${series_date%-win32}
+
 # Fileserver location of binary tarballs and build logfiles
-binaries="/work/space/binaries/${gcc_ver}/${target}"
-logs="/work/space/logs/${gcc_ver}/${target}"
+binaries="/work/space/binaries/${gcc_release}-${series_date}/${target}"
+logs="/work/space/logs/${gcc_release}-${series_date}/${target}"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
@@ -173,9 +204,14 @@ if test ${abe_ret} -ne 0; then
 fi
 
 # Copy the binary test results to the fileserver
-manifest="`find ${user_workspace}/_build/builds/destdir/ -name \*manifest.txt`"
 ssh ${fileserver} "if test ! -d ${binaries}; then mkdir -p ${binaries}; fi"
-scp ${manifest} ${fileserver}:${binaries}/
+
+# There could be a linux and/or a win32 manifest.
+for manifest in "${manifests[@]}"
+do
+    scp ${manifest} ${fileserver}:${binaries}/
+done
+
 tarballs="`find ${user_snapshots} -name \*${release}\*.xz -o -name \*${release}\*.asc`"
 scp ${tarballs} ${fileserver}:${binaries}/
 
