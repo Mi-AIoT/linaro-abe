@@ -156,14 +156,19 @@ binary_toolchain()
     local destdir="${local_builds}/tmp.$$/${tag}"
     dryrun "mkdir -p ${destdir}"
 
-    # Some mingw packages have a runtime dependency on libwinpthread-1.dll, so a copy
-    # is put in bin so all executables will work.
+    # Some mingw packages have a runtime dependency on
+    # libwinpthread-1.dll, so a copy is put in bin so executables will
+    # work.
+    # Another copy is needed in gcc's libexec for cc1.exe to work
     if test "`echo ${host} | grep -c mingw`" -gt 0; then
-	dryrun "cp /usr/${host}/lib/libwinpthread-1.dll ${local_builds}/destdir/${host}/bin/"
-	if test $? -gt 0; then
-	    error "libwinpthread-1.dll not found, win32 executables won't run without it."
-	    return 1
-	fi
+	for dest in ${local_builds}/destdir/${host}/bin/ ${local_builds}/destdir/${host}/libexec/gcc/${target}/*/
+	do
+	    dryrun "cp /usr/${host}/lib/libwinpthread-1.dll ${dest}"
+	    if test $? -gt 0; then
+		error "libwinpthread-1.dll not found, win32 executables won't run without it."
+		return 1
+	    fi
+	done
     fi
 
     # The manifest file records the versions of all of the components used to
