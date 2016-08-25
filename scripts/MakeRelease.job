@@ -171,7 +171,7 @@ if test ${abe_ret} -ne 0; then
 fi
 
 # Copy the binary test results to the fileserver
-manifest="`find ${user_workspace} -name \*manifest.txt`"
+manifest="`find ${user_workspace}/_build/builds/destdir/ -name \*manifest.txt`"
 ssh ${fileserver} "if test ! -d ${binaries}; then mkdir -p ${binaries}; fi"
 scp ${manifest} ${fileserver}:${binaries}/
 tarballs="`find ${user_snapshots} -name \*${release}\*.xz -o -name \*${release}\*.asc`"
