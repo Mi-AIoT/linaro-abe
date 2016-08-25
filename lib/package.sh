@@ -157,9 +157,15 @@ binary_toolchain()
     dryrun "mkdir -p ${destdir}"
 
     # Some mingw packages have a runtime dependency on libwinpthread-1.dll, so a copy
-    # is put in bin so all executables will work.
+    # is put in bin so executables will work.
+    # Another copy is needed in gcc's libexec for cc1.exe to work
     if test "`echo ${host} | grep -c mingw`" -gt 0; then
 	dryrun "cp /usr/${host}/lib/libwinpthread-1.dll ${local_builds}/destdir/${host}/bin/"
+	if test $? -gt 0; then
+	    error "libwinpthread-1.dll not found, win32 executables won't run without it."
+	    return 1
+	fi
+	dryrun "cp /usr/${host}/lib/libwinpthread-1.dll ${local_builds}/destdir/${host}/libexec/gcc/${target}/*/"
 	if test $? -gt 0; then
 	    error "libwinpthread-1.dll not found, win32 executables won't run without it."
 	    return 1
