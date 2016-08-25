@@ -34,6 +34,24 @@
       "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_5d77ca02",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-25T08:52:48Z",
+      "side": 1,
+      "message": "I\u0027ve just built an aarch64-none-elf toolchain with abe, and I can see:\nsysroots/aarch64-none-elf/usr/lib/ilp32/\nsysroots/aarch64-none-elf/usr/lib/\nso it seems newlib supports ilp32. Maybe it\u0027s broken, though.",
+      "parentUuid": "ba068154_7f872662",
+      "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
