@@ -147,14 +147,25 @@ if test ${abe_ret} -eq 0; then
     abe_ret=$?
 fi
 
+# Not sure what the use-case is for this. Since we currently supply
+# gcc_src as a URL, gcc_ver is always equal to gcc_src when we build
+# our releases.
 gcc_ver="$(echo $gcc_src | sed -e "s/^gcc-linaro-\([0-9\.]\+\).*\$/gcc-linaro-\1/")"
 if [ x"$gcc_ver" = x"$gcc_src" ]; then
     gcc_ver="$release"
 fi
 
+# Match the naming scheme used in the Jenkins job
+gcc_version="`basename $gcc_src | awk -F '-' '{ print $3 }'`"
+tcwg_version="`echo $gcc_version | awk -F '.' '{ print $1 }'`"
+gcc_minor="`echo $gcc_version | awk -F '.' '{ print $2 }'`"
+if test ${tcwg_version} -lt 5; then
+    tcwg_version="${tcwg_version}.${gcc_minor}"
+fi
+
 # Fileserver location of binary tarballs and build logfiles
-binaries="/work/space/binaries/${gcc_ver}/${target}"
-logs="/work/space/logs/${gcc_ver}/${target}"
+binaries="/work/space/binaries/${tcwg_version}-${gcc_ver}/${target}"
+logs="/work/space/logs/${tcwg_version}-${gcc_ver}/${target}"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
