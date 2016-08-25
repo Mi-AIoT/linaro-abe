@@ -147,14 +147,42 @@ if test ${abe_ret} -eq 0; then
     abe_ret=$?
 fi
 
-gcc_ver="$(echo $gcc_src | sed -e "s/^gcc-linaro-\([0-9\.]\+\).*\$/gcc-linaro-\1/")"
-if [ x"$gcc_ver" = x"$gcc_src" ]; then
-    gcc_ver="$release"
+os="linux"
+if test x"${canadian}" = x"true"; then
+    os="win32"
 fi
 
+# MakeRelease.job doesn't require an input gcc_src parameter (it'll invoke ABE
+# with the default) so we can't rely on it for the gcc version.  Parse the
+# generated manifest file name instead, e.g.,
+#    gcc-linaro-6.1.1-2016.08-rc1-linux-manifest.txt
+#    gcc-linaro-6.1.1-2016.08-rc1-win32-manifest.txt
+manifest_match="*-${os}-manifest.txt"
+manifest="`find ${user_workspace}/_build/builds/destdir/ -name "${manifest_match}" | head -n 1`"
+
+if test -z "$manifest"; then
+    echo "Couldn't find a manifest file for the recent build."
+    exit 1
+fi
+
+# Major.Minor.Point
+gcc_full_version=`echo ${manifest} | awk -F '-' '{ print $3 }'`
+
+# Before GCC 5 the GCC release name was Major.Minor.  With GCC 5 and later
+# the GCC release name is Major only.
+gcc_release="`echo $gcc_full_version | awk -F '.' '{ print $1 }'`"
+if test ${gcc_release} -lt 5; then
+    gcc_minor="`echo $gcc_full_version | awk -F '.' '{ print $2 }'`"
+    gcc_release="${gcc_release}.${gcc_minor}"
+fi
+
+# Strip off everything but the DATE[-SPIN][-RC]
+series_date=${manifest##*-${gcc_full_version}-}
+series_date=${series_date%${manifest_match}}
+
 # Fileserver location of binary tarballs and build logfiles
-binaries="/work/space/binaries/${gcc_ver}/${target}"
-logs="/work/space/logs/${gcc_ver}/${target}"
+binaries="/work/space/binaries/${gcc_release}-${series_date}/${target}"
+logs="/work/space/logs/${gcc_release}-${series_date}/${target}"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
@@ -171,7 +199,6 @@ if test ${abe_ret} -ne 0; then
 fi
 
 # Copy the binary test results to the fileserver
-manifest="`find ${user_workspace}/_build/builds/destdir/ -name \*manifest.txt`"
 ssh ${fileserver} "if test ! -d ${binaries}; then mkdir -p ${binaries}; fi"
 scp ${manifest} ${fileserver}:${binaries}/
 tarballs="`find ${user_snapshots} -name \*${release}\*.xz -o -name \*${release}\*.asc`"
