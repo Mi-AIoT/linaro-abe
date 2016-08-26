@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_38e2d49f",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-08-26T14:18:23Z",
+      "side": 1,
+      "message": "s/warning/error/ (also line 619)",
+      "revId": "29900696b598fecf03e57bd0c8554c069b7cd530",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
