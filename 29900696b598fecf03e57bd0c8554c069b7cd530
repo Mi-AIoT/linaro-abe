@@ -16,6 +16,24 @@
       "revId": "29900696b598fecf03e57bd0c8554c069b7cd530",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_b87244e3",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-08-26T14:23:49Z",
+      "side": 1,
+      "message": "oops, I blindly cut \u0026 pasted from the \u0027make install failed\u0027 case a few lines above.",
+      "parentUuid": "ba068154_38e2d49f",
+      "revId": "29900696b598fecf03e57bd0c8554c069b7cd530",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
