@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_ce41420d",
+        "filename": "lib/package.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-08-30T17:40:40Z",
+      "side": 1,
+      "message": "Really, this should be a warning at configure time, that binary mingw releases won\u0027t work without libwinpthread.dll being installed.  But for this patch I don\u0027t think it\u0027s necessary.",
+      "range": {
+        "startLine": 166,
+        "startChar": 16,
+        "endLine": 166,
+        "endChar": 52
+      },
+      "revId": "b6cb69e012ba1e1e9877a730f409b7c6901e1bed",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
