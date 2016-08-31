@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_8e4a9a81",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-08-31T10:58:23Z",
+      "side": 1,
+      "message": "Do we still gcc_ver, since your gcc_version/tcwg_version is very similar?",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 7
+      },
+      "revId": "ab7a80a112f5c3c2f4bb26d4c6a6eb4939ec62fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
