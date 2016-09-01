@@ -22,6 +22,30 @@
       "revId": "ab7a80a112f5c3c2f4bb26d4c6a6eb4939ec62fd",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_af0af9cf",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-09-01T12:54:13Z",
+      "side": 1,
+      "message": "My understanding is that when building our releases, the assignation below will make $gcc_ver\u003d2016.08\ngcc_version would be 6.1\ntcwg_version would be 6\n\nWe can probably make some cleanup here, once we clarify the question in the comments above.\n\nMy intention was to do as few changes as needed for next release (which is now late), and work on further cleanup for the one in 3 months from now.",
+      "parentUuid": "ba068154_8e4a9a81",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 7
+      },
+      "revId": "ab7a80a112f5c3c2f4bb26d4c6a6eb4939ec62fd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
