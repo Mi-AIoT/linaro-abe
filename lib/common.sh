@@ -66,6 +66,7 @@ dryrun()
 	local result=$?
 	if test $result -gt 0; then
 	    ERROR_DETECTED=1
+	    warning "Previous command failed"
 	fi
 	return $result
     fi
