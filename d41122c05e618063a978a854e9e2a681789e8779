@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_55131a5c",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-09-02T15:32:41Z",
+      "side": 1,
+      "message": "this is a shell glob, not a regexp, so should read *i?86*)",
+      "revId": "d41122c05e618063a978a854e9e2a681789e8779",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_3510164e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-09-02T15:32:41Z",
+      "side": 1,
+      "message": "this is an error, not a warning",
+      "revId": "d41122c05e618063a978a854e9e2a681789e8779",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_951d8269",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-09-02T15:32:41Z",
+      "side": 1,
+      "message": "could do s/warning/error/ here too",
+      "revId": "d41122c05e618063a978a854e9e2a681789e8779",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
