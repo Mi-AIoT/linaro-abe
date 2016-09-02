@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ba068154_554b1a2b",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-09-02T18:01:17Z",
+      "side": 1,
+      "message": "for win32 builds, this now only copies the win32 manifest, but previously it would have copied both the linux and win32 manifests.\n\nIt looks like both sets of tarballs are copied. If the linux manifest is not copied, the linux tarballs should not be copied either.",
+      "revId": "ef0f81af54e9cfc32de1d66ec0617499ad8f6812",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
