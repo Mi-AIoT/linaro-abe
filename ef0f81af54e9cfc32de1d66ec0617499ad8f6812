@@ -16,6 +16,24 @@
       "revId": "ef0f81af54e9cfc32de1d66ec0617499ad8f6812",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ba068154_b56366b0",
+        "filename": "scripts/MakeRelease.job",
+        "patchSetId": 3
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-09-02T18:06:10Z",
+      "side": 1,
+      "message": "across unique invocations for MakeRelease.job is ${user_snapshots} re-used?  If not, then I\u0027m not sure it\u0027ll ever pick up more than the one set of tarballs.",
+      "parentUuid": "ba068154_554b1a2b",
+      "revId": "ef0f81af54e9cfc32de1d66ec0617499ad8f6812",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
