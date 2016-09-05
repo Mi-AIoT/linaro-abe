@@ -279,3 +279,13 @@ preserves the data, otherwise it'll get truncated.
 string comparisons. If one of the two strings is undefined, the script
 will abort. So always using "test x${foo} = xbar" prevents that.
 
+Adding support for a new target
+-------------------------------
+In order to add support for a missing target, one has to tell
+ABE about a few things peculiar to the target:
+- which libc to choose: in abe.sh, look for "powerpc" and add similar
+  handling code
+- select which languages to build: in config/gcc.conf, look for
+  "powerpc" again for an example
+- convert the target name into the linux name when installing the
+  linux kernel headers: in lib/make.sh, look for powerpc again
