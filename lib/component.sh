@@ -28,6 +28,7 @@ declare -ag toolchain
 # SRCDIR
 # BUILDDIR
 # FILESPEC
+# MD5SUM
 # These values are extracted from the config/[component].conf files
 # BRANCH
 # MAKEFLAGS
@@ -213,6 +214,22 @@ set_component_configure ()
     return 0
 }
 
+set_component_md5sum ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    declare -p ${component} 2>&1 > /dev/null
+    if test $? -gt 0; then
+       warning "${component} does not exist!"
+       return 1
+    else
+       eval ${component}[MD5SUM]="$2"
+    fi
+
+    return 0
+}
+
 # BRANCH is parsed from the config file for each component, but can be redefined
 # on the command line at runtime.
 #
@@ -358,6 +375,21 @@ get_component_configure ()
 	return 1
     else
 	eval "echo \${${component}[CONFIGURE]} ${sopts}"
+    fi
+
+    return 0
+}
+
+get_component_md5sum ()
+{
+#    trace "$*"
+
+    local component="`echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::'`"
+    if test "${component:+set}" != "set"; then
+       warning "${component} does not exist!"
+       return 1
+    else
+       eval "echo \${${component}[MD5SUM]}"
     fi
 
     return 0
