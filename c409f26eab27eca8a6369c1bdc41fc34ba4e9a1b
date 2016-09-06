@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a0b7d60_b2af1e2b",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-09-06T09:29:25Z",
+      "side": 1,
+      "message": "Indentation is incorrect.",
+      "range": {
+        "startLine": 79,
+        "startChar": 10,
+        "endLine": 79,
+        "endChar": 43
+      },
+      "revId": "c409f26eab27eca8a6369c1bdc41fc34ba4e9a1b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0b7d60_f280868d",
+        "filename": "lib/fetch.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-09-06T09:29:25Z",
+      "side": 1,
+      "message": "This seems to be unused?",
+      "range": {
+        "startLine": 309,
+        "startChar": 4,
+        "endLine": 309,
+        "endChar": 21
+      },
+      "revId": "c409f26eab27eca8a6369c1bdc41fc34ba4e9a1b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
