@@ -68,14 +68,18 @@ fetch()
 	return 1
     fi
 
-    # Fetch only supports fetching files which have an entry in the md5sums file.
-    # An unlisted file should never get this far anyway.
-    dryrun "check_md5sum ${component}"
-    if test $? -gt 0; then
-	  error "md5sums don't match!"
-      if test x"${force}" != xyes; then
-	    return 1
-      fi
+    # if doing a dryrun, then the .asc files will not be present which
+    # results in an error, so we don't attempt to check the md5sums.
+    # Note: we can't do "dryrun check_md5sum" because the check_md5sum also
+    # sets the component md5sum field.
+    if test x"${dryrun}" != xyes; then
+        check_md5sum ${component}
+        if test $? -gt 0; then
+	      error "md5sums don't match!"
+          if test x"${force}" != xyes; then
+	        return 1
+          fi
+        fi
     fi
 
     notice "md5sums matched"
@@ -301,10 +305,12 @@ check_md5sum()
 {
 #    trace "$*"
 
-    local tool="`basename $1`"
+    local component="`basename $1`"
+    local md5sum="$2"
 
-    local file="`get_component_filespec ${tool}`.asc"
-    local url="`get_component_url ${tool}`"
+    local file="`get_component_filespec ${component}`.asc"
+    local url="`get_component_url ${component}`"
+    local expected_md5sum="`get_component_md5sum ${component}`"
 
 #    if test "`echo ${url} | grep -c infrastructure`" -gt 0; then
 #	local dir="/infrastructure/"
@@ -312,17 +318,35 @@ check_md5sum()
 	local dir=""
 #    fi
 
-    if test ! -e "${local_snapshots}${dir}/${file}"; then
-        error "No md5sum file for ${tool}!"
+    if test ! -f "${local_snapshots}${dir}/${file}"; then
+        error "No md5sum file for ${component}!"
         return 1
     fi
 
+
     # Ask md5sum to verify the md5sum of the downloaded file against the hash in
     # the index.  md5sum must be executed from the snapshots directory.
-    pushd ${local_snapshots}${dir} &>/dev/null
-    dryrun "md5sum --status --check ${file}"
+    dryrun "cd ${local_snapshots}${dir} && md5sum --status --check ${file}"
     md5sum_ret=$?
-    popd &>/dev/null
+
+    local md5sum_in_file="`grep -o '^[0-9a-f]\{32\}\>' "${local_snapshots}${dir}/${file}"`"
+
+    # if the md5sum matches the .asc file, then check the expected md5sum
+    # is correct (if specified in the manifest)
+    if [ $md5sum_ret -eq 0 -a ! -z "${expected_md5sum}" ]; then
+        if [ "${expected_md5sum}" == "${md5sum_in_file}" ]; then
+            error "Expected md5sum was ${expected_md5sum}, but found ${md5sum_in_file}"
+            md5sum_ret=1
+
+        fi
+    fi
+
+    # if no md5sum was specified in manifest, then set the component md5sum
+    # so that it will be reported in the manifest
+    if [ -z "${expected_md5sum}" ]; then
+        notice "Setting md5sum for ${component}"
+        set_component_md5sum ${component} ${md5sum_in_file}
+    fi
 
     return $md5sum_ret
 }
