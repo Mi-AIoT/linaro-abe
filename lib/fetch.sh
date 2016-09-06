@@ -68,14 +68,14 @@ fetch()
 	return 1
     fi
 
-    # Fetch only supports fetching files which have an entry in the md5sums file.
-    # An unlisted file should never get this far anyway.
+    # if doing a dryrun, then the .asc files will not be present which
+    # results in an error, so we don't attempt to check the md5sums.
     dryrun "check_md5sum ${component}"
     if test $? -gt 0; then
-	  error "md5sums don't match!"
-      if test x"${force}" != xyes; then
+	error "md5sums don't match!"
+	if test x"${force}" != xyes; then
 	    return 1
-      fi
+	fi
     fi
 
     notice "md5sums matched"
@@ -112,6 +112,29 @@ extract()
 
     # Initialize component data structures
     local builddir="`get_component_builddir ${component}`"
+
+    # read the md5sum from the .asc file
+    local md5sum_in_file
+    if test x"${dryrun}" != xyes; then
+	if ! md5sum_in_file="`grep -o '^[0-9a-f]\{32\}\>' "${tarball}".asc`"; then
+	    error "Could not find checksum in ${tarball}.asc"
+	    return 1
+	fi
+
+	# check the md5sum from the manifest against the .asc file
+	local expected_md5sum="`get_component_md5sum ${component}`"
+	if [ ! -z "${expected_md5sum}" ]; then
+	    if [ "${expected_md5sum}" != "${md5sum_in_file}" ]; then
+		error "Expected md5sum was ${expected_md5sum}, but found ${md5sum_in_file}"
+		return 1
+	    fi
+	else
+	    # if no md5sum was specified in manifest, then set the component
+	    # md5sum so that it will be reported in the manifest
+	    notice "Setting md5sum for ${component}"
+	    set_component_md5sum ${component} ${md5sum_in_file}
+	fi
+    fi
 
     local ret=
     # If the tarball hasn't changed, then we don't need to extract anything.

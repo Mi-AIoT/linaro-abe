@@ -305,6 +305,11 @@ manifest()
 	    echo "${component}_makeflags=\"${makeflags}\"" >> ${outfile}
 	fi
 
+	local md5sum="`get_component_md5sum ${component}`"
+	if test x"${md5sum}" != x; then
+	    echo "${component}_md5sum=${md5sum}" >> ${outfile}
+	fi
+
 	# Drop any local build paths and replaced with variables to be more portable.
 	if test x"${component}" = x"gcc"; then
 	    echo "${component}_configure=" >> ${outfile}

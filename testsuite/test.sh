@@ -406,6 +406,29 @@ fi
 
 mv ${local_snapshots}/gmp-6.1.0.tar.xz.back ${local_snapshots}/gmp-6.1.0.tar.xz
 
+echo "============= extract() tests ================"
+
+# use correct md5sum
+set_component_md5sum gmp a9868ef2556ad6a2909babcd1428f3c7
+
+if extract gmp 2>/dev/null; then
+    pass "extract passed with valid md5sum"
+else
+    fail "extract failed with valid md5sum"
+fi
+
+# use incorrect md5sum
+set_component_md5sum gmp aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+if extract gmp 2>/dev/null; then
+    fail "extract succeeded, but should have failed due to incorrect md5sum"
+else
+    pass "extract failed as expected due to incorrect md5sum"
+fi
+
+# unset md5sum so that the remainder of the testsuite is unaffected
+set_component_md5sum gmp ""
+
 # ----------------------------------------------------------------------------------
 #
 # Test package building

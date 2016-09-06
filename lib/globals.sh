@@ -40,7 +40,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.1
+manifest_version=1.2
 
 # The prefix for installing the toolchain
 prefix=
@@ -162,13 +162,18 @@ import_manifest()
 	fi
 
 	local manifest_format="`grep "^manifest_format" ${manifest} | cut -d '=' -f 2`"
-	if test ${manifest_version} != ${manifest_format}; then
-	    error "Imported manifest isn't the current supported format!"
-            return 1
-	fi
+	case "${manifest_format}" in
+	    1.1) ;; # no md5sums, but no special handling required
+	    1.2) ;;
+	    *)
+		error "Imported manifest version $manifest_format is not supported."
+		return 1
+		;;
+	esac
 	local variables=
 	local i=0
 	for i in ${components}; do
+	    local md5sum="`grep "^${i}_md5sum" ${manifest} | cut -d '=' -f 2`"
 	    local url="`grep "^${i}_url" ${manifest} | cut -d '=' -f 2`"
 	    local branch="`grep "^${i}_branch" ${manifest} | cut -d '=' -f 2`"
 	    local filespec="`grep "^${i}_filespec" ${manifest} | cut -d '=' -f 2`"
@@ -217,7 +222,7 @@ import_manifest()
 		    ;;
 	    esac
 
-	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}}
+	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${md5sum:+MD5SUM=${md5sum}}
 	    if [ $? -ne 0 ]; then
 		error "component_init failed while parsing manifest"
 		build_failure
@@ -232,6 +237,7 @@ import_manifest()
 	    unset static
 	    unset makeflags
 	    unset configure
+	    unset md5sum
 	done
     else
 	error "Manifest file '${manifest}' not found"
