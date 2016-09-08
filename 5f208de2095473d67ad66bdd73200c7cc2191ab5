@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a0b7d60_830f2ee1",
+        "filename": "scripts/update-snapshots-ref.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000055
+      },
+      "writtenOn": "2016-09-08T17:24:29Z",
+      "side": 1,
+      "message": "If you move this code block to before generate_snapshots is called (above) then this will make sure that generate_snapshots() re-downloads the .asc files every time update-snapshots-ref is called, and not the first time ABE is invoked after update-snapshots-ref on each builder.",
+      "range": {
+        "startLine": 91,
+        "startChar": 4,
+        "endLine": 91,
+        "endChar": 36
+      },
+      "revId": "5f208de2095473d67ad66bdd73200c7cc2191ab5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
