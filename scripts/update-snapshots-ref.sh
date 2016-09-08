@@ -78,6 +78,10 @@ update_git_repos () {
 
 if $generate; then
     mkdir -p ${snapshots_dir}-new
+
+    # Remove *.asc files to fix cached incorrect md5sum files
+    rm -f ${snapshots_dir}-new/*.asc
+
     update_git_repos
     generate_snapshots
 
