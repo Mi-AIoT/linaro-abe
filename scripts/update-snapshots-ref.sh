@@ -86,6 +86,9 @@ if $generate; then
 
     # Remove md5sums to force ABE to fetch canonical version via http://.
     rm -f ${snapshots_dir}-new/md5sums
+
+    # Remove *.asc files to fix cached incorrect expat md5sum file
+    rm -f ${snapshots_dir}-new/*.asc
 fi
 
 update_git_repos
