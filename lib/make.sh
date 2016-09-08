@@ -32,7 +32,7 @@ build_all()
 	if test "`echo ${host} | grep -c mingw`" -gt 0; then
 	    # As Mingw32 requires a cross compiler to be already built, so we don't need
 	    # to rebuilt the sysroot.
-            local builds="${infrastructure} binutils libc stage2 gdb"
+            local builds="${infrastructure} expat python binutils libc stage2 gdb"
 	else
             local builds="${infrastructure} binutils stage1 libc stage2 gdb"
 	fi
@@ -118,6 +118,39 @@ build_all()
 		    sed -i -e 's/.*FIXME: //' ${sysroots}/usr/include/sys/types.h
 		fi
                 ;;
+            expat)
+		# TODO: avoid hardcoding the version in the path here
+		dryrun "rsync -ar ${local_snapshots}/expat-2.1.0-1/include ${local_builds}/destdir/${host}/usr/"
+		if [ $? -ne 0 ]; then
+		    error "rsync of expat include failed"
+		    return 1
+		fi
+		dryrun "rsync -ar ${local_snapshots}/expat-2.1.0-1/lib ${local_builds}/destdir/${host}/usr/"
+		if [ $? -ne 0 ]; then
+		    error "rsync of expat lib failed"
+		    return 1
+		fi
+		;;
+            python)
+		# The mingw package of python contains a script used by GDB to
+		# configure itself, this is used to specify that path so we
+		# don't have to modify the GDB configure script.
+		# TODO: avoid hardcoding the version in the path here...
+		export PYTHON_MINGW=${local_snapshots}/python-2.7.4-mingw32
+		# The Python DLLS need to be in the bin dir where the
+		# executables are.
+		dryrun "rsync -ar ${PYTHON_MINGW}/pylib ${PYTHON_MINGW}/dll ${PYTHON_MINGW}/libpython2.7.dll ${local_builds}/destdir/${host}/bin/"
+		if [ $? -ne 0 ]; then
+		    error "rsync of python libs failed"
+		    return 1
+		fi
+		# Future make check support of python GDB in mingw32 will
+		# require these exports.  Export them now for future reference.
+		export PYTHONHOME=${local_builds}/destdir/${host}/bin/dll
+		warning "You must set PYTHONHOME in your environment to ${PYTHONHOME}"
+		export PYTHONPATH=${local_builds}/destdir/${host}/bin/pylib
+		warning "You must set PYTHONPATH in your environment to ${PYTHONPATH}"
+		;;
             *)
 		build $i
                 build_all_ret=$?
