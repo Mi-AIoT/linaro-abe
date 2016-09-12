@@ -242,7 +242,7 @@ checkout()
 		# Some packages allow the build to modify the source directory and
 		# that might screw up abe's state so we restore a pristine branch.
 		# If an upstream branch is configured, try to pull from it
-		if git rev-parse @{upstream} >&/dev/null; then
+		if git -C ${srcdir} rev-parse @{upstream} >&/dev/null; then
 		    notice "Updating sources for ${component} in ${srcdir}"
 		    dryrun "(cd ${srcdir} && git stash --all)"
 		    dryrun "(cd ${srcdir} && git reset --hard)"
@@ -283,7 +283,7 @@ checkout()
 		    fi
 		    dryrun "(cd ${srcdir} && git_robust checkout -B ${branch} origin/${branch})"
 		    if test $? -gt 0; then
-			error "Can't checkout ${revision}"
+			error "Can't checkout ${branch}"
 			return 1
 		    fi
 		    dryrun "(cd ${srcdir} && git_robust pull)"
