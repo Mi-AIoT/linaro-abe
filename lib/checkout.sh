@@ -133,6 +133,34 @@ git_robust()
     done
 }
 
+# various black magic to forcibly update a checkout of a branch in srcdir
+# uses && throughout to avoid verbose error handling
+update_checkout_branch()
+{
+    local component="$1"
+    local srcdir=
+    srcdir="`get_component_srcdir ${component}`" || return 1
+    notice "Updating sources for ${component} in ${srcdir}"
+    dryrun "(cd ${srcdir} && git stash --all)" &&
+    dryrun "(cd ${srcdir} && git reset --hard)" &&
+    dryrun "(cd ${srcdir} && git_robust pull)" &&
+    # This is required due to the following scenario:  A git
+    # reference dir is populated with a git clone on day X.  On day
+    # Y a developer removes a branch and then replaces the same
+    # branch with a new branch of the same name.  On day Z ABE is
+    # executed against the reference dir copy and the git pull fails
+    # due to error: 'refs/remotes/origin/<branch>' exists; cannot
+    # create 'refs/remotes/origin/<branch>'.  You have to remove the
+    # stale branches before pulling the new ones.
+    dryrun "(cd ${srcdir} && git remote prune origin)" &&
+
+    dryrun "(cd ${srcdir} && git_robust pull)" &&
+    # Update branch directory (which maybe the same as repo
+    # directory)
+    dryrun "(cd ${srcdir} && git stash --all)" &&
+    dryrun "(cd ${srcdir} && git reset --hard)"
+}
+
 # This gets the source tree from a remote host
 # $1 - This should be a service:// qualified URL.  If you just
 #       have a git identifier call get_URL first.
@@ -243,25 +271,11 @@ checkout()
 		# that might screw up abe's state so we restore a pristine branch.
 		# If an upstream branch is configured, try to pull from it
 		if git -C ${srcdir} rev-parse @{upstream} >&/dev/null; then
-		    notice "Updating sources for ${component} in ${srcdir}"
-		    dryrun "(cd ${srcdir} && git stash --all)"
-		    dryrun "(cd ${srcdir} && git reset --hard)"
-		    dryrun "(cd ${srcdir} && git_robust pull)"
-		    # This is required due to the following scenario:  A git
-		    # reference dir is populated with a git clone on day X.  On day
-		    # Y a developer removes a branch and then replaces the same
-		    # branch with a new branch of the same name.  On day Z ABE is
-		    # executed against the reference dir copy and the git pull fails
-		    # due to error: 'refs/remotes/origin/<branch>' exists; cannot
-		    # create 'refs/remotes/origin/<branch>'.  You have to remove the
-		    # stale branches before pulling the new ones.
-		    dryrun "(cd ${srcdir} && git remote prune origin)"
-
-		    dryrun "(cd ${srcdir} && git_robust pull)"
-		    # Update branch directory (which maybe the same as repo
-		    # directory)
-		    dryrun "(cd ${srcdir} && git stash --all)"
-		    dryrun "(cd ${srcdir} && git reset --hard)"
+		    update_checkout_branch ${component}
+		    if test $? -gt 0; then
+			error "Error during update_checkout_branch."
+			return 1
+		    fi
                 else
 		    notice "No upstream branch for ${component} in ${srcdir}"
 		fi
