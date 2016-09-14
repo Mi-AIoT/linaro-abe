@@ -161,6 +161,33 @@ update_checkout_branch()
     dryrun "(cd ${srcdir} && git reset --hard)"
 }
 
+update_checkout_tag()
+{
+    local component="$1"
+    local srcdir=
+    srcdir="`get_component_srcdir ${component}`" || return 1
+    local branch=
+    branch="`get_component_branch ${component}`" || return 1
+    if git -C ${srcdir} rev-parse origin/${branch} >& /dev/null; then
+	error "Unexpectedly not tracking origin/${branch}"
+	return 1
+    fi
+    dryrun "(cd ${srcdir} && git_robust fetch)"
+    if test $? -gt 0; then
+	error "Can't reset to ${branch}"
+	return 1
+    fi
+    local currev="`cd ${srcdir} && git rev-parse HEAD`"
+    local tagrev="`cd ${srcdir} && git rev-parse ${branch}`"
+    if test x${currev} != x${tagrev}; then
+	dryrun "(cd ${srcdir} && git stash && git reset --hard ${branch})"
+        if test $? -gt 0; then
+	    error "Can't reset to ${branch}"
+	    return 1
+        fi
+    fi
+    return 0
+}
 # This gets the source tree from a remote host
 # $1 - This should be a service:// qualified URL.  If you just
 #       have a git identifier call get_URL first.
@@ -267,30 +294,33 @@ checkout()
 		fi
 		new_srcdir=true
 	    elif test x"${supdate}" = xyes; then
-		# Some packages allow the build to modify the source directory and
-		# that might screw up abe's state so we restore a pristine branch.
-		# If an upstream branch is configured, try to pull from it
-		if git -C ${srcdir} rev-parse @{upstream} >&/dev/null; then
+		# if we're building a particular revision, then make sure it
+		# is checked out.
+                if test x"${revision}" != x""; then
+		    notice "Building explicit revision for ${component}."
+		    # No need to pull.  A commit is a single moment in time
+		    # and doesn't change.
+		    dryrun "(cd ${srcdir} && git_robust checkout -B local_${revision} ${revision})"
+		    if test $? -gt 0; then
+			error "Can't checkout ${revision}"
+			return 1
+		    fi
+		elif git -C ${srcdir} rev-parse --verify refs/tags/${branch} >&/dev/null; then
+		    notice "Found tag ${branch}, updating in case tag has moved."
+		    update_checkout_tag "${component}"
+		    if test $? -gt 0; then
+			error "Error during update_checkout_tag."
+			return 1
+		    fi
+		else
+		    # Some packages allow the build to modify the source
+		    # directory and that might screw up abe's state so we
+		    # restore a pristine branch.
 		    update_checkout_branch ${component}
 		    if test $? -gt 0; then
 			error "Error during update_checkout_branch."
 			return 1
 		    fi
-                else
-		    notice "No upstream branch for ${component} in ${srcdir}"
-		fi
-		if test x"${revision}" != x""; then
-		    # No need to pull.  A commit is a single moment in time
-		    # and doesn't change.
-		    dryrun "(cd ${srcdir} && git_robust checkout -B local_${revision})"
-		    if test $? -gt 0; then
-			error "Can't checkout ${revision}"
-			return 1
-		    fi
-		else
-		    # Make sure we are on the correct branch.
-		    # This is a no-op if $branch is empty and it
-		    # just gets master.
 		    if test x"${branch}" = x; then
 			error "No branch name specified!"
 			return 1
