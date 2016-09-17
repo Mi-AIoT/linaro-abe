@@ -52,6 +52,24 @@
       "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a0b7d60_7bb0eaf4",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-09-17T13:43:09Z",
+      "side": 1,
+      "message": "To preserve current behavior for aarch64-none-elf, I\u0027ve added --enable-mutlilib in the latest version of the patch.",
+      "parentUuid": "ba068154_5d77ca02",
+      "revId": "7f9d6cfdb2612990796307f14b862ec980373ee0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
