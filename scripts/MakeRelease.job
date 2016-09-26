@@ -215,4 +215,16 @@ done
 tarballs="`find ${user_snapshots} -name \*${release}\*.xz -o -name \*${release}\*.asc`"
 scp ${tarballs} ${fileserver}:${binaries}/
 
+echo "Starting manifest validation."
+git clone --depth 1 git://git.linaro.org/toolchain/abe-tests.git
+for manifest in "${manifests[@]}"; do
+    ./abe-tests/validate-manifest.pl "${manifest}"
+    if test $? -ne 0; then
+       echo "Manifest validation failed."
+       exit 1
+    else
+       echo "Manifest validation passed."
+    fi
+done
+
 exit 0
