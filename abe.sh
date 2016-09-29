@@ -471,6 +471,62 @@ crosscheck_clibrary_target()
     return 0
 }
 
+select_clibrary()
+{
+    # Range check user input against supported C libraries.
+    case "${clibrary}" in
+	glibc|eglibc|newlib)
+	    clibrary="${setting}"
+	    notice "Using '${setting}' as the C library as directed by \"--set libc=${setting}\"."
+	    return 0
+	    ;;
+	auto)
+	    # Certain targets only make sense using newlib as the default
+	    # clibrary. Override the normal default in lib/global.sh. The
+	    # user might try to override this with --set libc={glibc|eglibc}
+	    # or {glibc|eglibc}=<foo> but that will be caught elsewhere.
+	    case ${target} in
+		arm*-eabi*|arm*-elf|aarch64*-*elf|*-mingw32|powerpc*-eabi|ppc*-eabi)
+		    clibrary="newlib"
+		    ;;
+		*)
+		    # we should use eglibc or glibc, depending on the selected
+		    # configuration
+		    local this_extraconfig
+		    local preferred_libc
+		    for this_extraconfig in ${extraconfig[preferred_libc]}; do
+			if test -f "${this_extraconfig}"; then
+			    notice "Sourcing extra config: ${this_extraconfig}"
+			    . "${this_extraconfig}"
+			else
+			    error "Warning: extraconfig file does not exist: ${this_extraconfig}"
+			    return 1
+			fi
+		    done
+		    if [ x"$preferred_libc" != x"" ]; then
+			clibrary=$preferred_libc
+		    else
+			error "could not find preferred libc"
+			return 1
+		    fi
+		    ;;
+	    esac
+
+	    ;;
+	*)
+	    error "'${clibrary}' is an unsupported libc option."
+	    return 1
+	    ;;
+    esac
+
+    # Verify that the user specified libc is compatible with
+    # the user specified target.
+    crosscheck_clibrary_target ${setting} ${target}
+    if test $? -gt 0; then
+	return 1
+    fi
+}
+
 
 # Returns '0' if $package ($1) is in the list of all_unit_tests.  Returns '1'
 # if not found.
@@ -537,25 +593,7 @@ set_package()
 	    return 0
 	    ;;
 	libc|lib*)
-	    # Range check user input against supported C libraries.
-	    case ${setting} in
-		glibc|eglibc|newlib)    
-
-		    # Verify that the user specified libc is compatible with
-		    # the user specified target.
-		    crosscheck_clibrary_target ${setting} ${target}
-		    if test $? -gt 0; then
-			return 1
-		    fi
-
-		    clibrary="${setting}"
-		    notice "Using '${setting}' as the C library as directed by \"--set libc=${setting}\"."
-		    return 0
-		    ;;
-		*)
-		    error "'${setting}' is an unsupported libc option."
-		    ;;
-	    esac
+	    clibrary="${setting}"
 	    ;;
 	arch)
 	    override_arch="${setting}"
@@ -925,17 +963,6 @@ while test $# -gt 0; do
 	    target=$2
 	    sysroots=${sysroots}/${target}
 
-	    # Certain targets only make sense using newlib as the default
-	    # clibrary. Override the normal default in lib/global.sh. The
-	    # user might try to override this with --set libc={glibc|eglibc}
-	    # or {glibc|eglibc}=<foo> but that will be caught elsewhere.
-	    case ${target} in
-		arm*-eabi*|arm*-elf|aarch64*-*elf|*-mingw32|powerpc*-eabi|ppc*-eabi)
-		    clibrary="newlib"
-		    ;;
-		 *)
-		    ;;
-	    esac
 	    shift
             ;;
 	--testcode|te*)
@@ -1110,6 +1137,13 @@ fi
 if [ "x${component_version_set}" = x1 -a ! -z "${do_manifest}" ]; then
   error "setting component versions with --manifest is not supported"
   build_failure
+fi
+
+# resolve C library from command line options, defaults, or extraconfig.
+select_clibrary
+if [ $? -ne 0 ]; then
+    error "Failed to resolve C library choice."
+    build_failure
 fi
 
 if [ ! -z "${do_manifest}" ]; then
