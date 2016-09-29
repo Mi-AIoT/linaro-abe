@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_6e9f8f04",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-09-29T23:19:07Z",
+      "side": 1,
+      "message": "The previous code would call crosscheck_clibrary_target and possibly exit with an error if the user chose an incompatible C library. Don\u0027t we want to keep this behaviour?",
+      "range": {
+        "startLine": 481,
+        "startChar": 5,
+        "endLine": 481,
+        "endChar": 11
+      },
+      "revId": "c9013b218681935ba64aca51bb5d6e446e0363fe",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_2e9587e4",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-09-29T23:19:07Z",
+      "side": 1,
+      "message": "Why arm*-eabi* instead of arm*-eabi?\nWhy aarch64*-*elf instead of aarch64*-elf?\nThere are probably target triplets I don\u0027t know of :-(\n\nHa just noticed that you just cut \u0026 pasted existing code....",
+      "range": {
+        "startLine": 489,
+        "startChar": 2,
+        "endLine": 489,
+        "endChar": 68
+      },
+      "revId": "c9013b218681935ba64aca51bb5d6e446e0363fe",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
