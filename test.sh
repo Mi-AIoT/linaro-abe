@@ -384,7 +384,7 @@ test_failure "${cb_commands}" "${match}"
 target="aarch64-none-elf"
 libc="foo"
 cb_commands="--target ${target} --set libc=${libc}"
-match="set_package"
+match="unsupported libc option"
 test_failure "${cb_commands}" "${match}"
 
 target="aarch64-none-elf"
