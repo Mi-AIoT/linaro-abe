@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_916e5e95",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-01T20:17:13Z",
+      "side": 1,
+      "message": "Do the following git commands depend on the \u0027cd ${srcdir}\u0027 ?\nThen, maybe it would be clearer to move the cd command before the if. In which case, you can drop the \u0027cd ${srcdir}\u0027 from the lines below, when computing currev, tagrev, ....",
+      "range": {
+        "startLine": 171,
+        "startChar": 7,
+        "endLine": 171,
+        "endChar": 26
+      },
+      "revId": "ab6d9ab5d699bca2ecf1198e8ab63d75e6815521",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_312cca4a",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-01T20:17:13Z",
+      "side": 1,
+      "message": "same comment as previously",
+      "range": {
+        "startLine": 308,
+        "startChar": 7,
+        "endLine": 308,
+        "endChar": 19
+      },
+      "revId": "ab6d9ab5d699bca2ecf1198e8ab63d75e6815521",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
