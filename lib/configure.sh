@@ -96,9 +96,7 @@ configure_build()
     fi
 
     # prefix is the root everything gets installed under.
-    if test x"${prefix}" = x; then
-	local prefix="${local_builds}/destdir/${host}"
-    fi
+    prefix="${local_builds}/destdir/${host}"
 
     # The release string is usually the date as well, but in YYYY.MM format.
     # For snapshots we add the day field as well.
