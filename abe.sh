@@ -31,7 +31,7 @@ usage()
              [--infrastructure] [--interactive]
              [--manifest <manifest_file>]
              [--space <space needed>]
-             [--parallel] [--prefix] [--release <release_version_string>]
+             [--parallel] [--release <release_version_string>]
              [--set {arch|cpu|tune}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
@@ -232,8 +232,6 @@ OPTIONS
 		Set to 0 to skip the space check.
 
   --parallel	Set the make flags for parallel builds.
-
-  --prefix	Set an alternate value for the prefix used to configure.
 
   --release <release_version_string>
 
@@ -833,11 +831,6 @@ while test $# -gt 0; do
        # download and install the infrastructure libraries GCC depends on
 	--inf*|infrastructure)
 	    infrastructure
-	    ;;
-	--pr*|--prefix*)
-	    check_directive $1 prefix "pr" $2
-	    prefix=$2
-	    shift
 	    ;;
 	--ccache|-cc*)
             use_ccache=yes

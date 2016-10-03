@@ -42,8 +42,8 @@ override_tune=
 
 manifest_version=1.1
 
-# The prefix for installing the toolchain
-prefix=
+# prefix is the root everything gets installed under.
+prefix="${local_builds}/destdir/${host}"
 
 # The default timeout.  If you're on a wireless network this
 # might not be sufficient and can be overridden at the command
