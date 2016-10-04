@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_f48fd073",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-04T14:41:46Z",
+      "side": 1,
+      "message": "if --host is specified on the command line, then this path will be wrong because this is executed before the command line parsing is done. This will probably break win32 builds.",
+      "revId": "b6774e1cbdf2eedac36c438622597d429b8d418e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
