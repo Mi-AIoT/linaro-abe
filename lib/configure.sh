@@ -35,6 +35,11 @@ configure_build()
     local version="`basename ${srcdir}`"
     local stamp="`get_stamp_name configure ${version} ${2:+$2}`"
 
+    # this is a hack for eglibc so that the configure script can be found
+    if [ x"${component}" = x"eglibc" ]; then
+	srcdir="${srcdir}/libc"
+    fi
+
     # Don't look for the stamp in the builddir because it's in builddir's
     # parent directory.
     local stampdir="`dirname ${builddir}`"

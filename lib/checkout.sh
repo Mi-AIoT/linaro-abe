@@ -52,7 +52,7 @@ checkout_all()
 	    checkout ${package}
 	    checkout_ret=$?
 	    if test ${checkout_ret} -gt 0; then
-		error "Failed checkout out of ${name}."
+		error "Failed checkout out of ${package}."
 		return 1
 	    fi
 	else
