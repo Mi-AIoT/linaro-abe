@@ -185,18 +185,12 @@ import_manifest()
 		local dir=${version}
 	    else
 		local fixbranch="`echo ${branch} | tr '/@' '_'`"
-		local dir=${i}.git~${fixbranch}${revision:+_rev_${revision}}
+		local dir=${filespec}~${fixbranch}${revision:+_rev_${revision}}
 	    fi
 	    local srcdir="${local_snapshots}/${dir}"
 	    local builddir="${local_builds}/${host}/${target}/${dir}"
 	    case "${i}" in
-		gdb|binutils)
-		    local dir="`echo ${dir} | sed -e 's:^.*\.git:binutils-gdb.git:'`"
-		    local srcdir=${local_snapshots}/${dir}
-		    local builddir="${local_builds}/${host}/${target}/${dir}"
-		    ;;
 		gdbserver)
-		    local dir="`echo ${dir} | sed -e 's:^.*\.git:binutils-gdb.git:'`"
 		    local srcdir=${local_snapshots}/${dir}/gdb/gdbserver
  		    local builddir="${local_builds}/${host}/${target}/${dir}-gdbserver"
 		    ;;
