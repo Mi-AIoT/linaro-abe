@@ -580,14 +580,19 @@ collect_data ()
 	    branch="master"
 	fi
 	local revision="`get_git_revision ${gitinfo}`"
-	local search=
-	case ${component} in
-	    binutils*|gdb*) search="binutils-gdb.git" ;;
-	    *) search="${component}.git" ;;
+	local repo="`get_git_url ${gitinfo}`"
+	local url=
+
+	case "${repo}" in
+	    *://*)
+		# user specified a full URL
+		url="${repo}" ;;
+	    *)
+		# look up full URL in sources.conf
+		url="`grep "^${repo}[[:space:]]" ${sources_conf} | tr -s ' ' | cut -d ' ' -f 2`"
 	esac
-	local url="`grep ^${search} ${sources_conf} | tr -s ' ' | cut -d ' ' -f 2`"
 	if test x"{$url}" = x; then
-	    warning "${component} Not found in  ${sources_conf}"
+	    warning "${repo} not found in ${sources_conf}"
 	    return 1
 	fi
 	local filespec="`basename ${url}`"
@@ -596,7 +601,7 @@ collect_data ()
 	# This is unfortunately, as @ is used to deliminate the revision
 	# string.
 	local fixbranch="`echo ${branch} | tr '/' '~' | tr '@' '_'`"
-	local dir=${search}${branch:+~${fixbranch}}${revision:+_rev_${revision}}
+	local dir=${filespec}${branch:+~${fixbranch}}${revision:+_rev_${revision}}
     fi
 
     # configured and built as a separate way.
