@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_c27652d8",
+        "filename": "config/gdbserver.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-11T11:13:37Z",
+      "side": 1,
+      "message": "abe-tests fails because gdbserver is now built with a C++ compiler and therefore needs CXXFLAGS\u003d--sysroot\u003d${sysroots} (untested...)\n\nI\u0027m not sure why the build succeeds for test\u003dcross-build, unless that test is not built in a clean workspace?\n\n(it looks like it is not built in a clean workspace because of https://git.linaro.org/ci/job/configs.git/commitdiff/cd4a95daf4457e114b8e41dd6e8d9760ac762e56)",
+      "revId": "2b5893911b6d3e344075e622d5701d1eea5e3715",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
