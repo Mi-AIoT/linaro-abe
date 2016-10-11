@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_c22492c8",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-10-11T12:05:13Z",
+      "side": 1,
+      "message": "maybe git -C would be better here for coherency, and since update_checkout_tag will do a cd ${srcdir}",
+      "range": {
+        "startLine": 308,
+        "startChar": 7,
+        "endLine": 308,
+        "endChar": 27
+      },
+      "revId": "7457441e3371c69122ae62e970b138c4a88c0bf3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
