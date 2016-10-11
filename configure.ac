@@ -49,10 +49,8 @@ AC_SUBST(DBPASSWD)
 DBHOST=${dbhost}
 AC_SUBST(DBHOST)
 
-CPUS="`grep -c proces /proc/cpuinfo`"
+CPUS="`getconf _NPROCESSORS_ONLN`"
 AC_SUBST(CPUS)
-CORES="`grep cores /proc/cpuinfo | tail -1 | cut -d ' ' -f 3`"
-AC_SUBST(CORES)
 LIBC="`getconf GNU_LIBC_VERSION`"
 AC_SUBST(LIBC)
 KERNEL="`uname -r`"
