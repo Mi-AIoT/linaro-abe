@@ -59,6 +59,9 @@ KERNEL="`uname -r`"
 AC_SUBST(KERNEL)
 BUILDHOST="`${srcdir}/config.guess`"
 BUILD_ARCH="`uname -m`"
+if test x"`uname -s`" = "xDarwin"; then
+   BUILD_ARCH="`uname -p`"
+fi
 AC_SUBST(BUILD_ARCH)
 AC_SUBST(BUILDHOST)
 HOSTNAME="`uname -n`"
