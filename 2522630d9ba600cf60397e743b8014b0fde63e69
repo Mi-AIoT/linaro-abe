@@ -22,6 +22,30 @@
       "revId": "2522630d9ba600cf60397e743b8014b0fde63e69",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_5d7367b1",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-11T15:44:00Z",
+      "side": 1,
+      "message": "It is redundant, but this comes from the original code which was moved from checkout(). Future cleanup is possible :)",
+      "parentUuid": "7af0899e_3dff7b03",
+      "range": {
+        "startLine": 160,
+        "startChar": 4,
+        "endLine": 161,
+        "endChar": 47
+      },
+      "revId": "2522630d9ba600cf60397e743b8014b0fde63e69",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
