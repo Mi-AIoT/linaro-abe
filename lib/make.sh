@@ -703,14 +703,7 @@ make_check()
 	exec_tests=false
 	case "$component" in
 	    gcc) exec_tests=true ;;
-	    # Support testing remote gdb for the merged binutils-gdb.git
-	    # repository where the branch doesn't indicate the tool.
-	    # Fixme: This doesn't seem to be working.
-	    binutils)
-		if [ x"$2" = x"gdb" ]; then
-		    exec_tests=true
-		fi
-		;;
+	    binutils) exec_tests=true ;;
 	    # Support testing remote gdb for the merged binutils-gdb.git
 	    # where the branch name DOES indicate the tool.
 	    gdb)
