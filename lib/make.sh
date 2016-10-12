@@ -293,12 +293,13 @@ build()
 	if test x"${supdate}" = xyes; then
             component_is_tar ${component}
             if test $? -gt 0; then
--		# Don't update the compiler sources between stage1 and stage2 builds if this
+		# Don't update the compiler sources between stage1 and stage2 builds if this
 		# is a cross build.
 		notice "Checking out ${component} ${2:+$2}"
 		checkout ${component}
 		if test $? -gt 0; then
-                    warning "Sources not updated, network error!"
+                    error "Sources not updated, network error!"
+                    return 1
 		fi
             else
 		# Don't update the compiler sources between stage1 and stage2 builds if this
