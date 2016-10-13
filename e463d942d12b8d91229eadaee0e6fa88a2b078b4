@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_2868d7f4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-13T12:50:12Z",
+      "side": 1,
+      "message": "config/ilp32-dev",
+      "revId": "e463d942d12b8d91229eadaee0e6fa88a2b078b4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_886d8b07",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-13T12:50:12Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e463d942d12b8d91229eadaee0e6fa88a2b078b4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
