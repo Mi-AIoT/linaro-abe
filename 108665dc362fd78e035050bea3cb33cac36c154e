@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_03769c3e",
+        "filename": "config/gdbserver.conf",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-13T23:34:54Z",
+      "side": 1,
+      "message": "We\u0027ll need CFLAGS set to support gdb 7.10. Should we do that here or in config/gcc4_9/gdbserver.conf?",
+      "revId": "108665dc362fd78e035050bea3cb33cac36c154e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
