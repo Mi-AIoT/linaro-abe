@@ -149,7 +149,6 @@ AC_CHECK_LIB(z, gzread)
 
 # Figure out which packaging system is in use. Since it's possible to
 # install both on a system.
-rpm="`uname -a | grep -ic '\.fc[[0-9]].\.'`"
 deb="`uname -a | grep -ic 'ubuntu'`"
 deb=$(($deb + `uname -a | grep -ic 'debian'`))
 
@@ -182,7 +181,7 @@ if test ${deb} -ge 1; then
 
 ### RPM Packages ###
 else
-if test ${rpm} -eq 1; then
+if which rpm > /dev/null; then
     packages="${packages} ncurses-devel python-devel"
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
@@ -200,9 +199,7 @@ if test ${rpm} -eq 1; then
 
 ### Arch Packages ###
 else
-pacman="`which pacman 2> /dev/null`"
-result=$?
-if test ${result} -eq 0; then
+if which pacman > /dev/null; then
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
         exists="`pacman -Qs ${i} | wc -l`"
