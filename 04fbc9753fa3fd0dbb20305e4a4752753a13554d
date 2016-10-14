@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_a3ace836",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-14T13:58:49Z",
+      "side": 1,
+      "message": "clean up: else if-\u003eelif",
+      "revId": "04fbc9753fa3fd0dbb20305e4a4752753a13554d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_03aa1c19",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-14T13:58:49Z",
+      "side": 1,
+      "message": "...and here...",
+      "revId": "04fbc9753fa3fd0dbb20305e4a4752753a13554d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_e3a6f052",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-14T13:58:49Z",
+      "side": 1,
+      "message": "...then only one fi here",
+      "revId": "04fbc9753fa3fd0dbb20305e4a4752753a13554d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
