@@ -67,6 +67,12 @@ logname=""
 # Compiler languages to build
 languages=default
 
+# Target to build for
+target=""
+
+# File with value for --testcontainer= option
+testcontainer_file=""
+
 # Whether attempt bootstrap
 try_bootstrap=false
 
@@ -91,7 +97,7 @@ rebuild=true
 
 orig_parameters="$@"
 
-OPTS="`getopt -o s:g:c:w:o:l:rt:b:h -l override:,gcc-branch:,snapshots:,gitrepo:,abe:,workspace:,options:,logserver:,logname:,languages:,runtests,target:,bootstrap,help,excludecheck:,norebuild,extraconfig: -- "$@"`"
+OPTS="`getopt -o s:g:c:w:o:l:rt:b:h -l override:,gcc-branch:,snapshots:,gitrepo:,abe:,workspace:,options:,logserver:,logname:,languages:,runtests,target:,testcontainerfile:,bootstrap,help,excludecheck:,norebuild,extraconfig: -- "$@"`"
 while test $# -gt 0; do
     case $1 in
 	--gcc-branch) change="$change gcc=$2"; shift ;;
@@ -101,6 +107,7 @@ while test $# -gt 0; do
         -g|--gitrepo) git_reference=$2; shift ;;
         -c|--abe) abe_dir=$2; shift ;;
 	-t|--target) target=$2; shift ;;
+	--testcontainerfile) testcontainer_file=$2; shift ;;
         -w|--workspace) user_workspace=$2; shift ;;
         -o|--options) user_options=$2; shift ;;
         --logserver) logserver=$2; shift ;;
@@ -363,6 +370,15 @@ if test x"${runtests}" = xtrue; then
 
     check="--check all"
     check="${check}${excludecheck_opt}"
+
+    if [ x"$testcontainer_file" != x"" ]; then
+        if [ ! -f "$testcontainer_file" ]; then
+            echo "ERROR: Cannot start test container"
+            exit 1
+        fi
+
+        check="$check --testcontainer $(cat "$testcontainer_file")"
+    fi
 
     ret=0
     $CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > check.out 2> >(tee check.err >&2) || ret=$?
