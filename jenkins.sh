@@ -242,25 +242,6 @@ if test x"${linux_snapshot}" != x"latest" -a x"${linux_snapshot}" != x; then
     change="${change} linux-${linux_snapshot}"
 fi
 
-# if runtests is true, then run make check after the build completes
-if test x"${runtests}" = xtrue; then
-    # check that expect is working, and dump some debug info then exit if not
-    if ! echo "spawn true" | /usr/bin/expect -f - >/dev/null; then
-        echo "expect cannot spawn processes. Aborting make check."
-        echo "some debug info follows..."
-        echo "running: ls -l /dev/ptmx"
-        ls -l /dev/ptmx
-        echo "running: ls -l /dev/pts"
-        ls -l /dev/pts
-        echo "running: grep devpts /proc/mounts"
-        grep devpts /proc/mounts
-        exit 1
-    fi
- 
-    check="--check all"
-    check="${check}${excludecheck_opt}"
-fi
-
 if test x"${target}" != x"native" -a x"${target}" != x; then
     platform="--target ${target}"
 fi
@@ -355,7 +336,7 @@ fi
 # Now we build the cross compiler, for a native compiler this becomes
 # the stage2 bootstrap build.
 ret=0
-$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2) || ret=$?
+$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2) || ret=$?
 
 # If abe returned an error, make jenkins see this as a build failure
 if test $ret -gt 0; then
@@ -363,6 +344,36 @@ if test $ret -gt 0; then
     tail -n 50 build.out
     echo "================= TAIL OF LOG: FINISH ================="
     exit 1
+fi
+
+# if runtests is true, then run make check after the build completes
+if test x"${runtests}" = xtrue; then
+    # check that expect is working, and dump some debug info then exit if not
+    if ! echo "spawn true" | /usr/bin/expect -f - >/dev/null; then
+        echo "expect cannot spawn processes. Aborting make check."
+        echo "some debug info follows..."
+        echo "running: ls -l /dev/ptmx"
+        ls -l /dev/ptmx
+        echo "running: ls -l /dev/pts"
+        ls -l /dev/pts
+        echo "running: grep devpts /proc/mounts"
+        grep devpts /proc/mounts
+        exit 1
+    fi
+
+    check="--check all"
+    check="${check}${excludecheck_opt}"
+
+    ret=0
+    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > check.out 2> >(tee check.err >&2) || ret=$?
+
+    # If abe returned an error, make jenkins see this as a build failure
+    if test $ret -gt 0; then
+	echo "================= TAIL OF LOG: BEGIN ================="
+	tail -n 50 check.out
+	echo "================= TAIL OF LOG: FINISH ================="
+	exit 1
+    fi
 fi
 
 # Create the BUILD-INFO file for Jenkins.
@@ -480,7 +491,7 @@ if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"tr
     cp ${logs} ${logs_dir}/ || status=1
 
     # Copy stdout and stderr output from abe.
-    cp build.out build.err ${logs_dir}/ || status=1
+    cp build.out build.err check.out check.err ${logs_dir}/ || status=1
 
     xz ${logs_dir}/* || status=1
     scp ${logs_dir}/* ${logserver}:${basedir}/${dir}/ || status=1
