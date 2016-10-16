@@ -141,8 +141,8 @@ update_checkout_branch()
     local srcdir=
     srcdir="`get_component_srcdir ${component}`" || return 1
     notice "Updating sources for ${component} in ${srcdir}"
-    dryrun "(cd ${srcdir} && git stash --all)" &&
-    dryrun "(cd ${srcdir} && git reset --hard)" &&
+    dryrun "git -C ${srcdir} stash --all" &&
+    dryrun "git -C ${srcdir} reset --hard" &&
     dryrun "(cd ${srcdir} && git_robust pull)" &&
     # This is required due to the following scenario:  A git
     # reference dir is populated with a git clone on day X.  On day
@@ -152,13 +152,13 @@ update_checkout_branch()
     # due to error: 'refs/remotes/origin/<branch>' exists; cannot
     # create 'refs/remotes/origin/<branch>'.  You have to remove the
     # stale branches before pulling the new ones.
-    dryrun "(cd ${srcdir} && git remote prune origin)" &&
+    dryrun "git -C ${srcdir} remote prune origin" &&
 
     dryrun "(cd ${srcdir} && git_robust pull)" &&
     # Update branch directory (which maybe the same as repo
     # directory)
-    dryrun "(cd ${srcdir} && git stash --all)" &&
-    dryrun "(cd ${srcdir} && git reset --hard)"
+    dryrun "git -C ${srcdir} stash --all" &&
+    dryrun "git -C ${srcdir} reset --hard"
 }
 
 update_checkout_tag()
@@ -180,7 +180,7 @@ update_checkout_tag()
     local currev="`cd ${srcdir} && git rev-parse HEAD`"
     local tagrev="`cd ${srcdir} && git rev-parse ${branch}`"
     if test x${currev} != x${tagrev}; then
-	dryrun "(cd ${srcdir} && git stash && git reset --hard ${branch})"
+	dryrun "git -C ${srcdir} stash && git -C ${srcdir} reset --hard ${branch}"
         if test $? -gt 0; then
 	    error "Can't reset to ${branch}"
 	    return 1
@@ -278,7 +278,7 @@ checkout()
 		    # git checkout of a commit leaves the head in detached state so we need to
 		    # give the current checkout a name.  Use -B so that it's only created if
 		    # it doesn't exist already.
-		    dryrun "(cd ${srcdir} && git checkout -B local_${revision})"
+		    dryrun "git -C ${srcdir} checkout -B local_${revision}"
 		    if test $? -gt 0; then
 			error "Can't checkout ${revision}"
 			return 1
