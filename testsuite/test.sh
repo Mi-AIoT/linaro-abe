@@ -602,12 +602,14 @@ test_checkout ()
     # Make sure there's no hanging state relating to this test before it runs
     rm -rf ${local_snapshots}/${package}*
 
-    if test x"${branch}" != x; then
-	set_component_branch ${package} ${branch}
+    set_component_branch ${package} ${branch}
+    set_component_revision ${package} ${revision}
+    set_component_srcdir abe ${local_snapshots}/abe.git~${branch}
+
+    if test x"${revision}" != x; then
+    set_component_srcdir abe ${local_snapshots}/abe.git_rev_${revision}
     fi
-    if test x"${branch}" != x; then
-	set_component_revision ${package} ${revision}
-    fi
+
     if test x"${debug}" = x"yes"; then
 	out="`(cd ${local_snapshots} && checkout ${package})`"
 	ret=$?
