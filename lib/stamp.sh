@@ -77,7 +77,7 @@ create_stamp()
 
     dryrun "touch \"${full_stamp_path}\""
     ret=$?
-    notice "Creating stamp ${full_stamp_path} (`stat -c %Y ${full_stamp_path}`)"
+    notice "Creating stamp ${full_stamp_path} ($(dryrun "stat -c %Y ${full_stamp_path}"))"
     return ${ret}
 }
 
@@ -136,11 +136,11 @@ check_stamp()
 	elif test x"${local_force}" = xyes; then
 	    notice "--force is being used${stamp_type:+, ${stamp_type}ing..}."
 	else
-	    notice "${compare_file} (`stat -c %Y ${compare_file}`) is newer than ${stamp_loc}/${stamp_name} (`stat -c %Y ${stamp_loc}/${stamp_name}`)${stamp_type:+, ${stamp_type}ing..}."
+	    notice "${compare_file} ($(dryrun "stat -c %Y ${compare_file}")) is newer than ${stamp_loc}/${stamp_name} ($(dryrun "stat -c %Y ${stamp_loc}/${stamp_name}"))${stamp_type:+, ${stamp_type}ing..}."
 	fi
 	return 1
     else
-     	notice "${stamp_loc}/${stamp_name} (`stat -c %Y ${stamp_loc}/${stamp_name}`) is newer than ${compare_file} (`stat -c %Y ${compare_file}`).  Nothing to be done."
+     	notice "${stamp_loc}/${stamp_name} ($(dryrun "stat -c %Y ${stamp_loc}/${stamp_name}")) is newer than ${compare_file} ($(dryrun "stat -c %Y ${compare_file}")).  Nothing to be done."
     fi    
     return 0
 }
