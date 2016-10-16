@@ -193,7 +193,7 @@ create_release_version()
 
 	local srcdir="`get_component_srcdir ${version}`"
 	if test -d "${srcdir}/.git" -o -e "${srcdir}/.gitignore"; then
-	    local revision="@`cd ${srcdir} && git log --oneline | head -1 | cut -d ' ' -f 1`"
+	    local revision="@`git -C ${srcdir} log --oneline | head -1 | cut -d ' ' -f 1`"
 	fi
 
 	local date="`date +%Y%m%d`"
