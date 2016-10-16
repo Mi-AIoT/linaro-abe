@@ -380,7 +380,7 @@ EOF
 	    local srcdir="`get_component_srcdir $i`"
 	    # Invoke in a subshell in order to prevent state-change of the current
 	    # working directory after manifest is called.
-	    $(cd ${srcdir} && git log -n 1 >> ${outfile})
+	    git -C ${srcdir} log -n 1 >> ${outfile}
 	    echo "" >> ${outfile}
 	fi
     done
@@ -439,7 +439,7 @@ binutils_src_tarball()
 	fi
 	if test -d ${srcdir}/.git; then
 	    local binutils_version="${dir}-${date}"
-	    local revision="-`cd ${srcdir} && git log --oneline | head -1 | cut -d ' ' -f 1`"
+	    local revision="-`git -C ${srcdir} log --oneline | head -1 | cut -d ' ' -f 1`"
 	    local exclude="--exclude .git"
 	else
 	    local binutils_version="`echo ${binutils_version} | sed -e "s:-2.*:-${date}:"`"

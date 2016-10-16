@@ -109,9 +109,9 @@ update_checkout_branch()
 	error "Can't checkout ${branch}"
 	return 1
     fi
-    dryrun "(cd ${srcdir} && git stash --all)" &&
-    dryrun "(cd ${srcdir} && git reset --hard)" &&
-    dryrun "(cd ${srcdir} && git_robust pull)" &&
+    dryrun "git -C ${srcdir} stash --all" &&
+    dryrun "git -C ${srcdir} reset --hard" &&
+    dryrun "git_robust -C ${srcdir} pull" &&
     # This is required due to the following scenario:  A git
     # reference dir is populated with a git clone on day X.  On day
     # Y a developer removes a branch and then replaces the same
@@ -120,13 +120,13 @@ update_checkout_branch()
     # due to error: 'refs/remotes/origin/<branch>' exists; cannot
     # create 'refs/remotes/origin/<branch>'.  You have to remove the
     # stale branches before pulling the new ones.
-    dryrun "(cd ${srcdir} && git remote prune origin)" &&
+    dryrun "git -C ${srcdir} remote prune origin" &&
 
-    dryrun "(cd ${srcdir} && git_robust pull)" &&
+    dryrun "git_robust -C ${srcdir} pull" &&
     # Update branch directory (which maybe the same as repo
     # directory)
-    dryrun "(cd ${srcdir} && git stash --all)" &&
-    dryrun "(cd ${srcdir} && git reset --hard)"
+    dryrun "git -C ${srcdir} stash --all" &&
+    dryrun "git -C ${srcdir} reset --hard"
 }
 
 update_checkout_tag()
@@ -140,15 +140,15 @@ update_checkout_tag()
 	error "Unexpectedly not tracking origin/${branch}"
 	return 1
     fi
-    dryrun "(cd ${srcdir} && git_robust fetch)"
+    dryrun "git_robust -C ${srcdir} fetch"
     if test $? -gt 0; then
 	error "Can't reset to ${branch}"
 	return 1
     fi
-    local currev="`cd ${srcdir} && git rev-parse HEAD`"
-    local tagrev="`cd ${srcdir} && git rev-parse ${branch}`"
+    local currev="`git -C ${srcdir} rev-parse HEAD`"
+    local tagrev="`git -C ${srcdir} rev-parse ${branch}`"
     if test x${currev} != x${tagrev}; then
-	dryrun "(cd ${srcdir} && git stash && git reset --hard ${branch})"
+	dryrun "git -C ${srcdir} stash && git -C ${srcdir} reset --hard ${branch}"
         if test $? -gt 0; then
 	    error "Can't reset to ${branch}"
 	    return 1
@@ -199,7 +199,7 @@ checkout()
         return 0
     fi
 
-    git ls-remote ${repodir} > /dev/null 2>&1
+    dryrun "git ls-remote ${repodir} > /dev/null 2>&1"
     if test $? -ne 0; then
 	error "proper URL required"
 	return 1
@@ -207,7 +207,11 @@ checkout()
 
     case ${protocol} in
 	git*|http*|ssh*)
-#	    local revision= `echo ${gcc_version} | grep -o "[~@][0-9a-z]*\$" | tr -d '~@'`"
+	    # newrev is set conservatively in dryrun mode (to the
+	    # value requested by the user), and updated to the actual
+	    # revision in non-dryrun mode.
+	    local newrev=
+
 	    # If the master branch doesn't exist, clone it. If it exists,
 	    # update the sources.
 	    if test ! -d ${local_snapshots}/${repo}; then
@@ -223,7 +227,7 @@ checkout()
 		dryrun "git_robust clone ${git_reference_opt} --config 'remote.origin.fetch=+refs/changes/*:refs/remotes/changes/*' ${repodir} ${local_snapshots}/${repo}"
 		# The above clone fetches only refs/heads/*, so fetch
 		# refs/changes/* by updating the remote.
-		dryrun "(cd ${local_snapshots}/${repo} && git remote update -p)"
+		dryrun "git -C ${local_snapshots}/${repo} remote update -p"
 		if test $? -gt 0; then
 		    error "Failed to clone master branch from ${url} to ${srcdir}"
 		    rm -f ${local_builds}/git$$.lock
@@ -236,7 +240,7 @@ checkout()
 		# branch AND a commit is redundant and potentially contradictory.  For this
 		# reason we only consider the commit if both are present.
 		if test x"${revision}" != x""; then
-		    notice "Checking out revision for ${component} in ${srcdir}"
+		    notice "Checking out revision ${revision} for ${component} in ${srcdir}"
 		    dryrun "${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${revision}"
 		    if test $? -gt 0; then
 			error "Revision ${revision} likely doesn't exist in git repo ${repo}!"
@@ -246,11 +250,12 @@ checkout()
 		    # git checkout of a commit leaves the head in detached state so we need to
 		    # give the current checkout a name.  Use -B so that it's only created if
 		    # it doesn't exist already.
-		    dryrun "(cd ${srcdir} && git checkout -B local_${revision})"
+		    dryrun "git -C ${srcdir} checkout -B local_${revision}"
 		    if test $? -gt 0; then
 			error "Can't checkout ${revision}"
 			return 1
 		    fi
+		    newrev=${revision}
 	        else
 		    notice "Checking out branch ${branch} for ${component} in ${srcdir}"
 		    dryrun "${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${branch}"
@@ -259,6 +264,7 @@ checkout()
 			rm -f ${local_builds}/git$$.lock
 			return 1
 		    fi
+		    newrev=${branch}
 		fi
 		new_srcdir=true
 	    elif test x"${supdate}" = xyes; then
@@ -268,18 +274,20 @@ checkout()
 		    notice "Building explicit revision for ${component}."
 		    # No need to pull.  A commit is a single moment in time
 		    # and doesn't change.
-		    dryrun "(cd ${srcdir} && git_robust checkout -B local_${revision} ${revision})"
+		    dryrun "git_robust -C ${srcdir} checkout -B local_${revision} ${revision}"
 		    if test $? -gt 0; then
 			error "Can't checkout ${revision}"
 			return 1
 		    fi
-		elif git -C ${srcdir} rev-parse --verify refs/tags/${branch} >&/dev/null; then
+		    newrev=${revision}
+		elif dryrun "git -C ${srcdir} rev-parse --verify refs/tags/${branch} >&/dev/null"; then
 		    notice "Found tag ${branch}, updating in case tag has moved."
 		    update_checkout_tag "${component}"
 		    if test $? -gt 0; then
 			error "Error during update_checkout_tag."
 			return 1
 		    fi
+		    newrev=${branch}
 		else
 		    # Some packages allow the build to modify the source
 		    # directory and that might screw up abe's state so we
@@ -293,11 +301,14 @@ checkout()
 			error "Error during update_checkout_branch."
 			return 1
 		    fi
+		    newrev=${branch}
 		fi
 		new_srcdir=true
 	    fi
 
-	    local newrev="`pushd ${srcdir} 2>&1 > /dev/null && git log --format=format:%H -n 1 ; popd 2>&1 > /dev/null`"
+	    if test x"${dryrun}" != xyes; then
+		newrev="`git -C ${srcdir} log --format=format:%H -n 1`"
+	    fi
 	    set_component_revision ${component} ${newrev}
 	    ;;
 	*)
@@ -366,7 +377,7 @@ push ()
 		local branch="master"
 	    fi
 	    if test -e ${local_snapshots}/${dir}/.git; then
-		#out="`(cd ${local_snapshots}/${dir} && git push ${repo} ${branch}`"
+		#out="`git -C ${local_snapshots}/${dir} push ${repo} ${branch}`"
 		notice "Pushing ${dir} upstream"
 		notice "git push ${repo} ${branch}"
 	    else
@@ -404,7 +415,7 @@ commit ()
 		local files="$2"
 	    fi
 	    if test -e ${local_snapshots}/${dir}/.git; then
-		#out="`(cd ${local_snapshots}/${dir} && git commit --file ${local_snapshots}/${dir}/commitmsg.txt ${files}`"
+		#out="`git -C ${local_snapshots}/${dir} commit --file ${local_snapshots}/${dir}/commitmsg.txt ${files}`"
 		notice "Committing ${files} to local repository..."
 		notice "git commit -m \"`cat ${local_snapshots}/${dir}/commitmsg.txt`\" ${files}"
    	    else
@@ -454,9 +465,9 @@ change_branch()
     else
 	if test x"${supdate}" = xyes; then
 	    if test x"${branch}" = x; then
-		dryrun "(cd ${local_snapshots}/${version} && git_robust pull origin master)"
+		dryrun "git_robust -C ${local_snapshots}/${version} pull origin master"
 	    else
-		dryrun "(cd ${local_snapshots}/${version}-${branch} && git_robust pull origin ${branch})"
+		dryrun "git_robust -C ${local_snapshots}/${version}-${branch} pull origin ${branch}"
 	    fi
 	fi
     fi
