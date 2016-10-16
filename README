@@ -136,7 +136,7 @@ Toolchain Components
  * gas
  * ld (gold)
  * libc (newlib,eglibc,glibc)
- * dependant libs (gmp, mpc, mpfr, libelf)
+ * dependant libs (gmp, mpc, mpfr)
 
 Build with stock Ubuntu toolchains
  * Linaro GCC Maintenance (currently Linaro GCC 4.7)

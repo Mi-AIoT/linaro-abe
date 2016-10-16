@@ -118,10 +118,6 @@ configure_build()
     # GCC and the binutils are the only toolchain components that need the
     # --target option set, as they generate code for the target, not the host.
     case ${component} in
-	# zlib)
-	#     # zlib doesn't support most standard configure options
-	#     local opts="--prefix=${sysroots}/usr"
-	#     ;;
 	newlib*|libgloss*)
 	    local opts="${opts} --host=${host} --target=${target} --prefix=${sysroots}/usr"
 	    ;;
@@ -200,7 +196,7 @@ configure_build()
 	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	# These are only built for the host
-	dejagnu|gmp|mpc|mpfr|isl|ppl|cloog|qt-everywhere-opensource-src|ffmpeg)
+	dejagnu|gmp|mpc|mpfr|isl|ppl|cloog)
 	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefix}"
 	    ;;
 	*)
