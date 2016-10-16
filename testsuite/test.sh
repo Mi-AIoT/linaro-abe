@@ -696,6 +696,11 @@ package="abe"
 branch="stable"
 revision=''
 should="pass"
+# We need to override srcdir to make sure the requested version is
+# actually checked-out
+set_component_srcdir abe ${local_snapshots}/abe.git~${branch}
+set_component_branch abe ${branch}
+set_component_revision abe ${revision}
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 testing="checkout: http://git@<url>/<repo>.git@<revision>"
@@ -703,6 +708,11 @@ package="abe"
 branch='master'
 revision="9bcced554dfc"
 should="pass"
+# We need to override srcdir to make sure the requested version is
+# actually checked-out
+set_component_srcdir abe ${local_snapshots}/abe.git_rev_${revision}
+set_component_branch abe ${branch}
+set_component_revision abe ${revision}
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 testing="checkout: http://git@<url>/<repo>.git/unusedbranchname@<revision>"
@@ -710,6 +720,11 @@ package="abe.git"
 branch="unusedbranchname"
 revision="9bcced554dfc"
 should="pass"
+# We need to override srcdir to make sure the requested version is
+# actually checked-out
+set_component_srcdir abe ${local_snapshots}/abe.git_rev_${revision}
+set_component_branch abe ${branch}
+set_component_revision abe ${revision}
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 # This should fail because it's an unknown repository
@@ -728,6 +743,11 @@ package="abe.git"
 branch="nonexistentbranch"
 revision=''
 should="fail"
+# We need to override srcdir to make sure the requested version is
+# actually checked-out
+set_component_srcdir abe ${local_snapshots}/abe.git~{$branch}
+set_component_branch abe ${branch}
+set_component_revision abe ${revision}
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 # This should fail because an unknown revision is specified
@@ -736,6 +756,11 @@ package="abe.git"
 branch=''
 revision="123456bogusbranch"
 should="fail"
+# We need to override srcdir to make sure the requested version is
+# actually checked-out
+set_component_srcdir abe ${local_snapshots}/abe.git_rev_${revision}
+set_component_branch abe ${branch}
+set_component_revision abe ${revision}
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 testing="checkout: http://git@<url>/<repo>.git~<branch> should pass with appropriate notice"
@@ -743,6 +768,11 @@ package="abe.git"
 branch='staging'
 revision=""
 should="pass"
+# We need to override srcdir to make sure the requested version is
+# actually checked-out
+set_component_srcdir abe ${local_snapshots}/abe.git~{$branch}
+set_component_branch abe ${branch}
+set_component_revision abe ${revision}
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 rm -rf "${local_snapshots}"/*.git*
