@@ -621,7 +621,7 @@ collect_data ()
 		url="${repo}" ;;
 	    *)
 		# look up full URL in sources.conf
-		url="`grep "^${repo}[[:space:]]" ${sources_conf} | tr -s ' ' | cut -d ' ' -f 2`"
+		url="`grep "^${repo}[[:space:]]" ${sources_conf} | head -n 1 | tr -s ' ' | cut -d ' ' -f 2`"
 	esac
 	if test x"{$url}" = x; then
 	    warning "${repo} not found in ${sources_conf}"
