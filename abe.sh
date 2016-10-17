@@ -1275,6 +1275,7 @@ if test ! -z ${do_build}; then
 	    if test `echo ${do_build} | grep -c "gcc"` -gt 0; then
 		build_param=${do_build_stage}
 	    fi
+	    collect_data ${gitinfo}
 	    build ${gitinfo}${build_param:+ ${build_param}}
 	    if test $? -gt 0; then
 		error "Building ${gitinfo} failed."
