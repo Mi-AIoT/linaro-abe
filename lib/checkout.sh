@@ -141,6 +141,11 @@ update_checkout_branch()
     local srcdir=
     srcdir="`get_component_srcdir ${component}`" || return 1
     notice "Updating sources for ${component} in ${srcdir}"
+    dryrun "git_robust -C ${srcdir} checkout -B ${branch} origin/${branch}"
+    if test $? -gt 0; then
+	error "Can't checkout ${branch}"
+	return 1
+    fi
     dryrun "(cd ${srcdir} && git stash --all)" &&
     dryrun "(cd ${srcdir} && git reset --hard)" &&
     dryrun "(cd ${srcdir} && git_robust pull)" &&
@@ -316,21 +321,15 @@ checkout()
 		    # Some packages allow the build to modify the source
 		    # directory and that might screw up abe's state so we
 		    # restore a pristine branch.
+		    if test x"${branch}" = x; then
+			error "No branch name specified!"
+			return 1
+		    fi
 		    update_checkout_branch ${component}
 		    if test $? -gt 0; then
 			error "Error during update_checkout_branch."
 			return 1
 		    fi
-		    if test x"${branch}" = x; then
-			error "No branch name specified!"
-			return 1
-		    fi
-		    dryrun "(cd ${srcdir} && git_robust checkout -B ${branch} origin/${branch})"
-		    if test $? -gt 0; then
-			error "Can't checkout ${branch}"
-			return 1
-		    fi
-		    dryrun "(cd ${srcdir} && git_robust pull)"
 		fi
 		new_srcdir=true
 	    fi
