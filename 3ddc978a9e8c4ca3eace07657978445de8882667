@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_38366604",
+        "filename": "config/gcc4_9/binutils.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-18T07:34:06Z",
+      "side": 1,
+      "message": "Can we have the same comment as in gcc5/binutils.conf ?",
+      "range": {
+        "startLine": 3,
+        "startChar": 0,
+        "endLine": 3,
+        "endChar": 36
+      },
+      "revId": "3ddc978a9e8c4ca3eace07657978445de8882667",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
