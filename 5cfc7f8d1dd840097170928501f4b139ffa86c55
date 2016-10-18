@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_8bb62289",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-18T15:42:17Z",
+      "side": 1,
+      "message": "typo here. Should have -C",
+      "revId": "5cfc7f8d1dd840097170928501f4b139ffa86c55",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_6bbbf672",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-18T15:42:17Z",
+      "side": 1,
+      "message": "this line should be done too...",
+      "revId": "5cfc7f8d1dd840097170928501f4b139ffa86c55",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
