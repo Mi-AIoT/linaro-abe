@@ -16,6 +16,24 @@
       "revId": "8cf908da7e4ae2b2058b3fbd4bc6f51f09adc9d6",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_4b26fabb",
+        "filename": "jenkins.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-10-18T08:32:10Z",
+      "side": 1,
+      "message": "target\u003d\"\" is not a new option, it is a small cleanup to declare a variable.\n\nThe testcontainer_file used to be passed as a normal value, but that means that the test container needs to up before we start jenkins.sh.  This changed it to what it is now: https://review.linaro.org/#/c/14780/1/tcwg-buildfarm-maxim.yaml .\n\nAt the start of the jenkins.sh the $testcontainer_file doesn\u0027t exist yet, and it is created by this http://git.linaro.org/ci/job/configs.git/blob/HEAD:/tcwg-test-container-matrix.yaml#l98 once the testing container is up and running.\n\nUsually this happens in 3-4 minutes, but I have seen cases under heavy load where test container was starting up for 20 minutes.",
+      "parentUuid": "7af0899e_b8d7f6be",
+      "revId": "8cf908da7e4ae2b2058b3fbd4bc6f51f09adc9d6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
