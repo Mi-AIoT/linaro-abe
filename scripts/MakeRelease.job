@@ -36,7 +36,6 @@ fileserver="148.251.136.42"
 extra=
 toolchain_config=""
 user_workspace="${WORKSPACE:-/home/${USER:-buildslave}/workspace}"
-logfile=${user_workspace}/MakeRelease-${BUILD_NUMBER}.log
 
 OPTS="`getopt -o t:f:d:w:m:l:g:u:h -l target:,date:,fileserver:,workspace:,toolchainconfig:,manifest:,glibc:,gcc:,binutils:,help`"
 while test $# -gt 0; do
@@ -63,6 +62,7 @@ fi
 shared="/home/buildslave/workspace/shared/"
 abe_dir="$(dirname $0)/.."
 user_snapshots="${user_workspace}/snapshots"
+logfile=${user_workspace}/MakeRelease-${BUILD_NUMBER}.log
 
 if test -e ${user_workspace}; then
     cat << EOF > ${user_workspace}/BUILD-INFO.txt
