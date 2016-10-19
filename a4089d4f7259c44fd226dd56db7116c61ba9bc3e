@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7af0899e_44654744",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-19T18:51:31Z",
+      "side": 1,
+      "message": "I will add dryrun here.",
+      "parentUuid": "7af0899e_e4d0b3f9",
+      "revId": "a4089d4f7259c44fd226dd56db7116c61ba9bc3e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af0899e_c4cdb75f",
         "filename": "lib/checkout.sh",
         "patchSetId": 5
@@ -64,6 +82,24 @@
       "writtenOn": "2016-10-19T17:03:55Z",
       "side": 1,
       "message": "is it sufficient to use:\n\n    else\n        newrev\u003d\"unknown/dryrun\"\n\nI think that\u0027s equivalent to the old behaviour (which makes newrev contain an error message from pushd), and not really less accurate than newrev\u003d${branch}",
+      "revId": "a4089d4f7259c44fd226dd56db7116c61ba9bc3e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_a45a2b81",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-19T18:51:31Z",
+      "side": 1,
+      "message": "I will give it a try, I thought I had to use something plausible.",
+      "parentUuid": "7af0899e_4409c794",
       "revId": "a4089d4f7259c44fd226dd56db7116c61ba9bc3e",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
