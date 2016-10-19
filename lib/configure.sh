@@ -207,7 +207,6 @@ configure_build()
     if test -e ${builddir}/config.status -a x"${component}" != x"gcc" -a x"${force}" = xno; then
 	warning "${buildir} already configured!"
     else
-	export PATH="${local_builds}/${host}/bin:$PATH"
 	# Don't stop on CONFIG_SHELL if it's set in the environment.
 	if test x"${CONFIG_SHELL}" = x; then
 	    export CONFIG_SHELL=${bash_shell}
