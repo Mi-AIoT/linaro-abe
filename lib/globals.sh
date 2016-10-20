@@ -241,3 +241,37 @@ import_manifest()
 
     return 0
 }
+
+#
+# get_component_list() returns the components which must be built in the
+# current configuration
+#
+get_component_list()
+{
+    # TODO: support --extraconfigdir for infrastructure.conf
+    local infrastructure="`grep ^depends ${topdir}/config/infrastructure.conf | tr -d '"' | sed -e 's:^depends=::'`"
+
+    if test x"${target}" != x"${build}"; then
+        # Build a cross compiler
+	if test "`echo ${host} | grep -c mingw`" -gt 0; then
+	    # As Mingw32 requires a cross compiler to be already built, so we
+	    # don't need to rebuild the sysroot.
+            local builds="${infrastructure} expat python binutils libc stage2 gdb"
+	else
+            local builds="${infrastructure} binutils stage1 libc stage2 gdb"
+	fi
+	if test "`echo ${target} | grep -c -- -linux-`" -eq 1; then
+	    local builds="${builds} gdbserver"
+	else
+	    # "linux" is included in the depends line in infrastructure.conf,
+	    # but is only needed for linux targets. Therefore remove it for
+	    # all other targets.
+	    builds="`echo ${builds} | sed -e 's: linux::'`"
+	fi
+    else
+        local builds="${infrastructure} binutils stage2 libc gdb" # native build
+    fi
+
+    echo "${builds}"
+}
+
