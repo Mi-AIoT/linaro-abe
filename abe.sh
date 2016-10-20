@@ -1250,9 +1250,9 @@ if test ! -z ${do_checkout}; then
 	    build_failure
 	fi
     else
-	infrastructure="`grep ^depends ${topdir}/config/infrastructure.conf | tr -d '\"' | sed -e 's:^depends=::'`"
-	builds="${infrastructure} binutils gcc gdb libc"
-	checkout_all ${builds}
+	checkout_components="$(get_component_list)"
+	notice "Checking out components: ${checkout_components}"
+	checkout_all ${checkout_components}
 	if test $? -gt 0; then
 	    error "--checkout all failed."
 	    build_failure
@@ -1284,7 +1284,7 @@ if test ! -z ${do_build}; then
 	fi
     else
 	buildingall=yes
-	build_all
+	build_all "$(get_component_list)"
 	if test $? -gt 0; then
 	    error "Build all failed."
 	    build_failure

@@ -23,32 +23,10 @@ build_all()
     
     # Turn off dependency checking, as everything is handled here
     nodepends=yes
-    
-    local infrastructure="`grep ^depends ${topdir}/config/infrastructure.conf | tr -d '"' | sed -e 's:^depends=::'`"
 
-    # Specify the components, in order to get a full toolchain build
-    if test x"${target}" != x"${build}"; then
-        # Build a cross compiler
-	if test "`echo ${host} | grep -c mingw`" -gt 0; then
-	    # As Mingw32 requires a cross compiler to be already built, so we don't need
-	    # to rebuilt the sysroot.
-            local builds="${infrastructure} expat python binutils libc stage2 gdb"
-	else
-            local builds="${infrastructure} binutils stage1 libc stage2 gdb"
-	fi
-	if test "`echo ${target} | grep -c -- -linux-`" -eq 1; then
-	    local builds="${builds} gdbserver"
-	else
-	    builds="`echo ${builds} | sed -e 's: linux::'`"
-	fi
-        notice "Buildall: Building \"${builds}\" for cross target ${target}."
-    else
-        local builds="${infrastructure} binutils stage2 libc gdb" # native build
-        notice "Buildall: Building \"${builds}\" for native target ${target}."
-    fi
-    
-    # cross builds need to build a minimal C compiler, which after compiling
-    # the C library, can then be reconfigured to be fully functional.
+    local builds="$*"
+
+    notice "build_all: Building components: ${builds}"
 
     local build_all_ret=
 
