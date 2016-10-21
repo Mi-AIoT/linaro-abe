@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_7a88dee7",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "in dryrun mode this will line will succeed, but it is only supposed succeed when an error is detected.\n\nIt should work as:\n\n   if test x\"${dryrun}\" !\u003d xyes \u0026\u0026 git -C ...\n\nThis git call should also be with \"--verify -q\" but that can be a later cleanup.",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_5a608235",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "It should be only possible to get here if ${srcdir} exists (see lines 239 and 269)",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_fa732e13",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "this has incorrectly changed the control flow for the non dryrun case.\n\nthe update_checkout_branch is supposed to be in the else of the \"if git...rev-parse\" on line 287.\n\nSince we have the test for srcdir on line 239 + elsif on line 269, I think it is ok to leave the condition as it is?",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_ba50865f",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "this should test ${revision}",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_1a4efac1",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "maybe srcdir should be set in test_checkout?",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_9a5aea81",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "test_checkout does set_component_branch itself",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_7a5f3e73",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 1,
+      "message": "test_checkout should do set_component_revision",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}

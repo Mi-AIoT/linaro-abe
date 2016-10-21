@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_3a65b645",
+        "filename": "lib/component.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-21T16:13:53Z",
+      "side": 0,
+      "message": "this should be in a separate patch ... or does it appear here as an artifact of a rebase?",
+      "revId": "83fb4446b8cb0359e4277bfee5069d98e55b5226",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
