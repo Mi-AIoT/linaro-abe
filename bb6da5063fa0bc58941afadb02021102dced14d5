@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "7af0899e_9a9f8a03",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-22T11:17:55Z",
+      "side": 1,
+      "message": "Indeed, it\u0027s similar to the other call to rev-parse, I\u0027ll fix that",
+      "parentUuid": "7af0899e_7a88dee7",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af0899e_5a608235",
         "filename": "lib/checkout.sh",
         "patchSetId": 8
@@ -70,6 +88,24 @@
     },
     {
       "key": {
+        "uuid": "7af0899e_bafec636",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-22T11:17:55Z",
+      "side": 1,
+      "message": "Right, another typo I missed.",
+      "parentUuid": "7af0899e_ba50865f",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af0899e_1a4efac1",
         "filename": "testsuite/test.sh",
         "patchSetId": 8
@@ -81,6 +117,24 @@
       "writtenOn": "2016-10-21T16:13:53Z",
       "side": 1,
       "message": "maybe srcdir should be set in test_checkout?",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_1afc3a3e",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-22T11:17:55Z",
+      "side": 1,
+      "message": "I\u0027ll give it a try.",
+      "parentUuid": "7af0899e_1a4efac1",
       "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -104,6 +158,24 @@
     },
     {
       "key": {
+        "uuid": "7af0899e_faf84e4b",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-22T11:17:55Z",
+      "side": 1,
+      "message": "But only if it\u0027s not empty...",
+      "parentUuid": "7af0899e_9a5aea81",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7af0899e_7a5f3e73",
         "filename": "testsuite/test.sh",
         "patchSetId": 8
@@ -115,6 +187,24 @@
       "writtenOn": "2016-10-21T16:13:53Z",
       "side": 1,
       "message": "test_checkout should do set_component_revision",
+      "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_5a9522e3",
+        "filename": "testsuite/test.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-22T11:17:55Z",
+      "side": 1,
+      "message": "same as above, and we want to reset the corresponding setting if branch/revision is empty.",
+      "parentUuid": "7af0899e_7a5f3e73",
       "revId": "bb6da5063fa0bc58941afadb02021102dced14d5",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
