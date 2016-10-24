@@ -145,7 +145,7 @@ fi
 # build the mingw32 compiler only if the previous cross-compiler build was
 # successful.
 if test ${abe_ret} -eq 0; then
-    $CONFIG_SHELL ${abe_dir}/abe.sh ${update} --release ${release} --tarbin ${srcs} ${platform} ${host} --build all ${libc} ${extra} >> ${logfile}
+    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update --release ${release} --tarbin ${srcs} ${platform} ${host} --build all ${libc} ${extra} >> ${logfile}
     abe_ret=$?
 fi
 
