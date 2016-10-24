@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_9cb5c7cf",
+        "filename": "lib/globals.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-24T12:37:59Z",
+      "side": 1,
+      "message": "Even though it\u0027s cut \u0026 paste, can you fix the typo?",
+      "range": {
+        "startLine": 258,
+        "startChar": 21,
+        "endLine": 258,
+        "endChar": 28
+      },
+      "revId": "0be62c23ee145469e912bfd3d8fbb00723e0872f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_fcc96b5b",
+        "filename": "lib/globals.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-10-24T12:37:59Z",
+      "side": 1,
+      "message": "Can you add a comment before this line?",
+      "range": {
+        "startLine": 266,
+        "startChar": 5,
+        "endLine": 266,
+        "endChar": 52
+      },
+      "revId": "0be62c23ee145469e912bfd3d8fbb00723e0872f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
