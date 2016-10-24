@@ -103,7 +103,7 @@ params="-o ${testdir}/hi ${testdir}/hello.cpp ${specs:-} -static"
 if test ${win32} -eq 0; then
     ${testdir}/${dir}/bin/${target}-c++ ${params}
 else
-    wine ${testdir}/${dir}/bin/${target}-c++ ${params}
+    strace -f wine ${testdir}/${dir}/bin/${target}-c++ ${params} |& grep c++config.h
 fi
 
 # See if the compilation worked
