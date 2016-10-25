@@ -103,6 +103,14 @@ params="-o ${testdir}/hi ${testdir}/hello.cpp ${specs:-} -static"
 if test ${win32} -eq 0; then
     ${testdir}/${dir}/bin/${target}-c++ ${params}
 else
+    # Compilation may fail if the paths are too long.
+    # Create a G: drive, as a shortcut makes wine automagically use
+    # it.
+    # Make sure WINEPREFIX exists by running a dummy command
+    export WINEPREFIX="$(pwd)/dotwine"
+    echo "ECHO Hello" | wine cmd
+    rm -f ${WINEPREFIX}/dosdevices/g:
+    ln -s ${testdir}/${dir} ${WINEPREFIX}/dosdevices/g:
     wine ${testdir}/${dir}/bin/${target}-c++ ${params}
 fi
 
