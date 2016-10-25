@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_ff883dc8",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-10-25T13:57:56Z",
+      "side": 1,
+      "message": "Is $HOME shared between containers with a bind mount or similar? It looks like this will risk jobs interfering with each other.\n\nI think it could be made safe with:\n\n    export WINEPREFIX\u003d\"$(pwd)/dotwine\"\n\nand updating the rm/ls commands to match",
+      "revId": "9c460e1718161f47a80ac5b3c7cbb7e395f35f00",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
