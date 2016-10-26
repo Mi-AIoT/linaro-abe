@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_629af015",
+        "filename": "lib/globals.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-10-26T17:54:21Z",
+      "side": 1,
+      "message": "hmm, now infrastructure seems useless, what about doing something like s/infrastructure/builds/",
+      "range": {
+        "startLine": 254,
+        "startChar": 4,
+        "endLine": 254,
+        "endChar": 19
+      },
+      "revId": "6e3c5895b2f4857a6db9443556f8bd182ce9b544",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
