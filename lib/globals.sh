@@ -157,9 +157,7 @@ import_manifest()
 	if test x"${ltarget}" != x; then
 	    target=${ltarget}
 	fi
-	if test "`echo ${sysroots} | grep -c ${target}`" -eq 0; then
-	    sysroots=${sysroots}/${target}
-	fi
+	sysroots=${sysroots}/${target}
 
 	local manifest_format="`grep "^manifest_format" ${manifest} | cut -d '=' -f 2`"
 	case "${manifest_format}" in
