@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_42f1b4cc",
+        "filename": "lib/globals.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-10-26T11:06:00Z",
+      "side": 1,
+      "message": "I know it is just moving existing code, but I find confusing having the \"local\" keyword here and not bellow, as if the 2 behaviors are different, whereas the locallity of \"builds\" is already defined.",
+      "range": {
+        "startLine": 264,
+        "startChar": 5,
+        "endLine": 264,
+        "endChar": 11
+      },
+      "revId": "920ab91e8ceeb1001ccc482b48be3cf43f098644",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
