@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7af0899e_82d0bc54",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-10-26T09:07:12Z",
+      "side": 1,
+      "message": "might be the right time to remove the redundancy here since git stash --all does a \"git reset --hard\"",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 113,
+        "endChar": 45
+      },
+      "revId": "9033eff53fa6e35c9cb0814899a7d486eefefc12",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_62d5d042",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-10-26T09:07:12Z",
+      "side": 1,
+      "message": "According to the scenario described bellow, the git pull will fail without pruning first.",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 44
+      },
+      "revId": "9033eff53fa6e35c9cb0814899a7d486eefefc12",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7af0899e_c2cac4a0",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 9
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-10-26T09:07:12Z",
+      "side": 1,
+      "message": "I think that this is useless.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 42
+      },
+      "revId": "9033eff53fa6e35c9cb0814899a7d486eefefc12",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
