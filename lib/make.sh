@@ -144,6 +144,29 @@ build_all()
     # Notify that the build completed successfully
     build_success
 
+    check_all
+    if test $? -ne 0; then
+	error "check_all failed"
+	return 1
+    fi
+    if test x"${tarsrc}" = x"yes"; then
+        do_tarsrc
+	if test $? -ne 0; then
+	    error "do_tarsrc failed"
+	    return 1
+	fi
+    fi
+    if test x"${tarbin}" = x"yes" -o x"${rpmbin}" = x"yes"; then
+	do_tarbin
+	if test $? -ne 0; then
+	    error "do_tarbin failed"
+	    return 1
+    	fi
+    fi
+}
+
+check_all()
+{
     # If we're building a full toolchain the binutils tests need to be built
     # with the stage 2 compiler, and therefore we shouldn't run unit-test
     # until the full toolchain is built.  Therefore we test all toolchain
@@ -235,39 +258,51 @@ build_all()
 	fi
     fi
     rm -f ${sumsfile}
+    return 0
+}
 
-    if test x"${tarsrc}" = x"yes"; then
-        if test "`echo ${with_packages} | grep -c toolchain`" -gt 0; then
-            release_binutils_src
-            release_gcc_src
-        fi
-        if test "`echo ${with_packages} | grep -c gdb`" -gt 0; then
-            release_gdb_src
-        fi
+
+do_tarsrc()
+{
+    # TODO: put the error handling in, or remove the tarsrc feature.
+    # this isn't as bad as it looks, because we will catch errors from
+    # dryrun'd commands at the end of the build.
+    notice "do_tarsrc has no error handling"
+    if test "`echo ${with_packages} | grep -c toolchain`" -gt 0; then
+	release_binutils_src
+	release_gcc_src
     fi
-
-    if test x"${tarbin}" = x"yes" -o x"${rpmbin}" = x"yes"; then
-        # Delete any previous release files
-        # First delete the symbolic links first, so we don't delete the
-        # actual files
-        dryrun "rm -fr ${local_builds}/linaro.*/*-tmp ${local_builds}/linaro.*/runtime*"
-        dryrun "rm -f ${local_builds}/linaro.*/*"
-        # delete temp files from making the release
-        dryrun "rm -fr ${local_builds}/linaro.*"
-
-        if test x"${clibrary}" != x"newlib" -a x"${tarbin}" = x"yes"; then
-            binary_runtime
-        fi
-        binary_toolchain
-
-	if test x"${tarbin}" = x"yes"; then
-	    binary_sysroot
-        fi
-#        if test "`echo ${with_packages} | grep -c gdb`" -gt 0; then
-#            binary_gdb
-#        fi
-        notice "Packaging took ${SECONDS} seconds"
+    if test "`echo ${with_packages} | grep -c gdb`" -gt 0; then
+        release_gdb_src
     fi
+}
+
+do_tarbin()
+{
+    # TODO: put the error handling in
+    # this isn't as bad as it looks, because we will catch errors from
+    # dryrun'd commands at the end of the build.
+    notice "do_tarbin has no error handling"
+    # Delete any previous release files
+    # First delete the symbolic links first, so we don't delete the
+    # actual files
+    dryrun "rm -fr ${local_builds}/linaro.*/*-tmp ${local_builds}/linaro.*/runtime*"
+    dryrun "rm -f ${local_builds}/linaro.*/*"
+    # delete temp files from making the release
+    dryrun "rm -fr ${local_builds}/linaro.*"
+
+    if test x"${clibrary}" != x"newlib" -a x"${tarbin}" = x"yes"; then
+	binary_runtime
+    fi
+    binary_toolchain
+
+    if test x"${tarbin}" = x"yes"; then
+	binary_sysroot
+    fi
+#    if test "`echo ${with_packages} | grep -c gdb`" -gt 0; then
+#	binary_gdb
+#    fi
+    notice "Packaging took ${SECONDS} seconds"
     
     return 0
 }
