@@ -301,41 +301,6 @@ build()
     local stampdir="`dirname ${builddir}`"
 
     notice "Building ${component} ${2:+$2}"
-    
-    # If this is a native build, we always checkout/fetch.  If it is a 
-    # cross-build we only checkout/fetch if this is stage1
-    if test x"${target}" = x"${build}" \
-        -o x"${target}" != x"${build}" -a x"$2" != x"stage2"; then
-	# Don't attempt to get sources if updating is disabled. If checkout_all()
-	# has been called, (build_all() does), then there is no need to keep
-	# updating.
-	if test x"${supdate}" = xyes; then
-            component_is_tar ${component}
-            if test $? -gt 0; then
-		# Don't update the compiler sources between stage1 and stage2 builds if this
-		# is a cross build.
-		notice "Checking out ${component} ${2:+$2}"
-		checkout ${component}
-		if test $? -gt 0; then
-                    error "Sources not updated, network error!"
-                    return 1
-		fi
-            else
-		# Don't update the compiler sources between stage1 and stage2 builds if this
-		# is a cross build.
-		fetch ${component}
-		if test $? -gt 0; then
-                    error "Couldn't fetch tarball ${component}"
-                    return 1
-		fi
-		extract ${component}
-		if test $? -gt 0; then
-                    error "Couldn't extract tarball ${component}"
-                    return 1
-		fi
-            fi
-	fi
-    fi
 
     # We don't need to build if the srcdir has not changed!  We check the
     # build stamp against the timestamp of the srcdir.
@@ -346,7 +311,7 @@ build()
 	return 0
     elif test $ret -eq 255; then
         # Don't proceed if the srcdir isn't present.  What's the point?
-        warning "no source dir for the stamp!"
+        error "no source dir for the stamp!"
         return 1
    fi
 
