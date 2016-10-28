@@ -110,6 +110,7 @@ set_build_steps()
     case "$1" in
 	checkout)
 	    build_steps[CHECKOUT]=1
+	    build_steps[MANIFEST]=1
 	    ;;
 	build)
 	    build_steps[CHECKOUT]=1
