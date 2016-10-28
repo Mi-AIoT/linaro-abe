@@ -32,6 +32,8 @@ checkout_all()
 
     local packages="$*"
 
+    notice "checkout_all called for packages: ${packages}"
+
     for i in ${packages}; do
 	local package=$i
 	if test x"$i" = x"libc"; then

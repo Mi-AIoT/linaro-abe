@@ -30,22 +30,6 @@ build_all()
 
     local build_all_ret=
 
-    # Checkout all the sources
-    checkout_all ${builds}
-    if test $? -ne 0; then
-        error "checkout_all failed"
-        return 1;
-    fi
-
-    if test x"${manifest}" = x"create"; then
-	notice "Exiting after creating"
-	local exitflag=true
-    fi
-    manifest="`manifest`"
-    if test x"${exitflag}" = xtrue; then
-	exit 0
-    fi
-
     # build each component
     for i in ${builds}; do
         notice "Building all, current component $i"
@@ -144,40 +128,23 @@ build_all()
     # Notify that the build completed successfully
     build_success
 
-    check_all
-    if test $? -ne 0; then
-	error "check_all failed"
-	return 1
-    fi
-    if test x"${tarsrc}" = x"yes"; then
-        do_tarsrc
-	if test $? -ne 0; then
-	    error "do_tarsrc failed"
-	    return 1
-	fi
-    fi
-    if test x"${tarbin}" = x"yes" -o x"${rpmbin}" = x"yes"; then
-	do_tarbin
-	if test $? -ne 0; then
-	    error "do_tarbin failed"
-	    return 1
-    	fi
-    fi
+    return 0
 }
 
 check_all()
 {
+    local test_packages="${1}"
+
     # If we're building a full toolchain the binutils tests need to be built
     # with the stage 2 compiler, and therefore we shouldn't run unit-test
     # until the full toolchain is built.  Therefore we test all toolchain
     # packages after the full toolchain is built. 
-    if test x"${runtests}" != x; then
-	notice "Testing components ${runtests}..."
-	buildingall=no
+    if test x"${test_packages}" != x; then
+	notice "Testing components ${test_packages}..."
 	local check_ret=0
 	local check_failed=
 
-	is_package_in_runtests "${runtests}" binutils
+	is_package_in_runtests "${test_packages}" binutils
 	if test $? -eq 0; then
 	    make_check binutils
 	    if test $? -ne 0; then
@@ -186,7 +153,7 @@ check_all()
 	    fi
 	fi
 
-	is_package_in_runtests "${runtests}" gcc
+	is_package_in_runtests "${test_packages}" gcc
 	if test $? -eq 0; then
 	    make_check gcc stage2
 	    if test $? -ne 0; then
@@ -195,7 +162,7 @@ check_all()
 	    fi
 	fi
 
-	is_package_in_runtests "${runtests}" gdb
+	is_package_in_runtests "${test_packages}" gdb
 	if test $? -eq 0; then
 	    make_check gdb
 	    if test $? -ne 0; then
@@ -207,7 +174,7 @@ check_all()
 	# Only perform unit tests on [e]glibc when we're building native.
         if test x"${target}" = x"${build}"; then
 	    # TODO: Get glibc make check working 'native'
-	    is_package_in_runtests "${runtests}" glibc
+	    is_package_in_runtests "${test_packages}" glibc
 	    if test $? -eq 0; then
 		#make_check ${glibc_version}
 		#if test $? -ne 0; then
@@ -217,7 +184,7 @@ check_all()
 		notice "make check on native glibc is not yet implemented."
 	    fi
 
-	    is_package_in_runtests "${runtests}" eglibc
+	    is_package_in_runtests "${test_packages}" eglibc
 	    if test $? -eq 0; then
 		#make_check ${eglibc_version}
 		#if test $? -ne 0; then
@@ -239,7 +206,7 @@ check_all()
 
     # If any unit-tests have been run, then we should send a message to gerrit.
     # TODO: Authentication from abe to jenkins does not yet work.
-    if test x"${gerrit_trigger}" = xyes -a x"${runtests}" != x; then
+    if test x"${gerrit_trigger}" = xyes -a x"${test_packages}" != x; then
 	local sumsfile="/tmp/sums$$.txt"
 	local sums="`find ${local_builds}/${host}/${target} -name \*.sum`"
 	for i in ${sums}; do
@@ -319,8 +286,14 @@ build()
     local url="`get_component_url ${component}`"
     local srcdir="`get_component_srcdir ${component}`"
     local builddir="`get_component_builddir ${component}`${2:+-$2}"
-    local version="`basename ${srcdir}`"
 
+    if [ x"${srcdir}" = x"" ]; then
+	# Somehow this component hasn't been set up correctly.
+	error "Component '${component}' has no srcdir defined."
+        return 1
+    fi
+
+    local version="`basename ${srcdir}`"
     local stamp=
     stamp="`get_stamp_name build ${version} ${2:+$2}`"
 
@@ -437,29 +410,6 @@ build()
 	
 	# For cross testing, we need to build a C library with our freshly built
 	# compiler, so any tests that get executed on the target can be fully linked.
-    fi
-
-    # Only execute make_check in build() if build_all() isn't being invoked for
-    # this run of abe.sh.  This is because build_all() will invoke make_check()
-    # in sequence after all builds are executed if it's been directed to run
-    # unit-tests.
-    # TODO: eliminate buildingall as a global and make it a local check passed
-    # via a parameter to build().
-    if test x"${buildingall}" = xno; then
-
-	# Skip make_check if it isn't designated to be executed in ${runtests}
-	is_package_in_runtests "${runtests}" ${component}
-	if test $? -eq 0 -a x"$2" != x"stage1" -a x"$2" != x"gdbserver"; then
-	    # We don't run make check on gcc stage1 or on gdbserver because
-	    # it's unnecessary.
-	    notice "Starting test run for ${tag}${2:+ $2}"
-	    make_check ${gitinfo}${2:+ $2}
-	    if test $? -gt 0; then
-	        return 1
-	    fi
-	else
-	    notice "make check skipped for ${tag}${2:+ $2}"
-	fi
     fi
 
     return 0
@@ -700,6 +650,12 @@ make_check()
 
     local component="`echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::'`"
     local builddir="`get_component_builddir ${component}`${2:+-$2}"
+
+    if [ x"${builddir}" = x"" ]; then
+	# Somehow this component hasn't been set up correctly.
+	error "Component '${component}' has no builddir defined."
+        return 1
+    fi
 
     # Some tests cause problems, so don't run them all unless
     # --enable alltests is specified at runtime.
