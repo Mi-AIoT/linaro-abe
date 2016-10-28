@@ -750,8 +750,9 @@ dump()
         echo "excludecheck       ${do_excludecheck}"
     fi
 
-    if test x"${runtests}" != x; then
-        echo "checking           ${runtests}"
+    local check_components="$(get_check_component_list)"
+    if test x"${check_components}" != x; then
+        echo "checking           ${check_components}"
     else
         echo "checking           {none}"
     fi
@@ -1132,6 +1133,14 @@ while test $# -gt 0; do
     fi
 done
 
+if [ x"$tarsrc" = x"yes" ]; then
+    set_build_steps tarsrc
+fi
+
+if [ x"$tarbin" = x"yes" -o x"$rpmbin" != x"yes" ]; then
+    set_build_steps tarbin
+fi
+
 if [ "x${target_set}" = x1 -a ! -z "${do_manifest}" ]; then
   # see https://bugs.linaro.org/show_bug.cgi?id=2059
   error "setting --target with --manifest is not supported"
@@ -1226,6 +1235,11 @@ if test ! -z "${do_excludecheck}"; then
     fi
 fi
 
+if [ ! -z "${runtests}" ]; then
+    set_check_component_list "${runtests}"
+    set_build_steps check
+fi
+
 # Process 'dump' after we process 'check' and 'excludecheck' so that the list
 # of tests to be evaluated is resolved before the dump.
 if test ! -z ${do_dump}; then
@@ -1244,25 +1258,15 @@ fi
 
 if test ! -z ${do_checkout}; then
     if test x"${do_checkout}" != x"all"; then
-	checkout ${do_checkout}
-	if test $? -gt 0; then
-	    error "--checkout ${url} failed."
-	    build_failure
-	fi
+        set_build_component_list "${do_checkout}"
     else
-	checkout_components="$(get_component_list)"
-	notice "Checking out components: ${checkout_components}"
-	checkout_all ${checkout_components}
-	if test $? -gt 0; then
-	    error "--checkout all failed."
-	    build_failure
-	fi
+	set_build_component_list "$(get_component_list)"
     fi
+    set_build_steps checkout
 fi
 
 if test ! -z ${do_build}; then
     if test x"${do_build}" != x"all"; then
-	buildingall=no
 	gitinfo="${do_build}"
 	if test x"${gitinfo}" = x; then
 	    error "Couldn't find the source for ${do_build}"
@@ -1273,23 +1277,20 @@ if test ! -z ${do_build}; then
 	    # The user might have specified a stage so we use that if
 	    # it's set.
 	    if test `echo ${do_build} | grep -c "gcc"` -gt 0; then
-		build_param=${do_build_stage}
-	    fi
-	    collect_data ${gitinfo}
-	    build ${gitinfo}${build_param:+ ${build_param}}
-	    if test $? -gt 0; then
-		error "Building ${gitinfo} failed."
-		build_failure
+	        set_build_component_list "${do_build_stage}"
+	    else
+		set_build_component_list "${gitinfo}"
 	    fi
 	fi
     else
-	buildingall=yes
-	build_all "$(get_component_list)"
-	if test $? -gt 0; then
-	    error "Build all failed."
-	    build_failure
-	fi
+	set_build_component_list "$(get_component_list)"
     fi	 
+    set_build_steps build
+fi
+
+perform_build_steps
+if test $? -ne 0; then
+    build_failure
 fi
 
 time="`expr ${SECONDS} / 60`"
