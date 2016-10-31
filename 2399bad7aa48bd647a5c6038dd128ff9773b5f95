@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_edf0a5cb",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-10-31T08:43:41Z",
+      "side": 1,
+      "message": "Offtopic: I think we should consider removing partial checkout and partial build support.  I am not aware of anyone using these features.",
+      "range": {
+        "startLine": 1261,
+        "startChar": 8,
+        "endLine": 1261,
+        "endChar": 49
+      },
+      "revId": "2399bad7aa48bd647a5c6038dd128ff9773b5f95",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aed85c8_cdede9f1",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-10-31T08:43:41Z",
+      "side": 1,
+      "message": "I remember seeing another checkout notice on the level up from checkout_all.  Should that one be removed?",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 10
+      },
+      "revId": "2399bad7aa48bd647a5c6038dd128ff9773b5f95",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aed85c8_2dbaade1",
+        "filename": "lib/control.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-10-31T08:43:41Z",
+      "side": 1,
+      "message": "Should we add \"set -e\" at the top of each new function in ABE?  I know we don\u0027t do this in most of the current code, but, I think, we should use \"set -e\" at least in the new code.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 19
+      },
+      "revId": "2399bad7aa48bd647a5c6038dd128ff9773b5f95",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
