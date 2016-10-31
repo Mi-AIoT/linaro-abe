@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_0dd89152",
+        "filename": "abe.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 1253,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-10-31T08:26:26Z",
+      "side": 0,
+      "message": "Bless you for removing this!",
+      "range": {
+        "startLine": 1253,
+        "startChar": 18,
+        "endLine": 1253,
+        "endChar": 31
+      },
+      "revId": "753c6a4b2edf83cc41ec887666d460a0e80b28f9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aed85c8_6dddd542",
+        "filename": "lib/make.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-10-31T08:26:26Z",
+      "side": 0,
+      "message": "... and this!",
+      "range": {
+        "startLine": 27,
+        "startChar": 27,
+        "endLine": 27,
+        "endChar": 40
+      },
+      "revId": "753c6a4b2edf83cc41ec887666d460a0e80b28f9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
