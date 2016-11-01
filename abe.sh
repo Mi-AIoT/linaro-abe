@@ -1137,7 +1137,7 @@ if [ x"$tarsrc" = x"yes" ]; then
     set_build_steps tarsrc
 fi
 
-if [ x"$tarbin" = x"yes" -o x"$rpmbin" != x"yes" ]; then
+if [ x"$tarbin" = x"yes" -o x"$rpmbin" = x"yes" ]; then
     set_build_steps tarbin
 fi
 
