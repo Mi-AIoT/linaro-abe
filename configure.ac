@@ -149,6 +149,7 @@ packages="texinfo gawk"
 ### Debian packages ###
 if test ${deb} -ge 1; then
     # add Ubuntu specific packages
+    packages="${packages} zlib1g-dev"
     if test x"${BUILD_ARCH}" != xaarch64; then
        packages="${packages} libncurses5-dev libpython2.7-dev"
        if test x"${BUILD_ARCH}" = x"x86_64"; then
@@ -170,7 +171,7 @@ if test ${deb} -ge 1; then
 ### RPM Packages ###
 else
 if which rpm > /dev/null; then
-    packages="${packages} ncurses-devel python-devel"
+    packages="${packages} ncurses-devel python-devel zlib-devel"
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
 	# RPM based systems might install via meta-packages but the rpm database
@@ -188,6 +189,7 @@ if which rpm > /dev/null; then
 ### Arch Packages ###
 else
 if which pacman > /dev/null; then
+    packages="${packages} zlib"
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
         exists="`pacman -Qs ${i} | wc -l`"
