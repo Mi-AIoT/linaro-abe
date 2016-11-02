@@ -186,8 +186,9 @@ series_date=${series_date%-linux}
 series_date=${series_date%-win32}
 
 # Fileserver location of binary tarballs and build logfiles
-binaries="/work/space/binaries/${gcc_release}-${series_date}/${target}"
-logs="/work/space/logs/${gcc_release}-${series_date}/${target}"
+buildid=`printf '%04d' ${BUILD_NUMBER}`
+binaries="/work/space/binaries/${gcc_release}-${series_date}-${buildid}/${target}"
+logs="/work/space/logs/${gcc_release}-${series_date}-${buildid}/${target}"
 
 # Copy the build log to the fileserver
 if test -e ${logfile}; then
