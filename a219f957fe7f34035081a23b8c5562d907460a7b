@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_962132b7",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-11-03T13:36:46Z",
+      "side": 0,
+      "message": "with --rpmbin removed, we can only get here if $tarbin \u003d yes, so it would be good to remove the if around this code.\n\nA similar clean-up can be done in do_tarbin (lib/make.sh) around the calls to binary_runtime and binary_sysroot.",
+      "revId": "a219f957fe7f34035081a23b8c5562d907460a7b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
