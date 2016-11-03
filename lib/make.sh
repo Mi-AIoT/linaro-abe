@@ -258,14 +258,13 @@ do_tarbin()
     # delete temp files from making the release
     dryrun "rm -fr ${local_builds}/linaro.*"
 
-    if test x"${clibrary}" != x"newlib" -a x"${tarbin}" = x"yes"; then
+    if test x"${clibrary}" != x"newlib"; then
 	binary_runtime
     fi
-    binary_toolchain
 
-    if test x"${tarbin}" = x"yes"; then
-	binary_sysroot
-    fi
+    binary_toolchain
+    binary_sysroot
+
 #    if test "`echo ${with_packages} | grep -c gdb`" -gt 0; then
 #	binary_gdb
 #    fi
