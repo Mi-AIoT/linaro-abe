@@ -25,27 +25,6 @@ build_deb()
     warning "unimplemented"
 }
 
-build_rpm()
-{
-#    trace "$*"
-
-    local infile="${abe_path}/packaging/redhat/tcwg.spec.in"
-    local arch="`echo ${target} | tr '-' '_'`"
-
-    local srcdir="`get_component_srcdir gcc`"
-    local version="`cat ${srcdir}/gcc/BASE-VER`"
-
-    rm -f /tmp/tcwg$$.spec
-    sed -e "s:%global triplet.*:%global triplet ${arch}:" \
-	-e "s:%global destdir.*:%global destdir $1:" \
-	-e "s:%global gcc_version.*:%global gcc_version ${version}_${arch}:" \
-	-e "s:%global snapshots.*:%global snapshots ${local_snapshots}:" \
-	 ${infile} >> /tmp/tcwg$$.spec
-
-    rpmbuild -bb -v /tmp/tcwg$$.spec
-    return $?
-}
-
 # This removes files that don't go into a release, primarily stuff left
 # over from development.
 #
@@ -182,10 +161,6 @@ binary_toolchain()
 	dryrun "rsync -avr ${sysroots}/* ${destdir}/${target}/libc/"
     fi
 
-    if test x"${rpmbin}" = x"yes"; then
-	notice "Making binary RPM for toolchain, please wait..."
-	build_rpm ${destdir}
-    fi
     if test x"${tarbin}" = x"yes"; then
 	# make the tarball from the tree we just created.
 	notice "Making binary tarball for toolchain, please wait..."

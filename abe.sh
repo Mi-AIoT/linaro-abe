@@ -38,7 +38,7 @@ usage()
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
              [--set {package}={toolchain|gdb|sysroot}]
-             [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc] [--rpm]
+             [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc]
              [--target {<target_triple>|''}]
              [--testcontainer user@ipaddress:ssh_port]
              [--timeout <timeout_value>]
@@ -298,9 +298,6 @@ OPTIONS
 
   --tarsrc
   		Build source tarballs after a successful build.
-
-  --rpm
-		Build binary RPM package after a successful build.
 
   --target	{<target_triple>|''}
 
@@ -958,9 +955,6 @@ while test $# -gt 0; do
 	--tarsrc*|-tars*)
 	    tarsrc=yes
 	    ;;
-	--rpm|-rpm*)
-	    rpmbin=yes
-	    ;;
 	--targ*|-targ*)			# target
             target_set=1
 	    check_directive $1 target targ $2
@@ -1137,7 +1131,7 @@ if [ x"$tarsrc" = x"yes" ]; then
     set_build_steps tarsrc
 fi
 
-if [ x"$tarbin" = x"yes" -o x"$rpmbin" = x"yes" ]; then
+if [ x"$tarbin" = x"yes" ]; then
     set_build_steps tarbin
 fi
 
