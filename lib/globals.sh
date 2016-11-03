@@ -106,7 +106,6 @@ runtests=
 test_container=
 
 ccache=no
-#gerrit=no
 
 release=""
 with_packages="toolchain,sysroot,gdb"
@@ -121,16 +120,6 @@ if test x"${BUILD_NUMBER}" = x; then
     export BUILD_NUMBER=${RANDOM}
 fi
 
-gerrit_host="review.linaro.org"
-gerrit_port="29418"
-gerrit_username=""
-gerrit_project=""
-gerrit_branch=""
-gerrit_revision=""
-gerrit_change_subject=""
-gerrit_change_id=""
-gerrit_change_number=""
-gerrit_event_type=""
 jenkins_job_name=""
 jenkins_job_url=""
 sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"

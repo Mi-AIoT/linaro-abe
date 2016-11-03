@@ -204,27 +204,6 @@ check_all()
     # Notify that the test run completed successfully
     test_success
 
-    # If any unit-tests have been run, then we should send a message to gerrit.
-    # TODO: Authentication from abe to jenkins does not yet work.
-    if test x"${gerrit_trigger}" = xyes -a x"${test_packages}" != x; then
-	local sumsfile="/tmp/sums$$.txt"
-	local sums="`find ${local_builds}/${host}/${target} -name \*.sum`"
-	for i in ${sums}; do
-	    local lineno="`grep -n -- "Summary" $i | grep -o "[0-9]*"`"
-	    local lineno="`expr ${lineno} - 2`"
-	    sed -e "1,${lineno}d" $i >> ${sumsfile}
-	    local status="`grep -c unexpected $i`"
-	    if test ${status} -gt 0; then
-		local hits="yes"
-	    fi
-	done
-	if test x"${hits}" = xyes; then
-	    gerrit_build_status ${gcc_version} 3 ${sumsfile}
-	else
-	    gerrit_build_status ${gcc_version} 2
-	fi
-    fi
-    rm -f ${sumsfile}
     return 0
 }
 

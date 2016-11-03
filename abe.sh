@@ -24,7 +24,7 @@ usage()
              [--ccache] [--check [{all|glibc|gcc|gdb|binutils}]]
              [--checkout {<package>[~branch][@revision]|all}]
              [--disable {install|update|make_docs|building}] [--dryrun]
-             [--dump] [--enable {bootstrap|gerrit}]
+             [--dump] [--enable bootstrap]
              [--excludecheck {all|glibc|gcc|gdb|binutils}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -158,15 +158,9 @@ OPTIONS
 
   --dump	Dump configuration file information for this build.
 
-  --enable {bootstrap|gerrit}
+  --enable bootstrap
 
-                bootstrap
-                        Enable gcc bootstrapping, which is disabled by
-                        default.
-
-                gerrit
-                        Enable posting comments to Gerrit on the build
-                        progress.
+                Enable gcc bootstrapping, which is disabled by default.
 
   --excludecheck {all|glibc|gcc|gdb|binutils}
 
@@ -731,7 +725,6 @@ dump()
     echo "Distribution:      ${distribution}"
 
     echo "Bootstrap          ${bootstrap}"
-    echo "Gerrit             ${gerrit}"
     echo "Install            ${install}"
     echo "Source Update      ${supdate}"
     echo "Make Documentation ${make_docs}"
@@ -1010,10 +1003,6 @@ while test $# -gt 0; do
 		bootstrap)
 		    bootstrap="${value}"
 		    ;;
-		gerrit)
-		    gerrit_trigger="${value}"
-		    # Initialize settings for gerrit
-		    ;;
 		install)
 		    install="${value}"
 		    ;;
@@ -1182,12 +1171,6 @@ fi
 #     warning "No testsuite will be run when building tarballs!"
 #     runtests=no
 # fi
-
-# If triggered by Gerrit, use the REST API. This assumes the lava-bot account
-# is supported by Gerrit, and the public SSH key is available. 
-if test x"${GERRIT_CHANGE_ID}" != x -o x"${gerrit_trigger}" = xyes; then
-    eval `gerrit_info $HOME`
-fi
 
 if test x"${force}" = xyes -a x"$supdate" = xno; then
     warning "You have specified \"--force\" and \"--disable update\"."

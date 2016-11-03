@@ -134,7 +134,6 @@ totals()
 . "${topdir}/testsuite/stamp-tests.sh"
 #. "${topdir}/testsuite/normalize-tests.sh"
 . "${topdir}/testsuite/dryrun-tests.sh"
-#. "${topdir}/testsuite/gerrit-tests.sh"
 #. "${topdir}/testsuite/report-tests.sh"
 
 # ----------------------------------------------------------------------------------

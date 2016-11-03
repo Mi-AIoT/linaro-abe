@@ -335,14 +335,6 @@ manifest()
 	echo "" >> ${outfile}
     done
 
-    # Gerrit info, if triggered
-    if test x"${gerrit_trigger}" = xyes; then
-	cat >> ${outfile} <<EOF
-gerrit_branch=${gerrit_branch}
-gerrit_revision=${gerrit_revision}
-EOF
-    fi
-
     cat >> ${outfile} <<EOF
 
 clibrary=${clibrary}
