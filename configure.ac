@@ -42,13 +42,6 @@ dnl AC_CANONICAL_BUILD
 dnl AC_CANONICAL_HOST
 
 dnl Get and store often used information on this build machine
-DBUSER=${dbuser}
-AC_SUBST(DBUSER)
-DBPASSWD=${dbpasswd}
-AC_SUBST(DBPASSWD)
-DBHOST=${dbhost}
-AC_SUBST(DBHOST)
-
 CPUS="`getconf _NPROCESSORS_ONLN`"
 AC_SUBST(CPUS)
 LIBC="`getconf GNU_LIBC_VERSION`"
@@ -221,26 +214,6 @@ dnl FIXME: Look for git-svn and git-bzr, bzr-fastimport svn-all-fast-export
 dnl Get build date for helping us debugging
 BUILDDATE="`date +%Y%m%d`"
 AC_SUBST(BUILDDATE)
-
-dnl While it's a bad idea to store the database access information in an unencrypted
-dnl text file, this is useful for abe development itself. This option should never
-dnl be used in a production environment. The default is read-only access. You can also
-dnl set DBUSER and DBPASSWD in your environment, but that's also a possible security
-dnl risk.
-AC_ARG_WITH(dbuser,
-  AC_HELP_STRING([--with-dbuser], [set the user name for the database]),
-  dbuser=${withval} ; AC_MSG_WARN([The database user name is stored in an unencrypted text file which could be considered a security risk!]),
-  dbuser='default')
-
-AC_ARG_WITH(dbpasswd,
-  AC_HELP_STRING([--with-dbpasswd], [set the user password for the database]),
-  dbpasswd=${withval} ; AC_MSG_WARN([It's a bad idea to set the database password as it's stored in an unencrypted text file!]),
-  dbpasswd='default')
-
-AC_ARG_WITH(dbhost,
-  AC_HELP_STRING([--with-dbhost], [set the database hostname]),
-  dbhost=${withval} ; AC_MSG_WARN([The database hostname is stored in an unencrypted text file which could be considered a security risk!]),
-  dbhost='localhost')
 
 dnl The top of the abe tree
 AC_ARG_WITH(toplevel,

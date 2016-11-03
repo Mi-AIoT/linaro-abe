@@ -625,9 +625,6 @@ BUILD_ARCH
 KERNEL
 LIBC
 CPUS
-DBHOST
-DBPASSWD
-DBUSER
 INSTALL_DATA
 INSTALL_SCRIPT
 INSTALL_PROGRAM
@@ -660,7 +657,6 @@ infodir
 docdir
 oldincludedir
 includedir
-runstatedir
 localstatedir
 sharedstatedir
 sysconfdir
@@ -683,9 +679,6 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
-with_dbuser
-with_dbpasswd
-with_dbhost
 with_toplevel
 with_fileserver
 with_sources_conf
@@ -753,7 +746,6 @@ datadir='${datarootdir}'
 sysconfdir='${prefix}/etc'
 sharedstatedir='${prefix}/com'
 localstatedir='${prefix}/var'
-runstatedir='${localstatedir}/run'
 includedir='${prefix}/include'
 oldincludedir='/usr/include'
 docdir='${datarootdir}/doc/${PACKAGE_TARNAME}'
@@ -1006,15 +998,6 @@ do
   | -silent | --silent | --silen | --sile | --sil)
     silent=yes ;;
 
-  -runstatedir | --runstatedir | --runstatedi | --runstated \
-  | --runstate | --runstat | --runsta | --runst | --runs \
-  | --run | --ru | --r)
-    ac_prev=runstatedir ;;
-  -runstatedir=* | --runstatedir=* | --runstatedi=* | --runstated=* \
-  | --runstate=* | --runstat=* | --runsta=* | --runst=* | --runs=* \
-  | --run=* | --ru=* | --r=*)
-    runstatedir=$ac_optarg ;;
-
   -sbindir | --sbindir | --sbindi | --sbind | --sbin | --sbi | --sb)
     ac_prev=sbindir ;;
   -sbindir=* | --sbindir=* | --sbindi=* | --sbind=* | --sbin=* \
@@ -1152,7 +1135,7 @@ fi
 for ac_var in	exec_prefix prefix bindir sbindir libexecdir datarootdir \
 		datadir sysconfdir sharedstatedir localstatedir includedir \
 		oldincludedir docdir infodir htmldir dvidir pdfdir psdir \
-		libdir localedir mandir runstatedir
+		libdir localedir mandir
 do
   eval ac_val=\$$ac_var
   # Remove trailing slashes.
@@ -1305,7 +1288,6 @@ Fine tuning of the installation directories:
   --sysconfdir=DIR        read-only single-machine data [PREFIX/etc]
   --sharedstatedir=DIR    modifiable architecture-independent data [PREFIX/com]
   --localstatedir=DIR     modifiable single-machine data [PREFIX/var]
-  --runstatedir=DIR       modifiable per-process data [LOCALSTATEDIR/run]
   --libdir=DIR            object code libraries [EPREFIX/lib]
   --includedir=DIR        C header files [PREFIX/include]
   --oldincludedir=DIR     C header files for non-gcc [/usr/include]
@@ -1348,9 +1330,6 @@ Optional Features:
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
-  --with-dbuser           set the user name for the database
-  --with-dbpasswd         set the user password for the database
-  --with-dbhost           set the database hostname
   --with-toplevel
   --with-fileserver       the remote file server hostname
   --with-sources-conf
@@ -3104,13 +3083,6 @@ test -z "$INSTALL_SCRIPT" && INSTALL_SCRIPT='${INSTALL}'
 test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
 
 
-DBUSER=${dbuser}
-
-DBPASSWD=${dbpasswd}
-
-DBHOST=${dbhost}
-
-
 CPUS="`getconf _NPROCESSORS_ONLN`"
 
 LIBC="`getconf GNU_LIBC_VERSION`"
@@ -3729,36 +3701,6 @@ fi # Debian
 
 
 BUILDDATE="`date +%Y%m%d`"
-
-
-
-# Check whether --with-dbuser was given.
-if test "${with_dbuser+set}" = set; then :
-  withval=$with_dbuser; dbuser=${withval} ; { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: The database user name is stored in an unencrypted text file which could be considered a security risk!" >&5
-$as_echo "$as_me: WARNING: The database user name is stored in an unencrypted text file which could be considered a security risk!" >&2;}
-else
-  dbuser='default'
-fi
-
-
-
-# Check whether --with-dbpasswd was given.
-if test "${with_dbpasswd+set}" = set; then :
-  withval=$with_dbpasswd; dbpasswd=${withval} ; { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: It's a bad idea to set the database password as it's stored in an unencrypted text file!" >&5
-$as_echo "$as_me: WARNING: It's a bad idea to set the database password as it's stored in an unencrypted text file!" >&2;}
-else
-  dbpasswd='default'
-fi
-
-
-
-# Check whether --with-dbhost was given.
-if test "${with_dbhost+set}" = set; then :
-  withval=$with_dbhost; dbhost=${withval} ; { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: The database hostname is stored in an unencrypted text file which could be considered a security risk!" >&5
-$as_echo "$as_me: WARNING: The database hostname is stored in an unencrypted text file which could be considered a security risk!" >&2;}
-else
-  dbhost='localhost'
-fi
 
 
 

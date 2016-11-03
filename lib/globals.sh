@@ -32,8 +32,6 @@ binutils="default"
 clibrary="auto"
 snapshots="default"
 configfile="default"
-dbuser="default"
-dbpasswd="default"
 
 # Don't set this unless you need to modify it.
 override_arch=
@@ -78,12 +76,6 @@ make_flags=
 # These can be changed by environment variables
 if test x"${SNAPSHOTS_URL}" != x -o x"${ABE_SNAPSHOTS}" != x; then
     snapshots="${SNAPSHOTS_URL}"
-fi
-if test x"${ABE_DBUSER}" != x; then
-    dbuser="${ABE_DBUSER}"
-fi
-if test x"${ABE_DBPASSWD}" != x; then
-    dbpasswd="${ABE_DBPASSWD}"
 fi
 
 force=no
