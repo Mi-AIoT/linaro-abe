@@ -21,9 +21,6 @@ build_all()
 {
 #    trace "$*"
     
-    # Turn off dependency checking, as everything is handled here
-    nodepends=yes
-
     local builds="$*"
 
     notice "build_all: Building components: ${builds}"

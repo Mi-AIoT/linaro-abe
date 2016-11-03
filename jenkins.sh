@@ -475,13 +475,13 @@ sums="`find ${user_workspace} -name \*.sum -not -path "*/gdb/testsuite/outputs/*
 # Canadian Crosses are a win32 hosted cross toolchain built on a Linux
 # machine.
 if test x"${canadian}" = x"true"; then
-    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${platform} --build all
+    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${change} ${platform} --build all
     distro="`lsb_release -sc`"
     # Ubuntu Lucid uses an older version of Mingw32
     if test x"${distro}" = x"lucid"; then
-	$CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${tars} --host=i586-mingw32msvc ${platform} --build all
+	$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${change} ${tars} --host=i586-mingw32msvc ${platform} --build all
     else
-	$CONFIG_SHELL ${abe_dir}/abe.sh --disable update --nodepends ${change} ${tars} --host=i686-w64-mingw32 ${platform} --build all
+	$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${change} ${tars} --host=i686-w64-mingw32 ${platform} --build all
     fi
 fi
 

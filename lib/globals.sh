@@ -88,7 +88,6 @@ fi
 
 force=no
 interactive=no
-nodepends=no
 verbose=1
 network=""
 
