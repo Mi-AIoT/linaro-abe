@@ -1,7 +1,0 @@
-load_generic_config tcwgcommon
-load_lib "dmucs.exp"
-
-set  slave [gethost "localhost" "0xc09"]
-verbose "Slave is: $slave"
-set_board_info hostname $slave
-
