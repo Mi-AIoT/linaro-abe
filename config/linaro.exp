@@ -60,9 +60,6 @@ proc linaro_lab { kind } {
 case "$target_triplet" in { 
     { "arm-*linux-gnueabi*" "armv[78]l-*linux-gnueabi*" } {
 	case "$native$myname" in {
-	    { *tcwgrob* ripple* darkstar* } {
-		set target_list { "tk1" }
-	    }
 	    { native* } {
 		set target_list { "tcwg-local" }
 	    }
@@ -94,9 +91,6 @@ case "$target_triplet" in {
     }
     { "aarch64-*linux*" } {
 	case "$native$myname" in {
-	    { *tcwgrob* ripple* darkstar* } {
-		set target_list { "tx1" }
-	    }
 	    { native* } {
 		set target_list { "tcwg-local" }
 	    }
