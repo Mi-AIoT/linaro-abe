@@ -214,7 +214,6 @@ checkout()
 		dryrun "git -C ${local_snapshots}/${repo} remote update -p > /dev/null"
 		if test $? -gt 0; then
 		    error "Failed to clone master branch from ${url} to ${local_snapshots}/${repo}"
-		    rm -f ${local_builds}/git$$.lock
 		    return 1
 		fi
 	    fi
@@ -228,7 +227,6 @@ checkout()
 		    dryrun "${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${revision}"
 		    if test $? -gt 0; then
 			error "Revision ${revision} likely doesn't exist in git repo ${repo}!"
-			rm -f ${local_builds}/git$$.lock
 			return 1
 		    fi
 		    # git checkout of a commit leaves the head in detached state so we need to
@@ -244,7 +242,6 @@ checkout()
 		    dryrun "${NEWWORKDIR} ${local_snapshots}/${repo} ${srcdir} ${branch}"
 		    if test $? -gt 0; then
 			error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
-			rm -f ${local_builds}/git$$.lock
 			return 1
 		    fi
 		fi
@@ -300,7 +297,6 @@ checkout()
 
     if test $? -gt 0; then
 	error "Couldn't checkout $1 !"
-	rm -f ${local_builds}/git$$.lock
 	return 1
     fi
 
@@ -324,7 +320,6 @@ checkout()
 	esac
     fi
 
-    rm -f ${local_builds}/git$$.lock
     return 0
 }
 

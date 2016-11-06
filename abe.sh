@@ -1246,8 +1246,8 @@ if test ! -z ${do_dump}; then
     dump
 fi
 
-# Both checkout and build need the build dir.  'build' uses it for the builds
-# but checkout uses it for file git locks.
+# Both checkout and build need the build dir.  'build' uses it for the builds.
+# It's not clear whether 'checkout' still uses it.
 if test ! -z "${do_checkout}" -o ! -z "${do_build}"; then
     # Sometimes a user might remove ${local_builds} to restart the build.
     if test ! -d "${local_builds}"; then
