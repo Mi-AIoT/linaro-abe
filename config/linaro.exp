@@ -91,12 +91,6 @@ case "$target_triplet" in {
     { "aarch64*-*elf*" } {
 	set target_list { "v8model" }
 	set env(FOUNDATION_MODEL) "/home/tcwg-buildslave/snapshots-ref/Foundation_Platformpkg/models/Linux64_GCC-4.7/Foundation_Platform"
-	case "$hostname" in {
-	    { *.moongulch.net *.senecass.com } {
-		set env(FOUNDATION_MODEL) "/work/linaro/foundation_v8pkg/Foundation_v8"
-		set target_list { "aarch64-qemu" }
-	    }
-	}
     }
     { "aarch64-*linux*" } {
 	case "$native$myname" in {
