@@ -211,7 +211,7 @@ checkout()
 		dryrun "git clone ${git_reference_opt} --config 'remote.origin.fetch=+refs/changes/*:refs/remotes/changes/*' ${repodir} ${local_snapshots}/${repo}"
 		# The above clone fetches only refs/heads/*, so fetch
 		# refs/changes/* by updating the remote.
-		dryrun "git -C ${local_snapshots}/${repo} remote update -p"
+		dryrun "git -C ${local_snapshots}/${repo} remote update -p > /dev/null"
 		if test $? -gt 0; then
 		    error "Failed to clone master branch from ${url} to ${local_snapshots}/${repo}"
 		    rm -f ${local_builds}/git$$.lock
