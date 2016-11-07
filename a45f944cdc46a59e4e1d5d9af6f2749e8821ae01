@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_e22b8c92",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-11-07T10:41:01Z",
+      "side": 1,
+      "message": "Can you make sure it\u0027s either needed or not needed?\nIs this related to this patch?",
+      "range": {
+        "startLine": 1250,
+        "startChar": 2,
+        "endLine": 1250,
+        "endChar": 50
+      },
+      "revId": "a45f944cdc46a59e4e1d5d9af6f2749e8821ae01",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
