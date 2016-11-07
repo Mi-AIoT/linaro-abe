@@ -22,6 +22,30 @@
       "revId": "a45f944cdc46a59e4e1d5d9af6f2749e8821ae01",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aed85c8_c20bf029",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1250,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-11-07T10:46:18Z",
+      "side": 1,
+      "message": "the manifest is placed in the build dir after checkout, although manifest() does mkdir -p as required",
+      "parentUuid": "5aed85c8_e22b8c92",
+      "range": {
+        "startLine": 1250,
+        "startChar": 2,
+        "endLine": 1250,
+        "endChar": 50
+      },
+      "revId": "a45f944cdc46a59e4e1d5d9af6f2749e8821ae01",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
