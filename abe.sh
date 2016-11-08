@@ -23,8 +23,9 @@ usage()
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--ccache] [--check [{all|glibc|gcc|gdb|binutils}]]
              [--checkout {<package>[~branch][@revision]|all}]
-             [--disable {install|update|make_docs|building}] [--dryrun]
-             [--dump] [--enable bootstrap]
+             [--disable {bootstrap|building|install|make_docs|schroot_test|update}]
+             [--dryrun] [--dump]
+             [--enable {bootstrap|building|install|make_docs|schroot_test|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -37,7 +38,7 @@ usage()
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
-             [--set {package}={toolchain|gdb|sysroot}]
+             [--set {packages}={toolchain|gdb|sysroot}]
              [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc]
              [--target {<target_triple>|''}]
              [--testcontainer user@ipaddress:ssh_port]
@@ -554,43 +555,43 @@ set_package()
     local setting="`echo $* | cut -d '=' -f 2-`"
 
     case ${package} in
-	languages|la*)
+	languages)
 	    with_languages="${setting}"
 	    notice "Setting list of languages to build to ${setting}"
 	    return 0
 	    ;;
-	packages|pa*)
+	packages)
 	    with_packages="${setting}"
 	    notice "Setting list of packages to build to ${setting}"
 	    return 0
 	    ;;
-	runtestflags|ru*)
+	runtestflags)
 	    override_runtestflags="${setting}"
 	    notice "Overriding ${setting} to RUNTESTFLAGS"
 	    return 0
 	    ;;
-	makeflags|ma*)
+	makeflags)
 #	    override_makeflags="${setting}"
 	    make_flags="${make_flags} ${setting}"
 	    notice "Overriding ${setting} to MAKEFLAGS"
 	    return 0
 	    ;;
-	ldflags|ld*)
+	ldflags)
 	    override_ldflags="${setting}"
 	    notice "Overriding ${setting} to LDFLAGS"
 	    return 0
 	    ;;
-	linker|lin*)
+	linker)
 	    override_linker="${setting}"
 	    notice "Overriding the default linker to ${setting}"
 	    return 0
 	    ;;
-	cflags|cf*)
+	cflags)
 	    override_cflags="${setting}"
 	    notice "Overriding ${setting} to CFLAGS"
 	    return 0
 	    ;;
-	libc|lib*)
+	libc)
 	    # validation is done after option parsing is complete.
 	    clibrary="${setting}"
 	    return 0
@@ -622,14 +623,10 @@ set_package()
 # parse the -- of the following switch.
 check_directive()
 {
-    local switch="$1"
-    local long="$2"
-    local short="$3"
-    local directive="$4"
+    local long="$1"
+    local directive="$2"
 
-    if test `echo ${switch} | grep -c "\-${short}.*=" ` -gt 0; then
-	error "A '=' is invalid after --${long}.  A space is expected between the switch and the directive."
-    elif test x"$directive" = x; then
+    if test x"$directive" = x; then
 	error "--${long} requires a directive.  See --usage for details.' "
     elif test `echo ${directive} | egrep -c "^\-+"` -gt 0; then
 	error "--${long} requires a directive.  ${abe} found the next -- switch.  See --usage for details.' "
@@ -652,16 +649,11 @@ check_directive()
 #	exit - Execution will abort if the input is invalid.
 check_optional_directive()
 {
-    local switch="$1"
-    local long="$2"
-    local short="$3"
-    local directive="$4"
-    local default="$5"
+    local long="$1"
+    local directive="$2"
+    local default="$3"
 
-    if test `echo ${switch} | grep -c "\-${short}.*=" ` -gt 0; then
-	error "A '=' is invalid after --${long}.  A space is expected between the switch and the directive."
-	build_failure
-    elif test x"$directive" = x; then
+    if test x"$directive" = x; then
 	notice "There is no directive accompanying this switch.  Using --$long $default."
 	directive="$default"
 	echo "$directive"
@@ -773,8 +765,8 @@ while test $# -gt 0; do
             warning "The --fileserver option has been removed, so ignoring it."
 	    continue
 	    ;;
-	--bu*|-bu*)			# build
-	    check_directive $1 build bu $2
+	--build)
+	    check_directive build $2
    
 	    # Save and process this after all other elements have been processed.
 	    do_build="$2"
@@ -782,8 +774,8 @@ while test $# -gt 0; do
 	    # Shift off the 'all' or the package identifier.
 	    shift
 	    ;;
-	--checkout*|-checkout*)
-	    check_directive $1 checkout "checkout" $2
+	--checkout)
+	    check_directive checkout $2
 	    # Save and process this after all other elements have been processed.
 	    do_checkout="$2"
 
@@ -792,9 +784,8 @@ while test $# -gt 0; do
 	    ;;
 	# This is after --checkout because we want to catch every other usage
 	# of check* but NOT 'checkout'.
-	--check*|-check*)
-	    tmp_do_makecheck=
-	    tmp_do_makecheck="`check_optional_directive $1 check "check" "$2" "all"`"
+	--check)
+	    tmp_do_makecheck="`check_optional_directive check "$2" all`"
 	    ret=$?
 
 	    # do_makecheck already contains the directive or 'all'.  This
@@ -819,8 +810,8 @@ while test $# -gt 0; do
 	    ;;
 	# This will exclude an individual package from the list of packages
 	# to run make check (unit-test) against.
-        --excludecheck*|-excludecheck*)
-	    check_directive $1 excludecheck "excludecheck" $2
+        --excludecheck)
+	    check_directive excludecheck $2
 
 	    # Verify that $2 is a valid option to exclude.
 	    crosscheck_unit_test $2
@@ -834,8 +825,8 @@ while test $# -gt 0; do
 
 	    shift
 	    ;;
-	--extraconfig|-extraconfig)
-	    check_directive $1 extraconfig extraconfig $2
+	--extraconfig)
+	    check_directive extraconfig $2
 	    extraconfig_tool="`echo $2 | cut -d '=' -f 1`"
 	    extraconfig_val="`echo $2 | cut -d '=' -f 2`"
 	    if [ x"$extraconfig_val" != x"" ]; then
@@ -847,7 +838,7 @@ while test $# -gt 0; do
 	    shift
             ;;
 	--extraconfigdir)
-	    check_directive $1 extraconfigdir extraconfigdir $2
+	    check_directive extraconfigdir $2
 	    if ! [ -d $2 ]; then
 		error "Parameter for --extraconfigdir $2 is not a directory."
 		build_failure
@@ -859,23 +850,23 @@ while test $# -gt 0; do
 	    done
 	    shift
 	    ;;
-	--host|-h*)
+	--host)
 	    host=$2
 	    shift
 	    ;;
-	--manifest*|-m*)
-	    check_directive $1 manifest "m" $2
+	--manifest)
+	    check_directive manifest $2
 	    do_manifest=$2
 	    shift
 	    ;;
-       # download and install the infrastructure libraries GCC depends on
-	--inf*|infrastructure)
+	# download and install the infrastructure libraries GCC depends on
+	--infrastructure)
 	    infrastructure
 	    ;;
-	--ccache|-cc*)
+	--ccache)
             use_ccache=yes
             ;;
-	--dry*|-dry*)
+	--dryrun)
             dryrun=yes
             ;;
 	--dump)
@@ -883,22 +874,22 @@ while test $# -gt 0; do
             #dump ${url}
 	    #shift
             ;;
-	--force|-f)
+	--force)
 	    force=yes
 	    ;;
-	--interactive|-i)
+	--interactive)
 	    interactive=yes
 	    ;;
-	--parallel|-par*)			# parallel
+	--parallel)
 	    parallel=yes
             ;;
-	--rel*|-rel*)
-	    check_directive $1 release "rel" $2
+	--release)
+	    check_directive release $2
             release=$2
 	    shift
             ;;
-	--set*|-set*)
-	    check_directive $1 set "set" "$2"
+	--set)
+	    check_directive set "$2"
 
 	    # Test if --target follows the --set command put --set and it's
 	    # directive on to the back of the inputs.  This is because clibrary
@@ -919,18 +910,18 @@ while test $# -gt 0; do
 	    fi
 	    shift
 	    ;;
-	--snap*|-snap*)
-	    check_directive $1 snapshots snap $2
+	--snapshots)
+	    check_directive snapshots $2
             local_snapshots=$2
 	    shift
             ;;
-	--sp*|-sp*)
-	    check_directive $1 space space $2
+	--space)
+	    check_directive space $2
 	    space_needed=$2
 	    shift
 	    ;;
-	--sta*|-sta*)
-	    check_directive $1 stage sta $2
+	--stage)
+	    check_directive stage $2
 	    if test x"$2" != x"2" -a x"$2" != x"1"; then
 		error "--stage requires a 2 or 1 directive."
 		build_failure
@@ -938,38 +929,38 @@ while test $# -gt 0; do
 	    do_build_stage="stage$2"
 	    shift
 	    ;;
-	--tarball*|-tarba*)
+	--tarball)
 	    tarsrc=yes
 	    tarbin=yes
 	    ;;
-	--tarbin*|-tarbi*)
+	--tarbin)
 	    tarbin=yes
 	    ;;
-	--tarsrc*|-tars*)
+	--tarsrc)
 	    tarsrc=yes
 	    ;;
-	--targ*|-targ*)			# target
+	--target)
             target_set=1
-	    check_directive $1 target targ $2
+	    check_directive target $2
 
 	    target=$2
 	    sysroots=${sysroots}/${target}
 
 	    shift
             ;;
-	--testcode|te*)
+	--testcode)
 	    testcode
 	    ;;
 	--testcontainer)
-	    check_directive $1 testcontainer testcontainer $2
+	    check_directive testcontainer testcontainer $2
 	    test_container=$2
 	    shift
 	    # We need to use environment variable to communicate to dejagnu's
 	    # config/linaro.exp to select the board made for container testing.
 	    export ABE_TEST_CONTAINER="$test_container"
 	    ;;
-	--time*|-time*)
-	    check_directive $1 timeout "time" $2
+	--timeout)
+	    check_directive timeout $2
 	    tmptime="`echo $2 | grep -o "[0-9]*"`"
 	    if test x"${tmptime}" != x; then
 		wget_timeout=${tmptime}
@@ -977,14 +968,14 @@ while test $# -gt 0; do
             shift
             ;;
 	# These steps are disabled by default but are sometimes useful.
-	--enable*|--disable*)
+	--enable|--disable)
 	    case "$1" in
-		--enable*)
-		    check_directive $1 "enable" "enable" $2
+		--enable)
+		    check_directive enable $2
 		    value="yes"
 		    ;;
-		--disable*)
-		    check_directive $1 "disable" "disable" $2
+		--disable)
+		    check_directive disable $2
 		    value="no"
 		    ;;
 		*)
@@ -997,20 +988,20 @@ while test $# -gt 0; do
 		bootstrap)
 		    bootstrap="${value}"
 		    ;;
+		building)
+		    building="${value}"
+		    ;;
 		install)
 		    install="${value}"
 		    ;;
-		building)
-		    building="${value}"
+		make_docs)
+		    make_docs="${value}"
 		    ;;
 		schroot_test)
 		    schroot_test="${value}"
 		    ;;
 		update)
 		    supdate="${value}"
-		    ;;
-		make_docs)
-		    make_docs="${value}"
 		    ;;
 		*)
 		    error "$2 not recognized as a valid $1 directive."
@@ -1088,7 +1079,7 @@ while test $# -gt 0; do
 			    glibc)
 				glibc_version="${value}"
 				;;
-			    n*|newlib)
+			    newlib)
 				newlib_version="${value}"
 				;;
 			    *)

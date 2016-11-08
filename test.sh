@@ -236,19 +236,7 @@ test_config_default()
   test_pass "${cb_commands}" "${perform_match}"
 }
 
-cb_commands="--dry-run"
-match=''
-test_pass "${cb_commands}" "${match}"
-
 cb_commands="--dryrun"
-match=''
-test_pass "${cb_commands}" "${match}"
-
-cb_commands="--dry"
-match=''
-test_pass "${cb_commands}" "${match}"
-
-cb_commands="-dry"
 match=''
 test_pass "${cb_commands}" "${match}"
 
@@ -294,7 +282,7 @@ match="Command not recognized"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--target=foo"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--target"
@@ -306,7 +294,7 @@ match="timeout requires a directive"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--timeout=foo"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--timeout 25"
@@ -318,7 +306,7 @@ match=''
 test_pass "${cb_commands}" "${match}"
 
 cb_commands="--build=all"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --build --foobar"
@@ -334,7 +322,7 @@ match="requires a directive"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--checkout=all"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--checkout --all"
@@ -358,7 +346,7 @@ match=''
 test_pass "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --target arm-linux-gnueabihf --checkout=glibc.git"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --target arm-linux-gnueabihf --checkout all"
@@ -366,7 +354,7 @@ match=''
 test_pass "${cb_commands}" "${match}"
 
 cb_commands="--set=libc=glibc"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--set"
@@ -374,7 +362,7 @@ match="requires a directive"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--release=foobar"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--release"
@@ -483,7 +471,7 @@ match='found the next'
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--snapshots=foo/bar --build all"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --snapshots ${local_snapshots} --build all"
@@ -560,7 +548,7 @@ match='found the next'
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--set=libc=glibc"
-match="A space is expected"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
 cb_commands="--set gcc=meh"
@@ -602,13 +590,13 @@ test_pass "${cb_commands}" "${match}"
 
 # The same as previous but with other commands mixed in.
 target="aarch64-none-elf"
-cb_commands="--set libc=glibc --dry-run --build all --target ${target}"
+cb_commands="--set libc=glibc --dryrun --build all --target ${target}"
 match="crosscheck_clibrary_target"
 test_failure "${cb_commands}" "${match}"
 
 # The same as previous but with other commands mixed in.
 target="arm-linux-gnueabihf"
-cb_commands="--set libc=glibc --dry-run --build all --target ${target}"
+cb_commands="--set libc=glibc --dryrun --build all --target ${target}"
 match=''
 test_pass "${cb_commands}" "${match}"
 
@@ -623,50 +611,50 @@ else
     fail ${testlineno} "VALID: --dryrun --build gcc.git --stage 2"
 fi
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --set arch=armv8-a"
+cb_commands="--dryrun --target arm-linux-gnueabihf --set arch=armv8-a"
 match='Overriding default --with-arch to armv8-a'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --set cpu=cortex-a57"
+cb_commands="--dryrun --target arm-linux-gnueabihf --set cpu=cortex-a57"
 match='Overriding default --with-cpu to cortex-a57'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --set tune=cortex-a53"
+cb_commands="--dryrun --target arm-linux-gnueabihf --set tune=cortex-a53"
 match='Overriding default --with-tune to cortex-a53'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --check=foo"
-match='is invalid after'
+cb_commands="--dryrun --target arm-linux-gnueabihf --check=foo"
+match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --dump --check"
+cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check"
 match='check              all'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --dump --check --dump"
+cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check --dump"
 match='check              all'
 test_pass "${cb_commands}" "${match}"
 
 # Yes this won't work because we match on 'exact' package name only.
-cb_commands="--dry-run --target arm-linux-gnueabihf --dump --check gdb--dump"
+cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check gdb--dump"
 match='dump is an invalid package'
 test_failure "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --check --dump"
+cb_commands="--dryrun --target arm-linux-gnueabihf --check --dump"
 match='check              all'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --check gdb --dump"
+cb_commands="--dryrun --target arm-linux-gnueabihf --check gdb --dump"
 match='check              gdb'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dry-run --target arm-linux-gnueabihf --check all --dump"
+cb_commands="--dryrun --target arm-linux-gnueabihf --check all --dump"
 match='check              all'
 test_pass "${cb_commands}" "${match}"
 
 # Verify that --check without a directive doesn't strip the next switch from
 # the command line.
-cb_commands="--dry-run --check --target arm-linux-gnueabihf --dump"
+cb_commands="--dryrun --check --target arm-linux-gnueabihf --dump"
 match='         arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
 
@@ -873,7 +861,7 @@ if test x"${runintmpdir}" = xyes; then
     rm -rf ${tmpdir}/builds
 
     # Test that builds/ is restored if it is removed.
-    cb_commands="--dry-run --target arm-linux-gnueabihf --dump --build all"
+    cb_commands="--dryrun --target arm-linux-gnueabihf --dump --build all"
     match=''
     test_pass "${cb_commands}" "${match}"
 
@@ -893,6 +881,9 @@ elif test -d "${tmpdir}/snapshots" -a ${failures} -lt 1; then
     echo ""
     echo "${testabe} finished with no unexpected failures. Removing ${tmpdir}"
     rm -rf ${tmpdir}
+elif test -d "${tmpdir}/snapshots" -a ${failures} -ge 1; then
+    echo ""
+    echo "${testabe} finished with unexpected failures. Check logs in ${tmpdir}"
 fi
 
 # ----------------------------------------------------------------------------------
