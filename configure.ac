@@ -140,8 +140,7 @@ AC_CHECK_LIB(z, gzread)
 
 # Figure out which packaging system is in use. Since it's possible to
 # install both on a system.
-deb="`uname -a | grep -ic 'ubuntu'`"
-deb=$(($deb + `uname -a | grep -ic 'debian'`))
+deb="`grep -ic 'ubuntu\|debian' /etc/issue`"
 
 dnl Look for packages that do not have executables, so we are forced
 dnl to ask the packaging system if they are installed. This is more
