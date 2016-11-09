@@ -67,6 +67,9 @@ logname=""
 # Compiler languages to build
 languages=default
 
+# Whether to run tests
+runtests=false
+
 # Target to build for
 target=""
 
@@ -354,7 +357,7 @@ if test $ret -gt 0; then
 fi
 
 # if runtests is true, then run make check after the build completes
-if test x"${runtests}" = xtrue; then
+if $runtests; then
     # check that expect is working, and dump some debug info then exit if not
     if ! echo "spawn true" | /usr/bin/expect -f - >/dev/null; then
         echo "expect cannot spawn processes. Aborting make check."
@@ -507,7 +510,10 @@ if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"tr
     cp ${logs} ${logs_dir}/ || status=1
 
     # Copy stdout and stderr output from abe.
-    cp build.out build.err check.out check.err ${logs_dir}/ || status=1
+    cp build.out build.err ${logs_dir}/ || status=1
+    if $runtests; then
+	cp check.out check.err ${logs_dir}/ || status=1
+    fi
 
     xz ${logs_dir}/* || status=1
     scp ${logs_dir}/* ${logserver}:${basedir}/${dir}/ || status=1
