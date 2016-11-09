@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_2cc106e5",
+        "filename": "scripts/TestRelease.job",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-11-09T13:46:39Z",
+      "side": 1,
+      "message": "This comment doesn\u0027t match with setting WINEPREFIX",
+      "revId": "dcb82cc73fa87ff96973f51b614b9b0998575caa",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
