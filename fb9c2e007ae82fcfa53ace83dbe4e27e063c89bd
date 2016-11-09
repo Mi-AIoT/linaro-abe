@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_acc0567d",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-11-09T07:03:29Z",
+      "side": 1,
+      "message": "Typo?",
+      "range": {
+        "startLine": 26,
+        "startChar": 74,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "fb9c2e007ae82fcfa53ace83dbe4e27e063c89bd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aed85c8_0cbecaff",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-11-09T07:03:29Z",
+      "side": 1,
+      "message": "and here?",
+      "range": {
+        "startLine": 28,
+        "startChar": 73,
+        "endLine": 28,
+        "endChar": 75
+      },
+      "revId": "fb9c2e007ae82fcfa53ace83dbe4e27e063c89bd",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
