@@ -507,7 +507,10 @@ if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"tr
     cp ${logs} ${logs_dir}/ || status=1
 
     # Copy stdout and stderr output from abe.
-    cp build.out build.err check.out check.err ${logs_dir}/ || status=1
+    cp build.out build.err ${logs_dir}/ || status=1
+    if $runtests; then
+	cp check.out check.err ${logs_dir}/ || status=1
+    fi
 
     xz ${logs_dir}/* || status=1
     scp ${logs_dir}/* ${logserver}:${basedir}/${dir}/ || status=1
