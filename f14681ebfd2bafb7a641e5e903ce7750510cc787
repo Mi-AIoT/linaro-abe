@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5aed85c8_4cc73213",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-11-09T11:46:06Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 7,
+        "startChar": 19,
+        "endLine": 7,
+        "endChar": 30
+      },
+      "revId": "f14681ebfd2bafb7a641e5e903ce7750510cc787",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5aed85c8_8cd11ad0",
+        "filename": "jenkins.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-11-09T11:46:06Z",
+      "side": 1,
+      "message": "it seems it\u0027s undefined by default, rather than false, so this is probably not working.",
+      "range": {
+        "startLine": 511,
+        "startChar": 8,
+        "endLine": 511,
+        "endChar": 16
+      },
+      "revId": "f14681ebfd2bafb7a641e5e903ce7750510cc787",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
