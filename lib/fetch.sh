@@ -256,30 +256,40 @@ fetch_reference()
 {
 #    trace "$*"
 
-    local getfile=$1
-    local url="$(get_component_url ${getfile})"
+    local component=$1
 
     # Prevent error with empty variable-expansion.
-    if test x"${getfile}" = x""; then
+    if test x"${component}" = x""; then
 	error "fetch_reference() must be called with a parameter designating the file to fetch."
 	return 1
     fi
 
+    local filespec="$(get_component_filespec ${component})"
+
     # Force will cause an overwrite.
     if test x"${force}" != xyes; then
 	local update_on_change="-u"
-	notice "Copying ${getfile} from reference dir to ${local_snapshots} if reference copy is newer or ${getfile} doesn't exist."
+	notice "Copying ${filespec} from reference dir to ${local_snapshots} if reference copy is newer or ${filespec} doesn't exist."
     else
-	notice "Copying ${getfile} from reference dir to ${local_snapshots} unconditionally."
+	notice "Copying ${filespec} from reference dir to ${local_snapshots} unconditionally."
     fi
 
     # Only copy if the source file in the reference dir is newer than
     # that file in the local_snapshots directory (if it exists).
-    dryrun "cp${update_on_change:+ ${update_on_change}} ${git_reference_dir}/${getfile}*.tar.* ${local_snapshots}/"
+    dryrun "cp${update_on_change:+ ${update_on_change}} ${git_reference_dir}/${filespec} ${local_snapshots}/"
     if test $? -gt 0; then
-	error "Copying ${getfile} from reference dir to ${local_snapshots} failed."
+	error "Copying ${filespec} from reference dir to ${local_snapshots} failed."
 	return 1
     fi
+
+    if [ -e "${git_reference_dir}/${filespec}.asc" ]; then
+	dryrun "cp${update_on_change:+ ${update_on_change}} ${git_reference_dir}/${filespec}.asc ${local_snapshots}/"
+	if test $? -gt 0; then
+	    error "Copying ${filespec}.asc from reference dir to ${local_snapshots} failed."
+	    return 1
+	fi
+    fi
+
     return 0
 }
 
