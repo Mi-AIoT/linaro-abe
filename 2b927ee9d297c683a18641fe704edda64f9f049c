@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "3afa9182_ac7b4328",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-11-14T13:17:09Z",
+      "side": 1,
+      "message": "Ack, will do.",
+      "parentUuid": "3afa9182_cc168ff1",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3afa9182_ace6a314",
         "filename": "lib/package.sh",
         "patchSetId": 1
@@ -36,6 +54,24 @@
     },
     {
       "key": {
+        "uuid": "3afa9182_2c88f321",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-11-14T13:17:09Z",
+      "side": 1,
+      "message": "Yes that\u0027s it, but what I wnated to do when we will release native toolchains, is to change the calls to strip_dir, that is not stripping the top directory but each intendend subdirs",
+      "parentUuid": "3afa9182_ace6a314",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3afa9182_ec19cb23",
         "filename": "lib/package.sh",
         "patchSetId": 1
@@ -47,6 +83,24 @@
       "writtenOn": "2016-11-14T12:59:35Z",
       "side": 1,
       "message": "I\u0027d prefer to see this controlled by \"--enable strip\"/\"--disable strip\" rather than overloading the --release command line switch.",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afa9182_4c873f10",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2016-11-14T13:17:09Z",
+      "side": 1,
+      "message": "It is something I discussed with Ryan, and given the way ABE handles options it seems safer to bundle it to --release, at least yet.  But, I agree it\u0027d but better to have a dedicated for that.",
+      "parentUuid": "3afa9182_ec19cb23",
       "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
