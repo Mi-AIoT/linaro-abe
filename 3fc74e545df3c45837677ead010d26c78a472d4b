@@ -46,6 +46,30 @@
       "revId": "3fc74e545df3c45837677ead010d26c78a472d4b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afa9182_6f0f8de2",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-11-14T20:13:33Z",
+      "side": 1,
+      "message": "OK then if there is already one such statement active here.",
+      "parentUuid": "3afa9182_af717579",
+      "range": {
+        "startLine": 225,
+        "startChar": 9,
+        "endLine": 225,
+        "endChar": 11
+      },
+      "revId": "3fc74e545df3c45837677ead010d26c78a472d4b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
