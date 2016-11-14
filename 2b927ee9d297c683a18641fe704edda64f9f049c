@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3afa9182_cc168ff1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-11-14T12:59:35Z",
+      "side": 1,
+      "message": "it would be nice to have an example before/after tarball size here, and to mention that mingw binaries are not stripped with this patch.",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afa9182_ace6a314",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-11-14T12:59:35Z",
+      "side": 1,
+      "message": "when this is used on a build of a native compiler, it will strip all of the target binaries/libraries as well as the toolchain executables. This seems undesirable, although, since we don\u0027t currently release native toolchains it might not matter too much at the moment.\n\nThe alternative would be to make a list of directories which are expected to contain strippable binaries, but this would potentially be fragile.\n\nViews?",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3afa9182_ec19cb23",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2016-11-14T12:59:35Z",
+      "side": 1,
+      "message": "I\u0027d prefer to see this controlled by \"--enable strip\"/\"--disable strip\" rather than overloading the --release command line switch.",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
