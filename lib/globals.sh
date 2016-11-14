@@ -38,7 +38,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.2
+manifest_version=1.3
 
 # The prefix for installing the toolchain
 prefix=
@@ -141,8 +141,9 @@ import_manifest()
 
 	local manifest_format="$(grep "^manifest_format" ${manifest} | cut -d '=' -f 2)"
 	case "${manifest_format}" in
-	    1.1) ;; # no md5sums, but no special handling required
-	    1.2) ;;
+	    1.1) ;; # no md5sums or id, but no special handling required
+	    1.2) ;; # no manifest id, but no special handling required
+	    1.3) ;;
 	    *)
 		error "Imported manifest version $manifest_format is not supported."
 		return 1

@@ -197,6 +197,41 @@ binary_sysroot()
     return 0
 }
 
+get_manifest_id()
+{
+    local file="$1"
+    if [ ! -f "$file" ]; then
+        error "get_manifest_id called for non-existent manifest"
+        return 1;
+    fi
+
+    if grep -q 'Everything below this line' "${file}"; then
+        error "get_manifest_id only works on partial manifest files during manifest creation."
+        return 1;
+    fi
+
+    local manifest_id=
+    manifest_id=$(
+        (
+          set -e
+          # extract manifest version
+          head -n 1 "${file}"
+          # extract ${component}_${field}=value lines, in lexicographic order
+          tail -n +2 "${file}" | grep '^[^#][^=]*_[^=]*=' | sort
+          # extract ${parameter}=value lines, in lexicographic order
+          tail -n +2 "${file}" | grep '^[^#][^=_]*=' | sort
+        ) | sha1sum - | awk '{ print $1; }')
+
+    if [ $? -ne 0 ]; then
+        error "manifest id calculation failed!"
+        return 1
+    fi
+
+    echo "$manifest_id"
+
+    return 0
+}
+
 # Create a manifest file that lists all the versions of the other components
 # used for this build.
 manifest()
@@ -308,10 +343,20 @@ manifest()
 	echo "" >> ${outfile}
     done
 
-    cat >> ${outfile} <<EOF
+    echo "" >> ${outfile}
+    echo "clibrary=${clibrary}" >> ${outfile}
+    echo "target=${target}" >> ${outfile}
 
-clibrary=${clibrary}
-target=${target}
+    # generate SHA1 of the manifest
+    local manifest_id
+    local manifest_id=$(get_manifest_id "${outfile}")
+    if [ $? -ne 0 ]; then
+        error "Manifest ID calculation failed"
+        return 1;
+    fi
+    echo "manifestid=$manifest_id" >> ${outfile}
+
+    cat >> ${outfile} <<EOF
 
  ##############################################################################
  # Everything below this line is only for informational purposes for developers
