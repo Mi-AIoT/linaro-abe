@@ -72,6 +72,24 @@
     },
     {
       "key": {
+        "uuid": "3afa9182_2cbc736c",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-11-14T15:25:45Z",
+      "side": 1,
+      "message": "You mean native x86 compilers?\nAren\u0027t the host and target binaries/libs cleanly separated in bin, lib/lib32/lib32 and libexec ? Are there others?",
+      "parentUuid": "3afa9182_ace6a314",
+      "revId": "2b927ee9d297c683a18641fe704edda64f9f049c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3afa9182_ec19cb23",
         "filename": "lib/package.sh",
         "patchSetId": 1
