@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3afa9182_ef541dcc",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2016-11-14T19:56:48Z",
+      "side": 1,
+      "message": "Is this catching errors from awk?\nDon\u0027t we want to catch errors from any of the pipe components?",
+      "range": {
+        "startLine": 225,
+        "startChar": 9,
+        "endLine": 225,
+        "endChar": 11
+      },
+      "revId": "3fc74e545df3c45837677ead010d26c78a472d4b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
