@@ -51,6 +51,45 @@ sanitize()
     return 0
 }
 
+# Strip HOST binaries present inside a given DIRECTORY.
+# Stripping policy is taken from Debian helpers (dh_strip).
+#
+# $1 = HOST
+# $2 = DIRECTORY
+# TODO: Handle mingw binaries.
+strip_dir()
+{
+#    trace "$*"
+
+    local destdir="$2"
+
+    case "$1" in
+	x86_64*)
+	    local host="x86-64" ;;
+	i686*)
+	    local host="80386" ;;
+	*)  note "Stripping host $1 is not supported."
+	    return 1 ;;
+    esac
+
+    while read file ; do
+	local file_type="$(file "$file")"
+	local opts="--remove-section=.comment --remove-section=.note"
+	case "$file_type" in
+	    *\ ar\ archive)
+		if readelf -h "$file" | grep Machine | grep -iq "$host" ; then
+		    opts="$opts --strip-debug --enable-deterministic-archives "
+		    dryrun "strip ${opts} ${file}"
+		fi ;;
+	    *shared\ object*$host*)
+		opts="$opts --strip-unneeded "
+		dryrun "strip ${opts} ${file}" ;;
+	    *$host*)
+		dryrun "strip ${opts} ${file}" ;;
+	esac
+     done < <(find "$destdir" -type f)
+}
+
 # The runtime libraries are produced during dynamic builds of gcc, libgcc,
 # listdc++, and gfortran.
 binary_runtime()
@@ -159,6 +198,12 @@ binary_toolchain()
 	# FIXME: link the sysroot into the toolchain tarball
 	dryrun "mkdir -p  ${destdir}/${target}/libc/"
 	dryrun "rsync -avr ${sysroots}/* ${destdir}/${target}/libc/"
+    fi
+
+
+    notice "Stripping host tools."
+    if test x"${release}" != x -a "$(echo ${host} | grep -c mingw)" -eq 0; then
+        strip_dir "$host" "$destdir"
     fi
 
     # make the tarball from the tree we just created.
