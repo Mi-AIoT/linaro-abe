@@ -157,7 +157,7 @@ git_parser()
 		local hasslash="$(echo "${in}" | grep -c '\/')"
 		if test ${hastilde} -gt 0; then
 		    # Grab everything to the right of the ~
-		    branch="$(echo ${in} | sed -e 's:.*~\(.*\):\1:')"
+		    branch="$(echo ${in} | sed -e 's:[^~]*~\(.*\):\1:')"
 		elif test ${hasslash} -gt 0; then
 		    branch="$(basename ${in})"
 		fi
@@ -236,7 +236,7 @@ git_parser()
 	local repo="$(echo ${secondbase} | sed -e 's#\(.*\.git\).*#\1#' -e 's#.*/##')"
 
 	if test ${hastilde} -gt 0; then
-	    local branch="$(echo "${secondbase}" | sed -n 's#.*~\(.*\)$#\1#p')"
+	    local branch="$(echo "${secondbase}" | sed -n 's#[^~]*~\(.*\)$#\1#p')"
 	    if test "$(echo ${branch} | grep -c "^/")" -gt 0; then
 		error "Malformed input.  Superfluous / after ~. Stripping."
 		err=1
@@ -260,7 +260,7 @@ git_parser()
 	# @ symbols) off.
 	local secondbase="$(echo "${secondbase}" | sed -e 's#@[[:alnum:]|@]*$##')"
 
-	local branch="$(echo "${secondbase}" | sed -n 's#.*~\(.*\)$#\1#p')"
+	local branch="$(echo "${secondbase}" | sed -n 's#[^~]*~\(.*\)$#\1#p')"
 	
 	if test "$(echo ${branch} | grep -c "^/")" -gt 0; then
 	    error "Malformed input.  Superfluous / after ~. Stripping."
@@ -268,7 +268,7 @@ git_parser()
 	    local branch="$(echo "${branch}" | sed -e 's#^/##')"
 	fi 
 
-	local repo="$(echo ${secondbase} | sed -e 's#\(.*\)~.*#\1#' -e 's#.*/##')"
+	local repo="$(echo ${secondbase} | sed -e 's#\([^~]*\)~.*#\1#' -e 's#.*/##')"
 
 	# Strip trailing trash introduced by erroneous inputs.	
 	local repo="$(echo ${repo} | sed -e  's#[[:punct:]]*$##')"
