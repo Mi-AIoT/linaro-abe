@@ -29,7 +29,6 @@ fetch()
 
     local component=$1
     local getfile="$(get_component_filespec ${component})"
-    local url="$(get_component_url ${component})"
 
     mkdir -p ${local_snapshots}
 
@@ -86,7 +85,6 @@ extract()
     local taropt=
     local component=$1
 
-    local url="$(get_component_url ${component})"
     local file="$(get_component_filespec ${component})"
     local srcdir="$(get_component_srcdir ${component})"
     local version="$(basename ${srcdir})"
@@ -300,13 +298,12 @@ check_md5sum()
 {
 #    trace "$*"
 
-    local tool="$(basename $1)"
+    local component=$1
 
-    local file="$(get_component_filespec ${tool}).asc"
-    local url="$(get_component_url ${tool})"
+    local file="$(get_component_filespec ${component}).asc"
 
     if test ! -e "${local_snapshots}/${file}"; then
-        error "No md5sum file for ${tool}!"
+        error "No md5sum file for ${component}!"
         return 1
     fi
 
