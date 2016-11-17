@@ -59,9 +59,10 @@ build_step_CHECK()
 {
     local check=""
     local build_names="$(echo $build_component_list | sed -e 's/stage[12]/gcc/')"
-    for i in $check_component_list; do
-        if is_package_in_runtests "${build_names}" "$i"; then
-	    check="$check $i"
+    local component
+    for component in $check_component_list; do
+        if is_package_in_runtests "${build_names}" "$component"; then
+	    check="$check ${component}"
 	fi
     done
     notice "Checking $check"
@@ -82,18 +83,19 @@ perform_build_steps()
 {
     notice "enabled build steps (not in order): ${!build_steps[*]}"
 
-    for i in CHECKOUT MANIFEST BUILD HELLO_WORLD CHECK TARSRC TARBIN; do
-        if [ ! -z "${build_steps[$i]}" ]; then
+    local step
+    for step in CHECKOUT MANIFEST BUILD HELLO_WORLD CHECK TARSRC TARBIN; do
+        if [ ! -z "${build_steps[$step]}" ]; then
 	    # this step is enabled
-            eval "build_step_$i"
+            eval "build_step_$step"
 	    if test $? -ne 0; then
-		error "Step $i failed"
+		error "Step $step failed"
 		return 1
 	    fi
 	else
 	    # this step is not enabled, so we finish here if it's a
 	    # required step.
-	    if [ ! -z "${build_step_required[$i]}" ]; then
+	    if [ ! -z "${build_step_required[$step]}" ]; then
 		break
 	    fi
 	fi
