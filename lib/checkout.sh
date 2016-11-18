@@ -244,6 +244,17 @@ checkout()
 			error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
 			return 1
 		    fi
+		    # If the user mistakenly used ~revision instead of
+		    # @revision, exit with an error, to avoid branch
+		    # update failures on subsequent runs.
+		    # ~revision can also point to a tag.
+		    if test x"${dryrun}" != xyes; then
+			if test $(git -C ${srcdir} reflog ${branch} | wc -l) -eq 0 -a \
+			        $(git -C ${srcdir} tag -l ${branch} | wc -l) -eq 0; then
+			    error "${branch} is not a branch or tag, use @{revision} to specify a revision"
+			    return 1
+			fi
+		    fi
 		fi
 		new_srcdir=true
 	    elif test x"${supdate}" = xyes; then
