@@ -244,6 +244,15 @@ checkout()
 			error "Branch ${branch} likely doesn't exist in git repo ${repo}!"
 			return 1
 		    fi
+		    # If the user mistakenly used ~revision instead of
+		    # @revision, exit with an error, to avoid branch
+		    # update failures on subsequent runs.
+		    if test x"${dryrun}" != xyes; then
+			if test $(git -C ${srcdir} reflog ${branch} | wc -l) -eq 0; then
+			    error "${branch} is not a branch, use @{branch} to specify a revision"
+			    return 1
+			fi
+		    fi
 		fi
 		new_srcdir=true
 	    elif test x"${supdate}" = xyes; then
