@@ -45,7 +45,7 @@ if { [lindex $ret 0] == 0 } {
     # Strip the CR or LF off the end of the line as returned by GCC
     regsub -all "\[\n\r\]+" $sysroot "" sysroot
 }
-set specdir "$sysroot/usr/lib"
+#set specdir "$sysroot/usr/lib"
 
 # set library path environment variable for qemu
 set env(QEMU_LD_PREFIX) $sysroot
@@ -54,12 +54,12 @@ set env(QEMU_LD_PREFIX) $sysroot
 # board. This board uses libgloss and newlib.
 
 # For bare metal we use libgloss, but for linux hosts this is wrong.
-if { [ istarget "arm*-none-*"] } {
-    set_board_info cflags  "-specs=$specdir/rdimon.specs"
-    set_board_info ldflags 	"[libgloss_link_flags] [newlib_link_flags] $additional_options"
-} else {
-    set_board_info ldflags "-lpthread -ldl"
-}
+#if { [ istarget "arm*-none-*"] } {
+#    set_board_info cflags  "-specs=$specdir/rdimon.specs"
+#    set_board_info ldflags 	"[libgloss_link_flags] [newlib_link_flags] $additional_options"
+#} else {
+#    set_board_info ldflags "-lpthread -ldl"
+#}
 
 # This board doesn't use a linker script.
 set_board_info ldscript ""
