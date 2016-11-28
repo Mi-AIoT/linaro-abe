@@ -286,6 +286,14 @@ is_package_in_runtests()
     local package="$2"
 
     for i in ${unit_test}; do
+	# libc is the generic component name as possibly listed in
+	# $build_component_list. The package name can be newlib,
+	# glibc, eglibc, ... as described in ${clibrary}.  Since this
+	# function is called with the actual package name, we need a
+	# special case for libc.
+	if test x"$i" = x"libc" -a x"${clibrary}" = x"${package}"; then
+	    return 0
+	fi
         if test x"$i" = x"$package"; then
             return 0
 	fi

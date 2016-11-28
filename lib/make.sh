@@ -141,6 +141,17 @@ check_all()
 	local check_ret=0
 	local check_failed=
 
+	if test x"${clibrary}" = x"newlib"; then
+	    is_package_in_runtests "${test_packages}" newlib
+	    if test $? -eq 0; then
+		make_check newlib
+		if test $? -ne 0; then
+		    check_ret=1
+		    check_failed="${check_failed} newlib"
+		fi
+	    fi
+        fi
+
 	is_package_in_runtests "${test_packages}" binutils
 	if test $? -eq 0; then
 	    make_check binutils
@@ -687,6 +698,14 @@ make_check()
 	    gdb)
 		local dirs="/"
 		local check_targets="check-gdb"
+		;;
+	    newlib)
+		# We need a special case for newlib, to bypass its
+		# multi-do Makefile targets that do not properly
+		# propagate multilib flags. This means that we call
+		# runtest only once for newlib.
+		local dirs="/${target}/newlib"
+		local check_targets="check-DEJAGNU"
 		;;
 	    *)
 		local dirs="/"

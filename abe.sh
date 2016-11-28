@@ -26,7 +26,7 @@ usage()
              [--disable {bootstrap|building|install|make_docs|parallel|schroot_test|update}]
              [--dryrun] [--dump]
              [--enable {bootstrap|building|install|make_docs|parallel|schroot_test|update}]
-             [--excludecheck {all|glibc|gcc|gdb|binutils}]
+             [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
              [--infrastructure] [--interactive]
@@ -111,12 +111,12 @@ OPTIONS
 
   --ccache	Use ccache when building packages.
 
-  --check {all|glibc|gcc|gdb|binutils}
+  --check {all|glibc|gcc|gdb|binutils|newlib}
 
                 For cross builds this will run package unit-tests on native
                 hardware
 
-                glibc|gcc|gdb|binutils
+                glibc|gcc|gdb|binutils|newlib
                         Run make check on the specified package only.
                 all
                         Run make check on all supported packages.
@@ -169,9 +169,9 @@ OPTIONS
 
                 Enable gcc bootstrapping, which is disabled by default.
 
-  --excludecheck {all|glibc|gcc|gdb|binutils}
+  --excludecheck {all|glibc|gcc|gdb|binutils|newlib}
 
-                {glibc|gcc|gdb|binutils}
+                {glibc|gcc|gdb|binutils|newlib}
                         When used with --check this will remove the
                         specified package from having its unit-tests
                         executed during make check.  When used without
