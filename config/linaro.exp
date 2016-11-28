@@ -13,6 +13,11 @@ if {[info exists env(PREFIX_UNDER_TEST)]} {
     }
 
     set GCC_UNDER_TEST "[set prefix]gcc $flags"
+    # When checking multilibs, ${CC} contains the right CFLAGS for the
+    # current dir
+    if {[info exists env(CC)]} {
+	set CC_FOR_TARGET  "$env(CC)"
+    }
     set GXX_UNDER_TEST "[set prefix]g++ $flags"
     set GFORTRAN_UNDER_TEST "[set prefix]gfortran $flags"
     set OBJC_UNDER_TEST "[set prefix]gcc $flags"

@@ -141,6 +141,17 @@ check_all()
 	local check_ret=0
 	local check_failed=
 
+	if test x"${clibrary}" = x"newlib"; then
+	    is_package_in_runtests "${test_packages}" newlib
+	    if test $? -eq 0; then
+		make_check newlib
+		if test $? -ne 0; then
+		    check_ret=1
+		    check_failed="${check_failed} newlib"
+		fi
+	    fi
+        fi
+
 	is_package_in_runtests "${test_packages}" binutils
 	if test $? -eq 0; then
 	    make_check binutils
