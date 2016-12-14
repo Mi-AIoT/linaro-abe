@@ -79,9 +79,6 @@ testcontainer_file=""
 # Whether attempt bootstrap
 try_bootstrap=false
 
-# The release version string, usually a date
-releasestr=
-
 # This is a string of optional extra arguments to pass to abe at runtime
 user_options=""
 
@@ -225,15 +222,6 @@ if test x"${tarbin}" = xtrue -o "$(echo $user_options | grep -c -- --tarbin)" -g
     tars="${tars} --tarbin "
 fi
 
-# Set the release string if specefied
-if ! test x"${release}" = xsnapshot -o x"${release}"; then
-    releasestr="--release ${release}"
-fi
-if test "$(echo $user_options | grep -c -- --release)" -gt 0; then
-    release="$(echo  $user_options | grep -o -- "--release [a-zA-Z0-9]* " | cut -d ' ' -f 2)"
-    releasestr="--release ${release}"
-fi
-
 # Get the versions of dependant components to use
 if test x"${gmp_snapshot}" != x"latest" -a x"${gmp_snapshot}" != x; then
     change="${change} gmp=${gmp_snapshot}"
@@ -346,7 +334,7 @@ fi
 # Now we build the cross compiler, for a native compiler this becomes
 # the stage2 bootstrap build.
 ret=0
-$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2) || ret=$?
+$CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${tars} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > build.out 2> >(tee build.err >&2) || ret=$?
 
 # If abe returned an error, make jenkins see this as a build failure
 if test $ret -gt 0; then
@@ -384,7 +372,7 @@ if $runtests; then
     fi
 
     ret=0
-    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${releasestr} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > check.out 2> >(tee check.err >&2) || ret=$?
+    $CONFIG_SHELL ${abe_dir}/abe.sh --disable update ${check} ${tars} ${platform} ${change} ${try_bootstrap} --timeout 100 --build all --disable make_docs > check.out 2> >(tee check.err >&2) || ret=$?
 
     # If abe returned an error, make jenkins see this as a build failure
     if test $ret -gt 0; then
@@ -402,13 +390,6 @@ Format-Version: 0.5
 Files-Pattern: *
 License-Type: open
 EOF
-
-if test x"${tars}" = x; then
-    # date="$(${gcc} --version | head -1 | cut -d ' ' -f 4 | tr -d ')')"
-    date="$(date +%Y%m%d)"
-else
-    date=${release}
-fi
 
 # Setup the remote directory for tcwgweb
 xgcc="$(find ${user_workspace} -name xgcc)"
@@ -520,21 +501,6 @@ if test x"${logserver}" != x"" && test x"${sums}" != x -o x"${runtests}" != x"tr
     rm -rf ${logs_dir} || status=1
 
     echo "Uploaded test results and build logs to ${logserver}:${basedir}/${dir}/ with status: $status"
-
-    if test x"${tarsrc}" = xtrue -a x"${release}" != x; then
-	allfiles="$(ls ${user_snapshots}/*${release}*.xz)"
-	srcfiles="$(echo ${allfiles} | egrep -v "arm|aarch")"
-	scp ${srcfiles} ${logserver}:/home/abe/var/snapshots/ || status=1
-	rm -f ${srcfiles} || status=1
-    fi
-
-    if test x"${tarbin}" = xtrue -a x"${release}" != x; then
-	allfiles="$(ls ${user_snapshots}/*${release}*.xz)"
-	binfiles="$(echo ${allfiles} | egrep "arm|aarch")"
-	scp ${binfiles} ${logserver}:/work/space/binaries/ || status=1
-	rm -f ${binfiles} || status=1
-    fi
-
 fi
 
 exit $status
