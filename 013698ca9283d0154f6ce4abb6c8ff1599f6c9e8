@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3afa9182_88945a38",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2016-12-14T07:48:35Z",
+      "side": 1,
+      "message": "My preference is to use a single if-clause \"if test cond1 -a cond2 -a cond3; then\", rather than nested clauses.  It\u0027s fine as-is though.",
+      "range": {
+        "startLine": 253,
+        "startChar": 10,
+        "endLine": 253,
+        "endChar": 14
+      },
+      "revId": "013698ca9283d0154f6ce4abb6c8ff1599f6c9e8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
