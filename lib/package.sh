@@ -164,6 +164,7 @@ binary_toolchain()
 #    trace "$*"
 
     local rtag="$(create_release_tag gcc)"
+    local symlinks=
 
     if test x"${host}" != x"${build}"; then
 	local tag="${rtag}-i686-mingw32_${target}"
@@ -187,6 +188,10 @@ binary_toolchain()
 		return 1
 	    fi
 	done
+	# Windows does not support symlinks, and extractors do not
+	# always handle them correctly: dereference them in the
+	# tarball to avoid problems.
+	symlinks=h
     fi
 
     # The manifest file records the versions of all of the components used to
@@ -210,7 +215,7 @@ binary_toolchain()
 
     # make the tarball from the tree we just created.
     notice "Making binary tarball for toolchain, please wait..."
-    dryrun "tar Jcf ${local_snapshots}/${tag}.tar.xz --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
+    dryrun "tar Jcf${symlinks} ${local_snapshots}/${tag}.tar.xz --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
 	
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
     dryrun "md5sum ${local_snapshots}/${tag}.tar.xz | sed -e 's:${local_snapshots}/::' > ${local_snapshots}/${tag}.tar.xz.asc"
