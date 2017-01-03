@@ -213,6 +213,10 @@ binary_toolchain()
 	fi
     fi
 
+    # Remove libtool *.la files
+    notice "Removing .la files."
+    find ${destdir} -name '*.la' -exec rm '{}' ';'
+
     # make the tarball from the tree we just created.
     notice "Making binary tarball for toolchain, please wait..."
     dryrun "tar Jcf ${local_snapshots}/${tag}.tar.xz --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
