@@ -37,5 +37,4 @@ makeversion=@MAKEVERSION@
 wget_bin=@WGET@
 fileserver=@FILESERVER@
 bash_shell=@BASH@
-MAKEINFO=@MAKEINFO@
 NEWWORKDIR=@NEWWORKDIR@
