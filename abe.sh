@@ -21,7 +21,7 @@ usage()
     # Format this section with 75 columns.
     cat << EOF
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
-             [--ccache] [--check [{all|glibc|gcc|gdb|binutils}]]
+             [--ccache] [--check {all|glibc|gcc|gdb|binutils}]
              [--checkout {<package>[~branch][@revision]|all}]
              [--disable {bootstrap|building|install|make_docs|schroot_test|update}]
              [--dryrun] [--dump]
@@ -111,7 +111,7 @@ OPTIONS
 
   --ccache	Use ccache when building packages.
 
-  --check [{all|glibc|gcc|gdb|binutils}]
+  --check {all|glibc|gcc|gdb|binutils}
 
                 For cross builds this will run package unit-tests on native
                 hardware
@@ -120,9 +120,11 @@ OPTIONS
                         Run make check on the specified package only.
                 all
                         Run make check on all supported packages.
+
                 <>
-                        If there is no directive it's the same as 'all' and
-                        make check will be run on all supported packages.
+                        --check requires an input directive.
+                        Calling --check without a directive is an
+                        error that will cause ${abe} to abort.
 
   --checkout {<package>[~branch][@revision]|all}
 
@@ -627,9 +629,9 @@ check_directive()
     local directive="$2"
 
     if test x"$directive" = x; then
-	error "--${long} requires a directive.  See --usage for details.' "
+	error "--${long} requires a directive.  See --usage for details."
     elif test $(echo ${directive} | egrep -c "^\-+") -gt 0; then
-	error "--${long} requires a directive.  ${abe} found the next -- switch.  See --usage for details.' "
+	error "--${long} requires a directive.  ${abe} found the next -- switch.  See --usage for details."
     else
 	return 0
     fi
@@ -782,31 +784,22 @@ while test $# -gt 0; do
 	    # Shift off the 'all' or the package identifier.
 	    shift
 	    ;;
-	# This is after --checkout because we want to catch every other usage
-	# of check* but NOT 'checkout'.
 	--check)
-	    tmp_do_makecheck="$(check_optional_directive check "$2" all)"
-	    ret=$?
+	    check_directive check $2
 
-	    # do_makecheck already contains the directive or 'all'.  This
-	    # test determines whether we need to strip off an additional
-	    # parameter from the command line argument if directive was
-	    # provided.
-	    if test $ret -eq 0; then
-	      shift;
-            fi
-
-	    crosscheck_unit_test ${tmp_do_makecheck}
+	    crosscheck_unit_test $2
 	    ret=$?
 	    if test $ret -eq 1; then
-		error "${tmp_do_makecheck} is an invalid package name to pass to --check. The choices are {all $all_unit_tests}."
+		error "${2} is an invalid package name to pass to --check. The choices are {all $all_unit_tests}."
 		build_failure
 	    fi
 
 	    # Accumulate --check packages from consecutive --check calls.  Yes
 	    # there might be potential duplicates but we'll prune those later.
 	    # parse later.
-	    do_makecheck=${do_makecheck:+${do_makecheck} }${tmp_do_makecheck}
+	    do_makecheck="${do_makecheck:+${do_makecheck} }${2}"
+
+	    shift
 	    ;;
 	# This will exclude an individual package from the list of packages
 	# to run make check (unit-test) against.
