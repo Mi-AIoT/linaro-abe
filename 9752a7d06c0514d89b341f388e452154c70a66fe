@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "ba1f61a0_6b83fdcc",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-01-05T14:26:40Z",
+      "side": 1,
+      "message": "Maybe... the tests pass as-is, so I kept it :-)",
+      "parentUuid": "ba1f61a0_4b039973",
+      "revId": "9752a7d06c0514d89b341f388e452154c70a66fe",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "ba1f61a0_abf7b58b",
         "filename": "test.sh",
         "patchSetId": 1
