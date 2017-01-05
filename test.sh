@@ -627,12 +627,14 @@ cb_commands="--dryrun --target arm-linux-gnueabihf --check=foo"
 match="Directive not supported"
 test_failure "${cb_commands}" "${match}"
 
+# This should error out because 'check' requires a directive
 cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check"
-match='check              all'
+match='check requires a directive'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check --dump"
-match='check              all'
+# This should error out because 'check' requires a package name
+cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check gcc=gcc.git"
+match='gcc=gcc.git is an invalid package name to pass to --check'
 test_pass "${cb_commands}" "${match}"
 
 # Yes this won't work because we match on 'exact' package name only.
@@ -640,8 +642,9 @@ cb_commands="--dryrun --target arm-linux-gnueabihf --dump --check gdb--dump"
 match='dump is an invalid package'
 test_failure "${cb_commands}" "${match}"
 
+# This should error out because 'check' requires a directive
 cb_commands="--dryrun --target arm-linux-gnueabihf --check --dump"
-match='check              all'
+match='check requires a directive'
 test_pass "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --target arm-linux-gnueabihf --check gdb --dump"
@@ -655,7 +658,7 @@ test_pass "${cb_commands}" "${match}"
 # Verify that --check without a directive doesn't strip the next switch from
 # the command line.
 cb_commands="--dryrun --check --target arm-linux-gnueabihf --dump"
-match='         arm-linux-gnueabihf'
+match='check requires a directive'
 test_pass "${cb_commands}" "${match}"
 
 # test various combinations of --check and --excludecheck
@@ -670,9 +673,9 @@ cb_commands="--check all --excludecheck gdb --dump"
 match='checking           glibc gcc binutils'
 test_pass "${cb_commands}" "${match}"
 
-# This should be the same as --check all --excludecheck gdb
+# This should error out because 'check' requires a directive
 cb_commands="--check  --excludecheck gdb --dump"
-match='checking           glibc gcc binutils'
+match='check requires a directive'
 test_pass "${cb_commands}" "${match}"
 
 # 'binutils' is on the end of the list which might have some whitespace issues.
@@ -730,12 +733,6 @@ cb_commands="--check all --check gdb --check glibc --dump"
 match='checking           glibc gcc gdb binutils'
 test_pass "${cb_commands}" "${match}"
 
-# Make sure we get the same result with --check (without a directive) since this is the same as 'all'.
-# It should be all tests in all_unit_tests and no redundant tests.
-cb_commands="--check --check gdb --check glibc --dump"
-match='checking           glibc gcc gdb binutils'
-test_pass "${cb_commands}" "${match}"
-
 # Make sure we can exclude binutils when 'all' is mixed with individual tests.
 cb_commands="--check all --check gdb --check glibc --excludecheck binutils --dump"
 match='checking           glibc gcc gdb'
@@ -752,20 +749,9 @@ cb_commands="--check gdb --check glibc --excludecheck binutils --excludecheck gd
 match='checking           glibc gcc'
 test_pass "${cb_commands}" "${match}"
 
-# Order of where --check shows up shouldn't affect outcome.
-# Make sure we can exclude several packages when 'all' is mixed with individual tests.
-cb_commands="--check gdb --check glibc --excludecheck binutils --excludecheck gdb --check --dump"
-match='checking           glibc gcc'
-test_pass "${cb_commands}" "${match}"
-
-# Make sure we can exclude several packages when 'all' is implicitly mixed with individual tests.
-cb_commands="--check --check gdb --check glibc --excludecheck binutils --excludecheck gdb --dump"
-match='checking           glibc gcc'
-test_pass "${cb_commands}" "${match}"
-
 # Order of --check and --excludecheck doesn't matter.  We always 'exclude' after we process 'check'.
 # If we add --check gdb after we've already excluded it, it'll remain excluded.
-cb_commands="--check --check gdb --check glibc --excludecheck binutils --excludecheck gdb --check gdb --dump"
+cb_commands="--check all --check gdb --check glibc --excludecheck binutils --excludecheck gdb --check gdb --dump"
 match='checking           glibc gcc'
 test_pass "${cb_commands}" "${match}"
 
@@ -810,7 +796,7 @@ match='checking           gdb glibc'
 test_pass "${cb_commands}" "${match}"
 
 # excluding this combination shouldn't leave extraneous spaces in runtests.
-cb_commands="--check --excludecheck gcc --excludecheck gdb --dump"
+cb_commands="--check all --excludecheck gcc --excludecheck gdb --dump"
 match='checking           glibc binutils'
 test_pass "${cb_commands}" "${match}"
 
@@ -846,12 +832,12 @@ match='foo is an invalid package name'
 test_failure "${cb_commands}" "${match}"
 
 # excluding a partial package name should error
-cb_commands="--check --excludecheck gd --dump"
+cb_commands="--check all --excludecheck gd --dump"
 match='gd is an invalid package name'
 test_failure "${cb_commands}" "${match}"
 
 # excluding an invalid package name should error
-cb_commands="--check --excludecheck foo --dump"
+cb_commands="--check all --excludecheck foo --dump"
 match='foo is an invalid package name'
 test_failure "${cb_commands}" "${match}"
 
