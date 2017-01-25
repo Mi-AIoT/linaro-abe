@@ -50,9 +50,19 @@ build_step_BUILD()
 
 build_step_HELLO_WORLD()
 {
-    ## TODO: waiting for build() cleanup
-    #hello_world
-    true
+    if ! is_package_in_runtests "${build_component_list}" "stage2"; then
+        notice "Hello World test skipped because stage2 was not built"
+        return 0
+    fi
+
+    dryrun "(hello_world)"
+    if test $? -eq 0; then
+        notice "Hello World test succeeded"
+        return 0
+    fi
+
+    error "Hello World test failed"
+    return 1
 }
 
 build_step_CHECK()
@@ -87,6 +97,7 @@ perform_build_steps()
     for step in CHECKOUT MANIFEST BUILD HELLO_WORLD CHECK TARSRC TARBIN; do
         if [ ! -z "${build_steps[$step]}" ]; then
 	    # this step is enabled
+	    notice "Performing build step $step"
             eval "build_step_$step"
 	    if test $? -ne 0; then
 		error "Step $step failed"
