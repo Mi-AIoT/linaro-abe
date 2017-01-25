@@ -332,17 +332,6 @@ build()
             notice "Skipping make install as requested (check host.conf)."
 	fi
 	
-	# See if we can compile and link a simple test case.
-	if test x"$2" = x"stage2" -a x"${clibrary}" != x"newlib"; then
-            dryrun "(hello_world)"
-            if test $? -gt 0; then
-		error "Hello World test failed for ${gitinfo}..."
-		return 1
-            else
-		notice "Hello World test succeeded for ${gitinfo}..."
-            fi
-	fi
-	
 	create_stamp "${stampdir}" "${stamp}"
 	
 	local tag="$(create_release_tag ${component})"
@@ -827,12 +816,23 @@ main(int argc, char *argv[])
 }
 EOF
     fi
-    
-    # See if a test case compiles to a fully linked executable. Since
-    # our sysroot isn't installed in it's final destination, pass in
-    # the path to the freshly built sysroot.
+
+    # Make sure we have C flags we need to link successfully
+    local extra_cflags=
+    case "${clibrary}/${target}" in
+        newlib/arm*) extra_cflags="-mcpu=cortex-a8"
+          ;;
+        newlib/aarch64*) extra_cflags="--specs=rdimon.specs"
+          ;;
+        newlib/*)
+          notice "Hello world test not supported for newlib on ${target}"
+          return 0
+          ;;
+    esac
+
+    # See if a test case compiles to a fully linked executable.
     if test x"${build}" != x"${target}"; then
-        dryrun "${target}-g++ --sysroot=${sysroots} -o /tmp/hi /tmp/hello.cpp"
+        dryrun "${target}-g++ ${extra_cflags} -o /tmp/hi /tmp/hello.cpp"
         if test -e /tmp/hi; then
             rm -f /tmp/hi
         else
