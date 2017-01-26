@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_7c58ddfa",
+        "filename": "lib/common.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-01-26T17:13:18Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this. This function is used as a generic \"find item in list\" in various places.\n\nA similar problem occurs with \"stage1\" and \"stage2\" being alternate names for the \"gcc\" component. This is already handled in build_step_CHECK in lib/control.sh, and I think that it might be better to handle the libc-\u003e{newlib,glibc,eglibc} case there too.",
+      "revId": "7ad1c3abe7d4952f51bf62b984d7e150c531f2b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_5c5d19e9",
+        "filename": "lib/make.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-01-26T17:13:18Z",
+      "side": 1,
+      "message": "this if should be unneeded. If newlib is not the selected C library, then it should not be in ${test_packages}",
+      "revId": "7ad1c3abe7d4952f51bf62b984d7e150c531f2b1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
