@@ -328,6 +328,12 @@ checkout()
 		# than plural.y.
 		dryrun "touch ${srcdir}/intl/plural.c"
 		;;
+	    eglibc)
+		# Like gdb and binutils, eglibc can be affected by a timestamps
+		# issue, and force a plural.c re-build.  Only the path differs
+		# in this case.
+		dryrun "touch ${srcdir}/libc/intl/plural.c"
+		;;
 	esac
     fi
 
