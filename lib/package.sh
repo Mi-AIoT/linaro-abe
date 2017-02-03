@@ -199,12 +199,6 @@ binary_toolchain()
     dryrun "cp ${manifest} ${local_builds}/destdir/${host}/"
     dryrun "rsync -avr${symlinks} ${local_builds}/destdir/${host}/* ${destdir}/"
 
-    if test x"${build}" != x"${target}"; then
-	# FIXME: link the sysroot into the toolchain tarball
-	dryrun "mkdir -p  ${destdir}/${target}/libc/"
-	dryrun "rsync -avr${symlinks} ${sysroots}/* ${destdir}/${target}/libc/"
-    fi
-
     # Strip host binaries when packaging releases.
     if test x"${release}" != x; then
 	notice "Stripping host tools."
@@ -251,6 +245,31 @@ binary_sysroot()
     dryrun "md5sum ${local_snapshots}/${tag}.tar.xz > ${local_snapshots}/${tag}.tar.xz.asc"
 
     return 0
+}
+
+do_install_sysroot()
+{
+    local prefix="${local_builds}/destdir/${host}/"
+    local symlinks=
+    if test "$(echo ${host} | grep -c mingw)" -gt 0; then
+	# Windows does not support symlinks, and extractors do not
+	# always handle them correctly: dereference them to avoid
+	# problems.
+	symlinks=L
+    fi
+
+    if test x"${build}" != x"${target}"; then
+	dryrun "mkdir -p  ${prefix}/${target}/libc/"
+        if [ $? -ne 0 ]; then
+	    error "mkdir failed"
+            return 1
+        fi
+	dryrun "rsync -avr${symlinks} ${sysroots}/* ${prefix}/${target}/libc/"
+        if [ $? -ne 0 ]; then
+	    error "copy of sysroot failed"
+            return 1
+        fi
+    fi
 }
 
 get_manifest_id()
