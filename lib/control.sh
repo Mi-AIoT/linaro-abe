@@ -69,6 +69,11 @@ build_step_CHECK()
     check_all "$check"
 }
 
+build_step_INSTALL_SYSROOT()
+{
+    do_install_sysroot
+}
+
 build_step_TARSRC()
 {
     do_tarsrc
@@ -84,7 +89,7 @@ perform_build_steps()
     notice "enabled build steps (not in order): ${!build_steps[*]}"
 
     local step
-    for step in CHECKOUT MANIFEST BUILD HELLO_WORLD CHECK TARSRC TARBIN; do
+    for step in CHECKOUT MANIFEST BUILD CHECK INSTALL_SYSROOT HELLO_WORLD TARSRC TARBIN; do
         if [ ! -z "${build_steps[$step]}" ]; then
 	    # this step is enabled
             eval "build_step_$step"
@@ -118,6 +123,7 @@ set_build_steps()
 	    build_steps[CHECKOUT]=1
 	    build_steps[MANIFEST]=1
 	    build_steps[BUILD]=1
+	    build_steps[INSTALL_SYSROOT]=1
 	    build_steps[HELLO_WORLD]=1
 	    ;;
 	tarsrc)
