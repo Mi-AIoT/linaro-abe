@@ -46,6 +46,30 @@
       "revId": "53d087fe2762b1c1e0fa7ae0a57b1eee7e385652",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_c4212fb6",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-02-06T12:53:49Z",
+      "side": 1,
+      "message": "Ha, this seems plausible with a C++ test :-)",
+      "parentUuid": "9a245df4_a43b5bea",
+      "range": {
+        "startLine": 823,
+        "startChar": 36,
+        "endLine": 823,
+        "endChar": 50
+      },
+      "revId": "53d087fe2762b1c1e0fa7ae0a57b1eee7e385652",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
