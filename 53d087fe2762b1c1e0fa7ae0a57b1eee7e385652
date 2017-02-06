@@ -22,6 +22,30 @@
       "revId": "53d087fe2762b1c1e0fa7ae0a57b1eee7e385652",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9a245df4_a43b5bea",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-02-06T12:50:18Z",
+      "side": 1,
+      "message": "iirc, there was a link error for some __sync_* helper functions. When selecting an ARMv7 CPU, GCC uses synchronisation instructions instead.",
+      "parentUuid": "9a245df4_a46d1b07",
+      "range": {
+        "startLine": 823,
+        "startChar": 36,
+        "endLine": 823,
+        "endChar": 50
+      },
+      "revId": "53d087fe2762b1c1e0fa7ae0a57b1eee7e385652",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
