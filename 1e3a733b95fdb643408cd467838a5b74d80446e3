@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_6463231b",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-02-06T12:02:22Z",
+      "side": 1,
+      "message": "We still want to use -L here (for GCC runtime libs), so you have to keep the symlinks\u003dL fragment above.",
+      "range": {
+        "startLine": 196,
+        "startChar": 23,
+        "endLine": 196,
+        "endChar": 33
+      },
+      "revId": "1e3a733b95fdb643408cd467838a5b74d80446e3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
