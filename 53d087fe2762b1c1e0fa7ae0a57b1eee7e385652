@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9a245df4_a46d1b07",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 823,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-02-06T12:05:03Z",
+      "side": 1,
+      "message": "Why do we need this?",
+      "range": {
+        "startLine": 823,
+        "startChar": 36,
+        "endLine": 823,
+        "endChar": 50
+      },
+      "revId": "53d087fe2762b1c1e0fa7ae0a57b1eee7e385652",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
