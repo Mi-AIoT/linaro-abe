@@ -447,7 +447,7 @@ check:
 	${srcdir}/test.sh
 
 clean:
-	rm -fr builds/* sysroot/*
+	rm -fr builds/* sysroots/*
 
 EOF
 
