@@ -509,6 +509,29 @@ component_dump()
     return 0
 }
 
+collect_data_abe ()
+{
+    local component="abe"
+    pushd ${abe_path}
+    local revision="$(git log --format=format:%H -n 1)"
+    local branch="$(git branch | grep "^\*" | cut -d ' ' -f 2)"
+    if test "$(echo ${branch} | egrep -c "detached|^\(no|^\(HEAD")" -gt -0; then
+        local branch=
+    fi
+    local url="$(git config --get remote.origin.url)"
+    local url="$(dirname ${url})"
+    local filespec="abe.git"
+    local srcdir="${abe_path}"
+    local configure=\""$(grep ${srcdir}/configure ${abe_top}/config.log | tr -s ' ' | cut -d ' ' -f 4-10| tr ' ' '%')"\"
+    popd
+    component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${configure:+CONFIGURE=${configure}}
+    if [ $? -ne 0 ]; then
+	error "component_init failed"
+	return 1
+    fi
+    return 0
+}
+
 collect_data ()
 {
 #    trace "$*"
@@ -522,26 +545,8 @@ collect_data ()
 
     # ABE's data is extracted differently than the rest.
     if test x"${component}" = x"abe"; then
-	pushd ${abe_path}
-	local revision="$(git log --format=format:%H -n 1)"
-	local abbrev="$(git log --format=format:%h -n 1)"
-	local branch="$(git branch | grep "^\*" | cut -d ' ' -f 2)"
-	if test "$(echo ${branch} | egrep -c "detached|^\(no|^\(HEAD")" -gt -0; then
-	    local branch=
-	fi
-	local url="$(git config --get remote.origin.url)"
-	local url="$(dirname ${url})"
-	local date="$(git log -n 1 --format=%aD | tr ' ' '%')"
-	local filespec="abe.git"
-	local srcdir="${abe_path}"
-	local configure=\""$(grep ${srcdir}/configure ${abe_top}/config.log | tr -s ' ' | cut -d ' ' -f 4-10| tr ' ' '%')"\"
-	popd
-	component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${data:+DATE=${date}} ${srcdir:+SRCDIR=${srcdir}} ${configure:+CONFIGURE=${configure}}
-	if [ $? -ne 0 ]; then
-            error "component_init failed"
-	    return 1
-	fi
-	return 0
+	collect_data_abe
+	return $?
     fi
 
     if test -d ${local_builds}/${host}/${target}; then
