@@ -582,35 +582,47 @@ collect_data ()
 	fi
     done
 
-    local version="${component}_version"
-    local tool="${!version}"
-    if test x"${tool}" = x; then
-	eval ${component}_version="${latest}"
+    # this accesses the component version which was specified on the command
+    # line, if any. The variable use_version will contain the version of the
+    # component we are going to use for the build. If a component version was
+    # specified on the command line, we use that, otherwise we use the latest
+    # variable from the .conf files.
+    local version_var="${component}_version"
+    local current_component_version="${!versionvar}"
+    local use_version=
+    if test x"${current_component_version}" = x; then
+        use_version=${latest}
+    else
+        use_version=${current_component_version}
     fi
-    eval "local latest=\${${component}_version}"
-    if test "$(echo ${latest} | grep -c ${component})" -eq 0; then
-	latest="${component}-${latest}"
-    fi
-    if test $(echo ${latest} | grep -c "\.tar") -gt 0; then
-	if test "$(echo ${latest} | grep -c 'http*://.*\.tar\.')" -eq 0; then
+    # TODO: dump() uses this, but this should be cleaned up so we can
+    # remove this line.
+    eval "${version_var}=${use_version}"
+
+    if test $(echo ${use_version} | grep -c "\.tar") -gt 0; then
+	# TODO: update conf files to include component name in name
+	# of tarball, and remove this hack.
+	if test "$(echo ${use_version} | grep -c ${component})" -eq 0; then
+	    use_version="${component}-${use_version}"
+	fi
+	# Set up variables for component with tarball URL
+	if test "$(echo ${use_version} | grep -c 'http*://.*\.tar\.')" -eq 0; then
 	    local url="$(grep "^${component} " ${sources_conf} | tr -s ' ' | cut -d ' ' -f 2)"
-	    local filespec="${latest}"
+	    local filespec="${use_version}"
 	else
-	    local url="$(dirname ${latest})"
-	    local filespec="$(basename ${latest})"
+	    local url="$(dirname ${use_version})"
+	    local filespec="$(basename ${use_version})"
 	fi
 
 	local dir="$(echo ${filespec} | sed -e 's:\.tar.*::'| tr '@' '_')"
     else
-	# If a manifest file has been imported, use those values
-	local filespec="$(get_component_filespec ${component})"
-	local gitinfo="${!version}"
-	local branch="$(get_git_branch ${gitinfo})"
+	# Set up variables for component with git URL
+	local branch="$(get_git_branch ${use_version})"
 	if test x"${branch}" = x; then
 	    branch="master"
 	fi
-	local revision="$(get_git_revision ${gitinfo})"
-	local repo="$(get_git_url ${gitinfo})"
+	local revision="$(get_git_revision ${use_version})"
+	local repo="$(get_git_url ${use_version})"
 	local url=
 
 	case "${repo}" in
