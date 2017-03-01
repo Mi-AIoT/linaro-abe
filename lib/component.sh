@@ -550,23 +550,14 @@ collect_data ()
     fi
 
     if test -d ${local_builds}/${host}/${target}; then
-	local conf="$(find ${local_builds}/${host}/${target} -name ${component}.conf | head -1)"
-    else
-	local conf=
+	if find ${local_builds}/${host}/${target} -name ${component}.conf | grep -q ^; then
+	    error "Local ${component}.conf files are no longer supported"
+	    return 1
+        fi
     fi
-    if test x"${conf}" != x; then
-	test ${topdir}/config/${component}.conf -nt ${conf}
-	if test $? -gt 0; then
-	    notice "Sourcing config: ${topdir}/config/${component}.conf"
-	    . "${topdir}/config/${component}.conf"
-	else
-	    notice "Sourcing local ${component}.conf, overriding defaults"
-	    . "${conf}"
-	fi
-    else
-	notice "Sourcing config: ${topdir}/config/${component}.conf"
-	. "${topdir}/config/${component}.conf"
-    fi
+
+    notice "Sourcing config: ${topdir}/config/${component}.conf"
+    . "${topdir}/config/${component}.conf"
 
     local default_conf="${topdir}/config/default/${component}.conf"
     if test -f "$default_conf"; then
