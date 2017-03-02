@@ -179,7 +179,7 @@ binary_toolchain()
     # libwinpthread-1.dll, so a copy is put in bin so executables will
     # work.
     # Another copy is needed in gcc's libexec for cc1.exe to work
-    if test "$(echo ${host} | grep -c mingw)" -gt 0; then
+    if is_host_mingw; then
 	for dest in ${local_builds}/destdir/${host}/bin/ ${local_builds}/destdir/${host}/libexec/gcc/${target}/*/
 	do
 	    dryrun "cp /usr/${host}/lib/libwinpthread-1.dll ${dest}"
@@ -202,7 +202,7 @@ binary_toolchain()
     # Strip host binaries when packaging releases.
     if test x"${release}" != x; then
 	notice "Stripping host tools."
-	if test x"${target}" != x"${build}" -a "$(echo ${host} | grep -c mingw)" -eq 0; then
+	if test x"${target}" != x"${build}" && ! is_host_mingw; then
 	    strip_dir "$host" "$destdir"
 	fi
     fi
@@ -251,7 +251,7 @@ do_install_sysroot()
 {
     local prefix="${local_builds}/destdir/${host}/"
     local symlinks=
-    if test "$(echo ${host} | grep -c mingw)" -gt 0; then
+    if is_host_mingw; then
 	# Windows does not support symlinks, and extractors do not
 	# always handle them correctly: dereference them to avoid
 	# problems.
@@ -330,7 +330,7 @@ manifest()
     if test x"$1" = x; then
 	mtag="$(create_release_tag gcc)"
 	mkdir -p ${local_builds}/${host}/${target}
-	if test $(echo ${host} | grep -c mingw) -eq 1; then
+	if is_host_mingw; then
 	    local build="win32"
 	else
 	    local build="linux"
