@@ -89,6 +89,11 @@ configure_build()
 	fi
     fi
 
+    local mingw_extra=$(get_component_mingw_extraconf ${component})
+    if is_host_mingw; then
+        opts="${opts} ${mingw_extra}"
+    fi
+
     # prefix is the root everything gets installed under.
     prefix="${local_builds}/destdir/${host}"
 
