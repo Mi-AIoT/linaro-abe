@@ -527,9 +527,6 @@ read_conf_files ()
         local var
         # configs also have the following unused vars:
         #    benchcmd benchcount benchlog configure
-        # configs set these, but they all set the same global variable which
-        # ends up being empty in all cases:
-        #    depends 
         # configs set these as temporary local variables, we ignore those:
 	#    aarch64_errata languages tag
         # set in a special conf file which is parsed separately in abe.sh:
