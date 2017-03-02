@@ -132,7 +132,6 @@ source_config()
     # clear the existing values so we can avoid inheriting config setting
     # from previously sourced config files.
     depends=""
-    installs=""
     latest=""
     default_configure_flags=""
     runtest_flags=""

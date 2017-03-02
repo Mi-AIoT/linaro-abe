@@ -526,13 +526,15 @@ read_conf_files ()
         done
         local var
         # configs also have the following unused vars:
-        #    benchcmd benchcount benchlog configure installs
+        #    benchcmd benchcount benchlog configure
         # configs set these, but they all set the same global variable which
         # ends up being empty in all cases:
         #    depends 
         # configs set these as temporary local variables, we ignore those:
-	#    aarch64_errata tag
-        for var in default_configure_flags default_makeflags languages latest preferred_libc runtest_flags stage1_flags stage2_flags static_link; do
+	#    aarch64_errata languages tag
+        # set in a special conf file which is parsed separately in abe.sh:
+        #    preferred_libc
+        for var in default_configure_flags default_makeflags latest runtest_flags stage1_flags stage2_flags static_link; do
             if [ "${!var:+set}" = "set" ]; then
                 echo "local conf_$var=\"${!var}\""
             fi
@@ -603,14 +605,6 @@ collect_data ()
 
     # import variables from conf files as local variables
     eval "$(read_conf_files $conf_list)"
-    # some conf files directly set these global variables inside Abe
-    local var
-    for var in preferred_libc languages; do
-        local conf_var="conf_$var"
-        if [ "${!conf_var:+set}" = "set" ]; then
-            var="${!conf_var}"
-        fi
-    done
 
     # this accesses the component version which was specified on the command
     # line, if any. The variable use_version will contain the version of the
