@@ -292,6 +292,15 @@ is_package_in_runtests()
     return 1
 }
 
+# tests whether host is mingw or not
+# Returns:
+# 0 (true) - host is mingw (Windows)
+# 1 (falgs) - host is some other platform
+is_host_mingw()
+{
+    echo "${host}" | grep -q mingw
+}
+
 build_failure()
 {
     local time="$(expr ${SECONDS} / 60)"

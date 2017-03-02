@@ -233,7 +233,7 @@ get_component_list()
 
     if test x"${target}" != x"${build}"; then
         # Build a cross compiler
-	if test "$(echo ${host} | grep -c mingw)" -gt 0; then
+	if is_host_mingw; then
 	    # As Mingw32 requires a cross compiler to be already built, so we
 	    # don't need to rebuild the sysroot.
             builds="${builds} expat python binutils libc stage2 gdb"
