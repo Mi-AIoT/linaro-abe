@@ -49,6 +49,8 @@ checkout_all()
 	fi
 
 	local filespec="$(get_component_filespec ${package})"
+	# don't skip mingw_only components so we get md5sums and/or
+        # git revisions
 	if test "$(component_is_tar ${package})" = no; then
  	    local checkout_ret=
 	    checkout ${package}

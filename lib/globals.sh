@@ -41,7 +41,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.3
+manifest_version=1.4
 
 # The prefix for installing the toolchain
 prefix=
@@ -127,6 +127,7 @@ fi
 #
 #
 #
+
 import_manifest()
 {
 #    trace "$*"
@@ -143,10 +144,14 @@ import_manifest()
 	sysroots=${sysroots}/${target}
 
 	local manifest_format="$(grep "^manifest_format" ${manifest} | cut -d '=' -f 2)"
+	local fixup_mingw=false
 	case "${manifest_format}" in
-	    1.1) ;; # no md5sums or id, but no special handling required
-	    1.2) ;; # no manifest id, but no special handling required
-	    1.3) ;;
+	    1.1) # no md5sums or id, but no special handling required
+                 fixup_mingw=true ;;
+	    1.2) # no manifest id, but no special handling required
+                 fixup_mingw=true ;;
+	    1.3) fixup_mingw=true ;;
+	    1.4) ;;
 	    *)
 		error "Imported manifest version $manifest_format is not supported."
 		return 1
@@ -160,6 +165,8 @@ import_manifest()
 	    local branch="$(grep "^${i}_branch" ${manifest} | cut -d '=' -f 2)"
 	    local filespec="$(grep "^${i}_filespec" ${manifest} | cut -d '=' -f 2)"
 	    local static="$(grep "^${i}_staticlink" ${manifest} | cut -d '=' -f 2)"
+	    local mingw_extraconf="$(grep "^${i}_mingw_extraconf" ${manifest} | cut -d '=' -f 2- | tr ' ' '%'| tr -d '\"')"
+	    local mingw_only="$(grep "^${i}_mingw_only" ${manifest} | cut -d '=' -f 2)"
 	    # Any embedded spaces in the value have to be converted to a '%'
 	    # character. for component_init().
 	    local makeflags="$(grep "^${i}_makeflags" ${manifest} | cut -d '=' -f 2-20 | tr ' ' '%')"
@@ -198,7 +205,16 @@ import_manifest()
 		    ;;
 	    esac
 
-	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${md5sum:+MD5SUM=${md5sum}}
+            # for old manifests, we have to fix up the missing parameters
+            if ${fixup_mingw}; then
+                mingw_extraconf=""
+                case ${i} in
+                    expat|python) mingw_only=yes ;;
+                    *) mingw_only=no ;;
+                esac
+            fi
+
+	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${md5sum:+MD5SUM=${md5sum}} ${mingw_only:+MINGWEXTRACONF=\"${mingw_extraconf}\"} ${mingw_only:+MINGWONLY=${mingw_only}}
 	    if [ $? -ne 0 ]; then
 		error "component_init failed while parsing manifest"
 		build_failure
@@ -214,6 +230,8 @@ import_manifest()
 	    unset makeflags
 	    unset configure
 	    unset md5sum
+	    unset mingw_only
+	    unset mingw_extraconf
 	done
     else
 	error "Manifest file '${manifest}' not found"
@@ -241,7 +259,10 @@ get_component_list()
 	    # don't need to rebuild the sysroot.
             builds="${builds} expat python binutils libc stage2 gdb"
 	else
-            builds="${builds} binutils stage1 libc stage2 gdb"
+	    # Non-linux builds skip expat and python, but are here so that
+            # they are included in the manifest, so linux and mingw
+            # manifests can be identical.
+            builds="${builds} expat python binutils stage1 libc stage2 gdb"
 	fi
 	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
 	    builds="${builds} gdbserver"
@@ -253,6 +274,18 @@ get_component_list()
 	fi
     else
         builds="${builds} binutils stage2 libc gdb" # native build
+    fi
+
+    # if this build is based on a manifest, then we must remove components from
+    # the build list which aren't described by the manifest
+    if [ x"${manifest}" != x"" ]; then
+        local i
+        for i in ${builds}; do
+            local match=${i/stage[12]/gcc}
+            if ! echo "${toolchain[*]}" | grep -q "${match}"; then
+                builds=$(echo "${builds}" | sed -e "s/\<${i}\>//")
+            fi
+        done
     fi
 
     echo "${builds}"

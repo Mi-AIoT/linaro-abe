@@ -35,6 +35,8 @@ declare -ag toolchain
 # STATICLINK
 # CONFIGURE
 # RUNTESTFLAGS
+# MINGWEXTRACONF
+# MINGWONLY
 
 # Initialize the associative array
 # parameters:
@@ -230,6 +232,38 @@ set_component_md5sum ()
     return 0
 }
 
+set_component_mingw_extraconf ()
+{
+#    trace "$*"
+
+    local component="$(echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::')"
+    declare -p ${component} 2>&1 > /dev/null
+    if test $? -gt 0; then
+       warning "${component} does not exist!"
+       return 1
+    else
+       eval ${component}[MINGWEXTRACONF]="$2"
+    fi
+
+    return 0
+}
+
+set_component_mingw_only ()
+{
+#    trace "$*"
+
+    local component="$(echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::')"
+    declare -p ${component} 2>&1 > /dev/null
+    if test $? -gt 0; then
+       warning "${component} does not exist!"
+       return 1
+    else
+       eval ${component}[MINGWONLY]="$2"
+    fi
+
+    return 0
+}
+
 # BRANCH is parsed from the config file for each component, but can be redefined
 # on the command line at runtime.
 #
@@ -395,6 +429,37 @@ get_component_md5sum ()
     return 0
 }
 
+get_component_mingw_extraconf ()
+{
+#    trace "$*"
+
+    local component="$(echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::')"
+    if test "${component:+set}" != "set"; then
+       warning "${component} does not exist!"
+       return 1
+    else
+       eval "echo \${${component}[MINGWEXTRACONF]}"
+    fi
+
+    return 0
+}
+
+get_component_mingw_only ()
+{
+#    trace "$*"
+
+    local component="$(echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::')"
+    if test "${component:+set}" != "set"; then
+       warning "${component} does not exist!"
+       return 1
+    else
+       eval "echo \${${component}[MINGWONLY]}"
+    fi
+
+    return 0
+}
+
+
 get_component_staticlink ()
 {
 #    trace "$*"
@@ -531,7 +596,7 @@ read_conf_files ()
 	#    aarch64_errata languages tag
 	# set in a special conf file which is parsed separately in abe.sh:
 	#    preferred_libc
-        for var in default_configure_flags default_makeflags latest runtest_flags stage1_flags stage2_flags static_link; do
+        for var in default_configure_flags default_makeflags latest mingw_extraconf mingw_only runtest_flags stage1_flags stage2_flags static_link; do
             if [ "${!var:+set}" = "set" ]; then
                 echo "local conf_$var=\"${!var}\""
             fi
@@ -689,6 +754,8 @@ collect_data ()
 	confvars="${confvars} ${conf_stage2_flags:+STAGE2=\"$(echo ${conf_stage2_flags} | tr ' ' '%')\"}"
     fi
     confvars="${confvars} ${conf_runtest_flags:+RUNTESTFLAGS=\"$(echo ${conf_runtest_flags} | tr ' ' '%')\"}"
+    confvars="${confvars} ${conf_mingw_only:+MINGWONLY=\"$(echo ${conf_mingw_only} | tr ' ' '%')\"}"
+    confvars="${confvars} ${conf_mingw_extraconf:+MINGWEXTRACONF=\"$(echo ${conf_mingw_extraconf} | tr ' ' '%')\"}"
     component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${confvars}
     if [ $? -ne 0 ]; then
         error "component_init failed"

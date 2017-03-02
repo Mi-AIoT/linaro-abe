@@ -401,6 +401,11 @@ manifest()
 	    echo "${component}_md5sum=${md5sum}" >> ${outfile}
 	fi
 
+	local mingw_only="$(get_component_mingw_only ${component})"
+	if test x"${mingw_only}" != x; then
+	    echo "${component}_mingw_only=\"${mingw_only}\"" >> ${outfile}
+	fi
+
 	# Drop any local build paths and replaced with variables to be more portable.
 	if test x"${component}" = x"gcc"; then
 	    echo "${component}_configure=" >> ${outfile}
@@ -409,6 +414,11 @@ manifest()
 	    if test x"${configure}" != x; then
 		echo "${component}_configure=\"${configure}\"" >> ${outfile}
 	    fi
+	fi
+
+	local mingw_extraconf="$(get_component_mingw_extraconf ${component} | normalize_manifest_path )"
+	if test x"${mingw_extraconf}" != x; then
+	    echo "${component}_mingw_extraconf=\"${mingw_extraconf}\"" >> ${outfile}
 	fi
 
 	local static="$(get_component_staticlink ${component})"
