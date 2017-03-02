@@ -509,6 +509,37 @@ component_dump()
     return 0
 }
 
+# read_conf_files () sources all scripts provided as arguments in a subshell
+# then outputs resulting variables on stdout. This prevents conf files from
+# making surprising changes to the environment or abe's internal variables.
+read_conf_files ()
+{
+    local conf
+    (
+        for conf in "$@"; do
+	    if ! test -f "${conf}"; then
+	        error "Warning: config file does not exist: ${conf}"
+	        exit 1
+	    fi
+	    notice "Sourcing config file: ${conf}"
+            . "$conf"
+        done
+        local var
+        # configs also have the following unused vars:
+        #    benchcmd benchcount benchlog configure installs
+        # configs set these, but they all set the same global variable which
+        # ends up being empty in all cases:
+        #    depends 
+        # configs set these as temporary local variables, we ignore those:
+	#    aarch64_errata tag
+        for var in default_configure_flags default_makeflags languages latest preferred_libc runtest_flags stage1_flags stage2_flags static_link; do
+            if [ "${!var:+set}" = "set" ]; then
+                echo "local conf_$var=\"${!var}\""
+            fi
+        done
+    )
+}
+
 collect_data_abe ()
 {
     local component="abe"
@@ -556,8 +587,7 @@ collect_data ()
         fi
     fi
 
-    notice "Sourcing config: ${topdir}/config/${component}.conf"
-    . "${topdir}/config/${component}.conf"
+    local conf_list="${topdir}/config/${component}.conf"
 
     local default_conf="${topdir}/config/default/${component}.conf"
     if test -f "$default_conf"; then
@@ -566,20 +596,20 @@ collect_data ()
 	    error "$default_conf should have only \"latest=\" and nothing else"
 	    exit 1
 	fi
-
-	notice "Sourcing config: $default_conf"
-	. "$default_conf"
+        conf_list="${conf_list} ${default_conf}"
     fi
 
-    local this_extraconfig
-    for this_extraconfig in ${extraconfig[${component}]}; do
-	if test -f "${this_extraconfig}"; then
-	    notice "Sourcing extra config: ${this_extraconfig}"
-	    . "${this_extraconfig}"
-	else
-	    error "Warning: extraconfig file does not exist: ${this_extraconfig}"
-	    exit 1
-	fi
+    conf_list="${conf_list} ${extraconfig[${component}]}"
+
+    # import variables from conf files as local variables
+    eval "$(read_conf_files $conf_list)"
+    # some conf files directly set these global variables inside Abe
+    local var
+    for var in preferred_libc languages; do
+        local conf_var="conf_$var"
+        if [ "${!conf_var:+set}" = "set" ]; then
+            var="${!conf_var}"
+        fi
     done
 
     # this accesses the component version which was specified on the command
@@ -591,7 +621,7 @@ collect_data ()
     local current_component_version="${!versionvar}"
     local use_version=
     if test x"${current_component_version}" = x; then
-        use_version=${latest}
+        use_version=${conf_latest}
     else
         use_version=${current_component_version}
     fi
@@ -660,23 +690,19 @@ collect_data ()
 
     # Extract a few other data variables from the conf file and store them so
     # the conf file only needs to be sourced once.
-    local confvars="${static_link:+STATICLINK=${static_link}}"
-    confvars="${confvars} ${default_makeflags:+MAKEFLAGS=\"$(echo ${default_makeflags} | tr ' ' '%')\"}"
-    confvars="${confvars} ${default_configure_flags:+CONFIGURE=\"$(echo ${default_configure_flags} | tr ' ' '%')\"}"
+    local confvars="${conf_static_link:+STATICLINK=${conf_static_link}}"
+    confvars="${confvars} ${conf_default_makeflags:+MAKEFLAGS=\"$(echo ${conf_default_makeflags} | tr ' ' '%')\"}"
+    confvars="${confvars} ${conf_default_configure_flags:+CONFIGURE=\"$(echo ${conf_default_configure_flags} | tr ' ' '%')\"}"
     if test x"${component}" = "xgcc"; then
-	confvars="${confvars} ${stage1_flags:+STAGE1=\"$(echo ${stage1_flags} | tr ' ' '%')\"}"
-	confvars="${confvars} ${stage2_flags:+STAGE2=\"$(echo ${stage2_flags} | tr ' ' '%')\"}"
+	confvars="${confvars} ${conf_stage1_flags:+STAGE1=\"$(echo ${conf_stage1_flags} | tr ' ' '%')\"}"
+	confvars="${confvars} ${conf_stage2_flags:+STAGE2=\"$(echo ${conf_stage2_flags} | tr ' ' '%')\"}"
     fi
-    confvars="${confvars} ${runtest_flags:+RUNTESTFLAGS=\"$(echo ${runtest_flags} | tr ' ' '%')\"}"
+    confvars="${confvars} ${conf_runtest_flags:+RUNTESTFLAGS=\"$(echo ${conf_runtest_flags} | tr ' ' '%')\"}"
     component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${confvars}
     if [ $? -ne 0 ]; then
         error "component_init failed"
         return 1
     fi
-
-    default_makeflags=
-    default_configure_flags=
-    runtest_flags=
 
     return 0
 }
