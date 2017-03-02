@@ -759,12 +759,9 @@ fi
 
 # Do not pollute env
 testing="source_config"
-depends="`depends= && source_config isl && echo ${depends}`"
 static_link="`static_link= && source_config isl && echo ${static_link}`"
 default_configure_flags="`default_configure_flags= && source_config isl && echo ${default_configure_flags}`"
-if test x"${depends}" != xgmp; then
-  fail "${testing}"
-elif test x"${static_link}" != xyes; then
+if test x"${static_link}" != xyes; then
   fail "${testing}"
 elif test x"${default_configure_flags}" != x"--with-gmp-prefix=${PWD}/${hostname}/${build}/depends"; then
   fail "${testing}"
