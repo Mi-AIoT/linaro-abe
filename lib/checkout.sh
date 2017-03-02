@@ -73,7 +73,7 @@ checkout_all()
     done
 
     # Reset to the stored value
-    if test $(echo ${host} | grep -c mingw) -eq 1 -a x"${tarbin}" = xyes; then
+    if is_host_mingw && test x"${tarbin}" = xyes; then
 	files="${files} installjammer-1.2.15.tar.gz"
     fi
 

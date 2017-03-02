@@ -66,14 +66,14 @@ build_all()
 		# up, and then tries to redefine caddr_t yet again. We modify the installed
 		# types.h instead of the one in the source tree to be a tiny bit less ugly.
 		# After libgcc is built with the modified file, it needs to be changed back.
-		if test  $(echo ${host} | grep -c mingw) -eq 1; then
+		if is_host_mingw; then
 		    sed -i -e 's/typedef __caddr_t caddr_t/\/\/ FIXME: typedef __caddr_t caddr_t/' ${sysroots}/usr/include/sys/types.h
 		fi
 
                 build gcc stage2
                 build_all_ret=$?
 		# Reverse the ugly hack
-		if test $(echo ${host} | grep -c mingw) -eq 1; then
+		if is_host_mingw; then
 		    sed -i -e 's/.*FIXME: //' ${sysroots}/usr/include/sys/types.h
 		fi
                 ;;
