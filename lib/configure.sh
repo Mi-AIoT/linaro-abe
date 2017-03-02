@@ -81,17 +81,6 @@ configure_build()
   
     local opts="$(get_component_configure ${component} $2)"
 
-    # See if this component depends on other components. They then need to be
-    # built first.
-    if test x"${depends}"; then
-	for i in "${depends}"; do
-	    # remove the current build component from the command line arguments
-	    # so we can replace it with the dependent component name.
-	    local args="$(echo ${command_line_arguments} | sed -e 's@$1@@')"
-	done
-    fi
-
-
     # Force static linking unless dynamic linking is specified
     local static="$(get_component_staticlink ${component})"
     if test x"${static}" = x"yes"; then
