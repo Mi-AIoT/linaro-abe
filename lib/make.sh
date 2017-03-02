@@ -29,6 +29,11 @@ build_all()
 
     # build each component
     for i in ${builds}; do
+        local mingw_only="$(get_component_mingw_only $i)"
+        if [ x"$mingw_only" = x"yes" ] && ! is_host_mingw ; then
+            notice "Skipping component $i, which is only required for mingw hosts"
+            continue
+        fi
         notice "Building all, current component $i"
         # If an interactive build, stop betweeen each step so we can
         # check the build and config options.
