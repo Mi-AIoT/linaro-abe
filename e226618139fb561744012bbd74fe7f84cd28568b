@@ -16,6 +16,24 @@
       "revId": "e226618139fb561744012bbd74fe7f84cd28568b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_a9d059f8",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2017-03-03T17:27:35Z",
+      "side": 1,
+      "message": "I agree",
+      "parentUuid": "9a245df4_eeafe529",
+      "revId": "e226618139fb561744012bbd74fe7f84cd28568b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
