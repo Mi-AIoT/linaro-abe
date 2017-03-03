@@ -309,6 +309,12 @@ get_manifest_id()
     return 0
 }
 
+# rewrite path so that it is based on ABE path variables
+normalize_manifest_path()
+{
+    sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g"
+}
+
 # Create a manifest file that lists all the versions of the other components
 # used for this build.
 manifest()
@@ -351,7 +357,7 @@ manifest()
 	    echo "${component}_branch=branch=$(get_component_branch ${component})" >> ${tmpfile}
 	    echo "${component}_revision=$(get_component_revision ${component})" >> ${tmpfile}
 	    echo "${component}_filespec=$(get_component_filespec ${component})" >> ${tmpfile}
-	    local configure="$(get_component_configure ${component} | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g")"
+	    local configure="$(get_component_configure ${component} | normalize_manifest_path)"
 	    echo "${component}_configure=\"${configure}\"" >> ${tmpfile}
 	    echo "" >> ${tmpfile}
 	    continue
@@ -385,7 +391,7 @@ manifest()
 	    echo "${component}_filespec=${filespec}" >> ${outfile}
 	fi
 
-	local makeflags="$(get_component_makeflags ${component} | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g")"
+	local makeflags="$(get_component_makeflags ${component} | normalize_manifest_path )"
 	if test x"${makeflags}" != x; then
 	    echo "${component}_makeflags=\"${makeflags}\"" >> ${outfile}
 	fi
@@ -399,7 +405,7 @@ manifest()
 	if test x"${component}" = x"gcc"; then
 	    echo "${component}_configure=" >> ${outfile}
 	else
-	    local configure="$(get_component_configure ${component} | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g")"
+	    local configure="$(get_component_configure ${component} | normalize_manifest_path )"
 	    if test x"${configure}" != x; then
 		echo "${component}_configure=\"${configure}\"" >> ${outfile}
 	    fi
@@ -411,9 +417,9 @@ manifest()
 	fi
 
 	if test x"${component}" = x"gcc"; then
-	    local stage1="$(get_component_configure gcc stage1 | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g")"
+	    local stage1="$(get_component_configure gcc stage1 | normalize_manifest_path )"
 	    echo "gcc_stage1_flags=\"${stage1}\"" >> ${outfile}
-	    local stage2="$(get_component_configure gcc stage2 | sed -e "s:${local_builds}:\$\{local_builds\}:g" -e "s:${sysroots}:\$\{sysroots\}:g" -e "s:${local_snapshots}:\$\{local_snapshots\}:g" -e "s:${host}:\$\{host\}:g")"
+	    local stage2="$(get_component_configure gcc stage2 | normalize_manifest_path )"
 	    echo "gcc_stage2_flags=\"${stage2}\"" >> ${outfile}
 	fi
 
