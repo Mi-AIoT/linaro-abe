@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_0909ad95",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-03T18:34:32Z",
+      "side": 1,
+      "message": "should be is_host_mingw \u0026\u0026 test",
+      "revId": "4edf349199df837424811f75ac0043ef689aa037",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_69fe616d",
+        "filename": "lib/package.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-03T18:34:32Z",
+      "side": 1,
+      "message": "should be test ... \u0026\u0026 ! is_host_mingw",
+      "revId": "4edf349199df837424811f75ac0043ef689aa037",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
