@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_daee35b4",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T16:09:43Z",
+      "side": 1,
+      "message": "Can we delete configure\u003d and installs\u003d from the corresponding *.conf files?",
+      "range": {
+        "startLine": 529,
+        "startChar": 42,
+        "endLine": 529,
+        "endChar": 60
+      },
+      "revId": "07c004d0f9fa1addc7732e441715cf05fb24bce3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_faf17196",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T16:09:43Z",
+      "side": 1,
+      "message": "bench* are used in lib/benchmark.sh, called by runbenchmark.sh: I\u0027m not sure if it\u0027s working/supported; maybe we should delete them in a future cleanup patch?",
+      "range": {
+        "startLine": 529,
+        "startChar": 13,
+        "endLine": 529,
+        "endChar": 41
+      },
+      "revId": "07c004d0f9fa1addc7732e441715cf05fb24bce3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_9af4bd88",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T16:09:43Z",
+      "side": 1,
+      "message": "Why not source the default_conf before conf_list? (I know this patch does not change that)",
+      "range": {
+        "startLine": 599,
+        "startChar": 7,
+        "endLine": 599,
+        "endChar": 48
+      },
+      "revId": "07c004d0f9fa1addc7732e441715cf05fb24bce3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
