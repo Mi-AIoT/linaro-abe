@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_7afe216d",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T15:17:57Z",
+      "side": 1,
+      "message": "Would be better with a capital \u0027T\u0027 :-)",
+      "range": {
+        "startLine": 585,
+        "startChar": 6,
+        "endLine": 585,
+        "endChar": 7
+      },
+      "revId": "14a85c252849a911434a3eb8a523725608c485d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_5a036573",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T15:17:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be version_var (with \u0027_\u0027 between version and var? If I am right, why did the validation pass?",
+      "range": {
+        "startLine": 591,
+        "startChar": 40,
+        "endLine": 591,
+        "endChar": 50
+      },
+      "revId": "14a85c252849a911434a3eb8a523725608c485d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
