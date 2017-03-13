@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_ba3ed927",
+        "filename": "lib/common.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T16:23:34Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 298,
+        "startChar": 5,
+        "endLine": 298,
+        "endChar": 10
+      },
+      "revId": "bbbd2b1dd9d578a5d4c3f8406b4aed6775b50180",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_9a3b1d38",
+        "filename": "lib/common.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-13T16:23:34Z",
+      "side": 1,
+      "message": "Any chance we want/need to execute this function under \u0027set -e\u0027? If yes, a non-mingw host would cause early exit because grep would fail.",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 301,
+        "endChar": 34
+      },
+      "revId": "bbbd2b1dd9d578a5d4c3f8406b4aed6775b50180",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
