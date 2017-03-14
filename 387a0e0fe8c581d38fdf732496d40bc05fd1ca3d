@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_1517fea4",
+        "filename": "config/gdb.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-14T14:09:45Z",
+      "side": 1,
+      "message": "I prefer the --enable-foo --disable-foo mechanism :-)",
+      "parentUuid": "7a1969be_95780e2d",
+      "range": {
+        "startLine": 13,
+        "startChar": 17,
+        "endLine": 13,
+        "endChar": 30
+      },
+      "revId": "387a0e0fe8c581d38fdf732496d40bc05fd1ca3d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_3a12e9b4",
         "filename": "lib/globals.sh",
         "patchSetId": 4
