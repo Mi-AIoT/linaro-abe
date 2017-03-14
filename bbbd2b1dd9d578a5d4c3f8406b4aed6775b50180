@@ -45,6 +45,30 @@
       "revId": "bbbd2b1dd9d578a5d4c3f8406b4aed6775b50180",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_15e25ed5",
+        "filename": "lib/common.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T13:16:09Z",
+      "side": 1,
+      "message": "We only really want to execute this function as the condition  of an if, so the early exit would be prevented.",
+      "parentUuid": "7a1969be_9a3b1d38",
+      "range": {
+        "startLine": 301,
+        "startChar": 4,
+        "endLine": 301,
+        "endChar": 34
+      },
+      "revId": "bbbd2b1dd9d578a5d4c3f8406b4aed6775b50180",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
