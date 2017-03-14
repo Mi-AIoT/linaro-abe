@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_95500e60",
+        "filename": "lib/common.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-14T14:12:33Z",
+      "side": 1,
+      "message": "isn\u0027t it \u0027false\u0027 instead?",
+      "range": {
+        "startLine": 298,
+        "startChar": 5,
+        "endLine": 298,
+        "endChar": 10
+      },
+      "revId": "f0f56c7d230a0ddaf57fc4ec3e295910814bc58d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
