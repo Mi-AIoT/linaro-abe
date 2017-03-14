@@ -92,6 +92,30 @@
       "revId": "07c004d0f9fa1addc7732e441715cf05fb24bce3",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_35d31a3a",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T12:30:45Z",
+      "side": 1,
+      "message": "For example, config/gcc.conf is not supposed to contain a latest\u003d flag, and it should be in config/default/gcc.conf. However, if both do contain a latest\u003d flag, then I think it is less confusing if the \"default\" one is used.\n\nA separate patch to enforce the absence of latest\u003d in config/*.conf would be a nice idea.",
+      "parentUuid": "7a1969be_9af4bd88",
+      "range": {
+        "startLine": 599,
+        "startChar": 7,
+        "endLine": 599,
+        "endChar": 48
+      },
+      "revId": "07c004d0f9fa1addc7732e441715cf05fb24bce3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
