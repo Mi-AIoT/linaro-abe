@@ -22,6 +22,30 @@
       "revId": "f0f56c7d230a0ddaf57fc4ec3e295910814bc58d",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_55d696c6",
+        "filename": "lib/common.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T14:42:20Z",
+      "side": 1,
+      "message": "excuse me while I find some 100% chocolate... :)",
+      "parentUuid": "7a1969be_95500e60",
+      "range": {
+        "startLine": 298,
+        "startChar": 5,
+        "endLine": 298,
+        "endChar": 10
+      },
+      "revId": "f0f56c7d230a0ddaf57fc4ec3e295910814bc58d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
