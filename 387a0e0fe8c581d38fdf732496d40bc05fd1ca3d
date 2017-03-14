@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_95912e55",
+        "filename": "config/gdb.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T12:48:22Z",
+      "side": 1,
+      "message": "I guess the alternative would be to have the full mingw configure flags as a separate variable (mingw_configure_flags\u003d\"...\") and not using default_configure_flags at all for mingw builds.\n\nI think doing this would require further refactoring of stage{1,2}_flags in gcc.conf, otherwise we would have annoying problems if we ever needed mingw-specific flags to configure gcc.",
+      "parentUuid": "7a1969be_9592ce9d",
+      "range": {
+        "startLine": 13,
+        "startChar": 17,
+        "endLine": 13,
+        "endChar": 30
+      },
+      "revId": "387a0e0fe8c581d38fdf732496d40bc05fd1ca3d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_3a12e9b4",
         "filename": "lib/globals.sh",
         "patchSetId": 4
@@ -36,6 +60,30 @@
       "writtenOn": "2017-03-13T16:37:09Z",
       "side": 1,
       "message": "Still, non-mingw builds have \u0027stage1\u0027. Doesn\u0027t it make a different in manifests?",
+      "range": {
+        "startLine": 262,
+        "startChar": 52,
+        "endLine": 262,
+        "endChar": 59
+      },
+      "revId": "387a0e0fe8c581d38fdf732496d40bc05fd1ca3d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_f5c7c262",
+        "filename": "lib/globals.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T12:48:22Z",
+      "side": 1,
+      "message": "The actual component name is \u0027gcc\u0027, so \u0027stage1\u0027 and \u0027stage2\u0027 do the same thing. In fact, the component data is gathered twice for gcc. You can see this in any Abe log file, as the line:\n\n    NOTE: Sourcing config file: /home/charles.baylis/tmp/abe/config/gcc.conf\n\nappears twice in very separate parts of the file.",
+      "parentUuid": "7a1969be_3a12e9b4",
       "range": {
         "startLine": 262,
         "startChar": 52,
