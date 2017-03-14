@@ -48,6 +48,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_95476e1d",
+        "filename": "lib/component.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T12:19:02Z",
+      "side": 1,
+      "message": "configure\u003d is used by the benchmark infrastructure, so I want to leave it alone for now.\n\ninstalls\u003d is removed in a later patch in this series.",
+      "parentUuid": "7a1969be_daee35b4",
+      "range": {
+        "startLine": 529,
+        "startChar": 42,
+        "endLine": 529,
+        "endChar": 60
+      },
+      "revId": "07c004d0f9fa1addc7732e441715cf05fb24bce3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_9af4bd88",
         "filename": "lib/component.sh",
         "patchSetId": 3
