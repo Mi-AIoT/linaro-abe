@@ -69,6 +69,54 @@
       "revId": "14a85c252849a911434a3eb8a523725608c485d1",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_5525f6a9",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T11:35:15Z",
+      "side": 1,
+      "message": "Good catch, thanks!",
+      "parentUuid": "7a1969be_5a036573",
+      "range": {
+        "startLine": 591,
+        "startChar": 40,
+        "endLine": 591,
+        "endChar": 50
+      },
+      "revId": "14a85c252849a911434a3eb8a523725608c485d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_7520f29b",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-14T11:35:15Z",
+      "side": 1,
+      "message": "the abe-tests-checkout tests do, but they currently only test that the checkout succeeds. I have a patch for that coming soon.",
+      "parentUuid": "7a1969be_d519e67a",
+      "range": {
+        "startLine": 591,
+        "startChar": 40,
+        "endLine": 591,
+        "endChar": 50
+      },
+      "revId": "14a85c252849a911434a3eb8a523725608c485d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
