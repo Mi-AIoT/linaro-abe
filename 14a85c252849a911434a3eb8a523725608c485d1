@@ -45,6 +45,30 @@
       "revId": "14a85c252849a911434a3eb8a523725608c485d1",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_d519e67a",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2017-03-14T10:36:30Z",
+      "side": 1,
+      "message": "the typo in the indirection make it always use ${latest}, do we have component version specified on the command line in the validation ?",
+      "parentUuid": "7a1969be_5a036573",
+      "range": {
+        "startLine": 591,
+        "startChar": 40,
+        "endLine": 591,
+        "endChar": 50
+      },
+      "revId": "14a85c252849a911434a3eb8a523725608c485d1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
