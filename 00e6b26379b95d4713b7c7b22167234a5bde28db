@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_208d9632",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-03-16T07:14:57Z",
+      "side": 1,
+      "message": "Unrelated to this patch, at Connect we discussed that default tuning for cortex-a9 is strange because it is not representative of most ARMv7 architectures.  Should we change this to A8 or A15?",
+      "range": {
+        "startLine": 140,
+        "startChar": 69,
+        "endLine": 140,
+        "endChar": 78
+      },
+      "revId": "00e6b26379b95d4713b7c7b22167234a5bde28db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
