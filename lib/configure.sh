@@ -18,7 +18,7 @@
 
 # Configure a source directory
 # $1 - the directory to configure
-# $2 - [OPTIONAL] which sub component to build, gcc stage, gdbserver, binutils, etc...
+# $2 - [OPTIONAL] which sub component to build (gcc stage)
 configure_build()
 {
 #    trace "$*"
@@ -73,11 +73,7 @@ configure_build()
     fi
 
     local opts=""
-    if test x"$2" = x"gdbserver"; then
-	local toolname="gdbserver"
-    else
-	local toolname="${component}"
-    fi
+    local toolname="${component}"
   
     local opts="$(get_component_configure ${component} $2)"
 
@@ -135,9 +131,6 @@ configure_build()
 			    ;;
 			stage2*)
 			    notice "Building stage 2 of GCC"
-			    ;;
-			gdbserver)
-			    notice "Building gdbserver for the target"
 			    ;;
 			bootstrap*)
 			    notice "Building bootstrapped GCC"

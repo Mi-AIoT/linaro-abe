@@ -403,10 +403,6 @@ make_all()
     # end so that config files can override
     local default_makeflags="$(get_component_makeflags ${component})"
 
-#    if test x"$2" = x"gdbserver"; then
-#       default_makeflags="CFLAGS=--sysroot=${sysroots}"
-#    fi
-
     if test x"${default_makeflags}" !=  x; then
         local make_flags="${make_flags} ${default_makeflags}"
     fi
@@ -550,11 +546,7 @@ make_install()
     local default_makeflags= #"$(get_component_makeflags ${component})"
     local install_log="$(dirname ${builddir})/install-${component}${2:+-$2}.log"
     if test x"${component}" = x"gdb" ; then
-	if test x"$2" != x"gdbserver" ; then
-            dryrun "make install-gdb ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
-        else
-            dryrun "make install ${make_flags} -w -C ${builddir} 2>&1 | tee ${install_log}"
-        fi
+        dryrun "make install-gdb ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     else
 	dryrun "make install ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     fi
