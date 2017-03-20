@@ -157,7 +157,7 @@ binary_gdb()
 
 # Produce a binary toolchain tarball
 # For daily builds produced by Jenkins, we use
-# $(date +%Y%m%d)-${BUILD_NUMBER}-${GIT_REVISION}
+# $(date --date="@${timestamp}" +%Y%m%d)-${BUILD_NUMBER}-${GIT_REVISION}
 # e.g artifact_20130906-12-245f0869.tar.xz
 binary_toolchain()
 {
@@ -526,7 +526,7 @@ binutils_src_tarball()
     done
  
     if test x"${release}" != x; then
-	local date="$(date +%Y%m%d)"
+	local date="$(date --date="@${timestamp}" +%Y%m%d)"
 	if test "$(echo $1 | grep -c '@')" -gt 0; then
 	    local revision="$(echo $1 | cut -d '@' -f 2)"
 	fi
@@ -537,7 +537,7 @@ binutils_src_tarball()
 	else
 	    local binutils_version="$(echo ${binutils_version} | sed -e "s:-2.*:-${date}:")"
 	fi
-	local date="$(date +%Y%m%d)"
+	local date="$(date --date="@${timestamp}" +%Y%m%d)"
 	local tag="${binutils_version}-linaro${revision}-${date}"
     else
 	local tag="binutils-linaro-${version}-${release}"

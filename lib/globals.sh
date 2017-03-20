@@ -24,7 +24,10 @@ build="${build}"
 host="${host:-${build}}"
 target="${host}"
 
-date="$(date "+%Y.%m.%d")"
+# we need to read the date once, so that we don't have
+# varying dates when midnight occurs during a build.
+timestamp=$(date +%s)
+date="$(date --date="@${timestamp}" "+%Y.%m.%d")"
 gcc="$(which gcc)"
 host_gcc_version="$(${gcc} -v 2>&1 | tail -1)"
 binutils="default"

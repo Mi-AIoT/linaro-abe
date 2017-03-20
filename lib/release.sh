@@ -234,7 +234,7 @@ edit_changelogs()
 	local email="${BUILD_USER_ID}"
     fi
 
-    local date="$(date +%Y-%m-%d)"
+    local date="$(date --date="@${timestamp}" +%Y-%m-%d)"
 
     # Get all the ChangeLog files.
     local clogs="$(find ${basedir}/ -name ChangeLog)"

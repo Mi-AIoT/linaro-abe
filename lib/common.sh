@@ -195,7 +195,7 @@ create_release_version()
 	    local revision="@$(git -C ${srcdir} log --oneline | head -1 | cut -d ' ' -f 1)"
 	fi
 
-	local date="$(date +%Y%m%d)"
+	local date="$(date --date="@${timestamp}" +%Y%m%d)"
 
 	# return the version string array
 	local rtag="${branch}${revision}-${date}"
@@ -253,7 +253,7 @@ create_release_tag()
     # Only expand ${version} if it exists, so we don't get a spurious '-'.
     local rtag="${component}-linaro${version:+-${version}}"
     if test x"${release}" = x; then
-	local date="$(date +%Y%m%d)"
+	local date="$(date --date="@${timestamp}" +%Y%m%d)"
 	if test x"${component}" = x"glibc"; then
 	    local branch="$(echo ${branch} | tr '/' '-')"
 	fi

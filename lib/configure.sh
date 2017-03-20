@@ -95,7 +95,7 @@ configure_build()
     # The release string is usually the date as well, but in YYYY.MM format.
     # For snapshots we add the day field as well.
     if test x"${release}" = x; then
-	local date="$(date "+%Y.%m")"
+	local date="$(date --date="@${timestamp}" "+%Y.%m")"
     else
 	local date="${release}"
     fi
