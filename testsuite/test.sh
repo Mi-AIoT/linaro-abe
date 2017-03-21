@@ -491,7 +491,7 @@ fi
 
 export release="2015.08-rc1"
 testing="create_release_tag: release candidate tarball with release"
-in="gcc-linaro-5.1.1-2015.08-rc1.tar.xz"
+in="gcc"
 out="`create_release_tag ${in} | grep -v TRACE`"
 toolname="`echo ${out} | cut -d ' ' -f 1`"
 branch="`echo ${out} | cut -d ' ' -f 2`"
@@ -505,7 +505,7 @@ fi
 
 export release="2015.08-2-rc1"
 testing="create_release_tag: release candidate tarball with release"
-in="gcc-linaro-5.1.1-2015.08-2-rc1.tar.xz"
+in="gcc"
 out="`create_release_tag ${in} | grep -v TRACE`"
 toolname="`echo ${out} | cut -d ' ' -f 1`"
 branch="`echo ${out} | cut -d ' ' -f 2`"
@@ -707,7 +707,7 @@ should="pass"
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 testing="checkout: http://git@<url>/<repo>.git/unusedbranchname@<revision>"
-package="abe.git"
+package="abe"
 branch="unusedbranchname"
 revision="9bcced554dfc"
 should="pass"
@@ -725,7 +725,7 @@ test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 # This should fail because an unknown branch is specified
 testing="checkout: http://git@<url>/<repo>.git/<nonexistentbranch> should fail with 'branch does not exist' message."
-package="abe.git"
+package="abe"
 branch="nonexistentbranch"
 revision=''
 should="fail"
@@ -733,14 +733,14 @@ test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 # This should fail because an unknown revision is specified
 testing="checkout: http://git@<url>/<repo>.git@<nonexistentrevision> should fail with 'revision does not exist' message."
-package="abe.git"
+package="abe"
 branch=''
 revision="123456bogusbranch"
 should="fail"
 test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 
 testing="checkout: http://git@<url>/<repo>.git~<branch> should pass with appropriate notice"
-package="abe.git"
+package="abe"
 branch='branch-used-by-abe-unit-testing'
 revision=""
 should="pass"

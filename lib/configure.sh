@@ -23,7 +23,7 @@ configure_build()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::')"
+    local component=$1
 
     # Linux isn't a build project, we only need the headers via the existing
     # Makefile, so there is nothing to configure.

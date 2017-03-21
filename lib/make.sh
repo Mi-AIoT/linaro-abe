@@ -262,7 +262,7 @@ build()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::')"
+    local component=$1
  
     if test "$(echo $2 | grep -c gdb)" -gt 0; then
 	local component="$2"
@@ -357,7 +357,7 @@ make_all()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::')"
+    local component=$1
 
     # Linux isn't a build project, we only need the headers via the existing
     # Makefile, so there is nothing to compile.
@@ -474,7 +474,7 @@ make_install()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::')"
+    local component=$1
 
     # Do not use -j for 'make install' because several build systems
     # suffer from race conditions. For instance in GCC, several
@@ -586,7 +586,7 @@ make_check()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::')"
+    local component=$1
     local builddir="$(get_component_builddir ${component})${2:+-$2}"
 
     if [ x"${builddir}" = x"" ]; then
@@ -758,7 +758,7 @@ make_docs()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:\.git.*::' -e 's:-[0-9a-z\.\-]*::')"
+    local component=$1
     local builddir="$(get_component_builddir ${component})${2:+-$2}"
 
     notice "Making docs in ${builddir}"

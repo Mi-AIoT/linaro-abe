@@ -227,7 +227,7 @@ create_release_tag()
 {
 #    trace "$*"
 
-    local component="$(echo $1 | sed -e 's:-[0-9a-z\.\-]*::' -e 's:\.git.*::')"
+    local component=$1
     if test "$(component_is_tar ${component})" = no; then
 	local branch="~$(get_component_branch ${component})"
 	local revision="@$(get_component_revision ${component} | grep -o '[0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z][0-9a-z]' | head -1)"
