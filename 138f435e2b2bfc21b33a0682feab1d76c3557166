@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_c3f7698b",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-22T09:36:28Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be component\u003d$1 ?",
+      "range": {
+        "startLine": 452,
+        "startChar": 11,
+        "endLine": 452,
+        "endChar": 12
+      },
+      "revId": "138f435e2b2bfc21b33a0682feab1d76c3557166",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
