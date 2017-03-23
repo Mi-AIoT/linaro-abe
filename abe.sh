@@ -39,6 +39,7 @@ usage()
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
              [--set {packages}={toolchain|gdb|sysroot}]
+             [--set {cc|cxx}=XXX]
              [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc]
              [--target {<target_triple>|''}]
              [--testcontainer [user@]ipaddress:ssh_port]
@@ -280,6 +281,9 @@ OPTIONS
                 This only applies to the --tarbin, --tarsrc, and --tarballs
                 command lines options, and are primarily to be only used by
                 developers.
+
+  --set		{cc|cxx}=XXX
+                This overrides default values for CC and CXX.
 
   --snapshots <path>
   		Use an alternative path to a local snapshots directory. 
@@ -614,6 +618,16 @@ set_package()
 	tune)
 	    override_tune="${setting}"
 	    notice "Overriding default --with-tune to ${setting}"
+	    return 0
+	    ;;
+	cc)
+	    export CC="${setting}"
+	    notice "Overriding default cc to ${setting}"
+	    return 0
+	    ;;
+	cxx)
+	    export CXX="${setting}"
+	    notice "Overriding default cxx to ${setting}"
 	    return 0
 	    ;;
 	*)
