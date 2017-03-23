@@ -393,7 +393,13 @@ make_all()
     fi
 
     if test x"${use_ccache}" = xyes -a x"${build}" = x"${host}"; then
-        local make_flags="${make_flags} CC='ccache gcc' CXX='ccache g++'"
+        if [ -z "${CC}" ]; then
+            CC='gcc'
+        fi
+        if [ -z "${CXX}" ]; then
+            CXX='g++'
+        fi
+        local make_flags="${make_flags} CC='ccache ${CC}' CXX='ccache ${CXX}'"
     fi 
 
     # All tarballs are statically linked
