@@ -35,6 +35,7 @@ usage()
              [--release <release_version_string>]
              [--set {arch|cpu|tune}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
+             [--set {cc|cxx}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
@@ -257,6 +258,9 @@ OPTIONS
   --set		{cflags|ldflags|runtestflags|makeflags}=XXX
                 This overrides the default values used for CFLAGS,
                 LDFLAGS, RUNTESTFLAGS, and MAKEFLAGS.
+  
+  --set		{cc|cxx}=XXX
+                This overrides default values for CC and CXX.
 
   --set		{languages}={c|c++|fortran|go|lto|objc|java|ada}
                 This changes the default set of GCC front ends that get built.
@@ -594,6 +598,16 @@ set_package()
 	cflags)
 	    override_cflags="${setting}"
 	    notice "Overriding ${setting} to CFLAGS"
+	    return 0
+	    ;;
+	cc)
+	    export CC="${setting}"
+	    notice "Overriding default cc to ${setting}"
+	    return 0
+	    ;;
+	cxx)
+	    export CXX="${setting}"
+	    notice "Overriding default cxx to ${setting}"
 	    return 0
 	    ;;
 	libc)
