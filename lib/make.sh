@@ -182,12 +182,11 @@ check_all()
 	    # TODO: Get glibc make check working 'native'
 	    is_package_in_runtests "${test_packages}" glibc
 	    if test $? -eq 0; then
-		#make_check ${glibc_version}
-		#if test $? -ne 0; then
-		#check_ret=1
-	        #check_failed="${check_failed} glibc"
-		#fi
-		notice "make check on native glibc is not yet implemented."
+		make_check ${glibc_version}
+		if test $? -ne 0; then
+		    check_ret=1
+		    check_failed="${check_failed} glibc"
+		fi
 	    fi
 
 	    is_package_in_runtests "${test_packages}" eglibc
@@ -693,6 +692,10 @@ make_check()
 		# runtest only once for newlib.
 		local dirs="/${target}/newlib"
 		local check_targets="check-DEJAGNU"
+		;;
+	    glibc|eglibc)
+		local dirs="/"
+		local check_targets="fastcheck"
 		;;
 	    *)
 		local dirs="/"
