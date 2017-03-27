@@ -67,8 +67,6 @@ if test x"${WGET}" = x; then
    missing="${missing} wget"
 fi
 
-AC_PATH_PROG(CCACHE, ccache)
-
 dnl AC_PATH_PROG(GITBZR, git-bzr)
 AC_PATH_PROG(BASH, bash)
 AC_SUBST(BASH)

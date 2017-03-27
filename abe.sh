@@ -21,7 +21,7 @@ usage()
     # Format this section with 75 columns.
     cat << EOF
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
-             [--ccache] [--check {all|glibc|gcc|gdb|binutils}]
+             [--check {all|glibc|gcc|gdb|binutils}]
              [--checkout {<package>[~branch][@revision]|all}]
              [--disable {bootstrap|building|install|make_docs|parallel|schroot_test|update}]
              [--dryrun] [--dump]
@@ -108,8 +108,6 @@ OPTIONS
                 all
                         Build the entire toolchain and populate the
                         sysroot.
-
-  --ccache	Use ccache when building packages.
 
   --check {all|glibc|gcc|gdb|binutils|newlib}
 
@@ -859,9 +857,6 @@ while test $# -gt 0; do
 	--infrastructure)
 	    infrastructure
 	    ;;
-	--ccache)
-            use_ccache=yes
-            ;;
 	--dryrun)
             dryrun=yes
             ;;

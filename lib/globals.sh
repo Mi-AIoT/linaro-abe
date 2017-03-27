@@ -99,8 +99,6 @@ runtests=
 # Container <user>@<ipaddress>:<ssh_port> to be used in cross-testing.
 test_container=
 
-ccache=no
-
 release=""
 with_packages="toolchain,sysroot,gdb"
 building=yes
