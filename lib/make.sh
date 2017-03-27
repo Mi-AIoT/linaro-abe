@@ -392,10 +392,6 @@ make_all()
         local make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
     fi
 
-    if test x"${use_ccache}" = xyes -a x"${build}" = x"${host}"; then
-        local make_flags="${make_flags} CC='ccache gcc' CXX='ccache g++'"
-    fi 
-
     # All tarballs are statically linked
     local make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"-static-libgcc\" -C ${builddir}"
 
