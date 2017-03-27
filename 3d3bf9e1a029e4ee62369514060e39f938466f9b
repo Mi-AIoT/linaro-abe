@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_5c37dab0",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-27T11:47:41Z",
+      "side": 1,
+      "message": "I would say that \u0027cc\u0027 comes before \u0027cflags\u0027, and similarly below :-)",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 33
+      },
+      "revId": "3d3bf9e1a029e4ee62369514060e39f938466f9b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_3c3c9e93",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-27T11:47:41Z",
+      "side": 1,
+      "message": "Can you remove these extra spaces?",
+      "range": {
+        "startLine": 261,
+        "startChar": 0,
+        "endLine": 261,
+        "endChar": 2
+      },
+      "revId": "3d3bf9e1a029e4ee62369514060e39f938466f9b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_7c461625",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-27T11:47:41Z",
+      "side": 1,
+      "message": "Can you use upper case?",
+      "range": {
+        "startLine": 605,
+        "startChar": 32,
+        "endLine": 605,
+        "endChar": 34
+      },
+      "revId": "3d3bf9e1a029e4ee62369514060e39f938466f9b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_dc4aaa26",
+        "filename": "abe.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 610,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-27T11:47:41Z",
+      "side": 1,
+      "message": "And upper case here too?",
+      "range": {
+        "startLine": 610,
+        "startChar": 32,
+        "endLine": 610,
+        "endChar": 35
+      },
+      "revId": "3d3bf9e1a029e4ee62369514060e39f938466f9b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
