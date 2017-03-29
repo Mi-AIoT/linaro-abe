@@ -30,6 +30,7 @@ usage()
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
              [--infrastructure] [--interactive]
+             [--list-artifacts <output_file>]
              [--manifest <manifest_file>]
              [--space <space needed>]
              [--release <release_version_string>]
@@ -217,6 +218,11 @@ OPTIONS
   --infrastructure Download and install the infrastructure libraries.
 
   --interactive Interactively select packages from the snapshots file.
+
+  --list-artifacts
+
+                Output a machine-readable list of paths to generated
+                artifacts.
 
   --manifest <manifest_file>
 
@@ -855,6 +861,11 @@ while test $# -gt 0; do
 	    do_manifest=$2
 	    shift
 	    ;;
+	--list-artifacts)
+	    check_directive list-artifacts $2
+	    list_artifacts=$2
+	    shift
+	    ;;
 	# download and install the infrastructure libraries GCC depends on
 	--infrastructure)
 	    infrastructure
@@ -1102,6 +1113,10 @@ while test $# -gt 0; do
 	shift
     fi
 done
+
+if [ "${list_artifacts:+set}" = "set" ]; then
+    rm -f "${list_artifacts}"
+fi
 
 if [ x"$tarsrc" = x"yes" ]; then
     set_build_steps tarsrc

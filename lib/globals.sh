@@ -118,6 +118,8 @@ jenkins_job_name=""
 jenkins_job_url=""
 sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"
 
+list_artifacts=""
+
 # source a user specific config file for commonly used configure options.
 # These overide any of the above values.
 if test -e ~/.aberc; then
@@ -258,3 +260,16 @@ get_component_list()
     echo "${builds}"
 }
 
+#
+# record_artifact() adds an artifact to the artifacts list file, if one
+# was configured on the command line
+#
+record_artifact()
+{
+    local artifact=$1
+    local path=$(readlink $2)
+    notice "Artifact ${artifact} created at ${path}."
+    if [ "${list_artifacts:+set}" = "set" -a x"${dryrun}" != xyes ]; then
+        echo "${1}=${2}" >> "${list_artifacts}"
+    fi
+}

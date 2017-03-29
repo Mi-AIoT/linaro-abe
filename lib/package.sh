@@ -114,10 +114,13 @@ binary_runtime()
 
     # make the tarball from the tree we just created.
     notice "Making binary tarball for runtime libraries, please wait..."
-    dryrun "tar Jcf ${local_snapshots}/${tag}.tar.xz --directory ${local_builds}/tmp.$$ ${tag}"
+    local tarball=${local_snapshots}/${tag}.tar.xz
+    dryrun "tar Jcf ${tarball} --directory ${local_builds}/tmp.$$ ${tag}"
+    record_artifact runtime "${tarball}"
 
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
-    dryrun "md5sum ${local_snapshots}/${tag}.tar.xz | sed -e 's:${local_snapshots}/::' > ${local_snapshots}/${tag}.tar.xz.asc"
+    dryrun "md5sum ${local_snapshots}/${tag}.tar.xz | sed -e 's:${local_snapshots}/::' > ${tarball}.asc"
+    record_artifact runtime_asc "${tarball}.asc"
 
     rm -fr ${local_builds}/tmp.$$
 
@@ -211,12 +214,17 @@ binary_toolchain()
     notice "Removing .la files."
     find ${destdir} -name '*.la' -exec rm '{}' ';'
 
+
+
     # make the tarball from the tree we just created.
     notice "Making binary tarball for toolchain, please wait..."
-    dryrun "tar Jcf ${local_snapshots}/${tag}.tar.xz --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
+    local tarball=${local_snapshots}/${tag}.tar.xz
+    dryrun "tar Jcf ${tarball} --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
+    record_artifact toolchain "${tarball}"
 	
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
-    dryrun "md5sum ${local_snapshots}/${tag}.tar.xz | sed -e 's:${local_snapshots}/::' > ${local_snapshots}/${tag}.tar.xz.asc"
+    dryrun "md5sum ${local_snapshots}/${tag}.tar.xz | sed -e 's:${local_snapshots}/::' > ${tarball}.asc"
+    record_artifact toolchain_asc "${tarball}".asc
     
     rm -fr ${local_builds}/tmp.$$
 
@@ -238,11 +246,15 @@ binary_sysroot()
 	dryrun "ln -sfnT ${abe_top}/sysroots ${destdir}"
     fi
 
+    local tarball=${local_snapshots}/${tag}.tar.xz
+
     notice "Making binary tarball for sysroot, please wait..."
-    dryrun "tar Jcfh ${local_snapshots}/${tag}.tar.xz --directory=${local_builds}/tmp.$$ ${tag}"
+    dryrun "tar Jcfh ${tarball} --directory=${local_builds}/tmp.$$ ${tag}"
+    record_artifact sysroot "${tarball}"
 
     rm -fr ${local_snapshots}/${tag}.tar.xz.asc ${local_builds}/tmp.$$
-    dryrun "md5sum ${local_snapshots}/${tag}.tar.xz > ${local_snapshots}/${tag}.tar.xz.asc"
+    dryrun "md5sum ${local_snapshots}/${tag}.tar.xz > ${tarball}.asc"
+    record_artifact sysroot_asc "${tarball}".asc
 
     return 0
 }
@@ -343,6 +355,9 @@ manifest()
     if test -e ${outfile}; then
 	mv -f ${outfile} ${outfile}.bak
     fi
+
+    record_artifact manifest "${outfile}"
+
     echo "manifest_format=${manifest_version:-1.0}" > ${outfile}
     echo "" >> ${outfile}
     echo "# Note that for ABE, these parameters are not used" >> ${outfile}
