@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_7460ea35",
+        "filename": "lib/control.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-30T20:09:22Z",
+      "side": 1,
+      "message": "What does this do?",
+      "range": {
+        "startLine": 74,
+        "startChar": 85,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_f46cda38",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-30T20:09:22Z",
+      "side": 1,
+      "message": "Why not just echo $version ?",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 24
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_d469de26",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-30T20:09:22Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 155,
+        "startChar": 21,
+        "endLine": 155,
+        "endChar": 24
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_34779204",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-30T20:09:22Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 156,
+        "startChar": 28,
+        "endLine": 156,
+        "endChar": 35
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_5465ee43",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-30T20:09:22Z",
+      "side": 1,
+      "message": "I\u0027m confused: doesn\u0027t this enable testing for 2.21+ for native builds, and always for cross builds?",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 6
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_147416fc",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-03-30T20:09:22Z",
+      "side": 1,
+      "message": "I think exec_tests is always false for glibc. See lines 672-681 above. Am I missing something?",
+      "range": {
+        "startLine": 712,
+        "startChar": 8,
+        "endLine": 712,
+        "endChar": 18
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
