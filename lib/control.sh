@@ -78,7 +78,7 @@ build_step_CHECK()
     # Replace pseudo component names by the actual component name:
     # stage[12] -> gcc
     # libc -> newlib|glibc|eglibc
-    local build_names="$(echo $build_component_list | sed -e 's/stage[12]/gcc/' -e s/libc/${clibrary}/)"
+    local build_names="$(echo $build_component_list | sed -e 's/stage[12]/gcc/' -e s/\\blibc\\b/${clibrary}/)"
     local component
     for component in $check_component_list; do
         if is_package_in_runtests "${build_names}" "$component"; then
