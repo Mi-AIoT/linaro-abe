@@ -418,6 +418,7 @@ make_all()
     # GDB and Binutils share the same top level files, so we have to explicitly build
     # one or the other, or we get duplicates.
     local logfile="${builddir}/make-${component}${2:+-$2}.log"
+    record_artifact "log_make_${component}${2:+-$2}" "${logfile}"
     dryrun "make SHELL=${bash_shell} -w -C ${builddir} ${make_flags} 2>&1 | tee ${logfile}"
     local makeret=$?
     
@@ -545,6 +546,7 @@ make_install()
 
     local default_makeflags= #"$(get_component_makeflags ${component})"
     local install_log="$(dirname ${builddir})/install-${component}${2:+-$2}.log"
+    record_artifact "log_install_${component}${2:+-$2}" "${install_log}"
     if test x"${component}" = x"gdb" ; then
         dryrun "make install-gdb ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     else
@@ -631,6 +633,7 @@ make_check()
 
     # Run tests
     local checklog="${builddir}/check-${component}.log"
+    record_artifact "log_check_${component}" "${checklog}"
     if test x"${build}" = x"${target}"; then
 	# Overwrite ${checklog} in order to provide a clean log file
 	# if make check has been run more than once on a build tree.
@@ -755,6 +758,7 @@ make_docs()
 
     notice "Making docs in ${builddir}"
 
+    record_artifact "log_makedoc${component}${2:+-$2}" "${builddir}/makedoc.log"
     case $1 in
         *binutils*)
             # the diststuff target isn't supported by all the subdirectories,
