@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_945f6672",
+        "filename": "lib/control.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-30T21:10:30Z",
+      "side": 1,
+      "message": "Basically it avoid the wrong substitution when you specify the glibc in $build_component_list. In this case, the \u0027sed -e s/libc/${clibrary}/\u0027 with \u0027clibrary\u003dglibc\u0027 will return:\n\n$ echo \"glibc\" | sed -e \u0027s/stage[12]/gcc/\u0027 -e s/libc/glibc/\ngglibc\n\nAnd it will thus invalid subsequent tests.",
+      "parentUuid": "7a1969be_7460ea35",
+      "range": {
+        "startLine": 74,
+        "startChar": 85,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_f46cda38",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -36,6 +60,30 @@
       "writtenOn": "2017-03-30T20:09:22Z",
       "side": 1,
       "message": "Why not just echo $version ?",
+      "range": {
+        "startLine": 138,
+        "startChar": 4,
+        "endLine": 138,
+        "endChar": 24
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_f4533a6a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-30T21:10:30Z",
+      "side": 1,
+      "message": "Good question, I think just echo will suffice. I will update the patch.",
+      "parentUuid": "7a1969be_f46cda38",
       "range": {
         "startLine": 138,
         "startChar": 4,
@@ -71,6 +119,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_d450be60",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-30T21:10:30Z",
+      "side": 1,
+      "message": "Thanks, I will fix it.",
+      "parentUuid": "7a1969be_d469de26",
+      "range": {
+        "startLine": 155,
+        "startChar": 21,
+        "endLine": 155,
+        "endChar": 24
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_34779204",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -94,6 +166,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_344e72c2",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-30T21:10:30Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "7a1969be_34779204",
+      "range": {
+        "startLine": 156,
+        "startChar": 28,
+        "endLine": 156,
+        "endChar": 35
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_5465ee43",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -105,6 +201,30 @@
       "writtenOn": "2017-03-30T20:09:22Z",
       "side": 1,
       "message": "I\u0027m confused: doesn\u0027t this enable testing for 2.21+ for native builds, and always for cross builds?",
+      "range": {
+        "startLine": 154,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 6
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_144b76b1",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-30T21:10:30Z",
+      "side": 1,
+      "message": "My understanding is the conditional \"if test x\"${target}\" \u003d x\"${build}\"; then\" evaluates true only for native builds or am I wrong in this case?\n\nIn any case, the only theoretical caveat about running glibc check on native it before 2.20 the make check stops on first issue, I we will need to issue a different command depending of the glibc version (for instance, on older version I used to run \u0027make check -jN -k 2\u003e\u00261 | tee _check \u0026\u0026 grep ^FAIL _check).\n\nIn any way, I think I can remove the mentioned first check and just the make check on 2.21 regardless if it is native or not. I will change it as well.",
+      "parentUuid": "7a1969be_5465ee43",
       "range": {
         "startLine": 154,
         "startChar": 0,
