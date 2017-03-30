@@ -128,6 +128,43 @@ build_all()
     return 0
 }
 
+get_glibc_version()
+{
+    local src="`get_component_srcdir glibc`"
+    local version=`grep VERSION $src/version.h | cut -d' ' -f3`
+    if [ $? -ne 0 ]; then
+	version="0.0"
+    fi
+    eval "echo $version"
+
+    return 0
+}
+
+is_glibc_check_runable()
+{
+    is_package_in_runtests "${test_packages}" glibc
+    if test $? -ne 0; then
+	return 1
+    fi
+
+    local glibc_version=`get_glibc_version`
+    local glibc_major=`echo $glibc_version | cut -d'.' -f1`
+    local glibc_minor=`echo $glibc_version | cut -d'.' -f2`
+
+    if test x"${target}" = x"${build}"; then
+	# Enable glibc make for for non 'native' build only for versions
+	# to 2.21.  This is mostly becuase the check system on older glibc
+	# do not work reliable with run-built-tests=no.
+	if [[ ( $glibc_major -ge 2 &&  $glibc_minor -ge 21 ) ]]; then
+	    return 0
+	else
+	    return 1
+	fi
+    fi
+
+    return 0
+}
+
 check_all()
 {
     local test_packages="${1}"
@@ -177,28 +214,23 @@ check_all()
 	    fi
 	fi
 
-	# Only perform unit tests on [e]glibc when we're building native.
-        if test x"${target}" = x"${build}"; then
-	    # TODO: Get glibc make check working 'native'
-	    is_package_in_runtests "${test_packages}" glibc
-	    if test $? -eq 0; then
-		#make_check ${glibc_version}
-		#if test $? -ne 0; then
-		#check_ret=1
-	        #check_failed="${check_failed} glibc"
-		#fi
-		notice "make check on native glibc is not yet implemented."
+	is_glibc_check_runable
+	if test $? -eq 0; then
+	    make_check glibc
+	    if test $? -ne 0; then
+		check_ret=1
+	        check_failed="${check_failed} glibc"
 	    fi
+	fi
 
-	    is_package_in_runtests "${test_packages}" eglibc
-	    if test $? -eq 0; then
-		#make_check ${eglibc_version}
-		#if test $? -ne 0; then
+	is_package_in_runtests "${test_packages}" eglibc
+	if test $? -eq 0; then
+	    #make_check ${eglibc_version}
+	    #if test $? -ne 0; then
 		#check_ret=1
 	        #check_failed="${check_failed} eglibc"
-		#fi
-		notice "make check on native eglibc is not yet implemented."
-	    fi
+	    #fi
+	    notice "make check on native eglibc is not yet implemented."
 	fi
 
 	if test ${check_ret} -ne 0; then
@@ -673,6 +705,14 @@ make_check()
 	    gdb)
 		local dirs="/"
 		local check_targets="check-gdb"
+		;;
+	    glibc)
+		local dirs="/"
+		local rbt="no"
+		if [ $exec_tests == true ]; then
+		     rbt="yes"
+		fi
+		local check_targets="check run-built-tests=${rbt}"
 		;;
 	    newlib)
 		# We need a special case for newlib, to bypass its
