@@ -97,6 +97,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_b7d1c4cf",
+        "filename": "lib/control.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-31T19:40:09Z",
+      "side": 1,
+      "message": "Although locally I could get the expected results (the sed is indeed returning the \u0027glibc\u0027 string), so I am not sure if this change is indeed required. How do I navigate through jenkins log to check if it actually did not issue the glibc make check (I am trying to fix the correct log without much success)?",
+      "parentUuid": "7a1969be_7788ec22",
+      "range": {
+        "startLine": 74,
+        "startChar": 85,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_f46cda38",
         "filename": "lib/make.sh",
         "patchSetId": 1
