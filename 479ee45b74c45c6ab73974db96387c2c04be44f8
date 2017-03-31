@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_7788ec22",
+        "filename": "lib/control.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-31T15:10:44Z",
+      "side": 1,
+      "message": "The quoting is wrong here, which is why the native build in Jenkins doesn\u0027t run glibc testing with this patch.\n\nYou need something like -e \"s/\\\\blibc\\\\b/${clibrary}/\"",
+      "parentUuid": "7a1969be_945f6672",
+      "range": {
+        "startLine": 74,
+        "startChar": 85,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_f46cda38",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -90,6 +114,23 @@
         "endLine": 138,
         "endChar": 24
       },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_37f154ce",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-31T15:10:44Z",
+      "side": 1,
+      "message": "${test_packages} is declared as a local var in check_all()\n\nWhile it works to use it here, it is not good style. It would be better to keep the is_package_in_runtests check in check_all().",
       "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -184,6 +225,23 @@
         "endLine": 156,
         "endChar": 35
       },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_578df030",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-03-31T15:10:44Z",
+      "side": 1,
+      "message": "this check won\u0027t work as expected for glibc version 3.0",
       "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
