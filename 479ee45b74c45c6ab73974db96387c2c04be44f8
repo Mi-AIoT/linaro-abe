@@ -73,6 +73,30 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_971128af",
+        "filename": "lib/control.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-31T18:35:18Z",
+      "side": 1,
+      "message": "Alright, I will fix it.",
+      "parentUuid": "7a1969be_7788ec22",
+      "range": {
+        "startLine": 74,
+        "startChar": 85,
+        "endLine": 74,
+        "endChar": 93
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_f46cda38",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -131,6 +155,24 @@
       "writtenOn": "2017-03-31T15:10:44Z",
       "side": 1,
       "message": "${test_packages} is declared as a local var in check_all()\n\nWhile it works to use it here, it is not good style. It would be better to keep the is_package_in_runtests check in check_all().",
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_f725fc0a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-31T18:35:18Z",
+      "side": 1,
+      "message": "I will fix it.",
+      "parentUuid": "7a1969be_37f154ce",
       "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -248,6 +290,24 @@
     },
     {
       "key": {
+        "uuid": "7a1969be_d7228000",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-31T18:35:18Z",
+      "side": 1,
+      "message": "Right, although it will take *some* time until we see glibc 3.0. Anyhow, I will fix it.",
+      "parentUuid": "7a1969be_578df030",
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7a1969be_5465ee43",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -306,6 +366,30 @@
       "writtenOn": "2017-03-30T20:09:22Z",
       "side": 1,
       "message": "I think exec_tests is always false for glibc. See lines 672-681 above. Am I missing something?",
+      "range": {
+        "startLine": 712,
+        "startChar": 8,
+        "endLine": 712,
+        "endChar": 18
+      },
+      "revId": "479ee45b74c45c6ab73974db96387c2c04be44f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_77790cfc",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2017-03-31T18:35:18Z",
+      "side": 1,
+      "message": "I will recheck it, although it did work for native/non-native build check I did locally (i.e, non-native ran with run-built-tests\u003dno).",
+      "parentUuid": "7a1969be_147416fc",
       "range": {
         "startLine": 712,
         "startChar": 8,
