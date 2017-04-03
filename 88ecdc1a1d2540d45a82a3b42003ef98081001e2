@@ -45,6 +45,30 @@
       "revId": "88ecdc1a1d2540d45a82a3b42003ef98081001e2",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_ba41ab0d",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000119
+      },
+      "writtenOn": "2017-04-03T10:54:31Z",
+      "side": 1,
+      "message": "If bootstrap is disabled, then --with-build-config is simply ignored and stage-1 only build is performed. \nHmm the check would require always passing --enable bootstrap --set buildconfig\u003dXXX. Would it make sense for --set buildconfig\u003dXXX to implicitly imply bootstrap build since otherwise the buildconfig option has no use ?",
+      "parentUuid": "7a1969be_9acf8fb0",
+      "range": {
+        "startLine": 574,
+        "startChar": 5,
+        "endLine": 574,
+        "endChar": 20
+      },
+      "revId": "88ecdc1a1d2540d45a82a3b42003ef98081001e2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
