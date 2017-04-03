@@ -35,6 +35,7 @@ usage()
              [--space <space needed>]
              [--release <release_version_string>]
              [--set {arch|cpu|tune}=XXX]
+             [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
              [--set {libc}={glibc|eglibc|newlib}]
@@ -257,6 +258,10 @@ OPTIONS
 		Note: There is no cross-checking to make sure that the passed
 		--target value is compatible with the passed arch, cpu, or
 		tune value.
+
+  --set		{buildconfig}=XXX
+                Set gcc's configure option --with-build-config=XXX
+                to perform specialized bootstrap build (bootstrap-lto, etc.)
 
   --set		{cflags|ldflags|runtestflags|makeflags}=XXX
                 This overrides the default values used for CFLAGS,
@@ -564,6 +569,11 @@ set_package()
     local setting="$(echo $* | cut -d '=' -f 2-)"
 
     case ${package} in
+	buildconfig)
+	    build_config="${setting}"
+	    notice "Setting buildconfig to ${setting}"
+	    return 0
+	    ;;
 	languages)
 	    with_languages="${setting}"
 	    notice "Setting list of languages to build to ${setting}"
@@ -1129,6 +1139,11 @@ fi
 
 if [ "x${host}" != "x${target}" -a "x${bootstrap}" = x"yes" ]; then
   error "host and target must be same for bootstrap"
+  build_failure
+fi
+
+if [ ! -z "${build_config}" -a "x${bootstrap}" != x"yes" ]; then
+  error "bootstrap must be enabled for buildconfig"
   build_failure
 fi
 
