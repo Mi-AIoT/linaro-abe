@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a1969be_fac32388",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-03T10:46:36Z",
+      "side": 1,
+      "message": "It seems there\u0027s an indentation problem, looking at the similar lines below.",
+      "range": {
+        "startLine": 262,
+        "startChar": 8,
+        "endLine": 262,
+        "endChar": 10
+      },
+      "revId": "88ecdc1a1d2540d45a82a3b42003ef98081001e2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "7a1969be_9acf8fb0",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-03T10:46:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure we want to force this silently. What happens if we don\u0027t set bootstrap to yes here? Does the build fail in some obvious way? If not, you could add a check later, and exit with an error if the user used --set buildconfig, but not --bootstrap.",
+      "range": {
+        "startLine": 574,
+        "startChar": 5,
+        "endLine": 574,
+        "endChar": 20
+      },
+      "revId": "88ecdc1a1d2540d45a82a3b42003ef98081001e2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
