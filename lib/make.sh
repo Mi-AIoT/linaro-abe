@@ -759,11 +759,11 @@ make_docs()
 
     notice "Making docs in ${builddir}"
 
-    record_artifact "log_makedoc${component}${2:+-$2}" "${builddir}/makedoc.log"
     case $1 in
         *binutils*)
             # the diststuff target isn't supported by all the subdirectories,
             # so we build both all targets and ignore the error.
+            record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
 	    for subdir in bfd gas gold gprof ld
 	    do
 		# Some configurations want to disable some of the
@@ -788,24 +788,26 @@ make_docs()
             return 0
             ;;
         *gdb)
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb/doc install-man 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *gcc*)
-            #dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} doc html info man 2>&1 | tee -a ${builddir}/makedoc.log"
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
             # the regular make install handles all the docs.
             ;;
-        *libc*) # including eglibc
-            #dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info dvi pdf html 2>&1 | tee -a ${builddir}/makedoc.log"
+        glibc|eglibc)
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
         *)
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
