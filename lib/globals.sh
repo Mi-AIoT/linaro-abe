@@ -299,9 +299,13 @@ get_component_list()
 record_artifact()
 {
     local artifact=$1
-    local path=$(readlink $2)
+    local path=$(readlink -f $2)
+    if [ x"${path}" = x"" ]; then
+        error "Artifact path '${2}' was invalid."
+        return 1
+    fi
     notice "Artifact ${artifact} created at ${path}."
     if [ "${list_artifacts:+set}" = "set" -a x"${dryrun}" != xyes ]; then
-        echo "${1}=${2}" >> "${list_artifacts}"
+        echo "${artifact}=${path}" >> "${list_artifacts}"
     fi
 }
