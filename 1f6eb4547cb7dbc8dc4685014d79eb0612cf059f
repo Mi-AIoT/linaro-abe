@@ -22,6 +22,30 @@
       "revId": "1f6eb4547cb7dbc8dc4685014d79eb0612cf059f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_2dff5503",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-04-11T16:57:52Z",
+      "side": 1,
+      "message": "Good catch! Thanks",
+      "parentUuid": "3a1371a2_6ae8137d",
+      "range": {
+        "startLine": 715,
+        "startChar": 12,
+        "endLine": 715,
+        "endChar": 49
+      },
+      "revId": "1f6eb4547cb7dbc8dc4685014d79eb0612cf059f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
