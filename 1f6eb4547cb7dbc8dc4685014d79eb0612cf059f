@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a1371a2_6ae8137d",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-11T15:37:44Z",
+      "side": 1,
+      "message": "This records results for cross-compilers only, what about native ones ? (lines 639-645)",
+      "range": {
+        "startLine": 715,
+        "startChar": 12,
+        "endLine": 715,
+        "endChar": 49
+      },
+      "revId": "1f6eb4547cb7dbc8dc4685014d79eb0612cf059f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
