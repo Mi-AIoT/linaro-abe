@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "3a1371a2_6a9f7304",
+        "filename": "config/gcc5/glibc.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-04-11T15:45:00Z",
+      "side": 1,
+      "message": "Since gcc5 is near the end of its support cycle, I think we should leave its configuration as is, and focus on gcc6/7 for glibc testing.",
+      "revId": "6608e763d6d449491901f90343ebdbb3759cf0f0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
