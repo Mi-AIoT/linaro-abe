@@ -16,6 +16,24 @@
       "revId": "6608e763d6d449491901f90343ebdbb3759cf0f0",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_f39eba62",
+        "filename": "config/gcc5/glibc.conf",
+        "patchSetId": 4
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-04-14T14:16:57Z",
+      "side": 1,
+      "message": "Agree.",
+      "parentUuid": "3a1371a2_6a9f7304",
+      "revId": "6608e763d6d449491901f90343ebdbb3759cf0f0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
