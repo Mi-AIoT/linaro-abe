@@ -32,6 +32,7 @@ set -o pipefail
 . "${topdir}/lib/schroot.sh" || exit 1
 . "${topdir}/lib/component.sh" || exit 1
 . "${topdir}/lib/control.sh" || exit 1
+. "${topdir}/lib/retrieve.sh" || exit 1
 
 # if --dryrun is passed to abe.sh, then commands are echoed instead of
 # of executed.

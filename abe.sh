@@ -34,6 +34,7 @@ usage()
              [--manifest <manifest_file>]
              [--space <space needed>]
              [--release <release_version_string>]
+             [--retrieve {all|glibc|gcc|gdb|binutils}]
              [--set {arch|cpu|tune}=XXX]
              [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
@@ -245,6 +246,17 @@ OPTIONS
                 that is released will be named:
 
                     gcc-linaro-4.9-2014.10-1.tar.xz
+
+  --retrieve {<package>|all}
+
+               <package>
+                       This will retrieve the package designated by the
+                       <package> source.conf identifier.
+
+               all
+                       This will retrieve all of the sources for a
+                       complete build as specified by the config/ .conf
+                       files.
 
   --set		{arch|cpu|tune}=XXX
 
@@ -764,6 +776,7 @@ export PATH="${local_builds}/destdir/${build}/bin:$PATH"
 # do_ switches are commands that should be executed after processing all
 # other switches.
 do_dump=
+do_retrieve=
 do_checkout=
 do_makecheck=
 do_excludecheck=
@@ -897,6 +910,14 @@ while test $# -gt 0; do
             release=$2
 	    shift
             ;;
+	--retrieve)
+	    check_directive retrieve $2
+	    # Save and process this after all other elements have been processed.
+	    do_retrieve="$2"
+
+	    # Shift off the 'all' or the package identifier.
+	    shift
+	    ;;
 	--set)
 	    check_directive set "$2"
 
@@ -1248,6 +1269,15 @@ if test ! -z "${do_checkout}" -o ! -z "${do_build}"; then
 	warning "${local_builds} does not exist. Recreating build directory!"
 	mkdir -p ${local_builds}
     fi
+fi
+
+if test ! -z ${do_retrieve}; then
+    if test x"${do_retrieve}" != x"all"; then
+        set_build_component_list "${do_retrieve}"
+    else
+	set_build_component_list "$(get_component_list)"
+    fi
+    set_build_steps retrieve
 fi
 
 if test ! -z ${do_checkout}; then
