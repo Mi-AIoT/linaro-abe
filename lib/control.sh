@@ -30,6 +30,13 @@ declare -A build_step_required
 build_component_list=""
 check_component_list=""
 
+build_step_required[RETRIEVE]=1
+build_step_RETRIEVE()
+{
+    retrieve_all "$build_component_list"
+}
+
+
 build_step_required[CHECKOUT]=1
 build_step_CHECKOUT()
 {
@@ -102,7 +109,7 @@ perform_build_steps()
     notice "enabled build steps (not in order): ${!build_steps[*]}"
 
     local step
-    for step in CHECKOUT MANIFEST BUILD CHECK INSTALL_SYSROOT HELLO_WORLD TARSRC TARBIN; do
+    for step in RETRIEVE CHECKOUT MANIFEST BUILD CHECK INSTALL_SYSROOT HELLO_WORLD TARSRC TARBIN; do
         if [ ! -z "${build_steps[$step]}" ]; then
 	    # this step is enabled
 	    notice "Performing build step $step"
@@ -129,11 +136,16 @@ perform_build_steps()
 set_build_steps()
 {
     case "$1" in
+	retrieve)
+	    build_steps[RETRIEVE]=1
+	    ;;
 	checkout)
+	    build_steps[RETRIEVE]=1
 	    build_steps[CHECKOUT]=1
 	    build_steps[MANIFEST]=1
 	    ;;
 	build)
+	    build_steps[RETRIEVE]=1
 	    build_steps[CHECKOUT]=1
 	    build_steps[MANIFEST]=1
 	    build_steps[BUILD]=1

@@ -518,10 +518,15 @@ else
 fi
 
 # ----------------------------------------------------------------------------------
-echo "============= checkout () tests ================"
+echo "============= retrieve/checkout () tests ================"
 echo "  Checking out sources into ${local_snapshots}"
 echo "  Please be patient while sources are checked out...."
-echo "================================================"
+echo "========================================================="
+
+retrievecheckout()
+{
+    retrieve "$@" && checkout "$@"
+}
 
 # These can be painfully slow so test small repos.
 
@@ -532,9 +537,9 @@ rm -rf "${local_snapshots}"/*.git*
 testing="http://abe.git@git.linaro.org/git/toolchain/abe.git"
 in="abe"
 if test x"${debug}" = xyes; then
-  out="`cd ${local_snapshots} && checkout ${in}`"
+  out="`cd ${local_snapshots} && retrievecheckout ${in}`"
 else
-  out="`cd ${local_snapshots} && checkout ${in} 2>/dev/null`"
+  out="`cd ${local_snapshots} && retrievecheckout ${in} 2>/dev/null`"
 fi
 if test $? -eq 0; then
   pass "${testing}"
@@ -603,10 +608,17 @@ test_checkout ()
 
     set_component_branch ${package} ${branch}
     set_component_revision ${package} ${revision}
-    set_component_srcdir abe ${local_snapshots}/abe.git~${branch}
+    set_component_srcdir ${package} ${local_snapshots}/${package}.git~${branch}
+
+    retrieve "${package}"
+    ret=$?
+    if test ${ret} -eq 1 -a x"${should}" = x"pass"; then
+        fail "function ${testing} (retrieve)"
+        return 1
+    fi
 
     if test x"${revision}" != x; then
-    set_component_srcdir abe ${local_snapshots}/abe.git_rev_${revision}
+    set_component_srcdir ${package} ${local_snapshots}/${package}.git_rev_${revision}
     fi
 
     if test x"${debug}" = x"yes"; then
@@ -652,7 +664,7 @@ test_checkout ()
 	elif test x"${revision}" = x; then
             branch_test=`(cd ${srcdir} && git branch -a | grep -c "^\* ${branch}$")`
 	else
-            branch_test=`(cd ${srcdir} && git branch -a | grep -c "^\* local_${revision}$")`
+            branch_test=`(cd ${srcdir} && git rev-parse HEAD | grep -c "^${revision}")`
 	fi
     else
 	untested "${testing}"
@@ -717,7 +729,7 @@ test_checkout "${should}" "${testing}" "${package}" "${branch}" "${revision}"
 component_init foo TOOL=foo
 
 testing="checkout: git://testingrepository/foo should fail with 'clone failed' message."
-package="foo.git"
+package="foo"
 branch=''
 revision=''
 should="fail"
@@ -792,7 +804,7 @@ cmp_makeflags=
 
 component_init dejagnu TOOL=dejagnu BRANCH=linaro-local/stable SRCDIR=${local_snapshots}/dejagnu.git~linaro BUILDDIR=${local_builds}/dejagnu.git~linaro FILESPEC=dejagnu.git URL=http://git.linaro.org/git/toolchain
 
-checkout dejagnu
+retrievecheckout dejagnu
 if test $? -eq 0; then
     pass "Checking out Dejagnu for configure test"
 else
