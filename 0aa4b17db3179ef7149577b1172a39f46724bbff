@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "3a1371a2_01c85d73",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-04-20T14:29:09Z",
+      "side": 1,
+      "message": "the branch name was tested in checkout(), and if it matched local_* then it wouldn\u0027t do \"git pull\" to avoid the \"You are not currently on a branch\" error which occurs when trying to pull on a detached HEAD. These branches have not been needed for a few months.",
+      "parentUuid": "3a1371a2_419b75c9",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 10
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a1371a2_21a0f9f3",
         "filename": "abe.sh",
         "patchSetId": 2
