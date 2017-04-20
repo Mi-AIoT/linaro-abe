@@ -65,6 +65,30 @@
     },
     {
       "key": {
+        "uuid": "3a1371a2_21bf59d2",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-04-20T14:17:06Z",
+      "side": 1,
+      "message": "It can be libc, but glibc,eglibc,newlib all work fine too.",
+      "parentUuid": "3a1371a2_81a56d06",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a1371a2_01b97d2e",
         "filename": "lib/checkout.sh",
         "patchSetId": 2
@@ -99,6 +123,30 @@
       "writtenOn": "2017-04-20T12:43:53Z",
       "side": 1,
       "message": "So this will fail with a remote-tracking branch with local changes? (unless we use --disable update)",
+      "range": {
+        "startLine": 86,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 6
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_61e2f104",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-04-20T14:17:06Z",
+      "side": 1,
+      "message": "It will fail if:\n. any local commits have been made\n. there are local changes in a file which is touched in the upstream changes.",
+      "parentUuid": "3a1371a2_61aaf1d5",
       "range": {
         "startLine": 86,
         "startChar": 3,
@@ -168,6 +216,30 @@
       "writtenOn": "2017-04-20T12:43:53Z",
       "side": 1,
       "message": "Does this mean you plan to abandon \nhttps://review.linaro.org/#/c/17902/ ?\nCan we remove the redirection so that we have the error messages in the logs in case of failure?",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 53
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_01033db9",
+        "filename": "lib/retrieve.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-04-20T14:17:06Z",
+      "side": 1,
+      "message": "I still want to remove this, but separately from this change.",
+      "parentUuid": "3a1371a2_c16765e9",
       "range": {
         "startLine": 94,
         "startChar": 11,
