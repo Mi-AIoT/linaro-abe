@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "3a1371a2_419b75c9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-20T12:43:53Z",
+      "side": 1,
+      "message": "Do you remember why we used these local_* branches?",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 10
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "3a1371a2_21a0f9f3",
         "filename": "abe.sh",
         "patchSetId": 2
@@ -13,6 +36,98 @@
       "writtenOn": "2017-04-20T12:43:14Z",
       "side": 1,
       "message": "what about newlib and the other components ?",
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_81a56d06",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-20T12:43:53Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"libc\" (see the code in retrieve_all)?",
+      "range": {
+        "startLine": 37,
+        "startChar": 29,
+        "endLine": 37,
+        "endChar": 35
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_01b97d2e",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-20T12:43:53Z",
+      "side": 1,
+      "message": "Can you add the branch name in the message?",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 84,
+        "endChar": 57
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_61aaf1d5",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-20T12:43:53Z",
+      "side": 1,
+      "message": "So this will fail with a remote-tracking branch with local changes? (unless we use --disable update)",
+      "range": {
+        "startLine": 86,
+        "startChar": 3,
+        "endLine": 90,
+        "endChar": 6
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_21791994",
+        "filename": "lib/retrieve.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-20T12:43:53Z",
+      "side": 1,
+      "message": "I think this should at least include 2017 :-)",
+      "range": {
+        "startLine": 3,
+        "startChar": 18,
+        "endLine": 3,
+        "endChar": 40
+      },
       "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
@@ -35,6 +150,29 @@
         "startChar": 53,
         "endLine": 89,
         "endChar": 57
+      },
+      "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "3a1371a2_c16765e9",
+        "filename": "lib/retrieve.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-04-20T12:43:53Z",
+      "side": 1,
+      "message": "Does this mean you plan to abandon \nhttps://review.linaro.org/#/c/17902/ ?\nCan we remove the redirection so that we have the error messages in the logs in case of failure?",
+      "range": {
+        "startLine": 94,
+        "startChar": 11,
+        "endLine": 94,
+        "endChar": 53
       },
       "revId": "0aa4b17db3179ef7149577b1172a39f46724bbff",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
