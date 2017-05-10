@@ -89,12 +89,9 @@ retrieve()
     local protocol="$(echo ${url} | cut -d ':' -f 1)"
     local repodir="${url}/${repo}"
 
-    # FIXME: this satisfies the test suite, but would prefer to validate
-    # ${repodir} without network.
-    dryrun "git ls-remote ${repodir} > /dev/null 2>&1"
-    if test $? -ne 0; then
-        error "proper URL required"
-        return 1
+    if ! validate_url "${repodir}"; then
+	error "proper URL required"
+	return 1
     fi
 
     # If the master branch doesn't exist, clone it. If it exists,

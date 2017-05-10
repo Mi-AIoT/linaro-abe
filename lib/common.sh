@@ -325,3 +325,14 @@ test_success()
     
     return 0
 }
+
+# perform some rudimentary syntax checking of a URL
+validate_url()
+{
+    local url=$1
+    if echo "${url}" | grep -qE '^[a-z]+://\w+'; then
+        return 0
+    else
+        return 1
+    fi
+}

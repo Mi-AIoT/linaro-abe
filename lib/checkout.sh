@@ -153,8 +153,7 @@ checkout()
         return 0
     fi
 
-    dryrun "git ls-remote ${repodir} > /dev/null 2>&1"
-    if test $? -ne 0; then
+    if ! validate_url "${repodir}"; then
 	error "proper URL required"
 	return 1
     fi
