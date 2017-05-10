@@ -924,7 +924,7 @@ while test $# -gt 0; do
 	    # Test if --target follows the --set command put --set and it's
 	    # directive on to the back of the inputs.  This is because clibrary
 	    # validity depends on the target.
-	    if test "$(echo $@ | grep -c "\-targ.*")" -gt 0; then
+	    if test "$(echo $@ | grep -c -e '--target\b')" -gt 0; then
 		# Push $1 and $2 onto the back of the inputs for later processing.
 		set -- "$@" "$1" "$2"
 		# Shift off them off the front.
