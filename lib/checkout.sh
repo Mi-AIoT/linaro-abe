@@ -179,6 +179,16 @@ checkout()
 			error "Failed to create workdir for ${branch}"
 			return 1
 		    fi
+		    # Make sure the checked out branch is up to
+		    # date. git-new-workdir does not update local
+		    # remote-tracking branches, so since ${srcdir}
+		    # does not exist we want an up-to-date version
+		    # even under --disable update.
+		    update_checkout_branch ${component}
+		    if test $? -gt 0; then
+			error "Error during update_checkout_branch."
+			return 1
+		    fi
 		    # If the user mistakenly used ~revision instead of
 		    # @revision, exit with an error, to avoid branch
 		    # update failures on subsequent runs.
