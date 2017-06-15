@@ -16,6 +16,24 @@
       "revId": "f3430695ab81ab6177a73fc868040788efb1794f",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_9763c519",
+        "filename": "lib/retrieve.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-06-15T15:21:50Z",
+      "side": 1,
+      "message": "I don\u0027t think it does.  Objects are still there.",
+      "parentUuid": "facab960_37ad9932",
+      "revId": "f3430695ab81ab6177a73fc868040788efb1794f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
