@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_37ad9932",
+        "filename": "lib/retrieve.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-15T15:06:47Z",
+      "side": 1,
+      "message": "this change won\u0027t be reflected in the snapshots-ref without additional intervention. Does that matter?",
+      "revId": "f3430695ab81ab6177a73fc868040788efb1794f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
