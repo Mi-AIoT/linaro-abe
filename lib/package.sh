@@ -200,7 +200,7 @@ binary_toolchain()
     # The manifest file records the versions of all of the components used to
     # build toolchain.
     dryrun "cp ${manifest} ${local_builds}/destdir/${host}/"
-    dryrun "rsync -avr${symlinks} ${local_builds}/destdir/${host}/* ${destdir}/"
+    dryrun "rsync -av${symlinks} ${local_builds}/destdir/${host}/* ${destdir}/"
 
     # Strip host binaries when packaging releases.
     if test x"${release}" != x; then
@@ -276,7 +276,7 @@ do_install_sysroot()
 	    error "mkdir failed"
             return 1
         fi
-	dryrun "rsync -avr${symlinks} ${sysroots}/* ${prefix}/${target}/libc/"
+	dryrun "rsync -av${symlinks} ${sysroots}/* ${prefix}/${target}/libc/"
         if [ $? -ne 0 ]; then
 	    error "copy of sysroot failed"
             return 1
