@@ -84,12 +84,12 @@ build_all()
                 ;;
             expat)
 		# TODO: avoid hardcoding the version in the path here
-		dryrun "rsync -ar ${local_snapshots}/expat-2.1.0-1/include ${local_builds}/destdir/${host}/usr/"
+		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/include ${local_builds}/destdir/${host}/usr/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of expat include failed"
 		    return 1
 		fi
-		dryrun "rsync -ar ${local_snapshots}/expat-2.1.0-1/lib ${local_builds}/destdir/${host}/usr/"
+		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/lib ${local_builds}/destdir/${host}/usr/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of expat lib failed"
 		    return 1
@@ -103,7 +103,7 @@ build_all()
 		export PYTHON_MINGW=${local_snapshots}/python-2.7.4-mingw32
 		# The Python DLLS need to be in the bin dir where the
 		# executables are.
-		dryrun "rsync -ar ${PYTHON_MINGW}/pylib ${PYTHON_MINGW}/dll ${PYTHON_MINGW}/libpython2.7.dll ${local_builds}/destdir/${host}/bin/"
+		dryrun "rsync -av ${PYTHON_MINGW}/pylib ${PYTHON_MINGW}/dll ${PYTHON_MINGW}/libpython2.7.dll ${local_builds}/destdir/${host}/bin/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of python libs failed"
 		    return 1
