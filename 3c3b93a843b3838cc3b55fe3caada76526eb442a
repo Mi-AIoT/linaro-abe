@@ -168,6 +168,30 @@
       "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_fcaeb0e6",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-27T16:30:03Z",
+      "side": 1,
+      "message": "fair enough. I don\u0027t know of any reason expat was done that way.",
+      "parentUuid": "facab960_bc6ee8c7",
+      "range": {
+        "startLine": 120,
+        "startChar": 34,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
