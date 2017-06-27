@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "facab960_9c2be481",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-27T15:31:13Z",
+      "side": 1,
+      "message": "I am not sure we should disable one internationalisation feature in order to enable another...\n\nDo we know how many of our users use the NLS support?",
+      "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_dc0e4c34",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-27T15:31:13Z",
+      "side": 1,
+      "message": "the configuration selected by config/*.conf should be independent of host.\n\ninstead of the case...esac, use:\n    mingw_extraconf\u003d\"--with-libiconv-prefix\u003d...\"",
+      "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_fc123057",
+        "filename": "lib/globals.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-27T15:31:13Z",
+      "side": 1,
+      "message": "this shouldn\u0027t be needed, as old manifests won\u0027t have libiconv.",
+      "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_1c10b44d",
+        "filename": "lib/globals.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-27T15:31:13Z",
+      "side": 1,
+      "message": "This should say \"non-mingw\" can you fix it while you\u0027re here?",
+      "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "facab960_3c1d7867",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-06-27T15:31:13Z",
+      "side": 1,
+      "message": "could this use just one rsync?\n\nrsync -av ${local_snapshots}/libiconv-1.14-3/include ${local_snapshots}/libiconv-1.14-3/lib ${local_builds}/destdir/${host}/usr/",
+      "range": {
+        "startLine": 120,
+        "startChar": 34,
+        "endLine": 120,
+        "endChar": 35
+      },
+      "revId": "3c3b93a843b3838cc3b55fe3caada76526eb442a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
