@@ -115,6 +115,14 @@ build_all()
 		export PYTHONPATH=${local_builds}/destdir/${host}/bin/pylib
 		warning "You must set PYTHONPATH in your environment to ${PYTHONPATH}"
 		;;
+	    libiconv)
+		# TODO: avoid hardcoding the version in the path here
+		dryrun "rsync -av ${local_snapshots}/libiconv-1.14-3/include ${local_snapshots}/libiconv-1.14-3/lib ${local_builds}/destdir/${host}/usr/"
+		if [ $? -ne 0 ]; then
+		    error "rsync of libiconv failed"
+		    return 1
+		fi
+		;;
             *)
 		build $i
                 build_all_ret=$?
