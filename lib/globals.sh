@@ -41,7 +41,7 @@ override_arch=
 override_cpu=
 override_tune=
 
-manifest_version=1.4
+manifest_version=1.5
 
 # The prefix for installing the toolchain
 prefix=
@@ -153,6 +153,7 @@ import_manifest()
                  fixup_mingw=true ;;
 	    1.3) fixup_mingw=true ;;
 	    1.4) ;;
+	    1.5) ;;
 	    *)
 		error "Imported manifest version $manifest_format is not supported."
 		return 1
@@ -258,12 +259,12 @@ get_component_list()
 	if is_host_mingw; then
 	    # As Mingw32 requires a cross compiler to be already built, so we
 	    # don't need to rebuild the sysroot.
-            builds="${builds} expat python binutils libc stage2 gdb"
+            builds="${builds} expat python libiconv binutils libc stage2 gdb"
 	else
-	    # Non-linux builds skip expat and python, but are here so that
-            # they are included in the manifest, so linux and mingw
-            # manifests can be identical.
-            builds="${builds} expat python binutils stage1 libc stage2 gdb"
+	    # Non-mingw builds skip expat, python and libiconv, but
+	    # are here so that they are included in the manifest, so
+	    # linux and mingw manifests can be identical.
+	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb"
 	fi
 	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
 	    builds="${builds} gdbserver"
