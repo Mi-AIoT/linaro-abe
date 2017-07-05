@@ -257,5 +257,8 @@ checkout()
 	esac
     fi
 
+    # Show the last commit, so that the user can check which version
+    # is actually built.
+    dryrun "git -C ${srcdir} show"
     return 0
 }
