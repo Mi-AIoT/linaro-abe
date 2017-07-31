@@ -596,6 +596,58 @@ make_install()
     return 0
 }
 
+# Copy sysroot to test container and print out ABE_TEST_* settings to pass
+# to dejagnu.
+# $1 -- test container
+print_make_opts_and_copy_sysroot ()
+{
+    (set -e
+     local test_container="$1"
+
+     local user machine port
+     user="$(echo $test_container | cut -s -d@ -f 1)"
+     machine="$(echo $test_container | sed -e "s/.*@//g" -e "s/:.*//g")"
+     port="$(echo $test_container | cut -s -d: -f 2)"
+
+     if [ x"$port" = x"" ]; then
+	 error "Wrong format of test_container: $test_container"
+	 return 1
+     fi
+
+     if [ x"$user" = x"" ]; then
+	 user=$(ssh -p$port $machine whoami)
+     fi
+
+     local ldso_bin lib_path
+     ldso_bin=$(find_dynamic_linker "$sysroots" true)
+     lib_path=$(dirname "$ldso_bin")
+
+     # (1) rsync sysroot to some directory (chroot) on the target,
+     # (2) bind-mount /tmp inside that chroot, and then
+     # (3) run all tests from that chroot (see config/boards/abe-container.exp).
+
+     local dest_sysroot
+     dest_sysroot=$(ssh -p$port $user@$machine mktemp -d)
+
+     # Rsync libs and ldconfig to the target
+     if ! rsync -az --delete -e "ssh -p$port" "$sysroots/" "$user@$machine:$dest_sysroot/"; then
+	 error "Cannot rsync sysroot to $user@machine:$port:$dest_sysroot/"
+	 return 1
+     fi
+
+     # Bind-mount /tmp inside chroot.  Tests are scp'ed into /tmp/runtest.XX,
+     # so make sure they are reachable inside chroot.
+     ssh -p$port $user@$machine sudo mkdir -p $dest_sysroot/tmp/
+     ssh -p$port $user@$machine sudo mount -o bind /tmp $dest_sysroot/tmp
+
+     # Prepare ld.so.conf
+     echo "/$(basename "$lib_path")" | ssh -p$port $user@$machine tee "$dest_sysroot/etc/ld.so.conf" > /dev/null
+     ssh -p$port $user@$machine sudo chroot --userspec=$user $dest_sysroot /sbin/ldconfig
+
+     echo "ABE_TEST_CONTAINER_USER=$user ABE_TEST_CONTAINER_MACHINE=$machine SCHROOT_PORT=$port ABE_TEST_ROOT=$dest_sysroot"
+    )
+}
+
 # $1 - The component to test
 # $2 - If set to anything, installed tools are used'
 make_check()
@@ -688,7 +740,13 @@ make_check()
 	# in config/linaro.exp
 	export SCHROOT_TEST="$schroot_test"
 
-	if $exec_tests && [ x"$schroot_test" = x"yes" ]; then
+	if $exec_tests && [ x"$test_container" != x"" ]; then
+	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
+	    if [ $? -ne 0 ]; then
+		error "Cannot initialize sysroot on $test_container"
+		return 1
+	    fi
+	elif $exec_tests && [ x"$schroot_test" = x"yes" ]; then
 	    # Start schroot sessions on target boards that support it
 	    start_schroot_sessions "${target}" "${sysroots}" "${builddir}"
 	    if test $? -ne 0; then
