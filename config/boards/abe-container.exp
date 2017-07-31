@@ -3,3 +3,5 @@ load_generic_config tcwg-remote
 global env
 # Note, the below value of hostname is hardcoded in schroot.sh:start_schroot_session
 set_board_info hostname [getenv ABE_TEST_CONTAINER_USER]@[getenv ABE_TEST_CONTAINER_MACHINE]
+
+set board_info($board,exec_shell) "[board_info $board exec_shell] sudo chroot --userspec=[getenv ABE_TEST_CONTAINER_USER] [getenv ABE_TEST_ROOT]"
