@@ -596,6 +596,82 @@ make_install()
     return 0
 }
 
+# Copy sysroot to test container and print out ABE_TEST_* settings to pass
+# to dejagnu.
+# $1 -- test container
+print_make_opts_and_copy_sysroot ()
+{
+    (set -e
+     local test_container="$1"
+
+     local user machine port
+     user="$(echo $test_container | cut -s -d@ -f 1)"
+     machine="$(echo $test_container | sed -e "s/.*@//g" -e "s/:.*//g")"
+     port="$(echo $test_container | cut -s -d: -f 2)"
+
+     if [ x"$port" = x"" ]; then
+	 error "Wrong format of test_container: $test_container"
+	 return 1
+     fi
+
+     if [ x"$user" = x"" ]; then
+	 user=$(ssh -p$port $machine whoami)
+     fi
+
+     # The overall plan is to:
+     # 1. rsync libs to /tmp/<new-sysroot>
+     # 2. regenerate /etc/ld.so.cache to include /tmp/<new-sysroot>
+     #    as preferred place for any libs that it has.
+     # 3. we need to be careful to update ld.so.cache at the same time
+     #    as we update symlink for /lib/ld-linux-*so*; otherwise we risk
+     #    de-synchronizing ld.so and libc.so, which will break the system.
+     
+     local ldso_bin lib_path ldso_link
+     ldso_bin=$(find_dynamic_linker "$sysroots" true)
+     lib_path=$(dirname "$ldso_bin")
+
+     local -a ldso_link
+     ldso_links=$(find "$lib_path" -type l -name "ld-linux-*.so*")
+
+     if [ "${#ldso_links[@]}" != "1" ]; then
+	 error "Exactly one ld.so symlink is expected: ${ldso_links[@]}"
+	 return 1
+     fi
+     ldso_link="${ldso_links[@]}"
+
+     local dest_ldso_bin dest_lib_path dest_ldso_link
+     dest_lib_path=$(ssh -p$port $user@$machine mktemp -d)
+     dest_ldso_bin="$dest_lib_path/$(basename $ldso_bin)"
+     dest_ldso_link="/$(basename "$lib_path")/$(basename "$ldso_link")"
+
+     # Rsync libs and ldconfig to the target
+     if ! rsync -az --delete -e "ssh -p$port" "$lib_path/" "$lib_path/../sbin/" "$user@$machine:$dest_lib_path/"; then
+	 error "Cannot rsync sysroot to $user@machine:$port:$dest_lib_path/"
+	 return 1
+     fi
+
+     # Prepare new ld.so.conf
+     local dest_ldsoconf
+     dest_ldsoconf=$(ssh -p$port $user@$machine mktemp)
+     echo "$dest_lib_path" | ssh -p$port $user@$machine tee "$dest_ldsoconf" > /dev/null
+     ssh -p$port $user@$machine "cat /etc/ld.so.conf | tee -a $dest_ldsoconf" > /dev/null
+
+     # The most tricky moment!  We need to replace ld.so and re-generate
+     # /etc/ld.so.cache in a single command.  Otherwise ld.so and libc will
+     # get de-synchronized, which will render container unoperational.
+     #
+     # Adding new, rather than replacing, ld.so link is rather mundane.
+     # E.g., adding ld.so for new abi (ILP32) is extremely unlikely to break
+     # LP64 system.
+     if ! ssh -p$port $user@$machine sudo bash -c "\"ln -f -s $dest_ldso_bin $dest_ldso_link && $dest_lib_path/ldconfig -f $dest_ldsoconf\""; then
+	 error "Could not install new sysroot"
+	 return 1
+     fi
+
+     echo "ABE_TEST_CONTAINER_USER=$user ABE_TEST_CONTAINER_MACHINE=$machine SCHROOT_PORT=$port"
+    )
+}
+
 # $1 - The component to test
 # $2 - If set to anything, installed tools are used'
 make_check()
@@ -688,7 +764,13 @@ make_check()
 	# in config/linaro.exp
 	export SCHROOT_TEST="$schroot_test"
 
-	if $exec_tests && [ x"$schroot_test" = x"yes" ]; then
+	if $exec_tests && [ x"$test_container" != x"" ]; then
+	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
+	    if [ $? -ne 0 ]; then
+		error "Cannot initialize sysroot on $test_container"
+		return 1
+	    fi
+	elif $exec_tests && [ x"$schroot_test" = x"yes" ]; then
 	    # Start schroot sessions on target boards that support it
 	    start_schroot_sessions "${target}" "${sysroots}" "${builddir}"
 	    if test $? -ne 0; then
