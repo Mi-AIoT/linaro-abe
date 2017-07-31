@@ -521,24 +521,10 @@ make_install()
         local srcdir="$(get_component_srcdir ${component}) ${2:+$2}"
 	local ARCH=
 	case ${target} in
-	    *aarch64*)
-		ARCH=arm64
-		;;
-	    *i?86*)
-		ARCH=i386
-		;;
-	    *x86_64*)
-		ARCH=x86_64
-		;;
-	    *arm*)
-		ARCH=arm
-		;;
-	    *powerpc*|*ppc*)
-		ARCH=powerpc
-		;;
-	    *)
-		error "Unknown arch for make headers_install!"
-		return 1
+	    "aarch64"*) ARCH=arm64 ;;
+	    *i?86*) ARCH=i386 ;;
+	    "ppc"*) ARCH=powerpc ;;
+	    *) ARCH="${target%%-*}" ;;
 	esac
         dryrun "make ${make_opts} -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/usr"
         if test $? != "0"; then
