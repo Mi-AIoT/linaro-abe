@@ -702,7 +702,39 @@ make_check()
 	# in config/linaro.exp
 	export SCHROOT_TEST="$schroot_test"
 
-	if $exec_tests && [ x"$schroot_test" = x"yes" ]; then
+	if $exec_tests && [ x"$test_container" != x"" ]; then
+	    if echo $- | grep -q "e"; then
+		orig_set_e="set -e"
+	    else
+		orig_set_e="set +e"
+	    fi
+	    set -e
+
+	    local user machine port
+	    user="$(echo $test_container | grep "@" | sed -e "s/@.*//")"
+	    machine="$(echo $test_container | sed -e "s/.*@//g" -e "s/:.*//g")"
+	    port="$(echo $test_container | grep ":" | sed -e "s/.*://")"
+
+	    if [ x"$port" = x"" ]; then
+		error "Wrong format of test_container: $test_container"
+		return 1
+	    fi
+
+	    if [ x"$user" = x"" ]; then
+		user=$(ssh -p$port $machine whoami)
+	    fi
+
+	    local ldso lib_path
+	    ldso=$(find_dynamic_linker "$sysroots" true)
+	    lib_path=$(dirname "$ldso")
+
+	    # Rsync sysroot to the same path in the test container as on
+	    # the host.
+	    rsync -az --delete -e "ssh -p$port" --rsync-path "mkdir -p $lib_path; rsync" "$lib_path/" "$user@$machine:$lib_path/"
+
+	    schroot_make_opts="ABE_TEST_CONTAINER_USER=$user ABE_TEST_CONTAINER_MACHINE=$machine SCHROOT_PORT=$port ABE_TEST_LDSO=$ldso ABE_TEST_LIB_PATH=$lib_path"
+	    $orig_set_e
+	elif $exec_tests && [ x"$schroot_test" = x"yes" ]; then
 	    # Start schroot sessions on target boards that support it
 	    start_schroot_sessions "${target}" "${sysroots}" "${builddir}"
 	    if test $? -ne 0; then
