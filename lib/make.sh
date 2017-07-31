@@ -610,6 +610,51 @@ make_install()
     return 0
 }
 
+# Copy sysroot to test container and print out ABE_TEST_* settings to pass
+# to dejagnu.
+# $1 -- test container
+print_make_opts_and_copy_sysroot ()
+{
+    (set -e
+
+     local user machine port
+     user="$(echo $test_container | grep "@" | sed -e "s/@.*//")"
+     machine="$(echo $test_container | sed -e "s/.*@//g" -e "s/:.*//g")"
+     port="$(echo $test_container | grep ":" | sed -e "s/.*://")"
+
+     if [ x"$port" = x"" ]; then
+	 error "Wrong format of test_container: $test_container"
+	 return 1
+     fi
+
+     if [ x"$user" = x"" ]; then
+	 user=$(ssh -p$port $machine whoami)
+     fi
+
+     local ldso lib_path
+     ldso=$(find_dynamic_linker "$sysroots" true)
+     lib_path=$(dirname "$ldso")
+
+     # Rsync sysroot to the same path in the test container as on
+     # the host.
+     retry=true
+     while true; do
+	 if rsync -az --delete -e "ssh -p$port" "$lib_path/" "$user@$machine:$lib_path/"; then
+	     break
+	 elif $retry; then
+	     ssh -p$port $user@$machine sudo rm -rf $lib_path
+	     ssh -p$port $user@$machine sudo mkdir -p $lib_path
+	     ssh -p$port $user@$machine sudo chown $user $lib_path
+	     retry=false
+	 else
+	     error "Cannot rsync sysroot to $user@machine:$port"
+	     return 1
+	 fi
+     done
+     echo "ABE_TEST_CONTAINER_USER=$user ABE_TEST_CONTAINER_MACHINE=$machine SCHROOT_PORT=$port ABE_TEST_LDSO=$ldso ABE_TEST_LIB_PATH=$lib_path"
+    )
+}
+
 # $1 - The component to test
 # $2 - If set to anything, installed tools are used'
 make_check()
@@ -702,7 +747,13 @@ make_check()
 	# in config/linaro.exp
 	export SCHROOT_TEST="$schroot_test"
 
-	if $exec_tests && [ x"$schroot_test" = x"yes" ]; then
+	if $exec_tests && [ x"$test_container" != x"" ]; then
+	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
+	    if [ $? -ne 0 ]; then
+		error "Cannot initialize sysroot on $test_container"
+		return 1
+	    fi
+	elif $exec_tests && [ x"$schroot_test" = x"yes" ]; then
 	    # Start schroot sessions on target boards that support it
 	    start_schroot_sessions "${target}" "${sysroots}" "${builddir}"
 	    if test $? -ne 0; then
