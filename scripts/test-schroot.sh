@@ -41,7 +41,7 @@ triplet_to_deb_arch()
 {
     set -e
     case "$1" in
-	aarch64-*linux-gnu) echo arm64 ;;
+	aarch64-*linux-gnu*) echo arm64 ;;
 	arm*-*linux-gnueabi*) echo armhf ;;
 	i686-*linux-gnu) echo i386 ;;
 	x86_64-*linux-gnu) echo amd64 ;;
@@ -265,7 +265,7 @@ EOF
     else
 	# Remove /etc/ld.so.cache to workaround QEMU problem for targets with
 	# different endianness (i.e., /etc/ld.so.cache is endian-dependent).
-	$rsh root@$machine "rm /etc/ld.so.cache"
+	$rsh root@$machine "rm -f /etc/ld.so.cache"
 	# Cleanup runaway QEMU processes that ran for more than 2 minutes.
 	# Note the "-S none" option -- ssh does not always detach from process
 	# when multiplexing is used.  I think this is a bug in ssh.
