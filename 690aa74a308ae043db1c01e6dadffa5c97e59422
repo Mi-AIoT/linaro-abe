@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b00566a2_e5429ee2",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 706,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-07-31T12:13:58Z",
+      "side": 1,
+      "message": "I\u0027m not entirely comfortable with using this ad-hoc trick. I think it\u0027s difficult to read, and I think the assumption that ssh/rsync are not expected to fail is not well-founded.\n\nI think it could be abstracted into a function:\n\n    copy_sysroot_ang_get_make_opts()\n    {\n        (\n        set -e\n        ...\n        )\n    }\n\n    schroot_make_opts\u003d$(copy_sysroot_and_get_make_opts $test_container)\n    if [ $? -ne 0 ]; then\n        error \"...\"\n        return 1\n    fi",
+      "revId": "690aa74a308ae043db1c01e6dadffa5c97e59422",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "500eb54e_0ae46c72",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-07-31T12:13:58Z",
+      "side": 1,
+      "message": "ldso is in /path/to/sysroot/lib/ld-linux.so\n\nso, lib_path \u003d /path/to/sysroot/lib/\n\ntherefore, only the lib subdir of the sysroot is copied. Is this intentional?\n\nAlso, the --rsync-path trick looks weird. perhaps clearer to write:\n\n    ssh -p$port $user@$machine mkdir -p \"$lib_path\"\n    rsync -az ...etc...",
+      "revId": "690aa74a308ae043db1c01e6dadffa5c97e59422",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
