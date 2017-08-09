@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "47d107ef_ecee3a0e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-08-09T15:27:04Z",
+      "side": 1,
+      "message": "the triplets for powerpc are documented starting with powerpc*, not ppc*. So we should match powerpc* here. In particular, powerpcle should be matched, but presumably also architecture versions can be embedded in the triplet too (as with arm)",
+      "revId": "71f2c3c667bbf72396749b6fc5026a6210252572",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "020dfa81_273ac374",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-08-09T15:27:04Z",
+      "side": 1,
+      "message": "We need arm* here to catch triplets such as \"armv8-linux-gnueabihf\".",
+      "revId": "71f2c3c667bbf72396749b6fc5026a6210252572",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
