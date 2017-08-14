@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ff17dbd0_e12ccd95",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-08-14T09:52:59Z",
+      "side": 1,
+      "message": "what does this retry mechanism achieve which is not achieved by:\n    ssh ... sudo mkdir -p\n    ssh ... sudo chown\n    rsync --delete ...",
+      "revId": "6459e33a55cbc2aace421cd61a42e827a99542f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
