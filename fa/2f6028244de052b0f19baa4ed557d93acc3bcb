@@ -1,0 +1,8 @@
+Code-Review+1: lava-bot
+Code-Review+1: Charles Baylis <charles.baylis@linaro.org>
+Code-Review+2: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Submitted-by: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Submitted-at: Tue, 22 Aug 2017 10:00:37 +0000
+Reviewed-on: https://review.linaro.org/20801
+Project: toolchain/abe
+Branch: refs/heads/master
