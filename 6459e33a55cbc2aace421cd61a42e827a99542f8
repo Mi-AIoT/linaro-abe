@@ -34,6 +34,24 @@
       "revId": "6459e33a55cbc2aace421cd61a42e827a99542f8",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "6fff245b_97bd067c",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-08-22T10:00:24Z",
+      "side": 1,
+      "message": "As a further improvement we can rsync sysroot to $(mktemp -d) directory on the target, and set ABE_TEST_LDSO/ABE_TEST_LIB_PATH appropriately.",
+      "parentUuid": "5a9ba3a7_34dad4b5",
+      "revId": "6459e33a55cbc2aace421cd61a42e827a99542f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
