@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d3034f83_dcf2b514",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-09-06T12:35:23Z",
+      "side": 1,
+      "message": "I think this explanation is too brief. Need to explain what is actually done somewhere. (maybe in a comment in the code)",
+      "revId": "d82cd165a0c36029dd8631184d1443b27017a79e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "44fbb0c6_b7e36c99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-09-06T12:35:23Z",
+      "side": 1,
+      "message": "this sounds good, but...",
+      "revId": "d82cd165a0c36029dd8631184d1443b27017a79e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9e4aa15e_88608b7c",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-09-06T12:35:23Z",
+      "side": 1,
+      "message": "... this doesn\u0027t sound like adding a new library, it sounds like replacing it.",
+      "revId": "d82cd165a0c36029dd8631184d1443b27017a79e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
