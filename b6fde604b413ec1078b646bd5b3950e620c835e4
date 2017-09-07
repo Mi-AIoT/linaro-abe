@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "0d43dc98_ef783c84",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-09-07T11:19:44Z",
+      "side": 1,
+      "message": "Yes, will fix.",
+      "parentUuid": "9976442c_f828f39a",
+      "range": {
+        "startLine": 633,
+        "startChar": 14,
+        "endLine": 633,
+        "endChar": 23
+      },
+      "revId": "b6fde604b413ec1078b646bd5b3950e620c835e4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "a650f4cc_9ae026d8",
         "filename": "lib/make.sh",
         "patchSetId": 2
@@ -36,6 +60,30 @@
       "writtenOn": "2017-09-07T10:58:58Z",
       "side": 1,
       "message": "I\u0027m not sure to understand these comments: aren\u0027t we copying sysroot+generating ld.so.conf/ld.so.cache in a tmp dir? If so, we are not replacing ld.so etc...",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 19
+      },
+      "revId": "b6fde604b413ec1078b646bd5b3950e620c835e4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "275ed61b_d8476b40",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-09-07T11:19:44Z",
+      "side": 1,
+      "message": "Both sysroot and ld.so.conf are in /tmp.  However, when running \"ldconfig -f /tmp/ld.so.conf\" it re-generates main /etc/ld.so.cache.  Regenerated /etc/ld.so.cache then points dynamic linker to use libraries from /tmp/\u003csysroot\u003e.",
+      "parentUuid": "a650f4cc_9ae026d8",
       "range": {
         "startLine": 659,
         "startChar": 0,
