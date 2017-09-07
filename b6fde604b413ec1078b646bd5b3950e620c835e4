@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9976442c_f828f39a",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-09-07T10:58:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be ldso_links? (with an \u0027s\u0027 at the end)",
+      "range": {
+        "startLine": 633,
+        "startChar": 14,
+        "endLine": 633,
+        "endChar": 23
+      },
+      "revId": "b6fde604b413ec1078b646bd5b3950e620c835e4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "a650f4cc_9ae026d8",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 665,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-09-07T10:58:58Z",
+      "side": 1,
+      "message": "I\u0027m not sure to understand these comments: aren\u0027t we copying sysroot+generating ld.so.conf/ld.so.cache in a tmp dir? If so, we are not replacing ld.so etc...",
+      "range": {
+        "startLine": 659,
+        "startChar": 0,
+        "endLine": 665,
+        "endChar": 19
+      },
+      "revId": "b6fde604b413ec1078b646bd5b3950e620c835e4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
