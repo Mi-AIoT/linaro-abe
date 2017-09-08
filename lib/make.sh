@@ -668,6 +668,14 @@ print_make_opts_and_copy_sysroot ()
 	 return 1
      fi
 
+     # Profiling tests attempt to create files on the target with the same
+     # paths as on the host.  When local and remote users do not match, we
+     # get "permission denied" on accessing /home/$USER/.  Workaround by
+     # creating $(pwd) on the target that target user can write to.
+     if [ x"$user" != x"$USER" ]; then
+	 ssh -p$port $user@$machine sudo bash -c "\"mkdir -p $(pwd) && chown $user $(pwd)\""
+     fi
+
      echo "ABE_TEST_CONTAINER_USER=$user ABE_TEST_CONTAINER_MACHINE=$machine SCHROOT_PORT=$port"
     )
 }
