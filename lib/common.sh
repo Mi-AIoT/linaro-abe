@@ -29,7 +29,6 @@ set -o pipefail
 . "${topdir}/lib/testcode.sh" || exit 1
 . "${topdir}/lib/git-parser.sh" || exit 1
 . "${topdir}/lib/stamp.sh" || exit 1
-. "${topdir}/lib/schroot.sh" || exit 1
 . "${topdir}/lib/component.sh" || exit 1
 . "${topdir}/lib/control.sh" || exit 1
 . "${topdir}/lib/retrieve.sh" || exit 1

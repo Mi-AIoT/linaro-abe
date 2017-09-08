@@ -23,9 +23,9 @@ usage()
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--check {all|glibc|gcc|gdb|binutils}]
              [--checkout {<package>[~branch][@revision]|all}]
-             [--disable {bootstrap|building|install|make_docs|parallel|schroot_test|update}]
+             [--disable {bootstrap|building|install|make_docs|parallel|update}]
              [--dryrun] [--dump]
-             [--enable {bootstrap|building|install|make_docs|parallel|schroot_test|update}]
+             [--enable {bootstrap|building|install|make_docs|parallel|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -1029,9 +1029,6 @@ while test $# -gt 0; do
 		    ;;
 		parallel)
 		    parallel="${value}"
-		    ;;
-		schroot_test)
-		    schroot_test="${value}"
 		    ;;
 		update)
 		    supdate="${value}"

@@ -28,7 +28,6 @@ enable_ssh=@ENABLE_SSH@
 bootstrap=@ENABLE_BOOTSTRAP@
 alltests=@ENABLE_ALLTESTS@
 install=@ENABLE_INSTALL@
-schroot_test=@ENABLE_SCHROOT_TEST@
 make_docs=@ENABLE_MAKE_DOCS@
 supdate=@ENABLE_SOURCE_UPDATE@
 parallel=@ENABLE_PARALLEL@

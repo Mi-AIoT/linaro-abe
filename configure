@@ -1333,7 +1333,7 @@ Optional Features:
   --enable-alltests       If you want to run all tests by default
   --enable-install        If you want to install by default
   --enable-make-docs      If you want to enable making package documentation
-  --enable-schroot-test   If you want to used schroot-based testing by default
+  --enable-schroot-test   Obsolete option, preserved for compatibility
   --enable-source-update  If you want to update sources by default
   --enable-parallel       If you want to build with make -j<number of CPUs> by
                           default

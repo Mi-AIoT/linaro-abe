@@ -755,25 +755,16 @@ make_check()
 		;;
 	esac
 
-	# Declare schroot_make_opts.  Its value will be set in
-	# start_schroot_sessions depending on features that target board[s]
-	# support.
-	eval "schroot_make_opts="
+	local schroot_make_opts
 
 	# Export SCHROOT_TEST so that we can choose correct boards
 	# in config/linaro.exp
-	export SCHROOT_TEST="$schroot_test"
+	export SCHROOT_TEST="yes"
 
 	if $exec_tests && [ x"$test_container" != x"" ]; then
 	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
 	    if [ $? -ne 0 ]; then
 		error "Cannot initialize sysroot on $test_container"
-		return 1
-	    fi
-	elif $exec_tests && [ x"$schroot_test" = x"yes" ]; then
-	    # Start schroot sessions on target boards that support it
-	    start_schroot_sessions "${target}" "${sysroots}" "${builddir}"
-	    if test $? -ne 0; then
 		return 1
 	    fi
 	fi
@@ -829,8 +820,6 @@ make_check()
 	    fi
 	done
 
-	# Stop schroot sessions
-	stop_schroot_sessions
 	unset SCHROOT_TEST
        
         if test x"${component}" = x"gcc"; then

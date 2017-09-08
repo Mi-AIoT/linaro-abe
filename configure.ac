@@ -357,8 +357,8 @@ AC_ARG_ENABLE(make-docs, AC_HELP_STRING([--enable-make-docs], [If you want to en
 esac], ENABLE_MAKE_DOCS=yes)
 AC_SUBST(ENABLE_MAKE_DOCS)
 
-dnl if you want to enable schroot-based testing by default
-AC_ARG_ENABLE(schroot-test, AC_HELP_STRING([--enable-schroot-test], [If you want to used schroot-based testing by default]),
+dnl Obsolete option, preserved for compatibility
+AC_ARG_ENABLE(schroot-test, AC_HELP_STRING([--enable-schroot-test], [Obsolete option, preserved for compatibility]),
 [case "${enableval}" in
   yes) ENABLE_SCHROOT_TEST=yes ;;
   no)  ENABLE_SCHROOT_TEST=no ;;
