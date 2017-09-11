@@ -757,10 +757,6 @@ make_check()
 
 	local schroot_make_opts
 
-	# Export SCHROOT_TEST so that we can choose correct boards
-	# in config/linaro.exp
-	export SCHROOT_TEST="yes"
-
 	if $exec_tests && [ x"$test_container" != x"" ]; then
 	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
 	    if [ $? -ne 0 ]; then
@@ -820,8 +816,6 @@ make_check()
 	    fi
 	done
 
-	unset SCHROOT_TEST
-       
         if test x"${component}" = x"gcc"; then
             rm -rf ${sysroots}/etc/ld.so.cache
 	fi
