@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "14b96ad6_015da9e5",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-09-11T08:55:14Z",
+      "side": 1,
+      "message": "I\u0027d rather see the option removed entirely, so that we can be confident that there are no existing users relying on it.",
+      "revId": "0cfc2e609775c4ba3fcf12b010a76ea50568b7eb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
