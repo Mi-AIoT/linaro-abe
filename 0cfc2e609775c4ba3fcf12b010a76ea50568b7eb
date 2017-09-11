@@ -16,6 +16,24 @@
       "revId": "0cfc2e609775c4ba3fcf12b010a76ea50568b7eb",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ad310067_dcfb7b3b",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-09-11T09:07:54Z",
+      "side": 1,
+      "message": "Why keep it here, and remove it from abe.sh ?",
+      "parentUuid": "14b96ad6_015da9e5",
+      "revId": "0cfc2e609775c4ba3fcf12b010a76ea50568b7eb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
