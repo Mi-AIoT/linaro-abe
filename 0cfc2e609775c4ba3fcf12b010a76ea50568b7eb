@@ -34,6 +34,42 @@
       "revId": "0cfc2e609775c4ba3fcf12b010a76ea50568b7eb",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "b735a206_93f403ea",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-09-12T05:56:53Z",
+      "side": 1,
+      "message": "We rely on configure option in jenkins.sh, so update needs to be coordinated with update to jenkins-scripts.  We don\u0027t use abe.sh option anywhere.",
+      "parentUuid": "ad310067_dcfb7b3b",
+      "revId": "0cfc2e609775c4ba3fcf12b010a76ea50568b7eb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "ff9b4333_8fffff67",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-09-12T05:56:53Z",
+      "side": 1,
+      "message": "Yes, once jenkins-scripts are updated.",
+      "parentUuid": "14b96ad6_015da9e5",
+      "revId": "0cfc2e609775c4ba3fcf12b010a76ea50568b7eb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
