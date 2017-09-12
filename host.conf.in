@@ -31,7 +31,6 @@ install=@ENABLE_INSTALL@
 make_docs=@ENABLE_MAKE_DOCS@
 supdate=@ENABLE_SOURCE_UPDATE@
 parallel=@ENABLE_PARALLEL@
-makeversion=@MAKEVERSION@
 
 wget_bin=@WGET@
 fileserver=@FILESERVER@
