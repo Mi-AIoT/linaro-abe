@@ -22,6 +22,30 @@
       "revId": "e51cef3edbb130c50b9d18cb4453cdfc1e76e358",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4175eb56_20610186",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2017-09-12T05:57:37Z",
+      "side": 1,
+      "message": "Yeap.",
+      "parentUuid": "c724613c_eb68163c",
+      "range": {
+        "startLine": 761,
+        "startChar": 5,
+        "endLine": 761,
+        "endChar": 12
+      },
+      "revId": "e51cef3edbb130c50b9d18cb4453cdfc1e76e358",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
