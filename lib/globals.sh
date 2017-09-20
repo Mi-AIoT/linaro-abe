@@ -39,6 +39,8 @@ configfile="default"
 # Don't set this unless you need to modify it.
 override_arch=
 override_cpu=
+override_fpu=
+override_mode=
 override_tune=
 
 manifest_version=1.5

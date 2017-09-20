@@ -258,18 +258,19 @@ OPTIONS
                        complete build as specified by the config/ .conf
                        files.
 
-  --set		{arch|cpu|tune}=XXX
+  --set		{arch|cpu|fpu|mode|tune}=XXX
 
-		This overrides the default values used for the configure
-		options --with-arch, --with-cpu, and --with-tune.
+		This overrides the default values used for the
+		configure options --with-arch, --with-cpu, --with-fpu,
+		--with-mode and --with-tune.
 
 		For most targets, specifying --set cpu is equivalent to
 		specifying both --set arch and --set tune, and hence those
 		options should not be used with --set cpu.
 
-		Note: There is no cross-checking to make sure that the passed
-		--target value is compatible with the passed arch, cpu, or
-		tune value.
+		Note: There is no cross-checking to make sure that the
+		passed --target value is compatible with the passed
+		arch, cpu, fpu, mode or tune value.
 
   --set		{buildconfig}=XXX
                 Set gcc's configure option --with-build-config=XXX
@@ -635,6 +636,16 @@ set_package()
 	cpu)
 	    override_cpu="${setting}"
 	    notice "Overriding default --with-cpu to ${setting}"
+	    return 0
+	    ;;
+	fpu)
+	    override_fpu="${setting}"
+	    notice "Overriding default --with-fpu to ${setting}"
+	    return 0
+	    ;;
+	mode)
+	    override_mode="${setting}"
+	    notice "Overriding default --with-mode to ${setting}"
 	    return 0
 	    ;;
 	tune)
