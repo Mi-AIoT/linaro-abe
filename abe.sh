@@ -35,9 +35,9 @@ usage()
              [--space <space needed>]
              [--release <release_version_string>]
              [--retrieve {<package>|all}]
-             [--set {arch|cpu|tune}=XXX]
              [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
+             [--set {gcc_override_configure}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {linker}={ld|gold}]
@@ -258,19 +258,6 @@ OPTIONS
                        complete build as specified by the config/ .conf
                        files.
 
-  --set		{arch|cpu|tune}=XXX
-
-		This overrides the default values used for the configure
-		options --with-arch, --with-cpu, and --with-tune.
-
-		For most targets, specifying --set cpu is equivalent to
-		specifying both --set arch and --set tune, and hence those
-		options should not be used with --set cpu.
-
-		Note: There is no cross-checking to make sure that the passed
-		--target value is compatible with the passed arch, cpu, or
-		tune value.
-
   --set		{buildconfig}=XXX
                 Set gcc's configure option --with-build-config=XXX
                 to perform specialized bootstrap build (bootstrap-lto, etc.)
@@ -278,6 +265,15 @@ OPTIONS
   --set		{cflags|ldflags|runtestflags|makeflags}=XXX
                 This overrides the default values used for CFLAGS,
                 LDFLAGS, RUNTESTFLAGS, and MAKEFLAGS.
+
+  --set		{gcc_override_configure}=XXX
+
+		This overrides the default values used for the GCC
+		configure options.
+
+		Note: There is no cross-checking to make sure that the
+		passed --target value is compatible with the passed
+		overrides.
 
   --set		{languages}={c|c++|fortran|go|lto|objc|java|ada}
                 This changes the default set of GCC front ends that get built.
@@ -627,19 +623,9 @@ set_package()
 	    clibrary="${setting}"
 	    return 0
 	    ;;
-	arch)
-	    override_arch="${setting}"
-	    notice "Overriding default --with-arch to ${setting}"
-	    return 0
-	    ;;
-	cpu)
-	    override_cpu="${setting}"
-	    notice "Overriding default --with-cpu to ${setting}"
-	    return 0
-	    ;;
-	tune)
-	    override_tune="${setting}"
-	    notice "Overriding default --with-tune to ${setting}"
+	gcc_override_configure)
+	    gcc_override_configure="${gcc_override_configure} ${setting}"
+	    notice "Adding ${setting} to GCC configure options."
 	    return 0
 	    ;;
 	*)
