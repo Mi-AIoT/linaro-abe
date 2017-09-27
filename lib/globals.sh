@@ -36,11 +36,6 @@ clibrary="auto"
 snapshots="default"
 configfile="default"
 
-# Don't set this unless you need to modify it.
-override_arch=
-override_cpu=
-override_tune=
-
 manifest_version=1.5
 
 # The prefix for installing the toolchain
@@ -107,6 +102,7 @@ override_linker=
 override_cflags=
 override_ldflags=
 override_runtestflags=
+gcc_override_configure=
 
 if test x"${BUILD_NUMBER}" = x; then
     export BUILD_NUMBER=${RANDOM}

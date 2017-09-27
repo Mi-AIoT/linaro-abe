@@ -105,8 +105,12 @@ cbtest()
 	echo "($testlineno) out: $2" 1>&2
     fi
 
+    # $3 can contain '.*', which is accepted by grep (used in the
+    # callers test_failure and test_pass). But 'case' in shell wants
+    # filename expansion, hence we replace any '.*' in $3 by '*'
+    pattern="$(echo "$3" | sed 's/\.\*/*/g')"
     case "$2" in
-	*$3*)
+	*$pattern*)
 	    pass ${testlineno} "$4"
 	    ;;
 	*)
@@ -177,6 +181,23 @@ test_pass()
     # Continue to search for error so we don't get false positives.
     out="`(${runintmpdir:+cd ${tmpdir}} && ${abe_path}/abe.sh --space 4960 ${cb_commands} 2>&1 | tee ${testlogs}/${testlineno}.log | grep "${match}" | sed -e 's:\(^ERROR\).*\('"${match}"'\).*:\1 \2:')`"
     cbtest ${testlineno} "${out}" "${match}" "VALID ${cb_commands}"
+}
+
+# Check that $2 does not match the output of $1
+test_no_pass()
+{
+    local testlineno=$BASH_LINENO
+    local cb_commands=$1
+    local match=$2
+    local out=
+
+    # Continue to search for error so we don't get false positives.
+    out="`(${runintmpdir:+cd ${tmpdir}} && ${abe_path}/abe.sh --space 4960 ${cb_commands} 2>&1 | tee ${testlogs}/${testlineno}.log | grep "${match}")`"
+    if test x"${out}" = x""; then
+	pass ${testlineno} "NOMATCH of $match in ${cb_commands}"
+    else
+	fail ${testlineno} "MATCH of $match in ${cb_commands}"
+    fi
 }
 
 test_config_default()
@@ -611,17 +632,39 @@ else
     fail ${testlineno} "VALID: --dryrun --build gcc.git --stage 2"
 fi
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --set arch=armv8-a"
-match='Overriding default --with-arch to armv8-a'
+# Check that --with-arch=armv8-a overrides the default armv7-a for
+# arm-linux-gnueabihf, and leaves --with-tune=cortex-a9
+cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-arch=armv8-a --build gcc"
+match='with-tune=cortex-a9 .* --with-arch=armv8-a .* --target=arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --set cpu=cortex-a57"
-match='Overriding default --with-cpu to cortex-a57'
+# Check that no other with-arch option is used
+match='with-arch=armv7-a'
+test_no_pass "${cb_commands}" "${match}"
+
+# Check --with-cpu override: it should be accepted, and exclude the
+# default with-tune and with-arch
+cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-cpu=cortex-a57 --build gcc"
+match='with-cpu=cortex-a57 .* --target=arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --set tune=cortex-a53"
-match='Overriding default --with-tune to cortex-a53'
+# Check that no with-tune option is used
+match='with-tune=cortex-a9'
+test_no_pass "${cb_commands}" "${match}"
+
+# Check that no with-arch option is used
+match='with-arch=armv7-a'
+test_no_pass "${cb_commands}" "${match}"
+
+# Check --with-tune override: it should be accepted, and exclude the
+# default with-tune
+cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-tune=cortex-a53 --build gcc"
+match='with-arch=armv7-a .* --with-tune=cortex-a53 .* --target=arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
+
+# Check that no with-tune option is used
+match='with-tune=cortex-a9'
+test_no_pass "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --target arm-linux-gnueabihf --check=foo"
 match="Directive not supported"
