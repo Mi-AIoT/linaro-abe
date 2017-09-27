@@ -611,16 +611,16 @@ else
     fail ${testlineno} "VALID: --dryrun --build gcc.git --stage 2"
 fi
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --set arch=armv8-a"
-match='Overriding default --with-arch to armv8-a'
+cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-arch=armv8-a"
+match='Adding --with-arch=armv8-a to GCC configure options'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --set cpu=cortex-a57"
-match='Overriding default --with-cpu to cortex-a57'
+cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-cpu=cortex-a57"
+match='Adding --with-cpu=cortex-a57 to GCC configure options'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dryrun --target arm-linux-gnueabihf --set tune=cortex-a53"
-match='Overriding default --with-tune to cortex-a53'
+cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-tune=cortex-a53"
+match='Adding --with-tune=cortex-a53 to GCC configure options'
 test_pass "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --target arm-linux-gnueabihf --check=foo"
