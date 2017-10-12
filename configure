@@ -3616,7 +3616,7 @@ $as_echo "yes" >&6; }
 ### RPM Packages ###
 else
 if which rpm > /dev/null; then
-    packages="${packages} ncurses-devel python-devel"
+    packages="${packages} ncurses-devel python[23]-devel"
     for i in ${packages}; do
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking if $i is installed" >&5
 $as_echo_n "checking if $i is installed... " >&6; }
