@@ -19,6 +19,24 @@
     },
     {
       "key": {
+        "uuid": "c52f665e_e77b5d6c",
+        "filename": "config/binutils.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-10-12T12:35:04Z",
+      "side": 1,
+      "message": "AFAICT, --with-arch is only understood by gas for the nds32 targets.\nSo I think it doesn\u0027t matter.",
+      "parentUuid": "dca58893_c4a3ce70",
+      "revId": "e6e2aee69bfe39479bbac9cf3724a3d07e1cd759",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "4bb77a3b_3a44e8bf",
         "filename": "test.sh",
         "patchSetId": 2
