@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "dca58893_c4a3ce70",
+        "filename": "config/binutils.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-10-12T12:12:19Z",
+      "side": 1,
+      "message": "this changes the configuration of binutils... Does it matter?",
+      "revId": "e6e2aee69bfe39479bbac9cf3724a3d07e1cd759",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "4bb77a3b_3a44e8bf",
+        "filename": "test.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000108
+      },
+      "writtenOn": "2017-10-12T12:12:19Z",
+      "side": 1,
+      "message": "is it possible to test the new logic in gcc.conf which removes the default configure switches?",
+      "revId": "e6e2aee69bfe39479bbac9cf3724a3d07e1cd759",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
