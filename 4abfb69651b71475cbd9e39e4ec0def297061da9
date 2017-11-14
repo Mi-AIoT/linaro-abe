@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "33b7d463_44c71b7e",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2017-11-14T12:33:20Z",
+      "side": 1,
+      "message": "I don\u0027t a have a fedora or redhat distro, but when I google it, it seems that this package can also be named python-devel.  So shouldn\u0027t it be: \"[23]\\?\"",
+      "range": {
+        "startLine": 164,
+        "startChar": 46,
+        "endLine": 164,
+        "endChar": 50
+      },
+      "revId": "4abfb69651b71475cbd9e39e4ec0def297061da9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
