@@ -161,13 +161,13 @@ if test ${deb} -ge 1; then
 ### RPM Packages ###
 else
 if which rpm > /dev/null; then
-    packages="${packages} ncurses-devel python-devel"
+    packages="${packages} ncurses-devel python[23]?-devel"
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
 	# RPM based systems might install via meta-packages but the rpm database
 	# can't be searched on meta-package name, so strip off any trailing
 	# information when searching the rpm database.
-        exists="`rpm -q -a ${i//.*/}| grep -c ${i//.*/}`"
+        exists="`rpm -q -a ${i//.*/}| grep -c -E \"${i//.*/}\"`"
         if test ${exists:-0} -eq 0; then
            AC_MSG_RESULT([no, install $i])
            missing="${missing} $i"
