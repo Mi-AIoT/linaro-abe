@@ -22,6 +22,29 @@
       "revId": "4abfb69651b71475cbd9e39e4ec0def297061da9",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "af94cda9_c4490579",
+        "filename": "configure.ac",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2017-11-14T13:00:18Z",
+      "side": 1,
+      "message": "Does this actually work? I\u0027ve just manually tried:\n$ rpm -q -a \u0027python-[23]\u0027 on a RHEL6 machine, and the reply is empty, while\n$ rpm -q -a python-2 is empty too, but\n$ rpm -q -a python\npython-2.6.6-36.el6.x86_64\n\nAnd the devel package is named:\npython-devel-2.6.6-36.el6.x86_64\nso python[23]-devel wouldn\u0027t match anyway.\n\nBut.... these tests were done on a RHEL machine, so maybe the packages have different names on Fedora?",
+      "range": {
+        "startLine": 164,
+        "startChar": 46,
+        "endLine": 164,
+        "endChar": 51
+      },
+      "revId": "4abfb69651b71475cbd9e39e4ec0def297061da9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
