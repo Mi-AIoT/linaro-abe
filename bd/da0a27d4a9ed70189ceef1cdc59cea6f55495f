@@ -1,0 +1,10 @@
+Code-Review+2: Yao Qi <yao.qi@linaro.org>
+Code-Review-1: lava-bot
+Code-Review+1: Yvan Roux <yvan.roux@linaro.org>
+Code-Review+1: Christophe Lyon <christophe.lyon@linaro.org>
+Code-Review+1: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Submitted-by: Mark Murray <mark.murray@linaro.org>
+Submitted-at: Fri, 09 Feb 2018 10:14:10 +0000
+Reviewed-on: https://review.linaro.org/23719
+Project: toolchain/abe
+Branch: refs/heads/master
