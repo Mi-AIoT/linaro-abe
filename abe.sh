@@ -757,7 +757,7 @@ dump()
     fi
 }
 
-export PATH="${local_builds}/destdir/${build}/bin:$PATH"
+export PATH="${local_builds}/hosttools/${build}/bin:${local_builds}/destdir/${build}/bin:$PATH"
 
 # do_ switches are commands that should be executed after processing all
 # other switches.

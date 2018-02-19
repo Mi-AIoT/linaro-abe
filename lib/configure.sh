@@ -90,6 +90,7 @@ configure_build()
 
     # prefix is the root everything gets installed under.
     prefix="${local_builds}/destdir/${host}"
+    prefixhost="${local_builds}/hosttools/${host}"
 
     # The release string is usually the date as well, but in YYYY.MM format.
     # For snapshots we add the day field as well.
@@ -177,12 +178,12 @@ configure_build()
 	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	gdbserver)
-	    local opts="${opts} --build=${build} --host=${target} --prefix=${prefix}"
+	    local opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
 	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	# These are only built for the host
 	dejagnu|gmp|mpc|mpfr|isl|ppl|cloog)
-	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefix}"
+	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefixhost}"
 	    ;;
 	*)
 	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
