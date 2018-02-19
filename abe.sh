@@ -47,7 +47,7 @@ usage()
              [--testcontainer [user@]ipaddress:ssh_port]
              [--timeout <timeout_value>]
              [--usage]
-             [{binutils|dejagnu|gcc|gmp|mpfr|mpc|eglibc|glibc|newlib}
+             [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}
                =<id|snapshot|url>]]
 
 EOF
@@ -357,7 +357,7 @@ OPTIONS
 
   --usage	Display synopsis information.
 
-   [{binutils|dejagnu|gcc|gmp|mpfr|mpc|eglibc|glibc|newlib}=<id|snapshot|url>]
+   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}=<id|snapshot|url>]
 
 		This option specifies a particular version of a package
 		that might differ from the default version in the
@@ -1067,6 +1067,9 @@ while test $# -gt 0; do
 			;;
 		    gdb)
 			gdb_version="${value}"
+			;;
+		    gdbserver)
+			gdbserver_version="${value}"
 			;;
 		    mpfr)
 			mpfr_version="${value}"
