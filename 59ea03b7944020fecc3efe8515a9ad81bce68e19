@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "771007a7_a90c1c95",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000202
+      },
+      "writtenOn": "2018-02-20T15:26:21Z",
+      "side": 1,
+      "message": "Where is prefixhost consumed?",
+      "range": {
+        "startLine": 93,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 14
+      },
+      "revId": "59ea03b7944020fecc3efe8515a9ad81bce68e19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "7eb66cef_bf71ce39",
         "filename": "lib/configure.sh",
         "patchSetId": 1
