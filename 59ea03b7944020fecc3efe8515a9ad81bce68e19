@@ -16,6 +16,24 @@
       "revId": "59ea03b7944020fecc3efe8515a9ad81bce68e19",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "9f287c04_08116ade",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2018-02-20T10:02:21Z",
+      "side": 1,
+      "message": "It\u0027s not needed: we change only the destination used at \u0027make install\u0027 time.",
+      "parentUuid": "7eb66cef_bf71ce39",
+      "revId": "59ea03b7944020fecc3efe8515a9ad81bce68e19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
