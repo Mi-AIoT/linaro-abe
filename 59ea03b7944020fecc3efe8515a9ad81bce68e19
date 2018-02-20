@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7eb66cef_bf71ce39",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000145
+      },
+      "writtenOn": "2018-02-20T10:00:53Z",
+      "side": 1,
+      "message": "Do we need to update this line as well?",
+      "revId": "59ea03b7944020fecc3efe8515a9ad81bce68e19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
