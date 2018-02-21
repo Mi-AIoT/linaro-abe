@@ -83,6 +83,7 @@ build_all()
 		fi
                 ;;
             expat)
+		mkdir -p ${local_builds}/destdir/${host}
 		# TODO: avoid hardcoding the version in the path here
 		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/include ${local_builds}/destdir/${host}/usr/"
 		if [ $? -ne 0 ]; then
