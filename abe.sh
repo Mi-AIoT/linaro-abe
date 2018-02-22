@@ -757,6 +757,10 @@ dump()
     fi
 }
 
+# hosttools/ contains runtest (from dejagnu). We need it for testing
+# the toolchain.
+# destdir/ contains the toolchain components, some of which are needed
+# during the build (eg. GCC uses binutils).
 export PATH="${local_builds}/hosttools/${build}/bin:${local_builds}/destdir/${build}/bin:$PATH"
 
 # do_ switches are commands that should be executed after processing all
