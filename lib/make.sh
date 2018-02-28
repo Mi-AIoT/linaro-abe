@@ -827,6 +827,14 @@ make_check()
 
         if test x"${component}" = x"gcc"; then
             rm -rf ${sysroots}/etc/ld.so.cache
+	    # If the user provided send_results_to, send the results
+	    # via email
+	    if [ x"$send_results_to" != x ]; then
+		pushd ${builddir}
+		local srcdir="$(get_component_srcdir ${component})"
+		${srcdir}/contrib/test_summary -t -m ${send_results_to} | sh
+		popd
+	    fi
 	fi
     fi
 
