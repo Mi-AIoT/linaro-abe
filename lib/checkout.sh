@@ -247,6 +247,10 @@ checkout()
 		# Touch GCC's auto-generated files to avoid non-deterministic
 		# build behavior.
 		dryrun "(cd ${srcdir} && ./contrib/gcc_update --touch)"
+		# LAST_UPDATED and gcc/REVISION are used when send
+		# results summaries
+		dryrun "echo $(TZ=UTC date) '(revision' ${newrev}')' | tee ${srcdir}/LAST_UPDATED"
+		dryrun "echo \[${branch} revision ${newrev}\] | tee ${srcdir}/gcc/REVISION"
 		;;
 	    *)
 		# Avoid rebuilding of auto-generated C files. Rather than

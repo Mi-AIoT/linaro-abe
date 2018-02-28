@@ -35,6 +35,7 @@ usage()
              [--space <space needed>]
              [--release <release_version_string>]
              [--retrieve {<package>|all}]
+             [--send-results-to <to>]
              [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
              [--set {gcc_override_configure}=XXX]
@@ -257,6 +258,11 @@ OPTIONS
                        This will retrieve all of the sources for a
                        complete build as specified by the config/ .conf
                        files.
+
+  --send-results-to <to>
+
+                Send the results of GCC tests using <to> email
+                address.
 
   --set		{buildconfig}=XXX
                 Set gcc's configure option --with-build-config=XXX
@@ -774,6 +780,7 @@ do_build=
 do_build_stage=stage2
 do_manifest=""
 component_version_set=""
+send_results_to=
 
 declare -A extraconfig
 
@@ -906,6 +913,11 @@ while test $# -gt 0; do
 	    do_retrieve="$2"
 
 	    # Shift off the 'all' or the package identifier.
+	    shift
+	    ;;
+	--send-results-to)
+	    check_directive send-results-to $2
+	    send_results_to="$2"
 	    shift
 	    ;;
 	--set)
