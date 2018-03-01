@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a2c2e1e6_cfbe4578",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2018-03-01T08:16:57Z",
+      "side": 1,
+      "message": "My preference is to create a symlink to \"Mail\" in our docker images rather than adding an extra abe command-line option.",
+      "range": {
+        "startLine": 263,
+        "startChar": 1,
+        "endLine": 263,
+        "endChar": 30
+      },
+      "revId": "0fa78be62f668c9467057a749025fc37fabf9a39",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
