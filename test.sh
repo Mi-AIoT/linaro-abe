@@ -142,7 +142,7 @@ while test $# -gt 0; do
 	    if test -z $2; then
 		error "--md5sums requires a path to an md5sums file."
 		exit 1;
-	    fi 
+	    fi
 	    md5sums=$2
 	    if test ! -e "$md5sums"; then
 		error "Path to md5sums is invalid."
@@ -150,7 +150,7 @@ while test $# -gt 0; do
 	    fi
 	    echo "Copying ${md5sums} to ${local_snapshots} for snapshots file."
 	    cp ${md5sums} ${local_snapshots}
-	    ;; 
+	    ;;
 	*)
 	    ;;
     esac
@@ -633,9 +633,9 @@ else
 fi
 
 # Check that --with-arch=armv8-a overrides the default armv7-a for
-# arm-linux-gnueabihf, and leaves --with-tune=cortex-a9
+# arm-linux-gnueabihf
 cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-arch=armv8-a --build gcc"
-match='with-tune=cortex-a9 .* --with-arch=armv8-a .* --target=arm-linux-gnueabihf'
+match='--with-arch=armv8-a .* --target=arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
 
 # Check that no other with-arch option is used
@@ -648,10 +648,6 @@ cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=
 match='with-cpu=cortex-a57 .* --target=arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
 
-# Check that no with-tune option is used
-match='with-tune=cortex-a9'
-test_no_pass "${cb_commands}" "${match}"
-
 # Check that no with-arch option is used
 match='with-arch=armv7-a'
 test_no_pass "${cb_commands}" "${match}"
@@ -661,10 +657,6 @@ test_no_pass "${cb_commands}" "${match}"
 cb_commands="--dryrun --target arm-linux-gnueabihf --set gcc_override_configure=--with-tune=cortex-a53 --build gcc"
 match='with-arch=armv7-a .* --with-tune=cortex-a53 .* --target=arm-linux-gnueabihf'
 test_pass "${cb_commands}" "${match}"
-
-# Check that no with-tune option is used
-match='with-tune=cortex-a9'
-test_no_pass "${cb_commands}" "${match}"
 
 cb_commands="--dryrun --target arm-linux-gnueabihf --check=foo"
 match="Directive not supported"
