@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a4ddf55a_a36428f8",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000060
+      },
+      "writtenOn": "2018-03-07T17:06:00Z",
+      "side": 0,
+      "message": "The comment says that it\u0027s checking that no with-tune option is used, but seems like it might actually be setting with-tune? I\u0027m not sure about this part so just removed everything. Perhaps this can be fine tuned further/properly?",
+      "revId": "dd4fa59714283cb6eab848a2d5b6f76c15d05f41",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "42071c28_aa2db2df",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000060
+      },
+      "writtenOn": "2018-03-07T17:06:00Z",
+      "side": 0,
+      "message": "Same as above.",
+      "revId": "dd4fa59714283cb6eab848a2d5b6f76c15d05f41",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
