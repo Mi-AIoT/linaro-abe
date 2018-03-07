@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2696cd3f_1d7c8c46",
+        "filename": "configure",
+        "patchSetId": 3
+      },
+      "lineNbr": 3619,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2018-03-07T15:03:09Z",
+      "side": 1,
+      "message": "Was this hand-edited?  I get \"python23?-devel\" if I run autoconf on configure.ac.",
+      "range": {
+        "startLine": 3619,
+        "startChar": 46,
+        "endLine": 3619,
+        "endChar": 51
+      },
+      "revId": "873be80c73a151015c7ce7d13d3d5b15550698e3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
