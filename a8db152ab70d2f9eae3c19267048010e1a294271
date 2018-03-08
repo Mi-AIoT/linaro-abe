@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b6768c00_53a22acd",
+        "filename": "configure.ac",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2018-03-08T08:11:50Z",
+      "side": 1,
+      "message": "Seeing this, I notice that on ubuntu we check for libpython2.7-dev, not python3.\nSee also this message:\nhttps://lists.linaro.org/pipermail/linaro-toolchain/2018-March/006399.html\n\nThat\u0027s not related to this patch, but worth a comment for the release managers.",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 71
+      },
+      "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
