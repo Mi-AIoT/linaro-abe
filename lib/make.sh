@@ -835,6 +835,12 @@ make_check()
 	# via email
 	if [ x"$send_results_to" != x ]; then
 	    local srcdir="$(get_component_srcdir ${component})"
+	    # Hack: Remove single quotes (octal 047) in
+	    # TOPLEVEL_CONFIGURE_ARGUMENTS line in config.status,
+	    # to avoid confusing test_summary. Quotes are added by
+	    # configure when srcdir contains special characters,
+	    # including '~' which ABE uses.
+	    dryrun "(cd ${builddir} && sed -i -e '/TOPLEVEL_CONFIGURE_ARGUMENTS/ s/\o047//g' config.status)"
 	    dryrun "(cd ${builddir} && ${srcdir}/contrib/test_summary -t -m ${send_results_to} | sh)"
 	fi
     fi

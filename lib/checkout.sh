@@ -247,10 +247,14 @@ checkout()
 		# Touch GCC's auto-generated files to avoid non-deterministic
 		# build behavior.
 		dryrun "(cd ${srcdir} && ./contrib/gcc_update --touch)"
-		# LAST_UPDATED and gcc/REVISION are used when send
+		# LAST_UPDATED and gcc/REVISION are used when sending
 		# results summaries
-		dryrun "echo $(TZ=UTC date) '(revision' ${newrev}')' | tee ${srcdir}/LAST_UPDATED"
-		dryrun "echo \[${branch} revision ${newrev}\] | tee ${srcdir}/gcc/REVISION"
+		# Report svn revision, if present
+		local svnrev="$(git -C ${srcdir} log -n 1 | grep git-svn-id: | awk '{print $2;}' | cut -d@ -f2)"
+		local revstring="${newrev}"
+		[ x"${svnrev}" != x ] && revstring="${svnrev}"
+		dryrun "echo $(TZ=UTC date) '(revision' ${revstring}')' | tee ${srcdir}/LAST_UPDATED"
+		dryrun "echo \[${branch} revision ${revstring}\] | tee ${srcdir}/gcc/REVISION"
 		;;
 	    *)
 		# Avoid rebuilding of auto-generated C files. Rather than
