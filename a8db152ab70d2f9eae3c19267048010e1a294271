@@ -46,6 +46,30 @@
       "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "bbb51ba0_3b2905a5",
+        "filename": "configure.ac",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2018-03-14T15:41:00Z",
+      "side": 1,
+      "message": "I mean several things:\n* in the above link, doko says \"modern gdb\u0027s really should be built using Python3\", that\u0027s why I noticed that on ubuntu we currently only check if libpython2.7-dev installed, and ignore python3. So I\u0027m wondering whether we should switch to python3 on ubuntu?\n\n* We have a discrepancy between deb and rpm distros: python2 only with deb, python 2 or 3 with rpm",
+      "parentUuid": "5050ad36_37e995fb",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 71
+      },
+      "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
