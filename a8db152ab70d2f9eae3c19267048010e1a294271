@@ -22,6 +22,30 @@
       "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5050ad36_37e995fb",
+        "filename": "configure.ac",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2018-03-14T15:28:52Z",
+      "side": 1,
+      "message": "Christophe, I don\u0027t follow your train of thought.  Why should we check for python3 on ubuntu?\n\nOr is your comment about checking for libpython on RPM-based distros (which we don\u0027t care about in the context of releases)?",
+      "parentUuid": "b6768c00_53a22acd",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 71
+      },
+      "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
