@@ -70,6 +70,30 @@
       "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "65d3889a_4d599f7d",
+        "filename": "configure.ac",
+        "patchSetId": 5
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2018-04-13T09:00:11Z",
+      "side": 1,
+      "message": "OK, let\u0027s mandate python3 for GDB then?",
+      "parentUuid": "bbb51ba0_3b2905a5",
+      "range": {
+        "startLine": 165,
+        "startChar": 4,
+        "endLine": 165,
+        "endChar": 71
+      },
+      "revId": "a8db152ab70d2f9eae3c19267048010e1a294271",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
