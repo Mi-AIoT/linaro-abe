@@ -30,13 +30,13 @@ case "$target_triplet" in {
     { "arm-*linux-gnueabi*" "armv[78]l-*linux-gnueabi*" "aarch64-*linux*" } {
 	case "$native" in {
 	    { native } {
-		set target_list { "tcwg-local" }
+		set target_list { "tcwg-local{-fPIE/-pie}" }
 	    }
 	    default {
 		if {[info exists env(ABE_TEST_CONTAINER)]} {
-		    set target_list { "abe-container" }
+		    set target_list { "abe-container{-fPIE/-pie}" }
 		} else {
-		    set target_list { "qemu" }
+		    set target_list { "qemu{-fPIE/-pie}" }
 		}
             }
 	}
@@ -45,34 +45,34 @@ case "$target_triplet" in {
 	global SIM
 	# CPU and sysroot are set through the environment
 	set SIM "qemu-arm"
-	set target_list { "arm-qemu" } 
+	set target_list { "arm-qemu{-fPIE/-pie}" } 
     }
     { "armeb-*-eabi*" } {
 	global SIM
 	# CPU and sysroot are set through the environment
 	set SIM "qemu-armeb"
-	set target_list { "arm-qemu" } 
+	set target_list { "arm-qemu{-fPIE/-pie}" } 
     }
     { "aarch64*-*elf*" } {
-	set target_list { "v8model" }
+	set target_list { "v8model{-fPIE/-pie}" }
 	set env(FOUNDATION_MODEL) "/home/tcwg-buildslave/snapshots-ref/Foundation_Platformpkg/models/Linux64_GCC-4.7/Foundation_Platform"
     }
     { "x86_64-*linux-gnu" "i686-*linux-gnu" } {
 	case "$native" in {
 	    { native } {
-		set target_list { "tcwg-local" }
+		set target_list { "tcwg-local{-fPIE/-pie}" }
 	    }
 	    default {
 		if {[info exists env(ABE_TEST_CONTAINER)]} {
-		    set target_list { "abe-container" }
+		    set target_list { "abe-container{-fPIE/-pie}" }
 		} else {
-		    set target_list { "tcwg-local" }
+		    set target_list { "tcwg-local{-fPIE/-pie}" }
 		}
 	    }
 	}
     }
     { "*linux-gnu*" } {
-	set target_list { "qemu" }
+	set target_list { "qemu{-fPIE/-pie}" }
     }
     default {
 	puts "No target hardware for $target_triplet"
