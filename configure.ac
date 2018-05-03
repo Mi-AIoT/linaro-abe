@@ -214,14 +214,6 @@ if test ! -d ${ABE_TOP}; then
    mkdir -p ${ABE_TOP}
 fi
 
-# The various Jenkins jobs copy log files and rest results to a remote file
-# server for storage and comparison. For the TCWG, this has been 'toolchain64'.
-AC_ARG_WITH(fileserver,
-  AC_HELP_STRING([--with-fileserver], [the remote file server hostname]),
-    FILESERVER=${withval},
-    FILESERVER='148.251.136.42/snapshots-ref')
-dnl AC_SUBST(FILESERVER)
-
 AC_ARG_WITH(sources-conf,
   AC_HELP_STRING([--with-sources-conf], []),
   SOURCES_CONF=${withval},
@@ -293,7 +285,6 @@ AC_MSG_NOTICE([Downloaded snapshots will be stored in: ${LOCAL_SNAPSHOTS}])
 AC_MSG_NOTICE([My builds will be installed in: ${LOCAL_BUILDS}])
 AC_MSG_NOTICE([Sysroots will be installed in: ${SYSROOTS}])
 AC_MSG_NOTICE([Remote snapshots will be fetched from: ${REMOTE_SNAPSHOTS}])
-AC_MSG_NOTICE([Using remote fileserver: http://${FILESERVER}])
 echo ""
 
 AC_ARG_WITH(languages,

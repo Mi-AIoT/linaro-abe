@@ -33,6 +33,5 @@ supdate=@ENABLE_SOURCE_UPDATE@
 parallel=@ENABLE_PARALLEL@
 
 wget_bin=@WGET@
-fileserver=@FILESERVER@
 bash_shell=@BASH@
 NEWWORKDIR=@NEWWORKDIR@
