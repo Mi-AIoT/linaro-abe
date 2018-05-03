@@ -790,10 +790,6 @@ while test $# -gt 0; do
     # URL can be either for a source tarball, or a checkout via svn, bzr,
     # or git
     case "$1" in
-        --fileserver)
-            warning "The --fileserver option has been removed, so ignoring it."
-	    continue
-	    ;;
 	--build)
 	    check_directive build $2
    

@@ -680,7 +680,6 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 with_toplevel
-with_fileserver
 with_sources_conf
 with_sysroot
 with_local_snapshots
@@ -1342,7 +1341,6 @@ Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-toplevel
-  --with-fileserver       the remote file server hostname
   --with-sources-conf
   --with-sysroot
   --with-local-snapshots  Where downloaded tarballs are stored
@@ -3678,17 +3676,6 @@ $as_echo "$as_me: WARNING: ${ABE_TOP} does not exist so creating directory!" >&2
    mkdir -p ${ABE_TOP}
 fi
 
-# The various Jenkins jobs copy log files and rest results to a remote file
-# server for storage and comparison. For the TCWG, this has been 'toolchain64'.
-
-# Check whether --with-fileserver was given.
-if test "${with_fileserver+set}" = set; then :
-  withval=$with_fileserver; FILESERVER=${withval}
-else
-  FILESERVER='148.251.136.42/snapshots-ref'
-fi
-
-
 
 # Check whether --with-sources-conf was given.
 if test "${with_sources_conf+set}" = set; then :
@@ -3783,8 +3770,6 @@ $as_echo "$as_me: My builds will be installed in: ${LOCAL_BUILDS}" >&6;}
 $as_echo "$as_me: Sysroots will be installed in: ${SYSROOTS}" >&6;}
 { $as_echo "$as_me:${as_lineno-$LINENO}: Remote snapshots will be fetched from: ${REMOTE_SNAPSHOTS}" >&5
 $as_echo "$as_me: Remote snapshots will be fetched from: ${REMOTE_SNAPSHOTS}" >&6;}
-{ $as_echo "$as_me:${as_lineno-$LINENO}: Using remote fileserver: http://${FILESERVER}" >&5
-$as_echo "$as_me: Using remote fileserver: http://${FILESERVER}" >&6;}
 echo ""
 
 
