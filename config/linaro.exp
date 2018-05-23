@@ -26,6 +26,12 @@ if {[info exists env(SYSROOT_UNDER_TEST)]} {
     set native "native"
 }
 
+if {[info exists env(QEMU_CPU_UNDER_TEST)]} {
+    set qemu_cpu "$env(QEMU_CPU_UNDER_TEST)"
+} else {
+    set qemu_cpu "any"
+}
+
 case "$target_triplet" in { 
     { "arm-*linux-gnueabi*" "armv[78]l-*linux-gnueabi*" "aarch64-*linux*" } {
 	case "$native" in {

@@ -9,4 +9,5 @@ case "$qemu_arch" in {
     }
 }
 
-set board_info($board,exec_shell) "[board_info $board exec_shell] setarch x86_64 -R qemu-$qemu_arch -cpu any -R 0 -L $sysroot"
+# qemu_cpu is set in linaro.exp
+set board_info($board,exec_shell) "[board_info $board exec_shell] setarch x86_64 -R qemu-$qemu_arch -cpu $qemu_cpu -R 0 -L $sysroot"
