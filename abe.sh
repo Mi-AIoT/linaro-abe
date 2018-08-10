@@ -22,7 +22,7 @@ usage()
     cat << EOF
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--check {all|glibc|gcc|gdb|binutils}]
-             [--checkout {<package>[~branch][@revision]|all}]
+             [--checkout {<package>|all}]
              [--disable {bootstrap|building|install|make_docs|parallel|update}]
              [--dryrun] [--dump]
              [--enable {bootstrap|building|install|make_docs|parallel|update}]
@@ -50,7 +50,7 @@ usage()
              [--timeout <timeout_value>]
              [--usage]
              [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}
-               =<id|snapshot|url>]]
+               =<id|snapshot|url>[~branch][@revision]]]
 
 EOF
     return 0
@@ -129,12 +129,11 @@ OPTIONS
                         Calling --check without a directive is an
                         error that will cause ${abe} to abort.
 
-  --checkout {<package>[~branch][@revision]|all}
+  --checkout {<package>|all}
 
-               <package>[~branch][@revision]
+               <package>
                        This will checkout the package designated by the
-                       <package> source.conf identifier with an optional
-                       branch and/or revision designation.
+                       <package> source.conf identifier.
 
                all
                        This will checkout all of the sources for a
@@ -369,7 +368,7 @@ OPTIONS
 
   --usage	Display synopsis information.
 
-   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}=<id|snapshot|url>]
+   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}=<id|snapshot|url>[~branch][@revision]]
 
 		This option specifies a particular version of a package
 		that might differ from the default version in the
@@ -379,7 +378,9 @@ OPTIONS
 
 		For a specific package use a version tag that matches a
 		setting in a sources.conf file, a snapshots identifier,
-		or a direct repository URL.
+		or a direct repository URL, with an optional branch
+		and/or revision designation for version tag and
+		repository URL.
 
 		Examples:
 
