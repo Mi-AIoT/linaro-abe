@@ -90,6 +90,18 @@ strip_dir()
      done < <(find "$destdir" -type f)
 }
 
+# Try to use faster compression and fall-back to normal when can't.
+tar_Jcf () {
+    (
+    set -euf -o pipefail
+
+    if ! tar -I pxz -cf "$@" > /dev/null 2>&1; then
+	# PXZ can [rarely] fail due to high RAM usage, so fallback to normal XZ.
+	tar -caf "$@"
+    fi
+    )
+}
+
 # The runtime libraries are produced during dynamic builds of gcc, libgcc,
 # listdc++, and gfortran.
 binary_runtime()
@@ -115,7 +127,7 @@ binary_runtime()
     # make the tarball from the tree we just created.
     notice "Making binary tarball for runtime libraries, please wait..."
     local tarball=${local_snapshots}/${tag}.tar.xz
-    dryrun "tar Jcf ${tarball} --directory ${local_builds}/tmp.$$ ${tag}"
+    dryrun "tar_Jcf ${tarball} --directory ${local_builds}/tmp.$$ ${tag}"
     record_artifact runtime "${tarball}"
 
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
@@ -150,7 +162,7 @@ binary_gdb()
  
    # make the tarball from the tree we just created.
     notice "Making binary tarball for GDB, please wait..."
-    dryrun "tar Jcfh ${local_snapshots}/${tag}-${abbrev}.tar.xz --directory=${local_builds}/tmp.$$ ${tag}"
+    dryrun "tar_Jcf ${local_snapshots}/${tag}-${abbrev}.tar.xz -h --directory=${local_builds}/tmp.$$ ${tag}"
 
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
     dryrun "md5sum ${local_snapshots}/${tag}-${abbrev}.tar.xz | sed -e 's:${local_snapshots}/::' > ${local_snapshots}/${tag}-${abbrev}.tar.xz.asc"
@@ -219,7 +231,7 @@ binary_toolchain()
     # make the tarball from the tree we just created.
     notice "Making binary tarball for toolchain, please wait..."
     local tarball=${local_snapshots}/${tag}.tar.xz
-    dryrun "tar Jcf ${tarball} --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
+    dryrun "tar_Jcf ${tarball} --directory=${local_builds}/tmp.$$ ${exclude} ${tag}"
     record_artifact toolchain "${tarball}"
 	
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
@@ -249,7 +261,7 @@ binary_sysroot()
     local tarball=${local_snapshots}/${tag}.tar.xz
 
     notice "Making binary tarball for sysroot, please wait..."
-    dryrun "tar Jcfh ${tarball} --directory=${local_builds}/tmp.$$ ${tag}"
+    dryrun "tar_Jcf ${tarball} -h --directory=${local_builds}/tmp.$$ ${tag}"
     record_artifact sysroot "${tarball}"
 
     rm -fr ${local_snapshots}/${tag}.tar.xz.asc ${local_builds}/tmp.$$
@@ -591,7 +603,7 @@ binutils_src_tarball()
     #find ${srcdir} -name \*~ -o -name .\#\* -exec rm {} \;
 
     notice "Making source tarball for GCC, please wait..."
-    dryrun "tar Jcfh ${local_snapshots}/${tag}.tar.xz ${exclude} --directory=${local_builds}/tmp.$$ ${tag}/)"
+    dryrun "tar_Jcf ${local_snapshots}/${tag}.tar.xz -h ${exclude} --directory=${local_builds}/tmp.$$ ${tag}/)"
 
     rm -f ${local_snapshots}/${tag}.tar.xz.asc
     dryrun "md5sum ${local_snapshots}/${tag}.tar.xz > ${local_snapshots}/${tag}.tar.xz.asc"
