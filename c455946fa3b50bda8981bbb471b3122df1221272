@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "ad71c1d5_dd59dc84",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000415
+      },
+      "writtenOn": "2018-08-13T14:16:01Z",
+      "side": 0,
+      "message": "Why not add:\n\nif ! git -C ${srcdir} for-each-ref ${branch} \u003e/dev/null 2\u003e\u00261 -a ! git -C ${srcdir} for-each-ref refs/heads/${branch} \u003e/dev/null 2\u003e\u00261\n-a ! git -C ${srcdir} for-each-ref refs/tags/${branch} \u003e/dev/null 2\u003e\u00261\n-a ! git -C ${srcdir} for-each-ref refs/remotes/${branch} \u003e/dev/null 2\u003e\u00261\n\n?",
+      "range": {
+        "startLine": 187,
+        "startChar": 3,
+        "endLine": 188,
+        "endChar": 61
+      },
+      "revId": "c455946fa3b50bda8981bbb471b3122df1221272",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
