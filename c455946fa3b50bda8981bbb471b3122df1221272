@@ -16,6 +16,24 @@
       "revId": "c455946fa3b50bda8981bbb471b3122df1221272",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "81779654_e0d7c0d2",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2018-08-13T15:58:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17375bf4_38f52251",
+      "revId": "c455946fa3b50bda8981bbb471b3122df1221272",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
