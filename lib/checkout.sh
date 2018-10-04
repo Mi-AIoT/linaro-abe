@@ -265,5 +265,9 @@ checkout()
 	esac
     fi
 
+    # Show the most recent commit, useful when debugging (to check
+    # that what we are building actually contains what we expect)
+    dryrun "git -C ${srcdir} show -s"
+
     return 0
 }
