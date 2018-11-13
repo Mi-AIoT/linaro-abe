@@ -266,8 +266,9 @@ checkout()
     fi
 
     # Show the most recent commit, useful when debugging (to check
-    # that what we are building actually contains what we expect)
-    dryrun "git -C ${srcdir} show -s"
+    # that what we are building actually contains what we expect).
+    # Add "| cat" to make terminal non-interactive to avoid scrolling.
+    dryrun "git -C ${srcdir} show -s | cat"
 
     return 0
 }
