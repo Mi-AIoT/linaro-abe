@@ -22,6 +22,30 @@
       "revId": "b717843d2b9323cca84ed9ac8540af9d6f719544",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "5fbbe075_d8d7fe5b",
+        "filename": "config/latest-rel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2018-11-26T16:08:11Z",
+      "side": 1,
+      "message": "that\u0027s a symlink from gcc8 to latest-rel.",
+      "parentUuid": "5b95bb3f_bc6ddeaf",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 4
+      },
+      "revId": "b717843d2b9323cca84ed9ac8540af9d6f719544",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
