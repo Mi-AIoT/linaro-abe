@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "5b95bb3f_bc6ddeaf",
+        "filename": "config/latest-rel",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2018-11-26T16:00:30Z",
+      "side": 1,
+      "message": "Is this a new file? Shouldn\u0027t we keep latest-rel as a copy of gcc8 until gcc9 is released?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 4
+      },
+      "revId": "b717843d2b9323cca84ed9ac8540af9d6f719544",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
