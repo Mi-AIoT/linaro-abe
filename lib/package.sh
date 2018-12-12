@@ -81,7 +81,9 @@ strip_dir()
 		    opts="$opts --strip-debug --enable-deterministic-archives "
 		    dryrun "strip ${opts} ${file}"
 		fi ;;
-	    *shared\ object*$host*)
+	    # Since file output contains BuildID sha1, checking for " $host,"
+	    # to avoid the cases where this sha1 contains 80386 string!
+	    *shared\ object*\ $host,*)
 		opts="$opts --strip-unneeded "
 		dryrun "strip ${opts} ${file}" ;;
 	    *$host*)
