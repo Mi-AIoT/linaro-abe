@@ -16,6 +16,24 @@
       "revId": "a09711bff8dc7781dd7192b370bdd630b296d45e",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "db7725c4_89ad71d5",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000077
+      },
+      "writtenOn": "2018-12-13T10:13:42Z",
+      "side": 1,
+      "message": "Nope for i386 it contains \"Intel 80386,\" and for x86_64 it is just \"x86_64,\"",
+      "parentUuid": "a39e8f29_4d4f5558",
+      "revId": "a09711bff8dc7781dd7192b370bdd630b296d45e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
