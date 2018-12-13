@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "a39e8f29_4d4f5558",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000372
+      },
+      "writtenOn": "2018-12-13T10:10:11Z",
+      "side": 1,
+      "message": "Would a comma before the first space in the regex not make a better anchor?\n\ni.e.\n*\\, $host,*)",
+      "revId": "a09711bff8dc7781dd7192b370bdd630b296d45e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
