@@ -86,7 +86,7 @@ strip_dir()
 	    *shared\ object*\ $host,*)
 		opts="$opts --strip-unneeded "
 		dryrun "strip ${opts} ${file}" ;;
-	    *$host*)
+	    *\ $host,*)
 		dryrun "strip ${opts} ${file}" ;;
 	esac
      done < <(find "$destdir" -type f)
