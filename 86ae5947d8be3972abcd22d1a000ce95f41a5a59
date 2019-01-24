@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "266ad392_fa91b1d6",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 590,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-01-24T23:02:02Z",
+      "side": 1,
+      "message": "D\u0027oh!\nI missed the typos. Looks like you didn\u0027t try to run it :-)\n\nSo... you need a space between 0 and /\nand \"-a \" before \"-d\".\n\nSee the errors reported by the validation.",
+      "range": {
+        "startLine": 589,
+        "startChar": 0,
+        "endLine": 590,
+        "endChar": 19
+      },
+      "revId": "86ae5947d8be3972abcd22d1a000ce95f41a5a59",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
