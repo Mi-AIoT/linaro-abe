@@ -586,7 +586,8 @@ make_install()
     # the first cross-compiler.
     if test x"${component}" = x"gcc" \
 	-a x"$2" = "xstage2" \
-	-a "$(echo ${host} | grep -c mingw)" -eq 0; then
+	-a "$(echo ${host} | grep -c mingw)" -eq 0 \
+	-a -d $sysroots; then
 	dryrun "copy_gcc_libs_to_sysroot \"${local_builds}/destdir/${host}/bin/${target}-gcc --sysroot=${sysroots}\""
 	if test $? != "0"; then
             error "Copy of gcc libs to sysroot failed!"
