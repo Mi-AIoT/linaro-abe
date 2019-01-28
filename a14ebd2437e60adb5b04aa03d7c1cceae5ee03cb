@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e75d8933_62df5208",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-01-28T12:35:42Z",
+      "side": 1,
+      "message": "this will evaluate to \"\" -- empty string, and cause \"test\" to fail.\nI was wrong about using \"grep -q\" in the case, sorry.",
+      "range": {
+        "startLine": 589,
+        "startChar": 4,
+        "endLine": 589,
+        "endChar": 37
+      },
+      "revId": "a14ebd2437e60adb5b04aa03d7c1cceae5ee03cb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
