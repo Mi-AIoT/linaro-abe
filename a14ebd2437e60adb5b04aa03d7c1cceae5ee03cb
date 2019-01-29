@@ -46,6 +46,30 @@
       "revId": "a14ebd2437e60adb5b04aa03d7c1cceae5ee03cb",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "be80081b_29fe1e87",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-01-29T10:57:25Z",
+      "side": 1,
+      "message": "No.  The problem is that \"test\" expects a valid expression for -a \"AND\" operand.  And output of \"grep -q\" will always be empty, making the AND operand empty.",
+      "parentUuid": "1c146445_1407e4a2",
+      "range": {
+        "startLine": 589,
+        "startChar": 4,
+        "endLine": 589,
+        "endChar": 37
+      },
+      "revId": "a14ebd2437e60adb5b04aa03d7c1cceae5ee03cb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
