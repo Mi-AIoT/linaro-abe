@@ -271,7 +271,8 @@ OPTIONS
 
   --set		{buildconfig}=XXX
                 Set gcc's configure option --with-build-config=XXX
-                to perform specialized bootstrap build (bootstrap-lto, etc.)
+                to perform specialized bootstrap build (bootstrap-lto, etc.).
+		Also enables bootstrap implicity.
 
   --set		{cflags|ldflags|runtestflags|makeflags}=XXX
                 This overrides the default values used for CFLAGS,
@@ -592,6 +593,7 @@ set_package()
     case ${package} in
 	buildconfig)
 	    build_config="${setting}"
+	    bootstrap="yes"
 	    notice "Setting buildconfig to ${setting}"
 	    return 0
 	    ;;
@@ -1171,11 +1173,6 @@ fi
 
 if [ "x${host}" != "x${target}" -a "x${bootstrap}" = x"yes" ]; then
   error "host and target must be same for bootstrap"
-  build_failure
-fi
-
-if [ ! -z "${build_config}" -a "x${bootstrap}" != x"yes" -a ! -z "${do_build}" ]; then
-  error "bootstrap must be enabled for buildconfig"
   build_failure
 fi
 
