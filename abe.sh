@@ -592,6 +592,7 @@ set_package()
     case ${package} in
 	buildconfig)
 	    build_config="${setting}"
+	    bootstrap="yes"
 	    notice "Setting buildconfig to ${setting}"
 	    return 0
 	    ;;
