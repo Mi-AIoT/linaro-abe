@@ -433,6 +433,10 @@ make_all()
         local make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
     fi
 
+    if test x"${component}" = x"gcc" -a x"${profiled_bootstrap}" = x"yes"; then
+	local make_flags="${make_flags} profiledbootstrap"
+    fi
+
     # All tarballs are statically linked
     local make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"-static-libgcc\" -C ${builddir}"
 

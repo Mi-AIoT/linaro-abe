@@ -25,7 +25,7 @@ usage()
              [--checkout {<package>|all}]
              [--disable {bootstrap|building|install|make_docs|parallel|update}]
              [--dryrun] [--dump]
-             [--enable {bootstrap|building|install|make_docs|parallel|update}]
+             [--enable {bootstrap|profiled_bootstrap|building|install|make_docs|parallel|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -170,6 +170,9 @@ OPTIONS
   --enable bootstrap
 
                 Enable gcc bootstrapping, which is disabled by default.
+
+  --enable profiled_bootstrap
+		Enable gcc bootstrapping with profile feedback, disabled by default.
 
   --excludecheck {all|glibc|gcc|gdb|binutils|newlib}
 
@@ -1030,6 +1033,10 @@ while test $# -gt 0; do
 	    case $2 in
 		bootstrap)
 		    bootstrap="${value}"
+		    ;;
+		profiled_bootstrap)
+		    bootstrap="${value}"
+		    profiled_bootstrap="${value}"
 		    ;;
 		building)
 		    building="${value}"
