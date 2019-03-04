@@ -991,9 +991,6 @@ while test $# -gt 0; do
 
 	    shift
             ;;
-	--testcode)
-	    testcode
-	    ;;
 	--testcontainer)
 	    check_directive testcontainer testcontainer $2
 	    test_container=$2
