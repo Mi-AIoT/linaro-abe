@@ -57,10 +57,6 @@ fi
 # This doesn't do any real work, just prints the configure options and make commands
 dryrun=no
 
-#
-launchpad_id=
-svn_id=
-
 # config values for the build machine
 libc_version=
 kernel=${kernel:+${kernel}}
@@ -104,12 +100,6 @@ override_ldflags=
 override_runtestflags=
 gcc_override_configure=
 
-if test x"${BUILD_NUMBER}" = x; then
-    export BUILD_NUMBER=${RANDOM}
-fi
-
-jenkins_job_name=""
-jenkins_job_url=""
 sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"
 
 list_artifacts=""
