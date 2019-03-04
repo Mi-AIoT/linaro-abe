@@ -1176,6 +1176,16 @@ if [ "x${host}" != "x${target}" -a "x${bootstrap}" = x"yes" ]; then
   build_failure
 fi
 
+if [ ! -z "${build_config}" -a "x${bootstrap}" != x"yes" -a ! -z "${do_build}" ]; then
+  error "bootstrap must be enabled for buildconfig"
+  build_failure
+fi
+
+if [ ! -z "${build_config}" -a "x${bootstrap}" != x"yes" -a ! -z "${do_build}" ]; then
+  error "bootstrap must be enabled for buildconfig"
+  build_failure
+fi
+
 if [ "x${component_version_set}" = x1 -a ! -z "${do_manifest}" ]; then
   error "setting component versions with --manifest is not supported"
   build_failure
