@@ -237,7 +237,7 @@ fetch_http()
        warning "downloaded file ${getfile} has zero data!"
        return 1
     fi
-    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/ ${url}.asc ${overwrite_or_timestamp}"
+    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/ ${url}.asc ${overwrite_or_timestamp}.asc"
     if test x"${dryrun}" != xyes -a ! -s ${local_snapshots}/${getfile}.asc; then
        warning "downloaded file ${getfile}.asc has zero data!"
     fi
