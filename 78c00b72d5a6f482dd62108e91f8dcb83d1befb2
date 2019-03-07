@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "596703ba_f5e839b0",
+        "filename": "lib/component.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-03-07T14:31:46Z",
+      "side": 1,
+      "message": "Please update the name here too.",
+      "range": {
+        "startLine": 31,
+        "startChar": 1,
+        "endLine": 31,
+        "endChar": 8
+      },
+      "revId": "78c00b72d5a6f482dd62108e91f8dcb83d1befb2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
