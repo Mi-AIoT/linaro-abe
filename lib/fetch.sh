@@ -218,6 +218,7 @@ fetch_http()
 	# This is the only way to explicitly overwrite the destination file
 	# with wget.
 	overwrite_or_timestamp="-O ${local_snapshots}/${getfile}"
+	getfile_asc=".asc"
         notice "Downloading ${getfile} to ${local_snapshots} unconditionally."
     else
 	# We only every download if the local version is absent or incomplete.
@@ -237,7 +238,7 @@ fetch_http()
        warning "downloaded file ${getfile} has zero data!"
        return 1
     fi
-    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/ ${url}.asc ${overwrite_or_timestamp}"
+    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/ ${url}.asc ${overwrite_or_timestamp}${getfile_asc:-}"
     if test x"${dryrun}" != xyes -a ! -s ${local_snapshots}/${getfile}.asc; then
        warning "downloaded file ${getfile}.asc has zero data!"
     fi
