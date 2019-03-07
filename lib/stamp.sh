@@ -26,7 +26,7 @@ get_stamp_name()
 {
     local stamptype=$1
     local git_or_tar=$2
-    local suffix=$3
+    local suffix=${3:-}
 
     local validstamp="$(echo ${stamptype} | egrep -c "^configure$|^build$|^extract$|^fetch$")" 
     if test ${validstamp} -lt 1; then

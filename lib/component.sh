@@ -395,7 +395,7 @@ collect_data ()
 
     local component=$1
 
-    if test x"${manifest}" != x; then
+    if test x"${manifest:-}" != x; then
 	notice "Reading data from Manifest file."
 	return 0
     fi

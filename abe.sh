@@ -528,7 +528,7 @@ select_clibrary()
 		    # get default preferred libc
 		    . ${topdir}/config/preferred_libc.conf
 		    # look for preferred libc in extraconfigs
-		    for this_extraconfig in ${extraconfig[preferred_libc]}; do
+		    for this_extraconfig in ${extraconfig[preferred_libc]:-}; do
 			if test -f "${this_extraconfig}"; then
 			    notice "Sourcing extra config: ${this_extraconfig}"
 			    . "${this_extraconfig}"
@@ -1154,15 +1154,15 @@ if [ "${list_artifacts:+set}" = "set" ]; then
     rm -f "${list_artifacts}"
 fi
 
-if [ x"$tarsrc" = x"yes" ]; then
+if [ x"${tarsrc:-}" = x"yes" ]; then
     set_build_steps tarsrc
 fi
 
-if [ x"$tarbin" = x"yes" ]; then
+if [ x"${tarbin:-}" = x"yes" ]; then
     set_build_steps tarbin
 fi
 
-if [ "x${target_set}" = x1 -a ! -z "${do_manifest}" ]; then
+if [ "x${target_set:-}" = x1 -a ! -z "${do_manifest}" ]; then
   # see https://bugs.linaro.org/show_bug.cgi?id=2059
   error "setting --target with --manifest is not supported"
   build_failure
@@ -1198,7 +1198,7 @@ if [ ! -z "${do_manifest}" ]; then
 fi
 
 # Check disk space. Each builds needs about 3.8G free
-if test x"${space_needed}" = x; then
+if test x"${space_needed:-}" = x; then
   space_needed=4194304
 fi
 if test ${space_needed} -gt 0; then
