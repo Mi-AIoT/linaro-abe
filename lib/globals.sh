@@ -68,8 +68,8 @@ distribution=${distribution:+${distribution}}
 make_flags=
 
 # These can be changed by environment variables
-if test x"${SNAPSHOTS_URL}" != x -o x"${ABE_SNAPSHOTS}" != x; then
-    snapshots="${SNAPSHOTS_URL}"
+if test x"${SNAPSHOTS_URL:-}" != x -o x"${ABE_SNAPSHOTS:-}" != x; then
+    snapshots="${SNAPSHOTS_URL:-}"
 fi
 
 force=no
