@@ -1,0 +1,8 @@
+Code-Review+1: Christophe Lyon <christophe.lyon@linaro.org>
+Code-Review+2: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Code-Review+1: ci-bot <ci-bot@linaro.org>
+Submitted-by: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Submitted-at: Mon, 11 Mar 2019 10:02:43 +0000
+Reviewed-on: https://review.linaro.org/c/toolchain/abe/+/30608
+Project: toolchain/abe
+Branch: refs/heads/master
