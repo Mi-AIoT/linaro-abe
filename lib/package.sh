@@ -277,6 +277,13 @@ do_install_sysroot()
 {
     local prefix="${local_builds}/destdir/${host}/"
     local symlinks=
+
+    # There may be no sysroot to install, depending on which package
+    # subset we built.
+    if [ ! -d ${sysroots} ]; then
+	return 0
+    fi
+
     if is_host_mingw; then
 	# Windows does not support symlinks, and extractors do not
 	# always handle them correctly: dereference them to avoid
