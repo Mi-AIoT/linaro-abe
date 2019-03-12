@@ -28,7 +28,7 @@ declare -ag toolchain
 # SRCDIR
 # BUILDDIR
 # FILESPEC
-# MD5SUMS
+# MD5SUM
 # These values are extracted from the config/[component].conf files
 # BRANCH
 # MAKEFLAGS
@@ -130,7 +130,7 @@ set_component_configure ()
 
 set_component_md5sum ()
 {
-    __set_component_GENERIC MD5SUMS "$@"
+    __set_component_GENERIC MD5SUM "$@"
 }
 
 set_component_mingw_extraconf ()
@@ -227,7 +227,7 @@ get_component_configure ()
 
 get_component_md5sum ()
 {
-    __get_component_GENERIC MD5SUMS "$@"
+    __get_component_GENERIC MD5SUM "$@"
 }
 
 get_component_mingw_extraconf ()
