@@ -28,8 +28,8 @@ target="${host}"
 # varying dates when midnight occurs during a build.
 timestamp=$(date +%s)
 date="$(date --date="@${timestamp}" "+%Y.%m.%d")"
-gcc="$(which gcc)"
-host_gcc_version="$(${gcc} -v 2>&1 | tail -1)"
+hostgcc="$(which gcc)"
+host_gcc_version="$(${hostgcc} -v 2>&1 | tail -1)"
 binutils="default"
 # This is the default clibrary and can be overridden on the command line.
 clibrary="auto"
