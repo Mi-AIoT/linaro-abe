@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7e86dc44_ef915b63",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-03-12T15:46:09Z",
+      "side": 1,
+      "message": "Should this be \"-q\"?",
+      "range": {
+        "startLine": 364,
+        "startChar": 47,
+        "endLine": 364,
+        "endChar": 49
+      },
+      "revId": "72931663d880de66bf78d4e834a654014fcd4eb5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
