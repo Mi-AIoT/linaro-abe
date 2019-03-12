@@ -446,6 +446,10 @@ collect_data ()
     # TODO: dump() uses this, but this should be cleaned up so we can
     # remove this line.
     eval "${version_var}=${use_version}"
+    if test x"${use_version}" = x; then
+	error "Unable to compute ${version_var}"
+	build_failure
+    fi
 
     if test $(echo ${use_version} | grep -c "\.tar") -gt 0; then
 	# TODO: update conf files to include component name in name
