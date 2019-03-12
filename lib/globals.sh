@@ -250,7 +250,7 @@ get_component_list()
 	    # Non-mingw builds skip expat, python and libiconv, but
 	    # are here so that they are included in the manifest, so
 	    # linux and mingw manifests can be identical.
-	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb"
+	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb qemu"
 	fi
 	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
 	    builds="${builds} gdbserver"
