@@ -36,7 +36,7 @@ clibrary="auto"
 snapshots="default"
 configfile="default"
 
-manifest_version=1.5
+manifest_version=1.6
 
 # The prefix for installing the toolchain
 prefix=
@@ -140,6 +140,7 @@ import_manifest()
 	    1.3) fixup_mingw=true ;;
 	    1.4) ;;
 	    1.5) ;;
+	    1.6) ;;
 	    *)
 		error "Imported manifest version $manifest_format is not supported."
 		return 1
@@ -250,7 +251,7 @@ get_component_list()
 	    # Non-mingw builds skip expat, python and libiconv, but
 	    # are here so that they are included in the manifest, so
 	    # linux and mingw manifests can be identical.
-	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb"
+	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb qemu"
 	fi
 	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
 	    builds="${builds} gdbserver"
@@ -261,7 +262,7 @@ get_component_list()
 	    builds="$(echo ${builds} | sed -e 's: linux::')"
 	fi
     else
-        builds="${builds} binutils stage2 libc gdb" # native build
+        builds="${builds} binutils stage2 libc gdb qemu" # native build
     fi
 
     # if this build is based on a manifest, then we must remove components from

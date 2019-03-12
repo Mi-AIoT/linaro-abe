@@ -925,6 +925,9 @@ make_docs()
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
+	qemu)
+	    return 0
+	    ;;
         *)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee -a ${builddir}/makedoc.log"
