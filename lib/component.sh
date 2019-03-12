@@ -143,6 +143,11 @@ set_component_mingw_only ()
     __set_component_GENERIC MINGWONLY "$@"
 }
 
+set_component_linuxhost_only ()
+{
+    __set_component_GENERIC LINUXHOSTONLY "$@"
+}
+
 # BRANCH is parsed from the config file for each component, but can be
 # redefined on the command line at runtime.
 #
@@ -238,6 +243,11 @@ get_component_mingw_extraconf ()
 get_component_mingw_only ()
 {
     __get_component_GENERIC MINGWONLY "$@"
+}
+
+get_component_linuxhost_only ()
+{
+    __get_component_GENERIC LINUXHOSTONLY "$@"
 }
 
 
@@ -358,7 +368,8 @@ read_conf_files ()
 	#    aarch64_errata languages tag
 	# set in a special conf file which is parsed separately in abe.sh:
 	#    preferred_libc
-        for var in default_configure_flags default_makeflags latest mingw_extraconf mingw_only runtest_flags stage1_flags stage2_flags static_link; do
+        for var in default_configure_flags default_makeflags latest mingw_extraconf mingw_only linuxhost_only runtest_flags stage1_flags stage2_flags static_link; do
+
             if [ "${!var:+set}" = "set" ]; then
                 echo "local conf_$var=\"${!var}\""
             fi
@@ -518,6 +529,7 @@ collect_data ()
     confvars="${confvars} ${conf_runtest_flags:+RUNTESTFLAGS=\"$(echo ${conf_runtest_flags} | tr ' ' '%')\"}"
     confvars="${confvars} ${conf_mingw_only:+MINGWONLY=\"$(echo ${conf_mingw_only} | tr ' ' '%')\"}"
     confvars="${confvars} ${conf_mingw_extraconf:+MINGWEXTRACONF=\"$(echo ${conf_mingw_extraconf} | tr ' ' '%')\"}"
+    confvars="${confvars} ${conf_linuxhost_only:+LINUXHOSTONLY=\"$(echo ${conf_linuxhost_only} | tr ' ' '%')\"}"
     component_init ${component} TOOL=${component} ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${filespec:+FILESPEC=${filespec}} ${url:+URL=${url}} ${confvars}
     if [ $? -ne 0 ]; then
         error "component_init failed"

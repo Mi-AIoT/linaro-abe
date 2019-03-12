@@ -447,6 +447,11 @@ manifest()
 	    echo "${component}_mingw_only=\"${mingw_only}\"" >> ${outfile}
 	fi
 
+	local linuxhost_only="$(get_component_linuxhost_only ${component})"
+	if test x"${linuxhost_only}" != x; then
+	    echo "${component}_linuxhost_only=\"${linuxhost_only}\"" >> ${outfile}
+	fi
+
 	# Drop any local build paths and replaced with variables to be more portable.
 	if test x"${component}" = x"gcc"; then
 	    echo "${component}_configure=" >> ${outfile}
