@@ -360,6 +360,11 @@ manifest()
 	return 0;
     fi
 
+    # Similarly, we need gcc to compute the filename of the manifest
+    if ! echo "${build_component_list}" | grep -c stage ; then
+	return 0
+    fi
+
     if test x"$1" = x; then
 	mtag="$(create_release_tag gcc)"
 	mkdir -p ${local_builds}/${host}/${target}
