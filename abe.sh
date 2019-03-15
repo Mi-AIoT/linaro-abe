@@ -592,7 +592,11 @@ set_package()
 
     case ${package} in
 	buildconfig)
-	    build_config="${setting}"
+	    # Allow --set buildconfig=bootstrap for consistency
+	    # with other bootstrap configs.
+	    if test x"${setting}" != x"bootstrap"; then
+		build_config="${setting}"
+	    fi
 	    bootstrap="yes"
 	    notice "Setting buildconfig to ${setting}"
 	    return 0
