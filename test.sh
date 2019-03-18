@@ -525,7 +525,7 @@ cb_commands="--dump"
 match='Bootstrap          no'
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--enable bootstrap --dump"
+cb_commands="--set buildconfig=bootstrap --dump"
 match='Bootstrap          yes'
 test_pass "${cb_commands}" "${match}"
 
