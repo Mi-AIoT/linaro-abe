@@ -49,7 +49,7 @@ usage()
              [--testcontainer [user@]ipaddress:ssh_port]
              [--timeout <timeout_value>]
              [--usage]
-             [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}
+             [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu}
                =<id|snapshot|url>[~branch][@revision]]]
 
 EOF
@@ -369,7 +369,7 @@ OPTIONS
 
   --usage	Display synopsis information.
 
-   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib}=<id|snapshot|url>[~branch][@revision]]
+   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu}=<id|snapshot|url>[~branch][@revision]]
 
 		This option specifies a particular version of a package
 		that might differ from the default version in the
@@ -1134,6 +1134,9 @@ while test $# -gt 0; do
 				build_failure
 				;;
 			esac
+			;;
+		    qemu)
+			qemu_version="$(echo ${value})"
 			;;
 		    *)
 			# This will catch unsupported component specifiers like <foo>=
