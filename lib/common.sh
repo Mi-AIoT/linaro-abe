@@ -300,6 +300,15 @@ is_host_mingw()
     echo "${host}" | grep -q mingw
 }
 
+# tests whether host is Linux or not
+# Returns:
+# 0 (true) - host is Linux
+# 1 (false) - host is some other platform
+is_host_linux()
+{
+    echo "${host}" | grep -q linux
+}
+
 build_failure()
 {
     local time="$(expr ${SECONDS} / 60)"

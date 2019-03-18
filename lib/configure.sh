@@ -80,7 +80,14 @@ configure_build()
     # Use static linking if component is configured for it
     local static="$(get_component_staticlink ${component})"
     if test x"${static}" = x"yes"; then
-	local opts="${opts} --disable-shared --enable-static"
+	case ${component} in
+	    qemu)
+		local opts="${opts} --static"
+		;;
+	    *)
+		local opts="${opts} --disable-shared --enable-static"
+		;;
+	    esac
     fi
 
     local mingw_extra=$(get_component_mingw_extraconf ${component})
@@ -103,6 +110,10 @@ configure_build()
     if test x"${override_cflags}" != x -a x"${component}" != x"eglibc"; then
 	local opts="${opts} CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\""
     fi
+
+    # Some components' configure (eg. qemu's) do not support overriding
+    # SHELL via an argument, so allow not to do so when needed.
+    FORCESHELL="SHELL=${bash_shell}"
 
     # GCC and the binutils are the only toolchain components that need the
     # --target option set, as they generate code for the target, not the host.
@@ -185,6 +196,11 @@ configure_build()
 	dejagnu)
 	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefixhost}"
 	    ;;
+	qemu)
+	    local opts="${opts} --prefix=${prefix}"
+	    # qemu's configure does not accept a parameter like SHELL=/bin/bash
+	    FORCESHELL=""
+	    ;;
 	*)
 	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
 	    ;;
@@ -197,7 +213,7 @@ configure_build()
 	if test x"${CONFIG_SHELL}" = x; then
 	    export CONFIG_SHELL=${bash_shell}
 	fi
-	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure SHELL=${bash_shell} ${default_configure_flags} ${opts})"
+	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure $FORCESHELL ${default_configure_flags} ${opts})"
 	if test $? -gt 0; then
 	    error "Configure of $1 failed."
 	    return 1

@@ -36,7 +36,7 @@ clibrary="auto"
 snapshots="default"
 configfile="default"
 
-manifest_version=1.5
+manifest_version=1.6
 
 # The prefix for installing the toolchain
 prefix=
@@ -141,6 +141,7 @@ import_manifest()
 	    1.3) fixup_mingw=true ;;
 	    1.4) ;;
 	    1.5) ;;
+	    1.6) ;;
 	    *)
 		error "Imported manifest version $manifest_format is not supported."
 		return 1
@@ -156,6 +157,7 @@ import_manifest()
 	    local static="$(grep "^${i}_staticlink" ${manifest} | cut -d '=' -f 2)"
 	    local mingw_extraconf="$(grep "^${i}_mingw_extraconf" ${manifest} | cut -d '=' -f 2- | tr ' ' '%'| tr -d '\"')"
 	    local mingw_only="$(grep "^${i}_mingw_only" ${manifest} | cut -d '=' -f 2)"
+	    local linuxhost_only="$(grep "^${i}_linuxhost_only" ${manifest} | cut -d '=' -f 2)"
 	    # Any embedded spaces in the value have to be converted to a '%'
 	    # character. for component_init().
 	    local makeflags="$(grep "^${i}_makeflags" ${manifest} | cut -d '=' -f 2-20 | tr ' ' '%')"
@@ -203,7 +205,7 @@ import_manifest()
                 esac
             fi
 
-	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${md5sum:+MD5SUMS=${md5sum}} ${mingw_only:+MINGWEXTRACONF=\"${mingw_extraconf}\"} ${mingw_only:+MINGWONLY=${mingw_only}}
+	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${md5sum:+MD5SUMS=${md5sum}} ${mingw_only:+MINGWEXTRACONF=\"${mingw_extraconf}\"} ${mingw_only:+MINGWONLY=${mingw_only}} ${linuxhost_only:+LINUXHOSTONLY=${linuxhost_only}}
 	    if [ $? -ne 0 ]; then
 		error "component_init failed while parsing manifest"
 		build_failure
@@ -221,6 +223,7 @@ import_manifest()
 	    unset md5sum
 	    unset mingw_only
 	    unset mingw_extraconf
+	    unset linuxhost_only
 	done
     else
 	error "Manifest file '${manifest}' not found"
@@ -246,12 +249,12 @@ get_component_list()
 	if is_host_mingw; then
 	    # As Mingw32 requires a cross compiler to be already built, so we
 	    # don't need to rebuild the sysroot.
-            builds="${builds} expat python libiconv binutils libc stage2 gdb"
+            builds="${builds} expat python libiconv binutils libc stage2 gdb qemu"
 	else
 	    # Non-mingw builds skip expat, python and libiconv, but
 	    # are here so that they are included in the manifest, so
 	    # linux and mingw manifests can be identical.
-	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb"
+	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb qemu"
 	fi
 	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
 	    builds="${builds} gdbserver"
@@ -262,7 +265,7 @@ get_component_list()
 	    builds="$(echo ${builds} | sed -e 's: linux::')"
 	fi
     else
-        builds="${builds} binutils stage2 libc gdb" # native build
+        builds="${builds} binutils stage2 libc gdb qemu" # native build
     fi
 
     # if this build is based on a manifest, then we must remove components from
