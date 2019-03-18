@@ -688,7 +688,6 @@ with_local_builds
 with_remote_snapshots
 with_languages
 enable_ssh
-enable_bootstrap
 enable_alltests
 enable_install
 enable_make_docs
@@ -3792,20 +3791,6 @@ $as_echo "$as_me: WARNING: bad value ${enableval} for enable-ssh option" >&2;} ;
 esac
 else
   ENABLE_SSH=no
-fi
-
-
-
-# Check whether --enable-bootstrap was given.
-if test "${enable_bootstrap+set}" = set; then :
-  enableval=$enable_bootstrap; case "${enableval}" in
-  yes) ENABLE_BOOTSTRAP=yes ;;
-  no)  ENABLE_BOOTSTRAP=no ;;
-  *)   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: bad value ${enableval} for enable-bootstrap option" >&5
-$as_echo "$as_me: WARNING: bad value ${enableval} for enable-bootstrap option" >&2;} ;;
-esac
-else
-  ENABLE_BOOTSTRAP=no
 fi
 
 
