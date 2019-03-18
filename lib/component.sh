@@ -349,6 +349,11 @@ read_conf_files ()
 	        exit 1
 	    fi
 	    notice "Sourcing config file: ${conf}"
+
+	    # Set default values for host-related components, to avoid
+	    # repeating them everywhere
+	    mingw_only=no
+
             . "$conf"
         done
         local var
