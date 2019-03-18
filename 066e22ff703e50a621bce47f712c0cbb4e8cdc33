@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "77568fff_a1083ec9",
+        "filename": "lib/globals.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-03-18T09:32:47Z",
+      "side": 1,
+      "message": "Can we set default values for linuxhost_only and mingw_only (\"no\" for both, probably) to avoid being overly verbose in configuration files?",
+      "range": {
+        "startLine": 159,
+        "startChar": 11,
+        "endLine": 159,
+        "endChar": 25
+      },
+      "revId": "066e22ff703e50a621bce47f712c0cbb4e8cdc33",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
