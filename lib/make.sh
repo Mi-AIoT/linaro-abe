@@ -34,6 +34,11 @@ build_all()
             notice "Skipping component $i, which is only required for mingw hosts"
             continue
         fi
+        local linuxhost_only="$(get_component_linuxhost_only $i)"
+        if [ x"$linuxhost_only" = x"yes" ] && ! is_host_linux ; then
+            notice "Skipping component $i, which is only required for Linux hosts"
+            continue
+        fi
         notice "Building all, current component $i"
         # If an interactive build, stop betweeen each step so we can
         # check the build and config options.
@@ -925,6 +930,9 @@ make_docs()
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee -a ${builddir}/makedoc.log"
             return $?
             ;;
+	qemu)
+	    return 0
+	    ;;
         *)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee -a ${builddir}/makedoc.log"
