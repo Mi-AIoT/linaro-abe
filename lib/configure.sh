@@ -138,10 +138,6 @@ configure_build()
 			stage2*)
 			    notice "Building stage 2 of GCC"
 			    ;;
-			bootstrap*)
-			    notice "Building bootstrapped GCC"
-			    local opts="${opts} --enable-bootstrap"
-			    ;;
 			*)
 			    if test -e ${sysroots}/usr/include/stdio.h; then
 				notice "Building with stage 2 flags, sysroot found!"

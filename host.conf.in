@@ -25,7 +25,6 @@ distribution=@DISTRIBUTION@
 # various configure time flags
 with_languages=@WITH_LANGUAGES@
 enable_ssh=@ENABLE_SSH@
-bootstrap=@ENABLE_BOOTSTRAP@
 alltests=@ENABLE_ALLTESTS@
 install=@ENABLE_INSTALL@
 make_docs=@ENABLE_MAKE_DOCS@
