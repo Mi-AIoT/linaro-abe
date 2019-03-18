@@ -688,7 +688,6 @@ with_local_builds
 with_remote_snapshots
 with_languages
 enable_ssh
-enable_bootstrap
 enable_alltests
 enable_install
 enable_make_docs
@@ -1328,7 +1327,6 @@ Optional Features:
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --enable-ssh            If you have SSH access to remote build host
-  --enable-bootstrap      If you want to do bootstrap by default
   --enable-alltests       If you want to run all tests by default
   --enable-install        If you want to install by default
   --enable-make-docs      If you want to enable making package documentation
@@ -3792,20 +3790,6 @@ $as_echo "$as_me: WARNING: bad value ${enableval} for enable-ssh option" >&2;} ;
 esac
 else
   ENABLE_SSH=no
-fi
-
-
-
-# Check whether --enable-bootstrap was given.
-if test "${enable_bootstrap+set}" = set; then :
-  enableval=$enable_bootstrap; case "${enableval}" in
-  yes) ENABLE_BOOTSTRAP=yes ;;
-  no)  ENABLE_BOOTSTRAP=no ;;
-  *)   { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: bad value ${enableval} for enable-bootstrap option" >&5
-$as_echo "$as_me: WARNING: bad value ${enableval} for enable-bootstrap option" >&2;} ;;
-esac
-else
-  ENABLE_BOOTSTRAP=no
 fi
 
 

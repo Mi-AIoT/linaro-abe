@@ -23,9 +23,9 @@ usage()
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--check {all|glibc|gcc|gdb|binutils}]
              [--checkout {<package>|all}]
-             [--disable {bootstrap|building|install|make_docs|parallel|update}]
+             [--disable {building|install|make_docs|parallel|update}]
              [--dryrun] [--dump]
-             [--enable {bootstrap|building|install|make_docs|parallel|update}]
+             [--enable {building|install|make_docs|parallel|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -167,10 +167,6 @@ OPTIONS
 
   --dump	Dump configuration file information for this build.
 
-  --enable bootstrap
-
-                Enable gcc bootstrapping, which is disabled by default.
-
   --excludecheck {all|glibc|gcc|gdb|binutils|newlib}
 
                 {glibc|gcc|gdb|binutils|newlib}
@@ -272,7 +268,7 @@ OPTIONS
   --set		{buildconfig}=XXX
                 Set gcc's configure option --with-build-config=XXX
                 to perform specialized bootstrap build (bootstrap-lto, etc.).
-		Also enables bootstrap implicity.
+		Also enables bootstrap implicitly.
 
   --set		{cflags|ldflags|runtestflags|makeflags}=XXX
                 This overrides the default values used for CFLAGS,
@@ -1029,9 +1025,6 @@ while test $# -gt 0; do
 	    esac
 
 	    case $2 in
-		bootstrap)
-		    bootstrap="${value}"
-		    ;;
 		building)
 		    building="${value}"
 		    ;;
@@ -1174,11 +1167,6 @@ fi
 
 if [ "x${host}" != "x${target}" -a "x${bootstrap}" = x"yes" ]; then
   error "host and target must be same for bootstrap"
-  build_failure
-fi
-
-if [ ! -z "${build_config}" -a "x${bootstrap}" != x"yes" -a ! -z "${do_build}" ]; then
-  error "bootstrap must be enabled for buildconfig"
   build_failure
 fi
 
