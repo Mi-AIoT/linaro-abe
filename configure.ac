@@ -302,15 +302,6 @@ AC_ARG_ENABLE(ssh, AC_HELP_STRING([--enable-ssh], [If you have SSH access to rem
 esac], ENABLE_SSH=no)
 AC_SUBST(ENABLE_SSH)
 
-dnl if you want to do bootstrap by default
-AC_ARG_ENABLE(bootstrap, AC_HELP_STRING([--enable-bootstrap], [If you want to do bootstrap by default]),
-[case "${enableval}" in
-  yes) ENABLE_BOOTSTRAP=yes ;;
-  no)  ENABLE_BOOTSTRAP=no ;;
-  *)   AC_MSG_WARN([bad value ${enableval} for enable-bootstrap option]) ;;
-esac], ENABLE_BOOTSTRAP=no)
-AC_SUBST(ENABLE_BOOTSTRAP)
-
 dnl if you want to run all tests by default
 AC_ARG_ENABLE(alltests, AC_HELP_STRING([--enable-alltests], [If you want to run all tests by default]),
 [case "${enableval}" in
