@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8f350921_5d7f17b5",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-03-19T08:28:24Z",
+      "side": 1,
+      "message": "Can you fix this typo?",
+      "range": {
+        "startLine": 271,
+        "startChar": 25,
+        "endLine": 271,
+        "endChar": 34
+      },
+      "revId": "0acbde48bd553cf9adb963db5063e4bbbd3e675a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
