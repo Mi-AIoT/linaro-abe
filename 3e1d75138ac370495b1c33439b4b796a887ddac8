@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4eddefa_de04eefa",
+        "filename": "configure",
+        "patchSetId": 4
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-03-20T09:54:00Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be removed too?",
+      "range": {
+        "startLine": 599,
+        "startChar": 0,
+        "endLine": 599,
+        "endChar": 16
+      },
+      "revId": "3e1d75138ac370495b1c33439b4b796a887ddac8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    }
+  ]
+}
