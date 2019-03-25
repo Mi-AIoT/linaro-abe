@@ -197,7 +197,7 @@ configure_build()
 	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefixhost}"
 	    ;;
 	qemu)
-	    local opts="${opts} --prefix=${prefix}"
+	    local opts="${opts} --prefix=${prefixhost}"
 	    # qemu's configure does not accept a parameter like SHELL=/bin/bash
 	    FORCESHELL=""
 	    ;;
