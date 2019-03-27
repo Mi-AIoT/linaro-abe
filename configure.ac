@@ -93,20 +93,6 @@ if test x"${AUTOGEN}" = x; then
    missing="${missing} autogen"
 fi
 
-AC_PATH_PROG(QEMU_ARM, qemu-arm)
-if test x"${QEMU_ARM}" = x; then
-   AC_MSG_WARN([You need 'qemu-arm' to run test the toolchain properly!])
-# Ubuntu uses qemu-user-static, Newer Fedora uses qemu-system-arm and qemu-system-aarch64,
-# and older Fedora's use just qemu as the package name.
-#   missing="${missing} qemu"
-fi
-# Older qemu packages don't contain the AARCH64 simulator
-AC_PATH_PROG(QEMU_AARCH64, qemu-aarch64)
-if test x"${QEMU_AARCH64}" = x; then
-   AC_MSG_WARN([You need 'qemu-aaarch64' to run test the toolchain properly!])
-#   missing="${missing} qemu"
-fi
-
 AC_PATH_PROG(FAKEROOT, fakeroot)
 if test x"${FAKEROOT}" = x; then
    AC_MSG_WARN([You need 'fakeroot' to build binary Deb packages !])
