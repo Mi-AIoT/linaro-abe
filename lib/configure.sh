@@ -138,6 +138,14 @@ configure_build()
 	    echo rtlddir=/lib >> ${builddir}/configparms
 	    local opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
+
+	    # Recent glibc (since 2.29) make use of a C++ compiler to run the
+	    # tests, but cross-builds incorrectly choose the host compiler
+	    # unless explicitly defined in the environment. Having CXX point
+	    # to a non-existing compiler is OK too.
+	    if test x"${component}" = x"glibc"; then
+		opts="${opts} CXX=${target}-c++"
+	    fi
 	    ;;
 	gcc*)
 	    if test x"${build}" != x"${target}"; then
