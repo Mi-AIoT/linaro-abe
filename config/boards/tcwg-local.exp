@@ -12,5 +12,8 @@ set test_timeout 300
 set_board_info exec_shell "timeout -k 30s 330s"
 
 # Mark this board as one for local testing
-unset_board_info isremote
-set_board_info isremote 0
+global board
+global board_info
+# Remove any target variant specifications from the name.
+set baseboard [lindex [split $board "/"] 0]
+set board_info($baseboard,isremote) 0
