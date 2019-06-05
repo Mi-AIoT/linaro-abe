@@ -439,7 +439,7 @@ make_all()
     fi
 
     # All tarballs are statically linked
-    local make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"-static-libgcc\" -C ${builddir}"
+    local make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"-static-libgcc\""
 
     # Some components require extra flags to make: we put them at the
     # end so that config files can override
