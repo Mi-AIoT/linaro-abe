@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "d23b10aa_6b41d297",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2019-06-05T12:51:06Z",
+      "side": 1,
+      "message": "It is not really recently that we might use a c++ compiler to run some tests, I think what is recent is make all triggers an internal library build (libsupport) and it uses a c++ compiler if configure indicate that one exists.",
+      "revId": "956788013ebd08b3c1c26de19a48a39b04c1ad9c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
