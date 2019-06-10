@@ -42,6 +42,7 @@ usage()
              [--set {gcc_override_configure}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
              [--set {libc}={glibc|eglibc|newlib}]
+             [--set {multilib}={aprofile|rmprofile}]
              [--set {linker}={ld|gold}]
              [--set {packages}={toolchain|gdb|sysroot}]
              [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc]
@@ -290,9 +291,16 @@ OPTIONS
 
   --set		{libc}={glibc|eglibc|newlib}
 
-		The default value is stored in lib/global.sh.  This
+		The default value is stored in lib/globals.sh.  This
 		setting overrides the default.  Specifying a libc
 		other than newlib on baremetal targets is an error.
+
+  --set         {multilib}={aprofile|rmprofile}]
+
+                For Arm newlib targets select the multilib list to be either
+                aprofile or rmprofile. The default is aprofile. Specifying
+                this option for an AArch64 target or when the libc is not
+                newlib is an error.
 
   --set		{linker}={ld|gold}
 
@@ -558,6 +566,64 @@ select_clibrary()
     return 0
 }
 
+crosscheck_multilib_list()
+{
+    local test_clibrary="$1"
+    local test_multilib_list="$2"
+    local test_target="$3"
+
+    case "${test_target}/${test_multilib_list}" in
+        arm*/*profile)
+          # Require newlib
+          if test x"${test_clibrary}" != x"newlib"; then
+              error "${test_multilib_list} is only compatible with newlib."
+              return 1
+          fi
+          ;;
+        arm*/auto)
+          # must not be newlib
+          if test x"${test_clibrary}" == x"newlib"; then
+              error "No multilib list selected for newlib."
+              return 1
+          fi
+          ;;
+        aarch64*/*profile)
+          error "multilib list not supported on AArch64."
+          return 1
+          ;;
+    esac
+    return 0
+}
+
+select_multilib_list()
+{
+    # Range check user input against supported multilibs.
+    case "${multilib_list}" in
+        aprofile|rmprofile)
+          notice "Using '${multilib_list}' as the multilib list as directed by \"--set multilib=${multilib_list}\"."
+          ;;
+        auto)
+          case "${target}/${clibrary}" in
+              arm*-eabi/newlib)
+                # We default to aprofile when the c-library is newlib
+                multilib_list="aprofile"
+                ;;
+          esac
+          ;;
+        *)
+           error "'${multilib_list}' is an unsupported multilib_list option."
+           return 1
+           ;;
+    esac
+
+    # Verify that the user specified multilib is compatible with
+    # the user specified libc and target.
+    crosscheck_multilib_list ${clibrary} ${multilib_list} ${target}
+    if test $? -gt 0; then
+        return 1
+    fi
+    return 0
+}
 
 # Returns '0' if $package ($1) is in the list of all_unit_tests.  Returns '1'
 # if not found.
@@ -638,6 +704,11 @@ set_package()
 	    clibrary="${setting}"
 	    return 0
 	    ;;
+        multilib)
+            # validation is done after option parsing is complete.
+            multilib_list="${setting}"
+            return 0
+            ;;
 	gcc_override_configure)
 	    gcc_override_configure="${gcc_override_configure} ${setting}"
 	    notice "Adding ${setting} to GCC configure options"
@@ -1182,6 +1253,13 @@ fi
 select_clibrary
 if [ $? -ne 0 ]; then
     error "Failed to resolve C library choice."
+    build_failure
+fi
+
+# resolve multilib_list from command line options or defaults
+select_multilib_list
+if [ $? -ne 0 ]; then
+    error "Failed to resolve multilib list choice."
     build_failure
 fi
 
