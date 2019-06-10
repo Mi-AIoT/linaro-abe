@@ -962,10 +962,15 @@ EOF
 
     # Make sure we have C flags we need to link successfully
     local extra_cflags=
-    case "${clibrary}/${target}" in
-        newlib/arm*) extra_cflags="-mcpu=cortex-a8"
+    case "${clibrary}/${target}/${multilib}" in
+        newlib/arm*/rmprofile)
+          extra_cflags="-mcpu=cortex-m3 --specs=rdimon.specs"
           ;;
-        newlib/aarch64*) extra_cflags="--specs=rdimon.specs"
+        newlib/arm*/aprofile)
+          extra_cflags="-mcpu=cortex-a8"
+          ;;
+        newlib/aarch64*)
+          extra_cflags="--specs=rdimon.specs"
           ;;
         newlib/*)
           notice "Hello world test not supported for newlib on ${target}"
