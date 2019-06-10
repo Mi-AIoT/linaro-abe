@@ -39,6 +39,30 @@
       "revId": "956788013ebd08b3c1c26de19a48a39b04c1ad9c",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "495f03a8_8c3588cf",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-06-10T19:08:20Z",
+      "side": 1,
+      "message": "I think configure finds ${target}-cc since it has already been built during stage1, so there\u0027s no need to set CC.",
+      "parentUuid": "1dc47c71_a95545d8",
+      "range": {
+        "startLine": 147,
+        "startChar": 16,
+        "endLine": 147,
+        "endChar": 20
+      },
+      "revId": "956788013ebd08b3c1c26de19a48a39b04c1ad9c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
