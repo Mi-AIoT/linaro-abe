@@ -837,10 +837,20 @@ make_check()
     fi
 
     if test x"${component}" = x"gcc"; then
+	# Run contrib/test_summary script and store it's output in result.txt
+	# which can later be used as input to compare_tests script.
+
+	local current_dir=$(pwd)
+	local srcdir="$(get_component_srcdir ${component})"
+
+	# Hack described below to avoid confusing test_summary.
+	cd ${builddir} && sed -i -e '/TOPLEVEL_CONFIGURE_ARGUMENTS/ s/\o047//g' config.status
+	cd ${builddir} && ${srcdir}/contrib/test_summary > ${current_dir}/result.txt
+	cd ${current_dir}
+
 	# If the user provided send_results_to, send the results
 	# via email
 	if [ x"$send_results_to" != x ]; then
-	    local srcdir="$(get_component_srcdir ${component})"
 	    # Hack: Remove single quotes (octal 047) in
 	    # TOPLEVEL_CONFIGURE_ARGUMENTS line in config.status,
 	    # to avoid confusing test_summary. Quotes are added by
