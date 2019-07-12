@@ -837,6 +837,10 @@ make_check()
     fi
 
     if test x"${component}" = x"gcc"; then
+	# Store .sum files into sumfiles dir.
+        mkdir -p sumfiles
+        find ${builddir} -name "*.sum" | xargs cp -t sumfiles/
+
 	# If the user provided send_results_to, send the results
 	# via email
 	if [ x"$send_results_to" != x ]; then
