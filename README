@@ -289,3 +289,4 @@ ABE about a few things peculiar to the target:
   "powerpc" again for an example
 - convert the target name into the linux name when installing the
   linux kernel headers: in lib/make.sh, look for powerpc again
+ 
