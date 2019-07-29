@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6447d7dd_fb1ba6a3",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-07-29T14:23:49Z",
+      "side": 1,
+      "message": "This is not quite true: globals.sh contains \"auto\", which is translated into \"aprofile\" later in abe.sh.",
+      "range": {
+        "startLine": 301,
+        "startChar": 39,
+        "endLine": 302,
+        "endChar": 30
+      },
+      "revId": "d5147d2b9abed867c867c34ce527a9e703c55ca0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
