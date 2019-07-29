@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6f0e09a6_123cfee7",
+        "filename": "config/newlib.conf",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-07-29T19:56:32Z",
+      "side": 1,
+      "message": "Isn\u0027t \"auto\" always converted into aprofile in select_mutlilib_list (abe.sh) ?\nIn other words, can we have \"auto\" here?",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "9b7f774e33356bca5a3bf9e6d68cb302d3f1e084",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
