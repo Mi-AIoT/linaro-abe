@@ -46,6 +46,30 @@
       "revId": "9b7f774e33356bca5a3bf9e6d68cb302d3f1e084",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "5e36706e_9dec67c4",
+        "filename": "config/newlib.conf",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-07-30T12:29:27Z",
+      "side": 1,
+      "message": "\u003e I thought it was, then the tests failed. For AArch64 there is no profile option so auto can remain here for aarch64-none-elf.\n\u003e \n\u003e I\u0027m not entirely happy about using auto here. I thought about adding target into the test so we\u0027d have something like:\n\u003e arm*/rmprofile)\n\u003e ...\n\u003e ;;\n\u003e aarch64*|arm*/aprofile)\n\u003e ...\n\u003e ;;\n\u003e *)\n\u003e error \"something has gone wrong.\"\n\nI\u0027m OK with this proposal.\n\n\u003e \n\u003e Other alternatives:\n\u003e - For AArch64 force to aprofile after the check to see if the option has been used.\n\u003e - Use a better name than auto for aarch64.\n\u003e \n\u003e I\u0027m open to suggestions?",
+      "parentUuid": "279054f7_c9db54b9",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 6
+      },
+      "revId": "9b7f774e33356bca5a3bf9e6d68cb302d3f1e084",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
     }
   ]
 }
