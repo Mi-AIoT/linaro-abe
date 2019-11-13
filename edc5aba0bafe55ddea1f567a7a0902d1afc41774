@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7a5c5407_0e22b37b",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-11-13T13:10:39Z",
+      "side": 1,
+      "message": "Given this command, it means that gcc_patch_file must be an absolute path: I think it would help to mention this in the help/doc.",
+      "range": {
+        "startLine": 260,
+        "startChar": 6,
+        "endLine": 260,
+        "endChar": 49
+      },
+      "revId": "edc5aba0bafe55ddea1f567a7a0902d1afc41774",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
