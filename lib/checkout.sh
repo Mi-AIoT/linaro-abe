@@ -255,6 +255,10 @@ checkout()
 		[ x"${svnrev}" != x ] && revstring="${svnrev}"
 		dryrun "echo $(TZ=UTC date) '(revision' ${revstring}')' | tee ${srcdir}/LAST_UPDATED"
 		dryrun "echo \[${branch} revision ${revstring}\] | tee ${srcdir}/gcc/REVISION"
+
+		if test x"${gcc_patch_file}" != x""; then
+		    cd ${srcdir} && git apply ${gcc_patch_file}
+		fi
 		;;
 	    *)
 		# Avoid rebuilding of auto-generated C files. Rather than

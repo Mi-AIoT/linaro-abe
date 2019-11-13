@@ -40,6 +40,7 @@ usage()
              [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
              [--set {gcc_override_configure}=XXX]
+             [--set {gcc_patch_file}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
              [--set {libc}={glibc|eglibc|newlib}]
              [--set {multilib}={aprofile|rmprofile}]
@@ -283,6 +284,10 @@ OPTIONS
 		Note: There is no cross-checking to make sure that the
 		passed --target value is compatible with the passed
 		overrides.
+
+  --set		{gcc_patch_file}=XXX
+
+		This option applies the specified patch to gcc branch.
 
   --set		{languages}={c|c++|fortran|go|lto|objc|java|ada}
                 This changes the default set of GCC front ends that get built.
@@ -712,6 +717,11 @@ set_package()
 	gcc_override_configure)
 	    gcc_override_configure="${gcc_override_configure} ${setting}"
 	    notice "Adding ${setting} to GCC configure options"
+	    return 0
+	    ;;
+       gcc_patch_file)
+	    gcc_patch_file=${setting}
+	    notice "Applyng patch ${setting} to gcc"
 	    return 0
 	    ;;
 	*)
