@@ -255,6 +255,15 @@ checkout()
 		[ x"${svnrev}" != x ] && revstring="${svnrev}"
 		dryrun "echo $(TZ=UTC date) '(revision' ${revstring}')' | tee ${srcdir}/LAST_UPDATED"
 		dryrun "echo \[${branch} revision ${revstring}\] | tee ${srcdir}/gcc/REVISION"
+
+		if test x"${gcc_patch_file}" != x""; then
+		    cd ${srcdir}
+		    local git_apply_check=$(git apply --check ${gcc_patch_file})
+		    if test ${git_apply_check} != 0; then
+			error "Patch ${gcc_patch_file} does not apply."
+		    fi
+		    git apply ${gcc_patch_file}
+		fi
 		;;
 	    *)
 		# Avoid rebuilding of auto-generated C files. Rather than
