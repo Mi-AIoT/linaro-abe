@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "2f2d625e_d585863c",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-11-14T14:22:58Z",
+      "side": 1,
+      "message": "You\u0027re changing PWD for rest of the execution.  You need to run \"cd ...\" in a subshell.",
+      "range": {
+        "startLine": 260,
+        "startChar": 6,
+        "endLine": 260,
+        "endChar": 18
+      },
+      "revId": "31ccf2745f90f0bca58e3c21fe54916047812491",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "076395c5_5e9bd3a8",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-11-14T14:22:58Z",
+      "side": 1,
+      "message": "cd ${srcdir} \u0026\u0026 git apply --check ${gcc_patch_file}",
+      "range": {
+        "startLine": 261,
+        "startChar": 30,
+        "endLine": 261,
+        "endChar": 65
+      },
+      "revId": "31ccf2745f90f0bca58e3c21fe54916047812491",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ce0f0312_0a02c224",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-11-14T14:22:58Z",
+      "side": 1,
+      "message": "dryrun \"cd ${srcdir} \u0026\u0026 git apply --check ${gcc_patch_file}\"\nThough, I never quite understood what \"dryrun\" does, but it seems to be a tradition to use it for \"actions\".",
+      "range": {
+        "startLine": 265,
+        "startChar": 6,
+        "endLine": 265,
+        "endChar": 33
+      },
+      "revId": "31ccf2745f90f0bca58e3c21fe54916047812491",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
