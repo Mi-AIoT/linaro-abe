@@ -323,6 +323,18 @@ build()
         return 1
     fi
 
+   if [ x"${component}" = x"gcc" -a x"${gcc_patch_file}" != x"" ]; then
+	(
+	    cd ${srcdir}
+	    git apply --check ${gcc_patch_file}
+	    if [ $? -ne 0 ]; then
+		error "Patch ${gcc_patch_file} does not apply."
+		return 1
+	    fi
+	    git apply ${gcc_patch_file}
+	)
+    fi
+
     local version="$(basename ${srcdir})"
     local stamp=
     stamp="$(get_stamp_name build ${version} ${2:+$2})"
