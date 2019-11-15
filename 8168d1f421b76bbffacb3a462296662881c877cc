@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "1312ad59_1393c15f",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2019-11-15T10:09:34Z",
+      "side": 1,
+      "message": "This will cause the sub-shell to exit, but not the main process.\nWhat I meant with regards to using subshell, is to wrap up /only/ \"(cd ${srcdir} \u0026\u0026 git apply --check ${gcc_patch_file})\" in a subshell, not the whole thing.  Similarly, if could use dryrun, which does the subshell thing internally.",
+      "range": {
+        "startLine": 332,
+        "startChar": 2,
+        "endLine": 332,
+        "endChar": 10
+      },
+      "revId": "8168d1f421b76bbffacb3a462296662881c877cc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
