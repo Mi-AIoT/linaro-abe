@@ -105,6 +105,7 @@ sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"
 list_artifacts=""
 build_config=""
 bootstrap="no"
+gcc_patch_file=""
 
 # source a user specific config file for commonly used configure options.
 # These overide any of the above values.
