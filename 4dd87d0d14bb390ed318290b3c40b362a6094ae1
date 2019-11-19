@@ -2,6 +2,29 @@
   "comments": [
     {
       "key": {
+        "uuid": "6c9c46d4_96e954ed",
+        "filename": "lib/checkout.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2019-11-19T13:11:15Z",
+      "side": 1,
+      "message": "I think we still want to wrap this inside \"dryrun\", otherwise this command is going to fail when using ABE in dryrun mode (srcdir may not exist)",
+      "range": {
+        "startLine": 260,
+        "startChar": 6,
+        "endLine": 260,
+        "endChar": 54
+      },
+      "revId": "4dd87d0d14bb390ed318290b3c40b362a6094ae1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "79d17219_6d3fb118",
         "filename": "lib/checkout.sh",
         "patchSetId": 5
