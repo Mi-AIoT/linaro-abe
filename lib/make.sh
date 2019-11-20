@@ -40,12 +40,6 @@ build_all()
             continue
         fi
         notice "Building all, current component $i"
-        # If an interactive build, stop betweeen each step so we can
-        # check the build and config options.
-        if test x"${interactive}" = x"yes"; then
-            echo "Hit any key to continue..."
-            read answer
-        fi
         case $i in
             # Build stage 1 of GCC, which is a limited C compiler used to compile
             # the C library.

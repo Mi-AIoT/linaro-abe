@@ -39,12 +39,6 @@ dryrun()
     if test x"${dryrun}" = xyes; then
 	echo "DRYRUN: $1" 1>&2
     else
-	if test x"${interactive}" = x"yes"; then
-	    notice "About to execute $1"
-	    notice "Hit any key to continue: "
-	    read answer
-	    return $?
-	fi
 	# Output this to stderr so we don't pollute functions that return
 	# information to stdout.
         echo "RUN: $1" 1>&2

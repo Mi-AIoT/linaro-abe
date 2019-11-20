@@ -98,9 +98,7 @@ all the available snapshots, you can do this"
 
     "abe.sh --list snapshots".
 
-You can also run abe with the --interactive options, which will
-display a subset of all the packages that matches the supplied
-string. To build a specific component, use the --build option to
+To build a specific component, use the --build option to
 abe. the --target option is also used for cross builds. For
 example:
 
