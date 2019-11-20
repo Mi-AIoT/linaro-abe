@@ -29,7 +29,7 @@ usage()
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
-             [--infrastructure] [--interactive]
+             [--infrastructure]
              [--list-artifacts <output_file>]
              [--manifest <manifest_file>]
              [--qemu-cpu <cpu>]
@@ -214,8 +214,6 @@ OPTIONS
 		build this would represent where the compiler is run.
 
   --infrastructure Download and install the infrastructure libraries.
-
-  --interactive Interactively select packages from the snapshots file.
 
   --list-artifacts
 
@@ -975,9 +973,6 @@ while test $# -gt 0; do
             ;;
 	--force)
 	    force=yes
-	    ;;
-	--interactive)
-	    interactive=yes
 	    ;;
 	--qemu-cpu)
 	    check_directive qemu-cpu $2

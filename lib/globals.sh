@@ -74,7 +74,6 @@ if test x"${SNAPSHOTS_URL:-}" != x -o x"${ABE_SNAPSHOTS:-}" != x; then
 fi
 
 force=no
-interactive=no
 verbose=1
 network=""
 
