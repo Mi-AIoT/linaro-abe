@@ -108,12 +108,6 @@ build_all()
 		    error "rsync of python libs failed"
 		    return 1
 		fi
-		# Future make check support of python GDB in mingw32 will
-		# require these exports.  Export them now for future reference.
-		export PYTHONHOME=${local_builds}/destdir/${host}/bin/dll
-		warning "You must set PYTHONHOME in your environment to ${PYTHONHOME}"
-		export PYTHONPATH=${local_builds}/destdir/${host}/bin/pylib
-		warning "You must set PYTHONPATH in your environment to ${PYTHONPATH}"
 		;;
 	    libiconv)
 		# TODO: avoid hardcoding the version in the path here
