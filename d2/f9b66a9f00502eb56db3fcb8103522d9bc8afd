@@ -1,0 +1,8 @@
+Code-Review+1: Christophe Lyon <christophe.lyon@linaro.org>
+Code-Review+2: Prathamesh Kulkarni <prathamesh.kulkarni@linaro.org>
+Code-Review+1: ci-bot <ci-bot@linaro.org>
+Submitted-by: Prathamesh Kulkarni <prathamesh.kulkarni@linaro.org>
+Submitted-at: Tue, 26 Nov 2019 08:33:45 +0000
+Reviewed-on: https://review.linaro.org/c/toolchain/abe/+/33298
+Project: toolchain/abe
+Branch: refs/heads/master
