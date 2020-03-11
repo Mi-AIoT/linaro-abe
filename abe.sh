@@ -41,7 +41,7 @@ usage()
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
              [--set {gcc_override_configure}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
-             [--set {libc}={glibc|eglibc|newlib}]
+             [--set {libc}={glibc|eglibc|newlib|uclibcng}]
              [--set {multilib}={aprofile|rmprofile}]
              [--set {linker}={ld|gold}]
              [--set {packages}={toolchain|gdb|sysroot}]
@@ -50,7 +50,7 @@ usage()
              [--testcontainer [user@]ipaddress:ssh_port]
              [--timeout <timeout_value>]
              [--usage]
-             [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu}
+             [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu|uclibcng}
                =<id|snapshot|url>[~branch][@revision]]]
 
 EOF
@@ -289,7 +289,7 @@ OPTIONS
                 The default set for most platforms is c, c++, go, fortran,
                 and lto.
 
-  --set		{libc}={glibc|eglibc|newlib}
+  --set		{libc}={glibc|eglibc|newlib|uclibcng}
 
 		The default value is stored in lib/globals.sh.  This
 		setting overrides the default.  Specifying a libc
@@ -346,6 +346,7 @@ OPTIONS
 			x86_64-linux-gnu
 			arm-linux-gnueabi
 			arm-linux-gnueabihf
+                        arm-uclinuxfdpiceabi
 			arm-none-eabi
 			armeb-none-eabi
 			armeb-linux-gnueabihf
@@ -373,7 +374,7 @@ OPTIONS
 
   --usage	Display synopsis information.
 
-   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu}=<id|snapshot|url>[~branch][@revision]]
+   [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu|uclibcng}=<id|snapshot|url>[~branch][@revision]]
 
 		This option specifies a particular version of a package
 		that might differ from the default version in the
@@ -494,9 +495,15 @@ crosscheck_clibrary_target()
 		return 1
 	    fi
 	    ;;
+	arm-uclinuxfdpiceabi)
+	    if test x"${test_clibrary}" != x"uclibcng"; then
+		error "${test_target} is only compatible with uclibc-ng."
+		return 1
+	    fi
+	    ;;	
 	*)
 	    case ${test_clibrary} in
-		glibc|eglibc|newlib)
+		glibc|eglibc|newlib|uclibcng)
 		    ;;
 		*)
 		    error "Invalid clibrary ${test_clibrary}."
@@ -512,7 +519,7 @@ select_clibrary()
 {
     # Range check user input against supported C libraries.
     case "${clibrary}" in
-	glibc|eglibc|newlib)
+	glibc|eglibc|newlib|uclibcng)
 	    notice "Using '${clibrary}' as the C library as directed by \"--set libc=${clibrary}\"."
 	    ;;
 	auto)
@@ -523,6 +530,9 @@ select_clibrary()
 	    case ${target} in
 		arm*-eabi*|arm*-elf|aarch64*-*elf|*-mingw32|powerpc*-eabi|ppc*-eabi)
 		    clibrary="newlib"
+		    ;;
+		arm-uclinuxfdpiceabi)
+		    clibrary="uclibcng"
 		    ;;
 		*)
 		    # we should use eglibc or glibc, depending on the selected
@@ -1168,7 +1178,7 @@ while test $# -gt 0; do
 		    mpc)
 			mpc_version="${value}"
 			;;
-		    eglibc|glibc|newlib)
+		    eglibc|glibc|newlib|uclibcng)
 			# Test if --target follows one of these clibrary set
 			# commands.  If so, put $1 onto the back of the inputs.
 			# This is because clibrary validity depends on the target.
@@ -1192,6 +1202,9 @@ while test $# -gt 0; do
 				;;
 			    newlib)
 				newlib_version="${value}"
+				;;
+			    uclibcng)
+				uclibcng_version="${value}"
 				;;
 			    *)
 				error "FIXME: Execution should never reach this point."

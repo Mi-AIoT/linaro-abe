@@ -201,7 +201,17 @@ configure_build()
 	    # qemu's configure does not accept a parameter like SHELL=/bin/bash
 	    FORCESHELL=""
 	    ;;
-	*)
+	uclibcng)
+	    dryrun "rsync -av ${srcdir}/* ${builddir}"
+	    sed "s;__KERNEL_HEADERS__;${sysroots}/usr/include;g" ${builddir}/config_template | \
+		sed "s;__CROSS_COMPILER_PREFIX__;${target}-;g" | \
+		sed "s;__DODEBUG__;DODEBUG=y;g" | \
+		sed "s;__DODEBUG_PT__;# DODEBUG_PT is not set;g" | \
+		sed "s;# COMPILE_IN_THUMB_MODE is not set;COMPILE_IN_THUMB_MODE=y;g" | \
+		sed "s;__DOSTRIP__;# DOSTRIP is not set;g" > ${builddir}/.config
+	    exit 1
+	    ;;
+    	*)
 	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
 	    ;;
     esac

@@ -245,6 +245,9 @@ create_release_tag()
 	newlib)
 	    # newlib doesn't have a version.
 	    ;;
+	uclibcng)
+	    local version="FIXME UCLIBCNG VERSION IN COMMON.sh"
+	    ;;
 	*)
 	    ;;
     esac
