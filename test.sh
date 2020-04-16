@@ -503,7 +503,7 @@ cb_commands="--dryrun --build gcc.git"
 match=''
 test_pass "${cb_commands}" "${match}"
 
-cb_commands="--dryrun --build asdflkajsdflkajsfdlasfdlaksfdlkaj.git"
+cb_commands="--dryrun --build asdflkajsdflkajsfdlasfdlaksfdlkaj_git"
 match="Malformed input. No url found"
 test_failure "${cb_commands}" "${match}"
 
