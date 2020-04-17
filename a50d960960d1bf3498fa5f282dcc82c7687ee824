@@ -22,6 +22,30 @@
       "revId": "a50d960960d1bf3498fa5f282dcc82c7687ee824",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ca6db703_cfa5b8f5",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-04-17T10:50:42Z",
+      "side": 0,
+      "message": "Ha, I didn\u0027t know about these features.\n\nI did check the bash behaviour under xenial before this patch: $component does contain the .git suffix.\n\nSo it looks like we have to fix collect_data()",
+      "parentUuid": "36cdd317_2e853976",
+      "range": {
+        "startLine": 506,
+        "startChar": 30,
+        "endLine": 506,
+        "endChar": 67
+      },
+      "revId": "a50d960960d1bf3498fa5f282dcc82c7687ee824",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
     }
   ]
 }
