@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "36cdd317_2e853976",
+        "filename": "test.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-04-17T10:03:19Z",
+      "side": 0,
+      "message": "IIRC, ABE supports building components using \"--build foobar.git\" and \"--build http://url.com/foobar.git\".  The first approach is a shortcut for the second and requires an entry for foobar.git in config/sources.conf.\n\nIf the above is correct, then this test checks whether the sources.conf entry exists.  Therefore, I think the problem is that $component is calculated to include \".git\" suffix, instead of stripping it.\n\nCould you check whether $component had .git suffix before (using xenial bash)?",
+      "range": {
+        "startLine": 506,
+        "startChar": 30,
+        "endLine": 506,
+        "endChar": 67
+      },
+      "revId": "a50d960960d1bf3498fa5f282dcc82c7687ee824",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
