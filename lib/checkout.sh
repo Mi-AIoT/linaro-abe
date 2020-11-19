@@ -144,6 +144,13 @@ checkout()
             error "gdb and gdbserver srcdirs don't match"
             return 1
         fi
+	# FIXME: This is a workaround for new gdbserver layout.
+	#        We should switch to using new gdbserver layout once
+	#        we don't care about building older GDB version.
+	#        For now, create a symlink to the historic gdbserver directory.
+	if [ -d "${gdbsrcdir}/gdbserver" -a ! -d "${gdbsrcdir}/gdb/gdbserver" ]; then
+	    ln -s "../gdbserver" "${gdbsrcdir}/gdb/gdbserver"
+	fi
 	local gdbrevision="$(get_component_revision gdb)"
         if [ x"${gdbrevision}" = x"" ]; then
             error "no gdb revision found"
