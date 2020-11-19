@@ -138,12 +138,6 @@ checkout()
 
     # gdbserver is already checked out in the GDB source tree.
     if test x"${component}" = x"gdbserver"; then
-        local gdbsrcdir;
-        gdbsrcdir="$(get_component_srcdir gdb)" || return 1
-        if [ x"${srcdir}" != x"${gdbsrcdir}/gdb/gdbserver" ]; then
-            error "gdb and gdbserver srcdirs don't match"
-            return 1
-        fi
 	local gdbrevision="$(get_component_revision gdb)"
         if [ x"${gdbrevision}" = x"" ]; then
             error "no gdb revision found"
