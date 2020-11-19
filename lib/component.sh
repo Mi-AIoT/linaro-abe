@@ -516,7 +516,7 @@ collect_data ()
     local srcdir=${local_snapshots}/${dir}
     case "${component}" in
 	gdbserver)
-	    local srcdir=${srcdir}/gdb/gdbserver
+	    local srcdir=${srcdir}/gdbserver
 	    local builddir="${builddir}-gdbserver"
 	    ;;
 	*)

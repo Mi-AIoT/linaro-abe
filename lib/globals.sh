@@ -180,7 +180,7 @@ import_manifest()
 	    local builddir="${local_builds}/${host}/${target}/${dir}"
 	    case "${i}" in
 		gdbserver)
-		    local srcdir=${local_snapshots}/${dir}/gdb/gdbserver
+		    local srcdir=${local_snapshots}/${dir}/gdbserver
  		    local builddir="${local_builds}/${host}/${target}/${dir}-gdbserver"
 		    ;;
 		*glibc)

@@ -140,7 +140,7 @@ checkout()
     if test x"${component}" = x"gdbserver"; then
         local gdbsrcdir;
         gdbsrcdir="$(get_component_srcdir gdb)" || return 1
-        if [ x"${srcdir}" != x"${gdbsrcdir}/gdb/gdbserver" ]; then
+        if [ x"${srcdir}" != x"${gdbsrcdir}/gdbserver" ]; then
             error "gdb and gdbserver srcdirs don't match"
             return 1
         fi
