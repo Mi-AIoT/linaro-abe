@@ -216,7 +216,22 @@ import_manifest()
                 esac
             fi
 
-	    component_init $i ${branch:+BRANCH=${branch}} ${revision:+REVISION=${revision}} ${url:+URL=${url}} ${filespec:+FILESPEC=${filespec}} ${srcdir:+SRCDIR=${srcdir}} ${builddir:+BUILDDIR=${builddir}} ${stage1_flags:+STAGE1=\"${stage1_flags}\"} ${stage2_flags:+STAGE2=\"${stage2_flags}\"} ${configure:+CONFIGURE=\"${configure}\"} ${makeflags:+MAKEFLAGS=\"${makeflags}\"} ${static:+STATICLINK=${static}} ${md5sum:+MD5SUMS=${md5sum}} ${mingw_only:+MINGWEXTRACONF=\"${mingw_extraconf}\"} ${mingw_only:+MINGWONLY=${mingw_only}} ${linuxhost_only:+LINUXHOSTONLY=${linuxhost_only}}
+	    component_init $i \
+			   ${branch:+BRANCH=${branch}} \
+			   ${revision:+REVISION=${revision}} \
+			   ${url:+URL=${url}} \
+			   ${filespec:+FILESPEC=${filespec}} \
+			   ${srcdir:+SRCDIR=${srcdir}} \
+			   ${builddir:+BUILDDIR=${builddir}} \
+			   ${stage1_flags:+STAGE1=\"${stage1_flags}\"} \
+			   ${stage2_flags:+STAGE2=\"${stage2_flags}\"} \
+			   ${configure:+CONFIGURE=\"${configure}\"} \
+			   ${makeflags:+MAKEFLAGS=\"${makeflags}\"} \
+			   ${static:+STATICLINK=${static}} \
+			   ${md5sum:+MD5SUMS=${md5sum}} \
+			   ${mingw_only:+MINGWEXTRACONF=\"${mingw_extraconf}\"} \
+			   ${mingw_only:+MINGWONLY=${mingw_only}} \
+			   ${linuxhost_only:+LINUXHOSTONLY=${linuxhost_only}}
 	    if [ $? -ne 0 ]; then
 		error "component_init failed while parsing manifest"
 		build_failure
