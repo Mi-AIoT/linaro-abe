@@ -185,7 +185,7 @@ import_manifest()
 		    ;;
 		*glibc)
 		    # Glibc builds will fail if there is an @ in the path. This is
-		    # unfortunately, as @ is used to deliminate the revision string.
+		    # unfortunate, as @ is used to deliminate the revision string.
 		    local srcdir="${local_snapshots}/${dir}"
 		    local builddir="$(echo ${local_builds}/${host}/${target}/${dir} | tr '@' '_')"
 		    ;;

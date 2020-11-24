@@ -315,7 +315,7 @@ build()
     local stamp=
     stamp="$(get_stamp_name $component build ${version} ${2:+$2})"
 
-    # The stamp is in the buildir's parent directory.
+    # The stamp is in the build dir's parent directory.
     local stampdir="$(dirname ${builddir})"
 
     notice "Building ${component} ${2:+$2}"
