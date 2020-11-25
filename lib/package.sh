@@ -149,7 +149,6 @@ binary_gdb()
     local tag="$(create_release_tag ${gdb_version} | sed -e 's:binutils-::')"
     local builddir="$(get_component_builddir gdb)-gdb"
     local destdir="${local_builds}/tmp.$$/${tag}-tmp"
-    local prefix="${local_builds}/destdir/${host}"
 
     rm ${builddir}/gdb/gdb
 
@@ -274,7 +273,6 @@ binary_sysroot()
 
 do_install_sysroot()
 {
-    local prefix="${local_builds}/destdir/${host}/"
     local symlinks=
 
     # There may be no sysroot to install, depending on which package

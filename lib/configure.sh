@@ -95,8 +95,7 @@ configure_build()
         opts="${opts} ${mingw_extra}"
     fi
 
-    # prefix is the root everything gets installed under.
-    prefix="${local_builds}/destdir/${host}"
+    # prefixhost is the root for host-side libs and tools.
     prefixhost="${local_builds}/hosttools/${host}"
 
     # The release string is usually the date as well, but in YYYY.MM format.
