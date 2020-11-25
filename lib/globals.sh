@@ -39,9 +39,6 @@ configfile="default"
 
 manifest_version=1.6
 
-# The prefix for installing the toolchain
-prefix=
-
 # The default timeout.  If you're on a wireless network this
 # might not be sufficient and can be overridden at the command
 # line.
@@ -117,6 +114,16 @@ fi
 #
 #
 
+init_globals()
+{
+    # Prefix is the root for installing the toolchain.
+    prefix="$local_builds/destdir/$host"
+    sysroots="$prefix"
+    if [ x"$host" != x"$target" ]; then
+	sysroots="$sysroots/$target"
+    fi
+}
+
 import_manifest()
 {
 #    trace "$*"
@@ -130,7 +137,6 @@ import_manifest()
 	if test x"${ltarget}" != x; then
 	    target=${ltarget}
 	fi
-	sysroots=${sysroots}/${target}
 
 	local manifest_format="$(grep "^manifest_format" ${manifest} | cut -d '=' -f 2)"
 	local fixup_mingw=false
