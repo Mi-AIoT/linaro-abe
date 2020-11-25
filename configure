@@ -602,7 +602,6 @@ REMOTE_SNAPSHOTS
 LOCAL_BUILDS
 GIT_REFERENCE_DIR
 LOCAL_SNAPSHOTS
-SYSROOTS
 ABE_PATH
 SOURCES_CONF
 ABE_TOP
@@ -678,7 +677,6 @@ ac_user_opts='
 enable_option_checking
 with_toplevel
 with_sources_conf
-with_sysroot
 with_local_snapshots
 with_git_reference_dir
 with_local_builds
@@ -1337,7 +1335,6 @@ Optional Packages:
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-toplevel
   --with-sources-conf
-  --with-sysroot
   --with-local-snapshots  Where downloaded tarballs are stored
   --with-git-reference-dir
                           Where reference git repos are stored, see git-clone
@@ -3595,24 +3592,6 @@ ABE_PATH=$(readlink -f ${srcdir})
 
 
 
-# Check whether --with-sysroot was given.
-if test "${with_sysroot+set}" = set; then :
-  withval=$with_sysroot; SYSROOTS=${withval}
-else
-  SYSROOTS="${ABE_TOP}"/sysroots
-fi
-
-
-
-if test x"${target}" != x"${build}"; then
-  if test ! -d ${SYSROOTS}; then
-    { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: ${SYSROOTS} does not exist so creating directory!" >&5
-$as_echo "$as_me: WARNING: ${SYSROOTS} does not exist so creating directory!" >&2;}
-    mkdir -p ${SYSROOTS}
-  fi
-fi
-
-
 # Check whether --with-local-snapshots was given.
 if test "${with_local_snapshots+set}" = set; then :
   withval=$with_local_snapshots; LOCAL_SNAPSHOTS=${withval}
@@ -3667,8 +3646,6 @@ echo ""
 $as_echo "$as_me: Downloaded snapshots will be stored in: ${LOCAL_SNAPSHOTS}" >&6;}
 { $as_echo "$as_me:${as_lineno-$LINENO}: My builds will be installed in: ${LOCAL_BUILDS}" >&5
 $as_echo "$as_me: My builds will be installed in: ${LOCAL_BUILDS}" >&6;}
-{ $as_echo "$as_me:${as_lineno-$LINENO}: Sysroots will be installed in: ${SYSROOTS}" >&5
-$as_echo "$as_me: Sysroots will be installed in: ${SYSROOTS}" >&6;}
 { $as_echo "$as_me:${as_lineno-$LINENO}: Remote snapshots will be fetched from: ${REMOTE_SNAPSHOTS}" >&5
 $as_echo "$as_me: Remote snapshots will be fetched from: ${REMOTE_SNAPSHOTS}" >&6;}
 echo ""
@@ -5238,7 +5215,7 @@ check:
 	${srcdir}/test.sh
 
 clean:
-	rm -fr builds/* sysroots/*
+	rm -fr builds/*
 
 EOF
 
