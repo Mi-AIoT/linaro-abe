@@ -213,20 +213,6 @@ AC_SUBST(SOURCES_CONF)
 ABE_PATH=$(readlink -f ${srcdir})
 AC_SUBST(ABE_PATH)
 
-dnl The top of the abe tree
-AC_ARG_WITH(sysroot,
-  AC_HELP_STRING([--with-sysroot], []),
-  SYSROOTS=${withval},
-  SYSROOTS="${ABE_TOP}"/sysroots)
-AC_SUBST(SYSROOTS)
-
-if test x"${target}" != x"${build}"; then
-  if test ! -d ${SYSROOTS}; then
-    AC_MSG_WARN(${SYSROOTS} does not exist so creating directory!)
-    mkdir -p ${SYSROOTS}
-  fi
-fi
-
 dnl The local directory where snapshots are stored
 AC_ARG_WITH(local-snapshots,
   AC_HELP_STRING([--with-local-snapshots], [Where downloaded tarballs are stored]),
@@ -269,7 +255,6 @@ dnl Display the default paths so the user does not need to look in the host.conf
 echo ""
 AC_MSG_NOTICE([Downloaded snapshots will be stored in: ${LOCAL_SNAPSHOTS}])
 AC_MSG_NOTICE([My builds will be installed in: ${LOCAL_BUILDS}])
-AC_MSG_NOTICE([Sysroots will be installed in: ${SYSROOTS}])
 AC_MSG_NOTICE([Remote snapshots will be fetched from: ${REMOTE_SNAPSHOTS}])
 echo ""
 
@@ -403,7 +388,7 @@ check:
 	${srcdir}/test.sh
 
 clean:
-	rm -fr builds/* sysroots/*
+	rm -fr builds/*
 
 EOF
 
