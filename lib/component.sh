@@ -434,7 +434,7 @@ collect_data ()
 
     local default_conf="${topdir}/config/default/${component}.conf"
     if test -f "$default_conf"; then
-	if grep -qv "^latest=" "$default_conf" \
+	if grep -qv "^latest=\|^#" "$default_conf" \
 		|| ! grep -q "^latest=" "$default_conf"; then
 	    error "$default_conf should have only \"latest=\" and nothing else"
 	    exit 1
