@@ -50,17 +50,6 @@ build_all()
             stage1)
                 build gcc stage1
                 build_all_ret=$?
-                # Don't create the sysroot if the clibrary build didn't succeed.
-                if test ${build_all_ret} -lt 1; then
-                    # If we don't install the sysroot, link to the one we built so
-                    # we can use the GCC we just built.
-		    if test x"${dryrun}" != xyes; then
-			local sysroot="$(${target}-gcc -print-sysroot)"
-			if test ! -d ${sysroot}; then
-			    dryrun "ln -sfnT ${abe_top}/sysroots/${target} ${sysroot}"
-			fi
-		    fi
-                fi
                 ;; 
             # Build stage 2 of GCC, which is the actual and fully functional compiler
             stage2)
@@ -580,21 +569,6 @@ make_install()
         return 1
     fi
 
-    # Copy libs only when building a toolchain where build=host,
-    # otherwise we can't execute ${target}-gcc. In case of a canadian
-    # cross build, the libs have already been installed when building
-    # the first cross-compiler.
-    if test x"${component}" = x"gcc" \
-	-a x"$2" = "xstage2" \
-	-a "$(echo ${host} | grep -c mingw)" -eq 0 \
-	-a -d $sysroots; then
-	dryrun "copy_gcc_libs_to_sysroot \"${local_builds}/destdir/${host}/bin/${target}-gcc --sysroot=${sysroots}\""
-	if test $? != "0"; then
-            error "Copy of gcc libs to sysroot failed!"
-            return 1
-	fi
-    fi
-
     return 0
 }
 
@@ -984,42 +958,6 @@ EOF
     fi
 
     return 0
-}
-
-# TODO: Should copy_gcc_libs_to_sysroot() use the input parameter in $1?
-# $1 - compiler (and any compiler flags) to query multilib information
-copy_gcc_libs_to_sysroot()
-{
-    local libgcc
-    local ldso
-    local gcc_lib_path
-    local sysroot_lib_dir
-
-    ldso="$(find_dynamic_linker "${sysroots}" false)"
-    if ! test -z "${ldso}"; then
-	libgcc="libgcc_s.so"
-    else
-	libgcc="libgcc.a"
-    fi
-
-    # Make sure the compiler built before trying to use it
-    if test ! -e ${local_builds}/destdir/${host}/bin/${target}-gcc; then
-	error "${target}-gcc doesn't exist!"
-	return 1
-    fi
-    libgcc="$(${local_builds}/destdir/${host}/bin/${target}-gcc -print-file-name=${libgcc})"
-    if test x"${libgcc}" = xlibgcc.so -o x"${libgcc}" = xlibgcc_s.so; then
-	error "GCC doesn't exist!"
-	return 1
-    fi
-    gcc_lib_path="$(dirname "${libgcc}")"
-    if ! test -z "${ldso}"; then
-	sysroot_lib_dir="$(dirname ${ldso})"
-    else
-	sysroot_lib_dir="${sysroots}/usr/lib"
-    fi
-
-    rsync -a ${gcc_lib_path}/ ${sysroot_lib_dir}/
 }
 
 # helper function for record_test_results(). Records .sum files as artifacts
