@@ -527,7 +527,7 @@ make_install()
 	    i?86*) ARCH=i386 ;;
 	    powerpc*) ARCH=powerpc ;;
 	esac
-        dryrun "make ${make_opts} -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/usr"
+        dryrun "make ${make_opts} -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/libc/usr"
         if test $? != "0"; then
             error "Make headers_install failed!"
             return 1
@@ -540,7 +540,7 @@ make_install()
     notice "Making install in ${builddir}"
 
     if test "$(echo ${component} | grep -c glibc)" -gt 0; then
-        local make_flags=" install_root=${sysroots} ${make_flags} LDFLAGS=-static-libgcc"
+        local make_flags=" install_root=${sysroots}/libc ${make_flags} LDFLAGS=-static-libgcc"
     fi
 
     if test x"${override_ldflags}" != x; then
