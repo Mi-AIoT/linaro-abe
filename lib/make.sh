@@ -313,7 +313,7 @@ build()
 
     local version="$(basename ${srcdir})"
     local stamp=
-    stamp="$(get_stamp_name build ${version} ${2:+$2})"
+    stamp="$(get_stamp_name $component build ${version} ${2:+$2})"
 
     # The stamp is in the buildir's parent directory.
     local stampdir="$(dirname ${builddir})"

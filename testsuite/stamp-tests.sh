@@ -57,88 +57,88 @@ test_get_stamp_name()
 }
 
 errmatch=0
-in="configure gcc.git"
-match="gcc.git-configure.stamp"
+in="gcc configure gcc.git"
+match="gcc-gcc.git-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure infrastructure/mpc-1.0.1.tar.xz"
-match="mpc-1.0.1-configure.stamp"
+in="mpc configure infrastructure/mpc-1.0.1.tar.xz"
+match="mpc-mpc-1.0.1-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git stage2"
-match="gcc.git-stage2-configure.stamp"
+in="gcc configure gcc.git stage2"
+match="gcc-gcc.git-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git~bzr/custom_branch"
-match="gcc.git~bzr-custom_branch-configure.stamp"
+in="gcc configure gcc.git~bzr/custom_branch"
+match="gcc-gcc.git~bzr-custom_branch-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git~bzr/custom_branch stage2"
-match="gcc.git~bzr-custom_branch-stage2-configure.stamp"
+in="gcc configure gcc.git~bzr/custom_branch stage2"
+match="gcc-gcc.git~bzr-custom_branch-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git@1234567"
-match="gcc.git@1234567-configure.stamp"
+in="gcc configure gcc.git@1234567"
+match="gcc-gcc.git@1234567-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git@1234567 stage2"
-match="gcc.git@1234567-stage2-configure.stamp"
+in="gcc configure gcc.git@1234567 stage2"
+match="gcc-gcc.git@1234567-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git~bzr/custom_branch@1234567"
-match="gcc.git~bzr-custom_branch@1234567-configure.stamp"
+in="gcc configure gcc.git~bzr/custom_branch@1234567"
+match="gcc-gcc.git~bzr-custom_branch@1234567-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc.git~bzr/custom_branch@1234567 stage2"
-match="gcc.git~bzr-custom_branch@1234567-stage2-configure.stamp"
+in="gcc configure gcc.git~bzr/custom_branch@1234567 stage2"
+match="gcc-gcc.git~bzr-custom_branch@1234567-stage2-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="configure gcc-4.8-foo-bar_fiddle.diddle.tar.bz2"
-match="gcc-4.8-foo-bar_fiddle.diddle-configure.stamp"
+in="gcc configure gcc-4.8-foo-bar_fiddle.diddle.tar.bz2"
+match="gcc-gcc-4.8-foo-bar_fiddle.diddle-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="build infrastructure/linux-linaro-3.11-rc6-2013.08.tar.bz2"
-match="linux-linaro-3.11-rc6-2013.08-build.stamp"
+in="linux build infrastructure/linux-linaro-3.11-rc6-2013.08.tar.bz2"
+match="linux-linux-linaro-3.11-rc6-2013.08-build.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 errmatch=0
-in="configure http://.git.linaro.org/git/toolchain/gcc.git"
-match="gcc.git-configure.stamp"
+in="gcc configure http://.git.linaro.org/git/toolchain/gcc.git"
+match="gcc-gcc.git-configure.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 
-in="build gcc.git"
-match="gcc.git-build.stamp"
+in="gcc build gcc.git"
+match="gcc-gcc.git-build.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="fetch mpc.1.4.tar.gz"
-match="mpc.1.4-fetch.stamp"
+in="mpc fetch mpc.1.4.tar.gz"
+match="mpc-mpc.1.4-fetch.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
-in="extract mpc.1.4.tar.gz"
-match="mpc.1.4-extract.stamp"
+in="mpc extract mpc.1.4.tar.gz"
+match="mpc-mpc.1.4-extract.stamp"
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 errmatch=1
-in="bogusstamp gcc.git"
+in="gcc bogusstamp gcc.git"
 match=""
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 # Partial match of a valid stamp SHOULDN'T match.
 errmatch=1
-in="buildfoo gcc.git"
+in="gcc buildfoo gcc.git"
 match=""
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 # Partial match of a valid stamp SHOULDN'T match.
 errmatch=1
-in="foobuild gcc.git"
+in="gcc foobuild gcc.git"
 match=""
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
 # Partial match of a valid stamp SHOULDN'T match.
 errmatch=1
-in="build http://@revision"
+in="gcc build http://@revision"
 match=""
 test_get_stamp_name "${in}" "${match}" "${errmatch}"
 
@@ -216,7 +216,7 @@ test_create_stamp()
 }
 
 
-stamp_name="`get_stamp_name configure gcc.git~bzr/custom_branch@1234567 stage2`"
+stamp_name="`get_stamp_name gcc configure gcc.git~bzr/custom_branch@1234567 stage2`"
 testing="check_stamp: no existing stamp."
 check_dir="${local_snapshots}/stamp_checkdir"
 if test -d ${local_builds} -a ! -e "${PWD}/host.conf"; then

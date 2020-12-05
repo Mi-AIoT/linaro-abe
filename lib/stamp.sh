@@ -24,9 +24,10 @@
 #
 get_stamp_name()
 {
-    local stamptype=$1
-    local git_or_tar=$2
-    local suffix=${3:-}
+    local component=$1
+    local stamptype=$2
+    local git_or_tar=$3
+    local suffix=${4:-}
 
     local validstamp="$(echo ${stamptype} | egrep -c "^configure$|^build$|^extract$|^fetch$")" 
     if test ${validstamp} -lt 1; then
@@ -49,9 +50,7 @@ get_stamp_name()
 	fi
     fi
 
-    #local stamp_name="stamp-${stamptype}-${name_fragment}${suffix:+-${suffix}}"
-    local stamp_name="${name_fragment}${suffix:+-${suffix}}-${stamptype}.stamp"
-    echo "${stamp_name}"
+    echo "$component-${name_fragment}${suffix:+-${suffix}}-${stamptype}.stamp"
     return 0
 }
 

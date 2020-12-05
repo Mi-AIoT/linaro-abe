@@ -90,7 +90,7 @@ extract()
     local version="$(basename ${srcdir})"
 
     local stamp=
-    stamp="$(get_stamp_name extract ${version})"
+    stamp="$(get_stamp_name $component extract ${version})"
 
     # Extract stamps go into srcdir
     local stampdir="${local_snapshots}"

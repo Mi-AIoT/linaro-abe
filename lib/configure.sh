@@ -33,7 +33,7 @@ configure_build()
     local srcdir="$(get_component_srcdir ${component})"
     local builddir="$(get_component_builddir ${component} $2)"
     local version="$(basename ${srcdir})"
-    local stamp="$(get_stamp_name configure ${version} ${2:+$2})"
+    local stamp="$(get_stamp_name $component configure ${version} ${2:+$2})"
 
     # this is a hack for eglibc so that the configure script can be found
     if [ x"${component}" = x"eglibc" ]; then
