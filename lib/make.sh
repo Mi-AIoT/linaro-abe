@@ -846,17 +846,13 @@ make_clean()
 {
 #    trace "$*"
 
-    builddir="$(get_component_builddir $1 ${2:+$2})"
-    notice "Making clean in ${builddir}"
+    local component=$1
+    local builddir="$(get_component_builddir ${component})${2:+-$2}"
 
-    if test x"$2" = "dist"; then
-        dryrun "make distclean ${make_flags} -w -C ${builddir}"
-    else
-        dryrun "make clean ${make_flags} -w -C ${builddir}"
-    fi
+    notice "Making clean in ${builddir}"
+    dryrun "make clean ${make_flags} -w -C ${builddir}"
     if test $? != "0"; then
         warning "Make clean failed!"
-        #return 1
     fi
 
     return 0
