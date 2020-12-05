@@ -187,7 +187,7 @@ get_component_srcdir ()
 
 get_component_builddir ()
 {
-    __get_component_GENERIC BUILDDIR "$@"
+    echo "$(__get_component_GENERIC BUILDDIR "$1")${2:+-$2}"
 }
 
 get_component_filespec ()

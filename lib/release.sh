@@ -71,7 +71,7 @@ release_binutils_src()
     fi
 
     local srcdir="$(get_component_srcdir ${binutils_version})"
-    local builddir="$(get_component_builddir ${binutils_version})-binutils"
+    local builddir="$(get_component_builddir ${binutils_version} binutils)"
     # The new combined repository for binutils has GDB too, so we strip that off.
     local tag="$(create_release_tag ${binutils_version} | sed -e 's:-gdb::' -e 's:-binutils::')"
 
@@ -127,7 +127,7 @@ release_gcc_src()
 	local gcc_version="$(grep ^latest= ${topdir}/config/gcc.conf | cut -d '\"' -f 2) | tr -d '\"'"
     fi
     local srcdir="$(get_component_srcdir ${gcc_version})"
-    local builddir="$(get_component_builddir ${gcc_version})-stage2"
+    local builddir="$(get_component_builddir ${gcc_version} stage2)"
     local tag="$(create_release_tag ${gcc_version} | sed -e 's:[-~]linaro-::' | tr '~' '-')"
     local destdir="${local_builds}/linaro.$$/${tag}"
 

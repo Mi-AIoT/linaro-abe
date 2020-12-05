@@ -303,7 +303,7 @@ build()
     fi
     local url="$(get_component_url ${component})"
     local srcdir="$(get_component_srcdir ${component})"
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
 
     if [ x"${srcdir}" = x"" ]; then
 	# Somehow this component hasn't been set up correctly.
@@ -399,7 +399,7 @@ make_all()
         return 0
     fi
 
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
     notice "Making all in ${builddir}"
 
     if test x"${parallel}" = x"yes" -a "$(echo ${component} | grep -c glibc)" -eq 0; then
@@ -529,7 +529,7 @@ make_install()
     fi
 
 
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
     notice "Making install in ${builddir}"
 
     if test "$(echo ${component} | grep -c glibc)" -gt 0; then
@@ -682,7 +682,7 @@ make_check()
 #    trace "$*"
 
     local component=$1
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
 
     if [ x"${builddir}" = x"" ]; then
 	# Somehow this component hasn't been set up correctly.
@@ -847,7 +847,7 @@ make_clean()
 #    trace "$*"
 
     local component=$1
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
 
     notice "Making clean in ${builddir}"
     dryrun "make clean ${make_flags} -w -C ${builddir}"
@@ -863,7 +863,7 @@ make_docs()
 #    trace "$*"
 
     local component=$1
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
 
     notice "Making docs in ${builddir}"
 
@@ -1016,7 +1016,7 @@ copy_gcc_libs_to_sysroot()
 record_sum_files()
 {
     local component=$1
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
 
     local findargs=
     case "${component}" in

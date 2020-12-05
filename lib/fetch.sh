@@ -98,9 +98,6 @@ extract()
     # Name of the downloaded tarball.
     local tarball="${local_snapshots}/${file}"
 
-    # Initialize component data structures
-    local builddir="$(get_component_builddir ${component})"
-
     # read the md5sum from the .asc file
     local md5sum_in_file
     if test x"${dryrun}" != xyes; then

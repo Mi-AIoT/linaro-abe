@@ -31,7 +31,7 @@ configure_build()
 	return 0
     fi
     local srcdir="$(get_component_srcdir ${component})"
-    local builddir="$(get_component_builddir ${component})${2:+-$2}"
+    local builddir="$(get_component_builddir ${component} $2)"
     local version="$(basename ${srcdir})"
     local stamp="$(get_stamp_name configure ${version} ${2:+$2})"
 

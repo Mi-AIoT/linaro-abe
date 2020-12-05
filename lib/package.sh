@@ -147,7 +147,7 @@ binary_gdb()
 
     local version="$(${target}-gdb --version | head -1 | grep -o " [0-9\.][0-9].*\." | tr -d ')')"
     local tag="$(create_release_tag ${gdb_version} | sed -e 's:binutils-::')"
-    local builddir="$(get_component_builddir gdb)-gdb"
+    local builddir="$(get_component_builddir gdb gdb)"
     local destdir="${local_builds}/tmp.$$/${tag}-tmp"
     local prefix="${local_builds}/destdir/${host}"
 
@@ -561,7 +561,6 @@ binutils_src_tarball()
     fi
 
     local srcdir="$(get_component_srcdir ${binutils_version})"
-    local builddir="$(get_component_builddir ${binutils_version} binutils)"
     local branch="$(echo ${binutils_version} | cut -d '/' -f 2)"
 
     # clean up files that don't go into a release, often left over from development
