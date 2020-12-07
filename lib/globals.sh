@@ -179,10 +179,6 @@ import_manifest()
 	    local srcdir="${local_snapshots}/${dir}"
 	    local builddir="${local_builds}/${host}/${target}/${component}-${dir}"
 	    case "${i}" in
-		gdbserver)
-		    local srcdir=${local_snapshots}/${dir}/gdb/gdbserver
- 		    local builddir="${local_builds}/${host}/${target}/${dir}-gdbserver"
-		    ;;
 		*glibc)
 		    # Glibc builds will fail if there is an @ in the path. This is
 		    # unfortunate, as @ is used to deliminate the revision string.

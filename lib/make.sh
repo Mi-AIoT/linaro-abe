@@ -298,9 +298,6 @@ build()
 
     local component=$1
  
-    if test "$(echo $2 | grep -c gdb)" -gt 0; then
-	local component="$2"
-    fi
     local url="$(get_component_url ${component})"
     local srcdir="$(get_component_srcdir ${component})"
     local builddir="$(get_component_builddir ${component} $2)"
@@ -563,8 +560,8 @@ make_install()
     local default_makeflags= #"$(get_component_makeflags ${component})"
     local install_log="$(dirname ${builddir})/install-${component}${2:+-$2}.log"
     record_artifact "log_install_${component}${2:+-$2}" "${install_log}"
-    if test x"${component}" = x"gdb" ; then
-        dryrun "make install-gdb ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
+    if [ x"${component}" = x"gdb" -o x"${component}" = x"gdbserver" ]; then
+        dryrun "make install-${component} ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     else
 	dryrun "make install ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     fi
