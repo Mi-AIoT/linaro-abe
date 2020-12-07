@@ -182,11 +182,9 @@ configure_build()
 	    ;;
 	gdb)
 	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
-	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	gdbserver)
 	    local opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
-	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	# These are only built for the host
 	gmp|mpc|mpfr|isl|ppl|cloog)

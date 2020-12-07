@@ -157,7 +157,6 @@ binary_gdb()
     # install in alternate directory so it's easier to build the tarball
     dryrun "make all ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
     dryrun "make install ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
-    dryrun "make install ${make_flags} DESTDIR=${destdir} -w -C ${builddir}/gdb/gdbserver"
     dryrun "ln -sfnT ${destdir}/${prefix} /${local_builds}/tmp.$$/${tag}"
 
     local abbrev="$(echo ${host}_${target} | sed -e 's:none-::' -e 's:unknown-::')"
