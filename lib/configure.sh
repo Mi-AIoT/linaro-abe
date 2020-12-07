@@ -182,11 +182,9 @@ configure_build()
 	    ;;
 	gdb)
 	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
-	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	gdbserver)
 	    local opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
-	    dryrun "mkdir -p ${builddir}"
 	    ;;
 	# These are only built for the host
 	gmp|mpc|mpfr|isl|ppl|cloog)
@@ -209,6 +207,14 @@ configure_build()
     if test -e ${builddir}/config.status -a x"${component}" != x"gcc" -a x"${force}" = xno; then
 	warning "${builddir} already configured!"
     else
+	if [ x"$component" = x"gdbserver" ]; then
+	    # Workaround missing dependency of gdbsupport on BFD.
+	    # It'll take a while for binutils-gdb patch to propagate into
+	    # releases, so patch code here as a workaround.
+	    if ! grep -q "^configure-gdbsupport: maybe-configure-bfd\$" $srcdir/Makefile.in; then
+		echo "configure-gdbsupport: maybe-configure-bfd" >> $srcdir/Makefile.in
+	    fi
+	fi
 	# Don't stop on CONFIG_SHELL if it's set in the environment.
 	if test x"${CONFIG_SHELL}" = x; then
 	    export CONFIG_SHELL=${bash_shell}
