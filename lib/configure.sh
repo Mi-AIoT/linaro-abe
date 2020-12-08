@@ -203,7 +203,7 @@ configure_build()
 	    ;;
     esac
 
-    if test -e ${builddir}/config.status -a x"${component}" != x"gcc" -a x"${force}" = xno; then
+    if test -e ${builddir}/config.status -a x"${force}" = xno; then
 	warning "${builddir} already configured!"
     else
 	# Don't stop on CONFIG_SHELL if it's set in the environment.
