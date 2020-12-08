@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e750a655_ba156af2",
+        "filename": "lib/package.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-08T20:15:20Z",
+      "side": 0,
+      "message": "I am not sure about the intent of this line, anyway it looks like the whole function is dead-code since do_tarbin() in lib/make.sh has the call to it commented out.",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 90
+      },
+      "revId": "03b67d046a5d56cebc1fe83077bd592a29e72efa",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
