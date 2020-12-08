@@ -203,7 +203,7 @@ configure_build()
 	    ;;
     esac
 
-    if test -e ${builddir}/config.status -a x"${component}" != x"gcc" -a x"${force}" = xno; then
+    if test -e ${builddir}/config.status -a x"${force}" = xno; then
 	warning "${builddir} already configured!"
     else
 	if [ x"$component" = x"gdbserver" ]; then
