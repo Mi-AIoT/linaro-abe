@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "529fc1ce_9e091d13",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-08T20:07:10Z",
+      "side": 1,
+      "message": "You forgot to add ${component} here, or maybe we should use $(echo ${builddir} | tr ...) instead?",
+      "range": {
+        "startLine": 190,
+        "startChar": 6,
+        "endLine": 190,
+        "endChar": 84
+      },
+      "revId": "03b67d046a5d56cebc1fe83077bd592a29e72efa",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
