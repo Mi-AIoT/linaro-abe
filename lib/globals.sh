@@ -177,7 +177,7 @@ import_manifest()
 		local dir=${filespec}~${fixbranch}${revision:+_rev_${revision}}
 	    fi
 	    local srcdir="${local_snapshots}/${dir}"
-	    local builddir="${local_builds}/${host}/${target}/${dir}"
+	    local builddir="${local_builds}/${host}/${target}/${component}-${dir}"
 	    case "${i}" in
 		gdbserver)
 		    local srcdir=${local_snapshots}/${dir}/gdb/gdbserver
