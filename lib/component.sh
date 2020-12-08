@@ -512,7 +512,7 @@ collect_data ()
     fi
 
     # configured and built as a separate way.
-    local builddir="${local_builds}/${host}/${target}/${dir}"
+    local builddir="${local_builds}/${host}/${target}/${component}-${dir}"
     local srcdir=${local_snapshots}/${dir}
     case "${component}" in
 	gdbserver)

@@ -177,7 +177,7 @@ import_manifest()
 		local dir=${filespec}~${fixbranch}${revision:+_rev_${revision}}
 	    fi
 	    local srcdir="${local_snapshots}/${dir}"
-	    local builddir="${local_builds}/${host}/${target}/${dir}"
+	    local builddir="${local_builds}/${host}/${target}/${i}-${dir}"
 	    case "${i}" in
 		gdbserver)
 		    local srcdir=${local_snapshots}/${dir}/gdb/gdbserver
@@ -186,8 +186,7 @@ import_manifest()
 		*glibc)
 		    # Glibc builds will fail if there is an @ in the path. This is
 		    # unfortunate, as @ is used to deliminate the revision string.
-		    local srcdir="${local_snapshots}/${dir}"
-		    local builddir="$(echo ${local_builds}/${host}/${target}/${dir} | tr '@' '_')"
+		    builddir="$(echo "$builddir" | tr '@' '_')"
 		    ;;
 		gcc)
 		    local configure=
