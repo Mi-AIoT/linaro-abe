@@ -60,14 +60,14 @@ build_all()
 		# types.h instead of the one in the source tree to be a tiny bit less ugly.
 		# After libgcc is built with the modified file, it needs to be changed back.
 		if is_host_mingw; then
-		    sed -i -e 's/typedef __caddr_t caddr_t/\/\/ FIXME: typedef __caddr_t caddr_t/' ${sysroots}/usr/include/sys/types.h
+		    sed -i -e 's/typedef __caddr_t caddr_t/\/\/ FIXME: typedef __caddr_t caddr_t/' ${sysroots}/libc/usr/include/sys/types.h
 		fi
 
                 build gcc stage2
                 build_all_ret=$?
 		# Reverse the ugly hack
 		if is_host_mingw; then
-		    sed -i -e 's/.*FIXME: //' ${sysroots}/usr/include/sys/types.h
+		    sed -i -e 's/.*FIXME: //' ${sysroots}/libc/usr/include/sys/types.h
 		fi
                 ;;
             expat)
