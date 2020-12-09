@@ -138,40 +138,33 @@ configure_build()
 	    local opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
 	    ;;
-	gcc*)
-	    if test x"${build}" != x"${target}"; then
-		if test x"$2" != x; then
-		    case $2 in
-			stage1*)
+	gcc)
+	    local opts="$opts --prefix=$prefix"
+
+	    if test x"$build" != x"$target"; then
+		local stage="$2"
+
+		case "$stage" in
+			stage1)
+			    opts="$opts $stage1_flags"
 			    notice "Building stage 1 of GCC"
 			    ;;
-			stage2*)
+			stage2)
+			    if [ ! -e "$sysroots/libc/usr/include/stdio.h" ]; then
+				warning "No sysroot found before gcc stage2 build"
+			    fi
+			    opts="$opts $stage2_flags"
 			    notice "Building stage 2 of GCC"
 			    ;;
 			*)
-			    if test -e ${sysroots}/usr/include/stdio.h; then
-				notice "Building with stage 2 flags, sysroot found!"
-				local opts="${opts} ${stage2_flags}"
-			    else
-				warning "Building with stage 1 flags, no sysroot found"
-				local opts="${opts} ${stage1_flags}"
-			    fi
+			    error "Unknown GCC stage: $stage"
 			    ;;
-		    esac
-		else
-		    if test -e ${sysroots}/usr/include/stdio.h; then
-			notice "Building with stage 2 flags, sysroot found!"
-			local opts="${opts} ${stage2_flags}"
-		    else
-			warning "Building with stage 1 flags, no sysroot found"
-			local opts="${opts} ${stage1_flags}"
-		    fi
-		fi
+		esac
+		opts="$opts --build=$build --host=$host --target=$target"
 	    else
-		local opts="${opts} ${stage2_flags}"
+		# Native build needs stage2 build only.
+		opts="$opts $stage2_flags"
 	    fi
-	    local version="$(echo $1 | sed -e 's#[a-zA-Z\+/:@.]*-##' -e 's:\.tar.*::')"
-	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
 	binutils)
 	    if test x"${override_linker}" = x"gold"; then
