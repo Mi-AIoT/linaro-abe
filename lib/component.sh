@@ -207,27 +207,7 @@ get_component_makeflags ()
 
 get_component_configure ()
 {
-#    trace "$*"
-
-    local sopts=""
-    local component=$1
-
-    # Only GCC has parameters for two stages.
-    if test x"${component}" = x"gcc"; then
-	if test x"$2" != x; then
-	    local stage="$(echo $2 | tr "[:lower:]" "[:upper:]")"
-	    local sopts="${gcc[${stage}]}"
-	fi
-    fi
-
-    if test "${component:+set}" != "set"; then
-	warning "${component} does not exist!"
-	return 1
-    else
-	eval "echo \${${component}[CONFIGURE]} ${sopts}"
-    fi
-
-    return 0
+    __get_component_GENERIC CONFIGURE "$@"
 }
 
 get_component_md5sum ()
