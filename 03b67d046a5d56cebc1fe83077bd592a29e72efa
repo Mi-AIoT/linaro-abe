@@ -22,6 +22,30 @@
       "revId": "03b67d046a5d56cebc1fe83077bd592a29e72efa",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "aac6e1df_e2d76ca9",
+        "filename": "lib/package.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-09T13:38:36Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "e750a655_ba156af2",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 90
+      },
+      "revId": "03b67d046a5d56cebc1fe83077bd592a29e72efa",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
