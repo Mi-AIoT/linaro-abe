@@ -72,9 +72,6 @@ configure_build()
 	fi
     fi
 
-    local opts=""
-    local toolname="${component}"
-  
     local opts="$(get_component_configure ${component} $2)"
 
     # Use static linking if component is configured for it
@@ -82,17 +79,16 @@ configure_build()
     if test x"${static}" = x"yes"; then
 	case ${component} in
 	    qemu)
-		local opts="${opts} --static"
+		opts="${opts} --static"
 		;;
 	    *)
-		local opts="${opts} --disable-shared --enable-static"
+		opts="${opts} --disable-shared --enable-static"
 		;;
 	    esac
     fi
 
-    local mingw_extra=$(get_component_mingw_extraconf ${component})
     if is_host_mingw; then
-        opts="${opts} ${mingw_extra}"
+        opts="${opts} $(get_component_mingw_extraconf ${component})"
     fi
 
     # prefixhost is the root for host-side libs and tools.
@@ -107,7 +103,7 @@ configure_build()
     fi
 
     if test x"${override_cflags}" != x -a x"${component}" != x"eglibc"; then
-	local opts="${opts} CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\""
+	opts="${opts} CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\""
     fi
 
     # Some components' configure (eg. qemu's) do not support overriding
@@ -118,7 +114,8 @@ configure_build()
     # --target option set, as they generate code for the target, not the host.
     case ${component} in
 	newlib*|libgloss*)
-	    local opts="${opts} --host=${host} --target=${target} --prefix=${sysroots}/usr"
+	    # ??? Should --prefix be ${sysroots}/libc/usr ?
+	    opts="${opts} --host=${host} --target=${target} --prefix=${sysroots}/usr"
 	    ;;
 	*libc)
 	    # [e]glibc uses slibdir and rtlddir for some of the libraries and
@@ -135,11 +132,11 @@ configure_build()
 
 	    # rtlddir is where the dynamic-linker is installed.
 	    echo rtlddir=/lib >> ${builddir}/configparms
-	    local opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
+	    opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
 	    ;;
 	gcc)
-	    local opts="$opts --prefix=$prefix"
+	    opts="$opts --prefix=$prefix"
 
 	    if test x"$build" != x"$target"; then
 		local stage="$2"
@@ -168,31 +165,32 @@ configure_build()
 	    ;;
 	binutils)
 	    if test x"${override_linker}" = x"gold"; then
-		local opts="${opts} --enable-gold=default"
+		opts="${opts} --enable-gold=default"
 	    fi
-	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
+	    opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
 	gdb)
-	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
+	    opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
 	gdbserver)
-	    local opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
+	    opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
 	    ;;
 	# These are only built for the host
 	gmp|mpc|mpfr|isl|ppl|cloog)
-	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefix}"
+	    opts="${opts} --build=${build} --host=${host} --prefix=${prefix}"
 	    ;;
 	# Dejagnu is not a deliverable
 	dejagnu)
-	    local opts="${opts} --build=${build} --host=${host} --prefix=${prefixhost}"
+	    opts="${opts} --build=${build} --host=${host} --prefix=${prefixhost}"
 	    ;;
 	qemu)
-	    local opts="${opts} --prefix=${prefixhost}"
+	    opts="${opts} --prefix=${prefixhost}"
 	    # qemu's configure does not accept a parameter like SHELL=/bin/bash
 	    FORCESHELL=""
 	    ;;
 	*)
-	    local opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
+	    # ??? Why the default for --prefix is not "$prefix"?
+	    opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
 	    ;;
     esac
 
@@ -211,7 +209,6 @@ configure_build()
 
 	# unset this to avoid problems later
 	unset default_configure_flags
-	unset opts
 	unset stage1_flags
 	unset stage2_flags
     fi
