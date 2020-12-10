@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "e07f85a3_386a51ca",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-10T00:28:07Z",
+      "side": 1,
+      "message": "I think we want to remove this.",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 43
+      },
+      "revId": "f57110114eb8a8bc727391f08f2944fafe9d10e6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "bdee0920_67faa00f",
+        "filename": "lib/globals.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-10T00:28:07Z",
+      "side": 1,
+      "message": "We need to remove this, otherwise the build from manifest uses a differently named builddir, which causes abe-test to fail (I took me a very long while to realize that test-manifest2.sh replaces everything after \".git\" with \"\u003cstuff\u003e\" in run_lines*.txt, thus removing the -gdbserver suffix...",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 74
+      },
+      "revId": "f57110114eb8a8bc727391f08f2944fafe9d10e6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
