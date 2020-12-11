@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "6309f882_2283285d",
+        "filename": "lib/component.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-11T04:59:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e07f85a3_386a51ca",
+      "range": {
+        "startLine": 520,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 43
+      },
+      "revId": "f57110114eb8a8bc727391f08f2944fafe9d10e6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "bdee0920_67faa00f",
         "filename": "lib/globals.sh",
         "patchSetId": 2
@@ -45,6 +69,30 @@
       "revId": "f57110114eb8a8bc727391f08f2944fafe9d10e6",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "adbc477f_24474f31",
+        "filename": "lib/globals.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-11T04:59:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdee0920_67faa00f",
+      "range": {
+        "startLine": 184,
+        "startChar": 0,
+        "endLine": 184,
+        "endChar": 74
+      },
+      "revId": "f57110114eb8a8bc727391f08f2944fafe9d10e6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
