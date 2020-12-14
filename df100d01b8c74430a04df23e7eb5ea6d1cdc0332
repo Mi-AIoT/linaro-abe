@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "aa28a4fe_ca4962c3",
+        "filename": "config/glibc.conf",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-14T14:47:44Z",
+      "side": 1,
+      "message": "The only place stage2 compiler is used in ABE is in building gdbserver.  And it worked there due to \"--sysroot\u003d\" override on CFLAGS.\nThen, at the end of the build, we would populate ${sysroots}/libc/ using rsync in do_install_sysroot().",
+      "parentUuid": "b4696b27_a13c9455",
+      "range": {
+        "startLine": 4,
+        "startChar": 104,
+        "endLine": 4,
+        "endChar": 110
+      },
+      "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "b3b3ae35_41155aea",
         "filename": "lib/make.sh",
         "patchSetId": 7
@@ -36,6 +60,24 @@
       "writtenOn": "2020-12-14T14:17:19Z",
       "side": 1,
       "message": "Does this work for native toolchains?",
+      "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "21c0f98e_c817281a",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-14T14:47:44Z",
+      "side": 1,
+      "message": "No idea.  We don\u0027t support native mingw builds.",
+      "parentUuid": "b3b3ae35_41155aea",
       "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
