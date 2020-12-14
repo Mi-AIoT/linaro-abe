@@ -22,6 +22,30 @@
       "revId": "ff243e681fd721e0e1fbf26b1a80c8086ff0c32b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "ffd931f5_5833fe3b",
+        "filename": "lib/globals.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-14T11:44:25Z",
+      "side": 1,
+      "message": "Because if we do a native build, then $sysroot should be set to $prefix.\nBefore this patch we had inconsistent behavior with regards to what sysroot to use for native build.  E.g., (assuming aarch64-unknown-linux-gnu machine):\n* ./abe.sh --build all\nand\n* ./abe.sh --build all --target aarch64-unknown-linux-gnu\nwould produce slightly-different toolchains.  I fixed all such inconsistencies that I could find.  After this patch they should provide the same result.",
+      "parentUuid": "8eedd155_6b853aa9",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 29
+      },
+      "revId": "ff243e681fd721e0e1fbf26b1a80c8086ff0c32b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
     }
   ]
 }
