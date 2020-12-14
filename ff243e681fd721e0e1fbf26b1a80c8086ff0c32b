@@ -46,6 +46,30 @@
       "revId": "ff243e681fd721e0e1fbf26b1a80c8086ff0c32b",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "95ae2a4e_d895265b",
+        "filename": "lib/globals.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-14T14:14:18Z",
+      "side": 1,
+      "message": "Why can\u0027t we use $sysroots/$target even for native builds?",
+      "parentUuid": "ffd931f5_5833fe3b",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 29
+      },
+      "revId": "ff243e681fd721e0e1fbf26b1a80c8086ff0c32b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
     }
   ]
 }
