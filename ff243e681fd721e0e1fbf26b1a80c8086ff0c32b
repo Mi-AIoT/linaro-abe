@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "8eedd155_6b853aa9",
+        "filename": "lib/globals.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-14T10:39:08Z",
+      "side": 1,
+      "message": "Why does this depend on $host ! $target?",
+      "range": {
+        "startLine": 123,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 29
+      },
+      "revId": "ff243e681fd721e0e1fbf26b1a80c8086ff0c32b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
