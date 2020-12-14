@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "b4696b27_a13c9455",
+        "filename": "config/glibc.conf",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-14T14:17:19Z",
+      "side": 1,
+      "message": "How could that work before?",
+      "range": {
+        "startLine": 4,
+        "startChar": 104,
+        "endLine": 4,
+        "endChar": 110
+      },
+      "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b3b3ae35_41155aea",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-14T14:17:19Z",
+      "side": 1,
+      "message": "Does this work for native toolchains?",
+      "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
