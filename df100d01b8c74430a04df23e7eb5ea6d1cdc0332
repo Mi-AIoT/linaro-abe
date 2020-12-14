@@ -49,6 +49,30 @@
     },
     {
       "key": {
+        "uuid": "8718de0a_74921cc7",
+        "filename": "config/glibc.conf",
+        "patchSetId": 7
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-14T15:08:32Z",
+      "side": 1,
+      "message": "OK, so that\u0027s one of the real bugs you fixed :-)",
+      "parentUuid": "aa28a4fe_ca4962c3",
+      "range": {
+        "startLine": 4,
+        "startChar": 104,
+        "endLine": 4,
+        "endChar": 110
+      },
+      "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
+    },
+    {
+      "key": {
         "uuid": "b3b3ae35_41155aea",
         "filename": "lib/make.sh",
         "patchSetId": 7
@@ -81,6 +105,24 @@
       "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "8922baaa_800865e8",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-14T15:08:32Z",
+      "side": 1,
+      "message": "Ha, right I overlooked the is_host_mingw test.",
+      "parentUuid": "21c0f98e_c817281a",
+      "revId": "df100d01b8c74430a04df23e7eb5ea6d1cdc0332",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": false
     }
   ]
 }
