@@ -50,17 +50,6 @@ build_all()
             stage1)
                 build gcc stage1
                 build_all_ret=$?
-                # Don't create the sysroot if the clibrary build didn't succeed.
-                if test ${build_all_ret} -lt 1; then
-                    # If we don't install the sysroot, link to the one we built so
-                    # we can use the GCC we just built.
-		    if test x"${dryrun}" != xyes; then
-			local sysroot="$(${target}-gcc -print-sysroot)"
-			if test ! -d ${sysroot}; then
-			    dryrun "ln -sfnT ${abe_top}/sysroots/${target} ${sysroot}"
-			fi
-		    fi
-                fi
                 ;; 
             # Build stage 2 of GCC, which is the actual and fully functional compiler
             stage2)
@@ -71,14 +60,14 @@ build_all()
 		# types.h instead of the one in the source tree to be a tiny bit less ugly.
 		# After libgcc is built with the modified file, it needs to be changed back.
 		if is_host_mingw; then
-		    sed -i -e 's/typedef __caddr_t caddr_t/\/\/ FIXME: typedef __caddr_t caddr_t/' ${sysroots}/usr/include/sys/types.h
+		    sed -i -e 's/typedef __caddr_t caddr_t/\/\/ FIXME: typedef __caddr_t caddr_t/' ${sysroots}/libc/usr/include/sys/types.h
 		fi
 
                 build gcc stage2
                 build_all_ret=$?
 		# Reverse the ugly hack
 		if is_host_mingw; then
-		    sed -i -e 's/.*FIXME: //' ${sysroots}/usr/include/sys/types.h
+		    sed -i -e 's/.*FIXME: //' ${sysroots}/libc/usr/include/sys/types.h
 		fi
                 ;;
             expat)
@@ -517,7 +506,7 @@ make_install()
 	    i?86*) ARCH=i386 ;;
 	    powerpc*) ARCH=powerpc ;;
 	esac
-        dryrun "make ${make_opts} -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/usr"
+        dryrun "make ${make_opts} -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/libc/usr"
         if test $? != "0"; then
             error "Make headers_install failed!"
             return 1
@@ -530,7 +519,7 @@ make_install()
     notice "Making install in ${builddir}"
 
     if test "$(echo ${component} | grep -c glibc)" -gt 0; then
-        local make_flags=" install_root=${sysroots} ${make_flags} LDFLAGS=-static-libgcc"
+        local make_flags=" install_root=${sysroots}/libc ${make_flags} LDFLAGS=-static-libgcc"
     fi
 
     if test x"${override_ldflags}" != x; then
@@ -570,6 +559,9 @@ make_install()
         return 1
     fi
 
+    # Copy compiler libraries to sysroot.
+    # Compiler libraries are installed by GCC under $prefix/$target/,
+    # but sysroot is located at $prefix/$target/libc/.
     # Copy libs only when building a toolchain where build=host,
     # otherwise we can't execute ${target}-gcc. In case of a canadian
     # cross build, the libs have already been installed when building

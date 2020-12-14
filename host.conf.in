@@ -11,9 +11,6 @@ sources_conf=@SOURCES_CONF@
 # This is where the components we build go, ie... make install
 local_builds=@LOCAL_BUILDS@
 
-# This is a sysroot to a pre-compiled C library
-sysroots=@SYSROOTS@
-
 # config values for the build machine
 cpus=@CPUS@
 kernel=@KERNEL@

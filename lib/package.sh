@@ -149,7 +149,6 @@ binary_gdb()
     local tag="$(create_release_tag ${gdb_version} | sed -e 's:binutils-::')"
     local builddir="$(get_component_builddir gdb gdb)"
     local destdir="${local_builds}/tmp.$$/${tag}-tmp"
-    local prefix="${local_builds}/destdir/${host}"
 
     rm ${builddir}/gdb/gdb
 
@@ -157,6 +156,10 @@ binary_gdb()
     # install in alternate directory so it's easier to build the tarball
     dryrun "make all ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
     dryrun "make install ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
+    # ??? This expands to ...
+    # ln -sfnT ${local_builds}/tmp.$$/${tag}-tmp/${local_builds}/destdir/${host}
+    #         /${local_builds}/tmp.$$/${tag}
+    # ??? WHY?
     dryrun "ln -sfnT ${destdir}/${prefix} /${local_builds}/tmp.$$/${tag}"
 
     local abbrev="$(echo ${host}_${target} | sed -e 's:none-::' -e 's:unknown-::')"
@@ -253,11 +256,7 @@ binary_sysroot()
 
     local destdir="${local_builds}/tmp.$$/${tag}"
     dryrun "mkdir -p ${local_builds}/tmp.$$"
-    if test x"${build}" != x"${target}"; then
-	dryrun "ln -sfnT ${abe_top}/sysroots/${target} ${destdir}"
-    else
-	dryrun "ln -sfnT ${abe_top}/sysroots ${destdir}"
-    fi
+    dryrun "ln -sfnT ${sysroots} ${destdir}"
 
     local tarball=${local_snapshots}/${tag}.tar.xz
 
@@ -274,30 +273,28 @@ binary_sysroot()
 
 do_install_sysroot()
 {
-    local prefix="${local_builds}/destdir/${host}/"
-    local symlinks=
-
     # There may be no sysroot to install, depending on which package
     # subset we built.
     if [ ! -d ${sysroots} ]; then
 	return 0
     fi
 
-    if is_host_mingw; then
+    if is_host_mingw && [ x"${build}" != x"${target}" ]; then
 	# Windows does not support symlinks, and extractors do not
 	# always handle them correctly: dereference them to avoid
 	# problems.
-	symlinks=L
-    fi
+	local res=0
+	local tmpdir
+	tmpdir=$(mktemp -d)
+	dryrun "rsync -aL ${prefix}/${target}/libc/ $tmpdir/"
+	res=$(($res|$?))
+	dryrun "rsync -aL ${sysroots}/* $tmpdir/"
+	res=$(($res|$?))
+	dryrun "rsync -a --del $tmpdir/ ${prefix}/${target}/libc/"
+	res=$(($res|$?))
 
-    if test x"${build}" != x"${target}"; then
-	dryrun "mkdir -p  ${prefix}/${target}/libc/"
-        if [ $? -ne 0 ]; then
-	    error "mkdir failed"
-            return 1
-        fi
-	dryrun "rsync -av${symlinks} ${sysroots}/* ${prefix}/${target}/libc/"
-        if [ $? -ne 0 ]; then
+	rm -rf "$tmpdir"
+        if [ $res -ne 0 ]; then
 	    error "copy of sysroot failed"
             return 1
         fi
