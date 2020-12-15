@@ -462,22 +462,20 @@ make_all()
 }
 
 # Print path to dynamic linker in sysroot
-# $1 -- sysroot path
-# $2 -- whether dynamic linker is expected to exist
+# $1 -- whether dynamic linker is expected to exist
 find_dynamic_linker()
 {
-    local sysroots="$1"
-    local strict="$2"
+    local strict="$1"
     local dynamic_linker c_library_version
 
     # Programmatically determine the embedded glibc version number for
     # this version of the clibrary.
-    if test -x "${sysroots}/usr/bin/ldd"; then
-	c_library_version="$(${sysroots}/usr/bin/ldd --version | head -n 1 | sed -e "s/.* //")"
-	dynamic_linker="$(find ${sysroots} -type f -name ld-${c_library_version}.so)"
+    if test -x "${sysroots}/libc/usr/bin/ldd"; then
+	c_library_version="$(${sysroots}/libc/usr/bin/ldd --version | head -n 1 | sed -e "s/.* //")"
+	dynamic_linker="$(find ${sysroots}/libc -type f -name ld-${c_library_version}.so)"
     fi
     if $strict && [ -z "$dynamic_linker" ]; then
-        error "Couldn't find dynamic linker ld-${c_library_version}.so in ${sysroots}"
+        error "Couldn't find dynamic linker ld-${c_library_version}.so in ${sysroots}/libc"
         exit 1
     fi
     echo "$dynamic_linker"
@@ -611,7 +609,7 @@ print_make_opts_and_copy_sysroot ()
      #    de-synchronizing ld.so and libc.so, which will break the system.
      
      local ldso_bin lib_path ldso_link
-     ldso_bin=$(find_dynamic_linker "$sysroots" true)
+     ldso_bin=$(find_dynamic_linker true)
      lib_path=$(dirname "$ldso_bin")
 
      local -a ldso_links
@@ -973,7 +971,7 @@ copy_gcc_libs_to_sysroot()
     local gcc_lib_path
     local sysroot_lib_dir
 
-    ldso="$(find_dynamic_linker "${sysroots}" false)"
+    ldso=$(find_dynamic_linker false)
     if ! test -z "${ldso}"; then
 	libgcc="libgcc_s.so"
     else
