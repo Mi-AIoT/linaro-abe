@@ -275,9 +275,7 @@ get_component_list()
 	is_target_linux=true
     fi
 
-    # read dependencies from infrastructure.conf
-    # TODO: support --extraconfigdir for infrastructure.conf
-    local builds="$(grep ^depends ${topdir}/config/infrastructure.conf | tr -d '"' | sed -e 's:^depends=::')"
+    local builds="dejagnu"
 
     if [ x"$use_system_libs" = x"no" ]; then
 	builds="$builds gmp mpfr mpc"
