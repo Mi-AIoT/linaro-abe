@@ -302,12 +302,13 @@ get_component_list()
 	if $is_target_linux; then
 	    builds="${builds} gdbserver"
 	fi
+	builds="$builds qemu"
     else
 	# Native build
 	# Note that we don't need to build gdbserver, it will be included in GDB.
         builds="${builds} stage2 libc"
     fi
-    builds="${builds} gdb qemu dejagnu"
+    builds="${builds} gdb dejagnu"
 
     # if this build is based on a manifest, then we must remove components from
     # the build list which aren't described by the manifest
