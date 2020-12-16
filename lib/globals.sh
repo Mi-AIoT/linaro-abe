@@ -270,14 +270,13 @@ import_manifest()
 #
 get_component_list()
 {
-    # read dependencies from infrastructure.conf
-    # TODO: support --extraconfigdir for infrastructure.conf
-    local builds="$(grep ^depends ${topdir}/config/infrastructure.conf | tr -d '"' | sed -e 's:^depends=::')"
+    local builds="dejagnu"
 
     if [ x"$use_system_libs" = x"no" ]; then
 	builds="$builds gmp mpfr mpc"
     fi
 
+    builds="$builds binutils"
     if test x"${target}" != x"${build}"; then
         # Build a cross compiler
 	local is_target_linux=false
@@ -288,7 +287,7 @@ get_component_list()
 	# Non-mingw builds skip expat, python and libiconv, but
 	# are here so that they are included in the manifest, so
 	# linux and mingw manifests can be identical.
-	builds="${builds} expat python libiconv binutils"
+	builds="${builds} expat python libiconv"
 	if ! is_host_mingw; then
 	    builds="${builds} stage1"
 	fi
@@ -302,7 +301,7 @@ get_component_list()
         builds="${builds} libc stage2 gdb"
     else
 	# Native build
-        builds="${builds} binutils stage2 libc gdb"
+        builds="${builds} stage2 libc gdb"
     fi
     if $is_target_linux; then
 	builds="${builds} gdbserver"
