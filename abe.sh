@@ -1115,6 +1115,9 @@ while test $# -gt 0; do
 		update)
 		    supdate="${value}"
 		    ;;
+		system_libs)
+		    use_system_libs="${value}"
+		    ;;
 		*)
 		    error "$2 not recognized as a valid $1 directive."
 		    build_failure

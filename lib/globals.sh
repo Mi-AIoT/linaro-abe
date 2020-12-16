@@ -90,6 +90,9 @@ test_container=
 release=""
 with_packages="toolchain,sysroot,gdb"
 building=yes
+# Use system-provided GMP, MPFR, MPC and other prerequisite libraries
+# instead of building from them from scratch.
+use_system_libs=no
 
 override_linker=
 override_cflags=
@@ -270,6 +273,10 @@ get_component_list()
     # read dependencies from infrastructure.conf
     # TODO: support --extraconfigdir for infrastructure.conf
     local builds="$(grep ^depends ${topdir}/config/infrastructure.conf | tr -d '"' | sed -e 's:^depends=::')"
+
+    if [ x"$use_system_libs" = x"no" ]; then
+	builds="$builds gmp mpfr mpc"
+    fi
 
     if test x"${target}" != x"${build}"; then
         # Build a cross compiler
