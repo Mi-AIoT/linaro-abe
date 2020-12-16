@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "66af24e7_79c2db75",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2020-12-16T20:57:12Z",
+      "side": 1,
+      "message": "So gdbserver is included in gdb for native builds, and not for cross-builds?",
+      "range": {
+        "startLine": 301,
+        "startChar": 3,
+        "endLine": 301,
+        "endChar": 73
+      },
+      "revId": "5a81e94d9346df0f4c99052d18ee526a1a89cd97",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    }
+  ]
+}
