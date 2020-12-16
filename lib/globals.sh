@@ -273,27 +273,33 @@ get_component_list()
 
     if test x"${target}" != x"${build}"; then
         # Build a cross compiler
-	if is_host_mingw; then
-	    # As Mingw32 requires a cross compiler to be already built, so we
-	    # don't need to rebuild the sysroot.
-	    # ??? Then why do we have "libc" on the list?
-            builds="${builds} expat python libiconv binutils libc stage2 gdb qemu"
-	else
-	    # Non-mingw builds skip expat, python and libiconv, but
-	    # are here so that they are included in the manifest, so
-	    # linux and mingw manifests can be identical.
-	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb qemu"
+	local is_target_linux=false
+	if echo ${target} | grep -q -- "-linux-"; then
+	    is_target_linux=true
 	fi
-	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
+
+	# Non-mingw builds skip expat, python and libiconv, but
+	# are here so that they are included in the manifest, so
+	# linux and mingw manifests can be identical.
+	builds="${builds} expat python libiconv binutils"
+	if ! is_host_mingw; then
+	    builds="${builds} stage1"
+	fi
+	if $is_target_linux; then
+	    builds="${builds} linux"
+	fi
+	# As Mingw32 requires a cross compiler to be already built, so we
+	# don't need to rebuild the sysroot.
+	# ??? Then why do we have "libc" on the list?
+	# ??? If we don't need "libc", then we also don't need "linux" added above.
+        builds="${builds} libc stage2 gdb qemu"
+	if $is_target_linux; then
 	    builds="${builds} gdbserver"
-	else
-	    # "linux" is included in the depends line in infrastructure.conf,
-	    # but is only needed for linux targets. Therefore remove it for
-	    # all other targets.
-	    builds="$(echo ${builds} | sed -e 's: linux::')"
 	fi
     else
-        builds="${builds} binutils stage2 libc gdb qemu" # native build
+	# Native build
+	# Note that we don't need to build gdbserver, it will be included in GDB.
+        builds="${builds} binutils stage2 libc gdb qemu"
     fi
 
     # if this build is based on a manifest, then we must remove components from
