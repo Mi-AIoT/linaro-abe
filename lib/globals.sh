@@ -267,34 +267,46 @@ import_manifest()
 #
 get_component_list()
 {
+    local is_target_linux=false
+    if echo ${target} | grep -q -- "-linux-"; then
+	is_target_linux=true
+    fi
+
     # read dependencies from infrastructure.conf
     # TODO: support --extraconfigdir for infrastructure.conf
     local builds="$(grep ^depends ${topdir}/config/infrastructure.conf | tr -d '"' | sed -e 's:^depends=::')"
 
+    builds="${builds} binutils"
+
+    if $is_target_linux; then
+	builds="${builds} linux"
+    fi
+
     if test x"${target}" != x"${build}"; then
         # Build a cross compiler
-	if is_host_mingw; then
-	    # As Mingw32 requires a cross compiler to be already built, so we
-	    # don't need to rebuild the sysroot.
-	    # ??? Then why do we have "libc" on the list?
-            builds="${builds} expat python libiconv binutils libc stage2 gdb qemu"
-	else
-	    # Non-mingw builds skip expat, python and libiconv, but
-	    # are here so that they are included in the manifest, so
-	    # linux and mingw manifests can be identical.
-	    builds="${builds} expat python libiconv binutils stage1 libc stage2 gdb qemu"
+
+	# Non-mingw builds skip expat, python and libiconv, but
+	# are here so that they are included in the manifest, so
+	# linux and mingw manifests can be identical.
+	builds="${builds} expat python libiconv"
+	if ! is_host_mingw; then
+	    builds="${builds} stage1"
 	fi
-	if test "$(echo ${target} | grep -c -- -linux-)" -eq 1; then
-	    builds="${builds} gdbserver"
-	else
-	    # "linux" is included in the depends line in infrastructure.conf,
-	    # but is only needed for linux targets. Therefore remove it for
-	    # all other targets.
-	    builds="$(echo ${builds} | sed -e 's: linux::')"
-	fi
+	# As Mingw32 requires a cross compiler to be already built, so we
+	# don't need to rebuild the sysroot.
+	# ??? Then why do we have "libc" on the list?
+	# ??? If we don't need "libc", then we also don't need "linux" added above.
+        builds="${builds} libc stage2 gdb"
     else
-        builds="${builds} binutils stage2 libc gdb qemu" # native build
+	# Native build
+        builds="${builds} stage2 libc gdb"
     fi
+    if $is_target_linux; then
+	builds="${builds} gdbserver"
+    fi
+    # We build QEMU user-mode and system-mode for cross-builds to run tests,
+    # and for native (system-mode only) to test kernel boot.
+    builds="${builds} qemu"
 
     # if this build is based on a manifest, then we must remove components from
     # the build list which aren't described by the manifest
