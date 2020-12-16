@@ -276,6 +276,7 @@ get_component_list()
 	if is_host_mingw; then
 	    # As Mingw32 requires a cross compiler to be already built, so we
 	    # don't need to rebuild the sysroot.
+	    # ??? Then why do we have "libc" on the list?
             builds="${builds} expat python libiconv binutils libc stage2 gdb qemu"
 	else
 	    # Non-mingw builds skip expat, python and libiconv, but
