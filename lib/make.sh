@@ -557,18 +557,25 @@ make_install()
         return 1
     fi
 
-    # Copy compiler libraries to sysroot.
-    # Compiler libraries are installed by GCC under $prefix/$target/,
-    # but sysroot is located at $prefix/$target/libc/.
-    # Copy libs only when building a toolchain where build=host,
-    # otherwise we can't execute ${target}-gcc. In case of a canadian
-    # cross build, the libs have already been installed when building
-    # the first cross-compiler.
-    if test x"${component}" = x"gcc" \
-	-a x"$2" = "xstage2" \
-	-a "$(echo ${host} | grep -c mingw)" -eq 0 \
-	-a -d $sysroots; then
-	dryrun "copy_gcc_libs_to_sysroot \"${local_builds}/destdir/${host}/bin/${target}-gcc --sysroot=${sysroots}\""
+    # Decide whether now is a good time to copy GCC libraries into
+    # sysroot.
+    local copy_gcc_libs=false
+    if is_host_mingw; then
+	# For mingw builds we copy sysroot from a linux-hosted toolchain.
+	:
+    elif get_component_list | grep -q "stage1" \
+	    && [ x"${component}" = x"gcc" -a x"$2" = x"stage2" ]; then
+	# This is a two-stage build, so copy GCC libraries to sysroot after
+	# install of gcc stage2.
+	copy_gcc_libs=true
+    elif [ x"$component" = x"$clibrary" ]; then
+	# This is a single-stage build (most likely native), so copy gcc
+	# libraries after libc install.
+	copy_gcc_libs=true
+    fi
+
+    if $copy_gcc_libs; then
+	dryrun "copy_gcc_libs_to_sysroot"
 	if test $? != "0"; then
             error "Copy of gcc libs to sysroot failed!"
             return 1
@@ -962,16 +969,23 @@ EOF
     return 0
 }
 
-# TODO: Should copy_gcc_libs_to_sysroot() use the input parameter in $1?
-# $1 - compiler (and any compiler flags) to query multilib information
+# Copy compiler libraries to sysroot
 copy_gcc_libs_to_sysroot()
 {
+    local ldso_must_exist=true
     local libgcc
     local ldso
     local gcc_lib_path
     local sysroot_lib_dir
 
-    ldso=$(find_dynamic_linker false)
+    if [ x"$clibrary" = x"newlib" ]; then
+	# Newlib is normally used for bare-metal builds, so no ld.so expected.
+	# Still, one could use newlib for linux builds
+	ldso_must_exist=false
+    fi
+
+    ldso=$(find_dynamic_linker $ldso_must_exist)
+
     if ! test -z "${ldso}"; then
 	libgcc="libgcc_s.so"
     else
@@ -984,8 +998,8 @@ copy_gcc_libs_to_sysroot()
 	return 1
     fi
     libgcc="$(${local_builds}/destdir/${host}/bin/${target}-gcc -print-file-name=${libgcc})"
-    if test x"${libgcc}" = xlibgcc.so -o x"${libgcc}" = xlibgcc_s.so; then
-	error "GCC doesn't exist!"
+    if [ x"$libgcc" = x"libgcc_s.so" -o x"$libgcc" = x"libgcc.a" ]; then
+	error "Cannot find libgcc: $libgcc"
 	return 1
     fi
     gcc_lib_path="$(dirname "${libgcc}")"
