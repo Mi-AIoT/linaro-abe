@@ -92,7 +92,7 @@ with_packages="toolchain,sysroot,gdb"
 building=yes
 # Use system-provided GMP, MPFR, MPC and other prerequisite libraries
 # instead of building from them from scratch.
-use_system_libs=no
+use_system_libs=yes
 
 override_linker=
 override_cflags=
