@@ -176,7 +176,7 @@ configure_build()
 	    opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
 	    ;;
 	# These are only built for the host
-	gmp|mpc|mpfr|isl|ppl|cloog)
+	gmp|mpc|mpfr)
 	    opts="${opts} --build=${build} --host=${host} --prefix=${prefix}"
 	    ;;
 	# Dejagnu is not a deliverable

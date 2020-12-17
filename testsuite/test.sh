@@ -767,20 +767,6 @@ else
 fi
 
 # Do not pollute env
-testing="source_config"
-static_link="`static_link= && source_config isl && echo ${static_link}`"
-default_configure_flags="`default_configure_flags= && source_config isl && echo ${default_configure_flags}`"
-if test x"${static_link}" != xyes; then
-  fail "${testing}"
-elif test x"${default_configure_flags}" != x"--with-gmp-prefix=${PWD}/${hostname}/${build}/depends"; then
-  fail "${testing}"
-else
-  pass "${testing}"
-fi
-depends=
-default_configure_flags=
-static_link=
-
 testing="postfix make args (make_install)"
 cmp_makeflags="`echo ${cmp_makeflags} | sed -e 's:\ball-:install-:g'`"
 if test x"${cmp_makeflags}" = x; then
