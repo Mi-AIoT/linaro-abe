@@ -22,6 +22,30 @@
       "revId": "5a81e94d9346df0f4c99052d18ee526a1a89cd97",
       "serverId": "f33910f19b7abb192b83adbd000000bf",
       "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "b66999f4_f4e89776",
+        "filename": "lib/globals.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-17T05:02:57Z",
+      "side": 1,
+      "message": "You know, I think I\u0027m wrong here.  Make target \"all-gdb\" doesn\u0027t seem to trigger \"all-gdbserver\".\n\nRegarding native vs cross-builds -- gdbserver is build only when host\u003d\u003dtarget, so /if/ we used top-level \"make all\" command, then for native both gdb and gdbserver would be built (along with binutils and everything else), but for cross only gdb would built.  This is why for cross we separately configure gdbserver with --host\u003d$target --target\u003d$target.",
+      "parentUuid": "66af24e7_79c2db75",
+      "range": {
+        "startLine": 301,
+        "startChar": 3,
+        "endLine": 301,
+        "endChar": 73
+      },
+      "revId": "5a81e94d9346df0f4c99052d18ee526a1a89cd97",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
     }
   ]
 }
