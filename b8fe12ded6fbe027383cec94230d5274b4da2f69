@@ -25,6 +25,30 @@
     },
     {
       "key": {
+        "uuid": "2e8efe46_b2653566",
+        "filename": "lib/globals.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-18T08:14:06Z",
+      "side": 1,
+      "message": "My understanding is that any reasonable linux system has these by default, so we need these only for mingw-hosted builds.  We include them here for linux-hosted builds to have them included in the linux manifests, so that manifests for linux-hosted and mingw-hosted builds match.\n\nWe never do native mingw-hosted builds, so we don\u0027t care about matching manifests for native linux builds.",
+      "parentUuid": "aaa54875_73c051bf",
+      "range": {
+        "startLine": 291,
+        "startChar": 19,
+        "endLine": 291,
+        "endChar": 40
+      },
+      "revId": "b8fe12ded6fbe027383cec94230d5274b4da2f69",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
         "uuid": "4534bf32_504fe13b",
         "filename": "lib/globals.sh",
         "patchSetId": 3
@@ -36,6 +60,30 @@
       "writtenOn": "2020-12-17T14:43:45Z",
       "side": 1,
       "message": "Do we use system-mode when testing cross-compilers?",
+      "range": {
+        "startLine": 307,
+        "startChar": 34,
+        "endLine": 307,
+        "endChar": 63
+      },
+      "revId": "b8fe12ded6fbe027383cec94230d5274b4da2f69",
+      "serverId": "f33910f19b7abb192b83adbd000000bf",
+      "unresolved": true
+    },
+    {
+      "key": {
+        "uuid": "4df45d00_ca6080ce",
+        "filename": "lib/globals.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2020-12-18T08:14:06Z",
+      "side": 1,
+      "message": "We did use system-mode QEMU for testing ILP32 builds, so we have some support for it.  In practice, we don\u0027t use system-mode QEMU for testing at the moment.",
+      "parentUuid": "4534bf32_504fe13b",
       "range": {
         "startLine": 307,
         "startChar": 34,
