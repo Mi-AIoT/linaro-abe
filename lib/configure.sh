@@ -114,8 +114,9 @@ configure_build()
     # --target option set, as they generate code for the target, not the host.
     case ${component} in
 	newlib*|libgloss*)
-	    # ??? Should --prefix be ${sysroots}/libc/usr ?
-	    opts="${opts} --host=${host} --target=${target} --prefix=${sysroots}/usr"
+	    # Newlib installs itself into $prefix/$target, so setting --prefix to $prefix
+	    # gives us the correct sysroot path.
+	    opts="${opts} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
 	*libc)
 	    # [e]glibc uses slibdir and rtlddir for some of the libraries and

@@ -524,17 +524,6 @@ make_install()
         local make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
     fi
 
-    # NOTE: $make_flags is dropped, so the headers and libraries get
-    # installed in the right place in our non-multilib'd sysroot.
-    if test x"${component}" = x"newlib"; then
-        # as newlib supports multilibs, we force the install directory to build
-        # a single sysroot for now. FIXME: we should not disable multilibs!
-        local make_flags=" tooldir=${sysroots}/usr/"
-        if test x"$2" = x"libgloss"; then
-            local make_flags="${make_flags}"
-        fi
-    fi
-
     if test x"${make_docs}" != xyes; then
 	export BUILD_INFO=""
     fi
@@ -1009,7 +998,7 @@ copy_gcc_libs_to_sysroot()
     if ! test -z "${ldso}"; then
 	sysroot_lib_dir="$(dirname ${ldso})"
     else
-	sysroot_lib_dir="${sysroots}/usr/lib"
+	sysroot_lib_dir="${sysroots}/lib"
     fi
 
     rsync -a ${gcc_lib_path}/ ${sysroot_lib_dir}/
