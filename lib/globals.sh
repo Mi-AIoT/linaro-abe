@@ -188,7 +188,7 @@ import_manifest()
 	    local srcdir="${local_snapshots}/${dir}"
 	    local builddir="${local_builds}/${host}/${target}/${i}-${dir}"
 	    case "${i}" in
-		*glibc)
+		glibc|eglibc)
 		    # Glibc builds will fail if there is an @ in the path. This is
 		    # unfortunate, as @ is used to deliminate the revision string.
 		    builddir="$(echo "$builddir" | tr '@' '_')"

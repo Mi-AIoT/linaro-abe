@@ -464,9 +464,10 @@ manifest()
 	fi
 
 	local static="$(get_component_staticlink ${component})"
-	if test "$(echo ${component} | grep -c glibc)" -eq 0; then
-	    echo "${component}_staticlink=\"${static}\"" >> ${outfile}
-	fi
+	case "${component}" in
+	    glibc|eglibc) ;;
+	    *) echo "${component}_staticlink=\"${static}\"" >> ${outfile} ;;
+	esac
 
 	if test x"${component}" = x"gcc"; then
 	    local stage1="$(get_component_configure gcc stage1 | normalize_manifest_path )"

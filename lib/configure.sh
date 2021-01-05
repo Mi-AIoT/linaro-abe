@@ -118,7 +118,9 @@ configure_build()
 	    # gives us the correct sysroot path.
 	    opts="${opts} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
-	*libc)
+	glibc|eglibc)
+	    # FIXME: Below is ancient evil that should be removed.
+	    #        Forcing 64-bit rtld into /lib is against ABI.
 	    # [e]glibc uses slibdir and rtlddir for some of the libraries and
 	    # defaults to lib64/ for aarch64.  We need to override this.
 	    # There's no need to install anything into lib64/ since we don't
