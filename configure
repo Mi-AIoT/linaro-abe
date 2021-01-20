@@ -3488,10 +3488,7 @@ packages="texinfo gawk"
 ### Debian packages ###
 if test ${deb} -ge 1; then
     # add Ubuntu specific packages
-    packages="${packages} zlib1g-dev"
-    if test x"${BUILD_ARCH}" != xaarch64; then
-       packages="${packages} libncurses5-dev libpython2.7-dev"
-    fi
+    packages="${packages} libncurses5-dev python3-dev zlib1g-dev"
     for i in ${packages}; do
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking if $i is installed" >&5
 $as_echo_n "checking if $i is installed... " >&6; }
@@ -3510,7 +3507,7 @@ $as_echo "yes" >&6; }
 ### RPM Packages ###
 else
 if which rpm > /dev/null; then
-    packages="${packages} ncurses-devel python[23]?-devel zlib-devel"
+    packages="${packages} ncurses-devel python3-devel zlib-devel"
     for i in ${packages}; do
         { $as_echo "$as_me:${as_lineno-$LINENO}: checking if $i is installed" >&5
 $as_echo_n "checking if $i is installed... " >&6; }

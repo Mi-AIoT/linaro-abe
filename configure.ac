@@ -126,10 +126,7 @@ packages="texinfo gawk"
 ### Debian packages ###
 if test ${deb} -ge 1; then
     # add Ubuntu specific packages
-    packages="${packages} zlib1g-dev"
-    if test x"${BUILD_ARCH}" != xaarch64; then
-       packages="${packages} libncurses5-dev libpython2.7-dev"
-    fi
+    packages="${packages} libncurses5-dev python3-dev zlib1g-dev"
     for i in ${packages}; do
     AC_MSG_CHECKING([if $i is installed])
     #exists=`dpkg --get-selections | grep -c "^$i\[[:space:]\]*install"`
@@ -145,7 +142,7 @@ if test ${deb} -ge 1; then
 ### RPM Packages ###
 else
 if which rpm > /dev/null; then
-    packages="${packages} ncurses-devel python[[23]]?-devel zlib-devel"
+    packages="${packages} ncurses-devel python3-devel zlib-devel"
     for i in ${packages}; do
         AC_MSG_CHECKING([if $i is installed])
 	# RPM based systems might install via meta-packages but the rpm database
