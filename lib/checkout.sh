@@ -132,7 +132,7 @@ checkout()
     srcdir="$(get_component_srcdir ${component})" || return 1
     local repo=
     repo="$(get_component_filespec ${component})" || return 1
-    local protocol="$(echo ${url} | cut -d ':' -f 1)"    
+    local protocol="$(echo ${url} | cut -d ':' -f 1)"
     local repodir="${url}/${repo}"
     local new_srcdir=false
 
