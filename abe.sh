@@ -1270,15 +1270,15 @@ if [ $? -ne 0 ]; then
     build_failure
 fi
 
+# Now that all parameters have been processed, initialize global variables
+init_globals
+
 if [ ! -z "${do_manifest}" ]; then
     import_manifest "$do_manifest"
     if test $? -gt 0; then
         build_failure
     fi
 fi
-
-# Now that all parameters have been processed, initialize global variables
-init_globals
 
 # Check disk space. Each builds needs about 3.8G free
 if test x"${space_needed:-}" = x; then
