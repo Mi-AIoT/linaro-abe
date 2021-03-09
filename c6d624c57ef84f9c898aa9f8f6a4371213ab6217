@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "435e22fb_538133a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-03-09T13:38:42Z",
+      "side": 1,
+      "message": "Hmmm the patch is doing the opposite of what the commit message says?",
+      "revId": "c6d624c57ef84f9c898aa9f8f6a4371213ab6217",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
