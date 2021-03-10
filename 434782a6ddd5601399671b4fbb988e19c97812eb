@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22ceb384_3f3fccd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-03-10T09:11:00Z",
+      "side": 1,
+      "message": "Hi Christophe,\n\nDid you look into testing failures?  Are they expected?",
+      "revId": "434782a6ddd5601399671b4fbb988e19c97812eb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
