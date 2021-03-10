@@ -16,6 +16,23 @@
       "message": "Hi Christophe,\n\nDid you look into testing failures?  Are they expected?",
       "revId": "434782a6ddd5601399671b4fbb988e19c97812eb",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e300bc_a1c42019",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-03-10T20:14:26Z",
+      "side": 1,
+      "message": "I hadn\u0027t looked at the results, but I have just checked.\n\nThere\u0027s a failure when configuring glibc:\nconfigure: error: GNU libc requires kernel header files from\nLinux 3.2.0 or later to be installed before configuring.\nThe kernel header files are found usually in /usr/include/asm and\n/usr/include/linux; make sure these directories use files from\nLinux 3.2.0 or later.  This check uses \u003clinux/version.h\u003e, so\nmake sure that file was built correctly when installing the kernel header\nfiles.  To use kernel headers not from /usr/include/linux, use the\nconfigure option --with-headers.\n\nIn this particular case, glibc is configured with\n--with-headers\u003d/home/tcwg-buildslave/workspace/tcwg-abe-test__0/abe-tests/full-manifest-test/build2/builds/destdir/x86_64-pc-linux-gnu/aarch64-linux-gnu/libc/usr/include\nwhich does not exist\n\nHowever, I can see:\n/home/tcwg-buildslave/workspace/tcwg-abe-test__0/abe-tests/full-manifest-test/build2/builds/destdir/x86_64-pc-linux-gnu/libc/usr/include/\n\nIs that XXX/libc/usr/include created for the wrong target?",
+      "revId": "434782a6ddd5601399671b4fbb988e19c97812eb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
