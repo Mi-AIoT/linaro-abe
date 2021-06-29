@@ -698,12 +698,24 @@ make_check()
         make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"${override_ldflags}\""
     fi
 
-    local runtestflags="$(get_component_runtestflags ${component})"
-    if test x"${runtestflags}" != x; then
-        make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags}\""
+    local -a runtestflags
+
+    # ??? No idea about the difference (if any?) between $runtest_flags
+    # ??? and $component_runtestflags.  Both seem to be empty all the time.
+    if [ x"$runtest_flags" != x"" ]; then
+        runtestflags+=("$runtest_flags")
     fi
-    if test x"${override_runtestflags}" != x; then
-        make_flags="${make_flags} RUNTESTFLAGS=\"${override_runtestflags}\""
+    local component_runtestflags
+    component_runtestflags=$(get_component_runtestflags $component)
+    if [ x"$component_runtestflags" != x"" ]; then
+	runtestflags+=("$component_runtestflags")
+    fi
+    if [ "$override_runtestflags" != x"" ]; then
+	# These are extra runtest flags, not a proper override.
+	runtestflags+=("$override_runtestflags")
+    fi
+    if [ x"${runtestflags[*]}" != x"" ]; then
+	make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags[*]}\""
     fi
 
     if test x"${parallel}" = x"yes"; then
@@ -724,7 +736,7 @@ make_check()
     if test x"${build}" = x"${target}"; then
 	# Overwrite ${checklog} in order to provide a clean log file
 	# if make check has been run more than once on a build tree.
-	dryrun "make check RUNTESTFLAGS=\"${runtest_flags} --xml=${component}.xml \" ${make_flags} -w -i -k -C ${builddir} 2>&1 | tee ${checklog}"
+	dryrun "make check ${make_flags} -w -i -k -C ${builddir} 2>&1 | tee ${checklog}"
         local result=$?
         record_test_results "${component}" $2
 	if test $result -gt 0; then
@@ -796,7 +808,7 @@ make_check()
 
 	for i in ${dirs}; do
 	    # Always append "tee -a" to the log when building components individually
-            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots} FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" RUNTESTFLAGS=\"${runtest_flags}\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots} FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
             local result=$?
             record_test_results "${component}" $2
 	    if test $result -gt 0; then
