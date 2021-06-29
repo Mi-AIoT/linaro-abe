@@ -686,27 +686,27 @@ make_check()
     done
     notice "Making check in ${builddir}"
 
+    local make_flags=""
     # Use pipes instead of /tmp for temporary files.
     if test x"${override_cflags}" != x -a x"$2" != x"stage2"; then
-        local make_flags="${make_flags} CFLAGS_FOR_BUILD=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"${override_cflags}\""
+        make_flags="${make_flags} CFLAGS_FOR_BUILD=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"${override_cflags}\""
     else
-        local make_flags="${make_flags} CFLAGS_FOR_BUILD=-\"-pipe\" CXXFLAGS_FOR_BUILD=\"-pipe\""
+        make_flags="${make_flags} CFLAGS_FOR_BUILD=-\"-pipe\" CXXFLAGS_FOR_BUILD=\"-pipe\""
     fi
 
     if test x"${override_ldflags}" != x; then
-        local make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"${override_ldflags}\""
+        make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"${override_ldflags}\""
     fi
 
     local runtestflags="$(get_component_runtestflags ${component})"
     if test x"${runtestflags}" != x; then
-        local make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags}\""
+        make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags}\""
     fi
     if test x"${override_runtestflags}" != x; then
-        local make_flags="${make_flags} RUNTESTFLAGS=\"${override_runtestflags}\""
+        make_flags="${make_flags} RUNTESTFLAGS=\"${override_runtestflags}\""
     fi
 
     if test x"${parallel}" = x"yes"; then
-	local make_flags
 	case "${target}" in
 	    "$build"|*"-elf"*|armeb*) make_flags="${make_flags} -j ${cpus}" ;;
 	    # Double parallelization when running tests on remote boards
