@@ -990,8 +990,10 @@ copy_gcc_libs_to_sysroot()
 
     ldso=$(find_dynamic_linker $ldso_must_exist)
 
-    if ! test -z "${ldso}"; then
+    if [ x"$ldso" != x"" ]; then
 	libgcc="libgcc_s.so"
+    elif $ldso_must_exist; then
+	return 1
     else
 	libgcc="libgcc.a"
     fi
@@ -1007,7 +1009,7 @@ copy_gcc_libs_to_sysroot()
 	return 1
     fi
     gcc_lib_path="$(dirname "${libgcc}")"
-    if ! test -z "${ldso}"; then
+    if [ x"$ldso" != x"" ]; then
 	sysroot_lib_dir="$(dirname ${ldso})"
     else
 	sysroot_lib_dir="${sysroots}/lib"
