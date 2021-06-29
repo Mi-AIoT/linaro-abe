@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3799fda_095f617d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-06-29T20:14:08Z",
+      "side": 1,
+      "message": "Indeed this is confusing :-(\nlooks like we never used the possibility to define runtest_flags in \u003ccomponent\u003e.conf\n\nHaving two variables named runtestflags and runtest_flags looks like a recipe for trouble :-(\n",
+      "revId": "466cc6619de354cce0d9331bf844a3aef7970d62",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
