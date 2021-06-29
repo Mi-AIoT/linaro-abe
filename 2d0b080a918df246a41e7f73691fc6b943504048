@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78562688_8cc96f6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-06-29T19:51:04Z",
+      "side": 1,
+      "message": "Looks trivial, but it would be better to fix the validation scripts before: there\u0027s an unexpected error message ERROR: Cannot find node for tcwg-apm_32-test",
+      "revId": "2d0b080a918df246a41e7f73691fc6b943504048",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
