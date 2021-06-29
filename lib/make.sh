@@ -473,6 +473,11 @@ find_dynamic_linker()
     if test -x "${sysroots}/libc/usr/bin/ldd"; then
 	c_library_version="$(${sysroots}/libc/usr/bin/ldd --version | head -n 1 | sed -e "s/.* //")"
 	dynamic_linker="$(find ${sysroots}/libc -type f -name ld-${c_library_version}.so)"
+	if [ x"$dynamic_linker" = x"" ]; then
+	    dynamic_linker=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
+				 | sed -e "s/^RTLDLIST=//")
+	    dynamic_linker="$sysroots/libc/$dynamic_linker"
+	fi
     fi
     if $strict && [ -z "$dynamic_linker" ]; then
         error "Couldn't find dynamic linker ld-${c_library_version}.so in ${sysroots}/libc"
@@ -615,6 +620,10 @@ print_make_opts_and_copy_sysroot ()
      ldso_links=($(find "$lib_path" -type l -name "ld-linux*.so*"))
 
      if [ "${#ldso_links[@]}" != "1" ]; then
+	 # FIXME: This part should be broken with glibc 2.34 and newer
+	 # due to glibc providing only straight ld-linux-ARCH.so.N binaries
+	 # with no symlinks.
+	 # We'll fix this when (and if) we start to use this code again.
 	 error "Exactly one ld.so symlink is expected: ${ldso_links[@]}"
 	 return 1
      fi
