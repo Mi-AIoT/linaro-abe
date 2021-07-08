@@ -802,8 +802,8 @@ make_check()
 		;;
 	esac
 	if test x"${component}" = x"gcc" -a x"${clibrary}" != "newlib"; then
-            touch ${sysroots}/etc/ld.so.cache
-            chmod 700 ${sysroots}/etc/ld.so.cache
+            touch ${sysroots}/libc/etc/ld.so.cache
+            chmod 700 ${sysroots}/libc/etc/ld.so.cache
 	fi
 
 	# Remove existing logs so that rerunning make check results
@@ -817,7 +817,7 @@ make_check()
 
 	for i in ${dirs}; do
 	    # Always append "tee -a" to the log when building components individually
-            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots} FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
             local result=$?
             record_test_results "${component}" $2
 	    if test $result -gt 0; then
@@ -827,7 +827,7 @@ make_check()
 	done
 
         if test x"${component}" = x"gcc"; then
-            rm -rf ${sysroots}/etc/ld.so.cache
+            rm -rf ${sysroots}/libc/etc/ld.so.cache
 	fi
     fi
 
