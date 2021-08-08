@@ -852,12 +852,6 @@ dump()
     fi
 }
 
-# hosttools/ contains runtest (from dejagnu). We need it for testing
-# the toolchain.
-# destdir/ contains the toolchain components, some of which are needed
-# during the build (eg. GCC uses binutils).
-export PATH="${local_builds}/hosttools/${build}/bin:${local_builds}/destdir/${build}/bin:$PATH"
-
 # do_ switches are commands that should be executed after processing all
 # other switches.
 do_dump=
@@ -1278,7 +1272,8 @@ if [ ! -z "${do_manifest}" ]; then
 fi
 
 # Now that all parameters have been processed, initialize global variables
-init_globals
+# and $PATH.
+init_globals_and_PATH
 
 # Check disk space. Each builds needs about 3.8G free
 if test x"${space_needed:-}" = x; then
