@@ -388,39 +388,40 @@ make_all()
     local builddir="$(get_component_builddir ${component} $2)"
     notice "Making all in ${builddir}"
 
+    local make_flags
     if test x"${parallel}" = x"yes" -a "$(echo ${component} | grep -c glibc)" -eq 0; then
-	local make_flags="${make_flags} -j ${cpus}"
+	make_flags="${make_flags} -j ${cpus}"
     fi
 
     # Enable an errata fix for aarch64 that effects the linker
     if test "$(echo ${component} | grep -c glibc)" -gt 0 -a $(echo ${target} | grep -c aarch64) -gt 0; then
-	local make_flags="${make_flags} LDFLAGS=\"-Wl,--fix-cortex-a53-843419\" "
+	make_flags="${make_flags} LDFLAGS=\"-Wl,--fix-cortex-a53-843419\" "
     fi
 
     if test "$(echo ${target} | grep -c aarch64)" -gt 0; then
-	local make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"-Wl,-fix-cortex-a53-843419\" "
+	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"-Wl,-fix-cortex-a53-843419\" "
     fi
 
     # Use pipes instead of /tmp for temporary files.
     if test x"${override_cflags}" != x -a x"${component}" != x"eglibc"; then
-	local make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe -g -O2\" CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"-pipe -g -O2\""
+	make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe -g -O2\" CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"-pipe -g -O2\""
     else
-	local make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe -g -O2\" CXXFLAGS_FOR_BUILD=\"-pipe -g -O2\""
+	make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe -g -O2\" CXXFLAGS_FOR_BUILD=\"-pipe -g -O2\""
     fi
 
     if test x"${override_ldflags}" != x; then
-        local make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
+        make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
     fi
 
     # All tarballs are statically linked
-    local make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"-static-libgcc\""
+    make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"-static-libgcc\""
 
     # Some components require extra flags to make: we put them at the
     # end so that config files can override
     local default_makeflags="$(get_component_makeflags ${component})"
 
     if test x"${default_makeflags}" !=  x; then
-        local make_flags="${make_flags} ${default_makeflags}"
+        make_flags="${make_flags} ${default_makeflags}"
     fi
 
     if test x"${CONFIG_SHELL}" = x; then
@@ -428,7 +429,7 @@ make_all()
     fi
 
     if test x"${make_docs}" != xyes; then
-        local make_flags="${make_flags} BUILD_INFO=\"\" MAKEINFO=echo"
+        make_flags="${make_flags} BUILD_INFO=\"\" MAKEINFO=echo"
     fi
     local makeret=
     # GDB and Binutils share the same top level files, so we have to explicitly build
