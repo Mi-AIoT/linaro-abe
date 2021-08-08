@@ -117,7 +117,7 @@ fi
 #
 #
 
-init_globals()
+init_globals_and_PATH()
 {
     # Prefix is the root for installing the toolchain.
     prefix="$local_builds/destdir/$host"
@@ -125,6 +125,39 @@ init_globals()
     if [ x"$host" != x"$target" ]; then
 	sysroots="$sysroots/$target"
     fi
+
+    local host_bin target_bin
+    # hosttools/ contains runtest (from dejagnu). We need it for testing
+    # the toolchain.
+    # destdir/ contains the toolchain components, some of which are needed
+    # during the build (eg. GCC uses binutils).
+    host_bin="$local_builds/hosttools/$build/bin"
+    target_bin="$local_builds/destdir/$build/bin"
+    mkdir -p "$host_bin" "$target_bin"
+
+    # Create wrappers for "system" gcc and g++ in $host_bin to avoid using
+    # freshly-built GCC to compile GDB and other subsequent packages in native
+    # builds.  We /need/ this for native builds, but it is also a reasonable
+    # thing for the cross-builds.
+    local -A wrappers
+    wrappers[gcc]=gcc
+    wrappers[g++]=g++
+    if [ x"$host" = x"$target" ]; then
+	wrappers[$host-gcc]=gcc
+	wrappers[$host-g++]=g++
+    fi
+
+    for i in "${!wrappers[@]}"; do
+	cat > "$host_bin/$i" <<EOF
+#!/bin/sh
+exec $(which ${wrappers[$i]}) "\$@"
+EOF
+	chmod +x "$host_bin/$i"
+    done
+
+    # Note that we are adding $host_bin as highest-priority part of PATH,
+    # so that the above gcc and g++ wrappers take precedence.
+    export PATH="$host_bin:$target_bin:$PATH"
 }
 
 import_manifest()
