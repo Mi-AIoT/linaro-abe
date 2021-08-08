@@ -117,7 +117,7 @@ fi
 #
 #
 
-init_globals()
+init_globals_and_PATH()
 {
     # Prefix is the root for installing the toolchain.
     prefix="$local_builds/destdir/$host"
@@ -125,6 +125,17 @@ init_globals()
     if [ x"$host" != x"$target" ]; then
 	sysroots="$sysroots/$target"
     fi
+
+    local host_bin target_bin
+    # hosttools/ contains runtest (from dejagnu). We need it for testing
+    # the toolchain.
+    # destdir/ contains the toolchain components, some of which are needed
+    # during the build (eg. GCC uses binutils).
+    host_bin="$local_builds/hosttools/$build/bin"
+    target_bin="$local_builds/destdir/$build/bin"
+    mkdir -p "$host_bin" "$target_bin"
+
+    export PATH="$host_bin:$PATH"
 }
 
 import_manifest()
