@@ -856,7 +856,24 @@ dump()
 # the toolchain.
 # destdir/ contains the toolchain components, some of which are needed
 # during the build (eg. GCC uses binutils).
-export PATH="${local_builds}/hosttools/${build}/bin:${local_builds}/destdir/${build}/bin:$PATH"
+host_bin="$local_builds/hosttools/$build/bin"
+target_bin="$local_builds/destdir/$build/bin"
+mkdir -p "$host_bin" "$target_bin"
+
+# Create wrappers for "system" gcc and g++ in $host_bin to avoid using
+# freshly-built GCC to compile GDB and other subsequent packages in native
+# builds.
+for i in gcc g++; do
+    cat > "$host_bin/$i" <<EOF
+#!/bin/sh
+exec $(which $i) "\$@"
+EOF
+    chmod +x "$host_bin/$i"
+done
+
+# Note that we are adding $host_bin as highest-priority part of PATH,
+# so that the above gcc and g++ wrappers take precedence.
+export PATH="$host_bin:$target_bin:$PATH"
 
 # do_ switches are commands that should be executed after processing all
 # other switches.
