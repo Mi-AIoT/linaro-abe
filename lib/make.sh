@@ -708,7 +708,7 @@ make_check()
     if test x"${override_cflags}" != x -a x"$2" != x"stage2"; then
         make_flags="${make_flags} CFLAGS_FOR_BUILD=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"${override_cflags}\""
     else
-        make_flags="${make_flags} CFLAGS_FOR_BUILD=-\"-pipe\" CXXFLAGS_FOR_BUILD=\"-pipe\""
+        make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe\" CXXFLAGS_FOR_BUILD=\"-pipe\""
     fi
 
     if test x"${override_ldflags}" != x; then
