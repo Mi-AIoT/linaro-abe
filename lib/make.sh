@@ -761,15 +761,33 @@ make_check()
 	    return 1
 	fi
     else
-	local exec_tests
+	local dirs check_targets exec_tests
+	dirs="/"
+	check_targets="check"
 	exec_tests=false
 	case "$component" in
-	    gcc) exec_tests=true ;;
-	    binutils) exec_tests=true ;;
-	    # Support testing remote gdb for the merged binutils-gdb.git
-	    # where the branch name DOES indicate the tool.
-	    gdb)
+	    binutils)
+		dirs="/binutils /ld /gas"
+		check_targets="check-DEJAGNU"
 		exec_tests=true
+		;;
+	    gcc)
+		exec_tests=true
+		;;
+	    gdb)
+		check_targets="check-gdb"
+		exec_tests=true
+		;;
+	    glibc)
+		check_targets="check run-built-tests=no"
+		;;
+	    newlib)
+		# We need a special case for newlib, to bypass its
+		# multi-do Makefile targets that do not properly
+		# propagate multilib flags. This means that we call
+		# runtest only once for newlib.
+		dirs="/${target}/newlib"
+		check_targets="check-DEJAGNU"
 		;;
 	esac
 
@@ -783,33 +801,7 @@ make_check()
 	    fi
 	fi
 
-	case ${component} in
-	    binutils)
-		local dirs="/binutils /ld /gas"
-		local check_targets="check-DEJAGNU"
-		;;
-	    gdb)
-		local dirs="/"
-		local check_targets="check-gdb"
-		;;
-	    glibc)
-		local dirs="/"
-		local check_targets="check run-built-tests=no"
-		;;
-	    newlib)
-		# We need a special case for newlib, to bypass its
-		# multi-do Makefile targets that do not properly
-		# propagate multilib flags. This means that we call
-		# runtest only once for newlib.
-		local dirs="/${target}/newlib"
-		local check_targets="check-DEJAGNU"
-		;;
-	    *)
-		local dirs="/"
-		local check_targets="check"
-		;;
-	esac
-	if test x"${component}" = x"gcc" -a x"${clibrary}" != "newlib"; then
+	if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
             touch ${sysroots}/libc/etc/ld.so.cache
             chmod 700 ${sysroots}/libc/etc/ld.so.cache
 	fi
@@ -834,7 +826,7 @@ make_check()
 	    fi
 	done
 
-        if test x"${component}" = x"gcc"; then
+        if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
             rm -rf ${sysroots}/libc/etc/ld.so.cache
 	fi
     fi
