@@ -119,11 +119,11 @@ binary_runtime()
 
     # Get the binary libraries.
     if test x"${build}" != x"${target}"; then
-	dryrun "rsync -av ${local_builds}/destdir/${host}/${target}/lib*/libgcc* ${destdir}/lib/${target}/"	
-	dryrun "rsync -av ${local_builds}/destdir/${host}/${target}/lib*/libstdc++* ${destdir}/usr/lib/${target}/"
+	dryrun "rsync -av $prefix/${target}/lib*/libgcc* ${destdir}/lib/${target}/"
+	dryrun "rsync -av $prefix/${target}/lib*/libstdc++* ${destdir}/usr/lib/${target}/"
     else
-	dryrun "rsync -av ${local_builds}/destdir/${host}/lib*/libgcc* ${destdir}/lib/${target}/"
-	dryrun "rsync -av ${local_builds}/destdir/${host}/lib*/libstdc++* ${destdir}/usr/lib/${target}/"
+	dryrun "rsync -av $prefix/lib*/libgcc* ${destdir}/lib/${target}/"
+	dryrun "rsync -av $prefix/lib*/libstdc++* ${destdir}/usr/lib/${target}/"
     fi
 
     # make the tarball from the tree we just created.
@@ -157,7 +157,7 @@ binary_gdb()
     dryrun "make all ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
     dryrun "make install ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
     # ??? This expands to ...
-    # ln -sfnT ${local_builds}/tmp.$$/${tag}-tmp/${local_builds}/destdir/${host}
+    # ln -sfnT ${local_builds}/tmp.$$/${tag}-tmp/$prefix
     #         /${local_builds}/tmp.$$/${tag}
     # ??? WHY?
     dryrun "ln -sfnT ${destdir}/${prefix} /${local_builds}/tmp.$$/${tag}"
@@ -199,7 +199,7 @@ binary_toolchain()
     # work.
     # Another copy is needed in gcc's libexec for cc1.exe to work
     if is_host_mingw; then
-	for dest in ${local_builds}/destdir/${host}/bin/ ${local_builds}/destdir/${host}/libexec/gcc/${target}/*/
+	for dest in $prefix/bin/ $prefix/libexec/gcc/${target}/*/
 	do
 	    dryrun "cp /usr/${host}/lib/libwinpthread-1.dll ${dest}"
 	    if test $? -gt 0; then
@@ -215,8 +215,8 @@ binary_toolchain()
 
     # The manifest file records the versions of all of the components used to
     # build toolchain.
-    dryrun "cp ${manifest} ${local_builds}/destdir/${host}/"
-    dryrun "rsync -av${symlinks} ${local_builds}/destdir/${host}/* ${destdir}/"
+    dryrun "cp ${manifest} $prefix/"
+    dryrun "rsync -av${symlinks} $prefix/* ${destdir}/"
 
     # Strip host binaries when packaging releases.
     if test x"${release}" != x; then
