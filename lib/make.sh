@@ -317,9 +317,16 @@ build()
         # Don't proceed if the srcdir isn't present.  What's the point?
         error "no source dir for the stamp!"
         return 1
-   fi
+    fi
 
-    if test x"${building}" != xno; then
+    if [ x"$building" = x"no" ]; then
+	return 0
+    fi
+
+    # configure_build is allowed to alter environment, e.g., set $PATH,
+    # for build of a particular component, so run configure and build
+    # in a sub-shell.
+    (
 	notice "Configuring ${component} ${2:+$2}"
 	configure_build ${component} ${2:+$2}
 	if test $? -gt 0; then
@@ -368,9 +375,10 @@ build()
 	
 	# For cross testing, we need to build a C library with our freshly built
 	# compiler, so any tests that get executed on the target can be fully linked.
-    fi
+    ) &
+    ret=0 && wait $! || ret=$?
 
-    return 0
+    return $ret
 }
 
 make_all()
