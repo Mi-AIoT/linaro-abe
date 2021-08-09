@@ -18,6 +18,12 @@ if {[info exists env(PREFIX_UNDER_TEST)]} {
     set OBJC_UNDER_TEST "[set prefix]gcc $flags"
     set GOC_UNDER_TEST "[set prefix]goc $flags"
     set GNAT_UNDER_TEST "[set prefix]gnat $flags"
+
+    set CC_FOR_TARGET "[set prefix]gcc $flags"
+    set CXX_FOR_TARGET "[set prefix]g++ $flags"
+    set F77_FOR_TARGET "[set prefix]gfortran $flags"
+    set F90_FOR_TARGET "[set prefix]gfortran $flags"
+    set GNATMAKE_FOR_TARGET "[set prefix]gnatmake $flags"
 }
 
 if {[info exists env(SYSROOT_UNDER_TEST)]} {
