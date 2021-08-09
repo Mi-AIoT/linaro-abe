@@ -7,10 +7,6 @@ if {[info exists env(PREFIX_UNDER_TEST)]} {
     if {[info exists env(FLAGS_UNDER_TEST)]} {
 	set flags "$env(FLAGS_UNDER_TEST)"
     }
-    if {[info exists env(SYSROOT_UNDER_TEST)]} {
-	set sysroot "$env(SYSROOT_UNDER_TEST)"
-	set flags "$flags --sysroot=$env(SYSROOT_UNDER_TEST)"
-    }
 
     # This set of variables is used by GCC
     set GCC_UNDER_TEST "[set prefix]gcc $flags"

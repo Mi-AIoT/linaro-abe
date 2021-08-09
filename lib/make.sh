@@ -781,8 +781,10 @@ make_check()
 	    ;;
     esac
 
-    local schroot_make_opts
+    local test_flags
+    test_flags="--sysroot=$sysroots/libc"
 
+    local schroot_make_opts
     if $exec_tests && [ x"$test_container" != x"" ]; then
 	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
 	if [ $? -ne 0 ]; then
@@ -810,7 +812,7 @@ make_check()
     local i result=0
     for i in ${dirs}; do
 	# Always append "tee -a" to the log when building components individually
-        dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+        dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
         if [ $? != 0 ]; then
 	    warning "make ${check_targets} -C ${builddir}$i failed."
 	    result=1
