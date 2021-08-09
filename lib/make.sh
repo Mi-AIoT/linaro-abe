@@ -815,19 +815,24 @@ make_check()
 	    rm ${checklog}
 	fi
 
+        local i result=0
 	for i in ${dirs}; do
 	    # Always append "tee -a" to the log when building components individually
             dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
-            local result=$?
-            record_test_results "${component}" $2
-	    if test $result -gt 0; then
-		error "make ${check_targets} -C ${builddir}$i failed."
-		return 1
+            if [ $? != 0 ]; then
+		warning "make ${check_targets} -C ${builddir}$i failed."
+		result=1
 	    fi
+            record_test_results "${component}" $2
 	done
 
         if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
             rm -rf ${sysroots}/libc/etc/ld.so.cache
+	fi
+
+	if [ $result != 0 ]; then
+	    error "Making check in ${builddir} failed"
+	    return 1
 	fi
     fi
 
