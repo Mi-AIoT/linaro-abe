@@ -197,6 +197,25 @@ configure_build()
 	    ;;
     esac
 
+    local target_hosted=false target_prefixed=false
+    for opt in $opts; do
+	case "$opt" in
+	    "--host=$target") target_hosted=true ;;
+	    "--prefix=$prefix") target_prefixed=true ;;
+	esac
+    done
+
+    if $target_hosted && ! $target_prefixed; then
+	# Components that are configured with --prefix=$prefix find
+	# tools installed in $prefix/bin by themselves.  For target-side
+	# components that need a custom --prefix= we add these tools
+	# to $PATH.
+	# We are running inside a sub-shell provided by make.sh:build(),
+	# so it's OK to alter environment.
+	export PATH="$prefix/bin:$PATH"
+	notice "Setting for $component${2:+ $2} build PATH=$PATH"
+    fi
+
     if test -e ${builddir}/config.status -a x"${force}" = xno; then
 	warning "${builddir} already configured!"
     else
@@ -210,6 +229,7 @@ configure_build()
 	fi
 	# Don't stop on CONFIG_SHELL if it's set in the environment.
 	if test x"${CONFIG_SHELL}" = x; then
+	    # ??? exporting CONFIG_SHELL seems excessive.
 	    export CONFIG_SHELL=${bash_shell}
 	fi
 	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure $FORCESHELL ${default_configure_flags} ${opts})"
