@@ -71,14 +71,13 @@ build_all()
 		fi
                 ;;
             expat)
-		mkdir -p ${local_builds}/destdir/${host}
 		# TODO: avoid hardcoding the version in the path here
-		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/include ${local_builds}/destdir/${host}/usr/"
+		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/include $prefix/usr/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of expat include failed"
 		    return 1
 		fi
-		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/lib ${local_builds}/destdir/${host}/usr/"
+		dryrun "rsync -av ${local_snapshots}/expat-2.1.0-1/lib $prefix/usr/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of expat lib failed"
 		    return 1
@@ -92,7 +91,7 @@ build_all()
 		export PYTHON_MINGW=${local_snapshots}/python-2.7.4-mingw32
 		# The Python DLLS need to be in the bin dir where the
 		# executables are.
-		dryrun "rsync -av ${PYTHON_MINGW}/pylib ${PYTHON_MINGW}/dll ${PYTHON_MINGW}/libpython2.7.dll ${local_builds}/destdir/${host}/bin/"
+		dryrun "rsync -av ${PYTHON_MINGW}/pylib ${PYTHON_MINGW}/dll ${PYTHON_MINGW}/libpython2.7.dll $prefix/bin/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of python libs failed"
 		    return 1
@@ -100,7 +99,7 @@ build_all()
 		;;
 	    libiconv)
 		# TODO: avoid hardcoding the version in the path here
-		dryrun "rsync -av ${local_snapshots}/libiconv-1.14-3/include ${local_snapshots}/libiconv-1.14-3/lib ${local_builds}/destdir/${host}/usr/"
+		dryrun "rsync -av ${local_snapshots}/libiconv-1.14-3/include ${local_snapshots}/libiconv-1.14-3/lib $prefix/usr/"
 		if [ $? -ne 0 ]; then
 		    error "rsync of libiconv failed"
 		    return 1
@@ -826,7 +825,7 @@ make_check()
 
 	for i in ${dirs}; do
 	    # Always append "tee -a" to the log when building components individually
-            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"${local_builds}/destdir/${host}/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
             local result=$?
             record_test_results "${component}" $2
 	    if test $result -gt 0; then
@@ -1017,11 +1016,11 @@ copy_gcc_libs_to_sysroot()
     fi
 
     # Make sure the compiler built before trying to use it
-    if test ! -e ${local_builds}/destdir/${host}/bin/${target}-gcc; then
+    if test ! -e $prefix/bin/${target}-gcc; then
 	error "${target}-gcc doesn't exist!"
 	return 1
     fi
-    libgcc="$(${local_builds}/destdir/${host}/bin/${target}-gcc -print-file-name=${libgcc})"
+    libgcc="$($prefix/bin/${target}-gcc -print-file-name=${libgcc})"
     if [ x"$libgcc" = x"libgcc_s.so" -o x"$libgcc" = x"libgcc.a" ]; then
 	error "Cannot find libgcc: $libgcc"
 	return 1
