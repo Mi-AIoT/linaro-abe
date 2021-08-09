@@ -129,12 +129,11 @@ init_globals_and_PATH()
     local host_bin
     # hosttools/ contains runtest (from dejagnu). We need it for testing
     # the toolchain.
-    # destdir/ contains the toolchain components, some of which are needed
-    # during the build (eg. GCC uses binutils).
     host_bin="$local_builds/hosttools/$host/bin"
-    mkdir -p "$host_bin" "$prefix/bin"
+    mkdir -p "$host_bin"
 
-    export PATH="$host_bin:$prefix/bin:$PATH"
+    export PATH="$host_bin:$PATH"
+    notice "Setting globally PATH=$PATH"
 }
 
 import_manifest()
