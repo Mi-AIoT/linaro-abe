@@ -750,84 +750,81 @@ make_check()
     # Run tests
     local checklog="${builddir}/check-${component}.log"
     record_artifact "log_check_${component}" "${checklog}"
-    if false; then
-	:
-    else
-	local dirs check_targets exec_tests
-	dirs="/"
-	check_targets="check"
-	exec_tests=false
-	case "$component" in
-	    binutils)
-		dirs="/binutils /ld /gas"
-		check_targets="check-DEJAGNU"
-		exec_tests=true
-		;;
-	    gcc)
-		exec_tests=true
-		;;
-	    gdb)
-		check_targets="check-gdb"
-		exec_tests=true
-		;;
-	    glibc)
-		check_targets="check run-built-tests=no"
-		;;
-	    newlib)
-		# We need a special case for newlib, to bypass its
-		# multi-do Makefile targets that do not properly
-		# propagate multilib flags. This means that we call
-		# runtest only once for newlib.
-		dirs="/${target}/newlib"
-		check_targets="check-DEJAGNU"
-		;;
-	esac
 
-	local schroot_make_opts
+    local dirs check_targets exec_tests
+    dirs="/"
+    check_targets="check"
+    exec_tests=false
+    case "$component" in
+	binutils)
+	    dirs="/binutils /ld /gas"
+	    check_targets="check-DEJAGNU"
+	    exec_tests=true
+	    ;;
+	gcc)
+	    exec_tests=true
+	    ;;
+	gdb)
+	    check_targets="check-gdb"
+	    exec_tests=true
+	    ;;
+	glibc)
+	    check_targets="check run-built-tests=no"
+	    ;;
+	newlib)
+	    # We need a special case for newlib, to bypass its
+	    # multi-do Makefile targets that do not properly
+	    # propagate multilib flags. This means that we call
+	    # runtest only once for newlib.
+	    dirs="/${target}/newlib"
+	    check_targets="check-DEJAGNU"
+	    ;;
+    esac
 
-	if $exec_tests && [ x"$test_container" != x"" ]; then
-	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
-	    if [ $? -ne 0 ]; then
-		error "Cannot initialize sysroot on $test_container"
-		return 1
-	    fi
-	elif [ x"${build}" = x"${target}" ]; then
-	    schroot_make_opts="ABE_TEST_CONTAINER=local"
-	fi
+    local schroot_make_opts
 
-	if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
-            touch ${sysroots}/libc/etc/ld.so.cache
-            chmod 700 ${sysroots}/libc/etc/ld.so.cache
-	fi
-
-	# Remove existing logs so that rerunning make check results
-	# in a clean log.
-	if test -e ${checklog}; then
-	    # This might or might not be called, depending on whether make_clean
-	    # is called before make_check.  None-the-less it's better to be safe.
-	    notice "Removing existing check-${component}.log: ${checklog}"
-	    rm ${checklog}
-	fi
-
-        local i result=0
-	for i in ${dirs}; do
-	    # Always append "tee -a" to the log when building components individually
-            dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
-            if [ $? != 0 ]; then
-		warning "make ${check_targets} -C ${builddir}$i failed."
-		result=1
-	    fi
-            record_test_results "${component}" $2
-	done
-
-        if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
-            rm -rf ${sysroots}/libc/etc/ld.so.cache
-	fi
-
-	if [ $result != 0 ]; then
-	    error "Making check in ${builddir} failed"
+    if $exec_tests && [ x"$test_container" != x"" ]; then
+	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
+	if [ $? -ne 0 ]; then
+	    error "Cannot initialize sysroot on $test_container"
 	    return 1
 	fi
+    elif [ x"${build}" = x"${target}" ]; then
+	schroot_make_opts="ABE_TEST_CONTAINER=local"
+    fi
+
+    if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
+        touch ${sysroots}/libc/etc/ld.so.cache
+        chmod 700 ${sysroots}/libc/etc/ld.so.cache
+    fi
+
+    # Remove existing logs so that rerunning make check results
+    # in a clean log.
+    if test -e ${checklog}; then
+	# This might or might not be called, depending on whether make_clean
+	# is called before make_check.  None-the-less it's better to be safe.
+	notice "Removing existing check-${component}.log: ${checklog}"
+	rm ${checklog}
+    fi
+
+    local i result=0
+    for i in ${dirs}; do
+	# Always append "tee -a" to the log when building components individually
+        dryrun "make ${check_targets} SYSROOT_UNDER_TEST=${sysroots}/libc FLAGS_UNDER_TEST=\"\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+        if [ $? != 0 ]; then
+	    warning "make ${check_targets} -C ${builddir}$i failed."
+	    result=1
+	fi
+        record_test_results "${component}" $2
+    done
+
+    if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
+        rm -rf ${sysroots}/libc/etc/ld.so.cache
+    fi
+
+    if [ $result != 0 ]; then
+	error "Making check in ${builddir} failed"
+	return 1
     fi
 
     if test x"${component}" = x"gcc"; then
