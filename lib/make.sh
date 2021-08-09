@@ -753,7 +753,7 @@ make_check()
     if test x"${build}" = x"${target}"; then
 	# Overwrite ${checklog} in order to provide a clean log file
 	# if make check has been run more than once on a build tree.
-	dryrun "make check ${make_flags} -w -i -k -C ${builddir} 2>&1 | tee ${checklog}"
+	dryrun "make check ABE_TEST_CONTAINER=${ABE_TEST_CONTAINER:-local} ${make_flags} -w -i -k -C ${builddir} 2>&1 | tee ${checklog}"
         local result=$?
         record_test_results "${component}" $2
 	if test $result -gt 0; then
