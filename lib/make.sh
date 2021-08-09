@@ -750,16 +750,8 @@ make_check()
     # Run tests
     local checklog="${builddir}/check-${component}.log"
     record_artifact "log_check_${component}" "${checklog}"
-    if test x"${build}" = x"${target}"; then
-	# Overwrite ${checklog} in order to provide a clean log file
-	# if make check has been run more than once on a build tree.
-	dryrun "make check ABE_TEST_CONTAINER=${ABE_TEST_CONTAINER:-local} ${make_flags} -w -i -k -C ${builddir} 2>&1 | tee ${checklog}"
-        local result=$?
-        record_test_results "${component}" $2
-	if test $result -gt 0; then
-	    error "make check -C ${builddir} failed."
-	    return 1
-	fi
+    if false; then
+	:
     else
 	local dirs check_targets exec_tests
 	dirs="/"
@@ -799,6 +791,8 @@ make_check()
 		error "Cannot initialize sysroot on $test_container"
 		return 1
 	    fi
+	elif [ x"${build}" = x"${target}" ]; then
+	    schroot_make_opts="ABE_TEST_CONTAINER=local"
 	fi
 
 	if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
