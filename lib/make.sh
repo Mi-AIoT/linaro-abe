@@ -793,6 +793,11 @@ make_check()
 	fi
     elif [ x"${build}" = x"${target}" ]; then
 	schroot_make_opts="ABE_TEST_CONTAINER=local"
+
+	local ldso_bin lib_path
+	ldso_bin=$(find_dynamic_linker true)
+	lib_path=$(dirname "$ldso_bin")
+	test_flags="$test_flags -Wl,-dynamic-linker=$ldso_bin -Wl,-rpath=$lib_path"
     fi
 
     if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
