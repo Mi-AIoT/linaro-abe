@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db33d549_f5ba8ad8",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000373
+      },
+      "writtenOn": "2021-08-10T19:10:23Z",
+      "side": 1,
+      "message": "Maybe document this one a bit. It looks a bit cryptic as it is.",
+      "revId": "637aa118678e742b1cd93e7d9d48a5e7ac7f9994",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
