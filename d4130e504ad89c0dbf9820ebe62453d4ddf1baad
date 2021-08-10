@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708528fe_6c79ae3c",
+        "filename": "abe.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000373
+      },
+      "writtenOn": "2021-08-10T19:16:46Z",
+      "side": 1,
+      "message": "global variables and PATH\u0027s?",
+      "revId": "d4130e504ad89c0dbf9820ebe62453d4ddf1baad",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
