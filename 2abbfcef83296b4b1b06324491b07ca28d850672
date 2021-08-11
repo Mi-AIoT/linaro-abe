@@ -33,6 +33,24 @@
       "message": "Before this patch, native builds have an empty $stage1_flags, right?\n",
       "revId": "2abbfcef83296b4b1b06324491b07ca28d850672",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c088ef2c_ece72125",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-11T13:02:41Z",
+      "side": 1,
+      "message": "Correct.  We normally don\u0027t build stage1 compiler for native configurations, but can force it with \"--build gcc --stage 1\"",
+      "parentUuid": "c55db6df_8732fb66",
+      "revId": "2abbfcef83296b4b1b06324491b07ca28d850672",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
