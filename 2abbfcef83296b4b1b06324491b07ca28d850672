@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03e05539_11c0bf66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-11T07:24:33Z",
+      "side": 1,
+      "message": "The failure in the tests is due to the expected difference in the manifest: --disable-bootstrap now is at the tail of the configure line.",
+      "revId": "2abbfcef83296b4b1b06324491b07ca28d850672",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
