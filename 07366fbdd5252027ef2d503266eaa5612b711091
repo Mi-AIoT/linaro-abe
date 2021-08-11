@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9637f3e6_a344784b",
+        "filename": "lib/configure.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-08-11T08:18:09Z",
+      "side": 1,
+      "message": "This applies to gdbserver only?",
+      "range": {
+        "startLine": 208,
+        "startChar": 0,
+        "endLine": 208,
+        "endChar": 49
+      },
+      "revId": "07366fbdd5252027ef2d503266eaa5612b711091",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
