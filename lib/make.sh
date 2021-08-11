@@ -814,10 +814,18 @@ make_check()
 	rm ${checklog}
     fi
 
+    notice "Redirecting output from the testsuite to $checklog"
+
     local i result=0
     for i in ${dirs}; do
-	# Always append "tee -a" to the log when building components individually
-        dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i 2>&1 | tee -a ${checklog}"
+	# Testsuites (I'm looking at you, GDB), can leave stray processes
+	# that inherit stdout of below "make check".  Therefore, if we pipe
+	# stdout to "tee", then "tee" will wait on output from these
+	# processes for forever and ever.  We workaround this by redirecting
+	# output to a file that can be "tail -f"'ed, if desired.
+	# A proper fix would be to fix dejagnu to not pass parent stdout
+	# to testcase processes.
+	dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
         if [ $? != 0 ]; then
 	    warning "make ${check_targets} -C ${builddir}$i failed."
 	    result=1
