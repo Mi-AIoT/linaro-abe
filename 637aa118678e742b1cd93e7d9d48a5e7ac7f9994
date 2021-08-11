@@ -16,6 +16,24 @@
       "message": "Maybe document this one a bit. It looks a bit cryptic as it is.",
       "revId": "637aa118678e742b1cd93e7d9d48a5e7ac7f9994",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57092ce_b4bd3283",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-11T07:37:53Z",
+      "side": 1,
+      "message": "Oh, this is a standard shell pattern to run a command that can fail without triggering a failure in \"set -e\" shells.  We use this pattern through TCWG shell scripts.\n\nNote that things like \"foo || true\" and \"foo || ret\u003d$?\" may have surprising behaviour in shells, especially when \"foo\" is a shell sub-routine.  There was a discussion on tcwg@ in thread \"Another shell peculiarity\" in November 2019 on this:\n\u003d\u003d\u003d\nAfter spending a few hours reading about this I found out many new things about shell.  The main takeaway is that one cannot expect \"usual\" set -e behavior ...\n- ... inside if/while/until conditions,\n- ... after \"!\" modifier (mostly used in conditions anyway),\n- ... in non-last parts of \"\u0026\u0026\", \"||\" or \"|\" pipelines.\n\nThe last one is quite surprising.  Behavior of \"a\" and \"a \u0026\u0026 true\" are different -- \"set -e\" is ignored in the latter.\n\u003d\u003d\u003d",
+      "parentUuid": "db33d549_f5ba8ad8",
+      "revId": "637aa118678e742b1cd93e7d9d48a5e7ac7f9994",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
