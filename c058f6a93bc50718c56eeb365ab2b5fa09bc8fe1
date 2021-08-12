@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d2ac19a_adca1849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-08-12T19:09:59Z",
+      "side": 1,
+      "message": "Not sure to follow: does it make a difference using xgcc instead of $prefix/bin/*gcc ?\n\nWhere was SYSROOT_UNDER_TEST used? Is that a reserved name like GCC_UNDER_TEST?\n",
+      "revId": "c058f6a93bc50718c56eeb365ab2b5fa09bc8fe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
