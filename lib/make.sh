@@ -781,8 +781,15 @@ make_check()
 	    ;;
     esac
 
-    local test_flags
-    test_flags="--sysroot=$sysroots/libc"
+    local ldso_bin test_flags
+
+    ldso_bin=$(find_dynamic_linker false)
+    if [ x"$ldso_bin" != x"" ]; then
+	# If we have ld.so, then we should have a sysroot for testing.
+	# If we don't have ld.so, then we are testing native GCC against
+	# system libraries.
+	test_flags="$test_flags --sysroot=$sysroots/libc"
+    fi
 
     local schroot_make_opts
     if $exec_tests && [ x"$test_container" != x"" ]; then
@@ -793,14 +800,17 @@ make_check()
 	fi
     elif [ x"${build}" = x"${target}" ]; then
 	schroot_make_opts="ABE_TEST_CONTAINER=local"
-
-	local ldso_bin lib_path
-	ldso_bin=$(find_dynamic_linker true)
-	lib_path=$(dirname "$ldso_bin")
-	test_flags="$test_flags -Wl,-dynamic-linker=$ldso_bin -Wl,-rpath=$lib_path"
+	if [ x"$ldso_bin" != x"" ]; then
+	    local lib_path
+	    lib_path=$(dirname "$ldso_bin")
+	    # For testing on the local machine we need to link tests against
+	    # ldso and libraries in $sysroots/libc
+	    test_flags="$test_flags -Wl,-dynamic-linker=$ldso_bin"
+	    test_flags="$test_flags -Wl,-rpath=$lib_path"
+	fi
     fi
 
-    if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
+    if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         touch ${sysroots}/libc/etc/ld.so.cache
         chmod 700 ${sysroots}/libc/etc/ld.so.cache
     fi
@@ -833,7 +843,7 @@ make_check()
         record_test_results "${component}" $2
     done
 
-    if $exec_tests && [ x"${clibrary}" != "newlib" ]; then
+    if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
     fi
 
