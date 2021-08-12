@@ -110,6 +110,8 @@ configure_build()
     # SHELL via an argument, so allow not to do so when needed.
     FORCESHELL="SHELL=${bash_shell}"
 
+    local needs_tools=false
+
     # GCC and the binutils are the only toolchain components that need the
     # --target option set, as they generate code for the target, not the host.
     case ${component} in
@@ -117,6 +119,7 @@ configure_build()
 	    # Newlib installs itself into $prefix/$target, so setting --prefix to $prefix
 	    # gives us the correct sysroot path.
 	    opts="${opts} --host=${host} --target=${target} --prefix=${prefix}"
+	    needs_tools=true
 	    ;;
 	glibc|eglibc)
 	    # FIXME: Below is ancient evil that should be removed.
@@ -137,6 +140,7 @@ configure_build()
 	    echo rtlddir=/lib >> ${builddir}/configparms
 	    opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
+	    needs_tools=true
 	    ;;
 	gcc)
 	    opts="$opts --prefix=$prefix"
@@ -177,6 +181,7 @@ configure_build()
 	    ;;
 	gdbserver)
 	    opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
+	    needs_tools=true
 	    ;;
 	# These are only built for the host
 	gmp|mpc|mpfr)
@@ -194,22 +199,12 @@ configure_build()
 	*)
 	    # ??? Why the default for --prefix is not "$prefix"?
 	    opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
+	    needs_tools=true
 	    ;;
     esac
 
-    local target_hosted=false target_prefixed=false
-    for opt in $opts; do
-	case "$opt" in
-	    "--host=$target") target_hosted=true ;;
-	    "--prefix=$prefix") target_prefixed=true ;;
-	esac
-    done
-
-    if $target_hosted && ! $target_prefixed; then
-	# Components that are configured with --prefix=$prefix find
-	# tools installed in $prefix/bin by themselves.  For target-side
-	# components that need a custom --prefix= we add these tools
-	# to $PATH.
+    if $needs_tools; then
+	# This component needs host-side tools in PATH.
 	# We are running inside a sub-shell provided by make.sh:build(),
 	# so it's OK to alter environment.
 	export PATH="$prefix/bin:$PATH"
