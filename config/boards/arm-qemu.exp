@@ -40,8 +40,7 @@ setup_sim arm
 # When testing GCC in tree, the libgloss spec files aren't in a known location,
 # so we have to find them in the sysroot. FIXME: this may change in the near 
 # future, but for now it works.
-set compiler 	"[find_gcc]"
-set ret [local_exec "$compiler --print-sysroot" "" "" $timeout]
+set ret [local_exec "$GCC_UNDER_TEST --print-sysroot" "" "" $timeout]
 if { [lindex $ret 0] == 0 } {
     set sysroot "[lindex $ret 1]"
     # Strip the CR or LF off the end of the line as returned by GCC
