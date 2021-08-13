@@ -16,6 +16,24 @@
       "message": "Not sure to follow: does it make a difference using xgcc instead of $prefix/bin/*gcc ?\n\nWhere was SYSROOT_UNDER_TEST used? Is that a reserved name like GCC_UNDER_TEST?\n",
       "revId": "c058f6a93bc50718c56eeb365ab2b5fa09bc8fe1",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ebcd2d_a3569c0e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-13T15:13:02Z",
+      "side": 1,
+      "message": "We set GCC_UNDER_TEST to \"gcc + flags\", and flags may include \"--sysroot\u003d\".  So we need to use \"$GCC_UNDER_TEST -print-sysroot\" to get path to the specified sysroot.\n\nSYSROOT_UNDER_TEST was a variable that we used in ABE to indicate native testing and set sysroot.  It doesn\u0027t have any special meaning.",
+      "parentUuid": "2d2ac19a_adca1849",
+      "revId": "c058f6a93bc50718c56eeb365ab2b5fa09bc8fe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
