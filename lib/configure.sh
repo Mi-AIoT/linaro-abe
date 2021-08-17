@@ -40,6 +40,26 @@ configure_build()
 	srcdir="${srcdir}/libc"
     fi
 
+    # Set PATH, if needed, before potential early exit due to up-to-date
+    # stamp.
+    local needs_tools=false
+    case ${component} in
+	newlib*|libgloss*) needs_tools=true ;;
+	glibc|eglibc) needs_tools=true ;;
+	gdbserver) needs_tools=true ;;
+    esac
+    if $needs_tools; then
+	# This component needs build-side tools in PATH.
+	# Usually, $host is the same as $build, and we just add $prefix/bin
+	# to PATH below.  In mingw builds, however, we need to add to PATH
+	# [prebuilt] linux-hosted tools from $local_builds/destdir/$build/bin.
+	#
+	# We are running inside a sub-shell provided by make.sh:build(),
+	# so it's OK to alter environment.
+	export PATH="$local_builds/destdir/$build/bin:$PATH"
+	notice "Setting for $component${2:+ $2} build PATH=$PATH"
+    fi
+
     # Don't look for the stamp in the builddir because it's in builddir's
     # parent directory.
     local stampdir="$(dirname ${builddir})"
@@ -110,8 +130,6 @@ configure_build()
     # SHELL via an argument, so allow not to do so when needed.
     FORCESHELL="SHELL=${bash_shell}"
 
-    local needs_tools=false
-
     # GCC and the binutils are the only toolchain components that need the
     # --target option set, as they generate code for the target, not the host.
     case ${component} in
@@ -119,7 +137,6 @@ configure_build()
 	    # Newlib installs itself into $prefix/$target, so setting --prefix to $prefix
 	    # gives us the correct sysroot path.
 	    opts="${opts} --host=${host} --target=${target} --prefix=${prefix}"
-	    needs_tools=true
 	    ;;
 	glibc|eglibc)
 	    # FIXME: Below is ancient evil that should be removed.
@@ -140,7 +157,6 @@ configure_build()
 	    echo rtlddir=/lib >> ${builddir}/configparms
 	    opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
-	    needs_tools=true
 	    ;;
 	gcc)
 	    opts="$opts --prefix=$prefix"
@@ -181,7 +197,6 @@ configure_build()
 	    ;;
 	gdbserver)
 	    opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
-	    needs_tools=true
 	    ;;
 	# These are only built for the host
 	gmp|mpc|mpfr)
@@ -199,21 +214,8 @@ configure_build()
 	*)
 	    # ??? Why the default for --prefix is not "$prefix"?
 	    opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${sysroots}/usr"
-	    needs_tools=true
 	    ;;
     esac
-
-    if $needs_tools; then
-	# This component needs build-side tools in PATH.
-	# Usually, $host is the same as $build, and we just add $prefix/bin
-	# to PATH below.  In mingw builds, however, we need to add to PATH
-	# [prebuilt] linux-hosted tools from $local_builds/destdir/$build/bin.
-	#
-	# We are running inside a sub-shell provided by make.sh:build(),
-	# so it's OK to alter environment.
-	export PATH="$local_builds/destdir/$build/bin:$PATH"
-	notice "Setting for $component${2:+ $2} build PATH=$PATH"
-    fi
 
     if test -e ${builddir}/config.status -a x"${force}" = xno; then
 	warning "${builddir} already configured!"
