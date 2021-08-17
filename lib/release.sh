@@ -337,7 +337,7 @@ tag_release()
     error "release TAGging unimplemented"
 }
 
-# $1 - The release ttee directory to put the script in for packaging.
+# $1 - The release tree directory to put the script in for packaging.
 sysroot_install_script()
 {
 #    trace "$*"

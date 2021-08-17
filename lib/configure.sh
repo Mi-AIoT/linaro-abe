@@ -204,10 +204,14 @@ configure_build()
     esac
 
     if $needs_tools; then
-	# This component needs host-side tools in PATH.
+	# This component needs build-side tools in PATH.
+	# Usually, $host is the same as $build, and we just add $prefix/bin
+	# to PATH below.  In mingw builds, however, we need to add to PATH
+	# [prebuilt] linux-hosted tools from $local_builds/destdir/$build/bin.
+	#
 	# We are running inside a sub-shell provided by make.sh:build(),
 	# so it's OK to alter environment.
-	export PATH="$prefix/bin:$PATH"
+	export PATH="$local_builds/destdir/$build/bin:$PATH"
 	notice "Setting for $component${2:+ $2} build PATH=$PATH"
     fi
 
