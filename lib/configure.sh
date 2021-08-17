@@ -46,6 +46,13 @@ configure_build()
     case ${component} in
 	newlib*|libgloss*) needs_tools=true ;;
 	glibc|eglibc) needs_tools=true ;;
+	gcc)
+	    if [ x"$build" != x"$host" ]; then
+		# We need [prebuilt] $build-hosted target GCC to build
+		# $host-hosted target GCC.
+		needs_tools=true
+	    fi
+	    ;;
 	gdbserver) needs_tools=true ;;
     esac
     if $needs_tools; then

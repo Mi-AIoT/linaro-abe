@@ -991,7 +991,7 @@ EOF
     esac
 
     # See if a test case compiles to a fully linked executable.
-    if test x"${build}" != x"${target}"; then
+    if [ x"$build" = x"$host" ]; then
         dryrun "$prefix/bin/${target}-g++ ${extra_cflags} -o /tmp/hi /tmp/hello.cpp"
         if test -e /tmp/hi; then
             rm -f /tmp/hi
