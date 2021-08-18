@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7880feb7_217fa08b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-18T12:27:57Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1338/ : Well ... it worked on my machine\"\n\nManifest comparison failed due to release/gcc-10 branch advancing between linux-hosted and mingw-hosted builds.",
+      "revId": "17b4c306d3df632851c17c600de0142d60781217",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
