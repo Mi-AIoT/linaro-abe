@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ab31f9c_27e37b0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-18T12:29:59Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1339/ : Well ... it worked on my machine\"\n\nTesting failed due to manifest having expected differences",
+      "revId": "08b5f48ee851e9de178b2f4f06a7b0d165666648",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
