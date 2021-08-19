@@ -678,8 +678,8 @@ set_package()
 	    return 0
 	    ;;
 	runtestflags)
-	    override_runtestflags="${setting}"
-	    notice "Overriding ${setting} to RUNTESTFLAGS"
+	    extra_runtestflags="$extra_runtestflags ${setting}"
+	    notice "Adding ${setting} to RUNTESTFLAGS"
 	    return 0
 	    ;;
 	makeflags)
