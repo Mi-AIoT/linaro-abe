@@ -97,7 +97,7 @@ use_system_libs=no
 override_linker=
 override_cflags=
 override_ldflags=
-override_runtestflags=
+extra_runtestflags=
 gcc_override_configure=
 
 sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"

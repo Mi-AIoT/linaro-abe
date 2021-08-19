@@ -727,9 +727,8 @@ make_check()
     if [ x"$component_runtestflags" != x"" ]; then
 	runtestflags+=("$component_runtestflags")
     fi
-    if [ "$override_runtestflags" != x"" ]; then
-	# These are extra runtest flags, not a proper override.
-	runtestflags+=("$override_runtestflags")
+    if [ "$extra_runtestflags" != x"" ]; then
+	runtestflags+=("$extra_runtestflags")
     fi
     if [ x"${runtestflags[*]}" != x"" ]; then
 	make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags[*]}\""
