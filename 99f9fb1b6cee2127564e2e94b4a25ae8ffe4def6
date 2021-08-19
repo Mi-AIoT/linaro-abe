@@ -16,6 +16,24 @@
       "message": "LGTM.\nwhat\u0027s the purpose? Do we have some RUNTESTFLAGS set, that we don\u0027t want to override?\n",
       "revId": "99f9fb1b6cee2127564e2e94b4a25ae8ffe4def6",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0306dcd_2a543909",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-08-19T15:40:09Z",
+      "side": 1,
+      "message": "In CI loops we bisect testsuite regressions by running testsuite subset, and it\u0027s easier to handle \"--set runtestflags\u003dfoo.exp --set runtestflags\u003dbar.exp\" than to handle \"--set runtestflags\u003d\\\"foo.exp bar.exp\\\"\", which causes quoting problems.",
+      "parentUuid": "4ea9e5d1_bf005b41",
+      "revId": "99f9fb1b6cee2127564e2e94b4a25ae8ffe4def6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
