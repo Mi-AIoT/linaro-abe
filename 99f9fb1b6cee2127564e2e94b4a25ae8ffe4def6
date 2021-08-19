@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea9e5d1_bf005b41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-08-19T13:23:02Z",
+      "side": 1,
+      "message": "LGTM.\nwhat\u0027s the purpose? Do we have some RUNTESTFLAGS set, that we don\u0027t want to override?\n",
+      "revId": "99f9fb1b6cee2127564e2e94b4a25ae8ffe4def6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
