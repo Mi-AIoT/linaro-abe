@@ -471,7 +471,7 @@ collect_data ()
 	    use_version="${component}-${use_version}"
 	fi
 	# Set up variables for component with tarball URL
-	if test "$(echo ${use_version} | grep -c 'http*://.*\.tar\.')" -eq 0; then
+	if test "$(echo ${use_version} | grep -c 'http.://.*\.tar\.')" -eq 0; then
 	    local url="$(grep "^${component} " ${sources_conf} | tr -s ' ' | cut -d ' ' -f 2)"
 	    local filespec="${use_version}"
 	else
