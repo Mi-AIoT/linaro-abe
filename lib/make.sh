@@ -482,9 +482,18 @@ find_dynamic_linker()
 	c_library_version="$(${sysroots}/libc/usr/bin/ldd --version | head -n 1 | sed -e "s/.* //")"
 	dynamic_linker="$(find ${sysroots}/libc -type f -name ld-${c_library_version}.so)"
 	if [ x"$dynamic_linker" = x"" ]; then
-	    dynamic_linker=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
-				 | sed -e "s/^RTLDLIST=//")
-	    dynamic_linker="$sysroots/libc/$dynamic_linker"
+	    local rtldlist ldso
+	    # Extract the list of runtime linkers from ldd and remove quotes
+	    # around it.
+	    rtldlist=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
+			   | sed -e "s/^RTLDLIST=//g" -e 's/^"\(.*\)"$/\1/g')
+	    for ldso in $rtldlist; do
+		ldso="$sysroots/libc$ldso"
+		if [ -f "$ldso" ]; then
+		    dynamic_linker="$ldso"
+		    break
+		fi
+	    done
 	fi
     fi
     if $strict && [ -z "$dynamic_linker" ]; then
