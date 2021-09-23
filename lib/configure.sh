@@ -146,22 +146,6 @@ configure_build()
 	    opts="${opts} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
 	glibc|eglibc)
-	    # FIXME: Below is ancient evil that should be removed.
-	    #        Forcing 64-bit rtld into /lib is against ABI.
-	    # [e]glibc uses slibdir and rtlddir for some of the libraries and
-	    # defaults to lib64/ for aarch64.  We need to override this.
-	    # There's no need to install anything into lib64/ since we don't
-	    # have biarch systems.
-
-	    # libdir is where static libraries and linker scripts are installed,
-	    # like libc.so, libc_nonshared.a, and libc.a.
-	    echo libdir=/usr/lib > ${builddir}/configparms
-
-	    # slibdir is where shared objects are installed.
-	    echo slibdir=/lib >> ${builddir}/configparms
-
-	    # rtlddir is where the dynamic-linker is installed.
-	    echo rtlddir=/lib >> ${builddir}/configparms
 	    opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
 	    ;;
