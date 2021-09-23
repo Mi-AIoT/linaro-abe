@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30e2627c_94f31843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-09-23T12:37:44Z",
+      "side": 1,
+      "message": "I guess you checked the builds are now OK, however after looking at previous commits in this area (a165bd768 and e3b7c0311), I\u0027m wondering whether this would now break Ubuntu / OpenEmbedded?\n",
+      "revId": "8b1590885feca47d4b2621210557a1e376c68fc5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
