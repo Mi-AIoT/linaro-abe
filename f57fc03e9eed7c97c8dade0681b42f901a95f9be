@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c362cfa_df67f3f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2021-09-23T12:39:14Z",
+      "side": 1,
+      "message": "I guess the validation complains are caused by changes in the manifests?\n\nHow badly were the builds broken before this patch?",
+      "revId": "f57fc03e9eed7c97c8dade0681b42f901a95f9be",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
