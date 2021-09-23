@@ -16,6 +16,24 @@
       "message": "I guess you checked the builds are now OK, however after looking at previous commits in this area (a165bd768 and e3b7c0311), I\u0027m wondering whether this would now break Ubuntu / OpenEmbedded?\n",
       "revId": "8b1590885feca47d4b2621210557a1e376c68fc5",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb427a8c_848614b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2021-09-23T13:17:48Z",
+      "side": 1,
+      "message": "Purpose of ABE has changed from building release toolchains to building developer/test toolchains.  AFAIK, neither Ubuntu nor OpenEmbedded use ABE, so not a problem.",
+      "parentUuid": "30e2627c_94f31843",
+      "revId": "8b1590885feca47d4b2621210557a1e376c68fc5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
