@@ -68,7 +68,7 @@ strip_dir()
 	    local host="x86-64" ;;
 	i686*)
 	    local host="80386" ;;
-	*)  note "Stripping host $1 is not supported."
+	*)  notice "Stripping host $1 is not supported."
 	    return 1 ;;
     esac
 
