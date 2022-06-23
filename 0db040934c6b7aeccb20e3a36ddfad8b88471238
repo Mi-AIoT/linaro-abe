@@ -16,6 +16,23 @@
       "message": "Hello Maxim,\n\nGDB built by the CI doesn\u0027t load libthread_db.so.1 when running the testsuite, because the auto-load-safe-path setting doesn\u0027t allow it.\n\nThis change adds a flag to configure that sets the default auto-load-safe-path value to include the sysroot directory.",
       "revId": "0db040934c6b7aeccb20e3a36ddfad8b88471238",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a117ae9_e88de309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-23T21:29:07Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1352/ : Well ... it worked on my machine\"\n\n\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1352/ : Well ... it worked on my machine\"\n\nThe failure happens because the value of the configure option that I added\nin my patch (“--with-auto-load-safe-path”) is correct in the 1st\nmanifest.txt¹, but wrong in the 2nd manifest.txt² (see “gdb_configure”\nline).\n\nThe difficulty is that the value of the configure option contains elements\nthat look like bash variables, but need to appear literally in the\nconfigure command line: “$debugdir:$datadir/auto-load”\n\nI managed to find a convoluted way of quoting the string so that the dollar\nsigns survive untouched until they are used to construct the configure\ncommand. Unfortunately this quoting strategy isn\u0027t working when\nabe-tests/test-manifest2.sh reads the manifest and attempts to reproduce\nthe build.\n\nI suspect the problem is in test-manifest2.sh. I\u0027m looking into it.\n\n-- \n\n¹ https://ci.linaro.org/job/tcwg-abe-test/1352/label\u003dtcwg-x86_64-build,test\u003dabe-tests/artifact/artifacts/orig-manifest1.txt\n2 https://ci.linaro.org/job/tcwg-abe-test/1352/label\u003dtcwg-x86_64-build,test\u003dabe-tests/artifact/artifacts/orig-manifest2.txt\n",
+      "revId": "0db040934c6b7aeccb20e3a36ddfad8b88471238",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
