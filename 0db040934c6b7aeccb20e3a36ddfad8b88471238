@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df18ffe_01b8541c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-23T16:20:41Z",
+      "side": 1,
+      "message": "Hello Maxim,\n\nGDB built by the CI doesn\u0027t load libthread_db.so.1 when running the testsuite, because the auto-load-safe-path setting doesn\u0027t allow it.\n\nThis change adds a flag to configure that sets the default auto-load-safe-path value to include the sysroot directory.",
+      "revId": "0db040934c6b7aeccb20e3a36ddfad8b88471238",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
