@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43880e50_0e3c0250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-23T02:17:21Z",
+      "side": 1,
+      "message": "Hello Maxim,\n\nThis is a fix for a small problem I noticed while working on some changes in Abe for GDB\n(in an upcoming change request). The error it fixes doesn\u0027t affect the build, but it\u0027s nice\nto not have this error show up in the output.",
+      "revId": "82f625c2b6c222bd09bf47bb5eca181945b3ac88",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
