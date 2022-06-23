@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1be9afa_4036df1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-23T16:23:10Z",
+      "side": 1,
+      "message": "Hello Maxim,\n\nThis commit updates the GDB and gdbserver branches and tags to release 12.",
+      "revId": "8763774e816d836806880bcf72e2fc595848b14a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
