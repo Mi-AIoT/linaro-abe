@@ -16,6 +16,23 @@
       "message": "Hello Maxim,\n\nThis workaround isn\u0027t needed anymore. Tested by running \"tcwg-dev-build.sh --abe_branch gdb-fixes -check gdb --version latest-tag\", where the gdb-fixes branch contains my change requests.",
       "revId": "b303e7670dcef2501617e65070aa7c8f4783464c",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c055f651_c32a7e4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-23T23:49:35Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1354/ : Well ... it worked on my machine\"\n\nThis change was submitted on top of my “config/gdb.conf: Add $sysroots to default auto-load-safe-path” change, and it looks like this failure is also caused by it.\n\nI\u0027ll abandon this change request and submitted a new one without the problematic commit.\nSorry for the noise.",
+      "revId": "b303e7670dcef2501617e65070aa7c8f4783464c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
