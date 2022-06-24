@@ -16,6 +16,23 @@
       "message": "Hello Maxim,\n\nThis commit updates the GDB and gdbserver branches and tags to release 12.",
       "revId": "8763774e816d836806880bcf72e2fc595848b14a",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3f254b6_558404b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T00:02:06Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1353/ : Well ... it worked on my machine\"\n\nThis change was also submitted on top of my “config/gdb.conf: Add $sysroots to default auto-load-safe-path” change, and it looks like this failure is caused by it as well.\n\nI\u0027ll abandon this change request and submitted a new one without the problematic commit.\nSorry for the noise.\n",
+      "revId": "8763774e816d836806880bcf72e2fc595848b14a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
