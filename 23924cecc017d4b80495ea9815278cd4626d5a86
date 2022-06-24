@@ -33,6 +33,41 @@
       "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1356/ : Well ... it worked on my machine\"\n\nFailing console here : \nhttps://ci.linaro.org/job/tcwg-abe-test/label\u003dtcwg-x86_64-build,test\u003dabe-tests-checkout/lastBuild/console\n\npoints on 3 failures in :\n ./test-checkout.sh --clean-snapshots --abe-path /home/tcwg-buildslave/workspace/tcwg-abe-test__0 --ref-snapshots /home/tcwg-buildslave/snapshots-ref\n\nCould you please check. Let me know if I could help on that point.\n",
       "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3245e9a2_d294b65c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T19:57:39Z",
+      "side": 1,
+      "message": "\u003e \u003e Patch Set 1: Code-Review-1\n\u003e \u003e \n\u003e \u003e \"Build Failed \n\u003e \u003e \n\u003e \u003e https://ci.linaro.org/job/tcwg-abe-test/1356/ : Well ... it worked on my machine\"\n\u003e \n\u003e Failing console here : \n\u003e https://ci.linaro.org/job/tcwg-abe-test/label\u003dtcwg-x86_64-build,test\u003dabe-tests-checkout/lastBuild/console\n\u003e \n\u003e points on 3 failures in :\n\u003e  ./test-checkout.sh --clean-snapshots --abe-path /home/tcwg-buildslave/workspace/tcwg-abe-test__0 --ref-snapshots /home/tcwg-buildslave/snapshots-ref\n\u003e \n\u003e Could you please check. Let me know if I could help on that point.\n\nThank you for having a look. The failure can be seen at the end of\ntest_previous_abe_cmd_line_gcc5.log.xz. compare_manifests.pl sees a\ndifference in the manifest files for the previous abe and the current abe\nbecause gdb_granch and gdbserver_branch are different, which is precisely the\npurpose of this change request:\n\n # Component data for gdb\n-gdb_branch\u003dgdb-11-branch\n+gdb_branch\u003dgdb-12-branch\n gdb_configure\u003d\"--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion\u003dLinaro_GDB-foo --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python\u003dpython3 --disable-werror\"\n gdb_filespec\u003dbinutils-gdb.git\n gdb_linuxhost_only\u003d\"no\"\n@@ -55,7 +55,7 @@\n gdb_url\u003dhttps://git.linaro.org/git/toolchain\n \n # Component data for gdbserver\n-gdbserver_branch\u003dgdb-11-branch\n+gdbserver_branch\u003dgdb-12-branch\n\nLooking at test-checkout.sh and compare-manifests.pl I don\u0027t see any\nmechanism to allow expecting that the branch will be different. So my\nunderstanding is that commits which change ${component}_branch will always\nfail this test.",
+      "parentUuid": "7b498328_638a64fa",
+      "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3846146f_973f6a3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T19:57:39Z",
+      "side": 1,
+      "message": "Hello Laurent,\n\nThank you for having a look at this change request.\nIf I understood test-checkout.sh correctly, unfortunately commits which change the component branch will always fail this check.",
+      "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
