@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3129a1c7_c14667b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T00:34:22Z",
+      "side": 1,
+      "message": "Hello,\n\nThis is a new attempt at updating gdb.conf and gdbserver.conf to release 12.\nIt\u0027s based directly on the master branch, so this time it should pass the CI tests.",
+      "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
