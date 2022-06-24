@@ -33,6 +33,41 @@
       "message": "Fine for me.\n\nDon\u0027t know enough on the history of adding this option, and pb on arm simulator.. \n\nIf you are comfortable with that, please +2 it, otherwise we\u0027ll wait for Maxim feedback.\n\nThanks",
       "revId": "9022742753166679cec8726a57ab6557c96c2c84",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccdca492_31c75b2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T20:01:23Z",
+      "side": 1,
+      "message": "This workaround hasn\u0027t been needed for a few GDB releases already, so I believe it\u0027s pretty safe to remove.",
+      "revId": "9022742753166679cec8726a57ab6557c96c2c84",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e5d90b_20a9f8cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T20:01:23Z",
+      "side": 1,
+      "message": "Thank you. I\u0027ll +2 this then.",
+      "parentUuid": "7135bd60_2ee4a448",
+      "revId": "9022742753166679cec8726a57ab6557c96c2c84",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
