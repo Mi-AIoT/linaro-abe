@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "980eb5d3_3c31fa7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-24T00:36:39Z",
+      "side": 1,
+      "message": "Hello,\n\nThis is a new change request for the change removing an outdated workaround in building GDB.\nIt\u0027s based on top of the \"Update latest to release 12\" change request because it would conflict with it if it was submitted separately.\n\nI expect the CI tests to pass this time...",
+      "revId": "9022742753166679cec8726a57ab6557c96c2c84",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
