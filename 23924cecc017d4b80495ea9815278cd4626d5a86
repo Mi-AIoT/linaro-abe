@@ -16,6 +16,23 @@
       "message": "Hello,\n\nThis is a new attempt at updating gdb.conf and gdbserver.conf to release 12.\nIt\u0027s based directly on the master branch, so this time it should pass the CI tests.",
       "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b498328_638a64fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2022-06-24T07:21:09Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1356/ : Well ... it worked on my machine\"\n\nFailing console here : \nhttps://ci.linaro.org/job/tcwg-abe-test/label\u003dtcwg-x86_64-build,test\u003dabe-tests-checkout/lastBuild/console\n\npoints on 3 failures in :\n ./test-checkout.sh --clean-snapshots --abe-path /home/tcwg-buildslave/workspace/tcwg-abe-test__0 --ref-snapshots /home/tcwg-buildslave/snapshots-ref\n\nCould you please check. Let me know if I could help on that point.\n",
+      "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
