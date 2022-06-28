@@ -86,6 +86,24 @@
       "parentUuid": "3846146f_973f6a3e",
       "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05722d5_cc87fde5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-28T14:09:50Z",
+      "side": 1,
+      "message": "Yes, that is my understanding of test-checkout.sh.",
+      "parentUuid": "07dc7b09_5a49841e",
+      "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
