@@ -68,6 +68,24 @@
       "message": "Hello Laurent,\n\nThank you for having a look at this change request.\nIf I understood test-checkout.sh correctly, unfortunately commits which change the component branch will always fail this check.",
       "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07dc7b09_5a49841e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2022-06-28T10:47:12Z",
+      "side": 1,
+      "message": "I didn\u0027t see much test-checkout.sh, but you mean the test is failing when changing component version, and will be passing as soon as the commit is pushed. Correct ?\n\nIf that\u0027s correct.. change is ok for me.",
+      "parentUuid": "3846146f_973f6a3e",
+      "revId": "23924cecc017d4b80495ea9815278cd4626d5a86",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
