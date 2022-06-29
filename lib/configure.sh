@@ -240,7 +240,10 @@ configure_build()
 	    # ??? exporting CONFIG_SHELL seems excessive.
 	    export CONFIG_SHELL=${bash_shell}
 	fi
-	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure $FORCESHELL ${default_configure_flags} ${opts})"
+        # Substitute '@@' with '$' in $opts because there's a GDB configure flag
+        # whose value has literal dollar signs and they were typed in as '@@' to
+        # preserve them from shell parameter expansion.
+	dryrun "(cd ${builddir} && ${CONFIG_SHELL} ${srcdir}/configure $FORCESHELL ${default_configure_flags} ${opts//@@/\\$})"
 	if test $? -gt 0; then
 	    error "Configure of $1 failed."
 	    return 1
