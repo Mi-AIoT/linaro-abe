@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded2ee69_80888da9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-29T22:18:40Z",
+      "side": 1,
+      "message": "Hello,\n\nThe aim is to add the option \u0027--with-auto-load-safe-path\u003d$debugdir:$datadir/auto-load:/path/to/abe/sysroots\u0027 to GDB\u0027s configure script so that it can load libthread_db.so.1 when the testsuite runs.\nNote that \"$debugdir:$datadir\" aren\u0027t variables and have to appear unmodified. To make that possible, this change uses \u0027@@\u0027 to represent the dollar sign.\n\nThis is my second try. My first was at https://review.linaro.org/c/toolchain/abe/+/41555 and didn\u0027t work because the dollar sign didn\u0027t \"survive\" when Abe tried to recreate the toolchain build using the manifest file.",
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
