@@ -9,19 +9,40 @@ if {[info exists env(PREFIX_UNDER_TEST)]} {
     }
 
     # This set of variables is used by GCC
-    set GCC_UNDER_TEST "[set prefix]gcc $flags"
-    set GXX_UNDER_TEST "[set prefix]g++ $flags"
-    set GFORTRAN_UNDER_TEST "[set prefix]gfortran $flags"
-    set OBJC_UNDER_TEST "[set prefix]gcc $flags"
-    set GOC_UNDER_TEST "[set prefix]goc $flags"
-    set GNAT_UNDER_TEST "[set prefix]gnat $flags"
+
+    if { [auto_execok "[set prefix]gcc"] ne "" } {
+        set GCC_UNDER_TEST "[set prefix]gcc $flags"
+        set OBJC_UNDER_TEST "[set prefix]gcc $flags"
+    }
+    if { [auto_execok "[set prefix]g++"] ne "" } {
+        set GXX_UNDER_TEST "[set prefix]g++ $flags"
+    }
+
+    if { [auto_execok "[set prefix]gfortran"] ne "" } {
+        set GFORTRAN_UNDER_TEST "[set prefix]gfortran $flags"
+    }
+    if { [auto_execok "[set prefix]goc"] ne "" } {
+        set GOC_UNDER_TEST "[set prefix]goc $flags"
+    }
+    if { [auto_execok "[set prefix]gnat"] ne "" } {
+        set GNAT_UNDER_TEST "[set prefix]gnat $flags"
+    }
 
     # This set of variables is used by Binutils and GDB
-    set CC_FOR_TARGET "[set prefix]gcc $flags"
-    set CXX_FOR_TARGET "[set prefix]g++ $flags"
-    set F77_FOR_TARGET "[set prefix]gfortran $flags"
-    set F90_FOR_TARGET "[set prefix]gfortran $flags"
-    set GNATMAKE_FOR_TARGET "[set prefix]gnatmake $flags"
+
+    if { [auto_execok "[set prefix]gcc"] ne "" } {
+        set CC_FOR_TARGET "[set prefix]gcc $flags"
+    }
+    if { [auto_execok "[set prefix]g++"] ne "" } {
+        set CXX_FOR_TARGET "[set prefix]g++ $flags"
+    }
+    if { [auto_execok "[set prefix]gfortran"] ne "" } {
+        set F77_FOR_TARGET "[set prefix]gfortran $flags"
+        set F90_FOR_TARGET "[set prefix]gfortran $flags"
+    }
+    if { [auto_execok "[set prefix]gnatmake"] ne "" } {
+        set GNATMAKE_FOR_TARGET "[set prefix]gnatmake $flags"
+    }
 }
 
 if {[info exists env(ABE_TEST_CONTAINER)]} {
