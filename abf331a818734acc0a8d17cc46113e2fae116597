@@ -33,6 +33,23 @@
       "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1358/ : Well ... it worked on my machine\"\n\nI looked into this failure. The \"problem\" can be found in the files test_previous_abe_cmd_line_gcc{4_9,5,6,7}.log. It is caused by compare-manifests.pl noticing that the gdb_configure parameter is different after my patch, which is precisely the intent of this change request.\n\nSo this failure is expected, since any commit that changes a parameter present in the manifest file will trigger it.",
       "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e066fcf2_52c19b53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-30T01:19:55Z",
+      "side": 1,
+      "message": "Hello,\n\nI looked into the build failure reported by lava-bot and noticed that doesn\u0027t indicate a problem.\n\nOne thing just occurred to me though: should I bump manifest_format to version 1.7 because of the special processing of \"@@\"?\n\nAlso I forgot to justify why I chose \"@@\": it\u0027s somewhat arbitrary. I just wanted something that doesn\u0027t have any meaning in bash scripts. I initially chose just \"@\" but then I thought it could interfere in the future if we have to add an email address as configure parameter for some reason...",
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
