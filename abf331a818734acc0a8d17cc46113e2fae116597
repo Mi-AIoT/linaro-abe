@@ -16,6 +16,23 @@
       "message": "Hello,\n\nThe aim is to add the option \u0027--with-auto-load-safe-path\u003d$debugdir:$datadir/auto-load:/path/to/abe/sysroots\u0027 to GDB\u0027s configure script so that it can load libthread_db.so.1 when the testsuite runs.\nNote that \"$debugdir:$datadir\" aren\u0027t variables and have to appear unmodified. To make that possible, this change uses \u0027@@\u0027 to represent the dollar sign.\n\nThis is my second try. My first was at https://review.linaro.org/c/toolchain/abe/+/41555 and didn\u0027t work because the dollar sign didn\u0027t \"survive\" when Abe tried to recreate the toolchain build using the manifest file.",
       "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9434c570_4a74fc35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-06-30T01:16:42Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1358/ : Well ... it worked on my machine\"\n\nI looked into this failure. The \"problem\" can be found in the files test_previous_abe_cmd_line_gcc{4_9,5,6,7}.log. It is caused by compare-manifests.pl noticing that the gdb_configure parameter is different after my patch, which is precisely the intent of this change request.\n\nSo this failure is expected, since any commit that changes a parameter present in the manifest file will trigger it.",
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
