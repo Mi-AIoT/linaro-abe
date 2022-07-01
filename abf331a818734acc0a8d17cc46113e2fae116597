@@ -72,6 +72,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3609f31a_ebc4f957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-07-01T14:33:23Z",
+      "side": 1,
+      "message": "Thanks! That\u0027s a good point I\u0027ll move these comments to the commit log.\n\nGerrit has so many textboxes to fill. now I will have to think of something else to write in them. :-)",
+      "parentUuid": "27ec12dd_bb61b6a6",
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9df399e7_6005a993",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-07-01T14:33:23Z",
+      "side": 1,
+      "message": "Thank you for your review! I\u0027ll submit a v2 using \u0027##\u0027 and improved commit logs.",
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "aa6fec9f_2cd1f04d",
         "filename": "lib/configure.sh",
         "patchSetId": 1
@@ -83,6 +118,30 @@
       "writtenOn": "2022-07-01T14:15:47Z",
       "side": 1,
       "message": "Ah, the joy of selecting a token to avoid shell expansion :-) .\nI, personally, prefer \"##\".",
+      "range": {
+        "startLine": 246,
+        "startChar": 111,
+        "endLine": 246,
+        "endChar": 113
+      },
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa6c35f_183faa09",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-07-01T14:33:23Z",
+      "side": 1,
+      "message": "Ok, thanks for the suggestion. I will submit a new version that uses \"##\".",
+      "parentUuid": "aa6fec9f_2cd1f04d",
       "range": {
         "startLine": 246,
         "startChar": 111,
