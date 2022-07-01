@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4229e346_d6623e2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-07-01T14:38:30Z",
+      "side": 1,
+      "message": "Hello Maxim,\n\nHere\u0027s the change to make Abe set GNATMAKE_FOR_TARGET and others only if the corresponding tool is actually present.\n\nThanks for quickly reviewing all these Gerrit change requests!",
+      "revId": "a21424f1a9ca41ac74c319c8e15ac8af8cbf8875",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
