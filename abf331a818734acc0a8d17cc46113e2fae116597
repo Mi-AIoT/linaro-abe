@@ -52,6 +52,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ec12dd_bb61b6a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2022-07-01T14:17:47Z",
+      "side": 1,
+      "message": "Hi Thiago,\nYou write these great comments on the motivation of your patches in the review submissions.  These comments would make great additions to commit logs of your patches.",
+      "parentUuid": "ded2ee69_80888da9",
+      "revId": "abf331a818734acc0a8d17cc46113e2fae116597",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa6fec9f_2cd1f04d",
