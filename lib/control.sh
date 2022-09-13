@@ -30,6 +30,10 @@ declare -A build_step_required
 build_component_list=""
 check_component_list=""
 
+# Whether the fast tests should be run for the components in
+# check_component_list.
+fast_checks=false
+
 build_step_required[RETRIEVE]=1
 build_step_RETRIEVE()
 {
@@ -188,3 +192,7 @@ get_check_component_list()
    echo "${check_component_list}"
 }
 
+enable_fast_checks()
+{
+    fast_checks=true
+}

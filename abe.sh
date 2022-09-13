@@ -22,6 +22,7 @@ usage()
     cat << EOF
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--check {all|glibc|gcc|gdb|binutils}]
+             [--check-fast gdb]
              [--checkout {<package>|all}]
              [--disable {building|install|make_docs|parallel|update}]
              [--dryrun] [--dump]
@@ -130,6 +131,11 @@ OPTIONS
                         --check requires an input directive.
                         Calling --check without a directive is an
                         error that will cause ${abe} to abort.
+
+  --check-fast gdb
+
+                Run a curated list of tests that run fast. At the moment only
+                the gdb package has such a list.
 
   --checkout {<package>|all}
 
@@ -840,6 +846,10 @@ dump()
         echo "check              ${do_makecheck}"
     fi
 
+    if test ! -z "${do_makecheck_fast}"; then
+	echo "check-fast         ${do_makecheck_fast}"
+    fi
+
     if test x"${do_excludecheck}" != x; then
         echo "excludecheck       ${do_excludecheck}"
     fi
@@ -858,6 +868,7 @@ do_dump=
 do_retrieve=
 do_checkout=
 do_makecheck=
+do_makecheck_fast=
 do_excludecheck=
 do_build=
 do_build_stage=stage2
@@ -899,12 +910,30 @@ while test $# -gt 0; do
 	    if test $ret -eq 1; then
 		error "${2} is an invalid package name to pass to --check. The choices are {all $all_unit_tests}."
 		build_failure
+	    elif [ -n "${do_makecheck_fast}" ]; then
+		error "--check and --check-fast are mutually exclusive."
+		build_failure
 	    fi
 
 	    # Accumulate --check packages from consecutive --check calls.  Yes
 	    # there might be potential duplicates but we'll prune those later.
 	    # parse later.
 	    do_makecheck="${do_makecheck:+${do_makecheck} }${2}"
+
+	    shift
+	    ;;
+	--check-fast)
+	    check_directive check-fast $2
+
+	    if [ "$2" != "gdb" ]; then
+		error "${2} is an invalid package name to pass to --check-fast. Currently only gdb has a list of fast testcases."
+		build_failure
+	    elif [ -n "${do_makecheck}" ]; then
+		error "--check and --check-fast are mutually exclusive."
+		build_failure
+	    fi
+
+	    do_makecheck_fast="${2}"
 
 	    shift
 	    ;;
@@ -1336,6 +1365,9 @@ if test ! -z "${do_excludecheck}"; then
 	# Strip white space from the end of the string
 	runtests=${runtests% }
     fi
+elif [ -n "${do_makecheck_fast}" ]; then
+    runtests="${do_makecheck_fast}"
+    enable_fast_checks
 fi
 
 if [ ! -z "${runtests}" ]; then

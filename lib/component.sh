@@ -35,6 +35,7 @@ declare -ag toolchain
 # STATICLINK
 # CONFIGURE
 # RUNTESTFLAGS
+# FASTTESTS
 # MINGWEXTRACONF
 # MINGWONLY
 
@@ -261,6 +262,11 @@ get_component_runtestflags ()
     __get_component_GENERIC RUNTESTFLAGS "$@"
 }
 
+get_component_fasttests ()
+{
+    __get_component_GENERIC FASTTESTS "$@"
+}
+
 # Note that this function is GCC specific.
 get_component_stage ()
 {
@@ -374,7 +380,7 @@ read_conf_files ()
 	#    aarch64_errata languages tag
 	# set in a special conf file which is parsed separately in abe.sh:
 	#    preferred_libc
-        for var in default_configure_flags default_makeflags latest mingw_extraconf mingw_only linuxhost_only runtest_flags stage1_flags stage2_flags static_link; do
+	for var in default_configure_flags default_makeflags latest mingw_extraconf mingw_only linuxhost_only runtest_flags stage1_flags stage2_flags static_link fast_tests; do
 
             if [ "${!var:+set}" = "set" ]; then
                 echo "local conf_$var=\"${!var}\""
@@ -525,6 +531,7 @@ collect_data ()
 	confvars="${confvars} ${conf_stage2_flags:+STAGE2=\"$(echo ${conf_stage2_flags} | tr ' ' '%')\"}"
     fi
     confvars="${confvars} ${conf_runtest_flags:+RUNTESTFLAGS=\"$(echo ${conf_runtest_flags} | tr ' ' '%')\"}"
+    confvars="${confvars} ${conf_fast_tests:+FASTTESTS=\"$(echo ${conf_fast_tests} | tr ' ' '%')\"}"
     confvars="${confvars} ${conf_mingw_only:+MINGWONLY=\"$(echo ${conf_mingw_only} | tr ' ' '%')\"}"
     confvars="${confvars} ${conf_mingw_extraconf:+MINGWEXTRACONF=\"$(echo ${conf_mingw_extraconf} | tr ' ' '%')\"}"
     confvars="${confvars} ${conf_linuxhost_only:+LINUXHOSTONLY=\"$(echo ${conf_linuxhost_only} | tr ' ' '%')\"}"

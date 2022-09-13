@@ -693,6 +693,17 @@ make_check()
         return 1
     fi
 
+    local fast_tests=""
+    if [ "${fast_checks}" = "true" ]; then
+	fast_tests="$(get_component_fasttests ${component} $2)"
+
+	if [ -z "${fast_tests}" ]; then
+	    # Not all components have a fast tests list.
+	    error "Component '${component}' has no fast_tests defined."
+	    return 1
+	fi
+    fi
+
     # Some tests cause problems, so don't run them all unless
     # --enable alltests is specified at runtime.
     local ignore="dejagnu gmp mpc mpfr make eglibc linux gdbserver"
@@ -732,6 +743,10 @@ make_check()
     fi
     if [ x"${runtestflags[*]}" != x"" ]; then
 	make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags[*]}\""
+    fi
+
+    if [ "${fast_checks}" = "true" ]; then
+	make_flags="${make_flags} TESTS=\"${fast_tests}\""
     fi
 
     if test x"${parallel}" = x"yes"; then
