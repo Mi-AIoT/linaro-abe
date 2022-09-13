@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d230d5_d30d86cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2022-09-13T21:51:53Z",
+      "side": 1,
+      "message": "This is a pre-requisite change in Abe to add a new CI job to run a subset of GDB tests that are fast and have stable results. The corresponding jenkins-scripts and ci/job/configs changes will follow shortly.\n\nI will have spotty availability and online access for the rest of this week due to the GNU Tools Cauldron conference, and one week of vacation next week. So it might be a good idea to commit these changes only on Sept 26 when I will be back and fully available to fix any eventual breakage.",
+      "revId": "178eaf4187985ca992caf3542ce01c18d60ea9e9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
