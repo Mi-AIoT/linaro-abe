@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "178eaf4187985ca992caf3542ce01c18d60ea9e9",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a72c801_db23a141",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2022-09-16T08:46:20Z",
+      "side": 1,
+      "message": "Could you check if you can do the same with setting \"${testsuites[@]}\" appropriately at \nhttps://git.linaro.org/toolchain/jenkins-scripts.git/tree/tcwg_gnu-build.sh#n60 ?",
+      "revId": "178eaf4187985ca992caf3542ce01c18d60ea9e9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
