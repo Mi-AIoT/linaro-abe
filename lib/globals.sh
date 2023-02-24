@@ -107,6 +107,10 @@ build_config=""
 bootstrap="no"
 gcc_patch_file=""
 
+rerun_failed_tests=false
+gcc_compare_results=""
+expected_failures=""
+
 # source a user specific config file for commonly used configure options.
 # These overide any of the above values.
 if test -e ~/.aberc; then

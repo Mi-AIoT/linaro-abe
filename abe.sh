@@ -198,6 +198,9 @@ OPTIONS
 
                 --check gdb --excludecheck gdb --check gdb
 
+  --expected-failures <path>
+                File containing known expected testsuite failures.
+
   --extraconfig <tool>=<path>
                 Use an additional configuration file for tool.
 
@@ -205,6 +208,9 @@ OPTIONS
                 Use a directory of additional configuration files.
 
   --force	Force download packages and force rebuild packages.
+
+  --gcc-compare-results <dir>
+                Directory containing gcc-compare-results checkout.
 
   --help|-h	Display this usage information.
 
@@ -232,6 +238,13 @@ OPTIONS
 
                 Specify which <cpu> value to use if testing uses
                 QEMU. Defaults to "any".
+
+  --rerun-failed-tests
+
+                Rerun testsuite .exp files that contain failed tests. The
+                DejaGNU sum and log files of the original testsuite run are
+                preserved with the .0 extension. The final sum file will be
+                an amalgamation containing the passes of all the reruns.
 
   --space <space_needed>
 
@@ -924,6 +937,15 @@ while test $# -gt 0; do
 
 	    shift
 	    ;;
+	--expected-failures)
+	    check_directive expected-failures "$2"
+	    if ! [ -f "$2" ]; then
+		error "Parameter for --expected-failures $2 is not a file."
+		build_failure
+	    fi
+	    expected_failures="$2"
+	    shift
+	    ;;
 	--extraconfig)
 	    check_directive extraconfig $2
 	    extraconfig_tool="$(echo $2 | cut -d '=' -f 1)"
@@ -947,6 +969,15 @@ while test $# -gt 0; do
 		extraconfig_val="$2/$i"
 		extraconfig[${extraconfig_tool}]="${extraconfig[${extraconfig_tool}]} ${extraconfig_val}"
 	    done
+	    shift
+	    ;;
+	--gcc-compare-results)
+	    check_directive gcc-compare-results "$2"
+	    if ! [ -d "$2" ]; then
+		error "Parameter for --gcc-compare-results $2 is not a directory."
+		build_failure
+	    fi
+	    gcc_compare_results="$2"
 	    shift
 	    ;;
 	--host)
@@ -988,6 +1019,9 @@ while test $# -gt 0; do
             release=$2
 	    shift
             ;;
+        --rerun-failed-tests)
+	    rerun_failed_tests=true
+	    ;;
 	--retrieve)
 	    check_directive retrieve $2
 	    # Save and process this after all other elements have been processed.
@@ -1247,6 +1281,11 @@ fi
 if [ "x${component_version_set}" = x1 -a ! -z "${do_manifest}" ]; then
   error "setting component versions with --manifest is not supported"
   build_failure
+fi
+
+if $rerun_failed_tests && [ -z "$gcc_compare_results" ]; then
+    error "Setting --rerun-failed-tests requires setting --gcc-compare-results as well"
+    build_failure
 fi
 
 # resolve C library from command line options, defaults, or extraconfig.
