@@ -743,9 +743,6 @@ make_check()
     if [ "$extra_runtestflags" != x"" ]; then
 	runtestflags+=("$extra_runtestflags")
     fi
-    if [ x"${runtestflags[*]}" != x"" ]; then
-	make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags[*]}\""
-    fi
 
     if test x"${parallel}" = x"yes"; then
 	case "${target}" in
@@ -838,22 +835,135 @@ make_check()
 
     notice "Redirecting output from the testsuite to $checklog"
 
+    local testsuite_mgmt="$gcc_compare_results/contrib/testsuite-management"
+    local validate_failures="$testsuite_mgmt/validate_failures.py"
+    local expected_fails="$testsuite_mgmt/flaky.xfail"
+    local fails_tmp_root fails_tmp
+
+    # Prepare temporary directory with files for expected and new fails.
+    fails_tmp_root="$(mktemp -d abe.XXXXXXXXXX)"
+    # Many xfail files include flaky.xfail from the parent directory, so they need to be
+    # copied to a subdirectory.
+    fails_tmp="$fails_tmp_root/workdir"
+    mkdir "$fails_tmp"
+    cp "$expected_fails" "$fails_tmp_root"
+
+    if [ -n "$ci_project" ] && [ -n "$ci_config" ] \
+	   && [ -f "$testsuite_mgmt/flaky/${ci_project}-${ci_config}.xfail" ]; then
+	expected_fails="$testsuite_mgmt/flaky/${ci_project}-${ci_config}.xfail"
+    fi
+
+    cp "$expected_fails" "$fails_tmp/xfails.orig"
+
+    notice "Using expected fails file $expected_fails"
+
     local i result=0
     for i in ${dirs}; do
-	# Testsuites (I'm looking at you, GDB), can leave stray processes
-	# that inherit stdout of below "make check".  Therefore, if we pipe
-	# stdout to "tee", then "tee" will wait on output from these
-	# processes for forever and ever.  We workaround this by redirecting
-	# output to a file that can be "tail -f"'ed, if desired.
-	# A proper fix would be to fix dejagnu to not pass parent stdout
-	# to testcase processes.
-	dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
-        if [ $? != 0 ]; then
-	    warning "make ${check_targets} -C ${builddir}$i failed."
-	    result=1
+	local xfails="$fails_tmp/xfails" new_fails="$fails_tmp/new_fails"
+
+	# Reset the xfails file to its initial state.
+	cp -f "$fails_tmp/xfails.orig" "$xfails"
+
+	local make_runtestflags=""
+	if [ -n "${runtestflags[*]}" ]; then
+	    make_runtestflags="RUNTESTFLAGS=\"${runtestflags[*]}\""
 	fi
+
+	local try=0
+	# The key in sums is the original name of the sum file, and the value is a list of
+	# the sum files produced by all the testsuite runs, separated by ';' (because bash
+	# doesn't support arrays within arrays).
+	local -A sums=()
+	while true; do
+	    # Testsuites (I'm looking at you, GDB), can leave stray processes
+	    # that inherit stdout of below "make check".  Therefore, if we pipe
+	    # stdout to "tee", then "tee" will wait on output from these
+	    # processes for forever and ever.  We workaround this by redirecting
+	    # output to a file that can be "tail -f"'ed, if desired.
+	    # A proper fix would be to fix dejagnu to not pass parent stdout
+	    # to testcase processes.
+	    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
+	    if [ $? != 0 ]; then
+		# Make is told to ignore errors, so it's really not supposed to fail.
+		warning "make ${check_targets} -C ${builddir}$i failed."
+		result=1
+		break
+	    elif ! $rerun_failed_tests; then
+		# No need to try again.
+		break
+	    fi
+
+	    "$validate_failures" \
+		--manifest="$xfails" \
+		--build_dir="${builddir}$i" \
+		--verbosity=1 \
+		> "$new_fails" &
+	    res=0 && wait $! || res=$?
+	    # If it was the first try and it didn't fail, we don't need to save copies of
+	    # the sum and log files.
+	    if [ $try -eq 0 ] && [ $res -eq 0 ]; then
+		break
+	    fi
+
+	    # Find sum and log files from this try and save them.
+	    local log sum
+	    while IFS= read -r -d '' sum; do
+		log="${sum/.sum/.log}"
+
+		mv "$sum" "${sum}.${try}"
+		mv "$log" "${log}.${try}"
+
+		sums["$sum"]+="${sum}.${try};"
+	    done < <(find "${builddir}$i" -name '*.sum' \
+			  -not -path '*/gdb/testsuite/outputs/*' -print0)
+
+	    if [ $res -eq 0 ]; then
+		# No failures. We can stop now.
+		break
+	    elif [ $res -ne 2 ]; then
+		# Exit code 2 means that the result comparison found regressions.
+		#
+		# Exit code 1 means that the script has failed to process .sum files. This
+		# likely indicates malformed or very unusual results.
+		warning "$validate_failures had an unexpected error."
+		result=1
+		break
+	    fi
+
+	    # Incorporate this try's failures into the expected failures list.
+	    cat "$new_fails" >> "$xfails"
+
+	    local -a failed_exps=()
+	    readarray -t failed_exps \
+		      < <(awk '/^Running .* \.\.\./ { print $2 }' < "$new_fails")
+
+	    if [ ${#failed_exps[@]} -eq 0 ]; then
+		# This indicates a bug in validate_failures.py.
+		warning "$validate_failures failed: it reported regressions but no failed tests."
+		result=1
+		break;
+	    fi
+
+	    make_runtestflags="RUNTESTFLAGS=\"${failed_exps[*]}\""
+	    try=$((try + 1))
+	done
+
+	# If there was more than one try, we need to merge all the sum files.
+	if [ $try -ne 0 ]; then
+	    for sum in "${!sums[@]}"; do
+		local -a sum_tries=()
+		IFS=";" read -r -a sum_tries <<< "${sums[$sum]}"
+
+		"${gcc_compare_results}/compare_dg_tests.pl" \
+		    --merge -o "${sum}" "${sum_tries[@]}"
+	    done
+	fi
+
+	notice "Ran the testsuite $((try + 1)) times."
         record_test_results "${component}" $2
     done
+
+    rm -rf "$fails_tmp_root"
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
