@@ -733,8 +733,9 @@ make_check()
     if [ "$extra_runtestflags" != x"" ]; then
 	runtestflags+=("$extra_runtestflags")
     fi
+    local make_runtestflags=""
     if [ x"${runtestflags[*]}" != x"" ]; then
-	make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags[*]}\""
+	make_runtestflags="RUNTESTFLAGS=\"${runtestflags[*]}\""
     fi
 
     if test x"${parallel}" = x"yes"; then
@@ -830,18 +831,57 @@ make_check()
 
     local i result=0
     for i in ${dirs}; do
-	# Testsuites (I'm looking at you, GDB), can leave stray processes
-	# that inherit stdout of below "make check".  Therefore, if we pipe
-	# stdout to "tee", then "tee" will wait on output from these
-	# processes for forever and ever.  We workaround this by redirecting
-	# output to a file that can be "tail -f"'ed, if desired.
-	# A proper fix would be to fix dejagnu to not pass parent stdout
-	# to testcase processes.
-	dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
-        if [ $? != 0 ]; then
+	local try=0 try_res
+	local -a old_failed_exps=("old") new_failed_exps=("new")
+	while [ "${old_failed_exps[*]}" != "${new_failed_exps[*]}" ] \
+		  && [ ${#new_failed_exps[@]} -ne 0 ] && [ $try -lt 3 ]; do
+	    try=$((try + 1))
+
+	    # Testsuites (I'm looking at you, GDB), can leave stray processes
+	    # that inherit stdout of below "make check".  Therefore, if we pipe
+	    # stdout to "tee", then "tee" will wait on output from these
+	    # processes for forever and ever.  We workaround this by redirecting
+	    # output to a file that can be "tail -f"'ed, if desired.
+	    # A proper fix would be to fix dejagnu to not pass parent stdout
+	    # to testcase processes.
+	    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
+	    try_res=$?
+	    if [ "$rerun_failed_tests" = false ]; then
+		# No need to try again.
+		notice "BOZO rerun_failed_tests = false"
+		break
+	    fi
+
+	    # Find sum and log files from this try and preserve them.
+	    local sum last_sum
+	    while IFS= read -r -d '' sum; do
+		log="${sum%.sum}.log"
+		last_sum="$sum"
+
+		cp "$sum" "${sum}.${try}"
+		cp "$log" "${log}.${try}"
+	    done < <(find "${builddir}$i" -name '*.sum' \
+			  -not -path '*/gdb/testsuite/outputs/*' -print0)
+
+	    # Copy new array to old array.
+	    old_failed_exps=("${new_failed_exps[@]}")
+
+	    # Collect list of exp files with non-passing tests.
+	    readarray -t new_failed_exps < <(awk 'BEGIN { FS=":" } /[A-Z]: .*\.exp:/ { if ($1 != "PASS") exps[$2] = 1 } END { for (e in exps) print e }' < "$last_sum")
+
+	    make_runtestflags="RUNTESTFLAGS=\"${new_failed_exps[*]}\""
+	done
+	if [ "$try_res" -ne 0 ]; then
 	    warning "make ${check_targets} -C ${builddir}$i failed."
 	    result=1
 	fi
+
+	# If there was more than one testsuite run, merge all the sum files.
+	if [ $try -ne 1 ]; then
+	    "${gcc_compare_results}/compare_dg_tests.pl" --merge -o "$last_sum" $(eval echo "${last_sum}.{1..$try}")
+	fi
+
+	notice "Ran the testsuite $try times."
         record_test_results "${component}" $2
     done
 

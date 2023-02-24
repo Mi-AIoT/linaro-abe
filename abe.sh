@@ -206,6 +206,9 @@ OPTIONS
 
   --force	Force download packages and force rebuild packages.
 
+  --gcc-compare-results <dir>
+                Directory containing gcc-compare-results checkout.
+
   --help|-h	Display this usage information.
 
   --host <host_triple>
@@ -232,6 +235,13 @@ OPTIONS
 
                 Specify which <cpu> value to use if testing uses
                 QEMU. Defaults to "any".
+
+  --rerun-failed-tests
+
+                Rerun testsuite .exp files that contain failed tests. The
+                DejaGNU sum and log files of the original testsuite run are
+                preserved with the .1 extension. The final sum file will be
+                an amalgamation containing the passes of all the reruns.
 
   --space <space_needed>
 
@@ -864,6 +874,8 @@ do_manifest=""
 component_version_set=""
 send_results_to=
 qemu_cpu="any"
+rerun_failed_tests=false
+gcc_compare_results=""
 
 declare -A extraconfig
 
@@ -949,6 +961,15 @@ while test $# -gt 0; do
 	    done
 	    shift
 	    ;;
+	--gcc-compare-results)
+	    check_directive gcc-compare-results "$2"
+	    if ! [ -d "$2" ]; then
+		error "Parameter for --gcc-compare-results $2 is not a directory."
+		build_failure
+	    fi
+	    gcc_compare_results="$2"
+	    shift
+	    ;;
 	--host)
 	    host=$2
 	    shift
@@ -988,6 +1009,9 @@ while test $# -gt 0; do
             release=$2
 	    shift
             ;;
+        --rerun-failed-tests)
+	    rerun_failed_tests=true
+	    ;;
 	--retrieve)
 	    check_directive retrieve $2
 	    # Save and process this after all other elements have been processed.
@@ -1247,6 +1271,11 @@ fi
 if [ "x${component_version_set}" = x1 -a ! -z "${do_manifest}" ]; then
   error "setting component versions with --manifest is not supported"
   build_failure
+fi
+
+if [ "${rerun_failed_tests}" = true ] && [ -z "${gcc_compare_results}" ]; then
+    error "Setting --rerun-failed-tests requires setting --gcc-compare-results as well"
+    build_failure
 fi
 
 # resolve C library from command line options, defaults, or extraconfig.
