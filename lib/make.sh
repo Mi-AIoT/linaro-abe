@@ -733,8 +733,9 @@ make_check()
     if [ "$extra_runtestflags" != x"" ]; then
 	runtestflags+=("$extra_runtestflags")
     fi
+    local make_runtestflags=""
     if [ x"${runtestflags[*]}" != x"" ]; then
-	make_flags="${make_flags} RUNTESTFLAGS=\"${runtestflags[*]}\""
+	make_runtestflags="RUNTESTFLAGS=\"${runtestflags[*]}\""
     fi
 
     if test x"${parallel}" = x"yes"; then
@@ -830,18 +831,101 @@ make_check()
 
     local i result=0
     for i in ${dirs}; do
-	# Testsuites (I'm looking at you, GDB), can leave stray processes
-	# that inherit stdout of below "make check".  Therefore, if we pipe
-	# stdout to "tee", then "tee" will wait on output from these
-	# processes for forever and ever.  We workaround this by redirecting
-	# output to a file that can be "tail -f"'ed, if desired.
-	# A proper fix would be to fix dejagnu to not pass parent stdout
-	# to testcase processes.
-	dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
-        if [ $? != 0 ]; then
-	    warning "make ${check_targets} -C ${builddir}$i failed."
-	    result=1
+	local try=0 log
+	local -a failed_exps=("new") merged_sums=() sums=()
+	while [ ${#failed_exps[@]} -ne 0 ]; do
+	    try=$((try + 1))
+
+	    # Testsuites (I'm looking at you, GDB), can leave stray processes
+	    # that inherit stdout of below "make check".  Therefore, if we pipe
+	    # stdout to "tee", then "tee" will wait on output from these
+	    # processes for forever and ever.  We workaround this by redirecting
+	    # output to a file that can be "tail -f"'ed, if desired.
+	    # A proper fix would be to fix dejagnu to not pass parent stdout
+	    # to testcase processes.
+	    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
+	    if [ $? != 0 ]; then
+		# Make is told to ignore errors, so it's really not supposed to fail.
+		warning "make ${check_targets} -C ${builddir}$i failed."
+		result=1
+		break
+	    elif ! $rerun_failed_tests; then
+		# No need to try again.
+		break
+	    fi
+
+	    # Find sum and log files from this try and process them.
+	    local old_new_merged_sums_equal=true sum
+	    sums=()
+	    while IFS= read -r -d '' sum; do
+		log="${sum%.sum}.log"
+		sums+=("$sum")
+
+		# Save each iteration's results for reference.
+		mv "$sum" "${sum}.${try}"
+		mv "$log" "${log}.${try}"
+
+		if [ $try -eq 1 ]; then
+		    old_new_merged_sums_equal=false
+		elif [ $try -eq 2 ]; then
+		    # Create the first merged sum file.
+		    "${gcc_compare_results}/compare_dg_tests.pl" \
+			--merge -o "${sum}.merged" "${sum}.1" "${sum}.2"
+		    merged_sums+=("${sum}.merged")
+
+		    if ! cmp --quiet "${sum}.merged" "${sum}.1"; then
+			old_new_merged_sums_equal=false
+		    fi
+		else
+		    # Merge the new sum file into the existing merged sum file.
+		    "${gcc_compare_results}/compare_dg_tests.pl" \
+			--merge -o "${sum}.merged.new" "${sum}.merged" "${sum}.${try}"
+
+		    if ! cmp --quiet "${sum}.merged.new" "${sum}.merged"; then
+			old_new_merged_sums_equal=false
+		    fi
+		    mv -f "${sum}.merged.new" "${sum}.merged"
+		fi
+	    done < <(find "${builddir}$i" -name '*.sum' \
+			  -not -path '*/gdb/testsuite/outputs/*' -print0)
+
+	    # If the new merged sum files are equal to the old ones, we can stop.
+	    if $old_new_merged_sums_equal; then
+		break;
+	    fi
+
+	    local -a merged_sums_this_try=()
+	    for sum in ${sums[*]}; do
+		if [ -f "${sum}.merged" ]; then
+		    merged_sums_this_try+=("${sum}.merged")
+		else
+		    # If there was only one try, there's no merged file.
+		    merged_sums_this_try+=("${sum}.${try}")
+		fi
+	    done
+
+	    # Collect list of exp files with non-passing tests from the merged sum files.
+	    readarray -t failed_exps < <(cat ${merged_sums_this_try[*]} | awk 'BEGIN { FS=":" } /[A-Z]: .*\.exp:/ { if ($1 != "PASS") print $2 }' | sort | uniq)
+
+	    make_runtestflags="RUNTESTFLAGS=\"${failed_exps[*]}\""
+	done
+
+	# If there was only one try, restore the original sum and log filenames.
+	# There's no point in having .1 files since there's no merged file.
+	if [ $try -eq 1 ]; then
+	    for sum in ${sums[*]}; do
+		log="${sum%.sum}.log"
+		mv "${sum}.1"  "$sum"
+		mv "${log}.1"  "$log"
+	    done
 	fi
+
+	# If there was more than one testsuite run, rename the merged sum files.
+	for sum in ${merged_sums[*]}; do
+	    mv -f "${sum}" "${sum%.merged}"
+	done
+
+	notice "Ran the testsuite $try times."
         record_test_results "${component}" $2
     done
 
