@@ -395,7 +395,8 @@ make_all()
     local builddir="$(get_component_builddir ${component} $2)"
     notice "Making all in ${builddir}"
 
-    local make_flags
+    local make_flags="$extra_makeflags"
+    # ??? Why disable parallel build for glibc?
     if test x"${parallel}" = x"yes" -a "$(echo ${component} | grep -c glibc)" -eq 0; then
 	make_flags="${make_flags} -j ${cpus}"
     fi
@@ -517,7 +518,7 @@ make_install()
 	    i?86*) ARCH=i386 ;;
 	    powerpc*) ARCH=powerpc ;;
 	esac
-        dryrun "make ${make_opts} -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/libc/usr"
+        dryrun "make -C ${srcdir} headers_install ARCH=${ARCH} INSTALL_HDR_PATH=${sysroots}/libc/usr"
         if test $? != "0"; then
             error "Make headers_install failed!"
             return 1
@@ -529,12 +530,15 @@ make_install()
     local builddir="$(get_component_builddir ${component} $2)"
     notice "Making install in ${builddir}"
 
+    local make_flags=""
     if test "$(echo ${component} | grep -c glibc)" -gt 0; then
-        local make_flags=" install_root=${sysroots}/libc ${make_flags} LDFLAGS=-static-libgcc"
+	# ??? Why build glibc with static libgcc?  To avoid adding
+	# ??? compiler libraries to LD_LIBRARY_PATH?
+	make_flags="install_root=${sysroots}/libc ${make_flags} LDFLAGS=-static-libgcc"
     fi
 
     if test x"${override_ldflags}" != x; then
-        local make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
+        make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
     fi
 
     if test x"${make_docs}" != xyes; then
@@ -546,13 +550,12 @@ make_install()
         export CONFIG_SHELL=${bash_shell}
     fi
 
-    local default_makeflags= #"$(get_component_makeflags ${component})"
     local install_log="$(dirname ${builddir})/install-${component}${2:+-$2}.log"
     record_artifact "log_install_${component}${2:+-$2}" "${install_log}"
     if [ x"${component}" = x"gdb" -o x"${component}" = x"gdbserver" ]; then
-        dryrun "make install-${component} ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
+        dryrun "make install-${component} ${make_flags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     else
-	dryrun "make install ${make_flags} ${default_makeflags} -w -C ${builddir} 2>&1 | tee ${install_log}"
+	dryrun "make install ${make_flags} -w -C ${builddir} 2>&1 | tee ${install_log}"
     fi
     if test $? != "0"; then
         warning "Make install failed!"
@@ -877,7 +880,7 @@ make_clean()
     local builddir="$(get_component_builddir ${component} $2)"
 
     notice "Making clean in ${builddir}"
-    dryrun "make clean ${make_flags} -w -C ${builddir}"
+    dryrun "make clean -w -C ${builddir}"
     if test $? != "0"; then
         warning "Make clean failed!"
     fi
@@ -893,6 +896,8 @@ make_docs()
     local builddir="$(get_component_builddir ${component} $2)"
 
     notice "Making docs in ${builddir}"
+
+    local make_flags=""
 
     case $1 in
         *binutils*)

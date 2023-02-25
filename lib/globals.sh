@@ -63,7 +63,7 @@ hostname=${hostname:+${hostname}}
 distribution=${distribution:+${distribution}}
 
 # These are options flags to pass to make, usually just -j N as set by --parallel
-make_flags=
+extra_makeflags=
 
 # These can be changed by environment variables
 if test x"${SNAPSHOTS_URL:-}" != x -o x"${ABE_SNAPSHOTS:-}" != x; then

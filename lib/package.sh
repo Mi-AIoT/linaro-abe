@@ -152,7 +152,7 @@ binary_gdb()
 
     rm ${builddir}/gdb/gdb
 
-    local make_flags="${make_flags}"
+    local make_flags="$extra_makeflags"
     # install in alternate directory so it's easier to build the tarball
     dryrun "make all ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"
     dryrun "make install ${make_flags} DESTDIR=${destdir} -w -C ${builddir}"

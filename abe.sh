@@ -683,9 +683,8 @@ set_package()
 	    return 0
 	    ;;
 	makeflags)
-#	    override_makeflags="${setting}"
-	    make_flags="${make_flags} ${setting}"
-	    notice "Overriding ${setting} to MAKEFLAGS"
+	    extra_makeflags="$extra_makeflags $setting"
+	    notice "Adding $setting to MAKEFLAGS"
 	    return 0
 	    ;;
 	ldflags)
@@ -718,7 +717,7 @@ set_package()
 	    notice "Adding ${setting} to GCC configure options"
 	    return 0
 	    ;;
-       gcc_patch_file)
+	gcc_patch_file)
 	    gcc_patch_file=${setting}
 	    notice "Applyng patch ${setting} to gcc"
 	    return 0
