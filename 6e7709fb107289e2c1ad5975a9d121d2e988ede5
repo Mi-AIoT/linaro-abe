@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f31a2e_d1923a49",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-02-27T15:51:56Z",
+      "side": 0,
+      "message": "This setting is present in some config files:\n\nconfig/eembc.conf:5:default_makeflags\u003d\"build -j 1 \"\nconfig/eembc.conf:7:  default_makeflags\u003d\"${default_makeflags} CROSS_COMPILE\u003d${target}-\"\nconfig/eglibc.conf:14:default_makeflags\u003d\"PARALLELMFLAGS\u003d\\\"-j${cpus}\\\"\"\nconfig/gcc.conf:87:default_makeflags\u003d\"MAKEINFOFLAGS\u003d--force\"\nconfig/newlib.conf:16:#default_makeflags\u003d\"all-target-newlib all-target-libgloss\"\nconfig/gdbserver.conf:10:default_makeflags\u003d\"all-gdbserver\"\nconfig/gdb.conf:17:default_makeflags\u003d\"all-gdb\"\nconfig/glibc.conf:11:default_makeflags\u003d\"PARALLELMFLAGS\u003d-j${cpus}\"\n\nMost seem related to parallelizing builds, so perhaps not the best place to put them (especially in the \"make install\" step). The gdb.conf and gdbserver.conf ones add the Makefile targets to build GDB and gdbserver, but that also appears misplaced for the \"make install\" step, and also appear unnecessary.\n\nLastly, there\u0027s MAKEINFOFLAGS\u003d--force in gcc.conf, but that one looks like a hack. Hopefully we won\u0027t need it anymore. And if we do, we should add a make_install_flags option like you say.\n\nAll this to say that this is ok to me. I just suggest that the patch should remove the default_makeflags lines from the conf files above.",
+      "revId": "6e7709fb107289e2c1ad5975a9d121d2e988ede5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
