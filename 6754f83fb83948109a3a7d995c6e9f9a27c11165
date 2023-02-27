@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a4a2907_816efdf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-02-27T11:02:40Z",
+      "side": 1,
+      "message": "LGTM. However, I don\u0027t understand what happened in test-manifest2.sh during the check.",
+      "revId": "6754f83fb83948109a3a7d995c6e9f9a27c11165",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
