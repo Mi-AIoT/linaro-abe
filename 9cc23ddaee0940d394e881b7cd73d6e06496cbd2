@@ -16,6 +16,29 @@
       "message": "Hello,\n\nThis makes ABE rerun failed tests and uses the new --merge option in compare_dg_tests.pl.\nIn order to run that script, a new option was needed to point ABE to the gcc-compare-results directory.",
       "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9068595_e9aef81a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-07T09:51:17Z",
+      "side": 1,
+      "message": "Why only on $last_sum and not on all the .sum files?",
+      "range": {
+        "startLine": 870,
+        "startChar": 150,
+        "endLine": 870,
+        "endChar": 158
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
