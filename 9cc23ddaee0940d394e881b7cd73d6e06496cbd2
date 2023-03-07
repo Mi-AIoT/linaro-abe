@@ -18,6 +18,138 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75ca59d_3156f1f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "Hi Thiago,\n\nDo I understand correctly that this patch will re-run tests while there are differences in the set of failed .exp files, but will not re-try testsuites when we have differences in FAILs in the same .exp file?\n\nE.g., on the 1st try:\nRunning foo.exp ...\nFAIL: test1\nFAIL: test2\n\non the 2nd try:\nRunning foo.exp ...\nPASS: test1\nFAIL: test2\n\non the 3rd try:\nFAIL: test1\nPASS: test2\n\nIn the above case after 3 tries we get a green testsuite.  Looking at this patch it seems we will stop after the 2nd try because set of .exp files with FAILed tests didn\u0027t change.  Or am I missing something?",
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "539da393_118a113b",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 878,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "These are better placed in lib/globals.sh .",
+      "range": {
+        "startLine": 877,
+        "startChar": 0,
+        "endLine": 878,
+        "endChar": 22
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c70ec561_c148a23f",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1276,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "The usual practice in shell for variables, which are set to either \"true\" or \"false\" is to use them directly without wrapping \"test\" around them:\nif $rerun_failed_tests \u0026\u0026 [ -z \"$gcc_compare_results\" ]",
+      "range": {
+        "startLine": 1276,
+        "startChar": 3,
+        "endLine": 1276,
+        "endChar": 38
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b274448_864b4dc1",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "Why limit?  Shouldn\u0027t we re-run until convergence of old_failed_exps and new_failed_exps?",
+      "range": {
+        "startLine": 837,
+        "startChar": 43,
+        "endLine": 837,
+        "endChar": 57
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fd0f71_93465c81",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 849,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "if ! $rerun_failed_tests; then",
+      "range": {
+        "startLine": 849,
+        "startChar": 8,
+        "endLine": 849,
+        "endChar": 41
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28634e0_a1f2a978",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 851,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "Maybe \"Finished testing; rerun_failed_tests is not active\"",
+      "range": {
+        "startLine": 851,
+        "startChar": 10,
+        "endLine": 851,
+        "endChar": 41
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9068595_e9aef81a",
@@ -36,6 +168,29 @@
         "startChar": 150,
         "endLine": 870,
         "endChar": 158
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "367eed1b_d7038cc4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-07T11:14:34Z",
+      "side": 1,
+      "message": "Why?\nLet\u0027s say we have 2 tests, on the first try results are ...\nPASS: test1\nFAIL: test2\n\n... and on the second run results are:\nPASS: test2\n.\n\nIn this case we have 100% of tests PASSed and testsuite is green.",
+      "range": {
+        "startLine": 874,
+        "startChar": 4,
+        "endLine": 874,
+        "endChar": 24
       },
       "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
