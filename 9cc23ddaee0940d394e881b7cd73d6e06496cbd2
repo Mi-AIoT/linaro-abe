@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a768fc63_f99587e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-07T06:28:21Z",
+      "side": 1,
+      "message": "Hello,\n\nThis makes ABE rerun failed tests and uses the new --merge option in compare_dg_tests.pl.\nIn order to run that script, a new option was needed to point ABE to the gcc-compare-results directory.",
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
