@@ -70,6 +70,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "741684ca_a28b2f88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T03:35:03Z",
+      "side": 1,
+      "message": "As I mentioned in another comment, with the new approach of merging the new gdb.sum file with the old one after each try and comparing them, this case should work in v2.",
+      "parentUuid": "d99fba7c_b6854fd9",
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539da393_118a113b",
@@ -201,6 +219,30 @@
       "side": 1,
       "message": "One thing that happens with GDB is that tests keep flipping back and forth between passing and failing, and old_failed_exps and new_failed_exps never converge.\n\nI will experiment with keeping all old_failed_exps and stopping when new_failed_exps is equal to any of them. That should detect cycles.\n\nWell, actually old_failed_tests and new_failed_tests as you pointed out in the other comment.",
       "parentUuid": "0b274448_864b4dc1",
+      "range": {
+        "startLine": 837,
+        "startChar": 43,
+        "endLine": 837,
+        "endChar": 57
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93bd12df_871d3709",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 837,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T03:35:03Z",
+      "side": 1,
+      "message": "I was able to remove the limit for v2. Instead of using old_failed_tests and new_failed_tests, I found a simpler approach: at each iteration of the while loop, I merge the new gdb.sum file with the old one, and stop when the merged gdb.sum file stops changing.\n\nThis also fixes the scenario you mentioned in the other comment where the script wouldn\u0027t detect differences in FAILs in the same .exp file.",
+      "parentUuid": "03eb208a_ed6f8169",
       "range": {
         "startLine": 837,
         "startChar": 43,
@@ -352,6 +394,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91054df3_0eb81120",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T03:35:03Z",
+      "side": 1,
+      "message": "I fixed it in v2. Now the awk goes over all the sum files listed by the previous find command.\n\nBut as I mentioned, GDB\u0027s testsuite produces only one sum file so the multiple-files handling is untested.",
+      "parentUuid": "5319db6d_6aaefc7a",
+      "range": {
+        "startLine": 870,
+        "startChar": 150,
+        "endLine": 870,
+        "endChar": 158
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "367eed1b_d7038cc4",
@@ -389,6 +455,30 @@
       "side": 1,
       "message": "Indeed, that\u0027s true. I\u0027ll have to parse the summary section at the end of the synthetic sum file to see whether the testsuite is green.",
       "parentUuid": "367eed1b_d7038cc4",
+      "range": {
+        "startLine": 874,
+        "startChar": 4,
+        "endLine": 874,
+        "endChar": 24
+      },
+      "revId": "9cc23ddaee0940d394e881b7cd73d6e06496cbd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34bfa985_dfc3cc43",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T03:35:03Z",
+      "side": 1,
+      "message": "I implemented summary parsing but then ABE started to return an error status from make_check(), which I never saw it do before even when the testsuite has failures.\n\nI then noticed that it calls \"make ${check_targets} ... -i ...\", which causes make to ignore errors. So even before my changes ABE didn\u0027t detect a green testsuite.\n\nGiven this, in v2 I changed this code to break out of the while loop in the unlikely case that the make command fails.",
+      "parentUuid": "0a43c54f_d8b8aace",
       "range": {
         "startLine": 874,
         "startChar": 4,

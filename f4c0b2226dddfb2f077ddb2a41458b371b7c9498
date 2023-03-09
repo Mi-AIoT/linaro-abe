@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "061c1e6f_6f2e295c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T03:35:03Z",
+      "side": 1,
+      "message": "Hello,\n\nThere are the changes in v2:\n- Moved globals to lib/globals.sh.\n- Changed tests of boolean variables to follow convention.\n- Rewrote loop in make_check() to stop when the merged sum file stops changing. This also allows detecting when different tests in a single exp file change.\n- Fixed awk invocation to look for failed tests in all the sum files produced by the testsuite.\n- If the \"make ${check_targets}\" invocation fails, break out of the loop instead of continuing and only checking the last invocation after the loop finishes.",
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
