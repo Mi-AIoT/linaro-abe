@@ -18,6 +18,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "824ae00c_9d5b511c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T16:05:06Z",
+      "side": 1,
+      "message": "Thank you for the review!",
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5abacf8d_c01957ec",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-03-09T07:38:00Z",
       "side": 1,
       "message": "I can\u0027t explain this rationally .. but how about \".0\" for original results?",
+      "range": {
+        "startLine": 243,
+        "startChar": 35,
+        "endLine": 243,
+        "endChar": 37
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1848740a_71650b62",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T16:05:06Z",
+      "side": 1,
+      "message": "Ok, I will change. It seems more logical to me too. I used .1 because in previous versions of the code it was easier to produce the \"Ran the testsuite $try times.\" notice if I increased the counter at the beginning of the loop. But now it\u0027s not hard to revert to the traditional 0-based count.",
+      "parentUuid": "5abacf8d_c01957ec",
       "range": {
         "startLine": 243,
         "startChar": 35,
@@ -64,6 +105,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69073e8e_935d68af",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T16:05:06Z",
+      "side": 1,
+      "message": "Yes, I used \"${sum/.sum/.log}\" there because in that loop you can get .sum.1 files, which isn\u0027t the case here. But the fancier version also works in this case so I\u0027ll change here as well for consistency.",
+      "parentUuid": "db494049_25e09f5a",
+      "range": {
+        "startLine": 861,
+        "startChar": 7,
+        "endLine": 861,
+        "endChar": 22
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "428b4c88_1d0238ec",
@@ -77,6 +142,30 @@
       "writtenOn": "2023-03-09T07:38:00Z",
       "side": 1,
       "message": "This will make testsuite with no FAILs run 2 times.",
+      "range": {
+        "startLine": 869,
+        "startChar": 6,
+        "endLine": 869,
+        "endChar": 37
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e246b99_ebfdc6af",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T16:05:06Z",
+      "side": 1,
+      "message": "In that case \"${#failed_exps[@]}\" will be 0 and the while loop will exit, so the testsuite will still run only once.",
+      "parentUuid": "428b4c88_1d0238ec",
       "range": {
         "startLine": 869,
         "startChar": 6,
@@ -112,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df241e0a_69a8352a",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T16:05:06Z",
+      "side": 1,
+      "message": "Ok, after you explained in the meeting the idea of feeding the previous run\u0027s results as a manifest for the next run I understood what you mean. I\u0027ll experiment on my side as well.",
+      "parentUuid": "403deda4_9140ba67",
+      "range": {
+        "startLine": 881,
+        "startChar": 7,
+        "endLine": 881,
+        "endChar": 49
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "06078547_86fb6047",
         "filename": "lib/make.sh",
         "patchSetId": 2
@@ -123,6 +236,30 @@
       "writtenOn": "2023-03-09T07:38:00Z",
       "side": 1,
       "message": "The right idiom is\nfor sum in \"${sums[@]}\"; do\n.\nsums\u003d(\"a b\" \"c\")\n${sums[*]} will expand into 3 elements: a b c\n\"${sums[@]}\" will expand into 2 elements: \"a b\" \"c\"",
+      "range": {
+        "startLine": 916,
+        "startChar": 5,
+        "endLine": 916,
+        "endChar": 30
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "327385f0_f8e15808",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-09T16:05:06Z",
+      "side": 1,
+      "message": "Ah, indeed. Fixed for v2. Thank you!",
+      "parentUuid": "06078547_86fb6047",
       "range": {
         "startLine": 916,
         "startChar": 5,
