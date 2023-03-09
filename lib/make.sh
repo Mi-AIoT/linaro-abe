@@ -407,7 +407,17 @@ make_all()
     fi
 
     if test "$(echo ${target} | grep -c aarch64)" -gt 0; then
-	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"-Wl,-fix-cortex-a53-843419\" "
+	local ldflags_for_target="-Wl,-fix-cortex-a53-843419"
+	# As discussed in
+	# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66203
+	# aarch64*-none-elf toolchains using newlib need the
+	# --specs=rdimon.specs option otherwise link fails because
+	# _exit etc... cannot be resolved. See commit message for
+	# details.
+	if test "$(echo ${target} | grep -c elf)" -gt 0;  then
+	    ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
+	fi
+	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
     fi
 
     # Use pipes instead of /tmp for temporary files.
