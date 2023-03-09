@@ -407,7 +407,11 @@ make_all()
     fi
 
     if test "$(echo ${target} | grep -c aarch64)" -gt 0; then
-	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"-Wl,-fix-cortex-a53-843419\" "
+	local ldflags_for_target="-Wl,-fix-cortex-a53-843419"
+	if test "$(echo ${target} | grep -c elf)" -gt 0;  then
+	    ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
+	fi
+	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
     fi
 
     # Use pipes instead of /tmp for temporary files.
