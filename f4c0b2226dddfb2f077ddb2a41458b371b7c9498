@@ -16,6 +16,121 @@
       "message": "Hello,\n\nThere are the changes in v2:\n- Moved globals to lib/globals.sh.\n- Changed tests of boolean variables to follow convention.\n- Rewrote loop in make_check() to stop when the merged sum file stops changing. This also allows detecting when different tests in a single exp file change.\n- Fixed awk invocation to look for failed tests in all the sum files produced by the testsuite.\n- If the \"make ${check_targets}\" invocation fails, break out of the loop instead of continuing and only checking the last invocation after the loop finishes.",
       "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5abacf8d_c01957ec",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-09T07:38:00Z",
+      "side": 1,
+      "message": "I can\u0027t explain this rationally .. but how about \".0\" for original results?",
+      "range": {
+        "startLine": 243,
+        "startChar": 35,
+        "endLine": 243,
+        "endChar": 37
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db494049_25e09f5a",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-09T07:38:00Z",
+      "side": 1,
+      "message": "I think you changed this to something more fancy in round-robin.sh.",
+      "range": {
+        "startLine": 861,
+        "startChar": 7,
+        "endLine": 861,
+        "endChar": 22
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428b4c88_1d0238ec",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-09T07:38:00Z",
+      "side": 1,
+      "message": "This will make testsuite with no FAILs run 2 times.",
+      "range": {
+        "startLine": 869,
+        "startChar": 6,
+        "endLine": 869,
+        "endChar": 37
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "403deda4_9140ba67",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 881,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-09T07:38:00Z",
+      "side": 1,
+      "message": "This handling of test results with compare_dg_tests.pl is a bit more complicated than I hoped, and additional work is needed to make it support .xfail and .flaky lists of known-bad or known-unreliable tests.  Let me see if I can come up with a suggestion on how to use validate_failures.py here for test comparison between iterations.",
+      "range": {
+        "startLine": 881,
+        "startChar": 7,
+        "endLine": 881,
+        "endChar": 49
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06078547_86fb6047",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-09T07:38:00Z",
+      "side": 1,
+      "message": "The right idiom is\nfor sum in \"${sums[@]}\"; do\n.\nsums\u003d(\"a b\" \"c\")\n${sums[*]} will expand into 3 elements: a b c\n\"${sums[@]}\" will expand into 2 elements: \"a b\" \"c\"",
+      "range": {
+        "startLine": 916,
+        "startChar": 5,
+        "endLine": 916,
+        "endChar": 30
+      },
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
