@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2bde2d7a_dc9b3e5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-10T16:49:17Z",
+      "side": 1,
+      "message": "Yes, thanks.",
+      "parentUuid": "1d49f8fa_7adc9fde",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "db29c83efc9a0925bdea4fc2ee6077d5338f8d94",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "564be90a_b3a63e2f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
