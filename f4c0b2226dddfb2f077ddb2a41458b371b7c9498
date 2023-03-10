@@ -35,6 +35,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2a25236_b84e6bb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-10T10:27:58Z",
+      "side": 1,
+      "message": "No further comments.  Thanks, Thiago!\nIt\u0027s on my list to look into validate_failures.py, but I don\u0027t want it to block this patch.",
+      "revId": "f4c0b2226dddfb2f077ddb2a41458b371b7c9498",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5abacf8d_c01957ec",
