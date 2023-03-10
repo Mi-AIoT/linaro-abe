@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7754e0_e10fb079",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-10T10:31:39Z",
+      "side": 1,
+      "message": "Would you please copy-paste this as a comment in the code?  And refer to this commit message for details.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "db29c83efc9a0925bdea4fc2ee6077d5338f8d94",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "564be90a_b3a63e2f",
