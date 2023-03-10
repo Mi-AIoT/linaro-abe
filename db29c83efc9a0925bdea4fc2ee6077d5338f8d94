@@ -24,6 +24,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d49f8fa_7adc9fde",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-10T13:40:39Z",
+      "side": 1,
+      "message": "Like so?",
+      "parentUuid": "2c7754e0_e10fb079",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 25
+      },
+      "revId": "db29c83efc9a0925bdea4fc2ee6077d5338f8d94",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "564be90a_b3a63e2f",
