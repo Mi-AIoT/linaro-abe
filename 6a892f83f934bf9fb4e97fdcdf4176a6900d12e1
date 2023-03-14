@@ -33,6 +33,92 @@
       "message": "LGTM.\n\nHow is the list of flaky tests maintained?",
       "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "162aaa4c_f92e43a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-14T10:59:59Z",
+      "side": 1,
+      "message": "Looks good, thanks!  The only nit-pick is about ci_project/ci_config.",
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04a951b9_a3509a41",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-14T10:59:59Z",
+      "side": 1,
+      "message": "Please move this to tcwg_gnu-build.sh or round-robin.sh .  ABE is a doesn\u0027t need to know about ci_projects and ci_configs; it only needs the [optional] filename to read known failures from.",
+      "range": {
+        "startLine": 851,
+        "startChar": 4,
+        "endLine": 854,
+        "endChar": 6
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23d1c66_48a8f554",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-14T10:59:59Z",
+      "side": 1,
+      "message": "\"\u003d()\" is for declaration of normal bash arrays; to declare associative array use just \"local -A sums\".",
+      "range": {
+        "startLine": 876,
+        "startChar": 14,
+        "endLine": 876,
+        "endChar": 17
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc182b67_18f04b1f",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-14T10:59:59Z",
+      "side": 1,
+      "message": "Did you confirm that binutils/gcc/gdb do not clean testsuite directories before running the testsuite?  Are *.$try files survive till the end?",
+      "range": {
+        "startLine": 913,
+        "startChar": 2,
+        "endLine": 913,
+        "endChar": 27
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
