@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7f3335b_cef61729",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-14T02:21:17Z",
+      "side": 1,
+      "message": "Hello,\n\nThese are the changes in v3:\n- Changed to use validate_failures.py to detect whether a new testsuite run is needed, instead of incrementally merging sum files.\n- Added --ci-project and --ci-config options to find xfails file.\n- Use .0 extension for the original sum and log files instead of .1.\n- Use \"${sum/.sum/.log}\" form to find log file.\n- Fixed array expansions to use \"${array[@]}\" form.\n- Track which sum files where generated and use the list to merge them into one, instead of using a \u003ctool\u003e.sum.* glob which could catch files from a previous invocation of the script.",
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
