@@ -70,6 +70,41 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "577d4d3b_fe9c31cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-14T16:31:40Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "162aaa4c_f92e43a3",
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacfc129_17e68e66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-14T16:31:40Z",
+      "side": 1,
+      "message": "Thank you for your review comments!",
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04a951b9_a3509a41",
@@ -83,6 +118,30 @@
       "writtenOn": "2023-03-14T10:59:59Z",
       "side": 1,
       "message": "Please move this to tcwg_gnu-build.sh or round-robin.sh .  ABE is a doesn\u0027t need to know about ci_projects and ci_configs; it only needs the [optional] filename to read known failures from.",
+      "range": {
+        "startLine": 851,
+        "startChar": 4,
+        "endLine": 854,
+        "endChar": 6
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec6ae91b_201ea5ff",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-14T16:31:40Z",
+      "side": 1,
+      "message": "Ok, will do.",
+      "parentUuid": "04a951b9_a3509a41",
       "range": {
         "startLine": 851,
         "startChar": 4,
@@ -118,6 +177,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21acbbbd_a217169c",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-14T16:31:40Z",
+      "side": 1,
+      "message": "Just \"local -A sums\" isn\u0027t sufficient because I need the array to be empty at each iteration of the for loop it\u0027s in, and \"local\" doesn\u0027t change the value of a variable that already exists.\n\nI believe () can be used both for indexed arrays and associative arrays. From the bash manual:\n\n\"When assigning to an associative array, the words in a compound assignment may be either assignment statements, for which the subscript is required, or a list of words that is interpreted as a sequence of alternating keys and values: name\u003d(key1 value1 key2 value2 … ). These are treated identically to name\u003d( [key1]\u003dvalue1 [key2]\u003dvalue2 … ).\"\n— https://www.gnu.org/software/bash/manual/html_node/Arrays.html",
+      "parentUuid": "c23d1c66_48a8f554",
+      "range": {
+        "startLine": 876,
+        "startChar": 14,
+        "endLine": 876,
+        "endChar": 17
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fc182b67_18f04b1f",
         "filename": "lib/make.sh",
         "patchSetId": 3
@@ -129,6 +212,30 @@
       "writtenOn": "2023-03-14T10:59:59Z",
       "side": 1,
       "message": "Did you confirm that binutils/gcc/gdb do not clean testsuite directories before running the testsuite?  Are *.$try files survive till the end?",
+      "range": {
+        "startLine": 913,
+        "startChar": 2,
+        "endLine": 913,
+        "endChar": 27
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2883270c_4ae0e528",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-14T16:31:40Z",
+      "side": 1,
+      "message": "Yes. When successively running ABE to test these changes, old *.$try files accumulate for both binutils and GDB. I haven\u0027t tested GCC with these changes.",
+      "parentUuid": "fc182b67_18f04b1f",
       "range": {
         "startLine": 913,
         "startChar": 2,
