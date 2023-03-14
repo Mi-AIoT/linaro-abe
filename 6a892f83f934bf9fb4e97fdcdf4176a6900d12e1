@@ -52,6 +52,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a479842_fec55e61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-14T11:01:24Z",
+      "side": 1,
+      "message": "At the moment flaky lists are updated in https://git.linaro.org/toolchain/jenkins-scripts.git/tree/round-robin-bisect.sh#n106 , but I have plans on reworking that.",
+      "parentUuid": "736389e9_8281fdde",
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04a951b9_a3509a41",
