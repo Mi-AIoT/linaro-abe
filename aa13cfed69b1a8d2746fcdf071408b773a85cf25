@@ -16,6 +16,24 @@
       "message": "In fact, it might be better to rebase an old patch from Maxim: https://review.linaro.org/c/toolchain/abe/+/39772",
       "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "827e1e0e_aa6f3202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-15T17:02:46Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong preference, but Maxim\u0027s patch does seem to be a bit better due to not needing to use the find command.",
+      "parentUuid": "7735fa7e_6e145296",
+      "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
