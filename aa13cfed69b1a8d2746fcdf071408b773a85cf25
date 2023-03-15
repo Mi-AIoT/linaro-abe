@@ -36,6 +36,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d91a093f_32bd0cbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-15T18:35:02Z",
+      "side": 1,
+      "message": "Looking at gerrit merge conflicts section, I see that I have tried fixing this in https://review.linaro.org/c/toolchain/abe/+/39772/ .",
+      "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f155cea8_903f928c",
