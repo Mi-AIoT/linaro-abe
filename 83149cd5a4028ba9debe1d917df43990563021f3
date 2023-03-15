@@ -16,6 +16,23 @@
       "message": "Hello,\n\nThese are the changes in v4:\n- Removed --ci-project and --ci-config options.\n- Added --expected-failures option to point to xfails file.",
       "revId": "83149cd5a4028ba9debe1d917df43990563021f3",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ea21d29_e6f676cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-15T08:26:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "83149cd5a4028ba9debe1d917df43990563021f3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
