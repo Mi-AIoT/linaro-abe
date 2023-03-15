@@ -486,6 +486,7 @@ find_dynamic_linker()
 {
     local strict="$1"
     local dynamic_linker c_library_version
+    local dynamic_linkers tmp_dynamic_linker
 
     # Programmatically determine the embedded glibc version number for
     # this version of the clibrary.
@@ -493,9 +494,18 @@ find_dynamic_linker()
 	c_library_version="$(${sysroots}/libc/usr/bin/ldd --version | head -n 1 | sed -e "s/.* //")"
 	dynamic_linker="$(find ${sysroots}/libc -type f -name ld-${c_library_version}.so)"
 	if [ x"$dynamic_linker" = x"" ]; then
-	    dynamic_linker=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
-				 | sed -e "s/^RTLDLIST=//")
-	    dynamic_linker="$sysroots/libc/$dynamic_linker"
+	    dynamic_linkers=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
+				  | sed -e "s/^RTLDLIST=//" -e 's/^"\(.*\)"$/\1/g')
+	    for tmp_dynamic_linker in $dynamic_linkers; do
+		tmp_dynamic_linker="$(find $sysroots/libc -name "$(basename $tmp_dynamic_linker)")"
+		if [ -f "$tmp_dynamic_linker" ]; then
+		    if [ "$dynamic_linker" != "" ]; then
+			error "Found more than one dynamic linker: $dynamic_linker $tmp_dynamic_linker"
+			return 1
+		    fi
+		    dynamic_linker="$tmp_dynamic_linker"
+		fi
+	    done
 	fi
     fi
     if $strict && [ -z "$dynamic_linker" ]; then
