@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7735fa7e_6e145296",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-15T16:18:35Z",
+      "side": 1,
+      "message": "In fact, it might be better to rebase an old patch from Maxim: https://review.linaro.org/c/toolchain/abe/+/39772",
+      "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
