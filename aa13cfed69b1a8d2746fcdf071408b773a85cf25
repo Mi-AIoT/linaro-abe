@@ -34,6 +34,52 @@
       "parentUuid": "7735fa7e_6e145296",
       "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f155cea8_903f928c",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-15T18:33:18Z",
+      "side": 1,
+      "message": "Please add new local variables for dynamic_linkers and tmp_dynamic_linker .",
+      "range": {
+        "startLine": 488,
+        "startChar": 10,
+        "endLine": 488,
+        "endChar": 24
+      },
+      "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19415f1_fbe8dee1",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-15T18:33:18Z",
+      "side": 1,
+      "message": "\";\" is not required here.\n\nAlso, would you please add an assert that we have only one actual dynamic linker present?  We build glibc once, so there should be only a single actual dynamic linker present.  I.e.,\n\nfor tmp_dynamic_linker in $dynamic_linkers; do\n  tmp_dynamic_linker\u003d$(find)\n  if [ -f \"$tmp_dynamic_linker\" ]; then\n    if [ \"$dynamic_linker\" !\u003d \"\" ]; then\n       error\n    fi\n    dynamic_linker\u003d\"$tmp_dynamic_linker\"\n  fi\ndone",
+      "range": {
+        "startLine": 501,
+        "startChar": 11,
+        "endLine": 501,
+        "endChar": 12
+      },
+      "revId": "aa13cfed69b1a8d2746fcdf071408b773a85cf25",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
