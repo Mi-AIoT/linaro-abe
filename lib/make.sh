@@ -483,9 +483,14 @@ find_dynamic_linker()
 	c_library_version="$(${sysroots}/libc/usr/bin/ldd --version | head -n 1 | sed -e "s/.* //")"
 	dynamic_linker="$(find ${sysroots}/libc -type f -name ld-${c_library_version}.so)"
 	if [ x"$dynamic_linker" = x"" ]; then
-	    dynamic_linker=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
-				 | sed -e "s/^RTLDLIST=//")
-	    dynamic_linker="$sysroots/libc/$dynamic_linker"
+	    dynamic_linkers=$(grep "^RTLDLIST=" "$sysroots/libc/usr/bin/ldd" \
+				  | sed -e "s/^RTLDLIST=//")
+	    for tmp_dynamic_linker in $dynamic_linkers; do
+		dynamic_linker="$(find $sysroots/libc -name "$(basename $tmp_dynamic_linker)")"
+		if [ -f "$dynamic_linker" ]; then
+		    break;
+		fi
+	    done
 	fi
     fi
     if $strict && [ -z "$dynamic_linker" ]; then
