@@ -152,6 +152,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27734f5_d79a4356",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-15T14:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec6ae91b_201ea5ff",
+      "range": {
+        "startLine": 851,
+        "startChar": 4,
+        "endLine": 854,
+        "endChar": 6
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c23d1c66_48a8f554",
@@ -189,6 +213,30 @@
       "side": 1,
       "message": "Just \"local -A sums\" isn\u0027t sufficient because I need the array to be empty at each iteration of the for loop it\u0027s in, and \"local\" doesn\u0027t change the value of a variable that already exists.\n\nI believe () can be used both for indexed arrays and associative arrays. From the bash manual:\n\n\"When assigning to an associative array, the words in a compound assignment may be either assignment statements, for which the subscript is required, or a list of words that is interpreted as a sequence of alternating keys and values: name\u003d(key1 value1 key2 value2 … ). These are treated identically to name\u003d( [key1]\u003dvalue1 [key2]\u003dvalue2 … ).\"\n— https://www.gnu.org/software/bash/manual/html_node/Arrays.html",
       "parentUuid": "c23d1c66_48a8f554",
+      "range": {
+        "startLine": 876,
+        "startChar": 14,
+        "endLine": 876,
+        "endChar": 17
+      },
+      "revId": "6a892f83f934bf9fb4e97fdcdf4176a6900d12e1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ca72939_2e4e9391",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-15T14:07:50Z",
+      "side": 1,
+      "message": "I\u0027m marking this as resolved. If it turns out that there\u0027s a more appropriate syntax for initializing associative arrays, I can submit a separate review request to change it.",
+      "parentUuid": "21acbbbd_a217169c",
       "range": {
         "startLine": 876,
         "startChar": 14,
