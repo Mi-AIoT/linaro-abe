@@ -121,6 +121,24 @@
       "parentUuid": "dd488e3b_9d1687df",
       "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86bf7a7_c650120e",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-17T15:07:16Z",
+      "side": 1,
+      "message": "The reason why ld-linux-x86_64.so.2 is under /lib and not /lib64 is due to \"ancient evil\" hack I\u0027m trying to fix in https://review.linaro.org/c/toolchain/abe/+/39772/3/lib/configure.sh",
+      "parentUuid": "cd7ced28_b254092e",
+      "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
