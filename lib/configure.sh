@@ -203,7 +203,7 @@ configure_build()
 	    opts="${opts} --build=${build} --host=${host} --target=${target} --prefix=${prefix}"
 	    ;;
 	gdbserver)
-	    opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr"
+	    opts="${opts} --build=${build} --host=${target} --prefix=${sysroots}/usr --disable-gdb"
 	    ;;
 	# These are only built for the host
 	gmp|mpc|mpfr)
