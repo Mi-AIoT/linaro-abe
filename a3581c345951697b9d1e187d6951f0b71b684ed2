@@ -16,6 +16,23 @@
       "message": "Hello,\n\nThis updates the latest GDB version in ABE.",
       "revId": "a3581c345951697b9d1e187d6951f0b71b684ed2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb73d9c7_161a2308",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-17T23:51:31Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1383/ : Well ... it worked on my machine\"\n\nThis is still that same network failure, this time from my retriggering of the job.\n\nI\u0027ll retrigger again on Monday.",
+      "revId": "a3581c345951697b9d1e187d6951f0b71b684ed2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
