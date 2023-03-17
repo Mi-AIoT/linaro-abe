@@ -16,6 +16,23 @@
       "message": "Hello,\n\nThis fixes the gdbserver build that was causing the tcwg-gnu-build job to fail.",
       "revId": "6fa2df4f72bc1752582ff16ec92ed75c6dcc4127",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "054b03cd_272ab943",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-17T22:05:06Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1381/ : Well ... it worked on my machine\"\n\nThis is a failure due to some networking issue:\n\n16:59:17 SSH server not ready, waiting.....\n16:59:52 SSH server not ready, waiting.....\n16:59:57 ERROR: SSH server did not respond (tcwg-x86_64-build-08.tcwglab:49155)\n16:59:57 SSH server did not respond, exiting\n17:00:00 Build step \u0027Execute shell\u0027 marked build as failure\n\nI retriggered the build to see if it works next time.",
+      "revId": "6fa2df4f72bc1752582ff16ec92ed75c6dcc4127",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
