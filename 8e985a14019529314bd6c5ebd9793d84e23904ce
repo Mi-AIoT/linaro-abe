@@ -18,6 +18,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c1c7879_a6cb237b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-03-17T09:39:33Z",
+      "side": 1,
+      "message": "Fine for me",
+      "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d404fb3_dd55f2b0",
@@ -48,6 +65,24 @@
       "writtenOn": "2023-03-17T09:39:04Z",
       "side": 1,
       "message": "It is set below line 506 when we find a dynamic linker file. So this if line 502 is to check if we have several dynamic linkers, and return an error in that case (see Maxim\u0027s comment in the previous version of this patch)",
+      "parentUuid": "4d404fb3_dd55f2b0",
+      "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd488e3b_9d1687df",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-03-17T09:39:33Z",
+      "side": 1,
+      "message": "This condition is to catch if many dyn-loaders existing in the list. (see for loop in l.499, and assignment in l.506)\n\nIs this not always the case on 64-bits ? or only for x86_64 ? having a DL for 32-bit and another DL for 64-bit ?\n\nLooking at Maxim comment, and probably your experiments, I guess I m wrong.",
       "parentUuid": "4d404fb3_dd55f2b0",
       "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
