@@ -33,6 +33,24 @@
       "message": "Perhaps I\u0027m not seeing something, but if we entered the if statement in line 496 doesn\u0027t it mean that $dynamic_linker is empty and thus this if statement will never be entered?",
       "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded37133_76104c9c",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-17T09:39:04Z",
+      "side": 1,
+      "message": "It is set below line 506 when we find a dynamic linker file. So this if line 502 is to check if we have several dynamic linkers, and return an error in that case (see Maxim\u0027s comment in the previous version of this patch)",
+      "parentUuid": "4d404fb3_dd55f2b0",
+      "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
