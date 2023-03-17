@@ -86,6 +86,24 @@
       "parentUuid": "4d404fb3_dd55f2b0",
       "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd7ced28_b254092e",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-17T12:30:13Z",
+      "side": 1,
+      "message": "Yes, we currently build glibc only once, for one ABI, but we still have:\nRTLDLIST\u003d\"/lib/ld-linux.so.2 /lib64/ld-linux-x86-64.so.2 /libx32/ld-linux-x32.so.2\"\nand we only install the second one (ld-linux-x86-64.so.2) but not under /lib64 for some reason.\n\nI\u0027m assuming that this list contains all the names theoretically supported, even if we build only one of them. And that we could have all the three of them if we ran three builds with the appropriate configuration flags (but then, we\u0027d need to fix this loops, but that\u0027s for the future if ever needed)",
+      "parentUuid": "dd488e3b_9d1687df",
+      "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
