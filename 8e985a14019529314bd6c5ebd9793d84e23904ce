@@ -35,6 +35,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f19ef26_e280a3d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-17T13:46:46Z",
+      "side": 1,
+      "message": "Thank you for the explanation! This looks good to me.",
+      "revId": "8e985a14019529314bd6c5ebd9793d84e23904ce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d404fb3_dd55f2b0",
