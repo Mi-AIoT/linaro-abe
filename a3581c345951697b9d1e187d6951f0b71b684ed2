@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eea685c_fdaf627b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-17T20:07:39Z",
+      "side": 1,
+      "message": "Hello,\n\nThis updates the latest GDB version in ABE.",
+      "revId": "a3581c345951697b9d1e187d6951f0b71b684ed2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
