@@ -51,6 +51,29 @@
       "parentUuid": "054b03cd_272ab943",
       "revId": "6fa2df4f72bc1752582ff16ec92ed75c6dcc4127",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6829791_f79c4ded",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-18T07:21:21Z",
+      "side": 1,
+      "message": "I think default_configure_flags in config/gdbserver.conf is the right place for this.",
+      "range": {
+        "startLine": 206,
+        "startChar": 77,
+        "endLine": 206,
+        "endChar": 91
+      },
+      "revId": "6fa2df4f72bc1752582ff16ec92ed75c6dcc4127",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
