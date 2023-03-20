@@ -53,6 +53,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f15083_882ffebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-20T03:15:58Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "160ee26c_d4c4b257",
+      "revId": "6fa2df4f72bc1752582ff16ec92ed75c6dcc4127",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6829791_f79c4ded",
@@ -66,6 +84,30 @@
       "writtenOn": "2023-03-18T07:21:21Z",
       "side": 1,
       "message": "I think default_configure_flags in config/gdbserver.conf is the right place for this.",
+      "range": {
+        "startLine": 206,
+        "startChar": 77,
+        "endLine": 206,
+        "endChar": 91
+      },
+      "revId": "6fa2df4f72bc1752582ff16ec92ed75c6dcc4127",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acd7b701_80c651f9",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-20T03:15:58Z",
+      "side": 1,
+      "message": "Ok, I did this in v2.",
+      "parentUuid": "d6829791_f79c4ded",
       "range": {
         "startLine": 206,
         "startChar": 77,
