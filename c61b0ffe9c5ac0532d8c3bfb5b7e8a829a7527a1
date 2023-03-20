@@ -16,6 +16,23 @@
       "message": "Thank you for your comments. I just sent v2.",
       "revId": "c61b0ffe9c5ac0532d8c3bfb5b7e8a829a7527a1",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae17b291_c962fd1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-20T13:24:43Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1386/ : Well ... it worked on my machine\"\n\nThis failure is expected and can be ignored. It\u0027s just that the new gdbserver option appears in the manifest and this causes a manifest comparison with the one produced by the previous version of ABE to fail:\n\n+ /home/tcwg-buildslave/workspace/tcwg-abe-test__0/abe-tests/compare-manifests.pl --ignore-revisions mani1.txt mani2.txt\n--- /tmp/cutWZBegr_\t2023-03-20 04:22:37.410511851 +0000\n+++ /tmp/xa3p9tHudq\t2023-03-20 04:22:37.530512497 +0000\n@@ -56,7 +56,7 @@\n \n # Component data for gdbserver\n gdbserver_branch\u003dgdb-12-branch\n-gdbserver_configure\u003d\"--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion\u003dLinaro_GDB-foo --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python\u003dpython3\"\n+gdbserver_configure\u003d\"--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion\u003dLinaro_GDB-foo --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python\u003dpython3 --disable-gdb\"\n gdbserver_filespec\u003dbinutils-gdb.git\n gdbserver_linuxhost_only\u003d\"no\"\n gdbserver_makeflags\u003d\"all-gdbserver\"\nManifests differ\n+ compare_ret\u003d1\n+ case \"${compare_ret}-${SKIP_COMPARE}\" in\n+ echo \u0027Manifests differ.\u0027\nManifests differ.\n+ result\u003d1\n+ return 1\n",
+      "revId": "c61b0ffe9c5ac0532d8c3bfb5b7e8a829a7527a1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
