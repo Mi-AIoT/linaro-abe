@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50cacd7c_33a95b6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-20T13:33:32Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2:\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1387/ : Well ... it worked on my machine\"\n\nThis failure is expected and can be ignored. It\u0027s just that the GDB branch appears in the manifest and this causes a manifest comparison with the one produced by the previous version of ABE to fail:\n\n+ /home/tcwg-buildslave/workspace/tcwg-abe-test__0/abe-tests/compare-manifests.pl --ignore-revisions mani1.txt mani2.txt\n--- /tmp/xJCdMx0_ZA\t2023-03-20 04:06:36.415878741 +0000\n+++ /tmp/g3mtJAhiKC\t2023-03-20 04:06:36.679872767 +0000\n@@ -43,7 +43,7 @@\n gcc_url\u003dhttps://git.linaro.org/git/toolchain\n \n # Component data for gdb\n-gdb_branch\u003dgdb-12-branch\n+gdb_branch\u003dgdb-13-branch\n gdb_configure\u003d\"--with-gnu-ld --enable-plugins --enable-tui --with-pkgversion\u003dLinaro_GDB-foo --disable-gas --disable-binutils --disable-elfcpp --disable-ld --disable-gold --disable-gprof --with-python\u003dpython3 --disable-werror --with-auto-load-safe-path\u003d@@debugdir:@@datadir/auto-load:${local_builds}/destdir/${host}/armeb-eabi\"\n gdb_filespec\u003dbinutils-gdb.git\n gdb_linuxhost_only\u003d\"no\"\nManifests differ\n+ compare_ret\u003d1\n+ case \"${compare_ret}-${SKIP_COMPARE}\" in\n+ echo \u0027Manifests differ.\u0027\nManifests differ.\n+ result\u003d1\n+ return 1",
+      "revId": "e684f09ca271ad8c757a91a4803a713b30540f2e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
