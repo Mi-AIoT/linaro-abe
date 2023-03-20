@@ -692,6 +692,80 @@ print_make_opts_and_copy_sysroot ()
 }
 
 # $1 - The component to test
+# Iterate over $runtestflags and keep only the flags relevant to
+# $component
+# The rules are as follows:
+#
+# - if $flag is of the form $tool:$exp, include $flag in the list if
+#   $component and $tool match. For the binutils component, binutils,
+#   gas and ld are acceptable tools. For the gdb component, gdb is the
+#   only relevant tool.
+#
+#   For gcc, include $flag if the $tool prefix is one of gcc, g++,
+#   gfortran, lib*, obj*. This is because the gcc testsuite does not
+#   accept $exp names with path separators. This way, we also skip
+#   $flag if it is prefixed by a $tool that does not correspond to
+#   $component
+#
+# - if $flag has no $tool prefix, but contains a "/", ignore it for
+#   gcc, accept it otherwise
+#
+# - accept it otherwise
+#
+# For instance, if $component is gdb, we accept all of break.exp,
+# gdb.base/break.exp, gdb:gdb.base/break.exp
+#
+# if $component is gcc, we accept compile.exp,
+# gcc:gcc.c-torture/execute/execute.exp, but not
+# gcc.c-torture/execute/execute.exp
+# (which would cause errors when executing "make check" for g++ or
+# gfortran)
+filter_runtest_flags_for_component()
+{
+    local component="$1"
+    local -a runtestflags_for_component=()
+
+    for flag in "${runtestflags[@]}"
+    do
+	case "$flag" in
+	    *:*)
+		local flag_tool=${flag%:*}
+		local this_runtestflag=${flag#*:}
+		case $component:$flag_tool in
+		    binutils:binutils|\
+			binutils:gas|\
+			binutils:ld|\
+			gcc:gcc|\
+			gcc:g++|\
+			gcc:gfortran|\
+			gcc:lib*|\
+			gcc:obj*|\
+			gdb:gdb)
+			runtestflags_for_component+=("$this_runtestflag")
+			;;
+		esac
+		;;
+	    */*)
+		case $component in
+		    # Ignore runtestflags with dir name for GCC and no tool prefix
+		    gcc)
+			warning "Skipping runtestflag $flag for $component"
+			;;
+		    *)
+			runtestflags_for_component+=("$flag")
+			;;
+		esac
+		;;
+	    *)
+		runtestflags_for_component+=("$flag")
+		;;
+	esac
+    done
+
+    echo "${runtestflags_for_component[@]}"
+}
+
+# $1 - The component to test
 # $2 - If set to anything, installed tools are used'
 make_check()
 {
@@ -741,7 +815,13 @@ make_check()
 	runtestflags+=("$component_runtestflags")
     fi
     if [ "$extra_runtestflags" != x"" ]; then
-	runtestflags+=("$extra_runtestflags")
+	# extra_runtestflags is a space-separated list of names, we
+	# have to convert it into and array before appending it to
+	# runtestflags. runtestflags+=("$extra_runtestflags") would
+	# result in adding a single, space-separated element.
+	local -a tmp_runtestflags
+	read -a tmp_runtestflags <<< $extra_runtestflags
+	runtestflags+=("${tmp_runtestflags[@]}")
     fi
 
     if test x"${parallel}" = x"yes"; then
@@ -764,6 +844,9 @@ make_check()
     dirs="/"
     check_targets="check"
     exec_tests=false
+    # Keep only runtestflags that are relevant to the current component
+    local -a runtestflags_for_component
+    read -r -a runtestflags_for_component <<< "$(filter_runtest_flags_for_component "$component")"
     case "$component" in
 	binutils)
 	    dirs="/binutils /ld /gas"
@@ -772,6 +855,39 @@ make_check()
 	    ;;
 	gcc)
 	    exec_tests=true
+
+	    # For GCC we need a special handling of the user-supplied
+	    # runtestflags.  Indeed, GCC makes use of runtest's --tool
+	    # option to find some of the Expect library functions.
+	    for flag in "${runtestflags[@]}"
+	    do
+		case "$flag" in
+		    *:*)
+			local flag_tool=${flag%:*}
+			local this_runtestflag=${flag#*:}
+			case $flag_tool in
+			    gcc|g++|gfortran|obj*)
+				if [ "$check_targets" != "check-$flag_tool" ] \
+				       && [ "$check_targets" != "check" ]; then
+				    error "multiple check targets needed for GCC: ${runtestflags[*]}"
+				    return 1
+				fi
+				check_targets="check-$flag_tool"
+				dirs="/gcc"
+				;;
+			    lib*)
+				if [ "$check_targets" != "check-target-$flag_tool" ] \
+				       && [ "$check_targets" != "check" ]; then
+				    error "multiple check targets needed for GCC: ${runtestflags[*]}"
+				    return 1
+				fi
+				check_targets="check-target-$flag_tool"
+				dirs="/"
+				;;
+			esac
+			;;
+		esac
+	    done
 	    ;;
 	gdb)
 	    check_targets="check-gdb"
@@ -866,8 +982,8 @@ make_check()
 	fi
 
 	local make_runtestflags=""
-	if [ -n "${runtestflags[*]}" ]; then
-	    make_runtestflags="RUNTESTFLAGS=\"${runtestflags[*]}\""
+	if [ -n "${runtestflags_for_component[*]}" ]; then
+	    make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component[*]}\""
 	fi
 
 	local try=0
