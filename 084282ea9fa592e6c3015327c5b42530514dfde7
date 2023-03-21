@@ -3,6 +3,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17e5d290_43f9572c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-03-21T08:13:29Z",
+      "side": 1,
+      "message": "typo: does not",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3678cb4a_b3c20aba",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-03-21T08:13:29Z",
+      "side": 1,
+      "message": "typo: right",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a60a8cc8_525ca4e7",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
@@ -99,6 +133,23 @@
       "writtenOn": "2023-03-21T02:29:59Z",
       "side": 1,
       "message": "Here \"${runtestflags[@]}\" should be quoted as well.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d1076c_26c654a4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-03-21T08:13:29Z",
+      "side": 1,
+      "message": "That means for gcc related checks, it will now work only with this new syntax.\n( Without hat syntax, $check_target will not be filled )\nAm I mistaking somewhere ?",
       "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
