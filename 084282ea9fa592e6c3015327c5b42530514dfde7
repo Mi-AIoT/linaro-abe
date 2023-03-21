@@ -86,6 +86,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d62d82_3d4c52d6",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0ca4442_d77366b5",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "052f8f10_862e5047",
@@ -99,6 +117,24 @@
       "writtenOn": "2023-03-21T02:29:59Z",
       "side": 1,
       "message": "ShellCheck recommends quoting \"${runtestflags[@]}\":\nSC2068 (error): Double quote array expansions to avoid re-splitting elements.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d88d9ab_eb4a2dc7",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "I didn\u0027t use quotes on purpose, because otherwise I had a single space-separated element. I have now fixed the way we include extra_runtestflags, so that I can use quotes here.",
+      "parentUuid": "052f8f10_862e5047",
       "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
@@ -120,6 +156,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3154e66_5142e101",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1b61eda_763495b7",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "899081dd_d21bfc44",
@@ -133,6 +187,24 @@
       "writtenOn": "2023-03-21T02:29:59Z",
       "side": 1,
       "message": "Here \"${runtestflags[@]}\" should be quoted as well.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4304ef0_6d8a4bf1",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "It was the same reason as above.",
+      "parentUuid": "899081dd_d21bfc44",
       "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
@@ -154,6 +226,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4980735a_7dac80af",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 858,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Not completely: if we supply \"execute.exp\" (with no $tool, nor path), it will behave as before, since dirs/check_targets are initialised before the loop with acceptable default values for gcc.",
+      "parentUuid": "58d1076c_26c654a4",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "567e03b7_fb741ba9",
@@ -167,6 +257,24 @@
       "writtenOn": "2023-03-21T02:29:59Z",
       "side": 1,
       "message": "Here ShellCheck warns:\nSC2166 (warning): Prefer [ p ] \u0026\u0026 [ q ] as [ p -a q ] is not well defined.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "271f21a5_8fd1d11d",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "567e03b7_fb741ba9",
       "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
@@ -188,6 +296,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91ad8606_2d3c9591",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3d0ab4e_2c687cf4",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9d9ea01_9c6bf89a",
@@ -205,6 +331,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89e04f3a_f93bb0d5",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9d9ea01_9c6bf89a",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae527555_7520b7d2",
@@ -218,6 +362,24 @@
       "writtenOn": "2023-03-21T02:29:59Z",
       "side": 1,
       "message": "Same ShellCheck warning as line 865.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2e8da7_9e392df0",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-21T10:24:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae527555_7520b7d2",
       "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
