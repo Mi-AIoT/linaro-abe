@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a60a8cc8_525ca4e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Typo at the end of the sentence.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a85adbd3_8b0323df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Hello,\n\nLooks good to me. My comments are just some syntax nits from ShellCheck.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ca4442_d77366b5",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "I think you need to use \"local -a\" for arrays.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "052f8f10_862e5047",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "ShellCheck recommends quoting \"${runtestflags[@]}\":\nSC2068 (error): Double quote array expansions to avoid re-splitting elements.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b61eda_763495b7",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "IMHO it would be better to declare runtestflags_for_component with \"local -a\" as well.\nAlso, ShellCheck suggests:\nSC2207 (warning): Prefer mapfile or read -a to split command output (or quote to avoid splitting).\n\nSo I think here that would mean something like:\n\nread -r -a runtestflags_for_component \u003c(filter_runtest_flags_for_component \"$component\")",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "899081dd_d21bfc44",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 855,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Here \"${runtestflags[@]}\" should be quoted as well.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567e03b7_fb741ba9",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 864,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Here ShellCheck warns:\nSC2166 (warning): Prefer [ p ] \u0026\u0026 [ q ] as [ p -a q ] is not well defined.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3d0ab4e_2c687cf4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 865,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Inside a string, the expansion needs to use [*] instead of [@]:\nSC2145 (error): Argument mixes string and array. Use * or separate argument.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9d9ea01_9c6bf89a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 873,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Same ShellCheck warning as line 864.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae527555_7520b7d2",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T02:29:59Z",
+      "side": 1,
+      "message": "Same ShellCheck warning as line 865.",
+      "revId": "084282ea9fa592e6c3015327c5b42530514dfde7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
