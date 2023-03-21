@@ -16,6 +16,57 @@
       "message": "ok for me",
       "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "483fc63f_61cbc7d7",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T16:12:19Z",
+      "side": 1,
+      "message": "Very helpful documentation. Thanks!",
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "878e0f54_66eaf5e9",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T16:12:19Z",
+      "side": 1,
+      "message": "This line wasn\u0027t changed in your patch (it\u0027s been like this since 2021) but I\u0027m pointing it out since it could affect your code:\n\nThe comparison has an \u0027x\u0027 only on the right side. It should either have an \u0027x\u0027 on the left side as well or be rewritten as [ -n \"$extra_runtestflags\" ]\n\nI can submit a separate patch if you think this isn\u0027t relevant to your change and should be dealt with separately.",
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0368d524_9f45fd5c",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-21T16:12:19Z",
+      "side": 1,
+      "message": "Instead of doing this here, would it be hard to convert extra_runtestflags to an array?\nI believe this logic could then be put in set_package()",
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
