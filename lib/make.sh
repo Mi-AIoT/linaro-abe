@@ -702,6 +702,191 @@ print_make_opts_and_copy_sysroot ()
 }
 
 # $1 - The component to test
+# $2 - The expfile specification. Can be: myfile.exp,
+#      path/to/myfile.exp or tool:path/to/myfile.exp
+#
+# The rules are as follows:
+#
+# - if $flag is of the form $tool:$exp, include $flag in the list if
+#   $component and $tool match. For the binutils component, binutils,
+#   gas and ld are acceptable tools. For the gdb component, gdb is the
+#   only relevant tool.
+#
+#   For gcc, include $flag if the $tool prefix is one of gcc, g++,
+#   gfortran, lib*, obj*. This is because the gcc testsuite does not
+#   accept $exp names with path separators. This way, we also skip
+#   $flag if it is prefixed by a $tool that does not correspond to
+#   $component
+#
+#   In other cases, report $tool as "none", so as to skip collecting
+#   testname for this component/tool
+#
+# - if $flag has no $tool prefix, but contains a "/", ignore it for
+#   gcc, accept it otherwise
+#
+# - if there is no $tool prefix, report $tool as "any", so that
+#   testcases are taken into account for this component/tool
+#
+# For instance, if $component is gdb, we accept all of break.exp,
+# gdb.base/break.exp, gdb:gdb.base/break.exp (note that supplying all
+# these flags together is later rejected as ambiguous).
+#
+# if $component is gcc, we accept compile.exp,
+# gcc:gcc.c-torture/execute/execute.exp, but not
+# gcc.c-torture/execute/execute.exp (which would cause errors when
+# executing "make check" for g++ or gfortran).
+exp_to_tool()
+{
+    local component="$1"
+    local exp="$2"
+    local tool=""
+
+    case "$exp" in
+	*:*)
+	    tool=${exp%:*}
+	    case "$component:$tool" in
+		binutils:binutils|\
+		    binutils:gas|\
+		    binutils:ld|\
+		    gcc:gcc|\
+		    gcc:g++|\
+		    gcc:gfortran|\
+		    gcc:lib*|\
+		    gcc:obj*|\
+		    gdb:gdb|\
+		    newlib:newlib|\
+		    glibc:glibc)
+		;;
+		*:*)
+		    # If $tool does not belong to $component, ignore it
+		    tool="none"
+		    ;;
+	    esac
+	    ;;
+	*/*)
+	    case $component in
+		# Ignore runtestflags with dir name for GCC and no
+		# tool prefix
+		gcc)
+		    warning "Skipping runtestflag $flag for $component as it does not support path components unless prefixed with the appropriate tool name"
+		    tool="none"
+		    ;;
+		*)
+		    tool="any"
+		    ;;
+	    esac
+	    ;;
+	*)
+	    # No $tool prefix, so $exp can match any tool/component
+	    tool="any"
+	    ;;
+    esac
+
+    echo "$tool"
+}
+
+# $1 - The component to test
+# $2 - The tool to test, as reported by exp_to_tool)_
+#
+# Given a component/tool pair, return the buildir subdirectory into
+# which we should execute the testsuite. Return "none" if no test
+# should be run.
+#
+# For GCC we need a special handling of the user-supplied
+# runtestflags.  Indeed, GCC makes use of runtest's --tool option to
+# find some of the Expect library functions.
+tool_to_dirs()
+{
+    local component="$1"
+    local tool="$2"
+    local dirs="none"
+
+    case "$component" in
+	binutils)
+	    case "$tool" in
+		binutils|gas|ld)
+		    dirs="/$tool"
+		    ;;
+		any)
+		    dirs="/binutils /gas /ld"
+		    ;;
+	    esac
+	    ;;
+	gcc)
+	    case "$tool" in
+		gcc|g++|gfortran|obj*)
+		    dirs="/gcc"
+		    ;;
+		lib*)
+		    dirs="/"
+		    ;;
+		any)
+		    dirs="/"
+		    ;;
+	    esac
+	    ;;
+	gdb|glibc)
+	    case "$tool" in
+		none) ;;
+		*)
+		    dirs="/"
+		    ;;
+	    esac
+	    ;;
+	newlib)
+	    # We need a special case for newlib, to bypass its
+	    # multi-do Makefile targets that do not properly
+	    # propagate multilib flags. This means that we call
+	    # runtest only once for newlib.
+	    case "$tool" in
+		*)
+		    dirs="/${target}/newlib"
+		    ;;
+	    esac
+	    ;;
+    esac
+
+    echo "$dirs"
+}
+
+# $1 - The component to test
+# $2 - The tool to test, as reported by exp_to_tool)_
+#
+# Given a component/tool pair, return the "check" target to use when
+# invoking make.
+#
+# For GCC we need a special handling of the user-supplied
+# runtestflags.  Indeed, GCC makes use of runtest's --tool
+# option to find some of the Expect library functions.
+tool_to_check()
+{
+    local component="$1"
+    local tool="$2"
+    local check="check"
+
+    case $component in
+	gcc)
+	    case $flag_tool in
+		gcc|g++|gfortran|obj*)
+		    check="check-$flag_tool"
+		    ;;
+		lib*)
+		    check="check-target-$flag_tool"
+		    ;;
+	    esac
+	    ;;
+	gdb)
+	    check="check-gdb"
+	    ;;
+	glibc)
+	    check="check run-built-tests=no"
+	    ;;
+    esac
+
+    echo "$check"
+}
+
+# $1 - The component to test
 # $2 - If set to anything, installed tools are used'
 make_check()
 {
@@ -750,8 +935,8 @@ make_check()
     if [ x"$component_runtestflags" != x"" ]; then
 	runtestflags+=("$component_runtestflags")
     fi
-    if [ "$extra_runtestflags" != x"" ]; then
-	runtestflags+=("$extra_runtestflags")
+    if [ x"$extra_runtestflags" != x"" ]; then
+	runtestflags+=("${extra_runtestflags[@]}")
     fi
 
     if test x"${parallel}" = x"yes"; then
@@ -770,33 +955,67 @@ make_check()
     local checklog="${builddir}/check-${component}.log"
     record_artifact "log_check_${component}" "${checklog}"
 
-    local dirs check_targets exec_tests
-    dirs="/"
-    check_targets="check"
+    local exec_tests
     exec_tests=false
+
+    # Compute which user-supplied runtestflags are relevant to this
+    # component, and the corresponding directories and "make check"
+    # targets.
+    local -A tool2dirs=()
+    local -A tool2exps=()
+    local -A tool2check=()
+
+    for flag in "${runtestflags[@]}"
+    do
+	local flag_tool=$(exp_to_tool "$component" "$flag")
+	local this_runtestflag=${flag#*:}
+	# If flag_tool is not relevant to the current component, do
+	# not include it in the list.
+	[ "$flag_tool" = "none" ] && continue
+
+	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+	tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
+	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+    done
+
+    # If the user supplied both non-prefixed and prefixed runtestflags
+    # that would apply to this component/tool, skip the non-prefixed
+    # ones.
+
+    # For instance with execute.exp g++:compile.exp, we would have to
+    # run the g++ tests twice:
+    # - from toplevel, using 'make check'
+    # - from /gcc, using 'make check-g++'
+    # and the second call would overwrite g++.sum
+    if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
+	warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
+	warning "Prefix these runtestflags with $component: if relevant"
+	unset tool2dirs[any]
+	unset tool2exps[any]
+	unset tool2check[any]
+    fi
+
+    # If no runtestflag was supplied or none applies to this
+    # component, use the defaults
+    if [ ${#tool2dirs[@]} -eq 0 ]; then
+	flag_tool="any"
+	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+    fi
+
     case "$component" in
 	binutils)
-	    dirs="/binutils /ld /gas"
-	    check_targets="check-DEJAGNU"
 	    exec_tests=true
 	    ;;
 	gcc)
 	    exec_tests=true
 	    ;;
 	gdb)
-	    check_targets="check-gdb"
 	    exec_tests=true
 	    ;;
 	glibc)
-	    check_targets="check run-built-tests=no"
 	    ;;
 	newlib)
-	    # We need a special case for newlib, to bypass its
-	    # multi-do Makefile targets that do not properly
-	    # propagate multilib flags. This means that we call
-	    # runtest only once for newlib.
-	    dirs="/${target}/newlib"
-	    check_targets="check-DEJAGNU"
 	    ;;
     esac
 
@@ -866,8 +1085,14 @@ make_check()
 	notice "Using expected fails file $expected_failures"
     fi
 
-    local i result=0
-    for i in ${dirs}; do
+    local result=0
+    for tool in "${!tool2dirs[@]}"; do
+	local dirs="${tool2dirs[$tool]}"
+	local dir
+	for dir in $dirs; do
+	local runtestflags_for_component="${tool2exps[$tool]}"
+	local check_targets="${tool2check[$tool]}"
+
 	local xfails="$fails_tmp/xfails" new_fails="$fails_tmp/new_fails"
 
 	# Reset the xfails file to its initial state.
@@ -878,8 +1103,8 @@ make_check()
 	fi
 
 	local make_runtestflags=""
-	if [ -n "${runtestflags[*]}" ]; then
-	    make_runtestflags="RUNTESTFLAGS=\"${runtestflags[*]}\""
+	if [ -n "${runtestflags_for_component}" ]; then
+	    make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component}\""
 	fi
 
 	local try=0
@@ -899,10 +1124,10 @@ make_check()
 	    # output to a file that can be "tail -f"'ed, if desired.
 	    # A proper fix would be to fix dejagnu to not pass parent stdout
 	    # to testcase processes.
-	    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$i >> $checklog 2>&1"
+	    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
 	    if [ $? != 0 ]; then
 		# Make is told to ignore errors, so it's really not supposed to fail.
-		warning "make ${check_targets} -C ${builddir}$i failed."
+		warning "make ${check_targets} -C ${builddir}$dir failed."
 		result=1
 		break
 	    elif ! $rerun_failed_tests; then
@@ -917,7 +1142,7 @@ make_check()
 
 	    "$validate_failures" \
 		${manifest_option} \
-		--build_dir="${builddir}$i" \
+		--build_dir="${builddir}$dir" \
 		--verbosity=1 \
 		> "$new_fails" &
 	    res=0 && wait $! || res=$?
@@ -988,6 +1213,7 @@ make_check()
 
 	notice "Ran the testsuite $((try + 1)) times."
         record_test_results "${component}" $2
+    done
     done
 
     rm -rf "$fails_tmp_root"
