@@ -691,7 +691,7 @@ set_package()
 	    return 0
 	    ;;
 	runtestflags)
-	    extra_runtestflags="$extra_runtestflags ${setting}"
+	    extra_runtestflags+=("${setting}")
 	    notice "Adding ${setting} to RUNTESTFLAGS"
 	    return 0
 	    ;;
