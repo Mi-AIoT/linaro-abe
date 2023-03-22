@@ -948,6 +948,15 @@ make_check()
 		break
 	    fi
 
+	    if [ $try -eq 1 ]; then
+		if [ -z "$expected_failures" ]; then
+		    notice "These failures weren't present in the original testsuite run:"
+		else
+		    notice "These failures weren't present in the original testsuite run nor in the expected failures list:"
+		fi
+		cat "$new_fails"
+	    fi
+
 	    # Incorporate this try's failures into the expected failures list.
 	    cat "$new_fails" >> "$xfails"
 
