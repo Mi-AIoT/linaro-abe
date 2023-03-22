@@ -870,9 +870,11 @@ make_check()
     for i in ${dirs}; do
 	local xfails="$fails_tmp/xfails" new_fails="$fails_tmp/new_fails"
 
+	# Reset the xfails file to its initial state.
 	if [ -n "$expected_failures" ]; then
-	    # Reset the xfails file to its initial state.
 	    cp -f "$fails_tmp/xfails.orig" "$xfails"
+	else
+	    rm -f "$xfails"
 	fi
 
 	local make_runtestflags=""
@@ -904,8 +906,13 @@ make_check()
 		break
 	    fi
 
+	    local manifest_option=""
+	    if [ -e "$xfails" ]; then
+		manifest_option="--manifest=$xfails"
+	    fi
+
 	    "$validate_failures" \
-		--manifest="$xfails" \
+		"${manifest_option}" \
 		--build_dir="${builddir}$i" \
 		--verbosity=1 \
 		> "$new_fails" &
