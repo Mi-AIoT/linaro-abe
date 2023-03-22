@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d4b752a_283c7f79",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-22T10:45:49Z",
+      "side": 1,
+      "message": "Needs to be local.",
+      "range": {
+        "startLine": 728,
+        "startChar": 8,
+        "endLine": 728,
+        "endChar": 12
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "878e0f54_66eaf5e9",
         "filename": "lib/make.sh",
         "patchSetId": 4
@@ -65,6 +88,98 @@
       "writtenOn": "2023-03-21T16:12:19Z",
       "side": 1,
       "message": "Instead of doing this here, would it be hard to convert extra_runtestflags to an array?\nI believe this logic could then be put in set_package()",
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2f59531_1d29992a",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-22T10:45:49Z",
+      "side": 1,
+      "message": "Unrelated to this patch, but I wonder why this is not \"check\".",
+      "range": {
+        "startLine": 853,
+        "startChar": 20,
+        "endLine": 853,
+        "endChar": 33
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd77136_06ca7a35",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-22T10:45:49Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand how this is supposed to work.  My current understanding is that ABE will fail if we pass an unfortunate set of .exp files that span several testsuites, e.g., g++ and libstdc++.  Or am I misunderstanding this?",
+      "range": {
+        "startLine": 870,
+        "startChar": 9,
+        "endLine": 870,
+        "endChar": 47
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57ff4911_25875a3c",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 876,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-22T10:45:49Z",
+      "side": 1,
+      "message": "We always set check_targets and dirs to a single element, we don\u0027t append to the list -- is this expected?",
+      "range": {
+        "startLine": 875,
+        "startChar": 4,
+        "endLine": 876,
+        "endChar": 15
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80f4a487_1a012389",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-22T10:45:49Z",
+      "side": 1,
+      "message": "Could it be simpler if we convert this loop to iterate over tools?  Something like...\nfor exp in \"${runtestflags[@]}\"; do\n  tool\u003d$(extract_tool $exp)\n  dir\u003d$(choose_dir $tool)\n  tool2dir[$tool]\u003d\"$dir\"\n  tool2exps[$tool]\u003d\"${tool2exps[$tool]} $exp\"\ndone\n\nfor tool in \"${!tool2dir[@]}\"; do\n  dir\u003d\"${tool2dir[$tool]}\"\n  runtestflags_for_component\u003d\"${tool2exps[$tool]}\"\n  ...\ndone",
+      "range": {
+        "startLine": 976,
+        "startChar": 4,
+        "endLine": 976,
+        "endChar": 20
+      },
       "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
