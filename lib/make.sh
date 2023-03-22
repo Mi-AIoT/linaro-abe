@@ -888,6 +888,10 @@ make_check()
 	# doesn't support arrays within arrays).
 	local -A sums=()
 	while true; do
+	    if [ $try -ne 0 ]; then
+		notice "Starting testsuite run #$((try + 1))."
+	    fi
+
 	    # Testsuites (I'm looking at you, GDB), can leave stray processes
 	    # that inherit stdout of below "make check".  Therefore, if we pipe
 	    # stdout to "tee", then "tee" will wait on output from these
@@ -947,6 +951,9 @@ make_check()
 		result=1
 		break
 	    fi
+
+	    notice "These failures require an additional testsuite run:"
+	    cat "$new_fails"
 
 	    # Incorporate this try's failures into the expected failures list.
 	    cat "$new_fails" >> "$xfails"
