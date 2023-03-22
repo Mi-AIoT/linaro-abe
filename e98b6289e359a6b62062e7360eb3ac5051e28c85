@@ -58,6 +58,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a6a98b8_68e18414",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-22T14:45:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6d4b752a_283c7f79",
+      "range": {
+        "startLine": 728,
+        "startChar": 8,
+        "endLine": 728,
+        "endChar": 12
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "878e0f54_66eaf5e9",
@@ -115,6 +139,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34a4fe1f_eef1717a",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-22T14:45:56Z",
+      "side": 1,
+      "message": "I\u0027ve tried to look at binutils\u0027 Makefiles but they are hard to follow. I guess that was Rob\u0027s knowledge. But it seems we can use \u0027check\u0027 safely.",
+      "parentUuid": "e2f59531_1d29992a",
+      "range": {
+        "startLine": 853,
+        "startChar": 20,
+        "endLine": 853,
+        "endChar": 33
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dd77136_06ca7a35",
@@ -128,6 +176,30 @@
       "writtenOn": "2023-03-22T10:45:49Z",
       "side": 1,
       "message": "I don\u0027t quite understand how this is supposed to work.  My current understanding is that ABE will fail if we pass an unfortunate set of .exp files that span several testsuites, e.g., g++ and libstdc++.  Or am I misunderstanding this?",
+      "range": {
+        "startLine": 870,
+        "startChar": 9,
+        "endLine": 870,
+        "endChar": 47
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e416a5c_e6094b44",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-22T14:45:56Z",
+      "side": 1,
+      "message": "The idea is to report an error if we supply both gcc:foo.exp and g++:bar.exp as both belong to the same component.",
+      "parentUuid": "7dd77136_06ca7a35",
       "range": {
         "startLine": 870,
         "startChar": 9,
@@ -174,6 +246,30 @@
       "writtenOn": "2023-03-22T10:45:49Z",
       "side": 1,
       "message": "Could it be simpler if we convert this loop to iterate over tools?  Something like...\nfor exp in \"${runtestflags[@]}\"; do\n  tool\u003d$(extract_tool $exp)\n  dir\u003d$(choose_dir $tool)\n  tool2dir[$tool]\u003d\"$dir\"\n  tool2exps[$tool]\u003d\"${tool2exps[$tool]} $exp\"\ndone\n\nfor tool in \"${!tool2dir[@]}\"; do\n  dir\u003d\"${tool2dir[$tool]}\"\n  runtestflags_for_component\u003d\"${tool2exps[$tool]}\"\n  ...\ndone",
+      "range": {
+        "startLine": 976,
+        "startChar": 4,
+        "endLine": 976,
+        "endChar": 20
+      },
+      "revId": "e98b6289e359a6b62062e7360eb3ac5051e28c85",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e0a21ed_5daecc61",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-22T14:45:56Z",
+      "side": 1,
+      "message": "I didn\u0027t want to make too intrusive changes, but yes, I think it would be better, and remove the restrictions above.",
+      "parentUuid": "80f4a487_1a012389",
       "range": {
         "startLine": 976,
         "startChar": 4,
