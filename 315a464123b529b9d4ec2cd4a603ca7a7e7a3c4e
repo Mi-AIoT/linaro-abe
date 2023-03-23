@@ -16,6 +16,29 @@
       "message": "Hello,\n\nMaxim suggested showing which test failures are new when the testsuite is ran again, so this change implements that.",
       "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdf3d80e_9d1afdc4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-23T06:09:58Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"[ $try -ge 1 ]\" or \"[ $try -ne 0 ]\" to match condition after the loop?",
+      "range": {
+        "startLine": 951,
+        "startChar": 15,
+        "endLine": 951,
+        "endChar": 18
+      },
+      "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
