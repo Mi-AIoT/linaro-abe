@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e9435f_3e1435ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-23T03:16:53Z",
+      "side": 1,
+      "message": "Hello,\n\nMaxim suggested showing which test failures are new when the testsuite is ran again, so this change implements that.",
+      "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
