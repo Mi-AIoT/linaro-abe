@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e6b2b25_ddde986b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-23T03:14:38Z",
+      "side": 1,
+      "message": "Hello,\n\nIn the CI, the --expected-failures options is always passed so this is not a problem, but when running manually you may not bother passing this option, so it would be convenient if it ABE didn\u0027t require it.",
+      "revId": "cbdc0a7645472460e92c20fbc6615f110be88857",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
