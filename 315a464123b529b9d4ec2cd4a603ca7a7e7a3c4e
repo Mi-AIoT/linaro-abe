@@ -39,6 +39,30 @@
       },
       "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff725564_8f7d187e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-23T13:01:30Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t this be \"[ $try -ge 1 ]\" or \"[ $try -ne 0 ]\" to match condition after the loop?\n\nI did that at first, but it generates a lot of output. If that\u0027s OK I can do it.",
+      "parentUuid": "fdf3d80e_9d1afdc4",
+      "range": {
+        "startLine": 951,
+        "startChar": 15,
+        "endLine": 951,
+        "endChar": 18
+      },
+      "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
