@@ -63,6 +63,30 @@
       },
       "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7531c22_7faac379",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-03-23T13:30:59Z",
+      "side": 1,
+      "message": "Could you post an example, please?  With each iteration it should output a shrinking list of failures; or am I missing something?",
+      "parentUuid": "ff725564_8f7d187e",
+      "range": {
+        "startLine": 951,
+        "startChar": 15,
+        "endLine": 951,
+        "endChar": 18
+      },
+      "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
