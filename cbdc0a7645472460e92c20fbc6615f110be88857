@@ -63,6 +63,30 @@
       },
       "revId": "cbdc0a7645472460e92c20fbc6615f110be88857",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57acade3_f13c4cbf",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-23T22:47:49Z",
+      "side": 1,
+      "message": "Forgot to include a link to the ABE output with the v2 change applied:\n\nhttps://people.linaro.org/~thiago.bauermann/abe-mention-new-fails.txt",
+      "parentUuid": "897697fa_a3d575dc",
+      "range": {
+        "startLine": 915,
+        "startChar": 2,
+        "endLine": 915,
+        "endChar": 22
+      },
+      "revId": "cbdc0a7645472460e92c20fbc6615f110be88857",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
