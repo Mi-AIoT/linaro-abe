@@ -39,6 +39,30 @@
       },
       "revId": "cbdc0a7645472460e92c20fbc6615f110be88857",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "897697fa_a3d575dc",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-23T22:35:48Z",
+      "side": 1,
+      "message": "\u003e I think this should be ${manifest_option} without quotes.  With quotes shell will pass an empty string \"\" as the first argument; without quotes ${manifest_option} will expand into nothing, and --build_dir\u003d will be the first option.\n\nIt worked with the quotes, but that is a good point. Changed in v2.",
+      "parentUuid": "bd80c058_50a7b3d7",
+      "range": {
+        "startLine": 915,
+        "startChar": 2,
+        "endLine": 915,
+        "endChar": 22
+      },
+      "revId": "cbdc0a7645472460e92c20fbc6615f110be88857",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
