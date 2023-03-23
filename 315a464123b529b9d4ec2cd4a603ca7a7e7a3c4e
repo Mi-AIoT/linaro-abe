@@ -87,6 +87,30 @@
       },
       "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab37ff0_ba7b8caa",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 951,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-23T22:46:26Z",
+      "side": 1,
+      "message": "\u003e Could you post an example, please?  With each iteration it should output a shrinking list of failures; or am I missing something?\n\nHm, I tested again and it\u0027s not too much output. I believe earlier I was running the GDB testsuite in parallel, which is a lot less stable. When running it sequentially, it\u0027s tame enough to enable printing the xfails file at every iteration, which is what v2 does.\n\nAlso, to make it easier to separate the output of each iteration v2 adds a new notice mentioning the iteration number that will run next.",
+      "parentUuid": "e7531c22_7faac379",
+      "range": {
+        "startLine": 951,
+        "startChar": 15,
+        "endLine": 951,
+        "endChar": 18
+      },
+      "revId": "315a464123b529b9d4ec2cd4a603ca7a7e7a3c4e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
