@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fd892f1_daf45851",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-24T17:42:02Z",
+      "side": 1,
+      "message": "Revision 5 and 7 are identical, I removed indentation in revision 6 to make the diff easier to read (otherwise it seems gerrit is a bit confused)\n",
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
