@@ -56,6 +56,30 @@
       },
       "revId": "d45d2143d0f6f1c291f82c75291f135da2e7046f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e3b5647_3526a512",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-24T16:03:50Z",
+      "side": 1,
+      "message": "\u003e Put these under\n\u003e if [ $try -ne 0 ]; then\n\u003e so that we don\u0027t dump the whole list of legitimate failures?\n\nMakes sense. I was on the fence on this one. Changed to your suggestion for v3, which I will commit immediately.",
+      "parentUuid": "e8d566ff_16005f2d",
+      "range": {
+        "startLine": 955,
+        "startChar": 5,
+        "endLine": 956,
+        "endChar": 21
+      },
+      "revId": "d45d2143d0f6f1c291f82c75291f135da2e7046f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
