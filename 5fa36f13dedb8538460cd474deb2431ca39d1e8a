@@ -125,6 +125,29 @@
       },
       "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae17702e_f039cf32",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-27T15:02:39Z",
+      "side": 1,
+      "message": "I just noticed that this \"$i\" needs to be changed to \"$dir\".",
+      "range": {
+        "startLine": 1164,
+        "startChar": 28,
+        "endLine": 1164,
+        "endChar": 30
+      },
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
