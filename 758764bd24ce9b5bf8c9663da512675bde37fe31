@@ -16,6 +16,24 @@
       "message": "Does this mean that newlib doesn\u0027t need a default check target?",
       "revId": "758764bd24ce9b5bf8c9663da512675bde37fe31",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f11bfde0_f4712b79",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 0,
+      "message": "same as binutils: check-DEJAGNU is a shortcut, the primary target is \u0027check\u0027 which at some point invokes check-DEJAGNU",
+      "parentUuid": "f4e29d64_6a5512bc",
+      "revId": "758764bd24ce9b5bf8c9663da512675bde37fe31",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }

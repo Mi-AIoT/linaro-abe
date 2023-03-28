@@ -18,6 +18,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f52107c5_5774b389",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "Thanks for your careful review Thiago!\n",
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "423fc850_d9266618",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-03-24T22:35:04Z",
       "side": 1,
       "message": "Minor nit: The extraneous \")_\" can be removed.",
+      "range": {
+        "startLine": 789,
+        "startChar": 51,
+        "endLine": 789,
+        "endChar": 53
+      },
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6dc96c2_ba319abe",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "423fc850_d9266618",
       "range": {
         "startLine": 789,
         "startChar": 51,
@@ -64,6 +105,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "083281c9_ac0d9d4f",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 853,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98e16860_fe902fbf",
+      "range": {
+        "startLine": 853,
+        "startChar": 51,
+        "endLine": 853,
+        "endChar": 53
+      },
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67bd3cee_da2da049",
@@ -77,6 +142,30 @@
       "writtenOn": "2023-03-24T22:35:04Z",
       "side": 1,
       "message": "This should be \"$tool\" (also in lines 871 and 874).\n\n\"$flag_tool\" works because (as I learned a few days ago) bash uses dynamic scope. But at least for me it is a bit confusing.",
+      "range": {
+        "startLine": 869,
+        "startChar": 10,
+        "endLine": 869,
+        "endChar": 20
+      },
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125c6365_5da62a6f",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "Thanks for catching this. Indeed bash has some questionable \"magic\" :-)",
+      "parentUuid": "67bd3cee_da2da049",
       "range": {
         "startLine": 869,
         "startChar": 10,
@@ -104,6 +193,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9294b8_0e12c8ce",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "thanks!",
+      "parentUuid": "7a5a0cd0_16d30df5",
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae763428_7400287b",
@@ -127,6 +234,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "453d5535_aee3a0d6",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae763428_7400287b",
+      "range": {
+        "startLine": 968,
+        "startChar": 8,
+        "endLine": 968,
+        "endChar": 12
+      },
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae17702e_f039cf32",
@@ -140,6 +271,30 @@
       "writtenOn": "2023-03-27T15:02:39Z",
       "side": 1,
       "message": "I just noticed that this \"$i\" needs to be changed to \"$dir\".",
+      "range": {
+        "startLine": 1164,
+        "startChar": 28,
+        "endLine": 1164,
+        "endChar": 30
+      },
+      "revId": "5fa36f13dedb8538460cd474deb2431ca39d1e8a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f8dbaa_161a9278",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-03-28T09:29:26Z",
+      "side": 1,
+      "message": "Thanks, that was my mistake when resolving a conflict after rebasing.",
+      "parentUuid": "ae17702e_f039cf32",
       "range": {
         "startLine": 1164,
         "startChar": 28,
