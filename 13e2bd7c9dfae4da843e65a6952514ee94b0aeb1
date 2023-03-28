@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff9805d3_a31d72c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-28T21:52:52Z",
+      "side": 1,
+      "message": "Just one final nit that I missed in the last version.\nIf there are no more comments on this version, it can be fixed right before merging...",
+      "revId": "13e2bd7c9dfae4da843e65a6952514ee94b0aeb1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02c32489_8ef9061a",
+        "filename": "lib/make.sh",
+        "patchSetId": 8
+      },
+      "lineNbr": 1090,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-28T21:52:52Z",
+      "side": 1,
+      "message": "Sorry, I missed this in the last review: \"tool\" should be declared as local.",
+      "range": {
+        "startLine": 1090,
+        "startChar": 8,
+        "endLine": 1090,
+        "endChar": 12
+      },
+      "revId": "13e2bd7c9dfae4da843e65a6952514ee94b0aeb1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
