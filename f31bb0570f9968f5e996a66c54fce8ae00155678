@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad4ce669_bf0da94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-03-29T22:48:32Z",
+      "side": 1,
+      "message": "Hello,\n\nThis fixes the CI job that updates ABE\u0027s tested branch, which is currently failing due to cross-building GDB for MinGW, as noticed by Christophe.",
+      "revId": "f31bb0570f9968f5e996a66c54fce8ae00155678",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
