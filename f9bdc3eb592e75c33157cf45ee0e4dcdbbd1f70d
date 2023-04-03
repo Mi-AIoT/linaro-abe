@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "709f1490_261e9286",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-03T16:02:50Z",
+      "side": 1,
+      "message": "Thanks for your review! If we ever need to cross-build for Windows with Python support, I can revisit this.",
+      "revId": "f9bdc3eb592e75c33157cf45ee0e4dcdbbd1f70d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
