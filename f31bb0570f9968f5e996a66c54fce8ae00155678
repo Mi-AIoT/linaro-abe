@@ -33,6 +33,23 @@
       "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1403/ : Well ... it worked on my machine\"\n\nThis is the expected failure that happens when the configuration options change because the manifest without the patch and with the patch are different:\n\n+ local compare_ret\u003d0\n+ /home/tcwg-buildslave/workspace/tcwg-abe-test__1/abe-tests/compare-manifests.pl --ignore-revisions mani1.txt mani2.txt\n--- /tmp/osehHAJLzM\t2023-03-29 23:38:50.155857688 +0000\n+++ /tmp/yCRMEzVG0r\t2023-03-29 23:38:50.279854190 +0000\n@@ -48,7 +48,7 @@\n gdb_filespec\u003dbinutils-gdb.git\n gdb_linuxhost_only\u003d\"no\"\n gdb_makeflags\u003d\"all-gdb\"\n-gdb_mingw_extraconf\u003d\"--disable-tui --with-python\u003d${local_snapshots}/python-2.7.4-mingw32 CFLAGS\u003d-I${local_builds}/destdir/${host}/usr/include LDFLAGS\u003d-L${local_builds}/destdir/${host}/usr/lib\"\n+gdb_mingw_extraconf\u003d\"--disable-tui --with-python\u003dno CFLAGS\u003d-I${local_builds}/destdir/${host}/usr/include LDFLAGS\u003d-L${local_builds}/destdir/${host}/usr/lib\"\n gdb_mingw_only\u003d\"no\"\n gdb_revision\u003d...\n gdb_staticlink\u003d\"yes\"\nManifests differ\n+ compare_ret\u003d1\n+ case \"${compare_ret}-${SKIP_COMPARE}\" in\n+ echo \u0027Manifests differ.\u0027\nManifests differ.\n+ result\u003d1\n+ return 1\n",
       "revId": "f31bb0570f9968f5e996a66c54fce8ae00155678",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5e1bb9b_72aa42e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-03T15:50:52Z",
+      "side": 1,
+      "message": "Sounds good enough indeed.\n",
+      "revId": "f31bb0570f9968f5e996a66c54fce8ae00155678",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
