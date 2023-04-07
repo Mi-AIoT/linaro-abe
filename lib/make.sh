@@ -616,10 +616,12 @@ make_install()
 # Copy sysroot to test container and print out ABE_TEST_* settings to pass
 # to dejagnu.
 # $1 -- test container
+# $2 -- action: "install" our sysroot or "restore" original sysroot.
 print_make_opts_and_copy_sysroot ()
 {
     (set -e
      local test_container="$1"
+     local action="$2"
 
      local user machine port
      user="$(echo $test_container | cut -s -d@ -f 1)"
@@ -664,6 +666,11 @@ print_make_opts_and_copy_sysroot ()
      dest_lib_path=$(ssh -p$port $user@$machine mktemp -d)
      dest_ldso_bin="$dest_lib_path/$(basename $ldso_bin)"
      dest_ldso_link="/$(basename "$lib_path")/$(basename "$ldso_link")"
+
+     if [ "$action" = "restore" ]; then
+	 ssh -p$port $user@$machine sudo /tmp/restore.sh
+	 return 0
+     fi
 
      # Rsync libs and ldconfig to the target
      if ! rsync -az --delete -e "ssh -p$port" "$lib_path/" "$lib_path/../sbin/" "$user@$machine:$dest_lib_path/"; then
@@ -716,7 +723,25 @@ ln -f -s $dest_ldso_bin $dest_ldso_link \\
   && $dest_lib_path/ldconfig -f \$dest_ldsoconf
 EOF
 
-     ssh -p$port $user@$machine chmod +x /tmp/install.sh
+     # Generate restore script to restore original glibc setup.
+     # Once ld.so symlink is replaced we can no longer run new non-static
+     # executables -- sudo, bash, etc..  Therefore, we need to run ldconfig
+     # in the same "sudo bash -c" command.  Also, on Ubuntu distro ldconfig
+     # is a shell script, which call ldconfig.real -- try running that directly,
+     # since we will not be able to start bash.
+     local orig_ldso_link
+     orig_ldso_link=$(ssh -p$port $user@$machine readlink "$dest_ldso_link")
+     # shellcheck disable=SC2087
+     ssh -p$port $user@$machine tee /tmp/restore.sh > /dev/null <<EOF
+#!/bin/bash
+
+set -euf -o pipefail
+
+ln -f -s $orig_ldso_link $dest_ldso_link \\
+  && ldconfig.real || ldconfig
+EOF
+
+     ssh -p$port $user@$machine chmod +x /tmp/install.sh /tmp/restore.sh
 
      if ! ssh -p$port $user@$machine sudo /tmp/install.sh; then
 	 error "Could not install new sysroot"
@@ -1066,7 +1091,8 @@ make_check()
 
     local schroot_make_opts
     if $exec_tests && [ x"$test_container" != x"" ]; then
-	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
+	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container" \
+							     "install")
 	if [ $? -ne 0 ]; then
 	    error "Cannot initialize sysroot on $test_container"
 	    return 1
@@ -1257,6 +1283,14 @@ make_check()
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
+    fi
+
+    if $exec_tests && [ x"$test_container" != x"" ]; then
+	print_make_opts_and_copy_sysroot "$test_container" "restore"
+	if [ $? -ne 0 ]; then
+	    error "Cannot restore sysroot on $test_container"
+	    return 1
+	fi
     fi
 
     if [ $result != 0 ]; then
