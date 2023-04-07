@@ -648,18 +648,18 @@ print_make_opts_and_copy_sysroot ()
      lib_path=$(dirname "$ldso_bin")
 
      local -a ldso_links
-     ldso_links=($(find "$lib_path" -type l -name "ld-linux*.so*"))
+     ldso_links=($(find "$lib_path" -type f,l -name "ld-linux*.so*"))
 
      if [ "${#ldso_links[@]}" != "1" ]; then
-	 # FIXME: This part should be broken with glibc 2.34 and newer
-	 # due to glibc providing only straight ld-linux-ARCH.so.N binaries
-	 # with no symlinks.
-	 # We'll fix this when (and if) we start to use this code again.
-	 error "Exactly one ld.so symlink is expected: ${ldso_links[@]}"
+	 error "Exactly one ld.so file or symlink is expected: ${ldso_links[@]}"
 	 return 1
      fi
      ldso_link="${ldso_links[@]}"
 
+     # Glibc 2.34 and newer provides only straight ld-linux-ARCH.so.N binaries
+     # with no symlinks, so $ldso_bin and $ldso_link are now the same.
+     # We could simplify below logic a bit, but, imo, it's slightly better
+     # to keep support for ld.so symlinks.
      local dest_ldso_bin dest_lib_path dest_ldso_link
      dest_lib_path=$(ssh -p$port $user@$machine mktemp -d)
      dest_ldso_bin="$dest_lib_path/$(basename $ldso_bin)"
@@ -684,6 +684,10 @@ print_make_opts_and_copy_sysroot ()
      # Adding new, rather than replacing, ld.so link is rather mundane.
      # E.g., adding ld.so for new abi (ILP32) is extremely unlikely to break
      # LP64 system.
+     #
+     # We use Ubuntu containers for testing, and ubuntu rootfs has /lib/ld.so
+     # as a symlink to /lib/<target/ld.so.  Therefore, we override the symlink
+     # to install our ld.so.
      if ! ssh -p$port $user@$machine sudo bash -c "\"ln -f -s $dest_ldso_bin $dest_ldso_link && $dest_lib_path/ldconfig -f $dest_ldsoconf\""; then
 	 error "Could not install new sysroot"
 	 return 1
