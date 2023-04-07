@@ -620,6 +620,7 @@ print_make_opts_and_copy_sysroot ()
 {
     (set -e
      local test_container="$1"
+     local action="$2"
 
      local user machine port
      user="$(echo $test_container | cut -s -d@ -f 1)"
@@ -665,6 +666,11 @@ print_make_opts_and_copy_sysroot ()
      dest_ldso_bin="$dest_lib_path/$(basename $ldso_bin)"
      dest_ldso_link="/$(basename "$lib_path")/$(basename "$ldso_link")"
 
+     if [ "$action" = "restore" ]; then
+	 ssh -p$port $user@$machine /tmp/restore.sh
+	 return 0
+     fi
+
      # Rsync libs and ldconfig to the target
      if ! rsync -az --delete -e "ssh -p$port" "$lib_path/" "$lib_path/../sbin/" "$user@$machine:$dest_lib_path/"; then
 	 error "Cannot rsync sysroot to $user@machine:$port:$dest_lib_path/"
@@ -676,6 +682,22 @@ print_make_opts_and_copy_sysroot ()
      dest_ldsoconf=$(ssh -p$port $user@$machine mktemp)
      echo "$dest_lib_path" | ssh -p$port $user@$machine tee "$dest_ldsoconf" > /dev/null
      ssh -p$port $user@$machine "cat /etc/ld.so.conf | tee -a $dest_ldsoconf" > /dev/null
+
+     local orig_ldso_link
+     orig_ldso_link=$(ssh -p$port $user@$machine readlink "$dest_ldso_link")
+
+     # Generate restore script to restore original glibc setup.
+     ssh -p$port $user@$machine tee /tmp/restore.sh > /dev/null <<EOF
+#!/bin/bash
+
+# Once ld.so symlink is replaced we can no longer run new non-static
+# executables -- sudo, bash, etc..  Therefore, we need to run ldconfig
+# in the same "sudo bash -c" command.  Also, on Ubuntu distro ldconfig
+# is a shell script, which call ldconfig.real -- try running that directly,
+# since we will not be able to start bash.
+sudo bash -c "ln -f -s $orig_ldso_link $dest_ldso_link && ldconfig.real || ldconfig"
+EOF
+     ssh -p$port $user@$machine chmod +x /tmp/restore.sh
 
      # The most tricky moment!  We need to replace ld.so and re-generate
      # /etc/ld.so.cache in a single command.  Otherwise ld.so and libc will
@@ -1036,7 +1058,8 @@ make_check()
 
     local schroot_make_opts
     if $exec_tests && [ x"$test_container" != x"" ]; then
-	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container")
+	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container" \
+							     "install")
 	if [ $? -ne 0 ]; then
 	    error "Cannot initialize sysroot on $test_container"
 	    return 1
@@ -1227,6 +1250,14 @@ make_check()
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
+    fi
+
+    if $exec_tests && [ x"$test_container" != x"" ]; then
+	print_make_opts_and_copy_sysroot "$test_container" "restore"
+	if [ $? -ne 0 ]; then
+	    error "Cannot restore sysroot on $test_container"
+	    return 1
+	fi
     fi
 
     if [ $result != 0 ]; then
