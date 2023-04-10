@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a128f772_c170c66b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-10T01:02:43Z",
+      "side": 1,
+      "message": "Hello,\n\nChristophe noticed that ABE isn\u0027t able to cross-build GDB\u0027s master branch with MinGW.\nThis fixes the ABE side of the problem. Unfortunately there\u0027s also a minor issue in GDB itself for which I have a patch that I\u0027m currently testing and will post upstream soon.\n\nWith this change and also the GDB patch applied, I am able to build GDB\u0027s master branch with MinGW.",
+      "revId": "d66186120f7b66e4ea9fded85c583652ee2fa0a3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
