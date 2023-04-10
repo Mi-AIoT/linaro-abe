@@ -16,6 +16,23 @@
       "message": "Hello,\n\nChristophe noticed that ABE isn\u0027t able to cross-build GDB\u0027s master branch with MinGW.\nThis fixes the ABE side of the problem. Unfortunately there\u0027s also a minor issue in GDB itself for which I have a patch that I\u0027m currently testing and will post upstream soon.\n\nWith this change and also the GDB patch applied, I am able to build GDB\u0027s master branch with MinGW.",
       "revId": "d66186120f7b66e4ea9fded85c583652ee2fa0a3",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffa3848_50f55cfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-10T02:46:08Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1408/ : Well ... it worked on my machine\"\n\nThere are three failed jobs here:\n\n- test\u003dcross_build fails building gold in branch users~linaro~binutils-2_28-branch\n  - This binutils version is from 2017.\n  - Selected by abe/config/gcc7.\n- test\u003dnative_build fails building gold in branch users~linaro~binutils-2_27-branch\n  - This binutils version is from 2017.\n  - Selected by abe/config/gcc6.\n- tcwg-x86_64-build,abe-tests-checkout fails with the expected \"manifests differ\" error.\n\nI tested manually cross-building and native-building current binutils and it works.\nSo I\u0027d say these test failures aren\u0027t a problem.\n\nI\u0027ll submit a new review request for ci/jobs/configs to change the first two jobs to use the default ABE config for these tests.",
+      "revId": "d66186120f7b66e4ea9fded85c583652ee2fa0a3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
