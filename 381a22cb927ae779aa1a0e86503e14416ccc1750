@@ -16,6 +16,23 @@
       "message": "I\u0027d trust you on this :-)\n",
       "revId": "381a22cb927ae779aa1a0e86503e14416ccc1750",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c66cfb_18333669",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-11T13:18:29Z",
+      "side": 1,
+      "message": "Adhemerval OK\u0027ed this offline.",
+      "revId": "381a22cb927ae779aa1a0e86503e14416ccc1750",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
