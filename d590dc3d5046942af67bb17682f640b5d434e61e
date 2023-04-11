@@ -16,6 +16,24 @@
       "message": "Why is this needed? If we are building a full new toolchain, don\u0027t we want to test all components with the new environment?\n",
       "revId": "d590dc3d5046942af67bb17682f640b5d434e61e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3915cc9_d499f63e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-11T13:17:47Z",
+      "side": 1,
+      "message": "Each component\u0027s make_check() calls print_make_opts_and_copy_sysroot() to install the new sysroot.  Before this patch we have:\n0. testcontainer with original sysroot\n1. make_check binutils: install new sysroot over original sysroot\n2. make_check gcc: install new sysroot over new sysroot\n\nAfter this patch we\u0027ll have:\n0. testcontainer with original sysroot\n1. make_check binutils: install new sysroot over original sysroot\n1a. restore original sysroot\n2. make_check gcc: install new sysroot over original sysroot\n2a. restore original sysroot\n\n... which is a bit cleaner.  The motivation for this patch was new glibc breaking \"sudo\", which caused \"make_check gcc\" to fail to start.",
+      "parentUuid": "9f489b8e_fe73b148",
+      "revId": "d590dc3d5046942af67bb17682f640b5d434e61e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
