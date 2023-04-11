@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b3fa2cb_c1c8b9d8",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-11T13:19:41Z",
+      "side": 1,
+      "message": "Would you please add a FIXME with motivation for this change?",
+      "range": {
+        "startLine": 225,
+        "startChar": 1,
+        "endLine": 225,
+        "endChar": 10
+      },
+      "revId": "f3df33541bafd0b11e6769b0679dcd3d3299624d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
