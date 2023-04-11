@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f489b8e_fe73b148",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-11T13:10:14Z",
+      "side": 1,
+      "message": "Why is this needed? If we are building a full new toolchain, don\u0027t we want to test all components with the new environment?\n",
+      "revId": "d590dc3d5046942af67bb17682f640b5d434e61e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
