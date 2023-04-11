@@ -51,6 +51,24 @@
       "parentUuid": "a128f772_c170c66b",
       "revId": "d66186120f7b66e4ea9fded85c583652ee2fa0a3",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0957f07c_2d68fb1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-11T13:20:58Z",
+      "side": 1,
+      "message": "Ha yes, that looks similar to what I recently changed in tcwg-abe-extended: we are no longer able to build gcc6/7 in our recent containers.",
+      "parentUuid": "fffa3848_50f55cfa",
+      "revId": "d66186120f7b66e4ea9fded85c583652ee2fa0a3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
