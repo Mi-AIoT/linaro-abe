@@ -1094,24 +1094,26 @@ make_check()
 
     local testsuite_mgmt="$gcc_compare_results/contrib/testsuite-management"
     local validate_failures="$testsuite_mgmt/validate_failures.py"
-    local fails_tmp_root fails_tmp
 
-    # Prepare temporary directory with files for expected and new fails.
-    fails_tmp_root="$(mktemp -d abe.XXXXXXXXXX)"
-    # Many xfail files include flaky.xfail from the parent directory, so they need to be
-    # copied to a subdirectory.
-    fails_tmp="$fails_tmp_root/workdir"
-    mkdir "$fails_tmp"
+    # Prepare temporary fail files
+    local xfails prev_fails new_fails
+    xfails=$(mktemp)
+    prev_fails=$(mktemp)
+    new_fails=$(mktemp)
 
-    if [ -n "$expected_failures" ]; then
-	if grep -q "@include ../flaky.xfail" "$expected_failures"; then
-	    cp "$testsuite_mgmt/flaky.xfail" "$fails_tmp_root"
-	fi
-
-	cp "$expected_failures" "$fails_tmp/xfails.orig"
-
+    # $xfails is the top-level file, which is passed as manifest to
+    # validate_failures.  It includes optional "$expected_failures", which is
+    # passed on the command line, and $prev_fails, which will be populated
+    # during iterative testing.
+    if [ "$expected_failures" != "" ]; then
+	cat >> "$xfails" <<EOF
+@include $expected_failures
+EOF
 	notice "Using expected fails file $expected_failures"
     fi
+    cat >> "$xfails" <<EOF
+@include $prev_fails
+EOF
 
     local result=0
     local tool
@@ -1122,15 +1124,6 @@ make_check()
 	for dir in $dirs; do
 	    local runtestflags_for_component="${tool2exps[$tool]}"
 	    local check_targets="${tool2check[$tool]}"
-
-	    local xfails="$fails_tmp/xfails" new_fails="$fails_tmp/new_fails"
-
-	    # Reset the xfails file to its initial state.
-	    if [ -n "$expected_failures" ]; then
-		cp -f "$fails_tmp/xfails.orig" "$xfails"
-	    else
-		rm -f "$xfails"
-	    fi
 
 	    local make_runtestflags=""
 	    if [ -n "${runtestflags_for_component}" ]; then
@@ -1165,13 +1158,8 @@ make_check()
 		    break
 		fi
 
-		local manifest_option=""
-		if [ -e "$xfails" ]; then
-		    manifest_option="--manifest=$xfails"
-		fi
-
 		"$validate_failures" \
-		    ${manifest_option} \
+		    --manifest="$xfails"
 		    --build_dir="${builddir}$dir" \
 		    --verbosity=1 \
 		    > "$new_fails" &
@@ -1213,7 +1201,7 @@ make_check()
 		fi
 
 		# Incorporate this try's failures into the expected failures list.
-		cat "$new_fails" >> "$xfails"
+		cat "$new_fails" >> "$prev_fails"
 
 		local -a failed_exps=()
 		readarray -t failed_exps \
@@ -1246,7 +1234,7 @@ make_check()
 	done
     done
 
-    rm -rf "$fails_tmp_root"
+    rm "$xfails" "$prev_fails" "$new_fails"
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
