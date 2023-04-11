@@ -1127,15 +1127,17 @@ make_check()
     local validate_failures="$testsuite_mgmt/validate_failures.py"
 
     # Prepare temporary fail files
-    local xfails prev_fails new_fails
+    local xfails orig_fails flaky_fails new_fails
     xfails=$(mktemp)
-    prev_fails=$(mktemp)
+    orig_fails=$(mktemp)
+    flaky_fails=$(mktemp)
     new_fails=$(mktemp)
 
     # $xfails is the top-level file, which is passed as manifest to
-    # validate_failures.  It includes optional "$expected_failures", which is
-    # passed on the command line, and $prev_fails, which will be populated
-    # during iterative testing.
+    # validate_failures.  It includes
+    # - optional "$expected_failures", which is passed on the command line,
+    # - $orig_fails, which is populated on the $try==0 test run,
+    # - $flaky_fails, which is populated on $try>0 test runs.
     if [ "$expected_failures" != "" ]; then
 	cat >> "$xfails" <<EOF
 @include $expected_failures
@@ -1143,7 +1145,8 @@ EOF
 	notice "Using expected fails file $expected_failures"
     fi
     cat >> "$xfails" <<EOF
-@include $prev_fails
+@include $orig_fails
+@include $flaky_fails
 EOF
 
     local result=0
@@ -1226,13 +1229,14 @@ EOF
 		    break
 		fi
 
-		if [ $try -ne 0 ]; then
+		# Incorporate this try's failures into $xfails
+		if [ $try = 0 ]; then
+		    cat "$new_fails" > "$orig_fails"
+		else
+		    cat "$new_fails" >> "$flaky_fails"
 		    notice "These failures require an additional testsuite run:"
 		    cat "$new_fails"
 		fi
-
-		# Incorporate this try's failures into the expected failures list.
-		cat "$new_fails" >> "$prev_fails"
 
 		local -a failed_exps=()
 		readarray -t failed_exps \
@@ -1265,7 +1269,7 @@ EOF
 	done
     done
 
-    rm "$xfails" "$prev_fails" "$new_fails"
+    rm "$xfails" "$orig_fails" "$flaky_fails" "$new_fails"
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
