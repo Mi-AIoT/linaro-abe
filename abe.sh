@@ -207,6 +207,9 @@ OPTIONS
   --extraconfigdir <dir>
                 Use a directory of additional configuration files.
 
+  --flaky-failures <path>
+                File to be populated with flaky testsuite failures.
+
   --force	Force download packages and force rebuild packages.
 
   --gcc-compare-results <dir>
@@ -969,6 +972,15 @@ while test $# -gt 0; do
 		extraconfig_val="$2/$i"
 		extraconfig[${extraconfig_tool}]="${extraconfig[${extraconfig_tool}]} ${extraconfig_val}"
 	    done
+	    shift
+	    ;;
+	--flaky-failures)
+	    check_directive flaky-failures "$2"
+	    if ! [ -f "$2" ]; then
+		error "Parameter for --flaky-failures $2 is not a file."
+		build_failure
+	    fi
+	    flaky_failures="$2"
 	    shift
 	    ;;
 	--gcc-compare-results)
