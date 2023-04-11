@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80cd5c0c_d52aaa3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-11T13:10:50Z",
+      "side": 1,
+      "message": "I\u0027d trust you on this :-)\n",
+      "revId": "381a22cb927ae779aa1a0e86503e14416ccc1750",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
