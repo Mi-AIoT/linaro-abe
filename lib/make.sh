@@ -1130,8 +1130,13 @@ make_check()
     local xfails orig_fails flaky_fails new_fails
     xfails=$(mktemp)
     orig_fails=$(mktemp)
-    flaky_fails=$(mktemp)
     new_fails=$(mktemp)
+
+    if [ "$flaky_failures" = "" ]; then
+	flaky_fails=$(mktemp)
+    else
+	flaky_fails="$flaky_failures"
+    fi
 
     # $xfails is the top-level file, which is passed as manifest to
     # validate_failures.  It includes
@@ -1269,7 +1274,10 @@ EOF
 	done
     done
 
-    rm "$xfails" "$orig_fails" "$flaky_fails" "$new_fails"
+    rm "$xfails" "$orig_fails" "$new_fails"
+    if [ "$flaky_failures" = "" ]; then
+	rm "$flaky_fails"
+    fi
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
