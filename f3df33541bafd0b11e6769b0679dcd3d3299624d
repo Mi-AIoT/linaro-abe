@@ -22,6 +22,30 @@
       },
       "revId": "f3df33541bafd0b11e6769b0679dcd3d3299624d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10cf92ae_8f175da5",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-11T15:04:02Z",
+      "side": 1,
+      "message": "In fact, since we already skip \"go\" in the round-robin jobs (as you pointed out), this change is not needed, at least for the moment.",
+      "parentUuid": "7b3fa2cb_c1c8b9d8",
+      "range": {
+        "startLine": 225,
+        "startChar": 1,
+        "endLine": 225,
+        "endChar": 10
+      },
+      "revId": "f3df33541bafd0b11e6769b0679dcd3d3299624d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
