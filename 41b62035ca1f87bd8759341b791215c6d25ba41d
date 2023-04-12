@@ -51,6 +51,81 @@
       "parentUuid": "e9cdc12f_e4f6ef0a",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4c8ae6_2f70ddbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T15:52:01Z",
+      "side": 1,
+      "message": "\u003e We are in catch-22 situation here.  Without glibc\u0027s libcrypt we can\u0027t cross-build sanitizers (native build can work, though, since we can link against system libxcrypt).\n\u003e With glibc\u0027s libcrypt we can build sanitizers, but cross-testing will fail due to sudo/ssh/etc. failing to find XCRYPT_2.0 version.\n\nWould it solve the catch-22 if we installed libcrypt-dev:arm64 in the CI container? I have it in my laptop so it\u0027s possible.",
+      "parentUuid": "809e10a9_c23ed567",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0bc2fab_7a88bb22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T15:52:01Z",
+      "side": 1,
+      "message": "Looks good to me! Just some minor nits.",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dffbdb6_4f93e512",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T15:52:01Z",
+      "side": 1,
+      "message": "Small nit. Document new function argument here.",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0549518_fede7b36",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T15:52:01Z",
+      "side": 1,
+      "message": "ShellCheck warns about the variables in the here document being expanded on the client rather than on the server side because EOF isn\u0027t quoted.\nThis is what we want though, so I suggest disabling the warning with:\n\n# shellcheck disable\u003dSC2087",
+      "range": {
+        "startLine": 690,
+        "startChar": 66,
+        "endLine": 690,
+        "endChar": 69
+      },
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
