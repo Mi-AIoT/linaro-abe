@@ -16,6 +16,23 @@
       "message": "Sounds ok to me, beside the failed abe check.",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9cdc12f_e4f6ef0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-12T12:45:49Z",
+      "side": 1,
+      "message": "Looking at ABE failures, I noticed that \"cross-build\" fails because:\n/home/tcwg-buildslave/workspace/tcwg-abe-test__0/snapshots/gcc.git~releases~gcc-12/libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.cpp:157:10: fatal error: crypt.h: No such file or directory\n  157 | #include \u003ccrypt.h\u003e\n\n",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
