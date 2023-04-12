@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a9295d7_92793829",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-04-12T12:05:17Z",
+      "side": 1,
+      "message": "Sounds ok to me, beside the failed abe check.",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
