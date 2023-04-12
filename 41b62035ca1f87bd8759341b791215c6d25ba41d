@@ -33,6 +33,24 @@
       "message": "Looking at ABE failures, I noticed that \"cross-build\" fails because:\n/home/tcwg-buildslave/workspace/tcwg-abe-test__0/snapshots/gcc.git~releases~gcc-12/libsanitizer/sanitizer_common/sanitizer_platform_limits_posix.cpp:157:10: fatal error: crypt.h: No such file or directory\n  157 | #include \u003ccrypt.h\u003e\n\n",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "809e10a9_c23ed567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-12T14:54:49Z",
+      "side": 1,
+      "message": "We are in catch-22 situation here.  Without glibc\u0027s libcrypt we can\u0027t cross-build sanitizers (native build can work, though, since we can link against system libxcrypt).\nWith glibc\u0027s libcrypt we can build sanitizers, but cross-testing will fail due to sudo/ssh/etc. failing to find XCRYPT_2.0 version.",
+      "parentUuid": "e9cdc12f_e4f6ef0a",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
