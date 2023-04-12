@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc393326_523020dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T18:00:07Z",
+      "side": 1,
+      "message": "Looks good to me. Just a small nit.",
+      "revId": "a302332d46e688b2a989b4410ef3b9d67dec6a53",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47be1c20_c24884d2",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T18:00:07Z",
+      "side": 1,
+      "message": "-eq is more correct though this works too, in practice.",
+      "range": {
+        "startLine": 1202,
+        "startChar": 12,
+        "endLine": 1202,
+        "endChar": 13
+      },
+      "revId": "a302332d46e688b2a989b4410ef3b9d67dec6a53",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
