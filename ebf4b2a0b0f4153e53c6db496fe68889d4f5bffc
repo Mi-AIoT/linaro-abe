@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e40637de_5b577f84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T17:46:08Z",
+      "side": 1,
+      "message": "\u003e Patch Set 2: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1416/ : Well ... it worked on my machine\"\n\nThe failure isn\u0027t related to this change.\nGCC stage2 failed to build in the cross_build and abe-tests jobs.",
+      "revId": "ebf4b2a0b0f4153e53c6db496fe68889d4f5bffc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a192f71_3e682f5d",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1116,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T17:46:08Z",
+      "side": 1,
+      "message": "@including the original xfails file and also a new file for previous failures is simpler than my original approach of copying things around. Nice!",
+      "revId": "ebf4b2a0b0f4153e53c6db496fe68889d4f5bffc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}

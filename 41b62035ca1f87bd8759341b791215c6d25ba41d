@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd563e63_cc2bc708",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-12T17:46:08Z",
+      "side": 0,
+      "message": "Does it make sense to keep the xfails from previous tools/directories for the next ones?\nWe could empty $prev_fails here. Though the old xfails wouldn\u0027t do harm either, so perhaps it\u0027s just a a theoretical correctness issue.\n\nJust a thought. Either way works for me.",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
