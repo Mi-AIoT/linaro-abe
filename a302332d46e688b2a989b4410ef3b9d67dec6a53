@@ -63,6 +63,30 @@
       },
       "revId": "a302332d46e688b2a989b4410ef3b9d67dec6a53",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "509e6d41_5470374c",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1202,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-13T07:44:19Z",
+      "side": 1,
+      "message": "\"\u003d\" compares strings, while \"-eq\" compares integers.",
+      "parentUuid": "899c2a79_6c84a8af",
+      "range": {
+        "startLine": 1202,
+        "startChar": 12,
+        "endLine": 1202,
+        "endChar": 13
+      },
+      "revId": "a302332d46e688b2a989b4410ef3b9d67dec6a53",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
