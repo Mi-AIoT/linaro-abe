@@ -124,6 +124,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd1ca03_1c0a4538",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T09:18:08Z",
+      "side": 1,
+      "message": "I have posted a workaround to remove \"libcrypt\" from test sysroot: https://review.linaro.org/c/toolchain/abe/+/43699/",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dffbdb6_4f93e512",
