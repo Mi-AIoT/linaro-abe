@@ -16,6 +16,41 @@
       "message": "Looks good to me.\nI see that the cross_build failure is:\n\nERROR (#227): check_all (Failed checking of  binutils gcc-stage2.)\n\nBut is it even possible to run \"make check\" in a canadian cross build? I think ABE shouldn\u0027t be trying to do that in this case.",
       "revId": "b05b9e1a7dc691ead5cc3e9d11198b350c1bd54b",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f52cd6a_315b942d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T18:03:01Z",
+      "side": 1,
+      "message": "cross_build is usual cross, not canadian cross.  ABE can test such toolchains.",
+      "parentUuid": "0a80131a_b61af622",
+      "revId": "b05b9e1a7dc691ead5cc3e9d11198b350c1bd54b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e82b8e98_96de1b63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T18:03:01Z",
+      "side": 1,
+      "message": "I found a typo, which caused this and subsequent patches to fail ABE tests.",
+      "revId": "b05b9e1a7dc691ead5cc3e9d11198b350c1bd54b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
