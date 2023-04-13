@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ae63fcb_b4c9f3e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T09:17:04Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a possible solution:\n1. install libcrypt:arm64 and libcrypt-dev:arm64 in x86_64 docker images,\n2. point ABE cross-builds to include /usr/lib/$target sysroot to find libcrypt.\n\nAnother possible solution is have ABE build glibc\u0027s libcrypt and link sanitizers against it. Then, when rsync\u0027ing new sysroot to the test container, exclude glibc\u0027s libcrypt and hope that ubuntu\u0027s libcrypt has all the right symbols and versions for tests to work.",
+      "parentUuid": "5d4c8ae6_2f70ddbf",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4dffbdb6_4f93e512",
         "filename": "lib/make.sh",
         "patchSetId": 2
@@ -119,6 +137,24 @@
       "writtenOn": "2023-04-12T15:52:01Z",
       "side": 1,
       "message": "Small nit. Document new function argument here.",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f46baa_af4ee2bf",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T09:17:04Z",
+      "side": 1,
+      "message": "Good catch, thanks!",
+      "parentUuid": "4dffbdb6_4f93e512",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
