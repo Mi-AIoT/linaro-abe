@@ -176,6 +176,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea6b33f2_035bd3e7",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 618,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T09:40:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53f46baa_af4ee2bf",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0549518_fede7b36",
@@ -189,6 +207,30 @@
       "writtenOn": "2023-04-12T15:52:01Z",
       "side": 1,
       "message": "ShellCheck warns about the variables in the here document being expanded on the client rather than on the server side because EOF isn\u0027t quoted.\nThis is what we want though, so I suggest disabling the warning with:\n\n# shellcheck disable\u003dSC2087",
+      "range": {
+        "startLine": 690,
+        "startChar": 66,
+        "endLine": 690,
+        "endChar": 69
+      },
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237108d8_702bc024",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T09:40:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0549518_fede7b36",
       "range": {
         "startLine": 690,
         "startChar": 66,
