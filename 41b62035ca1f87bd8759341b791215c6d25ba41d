@@ -16,6 +16,24 @@
       "message": "Does it make sense to keep the xfails from previous tools/directories for the next ones?\nWe could empty $prev_fails here. Though the old xfails wouldn\u0027t do harm either, so perhaps it\u0027s just a a theoretical correctness issue.\n\nJust a thought. Either way works for me.",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "086e4e06_3587713d",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-13T09:19:35Z",
+      "side": 0,
+      "message": "Could you elaborate, please?  I don\u0027t understand this comment.",
+      "parentUuid": "fd563e63_cc2bc708",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
