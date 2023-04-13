@@ -667,7 +667,7 @@ print_make_opts_and_copy_sysroot ()
      dest_ldso_link="/$(basename "$lib_path")/$(basename "$ldso_link")"
 
      if [ "$action" = "restore" ]; then
-	 ssh -p$port $user@$machine /tmp/restore.sh
+	 ssh -p$port $user@$machine sudo /tmp/restore.sh
 	 return 0
      fi
 
@@ -677,28 +677,22 @@ print_make_opts_and_copy_sysroot ()
 	 return 1
      fi
 
-     # Prepare new ld.so.conf
-     local dest_ldsoconf
-     dest_ldsoconf=$(ssh -p$port $user@$machine mktemp)
-     echo "$dest_lib_path" | ssh -p$port $user@$machine tee "$dest_ldsoconf" > /dev/null
-     ssh -p$port $user@$machine "cat /etc/ld.so.conf | tee -a $dest_ldsoconf" > /dev/null
+     # Packages in recent Ubuntu distros (20.04 and 22.04) are built against
+     # non-glibc libcrypt.so, and sudo, ssh, and other binaries fail
+     # to authorize users during testing if glibc's libcrypt.so is positioned
+     # first on the library search path.  The failure is silent, but manifests
+     # itself in failure to find XCRYPT_* versions in output
+     # "LD_DEBUG=libs sudo ls".
+     # Disabling libcrypt in our glibc build (--disable-crypt) causes
+     # GCC's sanitizers to fail to build.  So, rather than disabling libcrypt
+     # during build, we remove it from target sysroot
+     local libcrypt_workaround=false
+     if ssh -p$port $user@$machine dpkg -L libcrypt1 \
+	     | grep '^/lib.*/libcrypt.so.1$' 2>/dev/null; then
+	 libcrypt_workaround=true
+     fi
 
-     local orig_ldso_link
-     orig_ldso_link=$(ssh -p$port $user@$machine readlink "$dest_ldso_link")
-
-     # Generate restore script to restore original glibc setup.
-     ssh -p$port $user@$machine tee /tmp/restore.sh > /dev/null <<EOF
-#!/bin/bash
-
-# Once ld.so symlink is replaced we can no longer run new non-static
-# executables -- sudo, bash, etc..  Therefore, we need to run ldconfig
-# in the same "sudo bash -c" command.  Also, on Ubuntu distro ldconfig
-# is a shell script, which call ldconfig.real -- try running that directly,
-# since we will not be able to start bash.
-sudo bash -c "ln -f -s $orig_ldso_link $dest_ldso_link && ldconfig.real || ldconfig"
-EOF
-     ssh -p$port $user@$machine chmod +x /tmp/restore.sh
-
+     # Generate install script to install our sysroot.
      # The most tricky moment!  We need to replace ld.so and re-generate
      # /etc/ld.so.cache in a single command.  Otherwise ld.so and libc will
      # get de-synchronized, which will render container unoperational.
@@ -710,7 +704,43 @@ EOF
      # We use Ubuntu containers for testing, and ubuntu rootfs has /lib/ld.so
      # as a symlink to /lib/<target/ld.so.  Therefore, we override the symlink
      # to install our ld.so.
-     if ! ssh -p$port $user@$machine sudo bash -c "\"ln -f -s $dest_ldso_bin $dest_ldso_link && $dest_lib_path/ldconfig -f $dest_ldsoconf\""; then
+     ssh -p$port $user@$machine tee /tmp/install.sh > /dev/null <<EOF
+#!/bin/bash
+
+set -euf -o pipefail
+
+dest_ldsoconf=\$(mktemp)
+
+if $libcrypt_workaround; then
+  rm -f $dest_lib_path/libcrypt.so.1
+fi
+
+echo $dest_lib_path >> \$dest_ldsoconf
+cat /etc/ld.so.conf >> \$dest_ldsoconf
+ln -f -s $dest_ldso_bin $dest_ldso_link \\
+  && $dest_lib_path/ldconfig -f \$dest_ldsoconf
+EOF
+
+     # Generate restore script to restore original glibc setup.
+     # Once ld.so symlink is replaced we can no longer run new non-static
+     # executables -- sudo, bash, etc..  Therefore, we need to run ldconfig
+     # in the same "sudo bash -c" command.  Also, on Ubuntu distro ldconfig
+     # is a shell script, which call ldconfig.real -- try running that directly,
+     # since we will not be able to start bash.
+     local orig_ldso_link
+     orig_ldso_link=$(ssh -p$port $user@$machine readlink "$dest_ldso_link")
+     ssh -p$port $user@$machine tee /tmp/restore.sh > /dev/null <<EOF
+#!/bin/bash
+
+set -euf -o pipefail
+
+ln -f -s $orig_ldso_link $dest_ldso_link \\
+  && ldconfig.real || ldconfig
+EOF
+
+     ssh -p$port $user@$machine chmod +x /tmp/install.sh /tmp/restore.sh
+
+     if ! ssh -p$port $user@$machine sudo /tmp/install.sh; then
 	 error "Could not install new sysroot"
 	 return 1
      fi
