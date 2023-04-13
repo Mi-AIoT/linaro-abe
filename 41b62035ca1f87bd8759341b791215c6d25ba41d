@@ -34,6 +34,24 @@
       "parentUuid": "fd563e63_cc2bc708",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b10fb96d_c2fbc10d",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-13T12:19:26Z",
+      "side": 0,
+      "message": "\u003e Could you elaborate, please?  I don\u0027t understand this comment.\n\nWhat I mean is that we could put here:\n\necho \u003e \"$prev_fails\"\n\nIn later commits this would be changed to:\n\necho \u003e \"$orig_fails\"\n[ \"$flaky_failures\" \u003d \"\" ] \u0026\u0026 echo \u003e \"$flaky_fails\"\n\nBut like I said before, not much would change in practice.",
+      "parentUuid": "086e4e06_3587713d",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
