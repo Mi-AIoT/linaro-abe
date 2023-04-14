@@ -18,6 +18,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "668ba96a_35549ad6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T15:45:56Z",
+      "side": 1,
+      "message": "1. You add \"set -x\" to lib/make.sh:print_make_opts_and_copy_sysroot().\n2. You create a container for cross-testing on the target: ~/jenkins-scripts/start-container-docker.sh --distro lts --label tcwg-apm_32-test --task test --newuser $USER\n3. You run the abe.sh command from the log.",
+      "parentUuid": "f73a5eec_36b6ca72",
+      "revId": "914c062a100373a95362c39f6c66f8e251f8a8cf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8fefdac_6e958d84",
