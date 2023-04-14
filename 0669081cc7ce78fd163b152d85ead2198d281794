@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f45921bd_6be383c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T12:49:07Z",
+      "side": 1,
+      "message": "Christophe OK\u0027ed this offline.",
+      "revId": "0669081cc7ce78fd163b152d85ead2198d281794",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36e5f3c6_400a5232",
