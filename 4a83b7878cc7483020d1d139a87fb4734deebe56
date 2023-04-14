@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4b9af80_cf216791",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-14T07:49:35Z",
+      "side": 1,
+      "message": "LGTM, the remaining failure are caused by the (expected) manifest differences for gcc5 and gcc6. Not sure why there\u0027s no such difference in gcc4_9 and gcc7 configurations?\n",
+      "revId": "4a83b7878cc7483020d1d139a87fb4734deebe56",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
