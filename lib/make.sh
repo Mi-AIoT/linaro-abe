@@ -1017,52 +1017,6 @@ make_check()
     local exec_tests
     exec_tests=false
 
-    # Compute which user-supplied runtestflags are relevant to this
-    # component, and the corresponding directories and "make check"
-    # targets.
-    local -A tool2dirs=()
-    local -A tool2exps=()
-    local -A tool2check=()
-    local flag
-
-    for flag in "${runtestflags[@]}"
-    do
-	local flag_tool=$(exp_to_tool "$component" "$flag")
-	local this_runtestflag=${flag#*:}
-	# If flag_tool is not relevant to the current component, do
-	# not include it in the list.
-	[ "$flag_tool" = "none" ] && continue
-
-	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
-	tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
-	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
-    done
-
-    # If the user supplied both non-prefixed and prefixed runtestflags
-    # that would apply to this component/tool, skip the non-prefixed
-    # ones.
-
-    # For instance with execute.exp g++:compile.exp, we would have to
-    # run the g++ tests twice:
-    # - from toplevel, using 'make check'
-    # - from /gcc, using 'make check-g++'
-    # and the second call would overwrite g++.sum
-    if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
-	warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
-	warning "Prefix these runtestflags with $component: if relevant"
-	unset tool2dirs[any]
-	unset tool2exps[any]
-	unset tool2check[any]
-    fi
-
-    # If no runtestflag was supplied or none applies to this
-    # component, use the defaults
-    if [ ${#tool2dirs[@]} -eq 0 ]; then
-	flag_tool="any"
-	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
-	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
-    fi
-
     case "$component" in
 	binutils)
 	    exec_tests=true
@@ -1148,26 +1102,91 @@ EOF
 @include $prev_fails
 EOF
 
+    # Example iterations with binutils component:
+    # try#0 runtestflags=""  -> tools=(any) dirs=(/binutils /gas /ld)
+    #   detect failures in both gas and ld
+    # try#1 runtestflags="gas:gas.exp ld:ld.exp" -> tools=(gas ld)  dirs=(/gas /ld)
+    #   we need different lists of xfails/flaky tests for each too/dir,
+    #   otherwise we'll think that ld has gas' failures as flaky ld tests.
+
+    local -a failed_exps=(${runtestflags[@]})
+    local try=0
+    local more_tests_to_try=true
+
+    while $more_tests_to_try; do
+
+    more_tests_to_try=false
+
+    # Compute which user-supplied runtestflags are relevant to this
+    # component, and the corresponding directories and "make check"
+    # targets.
+    local -A tool2dirs=()
+    local -A tool2exps=()
+    local -A tool2check=()
+    local flag
+
+    for flag in "${failed_exps[@]}"
+    do
+	local flag_tool=$(exp_to_tool "$component" "$flag")
+	local this_runtestflag=${flag#*:}
+	# If flag_tool is not relevant to the current component, do
+	# not include it in the list.
+	[ "$flag_tool" = "none" ] && continue
+
+	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+	tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
+	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+    done
+    failed_exps=()
+
+    # If the user supplied both non-prefixed and prefixed runtestflags
+    # that would apply to this component/tool, skip the non-prefixed
+    # ones.
+
+    # For instance with execute.exp g++:compile.exp, we would have to
+    # run the g++ tests twice:
+    # - from toplevel, using 'make check'
+    # - from /gcc, using 'make check-g++'
+    # and the second call would overwrite g++.sum
+    if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
+	warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
+	warning "Prefix these runtestflags with $component: if relevant"
+	unset tool2dirs[any]
+	unset tool2exps[any]
+	unset tool2check[any]
+    fi
+
+    # If no runtestflag was supplied or none applies to this
+    # component, use the defaults
+    if [ ${#tool2dirs[@]} -eq 0 ]; then
+	flag_tool="any"
+	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+    fi
+
     local result=0
     local tool
 
     for tool in "${!tool2dirs[@]}"; do
 	local dirs="${tool2dirs[$tool]}"
 	local dir
+
 	for dir in $dirs; do
 	    local runtestflags_for_component="${tool2exps[$tool]}"
 	    local check_targets="${tool2check[$tool]}"
 
+	    local more_tests_to_try_for_dir=false
 	    local make_runtestflags=""
 	    if [ -n "${runtestflags_for_component}" ]; then
 		make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component}\""
 	    fi
 
-	    local try=0
 	    # The key in sums is the original name of the sum file, and the value is a list of
 	    # the sum files produced by all the testsuite runs, separated by ';' (because bash
 	    # doesn't support arrays within arrays).
 	    local -A sums=()
+	    # This loop is executed only once, we keep the loop
+	    # structure to make early exits easier.
 	    while true; do
 		if [ $try -ne 0 ]; then
 		    notice "Starting testsuite run #$((try + 1))."
@@ -1191,9 +1210,12 @@ EOF
 		    break
 		fi
 
+		local -a failed_exps_for_dir=()
+
 		"$validate_failures" \
 		    --manifest="$xfails" \
-		    --build_dir="${builddir}$dir" \
+		    --build_dir="${builddir}" \
+		    --tool_dir="$dir" \
 		    --verbosity=1 \
 		    > "$new_fails" &
 		res=0 && wait $! || res=$?
@@ -1227,6 +1249,7 @@ EOF
 		    result=1
 		    break
 		fi
+		more_tests_to_try_for_dir=true
 
 		if [ $try -ne 0 ]; then
 		    notice "These failures require an additional testsuite run:"
@@ -1236,20 +1259,20 @@ EOF
 		# Incorporate this try's failures into the expected failures list.
 		cat "$new_fails" >> "$prev_fails"
 
-		local -a failed_exps=()
-		readarray -t failed_exps \
+		readarray -t failed_exps_for_dir \
 			  < <(awk '/^Running .* \.\.\./ { print $2 }' < "$new_fails")
 
-		if [ ${#failed_exps[@]} -eq 0 ]; then
+		if [ ${#failed_exps_for_dir[@]} -eq 0 ]; then
 		    # This indicates a bug in validate_failures.py.
 		    warning "$validate_failures failed: it reported regressions but no failed tests."
 		    result=1
 		    break;
 		fi
 
-		make_runtestflags="RUNTESTFLAGS=\"${failed_exps[*]}\""
-		try=$((try + 1))
-	    done
+		failed_exps+=("${failed_exps_for_dir[@]}")
+
+		break
+	    done # inner while true
 
 	    # If there was more than one try, we need to merge all the sum files.
 	    if [ $try -ne 0 ]; then
@@ -1262,10 +1285,15 @@ EOF
 		done
 	    fi
 
+	if $more_tests_to_try_for_dir; then
+	    more_tests_to_try=true
+	fi
+    done # $dir loop
+    done # $tool loop
 	    notice "Ran the testsuite $((try + 1)) times."
             record_test_results "${component}" $2
-	done
-    done
+	    try=$((try + 1))
+    done # outer while true
 
     rm "$xfails" "$prev_fails" "$new_fails"
 
