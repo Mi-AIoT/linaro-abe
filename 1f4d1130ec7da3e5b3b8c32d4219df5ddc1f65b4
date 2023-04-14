@@ -34,6 +34,23 @@
       "parentUuid": "d7d5c899_22fc513e",
       "revId": "1f4d1130ec7da3e5b3b8c32d4219df5ddc1f65b4",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df10b568_c6161924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T08:30:19Z",
+      "side": 1,
+      "message": "This patch doesn\u0027t affect much the above discussion about organization of iterative testing, so I\u0027ll merge it.",
+      "revId": "1f4d1130ec7da3e5b3b8c32d4219df5ddc1f65b4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
