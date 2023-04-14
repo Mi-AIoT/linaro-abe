@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f73a5eec_36b6ca72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-14T14:54:33Z",
+      "side": 1,
+      "message": "The error in https://ci.linaro.org/job/tcwg-abe-test/1438/label\u003dtcwg-x86_64-build,test\u003dcross_build/console\nis:\n01:41:27.850 ERROR (#1306): make_check (Cannot restore sysroot on tcwg-apm-03.tcwglab:32779)\n\nnot sure how to debug that?",
+      "revId": "914c062a100373a95362c39f6c66f8e251f8a8cf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
