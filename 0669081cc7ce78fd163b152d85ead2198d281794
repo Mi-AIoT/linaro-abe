@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e5f3c6_400a5232",
+        "filename": "lib/make.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1238,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-14T08:14:43Z",
+      "side": 1,
+      "message": "Similarly to the previous patch in the series, I think we need a $flaky_fails per $tool/$dir.",
+      "range": {
+        "startLine": 1238,
+        "startChar": 6,
+        "endLine": 1238,
+        "endChar": 40
+      },
+      "revId": "0669081cc7ce78fd163b152d85ead2198d281794",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
