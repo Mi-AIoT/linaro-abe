@@ -16,6 +16,29 @@
       "message": "The error in https://ci.linaro.org/job/tcwg-abe-test/1438/label\u003dtcwg-x86_64-build,test\u003dcross_build/console\nis:\n01:41:27.850 ERROR (#1306): make_check (Cannot restore sysroot on tcwg-apm-03.tcwglab:32779)\n\nnot sure how to debug that?",
       "revId": "914c062a100373a95362c39f6c66f8e251f8a8cf",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8fefdac_6e958d84",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T15:37:36Z",
+      "side": 1,
+      "message": "We are moving to running our scripts with \"set -e\", and this will stop the script.  Please use\nif [ \"$flag_tool\" \u003d \"none\" ]; then\n  continue\nfi\ninstead.",
+      "range": {
+        "startLine": 1142,
+        "startChar": 1,
+        "endLine": 1142,
+        "endChar": 38
+      },
+      "revId": "914c062a100373a95362c39f6c66f8e251f8a8cf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
