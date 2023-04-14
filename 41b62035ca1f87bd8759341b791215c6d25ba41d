@@ -52,6 +52,24 @@
       "parentUuid": "086e4e06_3587713d",
       "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22d5f207_155622f0",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T08:37:08Z",
+      "side": 0,
+      "message": "Ah, I see your point.  For now, \"yes\", we could do that.  However, if my analysis is correct and we need to pull \"retry make check\" loop at the top level, then we will need to have $prev_fails as a list of combined FAILs from all $dirs/$tools.  And we will not be able to clean it after testing each \"dir\"",
+      "parentUuid": "b10fb96d_c2fbc10d",
+      "revId": "41b62035ca1f87bd8759341b791215c6d25ba41d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
