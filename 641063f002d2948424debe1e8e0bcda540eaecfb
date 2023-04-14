@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fa738e9_5baa97a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-14T12:48:05Z",
+      "side": 1,
+      "message": "Revision #2: no need for --tool_dir option when calling validate_failures.py since we now always use --manifest.",
+      "revId": "641063f002d2948424debe1e8e0bcda540eaecfb",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
