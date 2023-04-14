@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d5c899_22fc513e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-14T08:09:52Z",
+      "side": 1,
+      "message": "In my WIP patch, I think we have to handle such xfail lists per \"$dir\".\nFor instance if we have failures in both gas and ld, on try #0, we\u0027ll flag them,\nthen on try #1, we want to compare gas failures with gas failures of try #0, not gas+ld failures.\nOtherwise we\u0027ll have a shorter list, and need try #2.\n",
+      "revId": "1f4d1130ec7da3e5b3b8c32d4219df5ddc1f65b4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
