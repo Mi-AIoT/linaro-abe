@@ -16,6 +16,24 @@
       "message": "In my WIP patch, I think we have to handle such xfail lists per \"$dir\".\nFor instance if we have failures in both gas and ld, on try #0, we\u0027ll flag them,\nthen on try #1, we want to compare gas failures with gas failures of try #0, not gas+ld failures.\nOtherwise we\u0027ll have a shorter list, and need try #2.\n",
       "revId": "1f4d1130ec7da3e5b3b8c32d4219df5ddc1f65b4",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7029c501_4af76df5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T08:28:16Z",
+      "side": 1,
+      "message": "I think we need to take a step back to cleanly implement iterative testing of GCC.  Looking at https://review.linaro.org/c/toolchain/abe/+/43526/9/lib/make.sh , we have \"retry make check\" loop inside of \"dirs/tools\" loop.  Therefore, we can run 2 iterations of gas testing, and them 3 iterations of ld testing.  I think this is wrong.\n\nInstead, we should have \"retry make check\" loop at top level, and then run \"make check\" for dirs/tools in the inner loop.  The list of dirs/tools for the current iteration of testing should be computed from the list of $tool/$exp specifications.  This will enable us to run both gas and ld testsuites on the first iteration, then re-run parts of gas and ld testsuites on the second iteration, and then re-run parts of ld testsuite on the third iteration.",
+      "parentUuid": "d7d5c899_22fc513e",
+      "revId": "1f4d1130ec7da3e5b3b8c32d4219df5ddc1f65b4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
