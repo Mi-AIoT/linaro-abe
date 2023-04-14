@@ -36,6 +36,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68802027_d7396bde",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-14T15:55:45Z",
+      "side": 1,
+      "message": "But, I think, the culprit is https://ci.linaro.org/job/tcwg-reboot/4075/ .\nWe need to improve tcwg-reboot to wait for other containers to finish.  [1] has something similar.\n[1] https://git.linaro.org/ci/job/configs.git/tree/tcwg-update-containers.yaml.in#n191",
+      "parentUuid": "668ba96a_35549ad6",
+      "revId": "914c062a100373a95362c39f6c66f8e251f8a8cf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8fefdac_6e958d84",
