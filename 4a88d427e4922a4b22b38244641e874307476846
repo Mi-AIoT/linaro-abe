@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6308029_7075d0f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-15T04:20:27Z",
+      "side": 1,
+      "message": "This looks good to me, thanks!\nJust a few minor comments to consider, which can simplify the code a bit.",
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4f0e46_edbbfb04",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-15T04:20:27Z",
+      "side": 1,
+      "message": "Typo: \"tool\".",
+      "range": {
+        "startLine": 1117,
+        "startChar": 63,
+        "endLine": 1117,
+        "endChar": 66
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bede41_587992f1",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1150,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-15T04:20:27Z",
+      "side": 1,
+      "message": "It\u0027s unnecessary to clear failed_exps here, since it\u0027s not read anywhere else.",
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8da8c4dd_a8ad8db7",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-15T04:20:27Z",
+      "side": 1,
+      "message": "There are many loops to keep in mind here so I could be wrong, but wouldn\u0027t it be equivalent to directly set $more_tests_to_try here?\n\nI suspect that $more_tests_to_try_for_dir is unnecessary.",
+      "range": {
+        "startLine": 1261,
+        "startChar": 2,
+        "endLine": 1261,
+        "endChar": 27
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "014205a1_5c300763",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-15T04:20:27Z",
+      "side": 1,
+      "message": "I think the variable $failed_exps_for_dir is unnecessary. You could read directly into failed_exps here.",
+      "range": {
+        "startLine": 1272,
+        "startChar": 15,
+        "endLine": 1272,
+        "endChar": 34
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
