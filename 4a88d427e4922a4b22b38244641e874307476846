@@ -117,6 +117,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba757f6_c623ad5f",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1150,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-17T13:54:10Z",
+      "side": 1,
+      "message": "You are right. I was missing the fact that it is reset in an outer loop but accumulates in an inner loop.",
+      "parentUuid": "458be2af_af966caa",
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da8c4dd_a8ad8db7",
@@ -201,6 +219,30 @@
       "side": 1,
       "message": "I don\u0027t think so (just tried, it does not work, unless I missed something). IIUC, the issue is that readarray overwrites the array contents, and does not add to it.\nBut for instance we want failed_exps to contain the .exp files for both ld and gas.",
       "parentUuid": "014205a1_5c300763",
+      "range": {
+        "startLine": 1272,
+        "startChar": 15,
+        "endLine": 1272,
+        "endChar": 34
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e01755dd_10774c7d",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-17T13:54:10Z",
+      "side": 1,
+      "message": "Ah, indeed. I missed that $failed_exps is set to empty in an outer loop but accumulates exps in an inner loop. Thanks for trying and for the explanation. Sorry for the trouble.",
+      "parentUuid": "265da3e0_d2676628",
       "range": {
         "startLine": 1272,
         "startChar": 15,
