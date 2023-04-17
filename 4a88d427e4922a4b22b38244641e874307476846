@@ -18,6 +18,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d69279c_a4af8796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-17T07:44:19Z",
+      "side": 1,
+      "message": "Thanks for the comments, here is an updated version.\n",
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b4f0e46_edbbfb04",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-04-15T04:20:27Z",
       "side": 1,
       "message": "Typo: \"tool\".",
+      "range": {
+        "startLine": 1117,
+        "startChar": 63,
+        "endLine": 1117,
+        "endChar": 66
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93b4f835_280c1fcf",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-17T07:44:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b4f0e46_edbbfb04",
       "range": {
         "startLine": 1117,
         "startChar": 63,
@@ -58,6 +99,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "458be2af_af966caa",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1150,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-17T07:44:19Z",
+      "side": 1,
+      "message": "It is updated line 1282, so we need to clear it before building the updated list (which will be used again line 1136 during the next outer iteration.",
+      "parentUuid": "31bede41_587992f1",
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8da8c4dd_a8ad8db7",
@@ -81,6 +140,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a2095f3_cf53175d",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1261,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-17T07:44:19Z",
+      "side": 1,
+      "message": "You are right, this is an artifact of a previous version of my patch were I used the opposite logic.",
+      "parentUuid": "8da8c4dd_a8ad8db7",
+      "range": {
+        "startLine": 1261,
+        "startChar": 2,
+        "endLine": 1261,
+        "endChar": 27
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "014205a1_5c300763",
@@ -94,6 +177,30 @@
       "writtenOn": "2023-04-15T04:20:27Z",
       "side": 1,
       "message": "I think the variable $failed_exps_for_dir is unnecessary. You could read directly into failed_exps here.",
+      "range": {
+        "startLine": 1272,
+        "startChar": 15,
+        "endLine": 1272,
+        "endChar": 34
+      },
+      "revId": "4a88d427e4922a4b22b38244641e874307476846",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265da3e0_d2676628",
+        "filename": "lib/make.sh",
+        "patchSetId": 4
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-17T07:44:19Z",
+      "side": 1,
+      "message": "I don\u0027t think so (just tried, it does not work, unless I missed something). IIUC, the issue is that readarray overwrites the array contents, and does not add to it.\nBut for instance we want failed_exps to contain the .exp files for both ld and gas.",
+      "parentUuid": "014205a1_5c300763",
       "range": {
         "startLine": 1272,
         "startChar": 15,
