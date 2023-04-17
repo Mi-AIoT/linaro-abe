@@ -46,6 +46,30 @@
       },
       "revId": "f3df33541bafd0b11e6769b0679dcd3d3299624d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e40a8688_90cc859b",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-04-17T07:42:16Z",
+      "side": 1,
+      "message": "If you don\u0027t plan to merge this, then abandon it, please.",
+      "parentUuid": "10cf92ae_8f175da5",
+      "range": {
+        "startLine": 225,
+        "startChar": 1,
+        "endLine": 225,
+        "endChar": 10
+      },
+      "revId": "f3df33541bafd0b11e6769b0679dcd3d3299624d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
