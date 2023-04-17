@@ -872,17 +872,7 @@ tool_to_dirs()
 	    esac
 	    ;;
 	gcc)
-	    case "$tool" in
-		gcc|g++|gfortran|obj*)
-		    dirs="/gcc"
-		    ;;
-		lib*)
-		    dirs="/"
-		    ;;
-		any)
-		    dirs="/"
-		    ;;
-	    esac
+	    dirs="/"
 	    ;;
 	gdb|glibc)
 	    case "$tool" in
@@ -926,12 +916,13 @@ tool_to_check()
     case $component in
 	gcc)
 	    case $tool in
-		gcc|g++|gfortran|obj*)
-		    check="check-$tool"
-		    ;;
-		lib*)
-		    check="check-target-$tool"
-		    ;;
+		any) ;;
+		libstdc++) check="check-target-libstdc++-v3" ;;
+		lib*) check="check-target-$tool" ;;
+		gcc) check="check-gcc-c" ;;
+		g++) check="check-gcc-c++" ;;
+		gfortran) check="check-gcc-fortran" ;;
+		*) check="check-gcc-$tool" ;;
 	    esac
 	    ;;
 	gdb)
