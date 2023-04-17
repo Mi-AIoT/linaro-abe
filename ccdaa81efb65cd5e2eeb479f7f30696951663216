@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aca7574_a6bea191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-04-17T14:14:26Z",
+      "side": 1,
+      "message": "LGTM\nToo bad GCC has these discrepancies between tool name/Makefile target/documentation :-(\n",
+      "revId": "ccdaa81efb65cd5e2eeb479f7f30696951663216",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
