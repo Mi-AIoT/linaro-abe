@@ -16,6 +16,23 @@
       "message": "LGTM\nToo bad GCC has these discrepancies between tool name/Makefile target/documentation :-(\n",
       "revId": "ccdaa81efb65cd5e2eeb479f7f30696951663216",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a795de7_b36b5823",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-04-17T14:17:45Z",
+      "side": 1,
+      "message": "Looks good to me, assuming the GCC make targets are correct.\nI think that using one top level directory for all tools is simpler so this is a good direction to go, IMHO.",
+      "revId": "ccdaa81efb65cd5e2eeb479f7f30696951663216",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
