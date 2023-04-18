@@ -1112,6 +1112,11 @@ EOF
     local try=0
     local more_tests_to_try=true
 
+    # The key in sums is the original name of the sum file, and the value is a list of
+    # the sum files produced by all the testsuite runs, separated by ';' (because bash
+    # doesn't support arrays within arrays).
+    local -A sums=()
+
     while $more_tests_to_try; do
 
     more_tests_to_try=false
@@ -1181,10 +1186,6 @@ EOF
 		make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component}\""
 	    fi
 
-	    # The key in sums is the original name of the sum file, and the value is a list of
-	    # the sum files produced by all the testsuite runs, separated by ';' (because bash
-	    # doesn't support arrays within arrays).
-	    local -A sums=()
 	    # This loop is executed only once, we keep the loop
 	    # structure to make early exits easier.
 	    while true; do
@@ -1274,23 +1275,23 @@ EOF
 		break
 	    done # inner while true
 
-	    # If there was more than one try, we need to merge all the sum files.
-	    if [ $try -ne 0 ]; then
-		for sum in "${!sums[@]}"; do
-		    local -a sum_tries=()
-		    IFS=";" read -r -a sum_tries <<< "${sums[$sum]}"
-
-		    "${gcc_compare_results}/compare_dg_tests.pl" \
-			--merge -o "${sum}" "${sum_tries[@]}"
-		done
-	    fi
-
     done # $dir loop
     done # $tool loop
 	    notice "Ran the testsuite $((try + 1)) times."
             record_test_results "${component}" $2
 	    try=$((try + 1))
     done # outer while true
+
+    # If there was more than one try, we need to merge all the sum files.
+    if [ $try -ne 0 ]; then
+	for sum in "${!sums[@]}"; do
+	    local -a sum_tries=()
+	    IFS=";" read -r -a sum_tries <<< "${sums[$sum]}"
+
+	    "${gcc_compare_results}/compare_dg_tests.pl" \
+		--merge -o "${sum}" "${sum_tries[@]}"
+	done
+    fi
 
     rm "$xfails" "$orig_fails" "$new_fails"
     if [ "$flaky_failures" = "" ]; then
