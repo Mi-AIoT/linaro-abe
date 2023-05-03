@@ -1074,10 +1074,12 @@ make_check()
     local validate_failures="$testsuite_mgmt/validate_failures.py"
 
     # Prepare temporary fail files
-    local xfails orig_fails flaky_fails new_fails
+    local xfails orig_fails flaky_fails new_fails prev_fails flaky_passes
     xfails=$(mktemp)
     orig_fails=$(mktemp)
     new_fails=$(mktemp)
+    prev_fails=$(mktemp)
+    flaky_passes=$(mktemp)
 
     if [ "$flaky_failures" = "" ]; then
 	flaky_fails=$(mktemp)
@@ -1213,6 +1215,8 @@ EOF
 
 		local -a failed_exps_for_dir=()
 
+		cp "$new_fails" "$prev_fails"
+
 		"$validate_failures" \
 		    --manifest="$xfails" \
 		    --build_dir="${builddir}$dir" \
@@ -1223,6 +1227,24 @@ EOF
 		# the sum and log files.
 		if [ $try -eq 0 ] && [ $res -eq 0 ]; then
 		    break
+		fi
+
+		# Detect FAIL->PASS flaky tests.
+		# On $try == 0 this is a NOP ($prev_fails is empty).
+		# On $try >= 1 this adds to the flaky list the tests that
+		# have FAILed in $try-1, but PASSed in $try.
+		local res2
+		"$validate_failures" \
+		    --manifest="$prev_fails" \
+		    --build_dir="${builddir}$dir" \
+		    --inverse_match \
+		    --verbosity=1 \
+		    > "$flaky_passes" &
+		res2=0 && wait $! || res2=$?
+		if [ $res2 = 2 ]; then
+		    cat "$flaky_passes" >> "$flaky_fails"
+		    notice "Detected new FAIL->PASS flaky tests:"
+		    cat "$flaky_passes"
 		fi
 
 		# Find sum and log files from this try and save them.
@@ -1256,7 +1278,7 @@ EOF
 		    cat "$new_fails" > "$orig_fails"
 		else
 		    cat "$new_fails" >> "$flaky_fails"
-		    notice "These failures require an additional testsuite run:"
+		    notice "Detected new PASS->FAIL flaky tests:"
 		    cat "$new_fails"
 		fi
 
@@ -1293,7 +1315,7 @@ EOF
 	done
     fi
 
-    rm "$xfails" "$orig_fails" "$new_fails"
+    rm "$xfails" "$orig_fails" "$new_fails" "$prev_fails" "$flaky_passes"
     if [ "$flaky_failures" = "" ]; then
 	rm "$flaky_fails"
     fi
