@@ -1085,6 +1085,16 @@ make_check()
 	flaky_fails="$flaky_failures"
     fi
 
+    # These are used to detect FAIL->PASS flaky tests; these do not affect
+    # logic of whether we need to re-run testsuites another try.
+    # - $prev_try_fails -- all fails from $try-1
+    # - $new_try_fails -- fails from current $try, which will become
+    #                     $prev_try_fails when we finish $try round.
+    local prev_try_fails new_try_fails flaky_passes
+    prev_try_fails=$(mktemp)
+    new_try_fails=$(mktemp)
+    flaky_passes=$(mktemp)
+
     # $xfails is the top-level file, which is passed as manifest to
     # validate_failures.  It includes
     # - optional "$expected_failures", which is passed on the command line,
@@ -1225,6 +1235,24 @@ EOF
 		    break
 		fi
 
+		# Detect FAIL->PASS flaky tests.
+		# On $try == 0 this is a NOP ($prev_try_fails is empty).
+		# On $try >= 1 this adds to the flaky list the tests that
+		# have FAILed in $try-1, but PASSed in $try.
+		local res2
+		"$validate_failures" \
+		    --manifest="$prev_try_fails" \
+		    --build_dir="${builddir}$dir" \
+		    --inverse_match \
+		    --verbosity=1 \
+		    > "$flaky_passes" &
+		res2=0 && wait $! || res2=$?
+		if [ $res2 = 2 ]; then
+		    cat "$flaky_passes" >> "$flaky_fails"
+		    notice "Detected new FAIL->PASS flaky tests:"
+		    cat "$flaky_passes"
+		fi
+
 		# Find sum and log files from this try and save them.
 		local log sum
 		while IFS= read -r -d '' sum; do
@@ -1256,9 +1284,10 @@ EOF
 		    cat "$new_fails" > "$orig_fails"
 		else
 		    cat "$new_fails" >> "$flaky_fails"
-		    notice "These failures require an additional testsuite run:"
+		    notice "Detected new PASS->FAIL flaky tests:"
 		    cat "$new_fails"
 		fi
+		cat "$new_fails" >> "$new_try_fails"
 
 		readarray -t failed_exps_for_dir \
 			  < <(awk '/^Running .* \.\.\./ { print $2 }' < "$new_fails")
@@ -1280,6 +1309,8 @@ EOF
 	    notice "Ran the testsuite $((try + 1)) times."
             record_test_results "${component}" $2
 	    try=$((try + 1))
+	    cp "$new_try_fails" "$prev_try_fails"
+	    echo > "$new_try_fails"
     done # outer while true
 
     # If there was more than one try, we need to merge all the sum files.
@@ -1297,6 +1328,7 @@ EOF
     if [ "$flaky_failures" = "" ]; then
 	rm "$flaky_fails"
     fi
+    rm "$prev_try_fails" "$new_try_fails" "$flaky_passes"
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
