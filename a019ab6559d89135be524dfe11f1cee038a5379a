@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be32ff7c_9d546879",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-05-04T09:39:39Z",
+      "side": 1,
+      "message": "Isn\u0027t $prev_fails always equal to $new_fail because of line 1218 above?",
+      "range": {
+        "startLine": 1233,
+        "startChar": 0,
+        "endLine": 1233,
+        "endChar": 54
+      },
+      "revId": "a019ab6559d89135be524dfe11f1cee038a5379a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
