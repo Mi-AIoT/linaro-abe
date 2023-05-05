@@ -46,6 +46,30 @@
       },
       "revId": "a019ab6559d89135be524dfe11f1cee038a5379a",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dcd1bba_4ca3a31f",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-05-05T14:32:51Z",
+      "side": 1,
+      "message": "I see you have removed this copy at line 1218 from patch #2 (otherwise I think prev_fails was never empty unlike what the comment says)",
+      "parentUuid": "ba54670e_44c19bd1",
+      "range": {
+        "startLine": 1233,
+        "startChar": 0,
+        "endLine": 1233,
+        "endChar": 54
+      },
+      "revId": "a019ab6559d89135be524dfe11f1cee038a5379a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
