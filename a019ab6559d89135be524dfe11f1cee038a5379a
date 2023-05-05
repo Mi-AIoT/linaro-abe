@@ -22,6 +22,30 @@
       },
       "revId": "a019ab6559d89135be524dfe11f1cee038a5379a",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba54670e_44c19bd1",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-05T11:04:29Z",
+      "side": 1,
+      "message": "$prev_fails is $new_fails from previous iteration.  In line 1224 we overwrite $new_fails.",
+      "parentUuid": "be32ff7c_9d546879",
+      "range": {
+        "startLine": 1233,
+        "startChar": 0,
+        "endLine": 1233,
+        "endChar": 54
+      },
+      "revId": "a019ab6559d89135be524dfe11f1cee038a5379a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
