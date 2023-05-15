@@ -1129,188 +1129,188 @@ EOF
 
     while $more_tests_to_try; do
 
-    more_tests_to_try=false
+	more_tests_to_try=false
 
-    # Compute which user-supplied runtestflags are relevant to this
-    # component, and the corresponding directories and "make check"
-    # targets.
-    local -A tool2dirs=()
-    local -A tool2exps=()
-    local -A tool2check=()
-    local flag
+	# Compute which user-supplied runtestflags are relevant to this
+	# component, and the corresponding directories and "make check"
+	# targets.
+	local -A tool2dirs=()
+	local -A tool2exps=()
+	local -A tool2check=()
+	local flag
 
-    for flag in "${failed_exps[@]}"
-    do
-	local flag_tool=$(exp_to_tool "$component" "$flag")
-	local this_runtestflag=${flag#*:}
-	# If flag_tool is not relevant to the current component, do
-	# not include it in the list.
-	if [ "$flag_tool" = "none" ]; then
-	    continue
-	fi
-
-	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
-	tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
-	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
-    done
-    failed_exps=()
-
-    # If the user supplied both non-prefixed and prefixed runtestflags
-    # that would apply to this component/tool, skip the non-prefixed
-    # ones.
-
-    # For instance with execute.exp g++:compile.exp, we would have to
-    # run the g++ tests twice:
-    # - from toplevel, using 'make check'
-    # - from /gcc, using 'make check-g++'
-    # and the second call would overwrite g++.sum
-    if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
-	warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
-	warning "Prefix these runtestflags with $component: if relevant"
-	unset tool2dirs[any]
-	unset tool2exps[any]
-	unset tool2check[any]
-    fi
-
-    # If no runtestflag was supplied or none applies to this
-    # component, use the defaults
-    if [ ${#tool2dirs[@]} -eq 0 ]; then
-	flag_tool="any"
-	tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
-	tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
-    fi
-
-    local result=0
-    local tool
-
-    for tool in "${!tool2dirs[@]}"; do
-	local dirs="${tool2dirs[$tool]}"
-	local dir
-
-	for dir in $dirs; do
-	    local runtestflags_for_component="${tool2exps[$tool]}"
-	    local check_targets="${tool2check[$tool]}"
-
-	    local make_runtestflags=""
-	    if [ -n "${runtestflags_for_component}" ]; then
-		make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component}\""
+	for flag in "${failed_exps[@]}"
+	do
+	    local flag_tool=$(exp_to_tool "$component" "$flag")
+	    local this_runtestflag=${flag#*:}
+	    # If flag_tool is not relevant to the current component, do
+	    # not include it in the list.
+	    if [ "$flag_tool" = "none" ]; then
+		continue
 	    fi
 
-	    # This loop is executed only once, we keep the loop
-	    # structure to make early exits easier.
-	    while true; do
-		if [ $try -ne 0 ]; then
-		    notice "Starting testsuite run #$((try + 1))."
+	    tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+	    tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
+	    tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+	done
+	failed_exps=()
+
+	# If the user supplied both non-prefixed and prefixed runtestflags
+	# that would apply to this component/tool, skip the non-prefixed
+	# ones.
+
+	# For instance with execute.exp g++:compile.exp, we would have to
+	# run the g++ tests twice:
+	# - from toplevel, using 'make check'
+	# - from /gcc, using 'make check-g++'
+	# and the second call would overwrite g++.sum
+	if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
+	    warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
+	    warning "Prefix these runtestflags with $component: if relevant"
+	    unset tool2dirs[any]
+	    unset tool2exps[any]
+	    unset tool2check[any]
+	fi
+
+	# If no runtestflag was supplied or none applies to this
+	# component, use the defaults
+	if [ ${#tool2dirs[@]} -eq 0 ]; then
+	    flag_tool="any"
+	    tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+	    tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+	fi
+
+	local result=0
+	local tool
+
+	for tool in "${!tool2dirs[@]}"; do
+	    local dirs="${tool2dirs[$tool]}"
+	    local dir
+
+	    for dir in $dirs; do
+		local runtestflags_for_component="${tool2exps[$tool]}"
+		local check_targets="${tool2check[$tool]}"
+
+		local make_runtestflags=""
+		if [ -n "${runtestflags_for_component}" ]; then
+		    make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component}\""
 		fi
 
-		# Testsuites (I'm looking at you, GDB), can leave stray processes
-		# that inherit stdout of below "make check".  Therefore, if we pipe
-		# stdout to "tee", then "tee" will wait on output from these
-		# processes for forever and ever.  We workaround this by redirecting
-		# output to a file that can be "tail -f"'ed, if desired.
-		# A proper fix would be to fix dejagnu to not pass parent stdout
-		# to testcase processes.
-		dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
-		if [ $? != 0 ]; then
-		    # Make is told to ignore errors, so it's really not supposed to fail.
-		    warning "make ${check_targets} -C ${builddir}$dir failed."
-		    result=1
+		# This loop is executed only once, we keep the loop
+		# structure to make early exits easier.
+		while true; do
+		    if [ $try -ne 0 ]; then
+			notice "Starting testsuite run #$((try + 1))."
+		    fi
+
+		    # Testsuites (I'm looking at you, GDB), can leave stray processes
+		    # that inherit stdout of below "make check".  Therefore, if we pipe
+		    # stdout to "tee", then "tee" will wait on output from these
+		    # processes for forever and ever.  We workaround this by redirecting
+		    # output to a file that can be "tail -f"'ed, if desired.
+		    # A proper fix would be to fix dejagnu to not pass parent stdout
+		    # to testcase processes.
+		    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
+		    if [ $? != 0 ]; then
+			# Make is told to ignore errors, so it's really not supposed to fail.
+			warning "make ${check_targets} -C ${builddir}$dir failed."
+			result=1
+			break
+		    elif ! $rerun_failed_tests; then
+			# No need to try again.
+			break
+		    fi
+
+		    local -a failed_exps_for_dir=()
+
+		    "$validate_failures" \
+			--manifest="$xfails" \
+			--build_dir="${builddir}$dir" \
+			--verbosity=1 \
+			> "$new_fails" &
+		    res=0 && wait $! || res=$?
+		    # If it was the first try and it didn't fail, we don't need to save copies of
+		    # the sum and log files.
+		    if [ $try -eq 0 ] && [ $res -eq 0 ]; then
+			break
+		    fi
+
+		    # Detect FAIL->PASS flaky tests.
+		    # On $try == 0 this is a NOP ($prev_try_fails is empty).
+		    # On $try >= 1 this adds to the flaky list the tests that
+		    # have FAILed in $try-1, but PASSed in $try.
+		    local res2
+		    "$validate_failures" \
+			--manifest="$prev_try_fails" \
+			--build_dir="${builddir}$dir" \
+			--inverse_match \
+			--verbosity=1 \
+			> "$flaky_passes" &
+		    res2=0 && wait $! || res2=$?
+		    if [ $res2 = 2 ]; then
+			cat "$flaky_passes" >> "$flaky_fails"
+			notice "Detected new FAIL->PASS flaky tests:"
+			cat "$flaky_passes"
+		    fi
+
+		    # Find sum and log files from this try and save them.
+		    local log sum
+		    while IFS= read -r -d '' sum; do
+			log="${sum/.sum/.log}"
+
+			mv "$sum" "${sum}.${try}"
+			mv "$log" "${log}.${try}"
+
+			sums["$sum"]+="${sum}.${try};"
+		    done < <(find "${builddir}$dir" -name '*.sum' \
+				  -not -path '*/gdb/testsuite/outputs/*' -print0)
+
+		    if [ $res -eq 0 ]; then
+			# No failures. We can stop now.
+			break
+		    elif [ $res -ne 2 ]; then
+			# Exit code 2 means that the result comparison found regressions.
+			#
+			# Exit code 1 means that the script has failed to process .sum files. This
+			# likely indicates malformed or very unusual results.
+			warning "$validate_failures had an unexpected error."
+			result=1
+			break
+		    fi
+		    more_tests_to_try=true
+
+		    # Incorporate this try's failures into $xfails
+		    if [ $try = 0 ]; then
+			cat "$new_fails" > "$orig_fails"
+		    else
+			cat "$new_fails" >> "$flaky_fails"
+			notice "Detected new PASS->FAIL flaky tests:"
+			cat "$new_fails"
+		    fi
+		    cat "$new_fails" >> "$new_try_fails"
+
+		    readarray -t failed_exps_for_dir \
+			      < <(awk '/^Running .* \.\.\./ { print $2 }' < "$new_fails")
+
+		    if [ ${#failed_exps_for_dir[@]} -eq 0 ]; then
+			# This indicates a bug in validate_failures.py.
+			warning "$validate_failures failed: it reported regressions but no failed tests."
+			result=1
+			break;
+		    fi
+
+		    failed_exps+=("${failed_exps_for_dir[@]}")
+
 		    break
-		elif ! $rerun_failed_tests; then
-		    # No need to try again.
-		    break
-		fi
+		done # inner while true
 
-		local -a failed_exps_for_dir=()
-
-		"$validate_failures" \
-		    --manifest="$xfails" \
-		    --build_dir="${builddir}$dir" \
-		    --verbosity=1 \
-		    > "$new_fails" &
-		res=0 && wait $! || res=$?
-		# If it was the first try and it didn't fail, we don't need to save copies of
-		# the sum and log files.
-		if [ $try -eq 0 ] && [ $res -eq 0 ]; then
-		    break
-		fi
-
-		# Detect FAIL->PASS flaky tests.
-		# On $try == 0 this is a NOP ($prev_try_fails is empty).
-		# On $try >= 1 this adds to the flaky list the tests that
-		# have FAILed in $try-1, but PASSed in $try.
-		local res2
-		"$validate_failures" \
-		    --manifest="$prev_try_fails" \
-		    --build_dir="${builddir}$dir" \
-		    --inverse_match \
-		    --verbosity=1 \
-		    > "$flaky_passes" &
-		res2=0 && wait $! || res2=$?
-		if [ $res2 = 2 ]; then
-		    cat "$flaky_passes" >> "$flaky_fails"
-		    notice "Detected new FAIL->PASS flaky tests:"
-		    cat "$flaky_passes"
-		fi
-
-		# Find sum and log files from this try and save them.
-		local log sum
-		while IFS= read -r -d '' sum; do
-		    log="${sum/.sum/.log}"
-
-		    mv "$sum" "${sum}.${try}"
-		    mv "$log" "${log}.${try}"
-
-		    sums["$sum"]+="${sum}.${try};"
-		done < <(find "${builddir}$dir" -name '*.sum' \
-			      -not -path '*/gdb/testsuite/outputs/*' -print0)
-
-		if [ $res -eq 0 ]; then
-		    # No failures. We can stop now.
-		    break
-		elif [ $res -ne 2 ]; then
-		    # Exit code 2 means that the result comparison found regressions.
-		    #
-		    # Exit code 1 means that the script has failed to process .sum files. This
-		    # likely indicates malformed or very unusual results.
-		    warning "$validate_failures had an unexpected error."
-		    result=1
-		    break
-		fi
-		more_tests_to_try=true
-
-		# Incorporate this try's failures into $xfails
-		if [ $try = 0 ]; then
-		    cat "$new_fails" > "$orig_fails"
-		else
-		    cat "$new_fails" >> "$flaky_fails"
-		    notice "Detected new PASS->FAIL flaky tests:"
-		    cat "$new_fails"
-		fi
-		cat "$new_fails" >> "$new_try_fails"
-
-		readarray -t failed_exps_for_dir \
-			  < <(awk '/^Running .* \.\.\./ { print $2 }' < "$new_fails")
-
-		if [ ${#failed_exps_for_dir[@]} -eq 0 ]; then
-		    # This indicates a bug in validate_failures.py.
-		    warning "$validate_failures failed: it reported regressions but no failed tests."
-		    result=1
-		    break;
-		fi
-
-		failed_exps+=("${failed_exps_for_dir[@]}")
-
-		break
-	    done # inner while true
-
-    done # $dir loop
-    done # $tool loop
-	    notice "Ran the testsuite $((try + 1)) times."
-            record_test_results "${component}" $2
-	    try=$((try + 1))
-	    cp "$new_try_fails" "$prev_try_fails"
-	    echo > "$new_try_fails"
+	    done # $dir loop
+	done # $tool loop
+	notice "Ran the testsuite $((try + 1)) times."
+        record_test_results "${component}" $2
+	try=$((try + 1))
+	cp "$new_try_fails" "$prev_try_fails"
+	echo > "$new_try_fails"
     done # outer while true
 
     # If there was more than one try, we need to merge all the sum files.
