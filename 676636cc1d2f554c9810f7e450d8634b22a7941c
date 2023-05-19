@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "465dd90b_282db4f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-19T13:07:58Z",
+      "side": 1,
+      "message": "Small suggestion, but fine with me either way.",
+      "revId": "676636cc1d2f554c9810f7e450d8634b22a7941c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0843e18d_0df830f7",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-19T13:07:58Z",
+      "side": 1,
+      "message": "Is this because of the mv in line 1288? Perhaps it would be cleaner to change that line to test whether a log file exists before trying to move it?",
+      "range": {
+        "startLine": 1233,
+        "startChar": 4,
+        "endLine": 1233,
+        "endChar": 9
+      },
+      "revId": "676636cc1d2f554c9810f7e450d8634b22a7941c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d42907_67c1361b",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1241,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-19T13:07:58Z",
+      "side": 1,
+      "message": "I like how this simplifies other find commands further down. Nice improvement.",
+      "revId": "676636cc1d2f554c9810f7e450d8634b22a7941c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
