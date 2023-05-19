@@ -1216,7 +1216,33 @@ EOF
 			warning "make ${check_targets} -C ${builddir}$dir failed."
 			result=1
 			break
-		    elif ! $rerun_failed_tests; then
+		    fi
+
+		    # Remove glibc's subdir-tests.sum and gdb's test .sum
+		    # files to avoid confusing validate_failures.py
+		    case "$component" in
+			glibc)
+			    find "${builddir}$dir" -name subdir-tests.sum \
+				 -delete
+			    # Note that "find -name one -o name two -delete"
+			    # will delete only "two".
+			    find "${builddir}$dir" -name subdir-xtests.sum \
+				 -delete
+			    # Rename glibc's sum file and create a dummy .log
+			    if [ -f "${builddir}$dir/tests.sum" ]; then
+				touch "${builddir}$dir/tests.log"
+			    fi
+			    if [ -f "${builddir}$dir/xtests.sum" ]; then
+				touch "${builddir}$dir/xtests.log"
+			    fi
+			    ;;
+			gdb)
+			    find "${builddir}$dir" \
+				 -path '*/gdb/testsuite/outputs/*.sum' -delete
+			    ;;
+		    esac
+
+		    if ! $rerun_failed_tests; then
 			# No need to try again.
 			break
 		    fi
@@ -1262,8 +1288,7 @@ EOF
 			mv "$log" "${log}.${try}"
 
 			sums["$sum"]+="${sum}.${try};"
-		    done < <(find "${builddir}$dir" -name '*.sum' \
-				  -not -path '*/gdb/testsuite/outputs/*' -print0)
+		    done < <(find "${builddir}$dir" -name '*.sum' -print0)
 
 		    if [ $res -eq 0 ]; then
 			# No failures. We can stop now.
@@ -1552,23 +1577,12 @@ record_sum_files()
     local component=$1
     local builddir="$(get_component_builddir ${component} $2)"
 
-    local findargs=
-    case "${component}" in
-       gdb)
-           # skip partial .sum files in gdb results
-           findargs="-name *.sum -not -path */gdb/testsuite/outputs/*"
-           ;;
-       *)
-           findargs="-name *.sum"
-           ;;
-    esac
-         
-
     local time=$SECONDS
     # files/directories could have any weird chars in, so take care to
     # escape them correctly
     local i
-    for i in $(find "${builddir}" ${findargs} -exec bash -c 'printf "$@"' bash '%q\n' {} ';' ); do
+    for i in $(find "${builddir}" -name "*.sum" -exec \
+		    bash -c 'printf "$@"' bash '%q\n' {} ';' ); do
 	record_artifact "dj_sum_${component}${2:+-$2}" "${i}"
     done
     notice "Finding artifacts took $((SECONDS-time)) seconds"
