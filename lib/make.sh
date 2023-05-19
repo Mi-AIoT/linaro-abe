@@ -929,7 +929,7 @@ tool_to_check()
 	    check="check-gdb"
 	    ;;
 	glibc)
-	    check="check run-built-tests=no"
+	    check="xcheck"
 	    ;;
     esac
 
