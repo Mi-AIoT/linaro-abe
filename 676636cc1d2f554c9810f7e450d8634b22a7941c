@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8c809d59_8e18c6d4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1233,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-19T13:48:09Z",
+      "side": 1,
+      "message": "Yes, this is because our testing logic expects foo.log for every foo.sum file, which is always the case for dejagnu.  IMO, it\u0027s better for \"mv\" to fail and leave a trace if an [expected] .log file is missing.",
+      "parentUuid": "0843e18d_0df830f7",
+      "range": {
+        "startLine": 1233,
+        "startChar": 4,
+        "endLine": 1233,
+        "endChar": 9
+      },
+      "revId": "676636cc1d2f554c9810f7e450d8634b22a7941c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "69d42907_67c1361b",
         "filename": "lib/make.sh",
         "patchSetId": 1
