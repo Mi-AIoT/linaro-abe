@@ -1188,12 +1188,15 @@ EOF
 	    local dir
 
 	    for dir in $dirs; do
-		local runtestflags_for_component="${tool2exps[$tool]}"
 		local check_targets="${tool2check[$tool]}"
 
 		local make_runtestflags=""
-		if [ -n "${runtestflags_for_component}" ]; then
-		    make_runtestflags="RUNTESTFLAGS=\"${runtestflags_for_component}\""
+		if [ -n "${tool2exps[$tool]}" ]; then
+		    if [ "$component" != "glibc" ]; then
+			make_runtestflags="RUNTESTFLAGS=\"${tool2exps[$tool]}\""
+		    else
+			make_runtestflags="subdirs=\"${tool2exps[$tool]}\""
+		    fi
 		fi
 
 		# This loop is executed only once, we keep the loop
@@ -1201,6 +1204,11 @@ EOF
 		while true; do
 		    if [ $try -ne 0 ]; then
 			notice "Starting testsuite run #$((try + 1))."
+		    fi
+
+		    if [ "$component" = "glibc" ]; then
+			notice "Preparing glibc for testing"
+			dryrun "make tests-clean ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
 		    fi
 
 		    # Testsuites (I'm looking at you, GDB), can leave stray processes
