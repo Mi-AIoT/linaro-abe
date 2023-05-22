@@ -16,6 +16,23 @@
       "message": "ok as far as I understand",
       "revId": "19abfc7d3595f04ef1bfa1f6717c019e9fefc610",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe7737b_b51df40c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-05-22T15:25:13Z",
+      "side": 1,
+      "message": "The failures from tcwg-abe-test are:\n- lack of aarch32 machine for cross-testing at the moment (the APM we use is down)\n- (expected) change in manifest since the configure options for qemu change.\n",
+      "revId": "19abfc7d3595f04ef1bfa1f6717c019e9fefc610",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
