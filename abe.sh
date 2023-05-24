@@ -209,6 +209,9 @@ OPTIONS
 
   --flaky-failures <path>
                 File to be populated with flaky testsuite failures.
+                If the file is not empty, the contents will be used
+                as known/baseline flaky failures, and after the run
+                the file will contain only newly detected flaky tests.
 
   --force	Force download packages and force rebuild packages.
 
