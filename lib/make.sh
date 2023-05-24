@@ -1076,41 +1076,87 @@ make_check()
     local validate_failures="$testsuite_mgmt/validate_failures.py"
 
     # Prepare temporary fail files
-    local xfails orig_fails flaky_fails new_fails
-    xfails=$(mktemp)
-    orig_fails=$(mktemp)
+    local new_fails new_passes baseline_flaky known_flaky_and_fails new_flaky
     new_fails=$(mktemp)
+    new_passes=$(mktemp)
+    baseline_flaky=$(mktemp)
+    known_flaky_and_fails=$(mktemp)
 
     if [ "$flaky_failures" = "" ]; then
-	flaky_fails=$(mktemp)
+	new_flaky=$(mktemp)
     else
-	flaky_fails="$flaky_failures"
+	notice "Using flaky fails file $flaky_failures"
+	cp "$flaky_failures" "$baseline_flaky"
+	true > "$flaky_failures"
+	new_flaky="$flaky_failures"
     fi
 
-    # These are used to detect FAIL->PASS flaky tests; these do not affect
-    # logic of whether we need to re-run testsuites another try.
-    # - $prev_try_fails -- all fails from $try-1
-    # - $new_try_fails -- fails from current $try, which will become
-    #                     $prev_try_fails when we finish $try round.
-    local prev_try_fails new_try_fails flaky_passes
+    local prev_try_fails new_try_fails dir_fails
     prev_try_fails=$(mktemp)
     new_try_fails=$(mktemp)
-    flaky_passes=$(mktemp)
+    dir_fails=$(mktemp)
 
-    # $xfails is the top-level file, which is passed as manifest to
-    # validate_failures.  It includes
-    # - optional "$expected_failures", which is passed on the command line,
-    # - $orig_fails, which is populated on the $try==0 test run,
-    # - $flaky_fails, which is populated on $try>0 test runs.
     if [ "$expected_failures" != "" ]; then
-	cat >> "$xfails" <<EOF
-@include $expected_failures
-EOF
 	notice "Using expected fails file $expected_failures"
+	cp "$expected_failures" "$prev_try_fails"
     fi
-    cat >> "$xfails" <<EOF
-@include $orig_fails
-@include $flaky_fails
+
+    # Construct the initial $known_flaky_and_fails list.
+    #
+    # For the first iteration (try #0) we expect fails, passes and flaky tests
+    # to be the same as in provided $expected_failures and $flaky_failures.
+    # We will exit after running the testsuites for a single try if we
+    # do not see any difference in test results compared to the provided
+    # baseline.
+    #
+    # However, if we do see a difference in results after the first try, then
+    # we will iterate testing until we see no difference between $try-1 and
+    # $try results.  Each difference between $try-1 and $try will be recorded
+    # in $new_flaky list, so with every try we will ignore more and more
+    # tests as flaky.  We collect failures of the current try in $new_try_fails,
+    # which then becomes $prev_try_fails on $try+1.
+    #
+    # Note that we generate $prev_try_fails and $new_try_fails without regard
+    # for flaky tests.  Therefore, $validate_failures that generate $new_fails
+    # and $new_passes will see same tests with and without flaky attributes.
+    # Validate_failure uses python sets to store results, so the first entry
+    # wins.  Therefore, we need to put lists of flaky tests before lists of
+    # expected fails -- $prev_try_fails.
+    #
+    # This approach is designed to shake out both PASS->FAIL and FAIL->PASS
+    # tests equally well.  It is motivated by libstdc++ test
+    # FAIL: 29_atomics/atomic/compare_exchange_padding.cc execution test
+    # which almost always fails on armhf, but passes once in a blue moon.
+    #
+    # The previous approach handled flaky tests that PASS or FAIL with
+    # comparable frequencies or the tests that mostly PASS, but sometimes
+    # FAIL.  It could not, however, handle flaky tests that mostly FAIL,
+    # but sometimes PASS.
+    #
+    # With the previous approach, when the test passed on the first try,
+    # we didn't trigger additional iterations, and didn't have a chance
+    # to mark the test as flaky.  Therefore this build would see a progression
+    # on this test, and the next build would detect this test as a regression.
+    # It would try to bisect it, which would not detect a regression
+    # (because the test almost always fails), and the bisect would trigger
+    # a refresh-baseline build, which would re-add the test into expected
+    # failures.  Then things will be quiet for a while until the test passes
+    # again.  The only chance for us to mark the test as flaky with
+    # the previous approach would be to get very lucky and have the test
+    # pass (which is very rare) while having another test fail in the same
+    # libstdc++:libstdc++-dg/conformance.exp testsuite.
+    #
+    # With the new approach when this test [rarely] passes, we will detect
+    # that in comparison with "$known_flaky_and_fails", and, if $try==0, trigger
+    # another iteration of testing to confirm stability of the new PASS.
+    # The test will fail on the next iteration, and we will add it to
+    # $new_flaky list.  If the test passes during $try!=0, we will add it
+    # to the $new_flaky list immediately.
+
+    cat > "$known_flaky_and_fails" <<EOF
+@include $new_flaky
+@include $baseline_flaky
+@include $prev_try_fails
 EOF
 
     # Example iterations with binutils component:
@@ -1204,9 +1250,7 @@ EOF
 		# This loop is executed only once, we keep the loop
 		# structure to make early exits easier.
 		while true; do
-		    if [ $try -ne 0 ]; then
-			notice "Starting testsuite run #$((try + 1))."
-		    fi
+		    notice "Starting testsuite run #$try."
 
 		    if [ "$component" = "glibc" ]; then
 			notice "Preparing glibc for testing"
@@ -1259,35 +1303,41 @@ EOF
 
 		    local -a failed_exps_for_dir=()
 
+		    # Check if we have any new FAILs or PASSes compared
+		    # to the previous iteration.
+		    # Detect PASS->FAIL flaky tests.
+		    local res_new_fails
 		    "$validate_failures" \
-			--manifest="$xfails" \
+			--manifest="$known_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 \
 			> "$new_fails" &
-		    res=0 && wait $! || res=$?
-		    # If it was the first try and it didn't fail, we don't need to save copies of
-		    # the sum and log files.
-		    if [ $try -eq 0 ] && [ $res -eq 0 ]; then
+		    res_new_fails=0 && wait $! || res_new_fails=$?
+
+		    # Detect FAIL->PASS flaky tests.
+		    local res_new_passes
+		    "$validate_failures" \
+			--manifest="$known_flaky_and_fails" \
+			--build_dir="${builddir}$dir" \
+			--inverse_match --verbosity=1 \
+			> "$new_passes" &
+		    res_new_passes=0 && wait $! || res_new_passes=$?
+
+		    # If it was the first try and it didn't fail, we don't
+		    # need to save copies of the sum and log files.
+		    if [ $try = 0 ] \
+			   && [ $res_new_fails = 0 ] \
+			   && [ $res_new_passes = 0 ]; then
 			break
 		    fi
 
-		    # Detect FAIL->PASS flaky tests.
-		    # On $try == 0 this is a NOP ($prev_try_fails is empty).
-		    # On $try >= 1 this adds to the flaky list the tests that
-		    # have FAILed in $try-1, but PASSed in $try.
-		    local res2
+		    # Produce this dir's part of $new_try_fails, that will
+		    # become $prev_try_fails on the next iteration.
+		    local res_prev_fails
 		    "$validate_failures" \
-			--manifest="$prev_try_fails" \
-			--build_dir="${builddir}$dir" \
-			--inverse_match \
-			--verbosity=1 \
-			> "$flaky_passes" &
-		    res2=0 && wait $! || res2=$?
-		    if [ $res2 = 2 ]; then
-			cat "$flaky_passes" >> "$flaky_fails"
-			notice "Detected new FAIL->PASS flaky tests:"
-			cat "$flaky_passes"
-		    fi
+			--build_dir="${builddir}$dir" --produce_manifest \
+			--manifest="$dir_fails" --force --verbosity=1 &
+		    res_prev_fails=0 && wait $! || res_prev_fails=$?
 
 		    # Find sum and log files from this try and save them.
 		    local log sum
@@ -1300,32 +1350,63 @@ EOF
 			sums["$sum"]+="${sum}.${try};"
 		    done < <(find "${builddir}$dir" -name '*.sum' -print0)
 
-		    if [ $res -eq 0 ]; then
+		    if [ $res_new_fails = 0 ] \
+			   && [ $res_new_passes = 0 ]; then
 			# No failures. We can stop now.
 			break
-		    elif [ $res -ne 2 ]; then
-			# Exit code 2 means that the result comparison found regressions.
+		    elif [ $res_new_fails = 0 ] && [ $res_new_passes = 2 ] \
+			     && [ $res_prev_fails = 0 ]; then
+			:
+		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 0 ] \
+			     && [ $res_prev_fails = 0 ]; then
+			:
+		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 2 ] \
+			     && [ $res_prev_fails = 0 ]; then
+			:
+		    else
+			# Exit code 2 means that the result comparison
+			# found regressions.
 			#
-			# Exit code 1 means that the script has failed to process .sum files. This
-			# likely indicates malformed or very unusual results.
+			# Exit code 1 means that the script has failed
+			# to process .sum files. This likely indicates
+			# malformed or very unusual results.
 			warning "$validate_failures had an unexpected error."
 			result=1
 			break
 		    fi
 		    more_tests_to_try=true
 
-		    # Incorporate this try's failures into $xfails
-		    if [ $try = 0 ]; then
-			cat "$new_fails" > "$orig_fails"
-		    else
-			cat "$new_fails" >> "$flaky_fails"
-			notice "Detected new PASS->FAIL flaky tests:"
-			cat "$new_fails"
+		    if [ $try != 0 ]; then
+			# Incorporate this try's flaky tests into $new_flaky.
+			# This will make these tests appear in
+			# $known_flaky_and_fails for the next iteration.
+			if [ $res_new_fails = 2 ]; then
+			    # Prepend "flaky | " attribute to
+			    # the newly-detected flaky tests.
+			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
+				"$new_fails"
+
+			    cat "$new_fails" >> "$new_flaky"
+			    notice "Detected new PASS->FAIL flaky tests:"
+			    cat "$new_fails"
+			fi
+			if [ $res_new_passes = 2 ]; then
+			    # Prepend "flaky | " attribute to
+			    # the newly-detected flaky tests.
+			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
+				"$new_passes"
+
+			    cat "$new_passes" >> "$new_flaky"
+			    notice "Detected new FAIL->PASS flaky tests:"
+			    cat "$new_passes"
+			fi
 		    fi
-		    cat "$new_fails" >> "$new_try_fails"
+		    cat "$dir_fails" >> "$new_try_fails"
 
 		    readarray -t failed_exps_for_dir \
-			      < <(awk '/^Running .* \.\.\./ { print $2 }' < "$new_fails")
+                              < <(cat "$new_fails" "$new_passes" \
+				      | awk '/^Running .* \.\.\./ { print $2 }'\
+				      | sort -u)
 
 		    if [ ${#failed_exps_for_dir[@]} -eq 0 ]; then
 			# This indicates a bug in validate_failures.py.
@@ -1338,14 +1419,13 @@ EOF
 
 		    break
 		done # inner while true
-
 	    done # $dir loop
 	done # $tool loop
-	notice "Ran the testsuite $((try + 1)) times."
+	notice "Finished testsuite run #$try."
         record_test_results "${component}" $2
 	try=$((try + 1))
 	cp "$new_try_fails" "$prev_try_fails"
-	echo > "$new_try_fails"
+	true > "$new_try_fails"
     done # outer while true
 
     # If there was more than one try, we need to merge all the sum files.
@@ -1359,11 +1439,11 @@ EOF
 	done
     fi
 
-    rm "$xfails" "$orig_fails" "$new_fails"
+    rm "$new_fails" "$new_passes" "$baseline_flaky" "$known_flaky_and_fails"
     if [ "$flaky_failures" = "" ]; then
-	rm "$flaky_fails"
+	rm "$new_flaky"
     fi
-    rm "$prev_try_fails" "$new_try_fails" "$flaky_passes"
+    rm "$prev_try_fails" "$new_try_fails" "$dir_fails"
 
     if [ x"$ldso_bin" != x"" ] && $exec_tests; then
         rm -rf ${sysroots}/libc/etc/ld.so.cache
