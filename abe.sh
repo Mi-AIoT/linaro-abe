@@ -213,6 +213,11 @@ OPTIONS
                 as known/baseline flaky failures, and after the run
                 the file will contain only newly detected flaky tests.
 
+  --failures-expiration-date YYYYMMDD
+                Use provided date YYYYMMDD to decide whether entries in
+                provided --expected-failures and --flaky-failures lists
+                have expired or not.
+
   --force	Force download packages and force rebuild packages.
 
   --gcc-compare-results <dir>
@@ -984,6 +989,11 @@ while test $# -gt 0; do
 		build_failure
 	    fi
 	    flaky_failures="$2"
+	    shift
+	    ;;
+	--failures-expiration-date)
+	    check_directive failures-expiration-date "$2"
+	    failures_expiration_date="$2"
 	    shift
 	    ;;
 	--gcc-compare-results)
