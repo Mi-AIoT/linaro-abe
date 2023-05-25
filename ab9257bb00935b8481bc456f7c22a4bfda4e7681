@@ -69,6 +69,46 @@
       "parentUuid": "353696c1_e99743de",
       "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b025ec1_2c4f4b55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-25T21:05:10Z",
+      "side": 1,
+      "message": "Looks good, just a minor nit.",
+      "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea100f8_dc2d578b",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1106,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-25T21:05:10Z",
+      "side": 1,
+      "message": "Update with current option name \"--expiry_date\".",
+      "range": {
+        "startLine": 1106,
+        "startChar": 19,
+        "endLine": 1106,
+        "endChar": 38
+      },
+      "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
