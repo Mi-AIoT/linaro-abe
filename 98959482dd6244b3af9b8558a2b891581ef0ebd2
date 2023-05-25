@@ -18,6 +18,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8ef332_9296bdca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T06:34:23Z",
+      "side": 1,
+      "message": "Thanks for the ping, I missed your comment.  Now answered -- in short, it is a bug, but harmless.",
+      "parentUuid": "c3a5620f_c428d62e",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a09d8118_04bb1fa7",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d8479ee_7b1ce46c",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1088,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T06:34:23Z",
+      "side": 1,
+      "message": "Great question!  For this to work it requires changes to round-robin.sh:build_abe() to provide baseline flaky and baseline fails lists separately.  The new approach depends on discarding baseline fails after testing \"try #0\", but we want baseline flaky list to be ignored for all iterations.\n\nThe round-robin.sh:build_abe() changes are here: https://review.linaro.org/c/toolchain/jenkins-scripts/+/44303/22/round-robin.sh#401 .  I\u0027m testing them as part of pre-commit work.  Once tested, I\u0027ll post a separate patch for build_abe() changes.",
+      "parentUuid": "a09d8118_04bb1fa7",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f370e027_c9fc9769",
         "filename": "lib/make.sh",
         "patchSetId": 3
@@ -48,6 +84,24 @@
       "writtenOn": "2023-05-24T20:37:42Z",
       "side": 1,
       "message": "The baseline flaky tests are also in $expected_failures. $flaky_failures is used just as an output parameter.",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "422d8ace_b0f7a97f",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T06:34:23Z",
+      "side": 1,
+      "message": "After corresponding build_abe() changes, $expected_failures have no flaky tests.\n\nThis patch makes $flaky_failures a both input and output parameter; I could have added a new parameter, but it seems a fairly niche case, so I didn\u0027t bother.",
+      "parentUuid": "f370e027_c9fc9769",
       "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2df1f23_53f85c13",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T06:34:23Z",
+      "side": 1,
+      "message": "Sorry, I should have mentioned the required matching changes to build_abe().",
+      "parentUuid": "5b74612f_04df696e",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a36eb316_97fe4d34",
         "filename": "lib/make.sh",
         "patchSetId": 3
@@ -99,6 +171,24 @@
       "writtenOn": "2023-05-24T20:37:42Z",
       "side": 1,
       "message": "If a testcase.exp file contains one test that always fails, and one that is flaky, e.g.:\n\nRunning testcase.exp ...\nFAIL: This is a real failure\nFAIL: This is one is flaky\n\nWon\u0027t the lack of including $expected_failures cause the real failure to also be marked as flaky?",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fae8461b_7399c6ce",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T06:34:23Z",
+      "side": 1,
+      "message": "We add to the flaky list difference between $try-1 and $try for $try\u003e\u003d1.  As \"real failure\" always fails, it will never appear in the difference and will not be marked as flaky.",
+      "parentUuid": "a36eb316_97fe4d34",
       "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
