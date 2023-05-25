@@ -16,6 +16,23 @@
       "message": "Thiago, great review -- thanks!",
       "revId": "0f5ceea832f55231dab63332da68c6d3cf5935fc",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af139ae7_5575623d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T06:45:12Z",
+      "side": 1,
+      "message": "Christophe, great review as well!",
+      "revId": "0f5ceea832f55231dab63332da68c6d3cf5935fc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
