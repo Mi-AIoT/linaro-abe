@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ca94e4_ec86ce0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-05-25T15:38:37Z",
+      "side": 1,
+      "message": "OK.\nToo bad if the value does not comply with the expected format? Or maybe it\u0027s easy enough to add a sanity check?\n",
+      "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
