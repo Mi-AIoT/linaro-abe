@@ -106,6 +106,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b45106a_1fec2430",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-25T12:28:38Z",
+      "side": 1,
+      "message": "I agree it\u0027s ok to reuse $flaky_failures.",
+      "parentUuid": "422d8ace_b0f7a97f",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a158e6e_3cdef28b",
@@ -119,6 +137,24 @@
       "writtenOn": "2023-05-24T20:37:42Z",
       "side": 1,
       "message": "Looking at validate_failures.py:CompareResults(), the flaky attribute in a line just causes it to be ignored from the manifest file so it doesn\u0027t matter whether it repeats a result without the flaky attribute, and it also doesn\u0027t matter whether it appears before or after the same result without the flaky attribute.",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "890fed8f_50e87cd1",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1141,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-25T12:28:38Z",
+      "side": 1,
+      "message": "This explanation wasn\u0027t correct. The actual relevant code is TestResult.__eq__() as you clarified.",
+      "parentUuid": "1a158e6e_3cdef28b",
       "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
@@ -158,6 +194,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc028989_c1a9aaa2",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-25T12:28:38Z",
+      "side": 1,
+      "message": "No problem, thanks for the clarification.",
+      "parentUuid": "c2df1f23_53f85c13",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a36eb316_97fe4d34",
@@ -189,6 +243,24 @@
       "side": 1,
       "message": "We add to the flaky list difference between $try-1 and $try for $try\u003e\u003d1.  As \"real failure\" always fails, it will never appear in the difference and will not be marked as flaky.",
       "parentUuid": "a36eb316_97fe4d34",
+      "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddef17df_4151e1e0",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1400,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-05-25T12:28:38Z",
+      "side": 1,
+      "message": "Thanks for the clarification.\n\nI see that in patchset 9 there\u0027s a $prev_try_fails so the real failure will appear in it. That makes things easier to follow.",
+      "parentUuid": "fae8461b_7399c6ce",
       "revId": "98959482dd6244b3af9b8558a2b891581ef0ebd2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
