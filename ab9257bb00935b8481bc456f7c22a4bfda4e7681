@@ -16,6 +16,41 @@
       "message": "OK.\nToo bad if the value does not comply with the expected format? Or maybe it\u0027s easy enough to add a sanity check?\n",
       "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "353696c1_e99743de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T16:37:34Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you mean.\nThe date format is checked by validate_failures.py and ABE\u0027s job is just to pass it through.",
+      "parentUuid": "43ca94e4_ec86ce0b",
+      "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3567b235_a2523bc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-25T16:37:34Z",
+      "side": 1,
+      "message": "Testing failed due to cross-testing board being offline.",
+      "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
