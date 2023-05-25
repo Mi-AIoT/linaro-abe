@@ -51,6 +51,24 @@
       "message": "Testing failed due to cross-testing board being offline.",
       "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9101fda_f839aad2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-05-25T20:54:42Z",
+      "side": 1,
+      "message": "Indeed, I saw the other patch later, so that\u0027s OK.",
+      "parentUuid": "353696c1_e99743de",
+      "revId": "ab9257bb00935b8481bc456f7c22a4bfda4e7681",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
