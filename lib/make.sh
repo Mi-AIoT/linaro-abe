@@ -1101,6 +1101,11 @@ make_check()
 	cp "$expected_failures" "$prev_try_fails"
     fi
 
+    local -a expiry_date_opt=()
+    if [ "$failures_expiration_date" != "" ]; then
+	expiry_date_opt+=(--expiry_date "$failures_expiration_date")
+    fi
+
     # Construct the initial $known_flaky_and_fails list.
     #
     # For the first iteration (try #0) we expect fails, passes and flaky tests
@@ -1310,7 +1315,7 @@ EOF
 		    "$validate_failures" \
 			--manifest="$known_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
-			--verbosity=1 \
+			--verbosity=1 "${expiry_date_opt[@]}" \
 			> "$new_fails" &
 		    res_new_fails=0 && wait $! || res_new_fails=$?
 
@@ -1319,7 +1324,8 @@ EOF
 		    "$validate_failures" \
 			--manifest="$known_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
-			--inverse_match --verbosity=1 \
+			--verbosity=1 "${expiry_date_opt[@]}" \
+			--inverse_match \
 			> "$new_passes" &
 		    res_new_passes=0 && wait $! || res_new_passes=$?
 
