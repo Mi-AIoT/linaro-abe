@@ -48,6 +48,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f662fa09_ab0281c6",
+        "filename": "lib/make.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1361,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-26T06:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a84dfd12_9cfd0f37",
+      "range": {
+        "startLine": 1361,
+        "startChar": 0,
+        "endLine": 1361,
+        "endChar": 40
+      },
+      "revId": "bb609d23213724d0e6b7cd22d39d5aff89b20711",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "488080d9_7f9bdc34",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Because at $try\u003d\u003d0 we are comparing results to a previous build (with different sources), and can\u0027t judge about whether difference in results is due to test flakiness or due to changes in the sources.",
       "parentUuid": "488080d9_7f9bdc34",
+      "range": {
+        "startLine": 1379,
+        "startChar": 0,
+        "endLine": 1379,
+        "endChar": 28
+      },
+      "revId": "bb609d23213724d0e6b7cd22d39d5aff89b20711",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcb001ea_15915535",
+        "filename": "lib/make.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1379,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-05-26T06:33:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26b73837_f075173f",
       "range": {
         "startLine": 1379,
         "startChar": 0,
