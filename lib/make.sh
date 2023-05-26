@@ -929,9 +929,7 @@ tool_to_check()
 	    check="check-gdb"
 	    ;;
 	glibc)
-	    # Note that xcheck will trigger all of check's tests, but if any
-	    # of xcheck's tests fail, it will not generate check's tests.sum.
-	    check="xcheck check"
+	    check="check"
 	    ;;
     esac
 
