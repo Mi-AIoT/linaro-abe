@@ -1258,6 +1258,13 @@ EOF
 		    if [ "$component" = "glibc" ]; then
 			notice "Preparing glibc for testing"
 			dryrun "make tests-clean ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
+			# Glibc's tests-clean misses several tests,
+			# in particular, derivative malloc tests like
+			# *-hugetbl*, *-mcheck, etc.
+			# Remove artifacts of these ourselves so that we can
+			# detect them as flaky.
+			find "${builddir}$dir" -name "*.out" -delete
+			find "${builddir}$dir" -name "*.test-result" -delete
 		    fi
 
 		    # Testsuites (I'm looking at you, GDB), can leave stray processes
