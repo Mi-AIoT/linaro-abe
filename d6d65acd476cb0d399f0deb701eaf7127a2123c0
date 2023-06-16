@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aa1542b1_707faad4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-16T13:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09b34a0d_d52c2ab7",
+      "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1c9b1a7b_a92f74c5",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2023-06-16T13:24:23Z",
       "side": 1,
       "message": "Suggest moving this comment to inside the elif block, above line 425.\nIf preference is to keep it here, then suggest aligning the comment with the elif keyword.",
+      "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501234c7_f87a692f",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-16T13:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b2d87436_45cc60a1",
       "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
@@ -83,6 +119,24 @@
       "side": 1,
       "message": "Actually, looking at it again it\u0027s possible to simplify to a single grep command:\n\n    elif test \"$(echo ${target} | grep -c -e \u0027arm.*-eabi\u0027)\" -gt 0; then",
       "parentUuid": "956212a6_888eec54",
+      "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42abd8b_603f1d9a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-16T13:57:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aecf5e38_00128d9e",
       "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
