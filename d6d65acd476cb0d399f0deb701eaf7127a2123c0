@@ -67,6 +67,24 @@
       "message": "Suggest changing nested if block to an additional expression in the elif condition:\n\n    elif test \"$(echo ${target} | grep -c arm)\" -gt 0 \u0026\u0026\n\t test \"$(echo ${target} | grep -c -eabi)\" -gt 0; then",
       "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecf5e38_00128d9e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-06-16T13:27:36Z",
+      "side": 1,
+      "message": "Actually, looking at it again it\u0027s possible to simplify to a single grep command:\n\n    elif test \"$(echo ${target} | grep -c -e \u0027arm.*-eabi\u0027)\" -gt 0; then",
+      "parentUuid": "956212a6_888eec54",
+      "revId": "d6d65acd476cb0d399f0deb701eaf7127a2123c0",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
