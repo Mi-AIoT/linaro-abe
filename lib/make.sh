@@ -418,6 +418,11 @@ make_all()
 	    ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
 	fi
 	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
+    elif test "$(echo ${target} | grep -c -e 'arm.*-eabi')" -gt 0;  then
+	# The same applies to arm*-eabi, since we configure newlib
+	# with --disable-newlib-supplied-syscalls.
+	ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
+	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
     fi
 
     # Use pipes instead of /tmp for temporary files.
