@@ -33,6 +33,23 @@
       "message": "Looks good to me. Thanks!",
       "revId": "32b9a3f56ded32cede71a9b91d5d7d6bedd65f17",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "900959eb_c23d715c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-19T12:04:35Z",
+      "side": 1,
+      "message": "The failure in https://ci.linaro.org/job/tcwg-abe-test/1468/ is caused by expected difference in manifests wrt to newlib configure options.",
+      "revId": "32b9a3f56ded32cede71a9b91d5d7d6bedd65f17",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
