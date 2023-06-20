@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6812da0e_67ca1afa",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-06-20T09:13:36Z",
+      "side": 1,
+      "message": "I suggest that we contain changes in testing environment to a sub-shell, like we do here.\nMaybe add that sub-shell in check_all()?",
+      "range": {
+        "startLine": 325,
+        "startChar": 3,
+        "endLine": 327,
+        "endChar": 20
+      },
+      "revId": "6cb692dbbc36388cbad81a86320bc51652884f0f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
