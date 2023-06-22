@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8e991b_28554a6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-22T15:48:28Z",
+      "side": 1,
+      "message": "Hmmm between v1 and v2, I just added:\n+ # Like we do in build(), use a sub-shell.\n+ (\nand\n+ ) \u0026\n+    ret\u003d0 \u0026\u0026 wait $! || ret\u003d$?\nand re-indented, which seem to confuse gerrit....\n",
+      "revId": "d2c82d343241eabc0efe77a77f8958a9a2c7642d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
