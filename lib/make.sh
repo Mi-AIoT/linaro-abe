@@ -966,6 +966,16 @@ make_check()
     done
     notice "Making check in ${builddir}"
 
+    # We do not want to add $prefix/bin to PATH unconditionally during
+    # build (see commit 70da86d2b5a46cde72063b420086a68837ce5b89 for
+    # more context), but some testsuites (e.g. GCC) make use of
+    # $target-objdump and friends during testing. Make sure Dejagnu
+    # can find them.
+    # Like we do in build(), use a sub-shell.
+    (
+    export PATH="$local_builds/destdir/$build/bin:$PATH"
+    notice "Setting for $component${2:+ $2} check PATH=$PATH"
+
     local make_flags=""
     # Use pipes instead of /tmp for temporary files.
     if test x"${override_cflags}" != x -a x"$2" != x"stage2"; then
@@ -1494,6 +1504,7 @@ EOF
     fi
 
     return 0
+    )
 }
 
 make_clean()
