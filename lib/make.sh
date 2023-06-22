@@ -966,534 +966,546 @@ make_check()
     done
     notice "Making check in ${builddir}"
 
-    local make_flags=""
-    # Use pipes instead of /tmp for temporary files.
-    if test x"${override_cflags}" != x -a x"$2" != x"stage2"; then
-        make_flags="${make_flags} CFLAGS_FOR_BUILD=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"${override_cflags}\""
-    else
-        make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe\" CXXFLAGS_FOR_BUILD=\"-pipe\""
-    fi
+    # We do not want to add $prefix/bin to PATH unconditionally during
+    # build (see commit 70da86d2b5a46cde72063b420086a68837ce5b89 for
+    # more context), but some testsuites (e.g. GCC) make use of
+    # $target-objdump and friends during testing. Make sure Dejagnu
+    # can find them.
+    # Like we do in build(), use a sub-shell.
+    (
+	export PATH="$local_builds/destdir/$build/bin:$PATH"
+	notice "Setting for $component${2:+ $2} check PATH=$PATH"
 
-    if test x"${override_ldflags}" != x; then
-        make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"${override_ldflags}\""
-    fi
+	local make_flags=""
+	# Use pipes instead of /tmp for temporary files.
+	if test x"${override_cflags}" != x -a x"$2" != x"stage2"; then
+            make_flags="${make_flags} CFLAGS_FOR_BUILD=\"${override_cflags}\" CXXFLAGS_FOR_BUILD=\"${override_cflags}\""
+	else
+            make_flags="${make_flags} CFLAGS_FOR_BUILD=\"-pipe\" CXXFLAGS_FOR_BUILD=\"-pipe\""
+	fi
 
-    local -a runtestflags
+	if test x"${override_ldflags}" != x; then
+            make_flags="${make_flags} LDFLAGS_FOR_BUILD=\"${override_ldflags}\""
+	fi
 
-    # ??? No idea about the difference (if any?) between $runtest_flags
-    # ??? and $component_runtestflags.  Both seem to be empty all the time.
-    if [ x"$runtest_flags" != x"" ]; then
-        runtestflags+=("$runtest_flags")
-    fi
-    local component_runtestflags
-    component_runtestflags=$(get_component_runtestflags $component)
-    if [ x"$component_runtestflags" != x"" ]; then
-	runtestflags+=("$component_runtestflags")
-    fi
-    if [ ${#extra_runtestflags[@]} -ne 0 ]; then
-	runtestflags+=("${extra_runtestflags[@]}")
-    fi
+	local -a runtestflags
 
-    if test x"${parallel}" = x"yes"; then
-	case "${target}" in
-	    "$build"|*"-elf"*|armeb*) make_flags="${make_flags} -j ${cpus}" ;;
-	    # Double parallelization when running tests on remote boards
-	    # to avoid host idling when waiting for the board.
-	    *) make_flags="${make_flags} -j $((2*${cpus}))" ;;
+	# ??? No idea about the difference (if any?) between $runtest_flags
+	# ??? and $component_runtestflags.  Both seem to be empty all the time.
+	if [ x"$runtest_flags" != x"" ]; then
+            runtestflags+=("$runtest_flags")
+	fi
+	local component_runtestflags
+	component_runtestflags=$(get_component_runtestflags $component)
+	if [ x"$component_runtestflags" != x"" ]; then
+	    runtestflags+=("$component_runtestflags")
+	fi
+	if [ ${#extra_runtestflags[@]} -ne 0 ]; then
+	    runtestflags+=("${extra_runtestflags[@]}")
+	fi
+
+	if test x"${parallel}" = x"yes"; then
+	    case "${target}" in
+		"$build"|*"-elf"*|armeb*) make_flags="${make_flags} -j ${cpus}" ;;
+		# Double parallelization when running tests on remote boards
+		# to avoid host idling when waiting for the board.
+		*) make_flags="${make_flags} -j $((2*${cpus}))" ;;
+	    esac
+	fi
+
+	# load the config file for Linaro build farms
+	export DEJAGNU=${topdir}/config/linaro.exp
+
+	# Run tests
+	local checklog="${builddir}/check-${component}.log"
+	record_artifact "log_check_${component}" "${checklog}"
+
+	local exec_tests
+	exec_tests=false
+
+	case "$component" in
+	    binutils)
+		exec_tests=true
+		;;
+	    gcc)
+		exec_tests=true
+		;;
+	    gdb)
+		exec_tests=true
+		;;
+	    glibc)
+		;;
+	    newlib)
+		;;
 	esac
-    fi
 
-    # load the config file for Linaro build farms
-    export DEJAGNU=${topdir}/config/linaro.exp
+	local ldso_bin test_flags
 
-    # Run tests
-    local checklog="${builddir}/check-${component}.log"
-    record_artifact "log_check_${component}" "${checklog}"
-
-    local exec_tests
-    exec_tests=false
-
-    case "$component" in
-	binutils)
-	    exec_tests=true
-	    ;;
-	gcc)
-	    exec_tests=true
-	    ;;
-	gdb)
-	    exec_tests=true
-	    ;;
-	glibc)
-	    ;;
-	newlib)
-	    ;;
-    esac
-
-    local ldso_bin test_flags
-
-    ldso_bin=$(find_dynamic_linker false)
-    if [ x"$ldso_bin" != x"" ]; then
-	# If we have ld.so, then we should have a sysroot for testing.
-	# If we don't have ld.so, then we are testing native GCC against
-	# system libraries.
-	test_flags="$test_flags --sysroot=$sysroots/libc"
-    fi
-
-    local schroot_make_opts
-    if $exec_tests && [ x"$test_container" != x"" ]; then
-	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container" \
-							     "install")
-	if [ $? -ne 0 ]; then
-	    error "Cannot initialize sysroot on $test_container"
-	    return 1
-	fi
-    elif [ x"${build}" = x"${target}" ]; then
-	schroot_make_opts="ABE_TEST_CONTAINER=local"
+	ldso_bin=$(find_dynamic_linker false)
 	if [ x"$ldso_bin" != x"" ]; then
-	    local lib_path
-	    lib_path=$(dirname "$ldso_bin")
-	    # For testing on the local machine we need to link tests against
-	    # ldso and libraries in $sysroots/libc
-	    test_flags="$test_flags -Wl,-dynamic-linker=$ldso_bin"
-	    test_flags="$test_flags -Wl,-rpath=$lib_path"
+	    # If we have ld.so, then we should have a sysroot for testing.
+	    # If we don't have ld.so, then we are testing native GCC against
+	    # system libraries.
+	    test_flags="$test_flags --sysroot=$sysroots/libc"
 	fi
-    fi
 
-    if [ x"$ldso_bin" != x"" ] && $exec_tests; then
-        touch ${sysroots}/libc/etc/ld.so.cache
-        chmod 700 ${sysroots}/libc/etc/ld.so.cache
-    fi
+	local schroot_make_opts
+	if $exec_tests && [ x"$test_container" != x"" ]; then
+	    schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container" \
+								 "install")
+	    if [ $? -ne 0 ]; then
+		error "Cannot initialize sysroot on $test_container"
+		return 1
+	    fi
+	elif [ x"${build}" = x"${target}" ]; then
+	    schroot_make_opts="ABE_TEST_CONTAINER=local"
+	    if [ x"$ldso_bin" != x"" ]; then
+		local lib_path
+		lib_path=$(dirname "$ldso_bin")
+		# For testing on the local machine we need to link tests against
+		# ldso and libraries in $sysroots/libc
+		test_flags="$test_flags -Wl,-dynamic-linker=$ldso_bin"
+		test_flags="$test_flags -Wl,-rpath=$lib_path"
+	    fi
+	fi
 
-    # Remove existing logs so that rerunning make check results
-    # in a clean log.
-    if test -e ${checklog}; then
-	# This might or might not be called, depending on whether make_clean
-	# is called before make_check.  None-the-less it's better to be safe.
-	notice "Removing existing check-${component}.log: ${checklog}"
-	rm ${checklog}
-    fi
+	if [ x"$ldso_bin" != x"" ] && $exec_tests; then
+            touch ${sysroots}/libc/etc/ld.so.cache
+            chmod 700 ${sysroots}/libc/etc/ld.so.cache
+	fi
 
-    notice "Redirecting output from the testsuite to $checklog"
+	# Remove existing logs so that rerunning make check results
+	# in a clean log.
+	if test -e ${checklog}; then
+	    # This might or might not be called, depending on whether make_clean
+	    # is called before make_check.  None-the-less it's better to be safe.
+	    notice "Removing existing check-${component}.log: ${checklog}"
+	    rm ${checklog}
+	fi
 
-    local testsuite_mgmt="$gcc_compare_results/contrib/testsuite-management"
-    local validate_failures="$testsuite_mgmt/validate_failures.py"
+	notice "Redirecting output from the testsuite to $checklog"
 
-    # Prepare temporary fail files
-    local new_fails new_passes baseline_flaky known_flaky_and_fails new_flaky
-    new_fails=$(mktemp)
-    new_passes=$(mktemp)
-    baseline_flaky=$(mktemp)
-    known_flaky_and_fails=$(mktemp)
+	local testsuite_mgmt="$gcc_compare_results/contrib/testsuite-management"
+	local validate_failures="$testsuite_mgmt/validate_failures.py"
 
-    if [ "$flaky_failures" = "" ]; then
-	new_flaky=$(mktemp)
-    else
-	notice "Using flaky fails file $flaky_failures"
-	cp "$flaky_failures" "$baseline_flaky"
-	true > "$flaky_failures"
-	new_flaky="$flaky_failures"
-    fi
+	# Prepare temporary fail files
+	local new_fails new_passes baseline_flaky known_flaky_and_fails new_flaky
+	new_fails=$(mktemp)
+	new_passes=$(mktemp)
+	baseline_flaky=$(mktemp)
+	known_flaky_and_fails=$(mktemp)
 
-    local prev_try_fails new_try_fails dir_fails
-    prev_try_fails=$(mktemp)
-    new_try_fails=$(mktemp)
-    dir_fails=$(mktemp)
+	if [ "$flaky_failures" = "" ]; then
+	    new_flaky=$(mktemp)
+	else
+	    notice "Using flaky fails file $flaky_failures"
+	    cp "$flaky_failures" "$baseline_flaky"
+	    true > "$flaky_failures"
+	    new_flaky="$flaky_failures"
+	fi
 
-    if [ "$expected_failures" != "" ]; then
-	notice "Using expected fails file $expected_failures"
-	cp "$expected_failures" "$prev_try_fails"
-    fi
+	local prev_try_fails new_try_fails dir_fails
+	prev_try_fails=$(mktemp)
+	new_try_fails=$(mktemp)
+	dir_fails=$(mktemp)
 
-    local -a expiry_date_opt=()
-    if [ "$failures_expiration_date" != "" ]; then
-	expiry_date_opt+=(--expiry_date "$failures_expiration_date")
-    fi
+	if [ "$expected_failures" != "" ]; then
+	    notice "Using expected fails file $expected_failures"
+	    cp "$expected_failures" "$prev_try_fails"
+	fi
 
-    # Construct the initial $known_flaky_and_fails list.
-    #
-    # For the first iteration (try #0) we expect fails, passes and flaky tests
-    # to be the same as in provided $expected_failures and $flaky_failures.
-    # We will exit after running the testsuites for a single try if we
-    # do not see any difference in test results compared to the provided
-    # baseline.
-    #
-    # However, if we do see a difference in results after the first try, then
-    # we will iterate testing until we see no difference between $try-1 and
-    # $try results.  Each difference between $try-1 and $try will be recorded
-    # in $new_flaky list, so with every try we will ignore more and more
-    # tests as flaky.  We collect failures of the current try in $new_try_fails,
-    # which then becomes $prev_try_fails on $try+1.
-    #
-    # Note that we generate $prev_try_fails and $new_try_fails without regard
-    # for flaky tests.  Therefore, $validate_failures that generate $new_fails
-    # and $new_passes will see same tests with and without flaky attributes.
-    # Validate_failure uses python sets to store results, so the first entry
-    # wins.  Therefore, we need to put lists of flaky tests before lists of
-    # expected fails -- $prev_try_fails.
-    #
-    # This approach is designed to shake out both PASS->FAIL and FAIL->PASS
-    # tests equally well.  It is motivated by libstdc++ test
-    # FAIL: 29_atomics/atomic/compare_exchange_padding.cc execution test
-    # which almost always fails on armhf, but passes once in a blue moon.
-    #
-    # The previous approach handled flaky tests that PASS or FAIL with
-    # comparable frequencies or the tests that mostly PASS, but sometimes
-    # FAIL.  It could not, however, handle flaky tests that mostly FAIL,
-    # but sometimes PASS.
-    #
-    # With the previous approach, when the test passed on the first try,
-    # we didn't trigger additional iterations, and didn't have a chance
-    # to mark the test as flaky.  Therefore this build would see a progression
-    # on this test, and the next build would detect this test as a regression.
-    # It would try to bisect it, which would not detect a regression
-    # (because the test almost always fails), and the bisect would trigger
-    # a refresh-baseline build, which would re-add the test into expected
-    # failures.  Then things will be quiet for a while until the test passes
-    # again.  The only chance for us to mark the test as flaky with
-    # the previous approach would be to get very lucky and have the test
-    # pass (which is very rare) while having another test fail in the same
-    # libstdc++:libstdc++-dg/conformance.exp testsuite.
-    #
-    # With the new approach when this test [rarely] passes, we will detect
-    # that in comparison with "$known_flaky_and_fails", and, if $try==0, trigger
-    # another iteration of testing to confirm stability of the new PASS.
-    # The test will fail on the next iteration, and we will add it to
-    # $new_flaky list.  If the test passes during $try!=0, we will add it
-    # to the $new_flaky list immediately.
+	local -a expiry_date_opt=()
+	if [ "$failures_expiration_date" != "" ]; then
+	    expiry_date_opt+=(--expiry_date "$failures_expiration_date")
+	fi
 
-    cat > "$known_flaky_and_fails" <<EOF
+	# Construct the initial $known_flaky_and_fails list.
+	#
+	# For the first iteration (try #0) we expect fails, passes and flaky tests
+	# to be the same as in provided $expected_failures and $flaky_failures.
+	# We will exit after running the testsuites for a single try if we
+	# do not see any difference in test results compared to the provided
+	# baseline.
+	#
+	# However, if we do see a difference in results after the first try, then
+	# we will iterate testing until we see no difference between $try-1 and
+	# $try results.  Each difference between $try-1 and $try will be recorded
+	# in $new_flaky list, so with every try we will ignore more and more
+	# tests as flaky.  We collect failures of the current try in $new_try_fails,
+	# which then becomes $prev_try_fails on $try+1.
+	#
+	# Note that we generate $prev_try_fails and $new_try_fails without regard
+	# for flaky tests.  Therefore, $validate_failures that generate $new_fails
+	# and $new_passes will see same tests with and without flaky attributes.
+	# Validate_failure uses python sets to store results, so the first entry
+	# wins.  Therefore, we need to put lists of flaky tests before lists of
+	# expected fails -- $prev_try_fails.
+	#
+	# This approach is designed to shake out both PASS->FAIL and FAIL->PASS
+	# tests equally well.  It is motivated by libstdc++ test
+	# FAIL: 29_atomics/atomic/compare_exchange_padding.cc execution test
+	# which almost always fails on armhf, but passes once in a blue moon.
+	#
+	# The previous approach handled flaky tests that PASS or FAIL with
+	# comparable frequencies or the tests that mostly PASS, but sometimes
+	# FAIL.  It could not, however, handle flaky tests that mostly FAIL,
+	# but sometimes PASS.
+	#
+	# With the previous approach, when the test passed on the first try,
+	# we didn't trigger additional iterations, and didn't have a chance
+	# to mark the test as flaky.  Therefore this build would see a progression
+	# on this test, and the next build would detect this test as a regression.
+	# It would try to bisect it, which would not detect a regression
+	# (because the test almost always fails), and the bisect would trigger
+	# a refresh-baseline build, which would re-add the test into expected
+	# failures.  Then things will be quiet for a while until the test passes
+	# again.  The only chance for us to mark the test as flaky with
+	# the previous approach would be to get very lucky and have the test
+	# pass (which is very rare) while having another test fail in the same
+	# libstdc++:libstdc++-dg/conformance.exp testsuite.
+	#
+	# With the new approach when this test [rarely] passes, we will detect
+	# that in comparison with "$known_flaky_and_fails", and, if $try==0, trigger
+	# another iteration of testing to confirm stability of the new PASS.
+	# The test will fail on the next iteration, and we will add it to
+	# $new_flaky list.  If the test passes during $try!=0, we will add it
+	# to the $new_flaky list immediately.
+
+	cat > "$known_flaky_and_fails" <<EOF
 @include $new_flaky
 @include $baseline_flaky
 @include $prev_try_fails
 EOF
 
-    # Example iterations with binutils component:
-    # try#0 runtestflags=""  -> tools=(any) dirs=(/binutils /gas /ld)
-    #   detect failures in both gas and ld
-    # try#1 runtestflags="gas:gas.exp ld:ld.exp" -> tools=(gas ld)  dirs=(/gas /ld)
-    #   we need different lists of xfails/flaky tests for each tool/dir,
-    #   otherwise we'll think that ld has gas' failures as flaky ld tests.
+	# Example iterations with binutils component:
+	# try#0 runtestflags=""  -> tools=(any) dirs=(/binutils /gas /ld)
+	#   detect failures in both gas and ld
+	# try#1 runtestflags="gas:gas.exp ld:ld.exp" -> tools=(gas ld)  dirs=(/gas /ld)
+	#   we need different lists of xfails/flaky tests for each tool/dir,
+	#   otherwise we'll think that ld has gas' failures as flaky ld tests.
 
-    local -a failed_exps=(${runtestflags[@]})
-    local try=0
-    local more_tests_to_try=true
+	local -a failed_exps=(${runtestflags[@]})
+	local try=0
+	local more_tests_to_try=true
 
-    # The key in sums is the original name of the sum file, and the value is a list of
-    # the sum files produced by all the testsuite runs, separated by ';' (because bash
-    # doesn't support arrays within arrays).
-    local -A sums=()
+	# The key in sums is the original name of the sum file, and the value is a list of
+	# the sum files produced by all the testsuite runs, separated by ';' (because bash
+	# doesn't support arrays within arrays).
+	local -A sums=()
 
-    while $more_tests_to_try; do
+	while $more_tests_to_try; do
 
-	more_tests_to_try=false
+	    more_tests_to_try=false
 
-	# Compute which user-supplied runtestflags are relevant to this
-	# component, and the corresponding directories and "make check"
-	# targets.
-	local -A tool2dirs=()
-	local -A tool2exps=()
-	local -A tool2check=()
-	local flag
+	    # Compute which user-supplied runtestflags are relevant to this
+	    # component, and the corresponding directories and "make check"
+	    # targets.
+	    local -A tool2dirs=()
+	    local -A tool2exps=()
+	    local -A tool2check=()
+	    local flag
 
-	for flag in "${failed_exps[@]}"
-	do
-	    local flag_tool=$(exp_to_tool "$component" "$flag")
-	    local this_runtestflag=${flag#*:}
-	    # If flag_tool is not relevant to the current component, do
-	    # not include it in the list.
-	    if [ "$flag_tool" = "none" ]; then
-		continue
-	    fi
-
-	    tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
-	    tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
-	    tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
-	done
-	failed_exps=()
-
-	# If the user supplied both non-prefixed and prefixed runtestflags
-	# that would apply to this component/tool, skip the non-prefixed
-	# ones.
-
-	# For instance with execute.exp g++:compile.exp, we would have to
-	# run the g++ tests twice:
-	# - from toplevel, using 'make check'
-	# - from /gcc, using 'make check-g++'
-	# and the second call would overwrite g++.sum
-	if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
-	    warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
-	    warning "Prefix these runtestflags with $component: if relevant"
-	    unset tool2dirs[any]
-	    unset tool2exps[any]
-	    unset tool2check[any]
-	fi
-
-	# If no runtestflag was supplied or none applies to this
-	# component, use the defaults
-	if [ ${#tool2dirs[@]} -eq 0 ]; then
-	    flag_tool="any"
-	    tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
-	    tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
-	fi
-
-	local result=0
-	local tool
-
-	for tool in "${!tool2dirs[@]}"; do
-	    local dirs="${tool2dirs[$tool]}"
-	    local dir
-
-	    for dir in $dirs; do
-		local check_targets="${tool2check[$tool]}"
-
-		local make_runtestflags=""
-		if [ -n "${tool2exps[$tool]}" ]; then
-		    if [ "$component" != "glibc" ]; then
-			make_runtestflags="RUNTESTFLAGS=\"${tool2exps[$tool]}\""
-		    else
-			make_runtestflags="subdirs=\"${tool2exps[$tool]}\""
-		    fi
+	    for flag in "${failed_exps[@]}"
+	    do
+		local flag_tool=$(exp_to_tool "$component" "$flag")
+		local this_runtestflag=${flag#*:}
+		# If flag_tool is not relevant to the current component, do
+		# not include it in the list.
+		if [ "$flag_tool" = "none" ]; then
+		    continue
 		fi
 
-		# This loop is executed only once, we keep the loop
-		# structure to make early exits easier.
-		while true; do
-		    notice "Starting testsuite run #$try."
+		tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+		tool2exps["$flag_tool"]="${tool2exps["$flag_tool"]} $this_runtestflag"
+		tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+	    done
+	    failed_exps=()
 
-		    if [ "$component" = "glibc" ]; then
-			notice "Preparing glibc for testing"
-			dryrun "make tests-clean ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
-			# Glibc's tests-clean misses several tests,
-			# in particular, derivative malloc tests like
-			# *-hugetbl*, *-mcheck, etc.
-			# Remove artifacts of these ourselves so that we can
-			# detect them as flaky.
-			find "${builddir}$dir" -name "*.out" -delete
-			find "${builddir}$dir" -name "*.test-result" -delete
-		    fi
+	    # If the user supplied both non-prefixed and prefixed runtestflags
+	    # that would apply to this component/tool, skip the non-prefixed
+	    # ones.
 
-		    # Testsuites (I'm looking at you, GDB), can leave stray processes
-		    # that inherit stdout of below "make check".  Therefore, if we pipe
-		    # stdout to "tee", then "tee" will wait on output from these
-		    # processes for forever and ever.  We workaround this by redirecting
-		    # output to a file that can be "tail -f"'ed, if desired.
-		    # A proper fix would be to fix dejagnu to not pass parent stdout
-		    # to testcase processes.
-		    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
-		    if [ $? != 0 ]; then
-			# Make is told to ignore errors, so it's really not supposed to fail.
-			warning "make ${check_targets} -C ${builddir}$dir failed."
-			result=1
-			break
-		    fi
+	    # For instance with execute.exp g++:compile.exp, we would have to
+	    # run the g++ tests twice:
+	    # - from toplevel, using 'make check'
+	    # - from /gcc, using 'make check-g++'
+	    # and the second call would overwrite g++.sum
+	    if [ ${#tool2dirs[@]} -gt 1 ] && [ "${tool2dirs[any]}" != "" ]; then
+		warning "Ignoring ambiguous runtestflags for $component: ${tool2exps[any]}"
+		warning "Prefix these runtestflags with $component: if relevant"
+		unset tool2dirs[any]
+		unset tool2exps[any]
+		unset tool2check[any]
+	    fi
 
-		    # Remove glibc's subdir-tests.sum and gdb's test .sum
-		    # files to avoid confusing validate_failures.py
-		    case "$component" in
-			glibc)
-			    find "${builddir}$dir" -name subdir-tests.sum \
-				 -delete
-			    # Note that "find -name one -o name two -delete"
-			    # will delete only "two".
-			    find "${builddir}$dir" -name subdir-xtests.sum \
-				 -delete
-			    # Rename glibc's sum file and create a dummy .log
-			    if [ -f "${builddir}$dir/tests.sum" ]; then
-				touch "${builddir}$dir/tests.log"
-			    fi
-			    if [ -f "${builddir}$dir/xtests.sum" ]; then
-				touch "${builddir}$dir/xtests.log"
-			    fi
-			    ;;
-			gdb)
-			    find "${builddir}$dir" \
-				 -path '*/gdb/testsuite/outputs/*.sum' -delete
-			    ;;
-		    esac
+	    # If no runtestflag was supplied or none applies to this
+	    # component, use the defaults
+	    if [ ${#tool2dirs[@]} -eq 0 ]; then
+		flag_tool="any"
+		tool2dirs["$flag_tool"]=$(tool_to_dirs "$component" "$flag_tool")
+		tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
+	    fi
 
-		    if ! $rerun_failed_tests; then
-			# No need to try again.
-			break
-		    fi
+	    local result=0
+	    local tool
 
-		    local -a failed_exps_for_dir=()
+	    for tool in "${!tool2dirs[@]}"; do
+		local dirs="${tool2dirs[$tool]}"
+		local dir
 
-		    # Check if we have any new FAILs or PASSes compared
-		    # to the previous iteration.
-		    # Detect PASS->FAIL flaky tests.
-		    local res_new_fails
-		    "$validate_failures" \
-			--manifest="$known_flaky_and_fails" \
-			--build_dir="${builddir}$dir" \
-			--verbosity=1 "${expiry_date_opt[@]}" \
-			> "$new_fails" &
-		    res_new_fails=0 && wait $! || res_new_fails=$?
+		for dir in $dirs; do
+		    local check_targets="${tool2check[$tool]}"
 
-		    # Detect FAIL->PASS flaky tests.
-		    local res_new_passes
-		    "$validate_failures" \
-			--manifest="$known_flaky_and_fails" \
-			--build_dir="${builddir}$dir" \
-			--verbosity=1 "${expiry_date_opt[@]}" \
-			--inverse_match \
-			> "$new_passes" &
-		    res_new_passes=0 && wait $! || res_new_passes=$?
-
-		    # If it was the first try and it didn't fail, we don't
-		    # need to save copies of the sum and log files.
-		    if [ $try = 0 ] \
-			   && [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
-			break
-		    fi
-
-		    # Produce this dir's part of $new_try_fails, that will
-		    # become $prev_try_fails on the next iteration.
-		    local res_prev_fails
-		    "$validate_failures" \
-			--build_dir="${builddir}$dir" --produce_manifest \
-			--manifest="$dir_fails" --force --verbosity=1 &
-		    res_prev_fails=0 && wait $! || res_prev_fails=$?
-
-		    # Find sum and log files from this try and save them.
-		    local log sum
-		    while IFS= read -r -d '' sum; do
-			log="${sum/.sum/.log}"
-
-			mv "$sum" "${sum}.${try}"
-			mv "$log" "${log}.${try}"
-
-			sums["$sum"]+="${sum}.${try};"
-		    done < <(find "${builddir}$dir" -name '*.sum' -print0)
-
-		    if [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
-			# No failures. We can stop now.
-			break
-		    elif [ $res_new_fails = 0 ] && [ $res_new_passes = 2 ] \
-			     && [ $res_prev_fails = 0 ]; then
-			:
-		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 0 ] \
-			     && [ $res_prev_fails = 0 ]; then
-			:
-		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 2 ] \
-			     && [ $res_prev_fails = 0 ]; then
-			:
-		    else
-			# Exit code 2 means that the result comparison
-			# found regressions.
-			#
-			# Exit code 1 means that the script has failed
-			# to process .sum files. This likely indicates
-			# malformed or very unusual results.
-			warning "$validate_failures had an unexpected error."
-			result=1
-			break
-		    fi
-		    more_tests_to_try=true
-
-		    if [ $try != 0 ]; then
-			# Incorporate this try's flaky tests into $new_flaky.
-			# This will make these tests appear in
-			# $known_flaky_and_fails for the next iteration.
-			if [ $res_new_fails = 2 ]; then
-			    # Prepend "flaky | " attribute to
-			    # the newly-detected flaky tests.
-			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
-				"$new_fails"
-
-			    cat "$new_fails" >> "$new_flaky"
-			    notice "Detected new PASS->FAIL flaky tests:"
-			    cat "$new_fails"
-			fi
-			if [ $res_new_passes = 2 ]; then
-			    # Prepend "flaky | " attribute to
-			    # the newly-detected flaky tests.
-			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
-				"$new_passes"
-
-			    cat "$new_passes" >> "$new_flaky"
-			    notice "Detected new FAIL->PASS flaky tests:"
-			    cat "$new_passes"
+		    local make_runtestflags=""
+		    if [ -n "${tool2exps[$tool]}" ]; then
+			if [ "$component" != "glibc" ]; then
+			    make_runtestflags="RUNTESTFLAGS=\"${tool2exps[$tool]}\""
+			else
+			    make_runtestflags="subdirs=\"${tool2exps[$tool]}\""
 			fi
 		    fi
-		    cat "$dir_fails" >> "$new_try_fails"
 
-		    readarray -t failed_exps_for_dir \
-                              < <(cat "$new_fails" "$new_passes" \
-				      | awk '/^Running .* \.\.\./ { print $2 }'\
-				      | sort -u)
+		    # This loop is executed only once, we keep the loop
+		    # structure to make early exits easier.
+		    while true; do
+			notice "Starting testsuite run #$try."
 
-		    if [ ${#failed_exps_for_dir[@]} -eq 0 ]; then
-			# This indicates a bug in validate_failures.py.
-			warning "$validate_failures failed: it reported regressions but no failed tests."
-			result=1
-			break;
-		    fi
+			if [ "$component" = "glibc" ]; then
+			    notice "Preparing glibc for testing"
+			    dryrun "make tests-clean ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
+			    # Glibc's tests-clean misses several tests,
+			    # in particular, derivative malloc tests like
+			    # *-hugetbl*, *-mcheck, etc.
+			    # Remove artifacts of these ourselves so that we can
+			    # detect them as flaky.
+			    find "${builddir}$dir" -name "*.out" -delete
+			    find "${builddir}$dir" -name "*.test-result" -delete
+			fi
 
-		    failed_exps+=("${failed_exps_for_dir[@]}")
+			# Testsuites (I'm looking at you, GDB), can leave stray processes
+			# that inherit stdout of below "make check".  Therefore, if we pipe
+			# stdout to "tee", then "tee" will wait on output from these
+			# processes for forever and ever.  We workaround this by redirecting
+			# output to a file that can be "tail -f"'ed, if desired.
+			# A proper fix would be to fix dejagnu to not pass parent stdout
+			# to testcase processes.
+			dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
+			if [ $? != 0 ]; then
+			    # Make is told to ignore errors, so it's really not supposed to fail.
+			    warning "make ${check_targets} -C ${builddir}$dir failed."
+			    result=1
+			    break
+			fi
 
-		    break
-		done # inner while true
-	    done # $dir loop
-	done # $tool loop
-	notice "Finished testsuite run #$try."
-        record_test_results "${component}" $2
-	try=$((try + 1))
-	cp "$new_try_fails" "$prev_try_fails"
-	true > "$new_try_fails"
-    done # outer while true
+			# Remove glibc's subdir-tests.sum and gdb's test .sum
+			# files to avoid confusing validate_failures.py
+			case "$component" in
+			    glibc)
+				find "${builddir}$dir" -name subdir-tests.sum \
+				     -delete
+				# Note that "find -name one -o name two -delete"
+				# will delete only "two".
+				find "${builddir}$dir" -name subdir-xtests.sum \
+				     -delete
+				# Rename glibc's sum file and create a dummy .log
+				if [ -f "${builddir}$dir/tests.sum" ]; then
+				    touch "${builddir}$dir/tests.log"
+				fi
+				if [ -f "${builddir}$dir/xtests.sum" ]; then
+				    touch "${builddir}$dir/xtests.log"
+				fi
+				;;
+			    gdb)
+				find "${builddir}$dir" \
+				     -path '*/gdb/testsuite/outputs/*.sum' -delete
+				;;
+			esac
 
-    # If there was more than one try, we need to merge all the sum files.
-    if [ $try -ne 0 ]; then
-	for sum in "${!sums[@]}"; do
-	    local -a sum_tries=()
-	    IFS=";" read -r -a sum_tries <<< "${sums[$sum]}"
+			if ! $rerun_failed_tests; then
+			    # No need to try again.
+			    break
+			fi
 
-	    "${gcc_compare_results}/compare_dg_tests.pl" \
-		--merge -o "${sum}" "${sum_tries[@]}"
-	done
-    fi
+			local -a failed_exps_for_dir=()
 
-    rm "$new_fails" "$new_passes" "$baseline_flaky" "$known_flaky_and_fails"
-    if [ "$flaky_failures" = "" ]; then
-	rm "$new_flaky"
-    fi
-    rm "$prev_try_fails" "$new_try_fails" "$dir_fails"
+			# Check if we have any new FAILs or PASSes compared
+			# to the previous iteration.
+			# Detect PASS->FAIL flaky tests.
+			local res_new_fails
+			"$validate_failures" \
+			    --manifest="$known_flaky_and_fails" \
+			    --build_dir="${builddir}$dir" \
+			    --verbosity=1 "${expiry_date_opt[@]}" \
+			    > "$new_fails" &
+			res_new_fails=0 && wait $! || res_new_fails=$?
 
-    if [ x"$ldso_bin" != x"" ] && $exec_tests; then
-        rm -rf ${sysroots}/libc/etc/ld.so.cache
-    fi
+			# Detect FAIL->PASS flaky tests.
+			local res_new_passes
+			"$validate_failures" \
+			    --manifest="$known_flaky_and_fails" \
+			    --build_dir="${builddir}$dir" \
+			    --verbosity=1 "${expiry_date_opt[@]}" \
+			    --inverse_match \
+			    > "$new_passes" &
+			res_new_passes=0 && wait $! || res_new_passes=$?
 
-    if $exec_tests && [ x"$test_container" != x"" ]; then
-	print_make_opts_and_copy_sysroot "$test_container" "restore"
-	if [ $? -ne 0 ]; then
-	    error "Cannot restore sysroot on $test_container"
+			# If it was the first try and it didn't fail, we don't
+			# need to save copies of the sum and log files.
+			if [ $try = 0 ] \
+			       && [ $res_new_fails = 0 ] \
+			       && [ $res_new_passes = 0 ]; then
+			    break
+			fi
+
+			# Produce this dir's part of $new_try_fails, that will
+			# become $prev_try_fails on the next iteration.
+			local res_prev_fails
+			"$validate_failures" \
+			    --build_dir="${builddir}$dir" --produce_manifest \
+			    --manifest="$dir_fails" --force --verbosity=1 &
+			res_prev_fails=0 && wait $! || res_prev_fails=$?
+
+			# Find sum and log files from this try and save them.
+			local log sum
+			while IFS= read -r -d '' sum; do
+			    log="${sum/.sum/.log}"
+
+			    mv "$sum" "${sum}.${try}"
+			    mv "$log" "${log}.${try}"
+
+			    sums["$sum"]+="${sum}.${try};"
+			done < <(find "${builddir}$dir" -name '*.sum' -print0)
+
+			if [ $res_new_fails = 0 ] \
+			       && [ $res_new_passes = 0 ]; then
+			    # No failures. We can stop now.
+			    break
+			elif [ $res_new_fails = 0 ] && [ $res_new_passes = 2 ] \
+				 && [ $res_prev_fails = 0 ]; then
+			    :
+			elif [ $res_new_fails = 2 ] && [ $res_new_passes = 0 ] \
+				 && [ $res_prev_fails = 0 ]; then
+			    :
+			elif [ $res_new_fails = 2 ] && [ $res_new_passes = 2 ] \
+				 && [ $res_prev_fails = 0 ]; then
+			    :
+			else
+			    # Exit code 2 means that the result comparison
+			    # found regressions.
+			    #
+			    # Exit code 1 means that the script has failed
+			    # to process .sum files. This likely indicates
+			    # malformed or very unusual results.
+			    warning "$validate_failures had an unexpected error."
+			    result=1
+			    break
+			fi
+			more_tests_to_try=true
+
+			if [ $try != 0 ]; then
+			    # Incorporate this try's flaky tests into $new_flaky.
+			    # This will make these tests appear in
+			    # $known_flaky_and_fails for the next iteration.
+			    if [ $res_new_fails = 2 ]; then
+				# Prepend "flaky | " attribute to
+				# the newly-detected flaky tests.
+				sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
+				    "$new_fails"
+
+				cat "$new_fails" >> "$new_flaky"
+				notice "Detected new PASS->FAIL flaky tests:"
+				cat "$new_fails"
+			    fi
+			    if [ $res_new_passes = 2 ]; then
+				# Prepend "flaky | " attribute to
+				# the newly-detected flaky tests.
+				sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
+				    "$new_passes"
+
+				cat "$new_passes" >> "$new_flaky"
+				notice "Detected new FAIL->PASS flaky tests:"
+				cat "$new_passes"
+			    fi
+			fi
+			cat "$dir_fails" >> "$new_try_fails"
+
+			readarray -t failed_exps_for_dir \
+				  < <(cat "$new_fails" "$new_passes" \
+					  | awk '/^Running .* \.\.\./ { print $2 }'\
+					  | sort -u)
+
+			if [ ${#failed_exps_for_dir[@]} -eq 0 ]; then
+			    # This indicates a bug in validate_failures.py.
+			    warning "$validate_failures failed: it reported regressions but no failed tests."
+			    result=1
+			    break;
+			fi
+
+			failed_exps+=("${failed_exps_for_dir[@]}")
+
+			break
+		    done # inner while true
+		done # $dir loop
+	    done # $tool loop
+	    notice "Finished testsuite run #$try."
+            record_test_results "${component}" $2
+	    try=$((try + 1))
+	    cp "$new_try_fails" "$prev_try_fails"
+	    true > "$new_try_fails"
+	done # outer while true
+
+	# If there was more than one try, we need to merge all the sum files.
+	if [ $try -ne 0 ]; then
+	    for sum in "${!sums[@]}"; do
+		local -a sum_tries=()
+		IFS=";" read -r -a sum_tries <<< "${sums[$sum]}"
+
+		"${gcc_compare_results}/compare_dg_tests.pl" \
+		    --merge -o "${sum}" "${sum_tries[@]}"
+	    done
+	fi
+
+	rm "$new_fails" "$new_passes" "$baseline_flaky" "$known_flaky_and_fails"
+	if [ "$flaky_failures" = "" ]; then
+	    rm "$new_flaky"
+	fi
+	rm "$prev_try_fails" "$new_try_fails" "$dir_fails"
+
+	if [ x"$ldso_bin" != x"" ] && $exec_tests; then
+            rm -rf ${sysroots}/libc/etc/ld.so.cache
+	fi
+
+	if $exec_tests && [ x"$test_container" != x"" ]; then
+	    print_make_opts_and_copy_sysroot "$test_container" "restore"
+	    if [ $? -ne 0 ]; then
+		error "Cannot restore sysroot on $test_container"
+		return 1
+	    fi
+	fi
+
+	if [ $result != 0 ]; then
+	    error "Making check in ${builddir} failed"
 	    return 1
 	fi
-    fi
 
-    if [ $result != 0 ]; then
-	error "Making check in ${builddir} failed"
-	return 1
-    fi
-
-    if test x"${component}" = x"gcc"; then
-	# If the user provided send_results_to, send the results
-	# via email
-	if [ x"$send_results_to" != x ]; then
-	    local srcdir="$(get_component_srcdir ${component})"
-	    # Hack: Remove single quotes (octal 047) in
-	    # TOPLEVEL_CONFIGURE_ARGUMENTS line in config.status,
-	    # to avoid confusing test_summary. Quotes are added by
-	    # configure when srcdir contains special characters,
-	    # including '~' which ABE uses.
-	    dryrun "(cd ${builddir} && sed -i -e '/TOPLEVEL_CONFIGURE_ARGUMENTS/ s/\o047//g' config.status)"
-	    dryrun "(cd ${builddir} && ${srcdir}/contrib/test_summary -t -m ${send_results_to} | sh)"
+	if test x"${component}" = x"gcc"; then
+	    # If the user provided send_results_to, send the results
+	    # via email
+	    if [ x"$send_results_to" != x ]; then
+		local srcdir="$(get_component_srcdir ${component})"
+		# Hack: Remove single quotes (octal 047) in
+		# TOPLEVEL_CONFIGURE_ARGUMENTS line in config.status,
+		# to avoid confusing test_summary. Quotes are added by
+		# configure when srcdir contains special characters,
+		# including '~' which ABE uses.
+		dryrun "(cd ${builddir} && sed -i -e '/TOPLEVEL_CONFIGURE_ARGUMENTS/ s/\o047//g' config.status)"
+		dryrun "(cd ${builddir} && ${srcdir}/contrib/test_summary -t -m ${send_results_to} | sh)"
+	    fi
 	fi
-    fi
 
-    return 0
+	return 0
+    ) &
+    ret=0 && wait $! || ret=$?
 }
 
 make_clean()
