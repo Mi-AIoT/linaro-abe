@@ -16,6 +16,29 @@
       "message": "Hmmm between v1 and v2, I just added:\n+ # Like we do in build(), use a sub-shell.\n+ (\nand\n+ ) \u0026\n+    ret\u003d0 \u0026\u0026 wait $! || ret\u003d$?\nand re-indented, which seem to confuse gerrit....\n",
       "revId": "d2c82d343241eabc0efe77a77f8958a9a2c7642d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97d80329_24f64bbf",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-06-26T09:23:52Z",
+      "side": 1,
+      "message": "No real need to have a background process for this.  If you really want a background process -- please add \"local ret\" to avoid unintended aliasing with other \"ret\" variables.\n\nAlso, in many functions we specifically ignore indentation of the top-level sub-shell -- e.g., https://git.linaro.org/toolchain/jenkins-scripts.git/tree/jenkins-helpers.sh .  I would do the same here to avoid the huge re-indent.",
+      "range": {
+        "startLine": 1507,
+        "startChar": 5,
+        "endLine": 1508,
+        "endChar": 30
+      },
+      "revId": "d2c82d343241eabc0efe77a77f8958a9a2c7642d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
