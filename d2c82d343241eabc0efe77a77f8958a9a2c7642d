@@ -39,6 +39,30 @@
       },
       "revId": "d2c82d343241eabc0efe77a77f8958a9a2c7642d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4322a62_198db68e",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1508,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-26T12:52:58Z",
+      "side": 1,
+      "message": "OK, I merely used the same scheme as in build().",
+      "parentUuid": "97d80329_24f64bbf",
+      "range": {
+        "startLine": 1507,
+        "startChar": 5,
+        "endLine": 1508,
+        "endChar": 30
+      },
+      "revId": "d2c82d343241eabc0efe77a77f8958a9a2c7642d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
