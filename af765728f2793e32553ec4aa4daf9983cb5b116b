@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f2b8855_a0914aca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-28T07:43:40Z",
+      "side": 1,
+      "message": "LGTM if current glibc versions are known to build OK without --disable-werror.\n",
+      "revId": "af765728f2793e32553ec4aa4daf9983cb5b116b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
