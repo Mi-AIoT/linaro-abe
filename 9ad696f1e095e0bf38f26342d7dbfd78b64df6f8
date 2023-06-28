@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa282961_d21d4804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-06-28T07:44:39Z",
+      "side": 1,
+      "message": "Thanks for cleaning up all these flags\n",
+      "revId": "9ad696f1e095e0bf38f26342d7dbfd78b64df6f8",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
