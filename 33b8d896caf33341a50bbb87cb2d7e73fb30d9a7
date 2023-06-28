@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7dd5cbd_e690ee26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-06-28T07:39:16Z",
+      "side": 1,
+      "message": "Serie seems ok to me. I don\u0027t feel competent enough in that area to vote. ",
+      "revId": "33b8d896caf33341a50bbb87cb2d7e73fb30d9a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
