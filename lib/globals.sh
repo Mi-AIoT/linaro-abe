@@ -113,6 +113,8 @@ expected_failures=""
 flaky_failures=""
 failures_expiration_date=""
 
+prefix=""
+
 # source a user specific config file for commonly used configure options.
 # These overide any of the above values.
 if test -e ~/.aberc; then
@@ -126,7 +128,9 @@ fi
 init_globals_and_PATH()
 {
     # Prefix is the root for installing the toolchain.
-    prefix="$local_builds/destdir/$host"
+    if [ -z "$prefix" ]; then
+	prefix="$local_builds/destdir/$host"
+    fi
     sysroots="$prefix"
     if [ x"$host" != x"$target" ]; then
 	sysroots="$sysroots/$target"
