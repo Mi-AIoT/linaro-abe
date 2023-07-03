@@ -18,5 +18,26 @@ if { [lindex $ret 0] == 0 } {
     error "Cannot get compiler sysroot"
 }
 
+case "$build_triplet" in {
+    { "x86_64*-linux-gnu" } {
+	set setarch_arch x86_64
+    }
+    { "aarch64*-linux-gnu" } {
+	set setarch_arch arm64
+    }
+    { "arm-*linux*" } {
+	set setarch_arch arm
+    }
+    default {
+	puts "ERROR: Unsupported build triplet ($build_triplet) for qemu.exp"
+    }
+}
+
 # qemu_cpu is set in linaro.exp
-set board_info($board,exec_shell) "[board_info $board exec_shell] setarch x86_64 -R qemu-$qemu_arch -cpu $qemu_cpu -R 0 -L $sysroot"
+set board_info($board,exec_shell) "[board_info $board exec_shell] setarch $setarch_arch -R qemu-$qemu_arch -cpu $qemu_cpu -R 0 -L $sysroot"
+
+if { [ istarget "arm*-eabi"]
+     || [ istarget "aarch64*-elf"] } {
+    set_board_info cflags  "[libgloss_include_flags]"
+    set_board_info ldflags "[libgloss_link_flags] [newlib_link_flags] -specs=rdimon.specs"
+}

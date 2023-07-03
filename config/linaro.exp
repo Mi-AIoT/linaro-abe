@@ -56,29 +56,22 @@ if {[info exists env(ABE_TEST_CONTAINER)]} {
 	}
     }
 } else {
+    if {[info exists env(QEMU_CPU_UNDER_TEST)]} {
+	set qemu_cpu "$env(QEMU_CPU_UNDER_TEST)"
+    } else {
+	set qemu_cpu "any"
+    }
     case "$target_triplet" in {
 	{ "arm-*-eabi*" } {
-	    global SIM
-	    # CPU and sysroot are set through the environment
-	    set SIM "qemu-arm"
-	    set target_list { "arm-qemu" }
+	    set target_list { "qemu" }
 	}
 	{ "armeb-*-eabi*" } {
-	    global SIM
-	    # CPU and sysroot are set through the environment
-	    set SIM "qemu-armeb"
-	    set target_list { "arm-qemu" }
+	    set target_list { "qemu" }
 	}
 	{ "aarch64*-*elf*" } {
-	    set target_list { "v8model" }
-	    set env(FOUNDATION_MODEL) "/home/tcwg-buildslave/snapshots-ref/Foundation_Platformpkg/models/Linux64_GCC-4.7/Foundation_Platform"
+	    set target_list { "qemu" }
 	}
 	{ "*linux*" } {
-	    if {[info exists env(QEMU_CPU_UNDER_TEST)]} {
-		set qemu_cpu "$env(QEMU_CPU_UNDER_TEST)"
-	    } else {
-		set qemu_cpu "any"
-	    }
 	    set target_list { "qemu" }
 	}
 	default {
