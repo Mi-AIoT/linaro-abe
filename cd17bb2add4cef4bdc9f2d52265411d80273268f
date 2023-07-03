@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d2157b_03b62d8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-03T20:39:08Z",
+      "side": 1,
+      "message": "This patch depends on the following jenkins-scripts patch:\n\nhttps://review.linaro.org/c/toolchain/jenkins-scripts/+/44768",
+      "revId": "cd17bb2add4cef4bdc9f2d52265411d80273268f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
