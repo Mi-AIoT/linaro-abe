@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6454a071_1b1b887b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-03T15:20:30Z",
+      "side": 1,
+      "message": "This is to support this jenkins-scripts patch:\n\nhttps://review.linaro.org/c/toolchain/jenkins-scripts/+/44757",
+      "revId": "b612eaa4a97b10952be968e698d035af517a75be",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
