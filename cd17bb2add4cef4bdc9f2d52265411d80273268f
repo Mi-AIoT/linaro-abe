@@ -16,6 +16,23 @@
       "message": "This patch depends on the following jenkins-scripts patch:\n\nhttps://review.linaro.org/c/toolchain/jenkins-scripts/+/44768",
       "revId": "cd17bb2add4cef4bdc9f2d52265411d80273268f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ba020b_70eb79bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-03T23:26:43Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1482/ : Well ... it worked on my machine\"\n\nThe build failed because of the additional configure options for GDB and gdbserver, causing old and new manifest files to differ in the test_previous_abe_cmd_line tests.",
+      "revId": "cd17bb2add4cef4bdc9f2d52265411d80273268f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
