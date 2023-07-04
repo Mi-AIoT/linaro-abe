@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "663a56bf_cfb3d732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-04T10:33:28Z",
+      "side": 1,
+      "message": "Not very familiar with this part of ABE, but FWIW LGTM.",
+      "revId": "5eabf5e354e8bbd6f61154bbbeaa8ee062989547",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
