@@ -58,6 +58,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a608d414_84bcae12",
+        "filename": "config/linaro.exp",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-07-04T15:31:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f546e5d_1763c88f",
+      "range": {
+        "startLine": 89,
+        "startChar": 25,
+        "endLine": 89,
+        "endChar": 27
+      },
+      "revId": "37dcabe4069a357ce5f0f926ae4da701aace4fa5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "843825f0_30ebd7ef",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-07-04T11:08:05Z",
       "side": 1,
       "message": "Same question about quoting to prevent word-splitting in $new_target_list.",
+      "range": {
+        "startLine": 91,
+        "startChar": 20,
+        "endLine": 91,
+        "endChar": 36
+      },
+      "revId": "37dcabe4069a357ce5f0f926ae4da701aace4fa5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdda194e_c4edb068",
+        "filename": "config/linaro.exp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-07-04T15:31:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "843825f0_30ebd7ef",
       "range": {
         "startLine": 91,
         "startChar": 20,
