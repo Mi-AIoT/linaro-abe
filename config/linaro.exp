@@ -79,3 +79,14 @@ if {[info exists env(ABE_TEST_CONTAINER)]} {
 	}
     }
 }
+
+# Append ABE_TARGET_BOARD_OPTIONS to each element of target_list
+if {[info exists env(ABE_TARGET_BOARD_OPTIONS)]
+    && [string compare $env(ABE_TARGET_BOARD_OPTIONS) ""]} {
+    set new_target_list {}
+    foreach x $target_list {
+	append x "$env(ABE_TARGET_BOARD_OPTIONS)"
+	lappend new_target_list "$x"
+    }
+    set target_list "$new_target_list"
+}
