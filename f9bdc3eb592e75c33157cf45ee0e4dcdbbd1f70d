@@ -16,6 +16,23 @@
       "message": "Thanks for your review! If we ever need to cross-build for Windows with Python support, I can revisit this.",
       "revId": "f9bdc3eb592e75c33157cf45ee0e4dcdbbd1f70d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f1143d_20c58c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-04T12:04:47Z",
+      "side": 1,
+      "message": "Please ignore this message. I\u0027m replying to try to make this merged review request from 3 months ago leave my dashboard.\n\nI think the problem is that this message from the build bot isn\u0027t marked as resolved:\n\n\u003e Patch Set 2:\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1404/ : Well ... it worked on my machine\"\n\nJust for completeness: this is expected and caused by difference in old and new manifest due to change in configuration options.",
+      "revId": "f9bdc3eb592e75c33157cf45ee0e4dcdbbd1f70d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
