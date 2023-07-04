@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "342b6444_a8345209",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-04T11:08:05Z",
+      "side": 1,
+      "message": "Just a couple of minor comments. LGTM either way.",
+      "revId": "37dcabe4069a357ce5f0f926ae4da701aace4fa5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f546e5d_1763c88f",
+        "filename": "config/linaro.exp",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-04T11:08:05Z",
+      "side": 1,
+      "message": "I\u0027m not very good with Tcl, but by analogy with shell scripting isn\u0027t it better to put $x between double quotes to avoid word-splitting?",
+      "range": {
+        "startLine": 89,
+        "startChar": 25,
+        "endLine": 89,
+        "endChar": 27
+      },
+      "revId": "37dcabe4069a357ce5f0f926ae4da701aace4fa5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "843825f0_30ebd7ef",
+        "filename": "config/linaro.exp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-04T11:08:05Z",
+      "side": 1,
+      "message": "Same question about quoting to prevent word-splitting in $new_target_list.",
+      "range": {
+        "startLine": 91,
+        "startChar": 20,
+        "endLine": 91,
+        "endChar": 36
+      },
+      "revId": "37dcabe4069a357ce5f0f926ae4da701aace4fa5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
