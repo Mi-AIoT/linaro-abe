@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922494b8_72dbfec8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-07-04T17:31:49Z",
+      "side": 1,
+      "message": "+2\u0027ing and merging since the new version addresses Maxim\u0027s request (as well as removes the gdbserver.conf change, which was a NOP).",
+      "revId": "d4eb30f20f48072517e76a2b3d3e9e1dd92d314f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
