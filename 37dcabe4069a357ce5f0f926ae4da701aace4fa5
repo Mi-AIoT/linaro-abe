@@ -18,6 +18,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "394d37bf_6b5c192a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-07-04T14:19:06Z",
+      "side": 1,
+      "message": "OK with Thiago\u0027s comments addressed.",
+      "revId": "37dcabe4069a357ce5f0f926ae4da701aace4fa5",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f546e5d_1763c88f",
