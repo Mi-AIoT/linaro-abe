@@ -46,6 +46,7 @@ usage()
              [--set {multilib}={aprofile|rmprofile}]
              [--set {linker}={ld|gold}]
              [--set {packages}={toolchain|gdb|sysroot}]
+             [--set {target_board_options}=XXX
              [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc]
              [--target {<target_triple>|''}]
              [--testcontainer [user@]ipaddress:ssh_port]
@@ -290,11 +291,13 @@ OPTIONS
                 address.
 
   --set		{buildconfig}=XXX
+
                 Set gcc's configure option --with-build-config=XXX
                 to perform specialized bootstrap build (bootstrap-lto, etc.).
 		Also enables bootstrap implicitly.
 
   --set		{cflags|ldflags|runtestflags|makeflags}=XXX
+
                 This overrides the default values used for CFLAGS,
                 LDFLAGS, RUNTESTFLAGS, and MAKEFLAGS.
 
@@ -313,6 +316,7 @@ OPTIONS
 		The patch-file should be specified with absolute path.
 
   --set		{languages}={c|c++|fortran|go|lto|objc|java|ada}
+
                 This changes the default set of GCC front ends that get built.
                 The default set for most platforms is c, c++, go, fortran,
                 and lto.
@@ -335,15 +339,29 @@ OPTIONS
                 The default is to build the older GNU linker. This option
                 changes the linker to Gold, which is required for some C++
                 projects, including Android and Chromium.
- 
+
   --set		{package}={toolchain|gdb|sysroot}
+
                 This limits the default set of packages to the specified set.
                 This only applies to the --tarbin, --tarsrc, and --tarballs
                 command lines options, and are primarily to be only used by
                 developers.
 
+  --set		{target_board_options}=XXX
+
+                This sets the list of options passed to the testsuite,
+                as described in https://gcc.gnu.org/install/test.html
+		Note the "/" or "{" initial delimiter.
+
+		XXX is appended as-is to the target board, no
+		consistency check is performed.
+
+		For instance:
+		 --set target_board_options="/-O3/-fmerge-constants"
+		 --set target_board_options="{-mcpu=cortex-a9/-O2,-mcpu=cortex-a7}"
+
   --snapshots <path>
-  		Use an alternative path to a local snapshots directory. 
+  		Use an alternative path to a local snapshots directory.
 
   --stage {1|2}
                 If --build <*gcc*> is passed, then --stage {1|2} will cause
@@ -744,6 +762,10 @@ set_package()
 	gcc_patch_file)
 	    gcc_patch_file=${setting}
 	    notice "Applyng patch ${setting} to gcc"
+	    return 0
+	    ;;
+	target_board_options)
+	    export ABE_TARGET_BOARD_OPTIONS="$setting"
 	    return 0
 	    ;;
 	*)
