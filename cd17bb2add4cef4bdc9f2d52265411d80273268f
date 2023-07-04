@@ -33,6 +33,23 @@
       "message": "\u003e Patch Set 1: Code-Review-1\n\u003e \n\u003e \"Build Failed \n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1482/ : Well ... it worked on my machine\"\n\nThe build failed because of the additional configure options for GDB and gdbserver, causing old and new manifest files to differ in the test_previous_abe_cmd_line tests.",
       "revId": "cd17bb2add4cef4bdc9f2d52265411d80273268f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59be20d7_fdc81b7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-07-04T14:14:44Z",
+      "side": 1,
+      "message": "OK as-is, but, I think, we need to start adding one configure option per line with appropriate documentation for each.  E.g.,\n# Add support for foobar in new-option:\ndefault_configure_opts\u003d\"$default_configure_opts --with-new-option\u003dfoobar\"",
+      "revId": "cd17bb2add4cef4bdc9f2d52265411d80273268f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
