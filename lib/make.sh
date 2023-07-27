@@ -1278,7 +1278,7 @@ EOF
 	    tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
 	fi
 
-	# Increase timeout with each consequitive try.  This allows us
+	# Increase timeout with each consecutive try.  This allows us
 	# to start with [short] default timeout and then re-run only
 	# the failed tests with increased timeout.  This will add tests
 	# with inadequate timeout settings to the flaky list.
