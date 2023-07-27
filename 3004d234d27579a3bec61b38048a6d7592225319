@@ -16,6 +16,23 @@
       "message": "Merging to fix malloc/tst-malloc-too-large-malloc-hugetlb2 glibc test.  Post-commit reviews are welcome!",
       "revId": "3004d234d27579a3bec61b38048a6d7592225319",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "168521d6_20242ba9",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2023-07-27T14:58:29Z",
+      "side": 1,
+      "message": "s/consequitive/consecutive",
+      "revId": "3004d234d27579a3bec61b38048a6d7592225319",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
