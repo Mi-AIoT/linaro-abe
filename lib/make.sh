@@ -1246,6 +1246,20 @@ EOF
 	    tool2check["$flag_tool"]=$(tool_to_check "$component" "$flag_tool")
 	fi
 
+	# Increase timeout with each consequitive try.  This allows us
+	# to start with [short] default timeout and then re-run only
+	# the failed tests with increased timeout.  This will add tests
+	# with inadequate timeout settings to the flaky list.
+	#
+	# In particular, glibc has short timeout for tests, and some tests
+	# consistently require more time, e.g., nptl/ and malloc/ tests.
+	# For now, only glibc tests support $TIMEOUTFACTOR, and we will add
+	# it to DejaGnu board files later, if required.
+	#
+	# Note that we are running in a sub-shell (see "export PATH=" above),
+	# so this setting is "local".
+	export TIMEOUTFACTOR=$(($try + 1))
+
 	local result=0
 	local tool
 
