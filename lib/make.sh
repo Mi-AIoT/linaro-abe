@@ -957,7 +957,7 @@ create_glibc_tests_log ()
 
     local test_result
     while IFS= read -r -d '' test_result; do
-	if grep "^(PASS|XFAIL):" "$test_result"; then
+	if grep -q -E "^(PASS|XFAIL):" "$test_result"; then
 	    continue
 	fi
 
