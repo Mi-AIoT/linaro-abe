@@ -1317,16 +1317,9 @@ EOF
 			glibc)
 			    find "${builddir}$dir" -name subdir-tests.sum \
 				 -delete
-			    # Note that "find -name one -o name two -delete"
-			    # will delete only "two".
-			    find "${builddir}$dir" -name subdir-xtests.sum \
-				 -delete
 			    # Rename glibc's sum file and create a dummy .log
 			    if [ -f "${builddir}$dir/tests.sum" ]; then
 				touch "${builddir}$dir/tests.log"
-			    fi
-			    if [ -f "${builddir}$dir/xtests.sum" ]; then
-				touch "${builddir}$dir/xtests.log"
 			    fi
 			    ;;
 			gdb)
