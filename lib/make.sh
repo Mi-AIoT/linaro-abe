@@ -941,6 +941,38 @@ tool_to_check()
     echo "$check"
 }
 
+# Create tests.log from output of failed glibc tests.
+create_glibc_tests_log ()
+{
+    (
+    set -euf -o pipefail
+    local builddir="$1"
+
+    if ! [ -f "$builddir/tests.sum" ]; then
+	return 0
+    fi
+
+    local test_log="$builddir/tests.log"
+    echo "=== glibc failures ===" > "$test_log"
+
+    local test_result
+    while IFS= read -r -d '' test_result; do
+	if grep "^(PASS|XFAIL):" "$test_result"; then
+	    continue
+	fi
+
+	echo >> "$test_log"
+	cat "$test_result" >> "$test_log"
+
+	# Add output of failed test
+	test_result="${test_result%.test-result}.out"
+	if [ -f "$test_result" ]; then
+	    cat "$test_result" >> "$test_log"
+	fi
+    done < <(find "$builddir" -name "*.test-result" -print0)
+    )
+}
+
 # $1 - The component to test
 # $2 - If set to anything, installed tools are used'
 make_check()
@@ -1317,10 +1349,7 @@ EOF
 			glibc)
 			    find "${builddir}$dir" -name subdir-tests.sum \
 				 -delete
-			    # Rename glibc's sum file and create a dummy .log
-			    if [ -f "${builddir}$dir/tests.sum" ]; then
-				touch "${builddir}$dir/tests.log"
-			    fi
+			    create_glibc_tests_log "${builddir}$dir"
 			    ;;
 			gdb)
 			    find "${builddir}$dir" \
