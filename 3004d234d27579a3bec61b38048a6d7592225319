@@ -33,6 +33,24 @@
       "message": "s/consequitive/consecutive",
       "revId": "3004d234d27579a3bec61b38048a6d7592225319",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "233a6129_bd2b3914",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1249,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-07-27T16:26:56Z",
+      "side": 1,
+      "message": "Thanks, I often make misspell this word :-).  Posted a typo patch.",
+      "parentUuid": "168521d6_20242ba9",
+      "revId": "3004d234d27579a3bec61b38048a6d7592225319",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
