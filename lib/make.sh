@@ -1326,6 +1326,28 @@ EOF
 			# detect them as flaky.
 			find "${builddir}$dir" -name "*.out" -delete
 			find "${builddir}$dir" -name "*.test-result" -delete
+		    elif [ "$component" = "gdb" ]; then
+			notice "Preparing GDB for testing"
+
+			# Many tests timeout in GDB on armhf, so start with a
+			# small timeout value so that the first testsuite run
+			# doesn't take too long, and increase it for the
+			# following runs.
+			local gdb_timeout=$((10 + try * 300))
+			local site_exp="${builddir}$dir/gdb/testsuite/site.exp"
+
+			# Cap timeout at 10 minutes.
+			if [ "$gdb_timeout" -gt 600 ]; then
+			    gdb_timeout=600
+			fi
+
+			if [ "$try" -eq 0 ]; then
+			    # Create the site.exp file.
+			    dryrun "make -C ${builddir}$dir/gdb/testsuite site.exp >> $checklog 2>&1"
+			    dryrun "echo \"set gdb_test_timeout ${gdb_timeout}\" >> ${site_exp}"
+			else
+			    dryrun "sed -i -e \"s/set gdb_test_timeout .*/set gdb_test_timeout ${gdb_timeout}/\" ${site_exp}"
+			fi
 		    fi
 
 		    # Testsuites (I'm looking at you, GDB), can leave stray processes
