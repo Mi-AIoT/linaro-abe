@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06a6b5f5_ae3b9dfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-08-01T19:54:34Z",
+      "side": 1,
+      "message": "LGTM (I trust you on \u0027make site.exp\u0027 and the gdb_test_timeout name ;-) )\n",
+      "revId": "82d84343d37546c50215ca1acb796bbb37391275",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
