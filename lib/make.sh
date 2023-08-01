@@ -1395,6 +1395,7 @@ EOF
 
 		    # Produce this dir's part of $new_try_fails, that will
 		    # become $prev_try_fails on the next iteration.
+		    notice "New failed tests in this run:"
 		    local res_prev_fails
 		    "$validate_failures" \
 			--build_dir="${builddir}$dir" --produce_manifest \
