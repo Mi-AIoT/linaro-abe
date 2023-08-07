@@ -9,6 +9,7 @@ if {[info exists env(TIMEOUTFACTOR)] && ![string equal $env(TIMEOUTFACTOR) ""]} 
     set test_timeout [expr $timeout * $env(TIMEOUTFACTOR)]
 }
 set_board_info timeout $test_timeout
+set gdb_test_timeout $test_timeout
 
 # Unfortunatelly, current DejaGNU can't reliably kill timed-out
 # processes, so wrap them in timeout.
