@@ -162,6 +162,10 @@ check_all()
     # packages after the full toolchain is built. 
     if test x"${test_packages}" != x; then
 	notice "Testing components ${test_packages}..."
+	if [ -n "${ABE_TARGET_BOARD_OPTIONS}" ]; then
+	    notice "Using dejagnu target_board options: ${ABE_TARGET_BOARD_OPTIONS}"
+	fi
+
 	local check_ret=0
 	local check_failed=
 
