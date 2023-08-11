@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2defbb8_34b2ddd9",
+        "filename": "config/boards/tcwg-local.exp",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-08-11T05:37:30Z",
+      "side": 1,
+      "message": "Can you double check you are talking about $timeout and not $test_timeout ?",
+      "range": {
+        "startLine": 9,
+        "startChar": 27,
+        "endLine": 9,
+        "endChar": 35
+      },
+      "revId": "9534d49c27b0e31153fb20c41af333d58ec11870",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
