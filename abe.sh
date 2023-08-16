@@ -52,6 +52,7 @@ usage()
              [--target {<target_triple>|''}]
              [--testcontainer [user@]ipaddress:ssh_port]
              [--timeout <timeout_value>]
+             [--disable-timeoutfactor]
              [--usage]
              [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu}
                =<id|snapshot|url>[~branch][@revision]]]
@@ -420,6 +421,11 @@ OPTIONS
 
                 Use <timeout_value> as the timeout value for wget when
                 fetching snapshot packages.
+
+  --disable-timeoutfactor
+
+                Don't set an increasing timeoutfactor for subsequent testsuite
+                runs.
 
   --usage	Display synopsis information.
 
@@ -1165,6 +1171,9 @@ while test $# -gt 0; do
 	    fi
             shift
             ;;
+	--disable-timeoutfactor)
+	    enable_timeoutfactor=false
+	    ;;
 	# These steps are disabled by default but are sometimes useful.
 	--enable|--disable)
 	    case "$1" in

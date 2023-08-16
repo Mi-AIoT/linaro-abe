@@ -1294,7 +1294,9 @@ EOF
 	#
 	# Note that we are running in a sub-shell (see "export PATH=" above),
 	# so this setting is "local".
-	export TIMEOUTFACTOR=$(($try + 1))
+	if "$enable_timeoutfactor"; then
+	    export TIMEOUTFACTOR=$(($try + 1))
+	fi
 
 	local result=0
 	local tool

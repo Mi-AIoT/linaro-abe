@@ -112,6 +112,7 @@ gcc_compare_results=""
 expected_failures=""
 flaky_failures=""
 failures_expiration_date=""
+enable_timeoutfactor=true
 
 prefix=""
 
