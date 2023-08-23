@@ -16,6 +16,23 @@
       "message": "The new version addresses Laurent\u0027s comment.\nThere were some approvals, but I wasn\u0027t aware that they expire after a few days. Sorry about that:\n\nremote: The following approvals got outdated and were removed:        \nremote: * Code-Review+1 by Laurent Alfonsi        \nremote: * Code-Review+1 by Maxim Kuvyrkov        \nremote: * Code-Review-1 by lava-bot",
       "revId": "882ec35626a3bdc9fe08a37a11317884a59a1dce",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de8c5c8_72937296",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-08-23T15:10:14Z",
+      "side": 1,
+      "message": "ok for me",
+      "revId": "882ec35626a3bdc9fe08a37a11317884a59a1dce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
