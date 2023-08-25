@@ -33,6 +33,23 @@
       "message": "ok for me",
       "revId": "882ec35626a3bdc9fe08a37a11317884a59a1dce",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1042e567_bc39de0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-08-25T07:38:49Z",
+      "side": 1,
+      "message": "Anything blocking this patch?",
+      "revId": "882ec35626a3bdc9fe08a37a11317884a59a1dce",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
