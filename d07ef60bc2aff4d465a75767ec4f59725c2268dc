@@ -16,6 +16,41 @@
       "message": "Anything blocks this?",
       "revId": "d07ef60bc2aff4d465a75767ec4f59725c2268dc",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c53ce0_6bd6a3f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-08-25T17:07:02Z",
+      "side": 1,
+      "message": "Thank you for the reviews!",
+      "revId": "d07ef60bc2aff4d465a75767ec4f59725c2268dc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e165ea7_60dc7251",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-08-25T17:07:02Z",
+      "side": 1,
+      "message": "Only the needed increase of the timeout value in Jenkins, which I shared for review today:\n\nhttps://review.linaro.org/c/ci/job/configs/+/45551\n\nThe current timeout is 1000 minutes (~ 16h), while the GDB testsuite on armv8 with TIMEOUTFACTOR is taking at least 22h.",
+      "parentUuid": "f4d33fb9_8d0e2554",
+      "revId": "d07ef60bc2aff4d465a75767ec4f59725c2268dc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
