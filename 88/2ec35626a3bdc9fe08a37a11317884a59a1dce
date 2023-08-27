@@ -1,0 +1,9 @@
+Code-Review+1: Laurent Alfonsi <laurent.alfonsi@linaro.org>
+Code-Review+1: lava-bot
+Code-Review+2: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Submitted-by: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Submitted-at: Sun, 27 Aug 2023 12:12:09 +0000
+Reviewed-on: https://review.linaro.org/c/toolchain/abe/+/45235
+Comments-Total: 8
+Project: toolchain/abe
+Branch: refs/heads/master
