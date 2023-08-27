@@ -51,6 +51,24 @@
       "parentUuid": "f4d33fb9_8d0e2554",
       "revId": "d07ef60bc2aff4d465a75767ec4f59725c2268dc",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "228bf362_ddb57a45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-08-27T10:05:59Z",
+      "side": 1,
+      "message": "The configs.git patch looks good.  I\u0027ve merged it.",
+      "parentUuid": "2e165ea7_60dc7251",
+      "revId": "d07ef60bc2aff4d465a75767ec4f59725c2268dc",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
