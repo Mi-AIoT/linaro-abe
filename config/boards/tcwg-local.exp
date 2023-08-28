@@ -5,11 +5,12 @@ set_board_info gcc,timeout 600
 # Execution timeout 5min.
 # DJ seems to ignore these and uses default timeout of 300.
 set test_timeout 300
+set gdb_test_timeout 60
 if {[info exists env(TIMEOUTFACTOR)] && ![string equal $env(TIMEOUTFACTOR) ""]} {
     set test_timeout [expr $test_timeout * $env(TIMEOUTFACTOR)]
+    set gdb_test_timeout [expr $gdb_test_timeout * $env(TIMEOUTFACTOR)]
 }
 set_board_info timeout $test_timeout
-set gdb_test_timeout $test_timeout
 
 # Unfortunatelly, current DejaGNU can't reliably kill timed-out
 # processes, so wrap them in timeout.
