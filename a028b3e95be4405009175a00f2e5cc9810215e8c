@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07ee9c2d_ea44441d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-08-28T15:38:43Z",
+      "side": 1,
+      "message": "Adopted Maxim\u0027s version.",
+      "revId": "a028b3e95be4405009175a00f2e5cc9810215e8c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
