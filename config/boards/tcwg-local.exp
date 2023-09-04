@@ -5,7 +5,9 @@ set_board_info gcc,timeout 600
 # Execution timeout 5min.
 # DJ seems to ignore these and uses default timeout of 300.
 set test_timeout 300
-set gdb_test_timeout 60
+# GDB uses 10s as its default timeout. Unfortunately anything longer causes 5h
+# testsuite runs in 32-bit ARM.
+set gdb_test_timeout 10
 if {[info exists env(TIMEOUTFACTOR)] && ![string equal $env(TIMEOUTFACTOR) ""]} {
     set test_timeout [expr $test_timeout * $env(TIMEOUTFACTOR)]
     set gdb_test_timeout [expr $gdb_test_timeout * $env(TIMEOUTFACTOR)]
