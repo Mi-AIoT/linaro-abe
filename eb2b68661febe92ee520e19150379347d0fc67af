@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceeda700_7959fc1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-09-05T03:51:55Z",
+      "side": 1,
+      "message": "With this change, tcwg_gdb_check--master-arm took 1h54m for the first testsuite run, and 29m for the other 9 testsuite runs. This is within the range of what it used to take before the TIMEOUTFACTOR change.",
+      "revId": "eb2b68661febe92ee520e19150379347d0fc67af",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
