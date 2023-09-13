@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1b09faf_8c1eab06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-09-13T12:57:42Z",
+      "side": 1,
+      "message": "The validation error is caused by the expected change in the manifest.",
+      "revId": "ca42b96d021db499a6386cf4453cbe7716bacb19",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
