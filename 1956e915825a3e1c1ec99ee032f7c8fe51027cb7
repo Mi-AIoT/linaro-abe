@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b45cead4_7d7058d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-09-27T12:48:31Z",
+      "side": 1,
+      "message": "Added --with-headers\u003dyes for safety in case configure\u0027s logic changes.\nThe validation error is caused by the expected change in the manifest (the new options appear)",
+      "revId": "1956e915825a3e1c1ec99ee032f7c8fe51027cb7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
