@@ -883,7 +883,10 @@ tool_to_dirs()
 	gcc)
 	    dirs="/"
 	    ;;
-	gdb|glibc)
+	gdb)
+	    dirs="/gdb"
+	    ;;
+	glibc)
 	    case "$tool" in
 		none) ;;
 		*)
@@ -935,7 +938,7 @@ tool_to_check()
 	    esac
 	    ;;
 	gdb)
-	    check="check-gdb"
+	    check="check-read1"
 	    ;;
 	glibc)
 	    check="check"
