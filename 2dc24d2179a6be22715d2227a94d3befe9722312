@@ -16,6 +16,24 @@
       "message": "Some testcases are buggy and have additional failures when running under read1. In particular, gdb.linespec/cpcompletion.exp has 422 FAILs and gdb.mi/mi2-var-child.exp has 425 FAILs. A couple of tests in gdb.mi are still as flaky (and verbose) as before though.\n\nThe testsuite unexpected failures go from 56 to 1411. Still, the increased stability of the test results makes this change worth it.",
       "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbb3f41_f4c68ba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-03T23:39:32Z",
+      "side": 1,
+      "message": "Forgot to mention that the check_gdb step goes from about 1h to 5h30m.\n\nAfter this change goes in, I\u0027ll explore enabling running the tests in parallel.",
+      "parentUuid": "c5ef9b7c_47c9ade0",
+      "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
