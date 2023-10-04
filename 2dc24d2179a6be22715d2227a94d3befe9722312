@@ -52,6 +52,23 @@
       "parentUuid": "fdbb3f41_f4c68ba4",
       "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf14886_80ce3a25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-10-04T13:13:08Z",
+      "side": 1,
+      "message": "Nice to see the change is so small 😊\n\nGiven the names of the testcases, I understand that the new failures and longer duration happen both on aarch64 and arm?\nHopefully bisection will see these new failures as \"spurious\" and won\u0027t report them.",
+      "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
