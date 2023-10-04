@@ -69,6 +69,42 @@
       "message": "Nice to see the change is so small 😊\n\nGiven the names of the testcases, I understand that the new failures and longer duration happen both on aarch64 and arm?\nHopefully bisection will see these new failures as \"spurious\" and won\u0027t report them.",
       "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e60b094_08674ac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-04T14:26:54Z",
+      "side": 1,
+      "message": "\u003e Nice to see the change is so small 😊\n\nYes. All the heavy lifting is done by GDB testsuite\u0027s Makefile. 😊\n\n\u003e Given the names of the testcases, I understand that the new failures and longer duration happen both on aarch64 and arm?\n\nYes. On arm, the unexpected failures go from 321 to 1957.\nThe check_gdb run time goes from 1h30m to 7h. 🤦\n\n\u003e Hopefully bisection will see these new failures as \"spurious\" and won\u0027t report them.\n\nYes, that\u0027s the expectation. Bisection won\u0027t be able to find any commit responsible for the new failures.\n\nAlso, Maxim mentioned that if I push this patch when no precommit nor postcommit jobs are running, then the new failures will be incorporated into the baseline before the next precommit job starts.",
+      "parentUuid": "7bf14886_80ce3a25",
+      "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "394e5018_c526772e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-04T14:26:54Z",
+      "side": 1,
+      "message": "Good idea. Done in v2.",
+      "parentUuid": "03477935_5da7daef",
+      "revId": "2dc24d2179a6be22715d2227a94d3befe9722312",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }

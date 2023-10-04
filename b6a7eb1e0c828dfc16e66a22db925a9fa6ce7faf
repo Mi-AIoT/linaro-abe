@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d51900ae_3d5b3b8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-04T14:26:54Z",
+      "side": 1,
+      "message": "Thank you for your reviews! I\u0027ll submit when there are no GDB check jobs running, as suggested by Maxim.",
+      "revId": "b6a7eb1e0c828dfc16e66a22db925a9fa6ce7faf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
