@@ -37,6 +37,7 @@ usage()
              [--space <space needed>]
              [--release <release_version_string>]
              [--retrieve {<package>|all}]
+             [--send-results-filter <filter>]
              [--send-results-to <to>]
              [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
@@ -288,6 +289,18 @@ OPTIONS
                        This will retrieve all of the sources for a
                        complete build as specified by the config/ .conf
                        files.
+
+  --send-results-filter <filter>
+
+                Name of filter program to store the results of GCC
+                tests instead of emailing them.  The filter receives
+                the output of GCC's contrib/test_summary with the same
+                interface as the 'Mail' command:
+		- arguments -s "Subject" recipient
+		- mail body in stdin
+
+		The destination address is provided with
+		  --send-results-to.
 
   --send-results-to <to>
 
@@ -912,6 +925,7 @@ do_build=
 do_build_stage=stage2
 do_manifest=""
 component_version_set=""
+send_results_filter=Mail
 send_results_to=
 qemu_cpu="any"
 
@@ -1084,6 +1098,11 @@ while test $# -gt 0; do
 	    do_retrieve="$2"
 
 	    # Shift off the 'all' or the package identifier.
+	    shift
+	    ;;
+	--send-results-filter)
+	    check_directive send-results-filter $2
+	    send_results_filter="$2"
 	    shift
 	    ;;
 	--send-results-to)
