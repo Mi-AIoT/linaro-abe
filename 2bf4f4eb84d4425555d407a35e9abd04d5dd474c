@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355170ef_5ca235d4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-06T18:05:56Z",
+      "side": 1,
+      "message": "s/so/to/",
+      "range": {
+        "startLine": 9,
+        "startChar": 64,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "2bf4f4eb84d4425555d407a35e9abd04d5dd474c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d883c64_b70eab34",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1546,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-06T18:05:56Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be \"${send_results_filter}\" instead?\nI.e., curly braces rather than parentheses.",
+      "range": {
+        "startLine": 1546,
+        "startChar": 101,
+        "endLine": 1546,
+        "endChar": 123
+      },
+      "revId": "2bf4f4eb84d4425555d407a35e9abd04d5dd474c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
