@@ -1534,7 +1534,7 @@ EOF
 
     if test x"${component}" = x"gcc"; then
 	# If the user provided send_results_to, send the results
-	# via email
+	# via email, or via a filter
 	if [ x"$send_results_to" != x ]; then
 	    local srcdir="$(get_component_srcdir ${component})"
 	    # Hack: Remove single quotes (octal 047) in
@@ -1543,7 +1543,7 @@ EOF
 	    # configure when srcdir contains special characters,
 	    # including '~' which ABE uses.
 	    dryrun "(cd ${builddir} && sed -i -e '/TOPLEVEL_CONFIGURE_ARGUMENTS/ s/\o047//g' config.status)"
-	    dryrun "(cd ${builddir} && ${srcdir}/contrib/test_summary -t -m ${send_results_to} | sh)"
+	    dryrun "(cd ${builddir} && ${srcdir}/contrib/test_summary -t -m ${send_results_to} | sed s/Mail/$(send_results_filter)/ | sh)"
 	fi
     fi
 
