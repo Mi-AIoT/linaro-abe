@@ -41,6 +41,7 @@ usage()
              [--send-results-to <to>]
              [--set {buildconfig}=XXX]
              [--set {cflags|ldflags|runtestflags|makeflags}=XXX]
+             [--set {check_buffer_workaround}=XXX]
              [--set {gcc_override_configure}=XXX]
              [--set {gcc_patch_file}=XXX]
              [--set {languages}={c|c++|fortran|go|lto|objc|java|ada}]
@@ -317,6 +318,17 @@ OPTIONS
 
                 This overrides the default values used for CFLAGS,
                 LDFLAGS, RUNTESTFLAGS, and MAKEFLAGS.
+
+  --set		{check_buffer_workaround}=XXX
+
+		In order to help avoid/detect race conditions when
+		running the tests, use a workaround to change the
+		output bufferization.
+
+		Accepted values:
+		- gdb-read1: Apply the "READ1" workaround to GDB only.
+
+		Default value: gdb-read1.
 
   --set		{gcc_override_configure}=XXX
 
@@ -710,6 +722,21 @@ crosscheck_unit_test()
     return 1
 }
 
+# Check that we provide a supported option to --set check_buffer_workaround
+verify_check_buffer_workaround()
+{
+    local buffer_workaround="$1"
+
+    case "$buffer_workaround" in
+	gdb-read1) return 0 ;;
+	"") return 0 ;;
+	*)
+	    error "$buffer_workaround is not a supported value for --set check_buffer_workaround"
+	    return 1
+	    ;;
+    esac
+}
+
 set_package()
 {
     local package="$(echo $1 | cut -d '=' -f 1)"
@@ -783,6 +810,12 @@ set_package()
 	    ;;
 	target_board_options)
 	    export ABE_TARGET_BOARD_OPTIONS="$setting"
+	    return 0
+	    ;;
+	check_buffer_workaround)
+	    verify_check_buffer_workaround ${setting}
+	    check_buffer_workaround=${setting}
+	    notice "Applyng ${setting} workaround for bufferization when running the tests"
 	    return 0
 	    ;;
 	*)
