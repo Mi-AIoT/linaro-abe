@@ -885,10 +885,7 @@ tool_to_dirs()
 	gcc)
 	    dirs="/"
 	    ;;
-	gdb)
-	    dirs="/gdb"
-	    ;;
-	glibc)
+	gdb|glibc)
 	    case "$tool" in
 		none) ;;
 		*)
@@ -941,7 +938,7 @@ tool_to_check()
 	    esac
 	    ;;
 	gdb)
-	    check="check-read1"
+	    check="check-gdb"
 	    ;;
 	glibc)
 	    check="check"
@@ -1166,6 +1163,19 @@ make_check()
     fi
 
     notice "Redirecting output from the testsuite to $checklog"
+
+    case "$component:$check_buffer_workaround" in
+	gdb:gdb-read1|gcc:gcc-read1)
+	    local read1_dir=""
+	    [ "$component" = "gdb" ] && read1_dir="/gdb/testsuite"
+	    dryrun "make read1 -w -C ${builddir}${read1_dir} >> $checklog 2>&1"
+	    if [ $? != 0 ]; then
+		error "make read1 -w -C ${builddir}${read1_dir} failed."
+		return 1
+	    fi
+	    make_flags="${make_flags} READ1=1"
+	    ;;
+    esac
 
     local testsuite_mgmt="$gcc_compare_results/contrib/testsuite-management"
     local validate_failures="$testsuite_mgmt/validate_failures.py"
