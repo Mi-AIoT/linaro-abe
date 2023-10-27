@@ -99,6 +99,7 @@ override_cflags=
 override_ldflags=
 declare -a extra_runtestflags
 gcc_override_configure=
+check_buffer_workaround=gdb-read1
 
 sources_conf="${sources_conf:-${abe_path}/config/sources.conf}"
 
