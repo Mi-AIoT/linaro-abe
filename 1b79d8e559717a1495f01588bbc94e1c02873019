@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e09483ad_cfa360cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-30T16:41:40Z",
+      "side": 1,
+      "message": "Some questions and/or suggestions.\n\nI\u0027m currently running tcwg_gnu-build.sh with Abe from this branch just as a sanity check, but you most likely already did that so I don\u0027t expect any trouble.",
+      "revId": "1b79d8e559717a1495f01588bbc94e1c02873019",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f61bd09_00609523",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-30T16:41:40Z",
+      "side": 1,
+      "message": "I suggest adding a check here that \"${setting}\" is one of the recognized values (currently only \"gdb-read1\" and \"\").",
+      "revId": "1b79d8e559717a1495f01588bbc94e1c02873019",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e16599c_845f8c7f",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-10-30T16:41:40Z",
+      "side": 1,
+      "message": "Do we want to exit with an error if the \"$component:$check_buffer_workaround\" combination is invalid (\"e.g., gcc:gdb-read1\")? Or just ignore it in that case as is done here?\n\nI tend to prefer being strict, but being more forgiving has its advantages as well, so not sure.",
+      "revId": "1b79d8e559717a1495f01588bbc94e1c02873019",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
