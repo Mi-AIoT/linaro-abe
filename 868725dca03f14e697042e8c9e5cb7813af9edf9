@@ -39,6 +39,30 @@
       },
       "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174b3293_f69536a0",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-11-01T07:52:07Z",
+      "side": 1,
+      "message": "Note that in the middle-ground approach we improve quality of flaky lists at no additional runtime cost.",
+      "parentUuid": "9a7ab865_2254180a",
+      "range": {
+        "startLine": 1184,
+        "startChar": 31,
+        "endLine": 1185,
+        "endChar": 44
+      },
+      "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
