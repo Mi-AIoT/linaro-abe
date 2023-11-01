@@ -1129,10 +1129,13 @@ make_check()
 
     # Prepare temporary fail files
     local new_fails new_passes baseline_flaky known_flaky_and_fails new_flaky
+    local discovered_flaky_and_fails baseline_fails
     new_fails=$(mktemp)
     new_passes=$(mktemp)
     baseline_flaky=$(mktemp)
+    baseline_fails=$(mktemp)
     known_flaky_and_fails=$(mktemp)
+    discovered_flaky_and_fails=$(mktemp)
 
     if [ "$flaky_failures" = "" ]; then
 	new_flaky=$(mktemp)
@@ -1150,7 +1153,7 @@ make_check()
 
     if [ "$expected_failures" != "" ]; then
 	notice "Using expected fails file $expected_failures"
-	cp "$expected_failures" "$prev_try_fails"
+	cp "$expected_failures" "$baseline_fails"
     fi
 
     local -a expiry_date_opt=()
@@ -1158,20 +1161,28 @@ make_check()
 	expiry_date_opt+=(--expiry_date "$failures_expiration_date")
     fi
 
-    # Construct the initial $known_flaky_and_fails list.
+    # Construct the initial $known_flaky_and_fails and
+    # $discovered_flaky_and_fails lists.
     #
     # For the first iteration (try #0) we expect fails, passes and flaky tests
     # to be the same as in provided $expected_failures and $flaky_failures.
     # We will exit after running the testsuites for a single try if we
     # do not see any difference in test results compared to the provided
-    # baseline.
+    # baseline.  $known_flaky_and_fails contains $expected_failures and
+    # $flaky_failures and is used only in the first test results comparison.
     #
     # However, if we do see a difference in results after the first try, then
     # we will iterate testing until we see no difference between $try-1 and
     # $try results.  Each difference between $try-1 and $try will be recorded
     # in $new_flaky list, so with every try we will ignore more and more
     # tests as flaky.  We collect failures of the current try in $new_try_fails,
-    # which then becomes $prev_try_fails on $try+1.
+    # which then becomes $prev_try_fails on $try+1.  These test iterations
+    # don't compare against the provided baseline, which causes $new_try_fails
+    # and $prev_try_fails to contain the failures in $expected_failures and
+    # $flaky_failures.  This is why $discovered_flaky_and_fails doesn't include
+    # the baseline results, and is done so that the flaky tests list produced
+    # at the end of make_check doesn't depend on the provided
+    # $expected_failures and $flaky_failures.
     #
     # Note that we generate $prev_try_fails and $new_try_fails without regard
     # for flaky tests.  Therefore, $validate_failures that generate $new_fails
@@ -1204,15 +1215,21 @@ make_check()
     # libstdc++:libstdc++-dg/conformance.exp testsuite.
     #
     # With the new approach when this test [rarely] passes, we will detect
-    # that in comparison with "$known_flaky_and_fails", and, if $try==0, trigger
-    # another iteration of testing to confirm stability of the new PASS.
-    # The test will fail on the next iteration, and we will add it to
-    # $new_flaky list.  If the test passes during $try!=0, we will add it
-    # to the $new_flaky list immediately.
+    # that in comparison with "$known_flaky_and_fails" or
+    # "$discovered_flaky_and_fails" and, if $try==0, trigger another iteration
+    # of testing to confirm stability of the new PASS.  The test will fail on
+    # the next iteration, and we will add it to $new_flaky list.  If the test
+    # passes during $try!=0, we will add it to the $new_flaky list
+    # immediately.
 
     cat > "$known_flaky_and_fails" <<EOF
-@include $new_flaky
 @include $baseline_flaky
+@include $baseline_fails
+EOF
+
+    # This file only contains the flaky and fails discovered by this job.
+    cat > "$discovered_flaky_and_fails" <<EOF
+@include $new_flaky
 @include $prev_try_fails
 EOF
 
@@ -1371,34 +1388,53 @@ EOF
 
 		    local -a failed_exps_for_dir=()
 
-		    # Check if we have any new FAILs or PASSes compared
-		    # to the previous iteration.
+		    local res_new_fails res_new_passes
+		    if [ $try = 0 ]; then
+			# Check if we have any new FAILs or PASSes compared
+			# to the baseline.
+			# Detect PASS->FAIL flaky tests.
+			"$validate_failures" \
+			    --manifest="$known_flaky_and_fails" \
+			    --build_dir="${builddir}$dir" \
+			    --verbosity=1 "${expiry_date_opt[@]}" \
+			    > /dev/null &
+			res_new_fails=0 && wait $! || res_new_fails=$?
+
+			# Detect FAIL->PASS flaky tests.
+			"$validate_failures" \
+			    --manifest="$known_flaky_and_fails" \
+			    --build_dir="${builddir}$dir" \
+			    --verbosity=1 "${expiry_date_opt[@]}" \
+			    --inverse_match \
+			    > /dev/null &
+			res_new_passes=0 && wait $! || res_new_passes=$?
+
+			# If it was the first try and it didn't fail, we don't
+			# need to save copies of the sum and log files.
+			if [ $res_new_fails = 0 ] && [ $res_new_passes = 0 ]; then
+			    break
+			fi
+		    fi
+
+		    # Check new FAILs or PASSes compared to the previous
+		    # iteration, without considering the baseline.
+
 		    # Detect PASS->FAIL flaky tests.
-		    local res_new_fails
 		    "$validate_failures" \
-			--manifest="$known_flaky_and_fails" \
+			--manifest="$discovered_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 "${expiry_date_opt[@]}" \
 			> "$new_fails" &
 		    res_new_fails=0 && wait $! || res_new_fails=$?
 
 		    # Detect FAIL->PASS flaky tests.
-		    local res_new_passes
 		    "$validate_failures" \
-			--manifest="$known_flaky_and_fails" \
+			--manifest="$discovered_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 "${expiry_date_opt[@]}" \
 			--inverse_match \
 			> "$new_passes" &
 		    res_new_passes=0 && wait $! || res_new_passes=$?
-
-		    # If it was the first try and it didn't fail, we don't
-		    # need to save copies of the sum and log files.
-		    if [ $try = 0 ] \
-			   && [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
-			break
-		    fi
 
 		    # Produce this dir's part of $new_try_fails, that will
 		    # become $prev_try_fails on the next iteration.
@@ -1449,7 +1485,7 @@ EOF
 		    if [ $try != 0 ]; then
 			# Incorporate this try's flaky tests into $new_flaky.
 			# This will make these tests appear in
-			# $known_flaky_and_fails for the next iteration.
+			# $discovered_flaky_and_fails for the next iteration.
 			if [ $res_new_fails = 2 ]; then
 			    # Prepend "flaky | " attribute to
 			    # the newly-detected flaky tests.
@@ -1510,6 +1546,7 @@ EOF
     fi
 
     rm "$new_fails" "$new_passes" "$baseline_flaky" "$known_flaky_and_fails"
+    rm "$discovered_flaky_and_fails" "$baseline_fails"
     if [ "$flaky_failures" = "" ]; then
 	rm "$new_flaky"
     fi
