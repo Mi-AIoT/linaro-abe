@@ -16,6 +16,29 @@
       "message": "Running tcwg_gnu-build.sh on tcwg_gdb_check--master-arm takes a long time, so I\u0027m still in the process of testing this change.",
       "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a7ab865_2254180a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-11-01T07:49:11Z",
+      "side": 1,
+      "message": "IIUC, this approach makes every build that goes to $try\u003e\u003d1 re-detect as many flaky tests as it can.  While it would provide the most comprehensive statistics on the flaky tests, it would also significantly increase runtime, especially of less-stable testsuites like GDB.\n\nAs a middle-ground between current and proposed states -- how about keep the logic to continue/stop iteration as-is, and only change how $new_flaky list is generated?  For the addition to $new_flaky list we would ignore $baseline_flaky list and take into account only $new_flaky and $prev_try_fails lists?\n\nIn other words, if on $try\u003d\u003d1 we see a FAIL that was a PASS on $try\u003d\u003d0, we add it to $new_flaky irrespective of whether it is already present in $baseline_flaky.  But we will not go into $try\u003d\u003d2 iteration due to this known-and-confirmed flaky detection.",
+      "range": {
+        "startLine": 1184,
+        "startChar": 31,
+        "endLine": 1185,
+        "endChar": 44
+      },
+      "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
