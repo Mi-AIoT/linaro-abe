@@ -1129,10 +1129,13 @@ make_check()
 
     # Prepare temporary fail files
     local new_fails new_passes baseline_flaky known_flaky_and_fails new_flaky
+    local discovered_flaky_and_fails baseline_fails
     new_fails=$(mktemp)
     new_passes=$(mktemp)
     baseline_flaky=$(mktemp)
+    baseline_fails=$(mktemp)
     known_flaky_and_fails=$(mktemp)
+    discovered_flaky_and_fails=$(mktemp)
 
     if [ "$flaky_failures" = "" ]; then
 	new_flaky=$(mktemp)
@@ -1150,7 +1153,7 @@ make_check()
 
     if [ "$expected_failures" != "" ]; then
 	notice "Using expected fails file $expected_failures"
-	cp "$expected_failures" "$prev_try_fails"
+	cp "$expected_failures" "$baseline_fails"
     fi
 
     local -a expiry_date_opt=()
@@ -1158,7 +1161,8 @@ make_check()
 	expiry_date_opt+=(--expiry_date "$failures_expiration_date")
     fi
 
-    # Construct the initial $known_flaky_and_fails list.
+    # Construct the initial $known_flaky_and_fails and
+    # $discovered_flaky_and_fails lists.
     #
     # For the first iteration (try #0) we expect fails, passes and flaky tests
     # to be the same as in provided $expected_failures and $flaky_failures.
@@ -1171,7 +1175,13 @@ make_check()
     # $try results.  Each difference between $try-1 and $try will be recorded
     # in $new_flaky list, so with every try we will ignore more and more
     # tests as flaky.  We collect failures of the current try in $new_try_fails,
-    # which then becomes $prev_try_fails on $try+1.
+    # which then becomes $prev_try_fails on $try+1.  When generating the
+    # difference that will go into $new_flaky we don't compare against the
+    # provided baseline, which causes $new_flaky to also contain the baseline
+    # failures in $expected_failures and $flaky_failures.  This is why
+    # $discovered_flaky_and_fails doesn't include the baseline results, and is
+    # done so that the flaky tests list produced at the end of make_check
+    # doesn't depend on the provided $expected_failures and $flaky_failures.
     #
     # Note that we generate $prev_try_fails and $new_try_fails without regard
     # for flaky tests.  Therefore, $validate_failures that generate $new_fails
@@ -1213,6 +1223,14 @@ make_check()
     cat > "$known_flaky_and_fails" <<EOF
 @include $new_flaky
 @include $baseline_flaky
+@include $baseline_fails
+@include $prev_try_fails
+EOF
+
+    # This file only contains the flaky and fails discovered by this
+    # make_check invocation.
+    cat > "$discovered_flaky_and_fails" <<EOF
+@include $new_flaky
 @include $prev_try_fails
 EOF
 
@@ -1371,34 +1389,53 @@ EOF
 
 		    local -a failed_exps_for_dir=()
 
-		    # Check if we have any new FAILs or PASSes compared
-		    # to the previous iteration.
+		    # Check if we have any new FAILs or PASSes compared to the
+		    # baseline plus the flaky tests we discovered so far.
 		    # Detect PASS->FAIL flaky tests.
-		    local res_new_fails
+		    local res_new_fails_with_baseline
 		    "$validate_failures" \
 			--manifest="$known_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 "${expiry_date_opt[@]}" \
-			> "$new_fails" &
-		    res_new_fails=0 && wait $! || res_new_fails=$?
+			> /dev/null &
+		    res_new_fails_with_baseline=0 && wait $! \
+			    || res_new_fails_with_baseline=$?
 
 		    # Detect FAIL->PASS flaky tests.
-		    local res_new_passes
+		    local res_new_passes_with_baseline
 		    "$validate_failures" \
 			--manifest="$known_flaky_and_fails" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 "${expiry_date_opt[@]}" \
 			--inverse_match \
-			> "$new_passes" &
-		    res_new_passes=0 && wait $! || res_new_passes=$?
+			> /dev/null &
+		    res_new_passes_with_baseline=0 && wait $! \
+			    || res_new_passes_with_baseline=$?
 
-		    # If it was the first try and it didn't fail, we don't
-		    # need to save copies of the sum and log files.
-		    if [ $try = 0 ] \
-			   && [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
-			break
-		    fi
+		    # Check again for new FAILs or PASSes compared to the
+		    # previous iterations, but this time without considering
+		    # the baseline.
+
+		    # Detect PASS->FAIL flaky tests.
+		    local res_new_discovered_fails
+		    "$validate_failures" \
+			--manifest="$discovered_flaky_and_fails" \
+			--build_dir="${builddir}$dir" \
+			--verbosity=1 "${expiry_date_opt[@]}" \
+			> "$new_fails" &
+		    res_new_discovered_fails=0 && wait $! \
+			    || res_new_discovered_fails=$?
+
+		    # Detect FAIL->PASS flaky tests.
+		    local res_new_discovered_passes
+		    "$validate_failures" \
+			--manifest="$discovered_flaky_and_fails" \
+			--build_dir="${builddir}$dir" \
+			--verbosity=1 "${expiry_date_opt[@]}" \
+			--inverse_match \
+			> "$new_passes" &
+		    res_new_discovered_passes=0 && wait $! \
+			    || res_new_discovered_passes=$?
 
 		    # Produce this dir's part of $new_try_fails, that will
 		    # become $prev_try_fails on the next iteration.
@@ -1409,30 +1446,24 @@ EOF
 			--manifest="$dir_fails" --force --verbosity=1 &
 		    res_prev_fails=0 && wait $! || res_prev_fails=$?
 
-		    # Find sum and log files from this try and save them.
-		    local log sum
-		    while IFS= read -r -d '' sum; do
-			log="${sum/.sum/.log}"
-
-			mv "$sum" "${sum}.${try}"
-			mv "$log" "${log}.${try}"
-
-			sums["$sum"]+="${sum}.${try};"
-		    done < <(find "${builddir}$dir" -name '*.sum' -print0)
-
-		    if [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
-			# No failures. We can stop now.
-			break
-		    elif [ $res_new_fails = 0 ] && [ $res_new_passes = 2 ] \
+		    if [ $res_new_fails_with_baseline = 0 ] \
+			   && [ $res_new_passes_with_baseline = 0 ]; then
+			# No failures, but we can't stop yet because we still
+			# need to add $new_fails and $new_passes to
+			# $new_flaky.
+			more_tests_to_try=false
+		    elif [ $res_new_fails_with_baseline = 0 ] \
+			     && [ $res_new_passes_with_baseline = 2 ] \
 			     && [ $res_prev_fails = 0 ]; then
-			:
-		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 0 ] \
+			more_tests_to_try=true
+		    elif [ $res_new_fails_with_baseline = 2 ] \
+			     && [ $res_new_passes_with_baseline = 0 ] \
 			     && [ $res_prev_fails = 0 ]; then
-			:
-		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 2 ] \
+			more_tests_to_try=true
+		    elif [ $res_new_fails_with_baseline = 2 ] \
+			     && [ $res_new_passes_with_baseline = 2 ] \
 			     && [ $res_prev_fails = 0 ]; then
-			:
+			more_tests_to_try=true
 		    else
 			# Exit code 2 means that the result comparison
 			# found regressions.
@@ -1444,34 +1475,48 @@ EOF
 			result=1
 			break
 		    fi
-		    more_tests_to_try=true
 
-		    if [ $try != 0 ]; then
-			# Incorporate this try's flaky tests into $new_flaky.
-			# This will make these tests appear in
-			# $known_flaky_and_fails for the next iteration.
-			if [ $res_new_fails = 2 ]; then
-			    # Prepend "flaky | " attribute to
-			    # the newly-detected flaky tests.
-			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
-				"$new_fails"
+		    # Incorporate this try's flaky tests into $new_flaky.
+		    # This will make these tests appear in
+		    # $discovered_flaky_and_fails for the next iteration.
+		    if [ $res_new_discovered_fails = 2 ]; then
+			# Prepend "flaky | " attribute to
+			# the newly-detected flaky tests.
+			sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" "$new_fails"
 
-			    cat "$new_fails" >> "$new_flaky"
-			    notice "Detected new PASS->FAIL flaky tests:"
-			    cat "$new_fails"
-			fi
-			if [ $res_new_passes = 2 ]; then
-			    # Prepend "flaky | " attribute to
-			    # the newly-detected flaky tests.
-			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
-				"$new_passes"
+			cat "$new_fails" >> "$new_flaky"
+			notice "Detected new PASS->FAIL flaky tests:"
+			cat "$new_fails"
+		    fi
+		    if [ $res_new_discovered_passes = 2 ]; then
+			# Prepend "flaky | " attribute to
+			# the newly-detected flaky tests.
+			sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" "$new_passes"
 
-			    cat "$new_passes" >> "$new_flaky"
-			    notice "Detected new FAIL->PASS flaky tests:"
-			    cat "$new_passes"
-			fi
+			cat "$new_passes" >> "$new_flaky"
+			notice "Detected new FAIL->PASS flaky tests:"
+			cat "$new_passes"
 		    fi
 		    cat "$dir_fails" >> "$new_try_fails"
+
+		    # If it was the first try and it didn't fail, we don't
+		    # need to save copies of the sum and log files.
+		    if [ $try = 0 ] \
+			   && [ $res_new_fails_with_baseline = 0 ] \
+			   && [ $res_new_passes_with_baseline = 0 ]; then
+			break
+		    fi
+
+		    # Find sum and log files from this try and save them.
+		    local log sum
+		    while IFS= read -r -d '' sum; do
+			log="${sum/.sum/.log}"
+
+			mv "$sum" "${sum}.${try}"
+			mv "$log" "${log}.${try}"
+
+			sums["$sum"]+="${sum}.${try};"
+		    done < <(find "${builddir}$dir" -name '*.sum' -print0)
 
 		    readarray -t failed_exps_for_dir \
                               < <(cat "$new_fails" "$new_passes" \
@@ -1510,6 +1555,7 @@ EOF
     fi
 
     rm "$new_fails" "$new_passes" "$baseline_flaky" "$known_flaky_and_fails"
+    rm "$discovered_flaky_and_fails" "$baseline_fails"
     if [ "$flaky_failures" = "" ]; then
 	rm "$new_flaky"
     fi
