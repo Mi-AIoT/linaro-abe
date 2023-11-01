@@ -1171,11 +1171,13 @@ make_check()
     local validate_failures="$testsuite_mgmt/validate_failures.py"
 
     # Prepare temporary fail files
-    local new_fails new_passes baseline_flaky known_flaky_and_fails new_flaky
+    local new_fails new_passes baseline_flaky new_flaky
+    local known_flaky_and_fails_for_deciding flaky_and_fails_for_output
     new_fails=$(mktemp)
     new_passes=$(mktemp)
     baseline_flaky=$(mktemp)
-    known_flaky_and_fails=$(mktemp)
+    known_flaky_and_fails_for_deciding=$(mktemp)
+    flaky_and_fails_for_output=$(mktemp)
 
     if [ "$flaky_failures" = "" ]; then
 	new_flaky=$(mktemp)
@@ -1201,7 +1203,8 @@ make_check()
 	expiry_date_opt+=(--expiry_date "$failures_expiration_date")
     fi
 
-    # Construct the initial $known_flaky_and_fails list.
+    # Construct the initial $known_flaky_and_fails_for_deciding and
+    # $flaky_and_fails_for_output lists.
     #
     # For the first iteration (try #0) we expect fails, passes and flaky tests
     # to be the same as in provided $expected_failures and $flaky_failures.
@@ -1214,7 +1217,13 @@ make_check()
     # $try results.  Each difference between $try-1 and $try will be recorded
     # in $new_flaky list, so with every try we will ignore more and more
     # tests as flaky.  We collect failures of the current try in $new_try_fails,
-    # which then becomes $prev_try_fails on $try+1.
+    # which then becomes $prev_try_fails on $try+1.  When generating the
+    # difference that will go into $new_flaky we don't compare against the
+    # provided $baseline_flaky, so that any detected flaky failure will appear
+    # in $new_flaky even if it's already in the baseline flaky list.  This is
+    # why $flaky_and_fails_for_output doesn't include the baseline flaky results
+    # and is done so that the list of flaky tests produced at the end of
+    # make_check has some redundancy with it.
     #
     # Note that we generate $prev_try_fails and $new_try_fails without regard
     # for flaky tests.  Therefore, $validate_failures that generate $new_fails
@@ -1247,15 +1256,22 @@ make_check()
     # libstdc++:libstdc++-dg/conformance.exp testsuite.
     #
     # With the new approach when this test [rarely] passes, we will detect
-    # that in comparison with "$known_flaky_and_fails", and, if $try==0, trigger
-    # another iteration of testing to confirm stability of the new PASS.
-    # The test will fail on the next iteration, and we will add it to
-    # $new_flaky list.  If the test passes during $try!=0, we will add it
-    # to the $new_flaky list immediately.
+    # that in comparison with "$known_flaky_and_fails_for_deciding", and, if
+    # $try==0, trigger another iteration of testing to confirm stability of
+    # the new PASS.  The test will fail on the next iteration, and we will add
+    # it to $new_flaky list.  If the test passes during $try!=0, we will add
+    # it to the $new_flaky list immediately.
 
-    cat > "$known_flaky_and_fails" <<EOF
+    cat > "$known_flaky_and_fails_for_deciding" <<EOF
 @include $new_flaky
 @include $baseline_flaky
+@include $prev_try_fails
+EOF
+
+    # This file doesn't contain $baseline_flaky and is used to find the new
+    # flaky tests to be added to $new_flaky in each try.
+    cat > "$flaky_and_fails_for_output" <<EOF
+@include $new_flaky
 @include $prev_try_fails
 EOF
 
@@ -1414,32 +1430,68 @@ EOF
 
 		    local -a failed_exps_for_dir=()
 
+		    # We do two sets of validate_failures.py runs:
+		    #
+		    # In the first one we compare with the previous try's
+		    # failures plus all known flaky tests.  We use the exit
+		    # status to decide whether to do another try of the
+		    # testsuite.
+		    #
+		    # In the second one we compare with the previous try's
+		    # failures plus the flaky tests detected in this
+		    # invocation of Abe.  We use the output for $new_flaky.
+
 		    # Check if we have any new FAILs or PASSes compared
 		    # to the previous iteration.
 		    # Detect PASS->FAIL flaky tests.
-		    local res_new_fails
+		    local res_new_fails_for_deciding
 		    "$validate_failures" \
-			--manifest="$known_flaky_and_fails" \
+			--manifest="$known_flaky_and_fails_for_deciding" \
+			--build_dir="${builddir}$dir" \
+			--verbosity=0 "${expiry_date_opt[@]}" &
+		    res_new_fails_for_deciding=0 && wait $! \
+			    || res_new_fails_for_deciding=$?
+
+		    # Detect FAIL->PASS flaky tests.
+		    local res_new_passes_for_deciding
+		    "$validate_failures" \
+			--manifest="$known_flaky_and_fails_for_deciding" \
+			--build_dir="${builddir}$dir" \
+			--verbosity=0 "${expiry_date_opt[@]}" \
+			--inverse_match &
+		    res_new_passes_for_deciding=0 && wait $! \
+			    || res_new_passes_for_deciding=$?
+
+		    # Check again for new FAILs or PASSes compared to the
+		    # previous iteration, but this time without considering
+		    # the baseline flaky results.
+
+		    # Detect PASS->FAIL flaky tests.
+		    local res_new_fails_for_output
+		    "$validate_failures" \
+			--manifest="$flaky_and_fails_for_output" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 "${expiry_date_opt[@]}" \
 			> "$new_fails" &
-		    res_new_fails=0 && wait $! || res_new_fails=$?
+		    res_new_fails_for_output=0 && wait $! \
+			    || res_new_fails_for_output=$?
 
 		    # Detect FAIL->PASS flaky tests.
-		    local res_new_passes
+		    local res_new_passes_for_output
 		    "$validate_failures" \
-			--manifest="$known_flaky_and_fails" \
+			--manifest="$flaky_and_fails_for_output" \
 			--build_dir="${builddir}$dir" \
 			--verbosity=1 "${expiry_date_opt[@]}" \
 			--inverse_match \
 			> "$new_passes" &
-		    res_new_passes=0 && wait $! || res_new_passes=$?
+		    res_new_passes_for_output=0 && wait $! \
+			    || res_new_passes_for_output=$?
 
 		    # If it was the first try and it didn't fail, we don't
 		    # need to save copies of the sum and log files.
 		    if [ $try = 0 ] \
-			   && [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
+			   && [ $res_new_fails_for_deciding = 0 ] \
+			   && [ $res_new_passes_for_deciding = 0 ]; then
 			break
 		    fi
 
@@ -1463,17 +1515,20 @@ EOF
 			sums["$sum"]+="${sum}.${try};"
 		    done < <(find "${builddir}$dir" -name '*.sum' -print0)
 
-		    if [ $res_new_fails = 0 ] \
-			   && [ $res_new_passes = 0 ]; then
+		    if [ $res_new_fails_for_deciding = 0 ] \
+			   && [ $res_new_passes_for_deciding = 0 ]; then
 			# No failures. We can stop now.
 			break
-		    elif [ $res_new_fails = 0 ] && [ $res_new_passes = 2 ] \
+		    elif [ $res_new_fails_for_deciding = 0 ] \
+			     && [ $res_new_passes_for_deciding = 2 ] \
 			     && [ $res_prev_fails = 0 ]; then
 			:
-		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 0 ] \
+		    elif [ $res_new_fails_for_deciding = 2 ] \
+			     && [ $res_new_passes_for_deciding = 0 ] \
 			     && [ $res_prev_fails = 0 ]; then
 			:
-		    elif [ $res_new_fails = 2 ] && [ $res_new_passes = 2 ] \
+		    elif [ $res_new_fails_for_deciding = 2 ] \
+			     && [ $res_new_passes_for_deciding = 2 ] \
 			     && [ $res_prev_fails = 0 ]; then
 			:
 		    else
@@ -1492,8 +1547,9 @@ EOF
 		    if [ $try != 0 ]; then
 			# Incorporate this try's flaky tests into $new_flaky.
 			# This will make these tests appear in
-			# $known_flaky_and_fails for the next iteration.
-			if [ $res_new_fails = 2 ]; then
+			# $known_flaky_and_fails_for_deciding and
+			# $flaky_and_fails_for_output for the next iteration.
+			if [ $res_new_fails_for_output = 2 ]; then
 			    # Prepend "flaky | " attribute to
 			    # the newly-detected flaky tests.
 			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
@@ -1503,7 +1559,7 @@ EOF
 			    notice "Detected new PASS->FAIL flaky tests:"
 			    cat "$new_fails"
 			fi
-			if [ $res_new_passes = 2 ]; then
+			if [ $res_new_passes_for_output = 2 ]; then
 			    # Prepend "flaky | " attribute to
 			    # the newly-detected flaky tests.
 			    sed -i -e "s#^\([A-Z]\+: \)#flaky | \1#" \
@@ -1552,7 +1608,8 @@ EOF
 	done
     fi
 
-    rm "$new_fails" "$new_passes" "$baseline_flaky" "$known_flaky_and_fails"
+    rm "$new_fails" "$new_passes" "$baseline_flaky"
+    rm "$known_flaky_and_fails_for_deciding" "$flaky_and_fails_for_output"
     if [ "$flaky_failures" = "" ]; then
 	rm "$new_flaky"
     fi
