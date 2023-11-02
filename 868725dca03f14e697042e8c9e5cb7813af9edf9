@@ -63,6 +63,30 @@
       },
       "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "119974ac_f042af7a",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-02T07:53:02Z",
+      "side": 1,
+      "message": "Ah! That makes sense. I hadn\u0027t thought of the impact in runtime of the change, and also hadn\u0027t considered the possibility of the middle-ground approach.\n\nv2 implements your suggestion. The diff is bigger than you might expect because of the need to append $new_fails and $new_passes to $new_flaky even if only $try 0 runs.\n\nPlease let me know if this is what you had in mind.",
+      "parentUuid": "174b3293_f69536a0",
+      "range": {
+        "startLine": 1184,
+        "startChar": 31,
+        "endLine": 1185,
+        "endChar": 44
+      },
+      "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
