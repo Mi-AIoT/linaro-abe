@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f3983f_84883294",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-11-02T08:19:14Z",
+      "side": 1,
+      "message": "I do not follow why we need to do this.  Could you elaborate?",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "fb8e388690e0e0ac6d49bf8cae19f8c5430aa518",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c74a9403_93d94cfc",
