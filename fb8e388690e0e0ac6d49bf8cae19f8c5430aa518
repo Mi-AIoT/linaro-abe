@@ -24,6 +24,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "60e5bc93_3473af7d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-02T20:50:26Z",
+      "side": 1,
+      "message": "Well, \"need\" is a strong word, I should have used \"want\". My thinking is: assuming that the baseline flaky list is fairly complete, most CI jobs would run only on try 0. So if we don\u0027t record those failed tests, we would record redundant flaky tests only occasionally, when a new flaky test appears or when an existing flaky entry expires. Which doesn\u0027t sound like what we wanted to do, but perhaps is redundancy enough?\n\nOr perhaps my thinking is wrong? In any case, you are right: by recording all failures in try 0, the flaky list doesn\u0027t include only the flaky tests, but is polluted with all testsuite failures too.\n\nI\u0027ll make a v3 which doesn\u0027t record failures in try 0.",
+      "parentUuid": "60f3983f_84883294",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 28
+      },
+      "revId": "fb8e388690e0e0ac6d49bf8cae19f8c5430aa518",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c74a9403_93d94cfc",
@@ -37,6 +61,23 @@
       "writtenOn": "2023-11-02T07:53:02Z",
       "side": 1,
       "message": "The lava-bot build failure seems to be an outage or network error:\n\n\u003e 07:41:52 ERROR: Couldn\u0027t find any revision to build. Verify the repository and branch configuration for this job.",
+      "revId": "fb8e388690e0e0ac6d49bf8cae19f8c5430aa518",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "421bffca_e838175b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-02T20:50:26Z",
+      "side": 1,
+      "message": "Thank you for the review again! Working on v3 now.",
       "revId": "fb8e388690e0e0ac6d49bf8cae19f8c5430aa518",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
