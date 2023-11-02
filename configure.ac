@@ -258,7 +258,7 @@ echo ""
 AC_ARG_WITH(languages,
   AC_HELP_STRING([--with-languages], [List of languages for the compiler]),
   WITH_LANGUAGES=${withval},
-  WITH_LANGUAGES='default')
+  WITH_LANGUAGES='abe_default')
 AC_SUBST(WITH_LANGUAGES)
 
 dnl if you have SSH access to the remote machine
