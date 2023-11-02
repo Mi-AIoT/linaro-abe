@@ -819,6 +819,8 @@ exp_to_tool()
 		    gcc:gcc|\
 		    gcc:g++|\
 		    gcc:gfortran|\
+		    gcc:go|\
+		    gcc:gotools|\
 		    gcc:lib*|\
 		    gcc:obj*|\
 		    gdb:gdb|\
@@ -931,6 +933,7 @@ tool_to_check()
 		any) ;;
 		libstdc++) check="check-target-libstdc++-v3" ;;
 		lib*) check="check-target-$tool" ;;
+		gotools) check="check-gotools" ;;
 		gcc) check="check-gcc-c" ;;
 		g++) check="check-gcc-c++" ;;
 		gfortran) check="check-gcc-fortran" ;;
