@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1143f8d1_7b942b42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-03T06:37:57Z",
+      "side": 1,
+      "message": "Ditto, still testing v3 but uploading to get review of the approach and the code.",
+      "parentUuid": "49d9f50a_f93897dd",
+      "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9a7ab865_2254180a",
         "filename": "lib/make.sh",
         "patchSetId": 1
@@ -79,6 +97,30 @@
       "side": 1,
       "message": "Ah! That makes sense. I hadn\u0027t thought of the impact in runtime of the change, and also hadn\u0027t considered the possibility of the middle-ground approach.\n\nv2 implements your suggestion. The diff is bigger than you might expect because of the need to append $new_fails and $new_passes to $new_flaky even if only $try 0 runs.\n\nPlease let me know if this is what you had in mind.",
       "parentUuid": "174b3293_f69536a0",
+      "range": {
+        "startLine": 1184,
+        "startChar": 31,
+        "endLine": 1185,
+        "endChar": 44
+      },
+      "revId": "868725dca03f14e697042e8c9e5cb7813af9edf9",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f5dcc31_c26950f4",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1185,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-03T06:37:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "119974ac_f042af7a",
       "range": {
         "startLine": 1184,
         "startChar": 31,
