@@ -16,6 +16,29 @@
       "message": "Hello,\n\nI believe this version addresses the concerns raised on v2.\n\nThe \"Incorporate this try\u0027s flaky tests into $new_flaky.\" block is moved up so that $new_flaky will have the discovered flaky tests of the last try. Otherwise they would be lost.",
       "revId": "ffddae18490d2c2457594e1eca49fcfd771d681d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4181dd24_f1395cf6",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-11-06T13:56:27Z",
+      "side": 1,
+      "message": "Why do we want to look at $baseline_fails at $try \u003e\u003d 1?\n\nBackground:\nWe look at $baseline_fails on $try\u003d\u003d0 as an optimization to avoid re-confirming known non-flaky fails on every build.  This allows us to complete testing with a single iteration in most cases.  Otherwise we would always have to do at least 2 iterations in the presence of any non-flaky fail.",
+      "range": {
+        "startLine": 1226,
+        "startChar": 10,
+        "endLine": 1226,
+        "endChar": 24
+      },
+      "revId": "ffddae18490d2c2457594e1eca49fcfd771d681d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
