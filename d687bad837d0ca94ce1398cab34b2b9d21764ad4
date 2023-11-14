@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c9111d2_0189a5cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-14T15:47:03Z",
+      "side": 1,
+      "message": "Thanks for your review! v4 doesn\u0027t use baseline fails for $try ≥ 1 at the cost of slightly more complexity.\n\nI\u0027m fine with pushing either v3 or v4.",
+      "revId": "d687bad837d0ca94ce1398cab34b2b9d21764ad4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}

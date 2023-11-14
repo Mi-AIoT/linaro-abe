@@ -39,6 +39,30 @@
       },
       "revId": "ffddae18490d2c2457594e1eca49fcfd771d681d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b53ef91_f3a44808",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 1226,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-14T15:47:03Z",
+      "side": 1,
+      "message": "It\u0027s not really necessary, but doing so slightly simplifies the code.\nOtherwise we need a new $flaky_and_fails_for_deciding that wouldn\u0027t include $baseline_fails.\n\nI just pushed a v4 to compare both approaches.",
+      "parentUuid": "4181dd24_f1395cf6",
+      "range": {
+        "startLine": 1226,
+        "startChar": 10,
+        "endLine": 1226,
+        "endChar": 24
+      },
+      "revId": "ffddae18490d2c2457594e1eca49fcfd771d681d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
