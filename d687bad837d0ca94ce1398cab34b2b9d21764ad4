@@ -16,6 +16,23 @@
       "message": "Thanks for your review! v4 doesn\u0027t use baseline fails for $try ≥ 1 at the cost of slightly more complexity.\n\nI\u0027m fine with pushing either v3 or v4.",
       "revId": "d687bad837d0ca94ce1398cab34b2b9d21764ad4",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f32522_046df78d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-11-14T15:48:11Z",
+      "side": 1,
+      "message": "Sorry, forgot to close this comment. I\u0027ve tested both v3 and v4 on both aarch64 and armhf.",
+      "revId": "d687bad837d0ca94ce1398cab34b2b9d21764ad4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
