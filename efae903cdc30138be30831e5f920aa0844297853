@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99c2b1d_ee0d33f6",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2023-11-28T15:31:00Z",
+      "side": 1,
+      "message": "I don\u0027t have the full picture, so probably a useless remark.\n\nI\u0027m just surprised (locally) to see that you change $dirs from \"/gdb\" to \"/\" especially with read1_dir\u003d\"/gdb/testsuite\" below.\n\nbut you have the full picture. please process the remark.",
+      "range": {
+        "startLine": 886,
+        "startChar": 1,
+        "endLine": 886,
+        "endChar": 11
+      },
+      "revId": "efae903cdc30138be30831e5f920aa0844297853",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
