@@ -2,15 +2,15 @@
 
 # This script transforms the output of GCC's contrib/test_summary (an
 # email) into a format suitable for consumption by our Jenkins CI:
-# three files, containing subject, recipient and body.
+# three files, containing subject, recipients and body.
 #
 # In order to be used transparently as a replacement for "Mail",
 # it uses the same interface as the "Mail" command:
 #
-# cat body | testresults2jenkins.sh -s "subject" "recipient"
+# cat body | testresults2jenkins.sh -s "subject" "recipients"
 #
 # its output goes intro three files:
-# - testresults-mail-recipient.txt
+# - testresults-mail-recipients.txt
 # - testresults-mail-subject.txt
 # - testresults-mail-body.txt
 #
@@ -19,7 +19,7 @@
 
 usage()
 {
-    echo "Usage: $0 -s subject recipient"
+    echo "Usage: $0 -s subject recipients"
     exit 1
 }
 
@@ -32,10 +32,10 @@ if [ "$1" != "-s" ]; then
 fi
 
 subject="$2"
-recipient="$3"
+recipients="$3"
 
 TESTRESULTS_PREFIX=${TESTRESULTS_PREFIX-$(pwd)/testresults-}
 
-echo "to:$recipient" > ${TESTRESULTS_PREFIX}mail-recipient.txt
+echo "to:$recipients" > ${TESTRESULTS_PREFIX}mail-recipients.txt
 echo "$subject" > ${TESTRESULTS_PREFIX}mail-subject.txt
 cat > ${TESTRESULTS_PREFIX}mail-body.txt
