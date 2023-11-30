@@ -36,6 +36,6 @@ recipients="$3"
 
 TESTRESULTS_PREFIX=${TESTRESULTS_PREFIX-$(pwd)/testresults-}
 
-echo "to:$recipients" > ${TESTRESULTS_PREFIX}mail-recipients.txt
+echo "$recipients" > ${TESTRESULTS_PREFIX}mail-recipients.txt
 echo "$subject" > ${TESTRESULTS_PREFIX}mail-subject.txt
 cat > ${TESTRESULTS_PREFIX}mail-body.txt
