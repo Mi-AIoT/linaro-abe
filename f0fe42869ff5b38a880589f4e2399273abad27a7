@@ -98,6 +98,30 @@
       },
       "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de22e4d1_dc94b0b6",
+        "filename": "lib/make.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-12-04T20:45:01Z",
+      "side": 1,
+      "message": "thanks 😊",
+      "parentUuid": "b4bf2892_1f052bf3",
+      "range": {
+        "startLine": 1182,
+        "startChar": 61,
+        "endLine": 1183,
+        "endChar": 30
+      },
+      "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
