@@ -35,6 +35,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c6a7b9_e70549cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-04T17:46:26Z",
+      "side": 1,
+      "message": "Agreed. :-/",
+      "parentUuid": "188941b7_50b2dc30",
+      "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0a090bf_6078bffd",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-12-04T16:51:55Z",
       "side": 1,
       "message": "Since they are flaky, it may not include all of them, right? (Otherwise include $baseline_flaky at line 1227 is useless?)",
+      "range": {
+        "startLine": 1182,
+        "startChar": 61,
+        "endLine": 1183,
+        "endChar": 30
+      },
+      "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4bf2892_1f052bf3",
+        "filename": "lib/make.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-04T17:46:26Z",
+      "side": 1,
+      "message": "Right. It\u0027ll contain a subset of the baseline flaky failures.\nI\u0027ll reword to make it clearer.",
+      "parentUuid": "a0a090bf_6078bffd",
       "range": {
         "startLine": 1182,
         "startChar": 61,
