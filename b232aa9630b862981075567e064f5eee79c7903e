@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b0db31f_82e6b0a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-04T22:57:49Z",
+      "side": 1,
+      "message": "This version rewords the comment a bit, to address Christophe\u0027s question. Let me know if it can be improved further.\n\nThanks for your review!",
+      "revId": "b232aa9630b862981075567e064f5eee79c7903e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
