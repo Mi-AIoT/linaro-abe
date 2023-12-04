@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca5cef15_7166fb3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-04T14:04:38Z",
+      "side": 1,
+      "message": "Hello,\n\nThis version is based on my last conversation with Maxim, and just adds a new results comparison after each try to avoid taking into account the baseline flaky tests when generating the file with detected flaky tests.\n\nEverything else should stay the same.",
+      "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
