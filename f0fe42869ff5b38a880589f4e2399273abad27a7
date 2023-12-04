@@ -16,6 +16,46 @@
       "message": "Hello,\n\nThis version is based on my last conversation with Maxim, and just adds a new results comparison after each try to avoid taking into account the baseline flaky tests when generating the file with detected flaky tests.\n\nEverything else should stay the same.",
       "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "188941b7_50b2dc30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-12-04T16:51:55Z",
+      "side": 1,
+      "message": "This is getting complicated :-(",
+      "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a090bf_6078bffd",
+        "filename": "lib/make.sh",
+        "patchSetId": 5
+      },
+      "lineNbr": 1183,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-12-04T16:51:55Z",
+      "side": 1,
+      "message": "Since they are flaky, it may not include all of them, right? (Otherwise include $baseline_flaky at line 1227 is useless?)",
+      "range": {
+        "startLine": 1182,
+        "startChar": 61,
+        "endLine": 1183,
+        "endChar": 30
+      },
+      "revId": "f0fe42869ff5b38a880589f4e2399273abad27a7",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
