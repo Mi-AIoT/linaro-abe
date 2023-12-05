@@ -16,6 +16,24 @@
       "message": "This version rewords the comment a bit, to address Christophe\u0027s question. Let me know if it can be improved further.\n\nThanks for your review!",
       "revId": "b232aa9630b862981075567e064f5eee79c7903e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cff2cb80_1dc924aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-12-05T08:49:59Z",
+      "side": 1,
+      "message": "Thanks, I think that\u0027s clearer.",
+      "parentUuid": "2b0db31f_82e6b0a6",
+      "revId": "b232aa9630b862981075567e064f5eee79c7903e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
