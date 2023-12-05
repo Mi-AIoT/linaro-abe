@@ -34,6 +34,23 @@
       "parentUuid": "2b0db31f_82e6b0a6",
       "revId": "b232aa9630b862981075567e064f5eee79c7903e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77c1eabf_67d4ac26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-05T21:52:20Z",
+      "side": 1,
+      "message": "\u003e \"Build Failed\n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1535/ : Well ... it worked on my machine\"\n\nConsidering that patchset 5 passed tests, and the only difference in patchset 6 is a reworded comment, I\u0027m pretty sure this failure is spurious.\n\nIn any case, I had a look but I can\u0027t find a hint of what went wrong. Log file test_previous_abe_manifest_gcc7.log ends abruptly in call to validate-manifest.pl, in function validate_manifests_soft():\n\n+ validate_manifests_soft mani1.txt mani2.txt\n+ local RET\u003d0\n+ local version\u003d\n+ local prev_version\u003d\n+ local manifest_type_opt\u003d\n+ for i in \"$@\"\n++ head -n 1 mani1.txt\n+ version\u003dmanifest_format\u003d1.6\n+ \u0027[\u0027 \u0027!\u0027 -z \u0027\u0027 -a \u0027\u0027 \u0027!\u003d\u0027 manifest_format\u003d1.6 \u0027]\u0027\n+ manifest_type_opt\u003d\n+ /home/tcwg-buildslave/workspace/tcwg-abe-test__0/abe-tests/validate-manifest.pl --verbose --no-online mani1.txt\nPASS: mani1.txt\n+ prev_version\u003dmanifest_format\u003d1.6\n+ for i in \"$@\"\n++ head -n 1 mani2.txt\n+ version\u003dmanifest_format\u003d1.6\n+ \u0027[\u0027 \u0027!\u0027 -z manifest_format\u003d1.6 -a manifest_format\u003d1.6 \u0027!\u003d\u0027 manifest_format\u003d1.6 \u0027]\u0027\n+ manifest_type_opt\u003d\n+ /home/tcwg-buildslave/workspace/tcwg-abe-test__0/abe-tests/validate-manifest.pl --verbose --no-online mani2.txt",
+      "revId": "b232aa9630b862981075567e064f5eee79c7903e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
