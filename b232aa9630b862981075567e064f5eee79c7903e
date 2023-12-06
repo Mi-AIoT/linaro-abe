@@ -69,6 +69,24 @@
       "parentUuid": "77c1eabf_67d4ac26",
       "revId": "b232aa9630b862981075567e064f5eee79c7903e",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb87d640_a0737e9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-06T17:32:29Z",
+      "side": 1,
+      "message": "\u003e I have noticed simiilar failures in other builds of the same job, I restarted them manually, they failed again in different places, and the logs are not helpful either :-(\n\nMy first guess is that processes are abruptly dying or being killed. In this case, it looks like the bash process executing validate_manifests_soft() suddenly ended.",
+      "parentUuid": "17d0dd02_cc1bc819",
+      "revId": "b232aa9630b862981075567e064f5eee79c7903e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
