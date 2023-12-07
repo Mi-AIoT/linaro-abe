@@ -1071,6 +1071,46 @@ make_check()
 	    ;;
 	gcc)
 	    exec_tests=true
+
+	    if [ x"$send_results_to" != x ]; then
+		# LAST_UPDATED is used when sending results summaries.
+		# This file is not committed in the GCC repo, but is
+		# used by contrib/test_summary if present in $srcdir.
+		#
+		# We generate almost the same contents as in
+		# gcc/REVISION (see configure_build() in
+		# lib/configure.sh), but we add $target and
+		# $ABE_TARGET_BOARD_OPTIONS so that this information
+		# is more obvious when reading the email report.
+		#
+		# The reason we do this in two places is because in
+		# configure_build() we don;t know
+		# $ABE_TARGET_BOARD_OPTIONS, for instance if the user
+		# invokes ABE twice, once to build the toolchain
+		# (without $ABE_TARGET_BOARD_OPTIONS), and once to run
+		# the tests (with $ABE_TARGET_BOARD_OPTIONS, skipping
+		# the build part, so too late for an update to
+		# gcc/VERSION to be taken into account).  (This is
+		# what we do in CI)
+		#
+		# If we accept not to provide
+		# $ABE_TARGET_BOARD_OPTIONS in the summaries, we could
+		# merge the creation of LAST_UPDATED with that of
+		# gcc/REVISION in configure_build().
+		local revstring="$(get_component_revision ${component})"
+		local branch="$(get_component_branch ${component})"
+		local srcdir="$(get_component_srcdir ${component})"
+
+		# Try to generate a nicer revision
+		if [ -d ${srcdir}/.git ]; then
+		    revstring=$(git -C ${srcdir} describe --match "basepoints/*" \
+				    --match "releases/*" ${revstring}  | sed 's,^basepoints/,,')
+		fi
+
+		local long_config="$target $ABE_TARGET_BOARD_OPTIONS"
+		dryrun "echo $(date --utc --iso-8601=seconds) '(${branch} revision' $revstring')' $long_config | tee ${srcdir}/LAST_UPDATED"
+	    fi
+
 	    ;;
 	gdb)
 	    exec_tests=true
