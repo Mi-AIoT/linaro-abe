@@ -192,6 +192,25 @@ configure_build()
 		# Native build needs stage2 build only.
 		opts="$opts $stage2_flags"
 	    fi
+
+	    if [ x"$send_results_to" != x ]; then
+		# gcc/REVISION is used to build 'gcc --version'
+		# output.  This file is not committed in the GCC repo,
+		# but GCC's build system uses it if present in
+		# $srcdir.
+		local revstring="$(get_component_revision ${component})"
+		local branch="$(get_component_branch ${component})"
+		local srcdir="$(get_component_srcdir ${component})"
+
+		# Try to generate a nicer revision.
+		if [ -d ${srcdir}/.git ]; then
+		    revstring=$(git -C ${srcdir} describe --match "basepoints/*" \
+				    --match "releases/*" ${revstring}  | sed 's,^basepoints/,,')
+		fi
+
+		dryrun "echo \[${branch} revision ${revstring}\] | tee ${srcdir}/gcc/REVISION"
+		dryrun "touch ${srcdir}/gcc/genversion.cc"
+	    fi
 	    ;;
 	binutils)
 	    if test x"${override_linker}" = x"gold"; then
