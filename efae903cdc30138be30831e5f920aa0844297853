@@ -22,6 +22,30 @@
       },
       "revId": "efae903cdc30138be30831e5f920aa0844297853",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9046b262_246e6cbc",
+        "filename": "lib/make.sh",
+        "patchSetId": 3
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2023-12-21T10:27:11Z",
+      "side": 1,
+      "message": "Yes that\u0027s a partial revert/rewrite of a previous patch from Thiago, so that GDB and GCC have a similar treatment if/when READ1 support is added to GCC.",
+      "parentUuid": "d99c2b1d_ee0d33f6",
+      "range": {
+        "startLine": 886,
+        "startChar": 1,
+        "endLine": 886,
+        "endChar": 11
+      },
+      "revId": "efae903cdc30138be30831e5f920aa0844297853",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
