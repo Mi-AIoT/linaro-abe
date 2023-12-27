@@ -129,6 +129,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40fec20f_503fa06a",
+        "filename": "lib/make.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 1409,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-27T15:34:20Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "73441385_5873b7a5",
+      "range": {
+        "startLine": 1409,
+        "startChar": 16,
+        "endLine": 1409,
+        "endChar": 37
+      },
+      "revId": "b232aa9630b862981075567e064f5eee79c7903e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbdaeb5a_0b61f320",
@@ -142,6 +166,30 @@
       "writtenOn": "2023-12-27T10:57:14Z",
       "side": 1,
       "message": "FYI, you can set --verbosity\u003d0 instead of \"\u003e /dev/null\".  See https://git.linaro.org/toolchain/gcc-compare-results.git/tree/contrib/testsuite-management/validate_failures.py#n690",
+      "range": {
+        "startLine": 1412,
+        "startChar": 5,
+        "endLine": 1412,
+        "endChar": 14
+      },
+      "revId": "b232aa9630b862981075567e064f5eee79c7903e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae6a1e15_1ff6e711",
+        "filename": "lib/make.sh",
+        "patchSetId": 6
+      },
+      "lineNbr": 1412,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-27T15:34:20Z",
+      "side": 1,
+      "message": "Ah! I hadn\u0027t noticed the verbosity option. Good idea. Done.",
+      "parentUuid": "fbdaeb5a_0b61f320",
       "range": {
         "startLine": 1412,
         "startChar": 5,
