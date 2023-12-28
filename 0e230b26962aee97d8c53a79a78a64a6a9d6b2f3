@@ -16,6 +16,29 @@
       "message": "Thank you for the review! This version implements your suggestions.\nI\u0027m currently doing a test run in jade-03 with this version and will push when it\u0027s finished.",
       "revId": "0e230b26962aee97d8c53a79a78a64a6a9d6b2f3",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdb84639_f2505841",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-12-28T05:50:45Z",
+      "side": 1,
+      "message": "Hi Thiago.  I\u0027ve spotted that we are using \"for_output\" fails/passes to construct the list of .exp files to re-test.  So that even we \"decide\" that we need to re-test only a.exp and b.exp, but \"for_output\" we\u0027ll have \"a.exp b.exp c.exp ... z.exp\", then \"c.exp ... z.exp\" will also get re-tested.\n\nI think we need to use \"new_fails_for_deciding\" and \"new_passes_for_deciding\" here.",
+      "range": {
+        "startLine": 1576,
+        "startChar": 38,
+        "endLine": 1576,
+        "endChar": 64
+      },
+      "revId": "0e230b26962aee97d8c53a79a78a64a6a9d6b2f3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ],
   "submitRequirementResults": []
