@@ -1172,9 +1172,12 @@ make_check()
 
     # Prepare temporary fail files
     local new_fails new_passes baseline_flaky new_flaky
+    local new_fails_for_deciding new_passes_for_deciding
     local known_flaky_and_fails_for_deciding flaky_and_fails_for_output
     new_fails=$(mktemp)
+    new_fails_for_deciding=$(mktemp)
     new_passes=$(mktemp)
+    new_passes_for_deciding=$(mktemp)
     baseline_flaky=$(mktemp)
     known_flaky_and_fails_for_deciding=$(mktemp)
     flaky_and_fails_for_output=$(mktemp)
@@ -1448,7 +1451,8 @@ EOF
 		    "$validate_failures" \
 			--manifest="$known_flaky_and_fails_for_deciding" \
 			--build_dir="${builddir}$dir" \
-			--verbosity=0 "${expiry_date_opt[@]}" &
+			--verbosity=1 "${expiry_date_opt[@]}" \
+			> "$new_fails_for_deciding" &
 		    res_new_fails_for_deciding=0 && wait $! \
 			    || res_new_fails_for_deciding=$?
 
@@ -1457,8 +1461,9 @@ EOF
 		    "$validate_failures" \
 			--manifest="$known_flaky_and_fails_for_deciding" \
 			--build_dir="${builddir}$dir" \
-			--verbosity=0 "${expiry_date_opt[@]}" \
-			--inverse_match &
+			--verbosity=1 "${expiry_date_opt[@]}" \
+			--inverse_match \
+			> "$new_passes_for_deciding" &
 		    res_new_passes_for_deciding=0 && wait $! \
 			    || res_new_passes_for_deciding=$?
 
@@ -1573,7 +1578,8 @@ EOF
 		    cat "$dir_fails" >> "$new_try_fails"
 
 		    readarray -t failed_exps_for_dir \
-                              < <(cat "$new_fails" "$new_passes" \
+                              < <(cat "$new_fails_for_deciding"  \
+				      "$new_passes_for_deciding" \
 				      | awk '/^Running .* \.\.\./ { print $2 }'\
 				      | sort -u)
 
@@ -1609,6 +1615,7 @@ EOF
     fi
 
     rm "$new_fails" "$new_passes" "$baseline_flaky"
+    rm "$new_fails_for_deciding" "$new_passes_for_deciding"
     rm "$known_flaky_and_fails_for_deciding" "$flaky_and_fails_for_output"
     if [ "$flaky_failures" = "" ]; then
 	rm "$new_flaky"
