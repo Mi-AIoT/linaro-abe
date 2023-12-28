@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c706be_ec5f4f44",
+        "filename": "lib/make.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-12-28T07:45:10Z",
+      "side": 0,
+      "message": "I don\u0027t quite understand this part (but I\u0027m no expert in GDB testing).  Thiago, can you please review changes to tool_to_*() functions?",
+      "range": {
+        "startLine": 889,
+        "startChar": 5,
+        "endLine": 889,
+        "endChar": 16
+      },
+      "revId": "fc92e939942f8d495315075c64dae72328bcee56",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}

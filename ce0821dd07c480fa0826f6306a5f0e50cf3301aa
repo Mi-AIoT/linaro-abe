@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab77949e_87052f18",
+        "filename": "lib/make.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2023-12-28T07:45:10Z",
+      "side": 1,
+      "message": "How specific are expect-stdbuf-* wrappers to GCC?  IIUC, they should work with all other dejagnu testsuites, it\u0027s just so far they have been tested only with GCC.\n\nFrom GNU toolchain point of view, it would be nice to integrate these wrappers into DejaGnu, and have buffering adjusted transparently (via an environment variable or dejagnu board setting) for any binutils/gdb/gcc/newlib testsuite.\n\nThis is just a question, not a request for a major rework :-) .",
+      "range": {
+        "startLine": 1178,
+        "startChar": 1,
+        "endLine": 1178,
+        "endChar": 4
+      },
+      "revId": "ce0821dd07c480fa0826f6306a5f0e50cf3301aa",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
