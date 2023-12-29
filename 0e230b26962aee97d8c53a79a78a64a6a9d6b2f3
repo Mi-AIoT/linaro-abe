@@ -39,6 +39,30 @@
       },
       "revId": "0e230b26962aee97d8c53a79a78a64a6a9d6b2f3",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36ecb5be_abaf7793",
+        "filename": "lib/make.sh",
+        "patchSetId": 7
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2023-12-29T02:50:51Z",
+      "side": 1,
+      "message": "Indeed. Thanks for spotting it! Addressed in\n\nhttps://review.linaro.org/c/toolchain/abe/+/46449",
+      "parentUuid": "fdb84639_f2505841",
+      "range": {
+        "startLine": 1576,
+        "startChar": 38,
+        "endLine": 1576,
+        "endChar": 64
+      },
+      "revId": "0e230b26962aee97d8c53a79a78a64a6a9d6b2f3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ],
   "submitRequirementResults": []
