@@ -22,6 +22,30 @@
       },
       "revId": "fc92e939942f8d495315075c64dae72328bcee56",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91200172_623bf5a9",
+        "filename": "lib/make.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 889,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-01-07T21:00:10Z",
+      "side": 0,
+      "message": "This is a partial revert of b6a7eb1e0c828dfc16e66a22db925a9fa6ce7faf , and we now mimic what \u0027make check-read1\u0027 does: we build the read1 support utilities, then invoke \u0027make check\u0027 with \u0027READ1\u003d1, so that the behaviour from ABE point of view is more uniform between all toolchain components.\n\nThe idea is to build / provide the needed wrappers from ABE, then call \u0027make check\u0027 with the needed environment overrides.",
+      "parentUuid": "b9c706be_ec5f4f44",
+      "range": {
+        "startLine": 889,
+        "startChar": 5,
+        "endLine": 889,
+        "endChar": 16
+      },
+      "revId": "fc92e939942f8d495315075c64dae72328bcee56",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }

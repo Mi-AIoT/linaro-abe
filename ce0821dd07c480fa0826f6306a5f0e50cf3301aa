@@ -22,6 +22,30 @@
       },
       "revId": "ce0821dd07c480fa0826f6306a5f0e50cf3301aa",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb306338_d591b0b4",
+        "filename": "lib/make.sh",
+        "patchSetId": 10
+      },
+      "lineNbr": 1178,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-01-07T21:00:10Z",
+      "side": 1,
+      "message": "Indeed I think they should work with all components, but I have not checked yet.\nI have run the GCC testsuite with all these versions, with and without LANG\u003dC, but I still have to fully analyze the results (as the ones I had had plenty of random errors -- spawn/fork failed)\n\nSupporting these from DejaGnu would be nice indeed, but might involve long arguing with maintainers and users, but it would be more transparent and possibly provide more flexibility (eg only change buffering for compiler/tool output or for executable messages)",
+      "parentUuid": "ab77949e_87052f18",
+      "range": {
+        "startLine": 1178,
+        "startChar": 1,
+        "endLine": 1178,
+        "endChar": 4
+      },
+      "revId": "ce0821dd07c480fa0826f6306a5f0e50cf3301aa",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
