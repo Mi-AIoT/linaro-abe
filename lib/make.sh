@@ -1116,6 +1116,16 @@ make_check()
 	    exec_tests=true
 	    ;;
 	glibc)
+            # Copy the required/used gcc libraries on the build directory.
+            # It makes the glibc tests to use the libraries from the compiler
+            # used to build and avoid potential issues (such on arm) where
+            # some tests are linked against libgcc_s and the container tests
+            # can not be copy the required dependencies.
+	    dryrun "copy_gcc_libc_to_builddir ${builddir}"
+	    if [ $? -ne 0 ]; then
+	       error "Copy of gcc libs to build directory failed!"
+	       return 1
+	    fi
 	    ;;
 	newlib)
 	    ;;
@@ -1836,6 +1846,34 @@ copy_gcc_libs_to_sysroot()
     fi
 
     rsync -a ${gcc_lib_path}/ ${sysroot_lib_dir}/
+}
+
+# Copy compiler libraries to build dir
+copy_gcc_libc_to_builddir()
+{
+    local builddir=$1
+    local libgcc
+    local libstdcpp
+
+    # NB: some architectures (m68k, hppa) uses a different libgcc
+    # minor version than default '1'.
+    local libgccname="libgcc_s.so.1"
+    local libstdcppname="libstdc++.so.6"
+
+    libgcc="$(${target}-gcc -print-file-name=libgcc_s.so.1)"
+    if [ x"$libgcc" = x"$libgccname" ]; then
+	error "Cannot find libgcc: $libgcc"
+	return 1
+    fi
+    libstdcpp="$(${target}-gcc -print-file-name=libstdc++.so.6)"
+    if [ x"$libstdcpp" = x"$libstdcppname" ]; then
+	error "Cannot find libstdc++: $libstdcpp"
+	return 1
+    fi
+    echo "LIBSTCPP=$libstdcpp"
+
+    # The libstdc++.so.6 is usually a symlink to a minor version.
+    rsync -aL $libgcc $libstdcpp $builddir
 }
 
 # helper function for record_test_results(). Records .sum files as artifacts
