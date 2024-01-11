@@ -70,6 +70,30 @@
       },
       "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8d98be_fe73cddb",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-11T17:34:33Z",
+      "side": 1,
+      "message": "I see what I did differently than tcwg_FOO_check: I explicit added a --target when issuing abe.sh (which in turn made it use ${target}-gcc instead of just ${gcc}.  I will update the patch to handle it.",
+      "parentUuid": "67000505_7c79052f",
+      "range": {
+        "startLine": 1863,
+        "startChar": 14,
+        "endLine": 1863,
+        "endChar": 27
+      },
+      "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
