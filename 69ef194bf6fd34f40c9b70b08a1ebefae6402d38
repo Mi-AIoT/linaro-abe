@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43bdb287_c1a016b8",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-01-11T10:14:45Z",
+      "side": 1,
+      "message": "This won\u0027t work in our tcwg_glibc_check builds, where glibc is built using system compiler.  Is there a way to query glibc build about compiler it was built with?",
+      "range": {
+        "startLine": 1863,
+        "startChar": 14,
+        "endLine": 1863,
+        "endChar": 27
+      },
+      "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
