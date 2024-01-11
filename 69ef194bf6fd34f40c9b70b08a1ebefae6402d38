@@ -46,6 +46,30 @@
       },
       "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67000505_7c79052f",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-01-11T13:51:20Z",
+      "side": 1,
+      "message": "CI projects tcwg_FOO_check only build and test FOO component of the toolchain, using the rest from the system.  They are doing a partial ABE build -- \"abe.sh --build glibc\" instead of \"abe.sh --build all\".\nTherefore, glibc configure will not find \"$target-gcc\" compiler, and will use plain \"gcc\".",
+      "parentUuid": "040bb0b6_b8ebdd14",
+      "range": {
+        "startLine": 1863,
+        "startChar": 14,
+        "endLine": 1863,
+        "endChar": 27
+      },
+      "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
