@@ -22,6 +22,30 @@
       },
       "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040bb0b6_b8ebdd14",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1863,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-11T12:49:44Z",
+      "side": 1,
+      "message": "At least with a local abe build, since it does not explicit set CC but sets the target, configure will select \u0027${target}-gcc\u0027. Is tcwg_glibc_check doing something different?",
+      "parentUuid": "43bdb287_c1a016b8",
+      "range": {
+        "startLine": 1863,
+        "startChar": 14,
+        "endLine": 1863,
+        "endChar": 27
+      },
+      "revId": "69ef194bf6fd34f40c9b70b08a1ebefae6402d38",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
