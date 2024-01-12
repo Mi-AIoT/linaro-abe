@@ -24,6 +24,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea46873_8939e908",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a7e05407_689777b8",
+      "range": {
+        "startLine": 19,
+        "startChar": 20,
+        "endLine": 19,
+        "endChar": 28
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a0ad3fa_7a16380a",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-11T22:54:45Z",
       "side": 1,
       "message": "Shouldn\u0027t it be top-level/lib or lib64? I suppose you are right, but this seems like an unusual location to me.",
+      "range": {
+        "startLine": 20,
+        "startChar": 7,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7517159_d12eb5ec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "The glibc test-container tool is a way to isolate the glibc testing from the system, as it allows to tests some tools and/or APIs that requires to change the system files (such as ldconfig).\n\nIt accomplishes it by using linux namespace, among other things.  It creates a new namespace and binding mount the build directory and some required linux devices.  It means that the glibc built loader does not see, nor can open, any system files . The non-container tests might still access the ld.so.cache and thus eventually use system libraries and that\u0027s there are not failing. For instance, which the default why of issuing glibc tests:\n\n$ LD_DEBUG\u003dfiles elf/ld.so --library-path . elf/tst-dlmodcount 2\u003e\u00261 | grep libgcc_s.so.1\n   3120337:     file\u003dlibgcc_s.so.1 [0];  needed by elf/tst-dlmodcount [0]\n   3120337:     file\u003dlibgcc_s.so.1 [0];  generating link map\n   3120337:     calling init: /lib/arm-linux-gnueabihf/libgcc_s.so.1\n   3120339:     calling fini: /lib/arm-linux-gnueabihf/libgcc_s.so.1 [0]\n   3120337:     calling fini: /lib/arm-linux-gnueabihf/libgcc_s.so.1 [0]\n   \nAnd without the system load cache:\n\n$ LD_DEBUG\u003dfiles elf/ld.so --inhibit-cache --library-path . elf/tst-dlmodcount 2\u003e\u00261 | grep libgcc_s.so.1\n   3120340:     file\u003dlibgcc_s.so.1 [0];  needed by elf/tst-dlmodcount [0]\nelf/tst-dlmodcount: error while loading shared libraries: libgcc_s.so.1: cannot open shared object file: No such file or directory\n\nBy copying the gcc requires libraries to build direct, the glibc loader then can access and load them if required.",
+      "parentUuid": "0a0ad3fa_7a16380a",
       "range": {
         "startLine": 20,
         "startChar": 7,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d241b50c_8d4a72e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "It should be libstdc++.so.6.",
+      "parentUuid": "5b216ffd_84ee2664",
+      "range": {
+        "startLine": 21,
+        "startChar": 43,
+        "endLine": 21,
+        "endChar": 47
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d66d84a_eaaeffc6",
         "filename": "lib/make.sh",
         "patchSetId": 2
@@ -83,6 +155,30 @@
       "writtenOn": "2024-01-11T22:54:45Z",
       "side": 1,
       "message": "typo? (such as on arm)",
+      "range": {
+        "startLine": 1121,
+        "startChar": 56,
+        "endLine": 1121,
+        "endChar": 63
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e2b569b_140c1454",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3d66d84a_eaaeffc6",
       "range": {
         "startLine": 1121,
         "startChar": 56,
@@ -116,6 +212,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bae37b8_d0e94257",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c07899de_5d7d0a6e",
+      "range": {
+        "startLine": 1123,
+        "startChar": 14,
+        "endLine": 1123,
+        "endChar": 42
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d3281e8_f1faadfc",
@@ -129,6 +249,30 @@
       "writtenOn": "2024-01-11T22:54:45Z",
       "side": 1,
       "message": "Could this be $libgccname instead? (to avoid copy/paste errors in case we need to update the version for instance)",
+      "range": {
+        "startLine": 1869,
+        "startChar": 44,
+        "endLine": 1869,
+        "endChar": 57
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb706916_e8682bf7",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7d3281e8_f1faadfc",
       "range": {
         "startLine": 1869,
         "startChar": 44,
@@ -162,6 +306,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cadc564e_033179be",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1874,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e03a6a5b_f5d56659",
+      "range": {
+        "startLine": 1874,
+        "startChar": 47,
+        "endLine": 1874,
+        "endChar": 61
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f98350d_0a026f4e",
@@ -175,6 +343,24 @@
       "writtenOn": "2024-01-11T22:54:45Z",
       "side": 1,
       "message": "Same comment as in the commit message: should this be $builddir/lib ?",
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442bd457_2d5c58eb",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1881,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-12T12:33:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f98350d_0a026f4e",
       "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
