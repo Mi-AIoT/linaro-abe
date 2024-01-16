@@ -90,3 +90,8 @@ if {[info exists env(ABE_TARGET_BOARD_OPTIONS)]
     }
     set target_list "$new_target_list"
 }
+
+# The default Expect buffer size is 2000, but it is too small for some GDB
+# testcases which run commands generating a lot of output, causing
+# testsuite flakiness.
+match_max 100000
