@@ -51,6 +51,23 @@
       "parentUuid": "38c43bed_b9f3109b",
       "revId": "8cd48699b43bbc02fae0c7656e4f0c7c7786a1db",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff18d2b4_142732df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-01-17T18:28:43Z",
+      "side": 1,
+      "message": "The patch looks good to me.\n\nFWIW, I ran the tcwg_glibc_check job against this branch. I put the results here:\n\nhttps://people.linaro.org/~thiago.bauermann/artifacts-glibc-fix-container-tests/\n\nI don\u0027t know how to check whether this patch solved the failures. There were a couple of failures with \"container\" in the name:\n\nsumfiles/tests.sum:FAIL: elf/tst-dlopen-self-container\nsumfiles/tests.sum:FAIL: elf/tst-dlopen-tlsmodid-container\n\nThe files seem to have been copied into the container:\n\n$ xzgrep copy_gcc_libc_to_builddir 06-build_abe-check_glibc/console.log.xz\n00:00:53 RUN: copy_gcc_libc_to_builddir /home/thiago.bauermann/tmp/workspace/abe/builds/aarch64-unknown-linux-gnu/aarch64-unknown-linux-gnu/glibc-glibc.git~master\n\nFor reference, this is the full command line I ran:\n\n$ .../jenkins-scripts/tcwg_gnu-build.sh \\\n    \u003d\u003drr[ci_project] tcwg_glibc_check \\\n    \u003d\u003drr[ci_config] master-aarch64 \\\n    \u003d\u003drr[abe_repo] $HOME/Projects/Linaro/abe \\\n    \u003d\u003drr[abe_branch] review/adhemerval_zanella/azanella/glibc-copy-files",
+      "revId": "8cd48699b43bbc02fae0c7656e4f0c7c7786a1db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
