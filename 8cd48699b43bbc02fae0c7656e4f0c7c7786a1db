@@ -16,6 +16,23 @@
       "message": "Thanks for the explanations!",
       "revId": "8cd48699b43bbc02fae0c7656e4f0c7c7786a1db",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38c43bed_b9f3109b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-17T11:24:15Z",
+      "side": 1,
+      "message": "No sure why patchset4 failed while patchset 3 succeeded, since the only difference in patchset4 was a rewording in the commit message. Should I resend it again?",
+      "revId": "8cd48699b43bbc02fae0c7656e4f0c7c7786a1db",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
