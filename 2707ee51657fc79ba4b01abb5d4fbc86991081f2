@@ -95,6 +95,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "115ee4fe_d4952987",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-17T11:23:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7517159_d12eb5ec",
+      "range": {
+        "startLine": 20,
+        "startChar": 7,
+        "endLine": 20,
+        "endChar": 29
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b216ffd_84ee2664",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "It should be libstdc++.so.6.",
       "parentUuid": "5b216ffd_84ee2664",
+      "range": {
+        "startLine": 21,
+        "startChar": 43,
+        "endLine": 21,
+        "endChar": 47
+      },
+      "revId": "2707ee51657fc79ba4b01abb5d4fbc86991081f2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a58b6f56_cf6e373d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-01-17T11:23:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d241b50c_8d4a72e0",
       "range": {
         "startLine": 21,
         "startChar": 43,
