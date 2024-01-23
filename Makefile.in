@@ -1,0 +1,43 @@
+srcdir = @srcdir@
+CC = @CC@
+CFLAGS= @CFLAGS@
+
+# Build the expect wrapper script that preloads the read1.so library.
+expect-read1 expect-readmore:
+	rm -f $@-tmp; \
+	touch $@-tmp; \
+	echo "# THIS FILE IS GENERATED -*- buffer-read-only: t -*-" >>$@-tmp; \
+	echo "# vi:set ro:" >>$@-tmp; \
+	if [ $@ = expect-read1 ] ; then \
+	  echo "export LD_PRELOAD=`pwd`/read1.so" >>$@-tmp; \
+	else \
+	  echo "export LD_PRELOAD=`pwd`/readmore.so" >>$@-tmp; \
+	fi; \
+	echo 'exec expect "$$@"' >>$@-tmp; \
+	chmod +x $@-tmp; \
+	mv $@-tmp $@
+
+# Build the read1.so preload library.  This overrides the 'read'
+# function, making it read one byte at a time.  Running the testsuite
+# with this catches racy tests.
+read1.so: $(srcdir)/scripts/read1.c
+	$(CC) -o $@ $^ -Wall -shared -fPIC $(CFLAGS)
+
+# Build the readmore.so preload library.  This overrides the 'read'
+# function, making it try harder to read more at a time.  Running the
+# testsuite with this catches racy tests.
+readmore.so: $(srcdir)/scripts/read1.c
+	$(CC) -o $@ $^ -Wall -shared -fPIC $(CFLAGS) -DREADMORE
+
+# Build the read1 machinery.
+.PHONY: read1 readmore
+read1: read1.so expect-read1
+readmore: readmore.so expect-readmore
+
+check:
+	$(srcdir)/testsuite/test.sh
+	$(srcdir)/test.sh
+
+clean:
+	rm -fr builds/*
+

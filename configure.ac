@@ -372,22 +372,11 @@ AC_SUBST(NEWWORKDIR)
 #   AC_MSG_WARN([/opt/linaro is not writable!])
 #fi
 
-AC_OUTPUT(host.conf)
+AC_OUTPUT(host.conf Makefile)
 
 if test x"${missing}" != x; then
     AC_MSG_ERROR([You need to install these packages: ${missing}])
 fi
-
-rm -f Makefile
-cat<<EOF > Makefile
-check:
-	${srcdir}/testsuite/test.sh
-	${srcdir}/test.sh
-
-clean:
-	rm -fr builds/*
-
-EOF
 
 # Local Variables:
 # c-basic-offset: 2
