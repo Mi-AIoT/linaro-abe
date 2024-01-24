@@ -327,6 +327,7 @@ OPTIONS
 
 		Accepted values:
 		- "": Use no workaround.
+		- gcc-read1: Apply the "READ1" workaround to GCC only.
 		- gdb-read1: Apply the "READ1" workaround to GDB only.
 		- expect-stdbuf-0: Use "stdbuf -o0 -e0" expect wrapper.
 		- expect-stdbuf-1: Use "stdbuf -o1 -e1" expect wrapper.
@@ -732,6 +733,7 @@ verify_check_buffer_workaround()
     local buffer_workaround="$1"
 
     case "$buffer_workaround" in
+	gcc-read1) return 0 ;;
 	gdb-read1) return 0 ;;
 	"") return 0 ;;
 	expect-stdbuf-0) return 0 ;;
