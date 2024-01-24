@@ -1175,6 +1175,10 @@ make_check()
     notice "Redirecting output from the testsuite to $checklog"
 
     case "$component:$check_buffer_workaround" in
+	gcc:gcc-read1)
+	    dryrun "make read1 -w -C ${abe_top}"
+	    make_flags="${make_flags} EXPECT=${abe_top}/expect-read1"
+	    ;;
 	gdb:gdb-read1)
 	    local read1_dir=""
 	    [ "$component" = "gdb" ] && read1_dir="/gdb/testsuite"
