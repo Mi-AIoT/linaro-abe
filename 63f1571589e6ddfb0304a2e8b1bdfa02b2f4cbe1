@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc3ae73d_3edf5bc3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-01-26T18:42:40Z",
+      "side": 1,
+      "message": "\"appropriate\"",
+      "range": {
+        "startLine": 16,
+        "startChar": 41,
+        "endLine": 16,
+        "endChar": 52
+      },
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0a61d2_209398a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-01-26T18:42:40Z",
+      "side": 1,
+      "message": "Ideally GCC would get interested in read1 and adopt it, but putting it in ABE is a good practical solution.",
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
