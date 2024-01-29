@@ -133,6 +133,14 @@ configure_build()
 	opts="${opts} CFLAGS=\"${override_cflags}\" CXXFLAGS=\"${override_cflags}\""
     fi
 
+    if test x"${maintainer_mode}" = x"yes"; then
+	case ${component} in
+	    binutils|gcc|gdb|gdbserver|glibc|newlib)
+		opts="${opts} --enable-maintainer-mode"
+		;;
+	esac
+    fi
+
     # Some components' configure (eg. qemu's) do not support overriding
     # SHELL via an argument, so allow not to do so when needed.
     FORCESHELL="SHELL=${bash_shell}"

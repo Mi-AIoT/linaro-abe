@@ -114,6 +114,8 @@ expected_failures=""
 flaky_failures=""
 failures_expiration_date=""
 
+maintainer_mode=no
+
 prefix=""
 
 # source a user specific config file for commonly used configure options.
