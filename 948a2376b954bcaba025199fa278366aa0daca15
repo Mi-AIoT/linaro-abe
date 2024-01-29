@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e319702_6f04f7b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-01-29T21:29:25Z",
+      "side": 1,
+      "message": "Looks good to me, just one minor comment.\n\nAlso, I\u0027m assuming the lava-bot -1 is some transient error unrelated to this patch (ditto for the other patch in this series I +1\u0027d today). 😊",
+      "revId": "948a2376b954bcaba025199fa278366aa0daca15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8022abfb_a3cf2cb8",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-01-29T21:29:25Z",
+      "side": 1,
+      "message": "Nice touch completing the help text. Thanks.\n\nThough the second sentence here makes more sense in the disable case than the enable one. I suggest just removing it.",
+      "range": {
+        "startLine": 202,
+        "startChar": 24,
+        "endLine": 202,
+        "endChar": 53
+      },
+      "revId": "948a2376b954bcaba025199fa278366aa0daca15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
