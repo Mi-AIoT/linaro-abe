@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e4d36d42_8a2667ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-01-29T17:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc3ae73d_3edf5bc3",
+      "range": {
+        "startLine": 16,
+        "startChar": 41,
+        "endLine": 16,
+        "endChar": 52
+      },
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bb0a61d2_209398a8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -95,6 +119,30 @@
       "side": 1,
       "message": "Yes, you are right, thanks for spotting this!",
       "parentUuid": "9b529fcb_89ed966a",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 2
+      },
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc6a428_35ac78d5",
+        "filename": "Makefile.in",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-01-29T17:23:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8793fadd_e5f5f36c",
       "range": {
         "startLine": 38,
         "startChar": 1,
