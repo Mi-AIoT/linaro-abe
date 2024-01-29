@@ -23,9 +23,9 @@ usage()
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--check {all|glibc|gcc|gdb|binutils}]
              [--checkout {<package>|all}]
-             [--disable {building|install|make_docs|parallel|update}]
+             [--disable {building|install|maintainer_mode|make_docs|parallel|update}]
              [--dryrun] [--dump]
-             [--enable {building|install|make_docs|parallel|update}]
+             [--enable {building|install|maintainer_mode|make_docs|parallel|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -146,14 +146,18 @@ OPTIONS
                        complete build as specified by the config/ .conf
                        files.
 
-  --disable {install|update|make_docs|building|parallel}
+  --disable {install|update|maintainer_mode|make_docs|building|parallel}
 
-		install
+                install
                         Disable the make install stage of packages, which
                         is enabled by default.
 
-		update
-			Don't update source repositories before building.
+                update
+                        Don't update source repositories before building.
+
+                maintainer_mode
+                        [default] Do not configure components in
+                        maintainer mode.
 
                 make_docs
                         Don't make the toolchain package documentation.
@@ -167,11 +171,35 @@ OPTIONS
                 parallel
                         Don't parallelize build. This is useful when
                         troubleshooting a build.
-                        
+
   --dryrun	Run as much of ${abe} as possible without doing any
 		actual configuration, building, or installing.
 
   --dump	Dump configuration file information for this build.
+
+  --enable {install|update|maintainer_mode|make_docs|building|parallel}
+
+                install
+                        [default] Enable the make install stage of
+                        packages, which is enabled by default.
+
+                update
+                        [default] Update source repositories before building.
+
+                maintainer_mode
+                        Configure components in maintainer mode.  This
+                        requires the right versions of autoconf and
+                        automake in $PATH.
+
+                make_docs
+                        [default] Make the toolchain package documentation.
+
+                building
+                        [default] Build tools.
+
+                parallel
+                        [default] Parallelize build. This is useful
+                        when troubleshooting a build.
 
   --excludecheck {all|glibc|gcc|gdb|binutils|newlib}
 
@@ -933,6 +961,7 @@ dump()
     echo "Install            ${install}"
     echo "Source Update      ${supdate}"
     echo "Make Documentation ${make_docs}"
+    echo "Maintainer mode    ${maintainer_mode}"
 
     if test x"${release}" != x; then
         echo "Release Name       ${release}"
@@ -1249,6 +1278,9 @@ while test $# -gt 0; do
 		    ;;
 		install)
 		    install="${value}"
+		    ;;
+		maintainer_mode)
+		    maintainer_mode="${value}"
 		    ;;
 		make_docs)
 		    make_docs="${value}"
