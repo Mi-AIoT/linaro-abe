@@ -79,6 +79,30 @@
       },
       "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8793fadd_e5f5f36c",
+        "filename": "Makefile.in",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-01-29T15:52:43Z",
+      "side": 1,
+      "message": "Yes, you are right, thanks for spotting this!",
+      "parentUuid": "9b529fcb_89ed966a",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 2
+      },
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
