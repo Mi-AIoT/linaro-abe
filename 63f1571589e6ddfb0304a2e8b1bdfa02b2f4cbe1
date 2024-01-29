@@ -39,6 +39,46 @@
       "message": "Ideally GCC would get interested in read1 and adopt it, but putting it in ABE is a good practical solution.",
       "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa43f8f_03276785",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2024-01-29T11:36:21Z",
+      "side": 1,
+      "message": "sounds good. AFAIU",
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b529fcb_89ed966a",
+        "filename": "Makefile.in",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000532
+      },
+      "writtenOn": "2024-01-29T11:36:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be $(srcdir) related ?",
+      "range": {
+        "startLine": 38,
+        "startChar": 1,
+        "endLine": 38,
+        "endChar": 2
+      },
+      "revId": "63f1571589e6ddfb0304a2e8b1bdfa02b2f4cbe1",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
