@@ -39,6 +39,30 @@
       },
       "revId": "948a2376b954bcaba025199fa278366aa0daca15",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa1769d_20d1ab7a",
+        "filename": "abe.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-01-30T07:24:14Z",
+      "side": 1,
+      "message": "Agreed.",
+      "parentUuid": "8022abfb_a3cf2cb8",
+      "range": {
+        "startLine": 202,
+        "startChar": 24,
+        "endLine": 202,
+        "endChar": 53
+      },
+      "revId": "948a2376b954bcaba025199fa278366aa0daca15",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
