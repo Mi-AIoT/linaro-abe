@@ -579,7 +579,7 @@ make_install()
         export CONFIG_SHELL=${bash_shell}
     fi
 
-    local install_log="$(dirname ${builddir})/install-${component}${2:+-$2}.log"
+    local install_log="${builddir}/install-${component}${2:+-$2}.log"
     record_artifact "log_install_${component}${2:+-$2}" "${install_log}"
     if [ x"${component}" = x"gdb" -o x"${component}" = x"gdbserver" ]; then
         dryrun "make install-${component} ${make_flags} -w -C ${builddir} 2>&1 | tee ${install_log}"
@@ -1718,25 +1718,28 @@ make_docs()
 
     local make_flags=""
 
+    local logfile="${builddir}/makedoc-${component}${2:+-$2}.log"
+    rm -f ${logfile}
+
     case $1 in
         *binutils*)
             # the diststuff target isn't supported by all the subdirectories,
             # so we build both all targets and ignore the error.
-            record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
+            record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
 	    for subdir in bfd gas gold gprof ld
 	    do
 		# Some configurations want to disable some of the
 		# components (eg gold), so ${build}/${subdir} may not
 		# exist. Skip them in this case.
 		if [ -d ${builddir}/${subdir} ]; then
-		    dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/${subdir} diststuff install-man 2>&1 | tee -a ${builddir}/makedoc.log"
+		    dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/${subdir} diststuff install-man 2>&1 | tee -a ${logfile}"
 		    if test $? -ne 0; then
 			error "make docs failed in ${subdir}"
 			return 1;
 		    fi
 		fi
 	    done
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${logfile}"
 	    if test $? -ne 0; then
 		error "make docs failed"
 		return 1;
@@ -1747,30 +1750,30 @@ make_docs()
             return 0
             ;;
         *gdb)
-	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb/doc install-man 2>&1 | tee -a ${builddir}/makedoc.log"
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb/doc install-man 2>&1 | tee -a ${logfile}"
             return $?
             ;;
         *gcc*)
-	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${builddir}/makedoc.log"
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee ${logfile}"
             return $?
             ;;
         *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
             # the regular make install handles all the docs.
             ;;
         glibc|eglibc)
-	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee -a ${builddir}/makedoc.log"
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee ${logfile}"
             return $?
             ;;
 	qemu)
 	    return 0
 	    ;;
         *)
-	    record_artifact "log_makedoc_${component}${2:+-$2}" "${builddir}/makedoc.log"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee -a ${builddir}/makedoc.log"
+	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee ${logfile}"
             return $?
             ;;
     esac
