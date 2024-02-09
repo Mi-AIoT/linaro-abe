@@ -16,6 +16,24 @@
       "message": "What does this mean to GCC? I don\u0027t remember on top of my head? Probably OK, but isn\u0027t this lying to GCC\u0027s configure?",
       "revId": "0b6ecec677e726c1a976b7c789aa194fe05385a2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f7a29f_8b471cd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-02-09T08:51:02Z",
+      "side": 1,
+      "message": "This patch makes us lie less to GCC.  ABE does not support building mingw as a component, and I don\u0027t see a good reason to add that functionality just yet.",
+      "parentUuid": "00a05e1a_0da13a83",
+      "revId": "0b6ecec677e726c1a976b7c789aa194fe05385a2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
