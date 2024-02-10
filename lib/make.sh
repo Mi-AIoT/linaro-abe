@@ -455,9 +455,6 @@ make_all()
         export CONFIG_SHELL=${bash_shell}
     fi
 
-    if test x"${make_docs}" != xyes; then
-        make_flags="${make_flags} BUILD_INFO=\"\" MAKEINFO=echo"
-    fi
     local makeret=
     # GDB and Binutils share the same top level files, so we have to explicitly build
     # one or the other, or we get duplicates.
@@ -568,10 +565,6 @@ make_install()
 
     if test x"${override_ldflags}" != x; then
         make_flags="${make_flags} LDFLAGS=\"${override_ldflags}\""
-    fi
-
-    if test x"${make_docs}" != xyes; then
-	export BUILD_INFO=""
     fi
 
     # Don't stop on CONFIG_SHELL if it's set in the environment.
