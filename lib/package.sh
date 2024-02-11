@@ -524,10 +524,13 @@ EOF
 	if test "$(component_is_tar ${i})" = no; then
 	    echo "--------------------- $i ----------------------" >> ${outfile}
 	    local srcdir="$(get_component_srcdir $i)"
-	    # Invoke in a subshell in order to prevent state-change of the current
-	    # working directory after manifest is called.
-	    git -C ${srcdir} log -n 1 >> ${outfile}
-	    echo "" >> ${outfile}
+	    if [ "x${srcdir}" = "xdefault" ] \
+		   || [ "x${srcdir}" = "x" ]; then
+		echo "Using default system version" >> ${outfile}
+	    else
+		git -C ${srcdir} log -n 1 >> ${outfile}
+		echo "" >> ${outfile}
+	    fi
 	fi
     done
  
