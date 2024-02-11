@@ -460,7 +460,8 @@ make_all()
     # one or the other, or we get duplicates.
     local logfile="${builddir}/make-${component}${2:+-$2}.log"
     record_artifact "log_make_${component}${2:+-$2}" "${logfile}"
-    dryrun "make SHELL=${bash_shell} -w -C ${builddir} ${make_flags} 2>&1 | tee ${logfile}"
+    dryrun "echo NOTE: Building in ${builddir} | tee ${logfile}"
+    dryrun "make SHELL=${bash_shell} -w -C ${builddir} ${make_flags} 2>&1 | tee -a ${logfile}"
     local makeret=$?
     
 #    local errors="$(dryrun \"egrep '[Ff]atal error:|configure: error:|Error' ${logfile}\")"
@@ -552,9 +553,11 @@ make_install()
         return 0
     fi
 
-
     local builddir="$(get_component_builddir ${component} $2)"
     notice "Making install in ${builddir}"
+    local logfile="${builddir}/make-${component}${2:+-$2}.log"
+    record_artifact "log_install_${component}${2:+-$2}" "${logfile}"
+    dryrun "echo NOTE: Installing in ${builddir} | tee -a ${logfile}"
 
     local make_flags=""
     if test "$(echo ${component} | grep -c glibc)" -gt 0; then
@@ -572,12 +575,10 @@ make_install()
         export CONFIG_SHELL=${bash_shell}
     fi
 
-    local install_log="${builddir}/install-${component}${2:+-$2}.log"
-    record_artifact "log_install_${component}${2:+-$2}" "${install_log}"
     if [ x"${component}" = x"gdb" -o x"${component}" = x"gdbserver" ]; then
-        dryrun "make install-${component} ${make_flags} -w -C ${builddir} 2>&1 | tee ${install_log}"
+        dryrun "make install-${component} ${make_flags} -w -C ${builddir} 2>&1 | tee -a ${logfile}"
     else
-	dryrun "make install ${make_flags} -w -C ${builddir} 2>&1 | tee ${install_log}"
+	dryrun "make install ${make_flags} -w -C ${builddir} 2>&1 | tee -a ${logfile}"
     fi
     if test $? != "0"; then
         warning "Make install failed!"
@@ -1711,14 +1712,14 @@ make_docs()
 
     local make_flags=""
 
-    local logfile="${builddir}/makedoc-${component}${2:+-$2}.log"
-    rm -f ${logfile}
+    local logfile="${builddir}/make-${component}${2:+-$2}.log"
 
     case $1 in
         *binutils*)
             # the diststuff target isn't supported by all the subdirectories,
             # so we build both all targets and ignore the error.
             record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
+	    dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
 	    for subdir in bfd gas gold gprof ld
 	    do
 		# Some configurations want to disable some of the
@@ -1744,13 +1745,15 @@ make_docs()
             ;;
         *gdb)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee ${logfile}"
+            dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${logfile}"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb/doc install-man 2>&1 | tee -a ${logfile}"
             return $?
             ;;
         *gcc*)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee ${logfile}"
+            dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${logfile}"
             return $?
             ;;
         *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
@@ -1758,7 +1761,8 @@ make_docs()
             ;;
         glibc|eglibc)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee ${logfile}"
+            dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info html 2>&1 | tee -a ${logfile}"
             return $?
             ;;
 	qemu)
@@ -1766,7 +1770,8 @@ make_docs()
 	    ;;
         *)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee ${logfile}"
+            dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} info man 2>&1 | tee -a ${logfile}"
             return $?
             ;;
     esac
