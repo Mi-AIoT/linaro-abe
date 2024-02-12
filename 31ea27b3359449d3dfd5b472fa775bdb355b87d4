@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ee2bfb_0f25a82a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-02-12T17:20:54Z",
+      "side": 1,
+      "message": "I agree it\u0027s more resilient to rely on an external wrapper.",
+      "revId": "31ea27b3359449d3dfd5b472fa775bdb355b87d4",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
