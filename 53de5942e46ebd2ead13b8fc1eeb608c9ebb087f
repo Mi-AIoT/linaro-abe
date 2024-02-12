@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab1ae9b_413ab58b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-02-12T18:12:30Z",
+      "side": 1,
+      "message": "Looks good. Just one nit I noticed.",
+      "revId": "53de5942e46ebd2ead13b8fc1eeb608c9ebb087f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81a0e651_d92ff6da",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-02-12T18:12:30Z",
+      "side": 1,
+      "message": "This comment is outdated and can be removed.\n\nIt refers to a version of the code which did \"$(cd ${srcdir} \u0026\u0026 git log ...)\", but now it does \"git -C ${srcdir} log ...\" without invoking a subshell.",
+      "revId": "53de5942e46ebd2ead13b8fc1eeb608c9ebb087f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
