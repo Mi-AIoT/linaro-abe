@@ -33,6 +33,24 @@
       "message": "This comment is outdated and can be removed.\n\nIt refers to a version of the code which did \"$(cd ${srcdir} \u0026\u0026 git log ...)\", but now it does \"git -C ${srcdir} log ...\" without invoking a subshell.",
       "revId": "53de5942e46ebd2ead13b8fc1eeb608c9ebb087f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49fb8d3d_e1384b29",
+        "filename": "lib/package.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-02-12T20:44:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81a0e651_d92ff6da",
+      "revId": "53de5942e46ebd2ead13b8fc1eeb608c9ebb087f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
