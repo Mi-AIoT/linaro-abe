@@ -189,7 +189,9 @@ OPTIONS
                 maintainer_mode
                         Configure components in maintainer mode.  This
                         requires the right versions of autoconf and
-                        automake in $PATH.
+                        automake in $PATH.  This sets --enable
+                        make_docs, unless --disable make_docs is
+                        provided later.
 
                 make_docs
                         [default] Make the toolchain package documentation.
@@ -1280,6 +1282,9 @@ while test $# -gt 0; do
 		    ;;
 		maintainer_mode)
 		    maintainer_mode="${value}"
+		    if [ "$maintainer_mode" = "yes" ]; then
+			make_docs="yes"
+		    fi
 		    ;;
 		make_docs)
 		    make_docs="${value}"
