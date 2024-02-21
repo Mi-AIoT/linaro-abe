@@ -46,6 +46,30 @@
       },
       "revId": "905cdc12bc6208fa60d43c4c22d786c8b86649df",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e7cda6_7bc30e3d",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-02-21T10:31:47Z",
+      "side": 1,
+      "message": "I don\u0027t know, maybe it has been like that \u0027forever\u0027 ?",
+      "parentUuid": "b75f5799_7041e744",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "905cdc12bc6208fa60d43c4c22d786c8b86649df",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
