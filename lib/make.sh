@@ -410,24 +410,33 @@ make_all()
 	make_flags="${make_flags} LDFLAGS=\"-Wl,--fix-cortex-a53-843419\" "
     fi
 
-    if test "$(echo ${target} | grep -c aarch64)" -gt 0; then
-	local ldflags_for_target="-Wl,-fix-cortex-a53-843419"
-	# As discussed in
-	# https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66203
-	# aarch64*-none-elf toolchains using newlib need the
-	# --specs=rdimon.specs option otherwise link fails because
-	# _exit etc... cannot be resolved. See commit message for
-	# details.
-	if test "$(echo ${target} | grep -c elf)" -gt 0;  then
+    case "$target" in
+	aarch64*-mingw32)
+	    # FIXME: See comment about fix-cortex-a53-843419 in config/gcc.conf.
+	    true
+	    ;;
+	aarch64*)
+	    local ldflags_for_target="-Wl,-fix-cortex-a53-843419"
+	    # As discussed in
+	    # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=66203
+	    # aarch64*-none-elf toolchains using newlib need the
+	    # --specs=rdimon.specs option otherwise link fails because
+	    # _exit etc... cannot be resolved. See commit message for
+	    # details.
+	    case "$target" in
+		aarch64*-elf)
+		    ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
+		    ;;
+	    esac
+	    make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
+	    ;;
+	arm*-eabi)
+	    # The same applies to arm*-eabi, since we configure newlib
+	    # with --disable-newlib-supplied-syscalls.
 	    ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
-	fi
-	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
-    elif test "$(echo ${target} | grep -c -e 'arm.*-eabi')" -gt 0;  then
-	# The same applies to arm*-eabi, since we configure newlib
-	# with --disable-newlib-supplied-syscalls.
-	ldflags_for_target="${ldflags_for_target} --specs=rdimon.specs"
-	make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
-    fi
+	    make_flags="${make_flags} LDFLAGS_FOR_TARGET=\"${ldflags_for_target}\" "
+	    ;;
+    esac
 
     # Use pipes instead of /tmp for temporary files.
     if test x"${override_cflags}" != x -a x"${component}" != x"eglibc"; then
@@ -1805,10 +1814,12 @@ EOF
         newlib/arm*/aprofile)
           extra_cflags="-mcpu=cortex-a8"
           ;;
-        newlib/aarch64*)
+        newlib/aarch64*-elf)
           extra_cflags="--specs=rdimon.specs"
           ;;
         newlib/*)
+	  # FIXME: Enable hello-world test for aarch64-w64-mingw32 once
+	  # it supports C++.
           notice "Hello world test not supported for newlib on ${target}"
           return 0
           ;;
