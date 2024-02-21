@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf42510_50992e7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-02-21T13:53:05Z",
+      "side": 1,
+      "message": "Patchset #1 failed testing due to glibc not finding C++ compiler.  Patchset #2 passed testing with expected difference in manifest.",
+      "revId": "2d6378dd38d9bdd693b70ba0f49b31f39f086fa6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
