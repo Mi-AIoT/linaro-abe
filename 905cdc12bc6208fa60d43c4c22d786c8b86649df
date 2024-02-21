@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9e017f_fde408cd",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-02-21T09:40:51Z",
+      "side": 1,
+      "message": "Do we bootstrap when $build !\u003d $target?",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "905cdc12bc6208fa60d43c4c22d786c8b86649df",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
