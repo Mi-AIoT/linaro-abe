@@ -70,6 +70,30 @@
       },
       "revId": "905cdc12bc6208fa60d43c4c22d786c8b86649df",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec8b88bd_8a540593",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-02-21T10:44:06Z",
+      "side": 1,
+      "message": "Turns out, we need C++ to configure glibc.  I\u0027ve squashed this change with other FIXMEs for aarch64-w64-mingw32.",
+      "parentUuid": "46e7cda6_7bc30e3d",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 41
+      },
+      "revId": "905cdc12bc6208fa60d43c4c22d786c8b86649df",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
