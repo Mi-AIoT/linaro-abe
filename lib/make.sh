@@ -336,6 +336,8 @@ build()
             error "Configure of $1 failed!"
             return $?
 	fi
+	# For debug purpose, print modification dates after configure
+	notice "Source dir stamp after configure: ${srcdir} $(dryrun "stat -c %Y ${srcdir}")"
 	
 	# Clean the build directories when forced
 	if test x"${force}" = xyes; then
@@ -372,6 +374,8 @@ build()
 	fi
 	
 	create_stamp "${stampdir}" "${stamp}"
+	# For debug purpose, print modification dates after configure
+	notice "Source dir stamp after build: ${srcdir} $(dryrun "stat -c %Y ${srcdir}")"
 	
 	local tag="$(create_release_tag ${component})"
 	notice "Done building ${tag}${2:+ $2}, took ${SECONDS} seconds"
