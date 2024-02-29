@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a0b1aac_5a7aa4dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-02-29T19:38:13Z",
+      "side": 1,
+      "message": "I just posted the link on Slack, but also mentioning it here for completeness:\n\nhttps://git.linaro.org/toolchain/jenkins-scripts.git/tree/round-robin.sh#n580\n\nCould the rebuild be caused by this?",
+      "revId": "7bb5d3d53cd124964e0eb714eae6d4cfb9535b66",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
