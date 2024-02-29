@@ -843,7 +843,7 @@ set_package()
 	    ;;
 	gcc_patch_file)
 	    gcc_patch_file=${setting}
-	    notice "Applyng patch ${setting} to gcc"
+	    notice "Applying patch ${setting} to gcc"
 	    return 0
 	    ;;
 	target_board_options)
@@ -853,7 +853,7 @@ set_package()
 	check_buffer_workaround)
 	    verify_check_buffer_workaround ${setting}
 	    check_buffer_workaround=${setting}
-	    notice "Applyng ${setting} workaround for bufferization when running the tests"
+	    notice "Applying ${setting} workaround for bufferization when running the tests"
 	    return 0
 	    ;;
 	*)
