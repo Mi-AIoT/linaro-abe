@@ -51,6 +51,24 @@
       "message": "I didn\u0027t know that pb.\nIs stamp of srcdir enough to investigate that ?\nI would have guessed that this is more related to a date of some file.",
       "revId": "7bb5d3d53cd124964e0eb714eae6d4cfb9535b66",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8064846_a8d50784",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-03-01T12:12:17Z",
+      "side": 1,
+      "message": "Well in https://git.linaro.org/toolchain/abe.git/tree/lib/make.sh#n315 we pass ${srcdir} as \"compare_file\" parameter.  I doubt this will be enough to investigate :-)",
+      "parentUuid": "c9f87cbb_07d0868a",
+      "revId": "7bb5d3d53cd124964e0eb714eae6d4cfb9535b66",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
