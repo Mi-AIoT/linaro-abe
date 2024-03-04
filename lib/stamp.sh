@@ -136,6 +136,9 @@ check_stamp()
 	    notice "--force is being used${stamp_type:+, ${stamp_type}ing..}."
 	else
 	    notice "${compare_file} ($(dryrun "stat -c %Y ${compare_file}")) is newer than ${stamp_loc}/${stamp_name} ($(dryrun "stat -c %Y ${stamp_loc}/${stamp_name}"))${stamp_type:+, ${stamp_type}ing..}."
+	    if [ -d "${compare_file}" ]; then
+		notice "Directory stamp for ${compare_file}/ ($(dryrun "stat -c %Y ${compare_file}"))"
+	    fi
 	fi
 	return 1
     else
