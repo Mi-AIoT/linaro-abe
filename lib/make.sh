@@ -1120,15 +1120,54 @@ make_check()
 	    exec_tests=true
 	    ;;
 	glibc)
-            # Copy the required/used gcc libraries on the build directory.
-            # It makes the glibc tests use the libraries from the compiler
-            # used to build and avoid potential issues (such as on arm) where
-            # some tests are linked against libgcc_s and the container tests
-            # can not access the required dependencies.
+	    # The glibc tests are built in two different modes (enabled at configure
+	    # time):
+	    #
+	    # 1. No RPATH defined, tests will run by issuing the loader along with
+	    #    the required library paths.  It is the default option.
+	    # 2. RPATH defined, tests will have RPATH pointing to the build directory,
+	    #    so the kernel will be responsible for running the loader.  It enables
+	    #    with --enable-hardcoded-path-in-tests.
+	    #
+	    # In both cases, the loader consults the system cache (ld.so.cache), so any
+	    # compiler dynamic library (libgcc_s.so for instance) is supplied by the
+	    # system.
+	    #
+	    # However, this might fail for container tests, where even test-container
+	    # (the binary that setups and runs the tests in a container mode) creates
+	    # a loader cache that might not contain the required libraries.  The glibc
+	    # build system tries to check and provide the required libraries by tracing
+	    # the DT_NEEDED one from a test binary, but the tracing inhibits the system
+	    # loader, and thus it will not copy the required system libraries.  It is
+	    # expected the user to copy the required libraries to build a directory.
+	    #
+	    # This works for case 2., however, test-container does not issue the loader
+	    # for case 1.: it will parse the command arguments and issue the binary and
+	    # the kernel will be responsible for starting the loader.  This has the
+	    # side-effect of ignoring all the defined --library-path and thus making the
+	    # compiler libraries copy trick ineffective.
+	    #
+	    # So we copy the compiler libraries on both the build directory and on the
+	    # sysroot used by the test-container to set each test. The latter will place
+	    # the libraries on the default system path, which will be included in the
+	    # loader cache as well.
+
 	    dryrun "copy_gcc_libc_to_builddir ${builddir}"
 	    if [ $? -ne 0 ]; then
 	       error "Copy of gcc libs to build directory failed!"
 	       return 1
+	    fi
+
+	    local exec_prefix="$(grep -w "prefix.*=" ${builddir}/config.make | cut -d'=' -f2)"
+	    local build_libdir="$(grep -w libdir ${builddir}/config.make | cut -d'=' -f2 )"
+	    build_libdir="$(echo $(eval echo ${build_libdir}))"
+
+	    local testroot_libdir="${builddir}/testroot.pristine/${build_libdir}"
+	    dryrun "mkdir -p ${testroot_libdir}"
+	    dryrun "copy_gcc_libc_to_builddir ${testroot_libdir}"
+	    if [ $? -ne 0 ]; then
+	      error "Copy of gcc libs to testroot directory failed!"
+	      return 1
 	    fi
 	    ;;
 	newlib)
