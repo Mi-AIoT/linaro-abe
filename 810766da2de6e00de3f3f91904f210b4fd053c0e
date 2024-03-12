@@ -64,6 +64,23 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b628ff5b_984a833f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-03-12T16:30:08Z",
+      "side": 1,
+      "message": "I\u0027ll just note that the typos Christophe mentioned are also in the commit message.",
+      "revId": "810766da2de6e00de3f3f91904f210b4fd053c0e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c40f40e_672ab155",
