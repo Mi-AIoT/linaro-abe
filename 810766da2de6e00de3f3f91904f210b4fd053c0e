@@ -24,6 +24,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ab2046_2b9596d0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-03-12T18:25:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "02e275af_59173524",
+      "range": {
+        "startLine": 29,
+        "startChar": 35,
+        "endLine": 29,
+        "endChar": 38
+      },
+      "revId": "810766da2de6e00de3f3f91904f210b4fd053c0e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "441451c1_f1f15f6c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-03-12T16:04:27Z",
       "side": 1,
       "message": "typo? (former?)",
+      "range": {
+        "startLine": 39,
+        "startChar": 57,
+        "endLine": 39,
+        "endChar": 63
+      },
+      "revId": "810766da2de6e00de3f3f91904f210b4fd053c0e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18aa249_a412709c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-03-12T18:25:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "441451c1_f1f15f6c",
       "range": {
         "startLine": 39,
         "startChar": 57,
@@ -81,6 +129,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9577927_2aafb6ec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-03-12T18:25:09Z",
+      "side": 1,
+      "message": "The container tests are chroot-like tests, where glibc will create a testroot.pristine by installing itself on it. The \u0027pristine\u0027 in this case it a non-modified folder.\n\nFor each container tests, test-container will setup the \u0027testroot.root\u0027 by rsync the testroot.pristine, the test itself, the required files, and it also executes some pre and pos command if required. The idea is to already re-create the testroot.root based on testroot.pristine, so each container tests sees a clean state.\n\nThe patch idea is, just before \u0027make check, to put the requires libraries in testroot.pristine system library folder. It will make the installation, which also trigger ldconfig, to create a loader cache (ld.so.cache) with the required gcc libraries (as for a default distribution).",
+      "parentUuid": "e0d48705_035c32a4",
+      "revId": "810766da2de6e00de3f3f91904f210b4fd053c0e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c40f40e_672ab155",
@@ -94,6 +160,30 @@
       "writtenOn": "2024-03-12T16:04:27Z",
       "side": 1,
       "message": "typo?",
+      "range": {
+        "startLine": 1142,
+        "startChar": 25,
+        "endLine": 1142,
+        "endChar": 28
+      },
+      "revId": "810766da2de6e00de3f3f91904f210b4fd053c0e",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7936841d_65f0916f",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-03-12T18:25:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7c40f40e_672ab155",
       "range": {
         "startLine": 1142,
         "startChar": 25,
