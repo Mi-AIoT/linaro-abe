@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e716479_931328e5",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-03-13T11:35:31Z",
+      "side": 1,
+      "message": "Could you wrap at 80 columns, please?",
+      "range": {
+        "startLine": 1123,
+        "startChar": 68,
+        "endLine": 1123,
+        "endChar": 77
+      },
+      "revId": "6343cdd8e615f2479105afee41d08afc6ab0766d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04bab46e_a0327cef",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-03-13T11:35:31Z",
+      "side": 1,
+      "message": "Using\nlocal var\u003d\"$(cmd)\"\nwill ignore any errors produced by $cmd.  The preferred way is to\nlocal var1 var2 var3\nvar1\u003d$(cmd1)\nvar2\u003d$(cmd2)\nvar3\u003d$(cmd3)",
+      "range": {
+        "startLine": 1161,
+        "startChar": 22,
+        "endLine": 1161,
+        "endChar": 23
+      },
+      "revId": "6343cdd8e615f2479105afee41d08afc6ab0766d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46e95c20_335f5fb6",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1162,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-03-13T11:35:31Z",
+      "side": 1,
+      "message": "trailing space",
+      "range": {
+        "startLine": 1162,
+        "startChar": 81,
+        "endLine": 1162,
+        "endChar": 82
+      },
+      "revId": "6343cdd8e615f2479105afee41d08afc6ab0766d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c60e6125_32b9c528",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-03-13T11:35:31Z",
+      "side": 1,
+      "message": "Could you add a comment why \"eval\" is required?",
+      "range": {
+        "startLine": 1163,
+        "startChar": 28,
+        "endLine": 1163,
+        "endChar": 32
+      },
+      "revId": "6343cdd8e615f2479105afee41d08afc6ab0766d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
