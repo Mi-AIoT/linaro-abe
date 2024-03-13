@@ -16,6 +16,29 @@
       "message": "Good idea.",
       "revId": "ff5cb41e2a43eb41dc6f60dcf6b216674b4e6f50",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9aafc9e_c2a5771c",
+        "filename": "config/glibc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-03-13T11:27:25Z",
+      "side": 1,
+      "message": "Would you please add the new options as\n\u003ccut\u003e\n# Rationale\ndefault_configure_flags\u003d\"$default_configure_flags \u003cnew options\u003e\"\n\u003c/cut\u003e\n?\n\nI want us to have explanations for the various options we are using to configure.",
+      "range": {
+        "startLine": 4,
+        "startChar": 117,
+        "endLine": 4,
+        "endChar": 118
+      },
+      "revId": "ff5cb41e2a43eb41dc6f60dcf6b216674b4e6f50",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
