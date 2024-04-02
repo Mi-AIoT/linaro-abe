@@ -1779,7 +1779,7 @@ make_docs()
             # so we build both all targets and ignore the error.
             record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
 	    dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
-	    for subdir in bfd gas gold gprof ld
+	    for subdir in bfd binutils gas gold gprof ld
 	    do
 		# Some configurations want to disable some of the
 		# components (eg gold), so ${build}/${subdir} may not
@@ -1792,7 +1792,7 @@ make_docs()
 		    fi
 		fi
 	    done
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info install-pdf 2>&1 | tee -a ${logfile}"
 	    if test $? -ne 0; then
 		error "make docs failed"
 		return 1;
@@ -1805,14 +1805,27 @@ make_docs()
         *gdb)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
             dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info 2>&1 | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info install-pdf 2>&1 | tee -a ${logfile}"
             dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb/doc install-man 2>&1 | tee -a ${logfile}"
             return $?
             ;;
         *gcc*)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
             dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info 2>&1 | tee -a ${logfile}"
+	    for subdir in gcc ${target}/libstdc++-v3
+	    do
+		# Some configurations want to disable some of the
+		# components, so ${build}/${subdir} may not
+		# exist. Skip them in this case.
+		if [ -d ${builddir}/${subdir} ]; then
+		    dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/${subdir} install-man 2>&1 | tee -a ${logfile}"
+		    if test $? -ne 0; then
+			error "make docs failed in ${subdir}"
+			return 1;
+		    fi
+		fi
+	    done
+	    dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info install-pdf 2>&1 | tee -a ${logfile}"
             return $?
             ;;
         *linux*|*dejagnu*|*gmp*|*mpc*|*mpfr*|*newlib*|*make*)
