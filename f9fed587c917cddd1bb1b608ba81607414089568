@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96c8437c_5fc589ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-04-03T07:11:03Z",
+      "side": 1,
+      "message": "The test failure is expected: it\u0027s a difference in manifest, since we now use a new option.",
+      "revId": "f9fed587c917cddd1bb1b608ba81607414089568",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
