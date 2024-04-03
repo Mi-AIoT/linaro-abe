@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9ee363a_20ab5dff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-04-03T23:54:22Z",
+      "side": 1,
+      "message": "Great idea! After this patch goes in, I\u0027ll make a new one on top to also build the GDB man pages.",
+      "revId": "fb3365dfaee22b608ae852758aa20ceba7b2656f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
