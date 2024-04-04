@@ -1792,7 +1792,7 @@ make_docs()
 		    fi
 		fi
 	    done
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info install-pdf 2>&1 | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info install-pdf install-dvi 2>&1 | tee -a ${logfile}"
 	    if test $? -ne 0; then
 		error "make docs failed"
 		return 1;
@@ -1805,7 +1805,7 @@ make_docs()
         *gdb)
 	    record_artifact "log_makedoc_${component}${2:+-$2}" "${logfile}"
             dryrun "echo NOTE: Installing docs in ${builddir} | tee -a ${logfile}"
-            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info install-pdf 2>&1 | tee -a ${logfile}"
+            dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir}/gdb diststuff install-html install-info install-pdf install-dvi 2>&1 | tee -a ${logfile}"
 	    if test $? -ne 0; then
 		error "make docs failed"
 		return 1;
@@ -1833,7 +1833,7 @@ make_docs()
 		    fi
 		fi
 	    done
-	    dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info install-pdf 2>&1 | tee -a ${logfile}"
+	    dryrun "make SHELL=${bash_shell} ${make_flags} -w -C ${builddir} install-html install-info install-pdf install-dvi 2>&1 | tee -a ${logfile}"
 	    if test $? -ne 0; then
 		error "make docs failed"
 		return 1;
