@@ -52,6 +52,24 @@
       "parentUuid": "07c696a2_b5a9642d",
       "revId": "fb3365dfaee22b608ae852758aa20ceba7b2656f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e21a391e_871258a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-04-04T20:15:43Z",
+      "side": 1,
+      "message": "Yeah, I don\u0027t know why we need special handling for install-man targets, I\u0027d expect it to be a toplevel target like the other ones... (same for binutils / gcc)",
+      "parentUuid": "ba160946_eb9f017b",
+      "revId": "fb3365dfaee22b608ae852758aa20ceba7b2656f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
