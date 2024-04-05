@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a43bde_31d75dfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-04-05T07:11:33Z",
+      "side": 1,
+      "message": "Validation failed because binutils-2.41 do not have this target in their Makefiles, although they have the \"dvi:\" one.\nSo.... not sure this ABE patch is desirable? (I\u0027ve just pushed the fix to binutils/master)",
+      "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
