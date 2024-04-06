@@ -16,6 +16,24 @@
       "message": "Validation failed because binutils-2.41 do not have this target in their Makefiles, although they have the \"dvi:\" one.\nSo.... not sure this ABE patch is desirable? (I\u0027ve just pushed the fix to binutils/master)",
       "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "442f894f_5f23ff2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-04-06T04:20:11Z",
+      "side": 1,
+      "message": "\u003e So.... not sure this ABE patch is desirable? (I\u0027ve just pushed the fix to binutils/master)\n\nMy imnpression is that DVI is an outdated format, superseded by PDF.\nBut considering that you already posted patches fixing DVI installation in all components (thanks!), I think there\u0027s no harm in adding this patch.\n\nAs a data point, the gdb package in Ubuntu installs the following files:\n\n$ ls -l /usr/share/doc/gdb/refcard.*\n-rw-r--r-- 1 root root 7,3K Sep  7  2023 /usr/share/doc/gdb/refcard.dvi.gz\n-rw-r--r-- 1 root root 125K Sep  7  2023 /usr/share/doc/gdb/refcard.ps.gz\n-rw-r--r-- 1 root root 7,9K Sep  6  2023 /usr/share/doc/gdb/refcard.tex.gz\n\nThough interestingly, the gdb-doc package only installs the HTML and PDF files...",
+      "parentUuid": "45a43bde_31d75dfc",
+      "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
