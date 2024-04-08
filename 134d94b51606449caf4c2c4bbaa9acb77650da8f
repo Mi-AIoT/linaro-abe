@@ -52,6 +52,24 @@
       "parentUuid": "442f894f_5f23ff2e",
       "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eec0f93a_ab026bc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-04-08T19:12:31Z",
+      "side": 1,
+      "message": "\u003e quite inconsistent it seems... probably different package maintainers make different choices?\n\nYes, I think there\u0027s not a lot of pressure/scrutiny to get this right or consistent. I\u0027m surprised there\u0027s no PDF in the GCC doc packages.\n\n\u003e Anyway my concern is that with my patch ABE will fail to build older releases and work only for trunk versions of the components.\n\nAh, yes. That\u0027s a good point I hadn\u0027t considered.\n \n\u003e Wondering whether I should add a new option --enable full_docs or similar that would work for trunk, and keep make_docs work for older releases?\n\nI think it makes sense to do that, and then use the new option for the pre-/post-commit CI.",
+      "parentUuid": "1b22d498_e5cf63c8",
+      "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
