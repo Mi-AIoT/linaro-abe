@@ -70,6 +70,24 @@
       "parentUuid": "1b22d498_e5cf63c8",
       "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91b440fb_76adff2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-04-08T19:13:57Z",
+      "side": 1,
+      "message": "\u003e \u003e Wondering whether I should add a new option --enable full_docs or similar that would work for trunk, and keep make_docs work for older releases?\n\u003e \n\u003e I think it makes sense to do that, and then use the new option for the pre-/post-commit CI.\n\nHaving said that, I think it\u0027s also perfectly fine to ignore DVI and leave things as they currently are. 😊",
+      "parentUuid": "eec0f93a_ab026bc9",
+      "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
