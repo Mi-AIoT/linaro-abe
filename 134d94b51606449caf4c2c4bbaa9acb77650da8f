@@ -34,6 +34,24 @@
       "parentUuid": "45a43bde_31d75dfc",
       "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b22d498_e5cf63c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-04-08T12:48:08Z",
+      "side": 1,
+      "message": "hmmmm gcc-doc installs only:\n/usr/share/doc/gcc-doc/gcc.html\n/usr/share/doc/gcc-doc/gccint.html\n/usr/share/doc/gcc-doc/libgomp.html\n/usr/share/info/gcc.info.gz\n/usr/share/info/gccint.info.gz\n/usr/share/info/libgomp.info.gz\n\nbut gcc-11-doc installs:\n/usr/share/doc/gcc-11-base/gcc.html\n/usr/share/doc/gcc-11-base/gccint.html\n/usr/share/doc/gcc-11-base/libgomp.html\n/usr/share/doc/gcc-11-base/libitm.html\n/usr/share/doc/gcc-11-base/libquadmath.html\n/usr/share/info/gcc-11.info.gz\n/usr/share/info/gccint-11.info.gz\n/usr/share/info/libgomp-11.info.gz\n/usr/share/info/libquadmath-11.info.gz\n\nfind /usr/share/ -name \"*.dvi*\"\n/usr/share/doc/gdb/refcard.dvi.gz\n/usr/share/texlive/texmf-dist/dvips/config/config.dvired\n\nquite inconsistent it seems... probably different package maintainers make different choices?\n\nAnyway my concern is that with my patch ABE will fail to build older releases and work only for trunk versions of the components.\n\nWondering whether I should add a new option --enable full_docs or similar that would work for trunk, and keep make_docs work for older releases?",
+      "parentUuid": "442f894f_5f23ff2e",
+      "revId": "134d94b51606449caf4c2c4bbaa9acb77650da8f",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
