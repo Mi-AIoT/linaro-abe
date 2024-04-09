@@ -94,6 +94,9 @@ building=yes
 # instead of building from them from scratch.
 use_system_libs=no
 
+# Do not build all documentation formats by default
+full_docs=no
+
 override_linker=
 override_cflags=
 override_ldflags=

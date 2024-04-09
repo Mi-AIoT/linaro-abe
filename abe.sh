@@ -23,9 +23,9 @@ usage()
   ${abe} [''| [--build {<package> [--stage {1|2}]|all}]
              [--check {all|glibc|gcc|gdb|binutils}]
              [--checkout {<package>|all}]
-             [--disable {building|install|maintainer_mode|make_docs|parallel|update}]
+             [--disable {building|install|maintainer_mode|make_docs|full_docs|parallel|update}]
              [--dryrun] [--dump]
-             [--enable {building|install|maintainer_mode|make_docs|parallel|update}]
+             [--enable {building|install|maintainer_mode|make_docs|full_docs|parallel|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
              [--force] [--help] [--host <host_triple>]
@@ -146,7 +146,7 @@ OPTIONS
                        complete build as specified by the config/ .conf
                        files.
 
-  --disable {install|update|maintainer_mode|make_docs|building|parallel}
+  --disable {install|update|maintainer_mode|make_docs|full_docs|building|parallel}
 
                 install
                         Disable the make install stage of packages, which
@@ -160,7 +160,10 @@ OPTIONS
                         maintainer mode.
 
                 make_docs
-                        Don't make the toolchain package documentation.
+                        Don't make the standard toolchain package documentation.
+
+                full_docs
+                        [default] Don't make the full toolchain package documentation.
 
                 building
                         Don't build anything. This is only useful when
@@ -177,7 +180,7 @@ OPTIONS
 
   --dump	Dump configuration file information for this build.
 
-  --enable {install|update|maintainer_mode|make_docs|building|parallel}
+  --enable {install|update|maintainer_mode|make_docs|full_docs|building|parallel}
 
                 install
                         [default] Enable the make install stage of
@@ -190,11 +193,15 @@ OPTIONS
                         Configure components in maintainer mode.  This
                         requires the right versions of autoconf and
                         automake in $PATH.  This sets --enable
-                        make_docs, unless --disable make_docs is
-                        provided later.
+                        make_docs and --enable full_docs, unless --disable
+                        make_docs or --disable full_docs are provided later.
 
                 make_docs
                         [default] Make the toolchain package documentation.
+
+                full_docs
+                        Make the full toolchain package documentation.
+                        Implies --enable make_docs, and adds all documentation formats.
 
                 building
                         [default] Build tools.
@@ -962,6 +969,7 @@ dump()
     echo "Install            ${install}"
     echo "Source Update      ${supdate}"
     echo "Make Documentation ${make_docs}"
+    echo "Full Documentation ${full_docs}"
     echo "Maintainer mode    ${maintainer_mode}"
 
     if test x"${release}" != x; then
@@ -1277,6 +1285,12 @@ while test $# -gt 0; do
 		building)
 		    building="${value}"
 		    ;;
+		full_docs)
+		    full_docs="${value}"
+		    if [ "$full_docs" = "yes" ]; then
+			make_docs="yes"
+		    fi
+		    ;;
 		install)
 		    install="${value}"
 		    ;;
@@ -1284,10 +1298,14 @@ while test $# -gt 0; do
 		    maintainer_mode="${value}"
 		    if [ "$maintainer_mode" = "yes" ]; then
 			make_docs="yes"
+			full_docs="yes"
 		    fi
 		    ;;
 		make_docs)
 		    make_docs="${value}"
+		    if [ "$make_docs" = "no" ]; then
+			full_docs="no"
+		    fi
 		    ;;
 		parallel)
 		    parallel="${value}"
