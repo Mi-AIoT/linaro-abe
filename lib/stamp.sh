@@ -84,7 +84,8 @@ create_stamp()
 # $1 Stamp Location
 # $2 Stamp Name
 # $3 File to compare stamp against
-# $4 Force
+# $4 Stamp type
+# $5 Force
 #
 #   If stamp file is newer than the compare file return 0
 #   If stamp file is NOT newer than the compare file return 1
@@ -122,20 +123,21 @@ check_stamp()
     if test x"${stamp_type}" = x"configure"; then
        stamp_type="configur"
     fi
+    local stamping="${stamp_type:+, ${stamp_type}ing..}."
 
     if test x"${dryrun}" = xyes; then
-	notice "--dryrun is being used${stamp_type:+, ${stamp_type}ing..}."
+	notice "--dryrun is being used${stamping}"
 	return 1
     fi
 
     notice "Checking for ${stamp_loc}/${stamp_name}"
     if test ${compare_file} -nt ${stamp_loc}/${stamp_name} -o x"${local_force}" = xyes; then
         if test ! -e "${stamp_loc}/${stamp_name}"; then
-	    notice "${stamp_loc}/${stamp_name} does not yet exist${stamp_type:+, ${stamp_type}ing..}."
+	    notice "${stamp_loc}/${stamp_name} does not yet exist${stamping}"
 	elif test x"${local_force}" = xyes; then
-	    notice "--force is being used${stamp_type:+, ${stamp_type}ing..}."
+	    notice "--force is being used${stamping}"
 	else
-	    notice "${compare_file} ($(dryrun "stat -c %Y ${compare_file}")) is newer than ${stamp_loc}/${stamp_name} ($(dryrun "stat -c %Y ${stamp_loc}/${stamp_name}"))${stamp_type:+, ${stamp_type}ing..}."
+	    notice "${compare_file} ($(dryrun "stat -c %Y ${compare_file}")) is newer than ${stamp_loc}/${stamp_name} ($(dryrun "stat -c %Y ${stamp_loc}/${stamp_name}"))${stamping}"
 	    if [ -d "${compare_file}" ]; then
 		notice "Directory stamp for ${compare_file}/ ($(dryrun "stat -c %Y ${compare_file}/"))"
 	    fi
