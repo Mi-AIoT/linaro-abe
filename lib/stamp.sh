@@ -135,7 +135,11 @@ check_stamp()
         if test ! -e "${stamp_loc}/${stamp_name}"; then
 	    notice "${stamp_loc}/${stamp_name} does not yet exist${stamping}"
 	elif test x"${local_force}" = xyes; then
-	    notice "--force is being used${stamping}"
+	    local force_opt="--force_build"
+	    if [ "${force}" = "yes" ]; then
+		force_opt="--force"
+	    fi
+	    notice "${force_opt} is being used${stamping}"
 	else
 	    notice "${compare_file} ($(dryrun "stat -c %Y ${compare_file}")) is newer than ${stamp_loc}/${stamp_name} ($(dryrun "stat -c %Y ${stamp_loc}/${stamp_name}"))${stamping}"
 	    if [ -d "${compare_file}" ]; then

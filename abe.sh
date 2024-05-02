@@ -28,7 +28,8 @@ usage()
              [--enable {building|install|maintainer_mode|make_docs|full_docs|parallel|update}]
              [--excludecheck {all|glibc|gcc|gdb|binutils|newlib}]
              [--extraconfig <tool>=<path>] [--extraconfigdir <dir>]
-             [--force] [--help] [--host <host_triple>]
+             [--force] [--force_build]
+             [--help] [--host <host_triple>]
              [--infrastructure]
              [--list-artifacts <output_file>]
              [--manifest <manifest_file>]
@@ -258,7 +259,10 @@ OPTIONS
                 provided --expected-failures and --flaky-failures lists
                 have expired or not.
 
-  --force	Force download packages and force rebuild packages.
+  --force       Force download packages and force rebuild packages.
+                Implies --force_build.
+
+  --force_build Force rebuild packages.
 
   --gcc-compare-results <dir>
                 Directory containing gcc-compare-results checkout.
@@ -1158,6 +1162,10 @@ while test $# -gt 0; do
             ;;
 	--force)
 	    force=yes
+	    force_build=yes
+	    ;;
+	--force_build)
+	    force_build=yes
 	    ;;
 	--qemu-cpu)
 	    check_directive qemu-cpu $2

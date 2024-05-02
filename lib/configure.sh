@@ -72,7 +72,7 @@ configure_build()
     local stampdir="$(dirname ${builddir})"
 
     local ret=
-    check_stamp "${stampdir}" ${stamp} ${srcdir} configure ${force}
+    check_stamp "${stampdir}" ${stamp} ${srcdir} configure ${force_build}
     ret=$?
     if test $ret -eq 0; then
 	return 0 
@@ -248,7 +248,7 @@ configure_build()
 	    ;;
     esac
 
-    if test -e ${builddir}/config.status -a x"${force}" = xno; then
+    if test -e ${builddir}/config.status -a x"${force_build}" = xno; then
 	warning "${builddir} already configured!"
     else
 	if [ x"$component" = x"gdbserver" ]; then
@@ -264,6 +264,7 @@ configure_build()
 	    # ??? exporting CONFIG_SHELL seems excessive.
 	    export CONFIG_SHELL=${bash_shell}
 	fi
+
         # Substitute '@@' with '$' in $opts because there's a GDB configure flag
         # whose value has literal dollar signs and they were typed in as '@@' to
         # preserve them from shell parameter expansion.

@@ -312,7 +312,7 @@ build()
     # We don't need to build if the srcdir has not changed!  We check the
     # build stamp against the timestamp of the srcdir.
     local ret=
-    check_stamp "${stampdir}" ${stamp} ${srcdir} build ${force}
+    check_stamp "${stampdir}" ${stamp} ${srcdir} build ${force_build}
     ret=$?
     if test $ret -eq 0; then
 	return 0
@@ -340,13 +340,13 @@ build()
 	notice "Source dir stamp after configure: ${srcdir} $(dryrun "stat -c %Y ${srcdir}") ${srcdir}/ $(dryrun "stat -c %Y ${srcdir}/")"
 	
 	# Clean the build directories when forced
-	if test x"${force}" = xyes; then
+	if test x"${force_build}" = xyes; then
             make_clean ${component} ${2:+$2}
             if test $? -gt 0; then
 		return 1
             fi
 	fi
-	
+
 	# Finally compile and install the libaries
 	make_all ${component} ${2:+$2}
 	if test $? -gt 0; then

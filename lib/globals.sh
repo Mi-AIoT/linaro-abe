@@ -71,6 +71,7 @@ if test x"${SNAPSHOTS_URL:-}" != x -o x"${ABE_SNAPSHOTS:-}" != x; then
 fi
 
 force=no
+force_build=no
 verbose=1
 network=""
 
