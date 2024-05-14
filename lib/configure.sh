@@ -172,6 +172,11 @@ configure_build()
 	    echo rtlddir=/lib >> ${builddir}/configparms
 	    opts="${opts} --build=${build} --host=${target} --target=${target} --prefix=/usr"
 	    dryrun "(mkdir -p ${sysroots}/usr/lib)"
+
+	    # Explicitly set both CC and CXX to instruct glibc configure to not
+	    # try to check if another C++ compiler exists in PATH.  For stage1
+	    # it means C++ supports for tests will be disabled.
+	    opts="${opts} CC=${prefix}/bin/${target}-gcc CXX=${prefix}/bin/${target}-g++"
 	    ;;
 	gcc)
 	    opts="$opts --prefix=$prefix"
