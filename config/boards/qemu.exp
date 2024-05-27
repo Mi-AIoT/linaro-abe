@@ -34,7 +34,7 @@ case "$build_triplet" in {
 }
 
 # qemu_cpu is set in linaro.exp
-set board_info($board,exec_shell) "[board_info $board exec_shell] setarch $setarch_arch -R qemu-$qemu_arch -cpu $qemu_cpu -R 0 -L $sysroot"
+set board_info($board,exec_shell) "[board_info $board exec_shell] $env(QEMU_WRAPPER) $setarch_arch $qemu_arch $qemu_cpu $sysroot"
 
 if { [ istarget "arm*-eabi"]
      || [ istarget "aarch64*-elf"] } {
