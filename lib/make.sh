@@ -1490,7 +1490,7 @@ EOF
 		    # output to a file that can be "tail -f"'ed, if desired.
 		    # A proper fix would be to fix dejagnu to not pass parent stdout
 		    # to testcase processes.
-		    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
+		    dryrun "make ${check_targets} FLAGS_UNDER_TEST=\"$test_flags\" PREFIX_UNDER_TEST=\"$prefix/bin/${target}-\" QEMU_WRAPPER=${topdir}/scripts/qemu-wrapper.sh QEMU_CPU_UNDER_TEST=${qemu_cpu} ${schroot_make_opts} ${make_flags} ${make_runtestflags} -w -i -k -C ${builddir}$dir >> $checklog 2>&1"
 		    if [ $? != 0 ]; then
 			# Make is told to ignore errors, so it's really not supposed to fail.
 			warning "make ${check_targets} -C ${builddir}$dir failed."
