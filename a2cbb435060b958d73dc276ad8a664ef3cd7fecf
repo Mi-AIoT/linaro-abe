@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c2dcafa_e47675f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-05-27T20:21:06Z",
+      "side": 1,
+      "message": "Motivated by https://linaro.atlassian.net/browse/GNU-1214",
+      "revId": "a2cbb435060b958d73dc276ad8a664ef3cd7fecf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
