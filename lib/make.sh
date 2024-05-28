@@ -629,6 +629,28 @@ make_install()
     return 0
 }
 
+# Check whether to run tests within a container.  The <local> container is a
+# special rule that forces the check to run against the sysroot libs (for
+# instance to check against a libc with a different version than the system
+# one).
+run_test_container()
+{
+  if $exec_tests && [ -n "$test_container" -a "$test_container" != "local" ]; then
+      return 0
+  fi
+  return 1
+}
+
+# Check whether to run the tests locally by using a different loader and
+# library path.
+run_test_local()
+{
+  if $exec_tests && [ "${build}" = "${target}" -o "${test_container}" = "local" ]; then
+      return 0
+  fi
+  return 1
+}
+
 # Copy sysroot to test container and print out ABE_TEST_* settings to pass
 # to dejagnu.
 # $1 -- test container
@@ -1192,14 +1214,14 @@ make_check()
     fi
 
     local schroot_make_opts
-    if $exec_tests && [ x"$test_container" != x"" ]; then
+    if run_test_container; then
 	schroot_make_opts=$(print_make_opts_and_copy_sysroot "$test_container" \
 							     "install")
 	if [ $? -ne 0 ]; then
 	    error "Cannot initialize sysroot on $test_container"
 	    return 1
 	fi
-    elif [ x"${build}" = x"${target}" ]; then
+    elif run_test_local; then
 	schroot_make_opts="ABE_TEST_CONTAINER=local"
 	if [ x"$ldso_bin" != x"" ]; then
 	    local lib_path
@@ -1712,7 +1734,7 @@ EOF
         rm -rf ${sysroots}/libc/etc/ld.so.cache
     fi
 
-    if $exec_tests && [ x"$test_container" != x"" ]; then
+    if run_test_container; then
 	print_make_opts_and_copy_sysroot "$test_container" "restore"
 	if [ $? -ne 0 ]; then
 	    error "Cannot restore sysroot on $test_container"

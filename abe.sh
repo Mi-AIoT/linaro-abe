@@ -53,7 +53,7 @@ usage()
              [--set {target_board_options}=XXX
              [--snapshots <path>] [--tarball] [--tarbin] [--tarsrc]
              [--target {<target_triple>|''}]
-             [--testcontainer [user@]ipaddress:ssh_port]
+             [--testcontainer [[user@]ipaddress:ssh_port]|local]
              [--timeout <timeout_value>]
              [--usage]
              [{binutils|dejagnu|gcc|gdb|gdbserver|gmp|mpfr|mpc|eglibc|glibc|newlib|qemu}
@@ -478,13 +478,15 @@ OPTIONS
 			that ${abe} is running on then build the
 			toolchain as a cross toolchain.
 
-  --testcontainer [<user>@]<ipaddress>:<ssh_port>
+  --testcontainer [[<user>@]<ipaddress>:<ssh_port>|local]
 
 		Specify container to use for running cross-tests for
 		supported configurations.  The container should be
 		configured to allow passwordless ssh on port <ssh_port>
 		for <user> and "root" users. If <user>@ is omitted,
 		use the same user name as the local one.
+		The <local> configuration uses the host sysroot similar to
+		a native build.
 
   --timeout <timeout_value>
 
@@ -1260,9 +1262,11 @@ while test $# -gt 0; do
 	    check_directive testcontainer testcontainer $2
 	    test_container=$2
 	    shift
-	    # We need to use environment variable to communicate to dejagnu's
-	    # config/linaro.exp to select the board made for container testing.
-	    export ABE_TEST_CONTAINER="$test_container"
+	    if [ "${test_container}" != "local" ];  then
+	        # We need to use environment variable to communicate to dejagnu's
+		# config/linaro.exp to select the board made for container testing.
+		export ABE_TEST_CONTAINER="$test_container"
+	    fi
 	    ;;
 	--timeout)
 	    check_directive timeout $2
