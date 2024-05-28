@@ -16,6 +16,63 @@
       "message": "Motivated by https://linaro.atlassian.net/browse/GNU-1214",
       "revId": "a2cbb435060b958d73dc276ad8a664ef3cd7fecf",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3a6e09c_b87cb5ff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-28T16:01:12Z",
+      "side": 1,
+      "message": "Looks good to me, thanks! Just a few minor nits. Feel free to ignore as they are more personal opinion than actual issues.",
+      "revId": "a2cbb435060b958d73dc276ad8a664ef3cd7fecf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1f1a427_f1ac8ad9",
+        "filename": "scripts/qemu-wrapper.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-28T16:01:12Z",
+      "side": 1,
+      "message": "Shellcheck says:\n\n\"\"\"\nIn scripts/qemu-wrapper.sh line 17:\nif [ \"x$ASAN_OPTIONS\" \u003d x ]; then\n     ^--------------^ SC2268 (style): Avoid x-prefix in comparisons as it no longer serves a purpose.\n\nDid you mean:\nif [ \"$ASAN_OPTIONS\" \u003d \"\" ]; then\n\nFor more information:\n  https://www.shellcheck.net/wiki/SC2268 -- Avoid x-prefix in comparisons as ...\n\"\"\"\n\nAnd I think we can enjoy the fact that this hack isn\u0027t necessary anymore. 😊",
+      "range": {
+        "startLine": 17,
+        "startChar": 6,
+        "endLine": 17,
+        "endChar": 7
+      },
+      "revId": "a2cbb435060b958d73dc276ad8a664ef3cd7fecf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa19309_b1d83d3a",
+        "filename": "scripts/qemu-wrapper.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-28T16:01:12Z",
+      "side": 1,
+      "message": "Two comments on this line:\n\n1. When the scripts ends by calling another executable, I normally call it with exec. E.g., \"exec setarch \"$setarch_arch\" ...\".\n\nThis way, no bash process will be left unnecessarily waiting for the executable to finish just so that it can report its return value. This is just a pet peeve of mine and harmless in practice, so feel free to ignore.\n\n2. I suggest expanding the script arguments with \"$@\" instead of \"$*\", because if any of the arguments contains spaces, it will be preserved as a single argument instead of being split into additional arguments.",
+      "revId": "a2cbb435060b958d73dc276ad8a664ef3cd7fecf",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
