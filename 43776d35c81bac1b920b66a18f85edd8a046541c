@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d1b4fa9_add2905c",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-05-30T19:26:48Z",
+      "side": 0,
+      "message": "Removing this means we change the list of languages we build by default in the native case. Is that OK? (IIUC we would use c,c++,fortran,lto from line 77)\nFor CI purposes we use --set languages anyway, and for manual builds I don\u0027t think that is a problem.",
+      "range": {
+        "startLine": 227,
+        "startChar": 2,
+        "endLine": 229,
+        "endChar": 37
+      },
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
