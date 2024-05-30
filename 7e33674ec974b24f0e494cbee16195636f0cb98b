@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3652e60e_82d9de5b",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-30T19:55:23Z",
+      "side": 0,
+      "message": "This one isn\u0027t mentioned in the commit message. It would be nice to have a rationale for it too.",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 20
+      },
+      "revId": "7e33674ec974b24f0e494cbee16195636f0cb98b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}

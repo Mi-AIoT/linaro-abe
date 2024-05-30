@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ddfa92b_e207c258",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-30T19:55:23Z",
+      "side": 1,
+      "message": "I only know the basics of building GCC so this may be an obvious question: even if the distro\u0027s LLVM\u0027s as and ld installed and available in $PATH, is it guaranteed that binutils\u0027 versions will be used?",
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0321db9e_894cb677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-30T19:55:23Z",
+      "side": 1,
+      "message": "Just a minor nit and a question. I\u0027m not very familiar with GCC building, but LGTM FWIW.",
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
