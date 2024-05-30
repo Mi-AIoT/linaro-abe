@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02be0737_aea6b11a",
+        "filename": "config/binutils.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-30T20:11:06Z",
+      "side": 1,
+      "message": "Are we going to keep ${sysroots}/libc then? Or is it worth trying to get rid of it and installing libc directly in sysroots?\n\nI can work on that if it\u0027s worthwhile. There\u0027s a GDB testcase that fails because of it.",
+      "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
