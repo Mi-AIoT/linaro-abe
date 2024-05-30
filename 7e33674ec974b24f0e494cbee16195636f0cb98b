@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34cf274b_0d74ecd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-30T18:59:28Z",
+      "side": 1,
+      "message": "Assuming the lava-bot failure is due to the difference in configure options, LGTM. Thanks!",
+      "revId": "7e33674ec974b24f0e494cbee16195636f0cb98b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
