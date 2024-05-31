@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99bf400d_37f41ee4",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-31T00:43:51Z",
+      "side": 1,
+      "message": "Shellcheck found a bug in this condition:\n\nIn abe.sh line 1265:                                                                                                                                                                     \n            if [ x\"${test_container}\" !\u003d \"local\" ];  then                                                                                                                                \n                                      ^-- SC2193 (warning): The arguments to this comparison can never be equal. Make sure your syntax is correct.\n\nEven after fixing it, this \"x\" trick isn\u0027t necessary anymore. Every reasonably recent shell already fixed the bug which it worked around:\nhttps://www.shellcheck.net/wiki/SC2268",
+      "revId": "4d904aa264a847b322c9ba70ca5a66c53113a42c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19afecf7_9bd9211e",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-31T00:43:51Z",
+      "side": 1,
+      "message": "I suggest not using the x workaround.",
+      "range": {
+        "startLine": 638,
+        "startChar": 22,
+        "endLine": 638,
+        "endChar": 23
+      },
+      "revId": "4d904aa264a847b322c9ba70ca5a66c53113a42c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3414f0e_e7a3ae56",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-05-31T00:43:51Z",
+      "side": 1,
+      "message": "[ uses \"\u003d\" for string comparison.\n\nAlso, I suggest not using the x workaround.",
+      "range": {
+        "startLine": 648,
+        "startChar": 73,
+        "endLine": 648,
+        "endChar": 75
+      },
+      "revId": "4d904aa264a847b322c9ba70ca5a66c53113a42c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
