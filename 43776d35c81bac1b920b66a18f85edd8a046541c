@@ -18,6 +18,64 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b0edabd_1438ac2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-05-31T08:50:38Z",
+      "side": 1,
+      "message": "Just looked at GCC\u0027s configure \u0026 friends, it\u0027s not super-clear what the actual purpose of these is.... It seems on Solaris it can make a difference for instance. In our case, I\u0027m not sure.",
+      "parentUuid": "5ddfa92b_e207c258",
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea94b102_d27e80e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-05-31T08:50:38Z",
+      "side": 1,
+      "message": "Looking at configure, it seems it\u0027s only enabled by default on lm32 targets?",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 50
+      },
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "516210f3_450f20ab",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-05-31T08:50:38Z",
+      "side": 1,
+      "message": "typo (should be \"knows\")?",
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0321db9e_894cb677",
