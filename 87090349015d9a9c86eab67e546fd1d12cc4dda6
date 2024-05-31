@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4224035e_e1f280eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-05-31T09:03:13Z",
+      "side": 1,
+      "message": "Why do we want to enforce initfini-array? It seems there\u0027s autodetection in configure scripts, is it broken? Or is it because we want to enable it for bare-metal targets?",
+      "revId": "87090349015d9a9c86eab67e546fd1d12cc4dda6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
