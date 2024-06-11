@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ae25dc22_294e5055",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-11T17:33:36Z",
+      "side": 1,
+      "message": "I meant the configure to fail by using a wrong C++ compiler.  Maybe \"To avoid glibc confuguration fail with a stage1...\"?",
+      "parentUuid": "de5bc86a_2dc89257",
+      "revId": "2aa469ba802131fffd77f14d14881be341e8232d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3771901c_5c8f7e26",
         "filename": "lib/configure.sh",
         "patchSetId": 1
@@ -31,6 +49,30 @@
       "writtenOn": "2024-05-31T09:13:31Z",
       "side": 1,
       "message": "I\u0027m not sure to understand...\nThis always sets CXX, which should always point to a non-existing file, except if there\u0027s a previous build already present in ${prefix} ?\nIn general we build stage1, glibc, stage2, so when we build glibc, ${target}-g++ is normally absent. Do I understand correctly?\nSo, are there cases where we\u0027ll actually define CXX to something that exists?\n(and if no, how can we run glibc\u0027s tests if they require a valid CXX?)",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 81
+      },
+      "revId": "2aa469ba802131fffd77f14d14881be341e8232d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e2fbb8_99b2b595",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-11T17:33:36Z",
+      "side": 1,
+      "message": "The issue is glibc configure will try for *all* possibilities if you do not explicit set the CXX.  For instance, on an x86_64 host cross-compiling to aarch64:\n\n$ configure --prefix\u003d/usr --build\u003dx86_64-linux-gnu --host\u003daarch64-linux-gnu CC\u003d/home/azanella/toolchain/install/compilers//aarch64-linux-gnu/bin/aarch64-glibc-linux-gnu-gcc\n\nThe configure will check for all possible g++:\n[...]\nconfigure:3834: checking for aarch64-linux-gnu-g++\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-c++\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-gpp\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-aCC\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-CC\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-cxx\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-cc++\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-cl.exe\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-FCC\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-KCC\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-RCC\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-xlC_r\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-xlC\nconfigure:3869: result: no\nconfigure:3834: checking for aarch64-linux-gnu-clang++\nconfigure:3869: result: no\nconfigure:3883: checking for g++\nconfigure:3904: found /usr/bin/g++\nconfigure:3915: result: g++\nconfigure:3931: WARNING: using cross tools not prefixed with host triplet\n[...]\n\nWhere g++ is the system on targetting x86_64. By setting the CXX to an invalid one, the configure will *not* try to find one in $PATH.\n\nAlso, it should be ok if $prefix already have a host triplet prefixed g++ (it means that it target the expected ABI).\n\nAnd the usual stage2 bootstrap seems steps you described are the usual ones, we can\u0027t really test glibc C++ tests with a stage1 compiler targetting newlib because libstdc++ itself requires glibc. So to actually test glibc c++ tests, we need to rebuild glibc with the final stage2 compiler, copy the libgcc_s.so/libstdc++.so on the build folder (so glibc does not try to use the system ones) and run \u0027make check\u0027.",
+      "parentUuid": "3771901c_5c8f7e26",
       "range": {
         "startLine": 179,
         "startChar": 0,
