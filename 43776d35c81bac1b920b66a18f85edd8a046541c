@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8986304_13ddf6a3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-11T17:08:09Z",
+      "side": 1,
+      "message": "Afaiu these options are not really intended for GNU systems, where the default as/ld is the GNU ones.  Since we are building solely on Linux/GNU I don\u0027t think it would make sense to add them.\n\nAlso, I don\u0027t think we currently build or check gcc with llvm binutils alike tools (llvm-as, lld), so I don\u0027t think we should focus on this for now.",
+      "parentUuid": "9b0edabd_1438ac2a",
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea94b102_d27e80e1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 1
