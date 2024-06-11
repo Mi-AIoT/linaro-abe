@@ -16,6 +16,24 @@
       "message": "Why do we want to enforce initfini-array? It seems there\u0027s autodetection in configure scripts, is it broken? Or is it because we want to enable it for bare-metal targets?",
       "revId": "87090349015d9a9c86eab67e546fd1d12cc4dda6",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8d4561_dc7ce3fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-11T17:19:54Z",
+      "side": 1,
+      "message": "Mainly because it was not a default for cross-compiling prior gcc 12.  We have added it on glibc\u0027s build-many-glibcs.py for similar reason [1].\n\n[1] https://sourceware.org/bugzilla/show_bug.cgi?id\u003d27945",
+      "parentUuid": "4224035e_e1f280eb",
+      "revId": "87090349015d9a9c86eab67e546fd1d12cc4dda6",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
