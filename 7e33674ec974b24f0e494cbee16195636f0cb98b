@@ -34,6 +34,24 @@
       "parentUuid": "34cf274b_0d74ecd4",
       "revId": "7e33674ec974b24f0e494cbee16195636f0cb98b",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "524446ca_9cc1a5c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-11T20:12:10Z",
+      "side": 1,
+      "message": "\u003e The failure is not clear from the logs, at least I could not find the real issue. I will resumit the series with the issue addressd.\n\nI tried digging into the lava-bot failure. Looking at the test job\u0027s console output:\n\nhttps://ci.linaro.org/job/tcwg-abe-test/1604/label\u003dtcwg-x86_64-build,test\u003dabe-tests-checkout/console\n\nIf you grep for \"FAIL:\" it is indeed because of the difference in binutils configure options.",
+      "parentUuid": "7c7709a0_67dd4025",
+      "revId": "7e33674ec974b24f0e494cbee16195636f0cb98b",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
