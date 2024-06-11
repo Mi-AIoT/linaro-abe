@@ -22,6 +22,30 @@
       },
       "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d395b9d_6c5282fd",
+        "filename": "config/gcc.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-11T17:15:30Z",
+      "side": 0,
+      "message": "Right, I will add a previous patch to change the default languages to a more useful set: c,c++,d,fortran,go and maybe m2. I still need to check the ada problem with a stage2 cross-compile.",
+      "parentUuid": "0d1b4fa9_add2905c",
+      "range": {
+        "startLine": 227,
+        "startChar": 2,
+        "endLine": 229,
+        "endChar": 37
+      },
+      "revId": "43776d35c81bac1b920b66a18f85edd8a046541c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
