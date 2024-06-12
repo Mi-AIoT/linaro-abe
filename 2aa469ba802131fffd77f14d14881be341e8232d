@@ -81,6 +81,30 @@
       },
       "revId": "2aa469ba802131fffd77f14d14881be341e8232d",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3b50ab3_7275cd7e",
+        "filename": "lib/configure.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-06-12T07:48:26Z",
+      "side": 1,
+      "message": "Thanks for the clarification. I think \"invalid value\" is confusing (it may be valid, if already present from a previous build for instance; to me \"invalid\" would be something like CXX\u003d/path/to/non-existing-compiler 😊 )",
+      "parentUuid": "d1e2fbb8_99b2b595",
+      "range": {
+        "startLine": 179,
+        "startChar": 0,
+        "endLine": 179,
+        "endChar": 81
+      },
+      "revId": "2aa469ba802131fffd77f14d14881be341e8232d",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
