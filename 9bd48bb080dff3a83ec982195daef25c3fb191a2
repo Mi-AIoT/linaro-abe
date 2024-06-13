@@ -16,6 +16,24 @@
       "message": "Are we going to keep ${sysroots}/libc then? Or is it worth trying to get rid of it and installing libc directly in sysroots?\n\nI can work on that if it\u0027s worthwhile. There\u0027s a GDB testcase that fails because of it.",
       "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f5569f_34c6dab5",
+        "filename": "config/binutils.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-13T16:25:18Z",
+      "side": 1,
+      "message": "Without the setting the sysroot a stage2 compiler built with different glibc versions (aiming to test gcc targeting a different libc than the system one), won\u0027t link against the newly build glibc.  It is not an issue, since glibc guarantee future compatibility (and assuming system libc is older than the target one); but it defeats the idea of testing gcc along with a newly libc version.\n\nWhy gdb tests are failing with --sysroot?",
+      "parentUuid": "02be0737_aea6b11a",
+      "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
