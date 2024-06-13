@@ -18,6 +18,24 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a33f1493_2777108f",
+        "filename": "abe.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 1265,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-13T16:19:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "99bf400d_37f41ee4",
+      "revId": "4d904aa264a847b322c9ba70ca5a66c53113a42c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19afecf7_9bd9211e",
@@ -41,6 +59,30 @@
       "serverId": "f33910f19b7abb192b83adbd000000bf"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9aef6ca_f68ca002",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-13T16:19:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "19afecf7_9bd9211e",
+      "range": {
+        "startLine": 638,
+        "startChar": 22,
+        "endLine": 638,
+        "endChar": 23
+      },
+      "revId": "4d904aa264a847b322c9ba70ca5a66c53113a42c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3414f0e_e7a3ae56",
@@ -54,6 +96,30 @@
       "writtenOn": "2024-05-31T00:43:51Z",
       "side": 1,
       "message": "[ uses \"\u003d\" for string comparison.\n\nAlso, I suggest not using the x workaround.",
+      "range": {
+        "startLine": 648,
+        "startChar": 73,
+        "endLine": 648,
+        "endChar": 75
+      },
+      "revId": "4d904aa264a847b322c9ba70ca5a66c53113a42c",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c8089d_cc8a2e30",
+        "filename": "lib/make.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000232
+      },
+      "writtenOn": "2024-06-13T16:19:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a3414f0e_e7a3ae56",
       "range": {
         "startLine": 648,
         "startChar": 73,
