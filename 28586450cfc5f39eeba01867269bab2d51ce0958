@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2368709b_6b502b9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-06-14T08:03:28Z",
+      "side": 1,
+      "message": "The CI error is because of the expected difference in the manifest.",
+      "revId": "28586450cfc5f39eeba01867269bab2d51ce0958",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
