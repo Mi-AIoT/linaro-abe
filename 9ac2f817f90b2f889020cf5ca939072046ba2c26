@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9277588b_fee2de41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-06-14T08:37:09Z",
+      "side": 1,
+      "message": "It seems this patch (or the next one, the series order is not clear to me in gerrit) breaks the build of gcc-12.",
+      "revId": "9ac2f817f90b2f889020cf5ca939072046ba2c26",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
