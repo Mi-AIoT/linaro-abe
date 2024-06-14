@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90cae88_4478f2c6",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-06-14T08:15:22Z",
+      "side": 0,
+      "message": "So we drop objc for native builds? (See line 77 for the default value).\nI don\u0027t remember why we have d and m2 by default (line 77) and objc here :-(",
+      "revId": "7878b71ce45a3e6dc766c4a104da707d2f373be3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
