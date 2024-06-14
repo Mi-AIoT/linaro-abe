@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b66374_47a0ed18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-14T19:00:02Z",
+      "side": 1,
+      "message": "\u003e \"Build Failed\n\u003e  https://ci.linaro.org/job/tcwg-abe-test/1615/ : Well ... it worked on my machine\"\n\nThe native_build job failed because GCC 12 failed to build. From the console output:\n\n15:38:21 /home/tcwg-buildslave/workspace/tcwg-abe-test__1/snapshots/gcc.git~releases~gcc-12/libgcc/../gcc/tsystem.h:87:10: fatal error: stdio.h: No such file or directory\n15:38:21    87 | #include \u003cstdio.h\u003e\n15:38:21       |          ^~~~~~~~~\n15:38:21 compilation terminated.\n15:38:21 In file included from /home/tcwg-buildslave/workspace/tcwg-abe-test__1/snapshots/gcc.git~releases~gcc-12/libgcc/libgcc2.c:27:\n15:38:21 /home/tcwg-buildslave/workspace/tcwg-abe-test__1/snapshots/gcc.git~releases~gcc-12/libgcc/../gcc/tsystem.h:87:10: fatal error: stdio.h: No such file or directory",
+      "revId": "0d0d8f42e33302e21f912bb47f746fe96df73f67",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
