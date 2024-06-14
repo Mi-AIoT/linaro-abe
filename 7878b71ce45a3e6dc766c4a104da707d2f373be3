@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b2b24a_de1de073",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-14T18:19:56Z",
+      "side": 1,
+      "message": "\u003e \"Build failed\n\u003e  https://ci.linaro.org/job/tcwg-abe-test/1620/ : Well ... it worked on my machine\"\n\nThe abe-tests-checkout job failed because of the difference in GCC stage2 flags so it is expected.\n\nBut the abe-tests job failed for some other reason, probably because m2 couldn\u0027t be built. According to its results_report.txt¹:\n\n\u003e\u003e\u003e configure: error: \n\u003e\u003e\u003e The following requested languages could not be built: m2\n\u003e\u003e\u003e Supported languages are: c,ada,c,c++,d,fortran,go,lto,objc,obj-c++\n\u003e\u003e\u003e WARNING: Previous command failed\n\u003e\u003e\u003e ERROR (#273): configure_build (Configure of gcc failed.)\n\u003e\u003e\u003e ERROR (#336): build (Configure of gcc failed!)\n\u003e\u003e\u003e ERROR (#115): build_all (Failed building stage2.)\n\u003e\u003e\u003e ERROR (#118): perform_build_steps (Step BUILD failed)\n\u003e\u003e\u003e ERROR (#309): build_failure (Build process failed after 23 minutes)\n\n-- \n¹ https://ci.linaro.org/job/tcwg-abe-test/1620/label\u003dtcwg-x86_64-build,test\u003dabe-tests/artifact/artifacts/results_report.txt/*view*/",
+      "revId": "7878b71ce45a3e6dc766c4a104da707d2f373be3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
