@@ -16,6 +16,24 @@
       "message": "So we drop objc for native builds? (See line 77 for the default value).\nI don\u0027t remember why we have d and m2 by default (line 77) and objc here :-(",
       "revId": "7878b71ce45a3e6dc766c4a104da707d2f373be3",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a68f9b1_1c056787",
+        "filename": "config/gcc.conf",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-14T18:40:27Z",
+      "side": 0,
+      "message": "The default in line 77 was changed by the previous Gerrit change (\"47273: config/gcc.conf: Change default languages | https://review.linaro.org/c/toolchain/abe/+/47273\") to add Go, D and M2.\n\n\u003e So we drop objc for native builds? (See line 77 for the default value).\n\nChange 47273 drops Objective C because it\u0027s rarely used.\n\n\u003e I don\u0027t remember why we have d and m2 by default (line 77) and objc here :-(\n\nGo, D and M2 were added to match what Debian and Ubuntu build.",
+      "parentUuid": "a90cae88_4478f2c6",
+      "revId": "7878b71ce45a3e6dc766c4a104da707d2f373be3",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
