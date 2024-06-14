@@ -16,6 +16,24 @@
       "message": "It seems this patch (or the next one, the series order is not clear to me in gerrit) breaks the build of gcc-12.",
       "revId": "9ac2f817f90b2f889020cf5ca939072046ba2c26",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f95859ae_46ecbd06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-14T19:06:57Z",
+      "side": 1,
+      "message": "\u003e It seems this patch (or the next one, the series order is not clear to me in gerrit) breaks the build of gcc-12.\n\nIt\u0027s the next one. M2 isn\u0027t a valid language in GCC 12.",
+      "parentUuid": "9277588b_fee2de41",
+      "revId": "9ac2f817f90b2f889020cf5ca939072046ba2c26",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
