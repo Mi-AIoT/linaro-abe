@@ -52,6 +52,24 @@
       "parentUuid": "a8f5569f_34c6dab5",
       "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ee0c803_b74e6e64",
+        "filename": "config/binutils.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-15T00:19:54Z",
+      "side": 1,
+      "message": "The problem is not with --sysroot. That is fine. The problem is with having a separate libc \"sub-sysroot\": ${sysroots}/libc. I think this is a strange setup, and causes problems.\n\nIn GDB it breaks the libstdc++ pretty-printers, because they have to be copied into that ${sysroots}/libc subdirectory from the original ${sysroots} sysroot. The pretty-printers have libstdc++\u0027s installation prefix hard-coded into them and when they are moved somewhere else, they stop working. This caused this false-positive regression report, for example: https://linaro.atlassian.net/browse/GNU-1088\n\nAlso, as I mentioned in the GNU sync meeting once, I came across someone on Stack Overflow who wasn\u0027t able to cross-compile an application because of this subsysroot:\n\n\"It looks like the presence of the libc directory in the sysroot is unusual, and I checked other toolchains and it was always merged with lib. So I ended up ditching that particular toolchain and building my own with crosstool-ng instead. This avoided the problem entirely.\"\n\nhttps://stackoverflow.com/questions/58073824/cross-compiling-and-linking-to-a-library-in-a-sysroot-whats-wrong",
+      "parentUuid": "73e0dfe3_e225e98f",
+      "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
