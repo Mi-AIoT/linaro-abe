@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaddc89c_e9ab2910",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-06-15T00:45:47Z",
+      "side": 1,
+      "message": "lava-bot is complaining about the GCC 12 build failures, but that\u0027s nothing to do with this change.\n\nBy the way, I think it is trying to build GCC 12 because abe/config/latest-rel/gcc.conf points to it.",
+      "revId": "5204a4a4f67b6e2bc45f00bda3341a4a0804e039",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
