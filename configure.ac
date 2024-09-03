@@ -93,18 +93,6 @@ if test x"${AUTOGEN}" = x; then
    missing="${missing} autogen"
 fi
 
-AC_PATH_PROG(FAKEROOT, fakeroot)
-if test x"${FAKEROOT}" = x; then
-   AC_MSG_WARN([You need 'fakeroot' to build binary Deb packages !])
-#   missing="${missing} fakeroot"
-fi
-
-AC_PATH_PROG(ALIEN, alien)
-if test x"${ALIEN}" = x; then
-   AC_MSG_WARN([You need 'alien' to build binary Deb packages !])
-#   missing="${missing} alien"
-fi
-
 dnl Building GDB requires ncurses and termcap
 #AC_CHECK_LIB(ncurses, doupdate)
 #if test x${ac_cv_lib_ncurses_doupdate} != x"yes"; then
