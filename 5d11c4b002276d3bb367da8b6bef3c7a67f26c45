@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2608cd92_a6936702",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-09-09T07:48:17Z",
+      "side": 1,
+      "message": "LGTM. Making sure binary releases work on various host distros is the reason I can remember of for using static linking.",
+      "revId": "5d11c4b002276d3bb367da8b6bef3c7a67f26c45",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
