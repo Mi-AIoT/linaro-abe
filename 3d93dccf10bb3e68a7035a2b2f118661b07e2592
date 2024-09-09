@@ -16,6 +16,41 @@
       "message": "\u003e \"Build Failed\n\u003e \n\u003e https://ci.linaro.org/job/tcwg-abe-test/1624/ : Well ... it worked on my machine\"\n\nThis is a CI issue. The cross_build job failed with:\n\n01:48:17 + ./jenkins-scripts/start-container-docker.sh --label tcwg-armv7 --task test --prefix test_\n01:48:27 ERROR: Cannot find node for tcwg-armv7\n\nThe abe-tests-checkout job failure is ok. test_previous_abe_manifest failed because the previous and current manifest differ as expected:\n\n02:46:01 --- /tmp/0ShMCl2Jqx\t2024-09-06 05:46:01.342263917 +0000\n02:46:01 +++ /tmp/w7hkYo_0ec\t2024-09-06 05:46:01.458264406 +0000\n02:46:01 @@ -17,7 +17,7 @@\n02:46:01  dejagnu_linuxhost_only\u003d\"no\"\n02:46:01  dejagnu_mingw_only\u003d\"no\"\n02:46:01  dejagnu_revision\u003d...\n02:46:01 -dejagnu_staticlink\u003d\"yes\"\n02:46:01 +dejagnu_staticlink\u003d\"\"\n02:46:01  dejagnu_url\u003dhttps://git.linaro.org/git/toolchain",
       "revId": "3d93dccf10bb3e68a7035a2b2f118661b07e2592",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "434f5e54_7a828cb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-09-09T08:17:17Z",
+      "side": 1,
+      "message": "The CI problem is cause tk1-10 is down and we have no other machine with tcwg-armv7 label at the moment.",
+      "parentUuid": "2fb524d6_fe0ab2ca",
+      "revId": "3d93dccf10bb3e68a7035a2b2f118661b07e2592",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03412f9b_5a14d901",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-09-09T08:17:17Z",
+      "side": 1,
+      "message": "LGTM.\nWondering if the \"old bug\" is what commit f50d880fdacf3394a5809a346a80a3e120cd0aeb suggests: it\u0027s possible that \"static_link\u003dyes\" was leaking from other components into these two ones, and we kept them in the manifests for compatibility reasons. Maybe we should increase the manifest version number, but that involves testsuite updates that can be tricky.",
+      "revId": "3d93dccf10bb3e68a7035a2b2f118661b07e2592",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
