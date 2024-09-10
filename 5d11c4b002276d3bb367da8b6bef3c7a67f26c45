@@ -16,6 +16,24 @@
       "message": "LGTM. Making sure binary releases work on various host distros is the reason I can remember of for using static linking.",
       "revId": "5d11c4b002276d3bb367da8b6bef3c7a67f26c45",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb7d3cf8_defc151c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-09-10T05:54:26Z",
+      "side": 1,
+      "message": "\u003e LGTM. Making sure binary releases work on various host distros is the reason I can remember of for using static linking.\n\nThank you! Actually, one of the lava-bot failures is in an x86_64 native-build job:\n\n01:48:55 /home/tcwg-buildslave/workspace/tcwg-abe-test__0/_build/builds/x86_64-pc-linux-gnu/x86_64-pc-linux-gnu/gcc-gcc.git~releases~gcc-12-stage2/./gcc/xgcc -B/home/tcwg-buildslave/workspace/tcwg-abe-test__0/_build/builds/x86_64-pc-linux-gnu/x86_64-pc-linux-gnu/gcc-gcc.git~releases~gcc-12-stage2/./gcc/ -xc++ -nostdinc /dev/null -S -o /dev/null -fself-test\u003d/home/tcwg-buildslave/workspace/tcwg-abe-test__0/snapshots/gcc.git~releases~gcc-12/gcc/testsuite/selftests\n01:48:55 /home/tcwg-buildslave/workspace/tcwg-abe-test__0/_build/builds/x86_64-pc-linux-gnu/x86_64-pc-linux-gnu/gcc-gcc.git~releases~gcc-12-stage2/./gcc/cc1: error while loading shared libraries: libmpfr.so.4: cannot open shared object file: No such file or directory\n\nI won\u0027t dig into this for now, so I\u0027ll submit a v2 which keeps static_link\u003dyes for the library components, since my main interest here is in binutils, gdb and gdbserver.",
+      "parentUuid": "2608cd92_a6936702",
+      "revId": "5d11c4b002276d3bb367da8b6bef3c7a67f26c45",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
