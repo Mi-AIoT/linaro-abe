@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248d17f3_0d021ad9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-09-10T05:57:55Z",
+      "side": 1,
+      "message": "So this version reverts the change from expat, gmp, libiconv, mpc, mpfr and python. As I mentioned, I\u0027m mostly interested in changing this for binutils, gdb and gdbserver.\n\nI tested v2 on tcwg-jade-03 with tcwg_binutils_check, tcwg_gcc_check, tcwg_gdb_check, tcwg_gnu_native_check_binutils, tcwg_gnu_native_check_gcc and tcwg_gnu_native_check_gdb. Hopefully lava-bot will like it better.",
+      "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ]
+}
