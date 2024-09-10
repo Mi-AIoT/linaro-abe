@@ -16,6 +16,23 @@
       "message": "So this version reverts the change from expat, gmp, libiconv, mpc, mpfr and python. As I mentioned, I\u0027m mostly interested in changing this for binutils, gdb and gdbserver.\n\nI tested v2 on tcwg-jade-03 with tcwg_binutils_check, tcwg_gcc_check, tcwg_gdb_check, tcwg_gnu_native_check_binutils, tcwg_gnu_native_check_gcc and tcwg_gnu_native_check_gdb. Hopefully lava-bot will like it better.",
       "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "499d7dab_88a85a37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000534
+      },
+      "writtenOn": "2024-09-10T15:54:13Z",
+      "side": 1,
+      "message": "\u003e \"Build Failed\n\u003e https://ci.linaro.org/job/tcwg-abe-test/1626/ : Well ... it worked on my machine\"\n\nNow the only failures are the ones I expected: no armv7 machine available, and difference in the manifest file because it doesn\u0027t have static_link\u003dyes. E.g.:\n\n04:44:00 -gdbserver_staticlink\u003d\"yes\"\n04:44:00 +gdbserver_staticlink\u003d\"\"",
+      "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
