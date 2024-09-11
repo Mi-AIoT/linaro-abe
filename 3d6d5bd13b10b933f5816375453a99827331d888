@@ -33,6 +33,23 @@
       "message": "\u003e \"Build Failed\n\u003e https://ci.linaro.org/job/tcwg-abe-test/1626/ : Well ... it worked on my machine\"\n\nNow the only failures are the ones I expected: no armv7 machine available, and difference in the manifest file because it doesn\u0027t have static_link\u003dyes. E.g.:\n\n04:44:00 -gdbserver_staticlink\u003d\"yes\"\n04:44:00 +gdbserver_staticlink\u003d\"\"",
       "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af742982_b97f9fbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-09-11T13:28:56Z",
+      "side": 1,
+      "message": "This problem with libmpfr is that during the GCC build, the compiler is linked with -Lbuilds/destdir/$host/lib but that directory is not added to LD_LIBRARY_PATH or RUNPATH. So the system fails to find libmpfr.so.4 when it needs to execute gcc, although libmpfr.so.6 is present in the system.\n\nWe have the same problem if libmpfr.so.4 is present in any dir used at link time (for instance if you try the previous version of this patch, which will build libmpfr.so*, then revert the change, rebuild without cleaning: the system will find the .so version built previously)\n\nMaybe we should also consider upgrading infrastructure/mpfr-3.1.5.tar.xz to a more recent version... or always rely on the host.\n\nAnyway, the patch LGTM, just wondering if this will hide other future similar bugs in the Makefiles/test-system.",
+      "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
