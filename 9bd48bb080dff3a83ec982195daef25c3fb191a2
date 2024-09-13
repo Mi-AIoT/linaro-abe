@@ -70,6 +70,24 @@
       "parentUuid": "73e0dfe3_e225e98f",
       "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6536a26_d51428d1",
+        "filename": "config/binutils.conf",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-09-13T00:45:08Z",
+      "side": 1,
+      "message": "First of all, I\u0027m all for dropping arcane sysroot setups that we historically have.\n\nRe. $sysroots/lib vs $sysroots/libc -- I believe the motivation was to have \"libc\" directly copiable to the target system and have the minimum required amount of files to make the binaries run.  I.e., libc/ doesn\u0027t include static libraries.  Saving space on embedded systems was important back in the day.\n\nNowadays, I don\u0027t think we should bother to separate static and dynamic sysroots.  If we easily can do that -- great; if not -- let\u0027s drop it for the sake of simplicity.",
+      "parentUuid": "3ee0c803_b74e6e64",
+      "revId": "9bd48bb080dff3a83ec982195daef25c3fb191a2",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
