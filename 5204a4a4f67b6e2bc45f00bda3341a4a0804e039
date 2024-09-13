@@ -16,6 +16,29 @@
       "message": "lava-bot is complaining about the GCC 12 build failures, but that\u0027s nothing to do with this change.\n\nBy the way, I think it is trying to build GCC 12 because abe/config/latest-rel/gcc.conf points to it.",
       "revId": "5204a4a4f67b6e2bc45f00bda3341a4a0804e039",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646ffabb_42e8c8c4",
+        "filename": "lib/make.sh",
+        "patchSetId": 2
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-09-13T00:52:30Z",
+      "side": 1,
+      "message": "You are using a local $exec_tests in a nested function.  This shouldn\u0027t work.  Or am I missing something?",
+      "range": {
+        "startLine": 1091,
+        "startChar": 4,
+        "endLine": 1091,
+        "endChar": 20
+      },
+      "revId": "5204a4a4f67b6e2bc45f00bda3341a4a0804e039",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
