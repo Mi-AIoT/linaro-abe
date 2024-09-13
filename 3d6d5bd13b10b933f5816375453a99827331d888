@@ -50,6 +50,23 @@
       "message": "This problem with libmpfr is that during the GCC build, the compiler is linked with -Lbuilds/destdir/$host/lib but that directory is not added to LD_LIBRARY_PATH or RUNPATH. So the system fails to find libmpfr.so.4 when it needs to execute gcc, although libmpfr.so.6 is present in the system.\n\nWe have the same problem if libmpfr.so.4 is present in any dir used at link time (for instance if you try the previous version of this patch, which will build libmpfr.so*, then revert the change, rebuild without cleaning: the system will find the .so version built previously)\n\nMaybe we should also consider upgrading infrastructure/mpfr-3.1.5.tar.xz to a more recent version... or always rely on the host.\n\nAnyway, the patch LGTM, just wondering if this will hide other future similar bugs in the Makefiles/test-system.",
       "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
       "serverId": "f33910f19b7abb192b83adbd000000bf"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fdeb71b_ae0cb753",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000092
+      },
+      "writtenOn": "2024-09-13T00:36:21Z",
+      "side": 1,
+      "message": "FWIW, I think we should stop building gmp, mpfr, and other non-toolchain libraries.  We should link host-side binaries against system libraries.  For most builds we would link against dynamic libraries.  For release-style builds (if we start doing them again), we would link against distro-supplied .a libraries.",
+      "revId": "3d6d5bd13b10b933f5816375453a99827331d888",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
     }
   ]
 }
