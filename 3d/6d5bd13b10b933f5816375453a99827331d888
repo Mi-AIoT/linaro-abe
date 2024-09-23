@@ -1,0 +1,9 @@
+Code-Review+2: Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>
+Code-Review-1: lava-bot
+Code-Review+1: Christophe Lyon <christophe.lyon@linaro.org>
+Submitted-by: Thiago Bauermann <thiago.bauermann@linaro.org>
+Submitted-at: Mon, 23 Sep 2024 15:53:53 +0000
+Reviewed-on: https://review.linaro.org/c/toolchain/abe/+/47519
+Comments-Total: 6
+Project: toolchain/abe
+Branch: refs/heads/master
