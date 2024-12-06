@@ -39,18 +39,26 @@ configfile="default"
 
 manifest_version=1.6
 
+set -x
+echo "DEBUGTRACE:"
 # The default timeout.  If you're on a wireless network this
 # might not be sufficient and can be overridden at the command
 # line.
 wget_timeout=10
 wget_quiet=
 # if output is on a terminal we use the default style (bar), otherwise
-# we use the briefest available dot style to reduce the size of the logs
+# we use the briefest available dot style to reduce the size of the logs.
+# Similarly if not on a terminal, make the (presumably-automated) wget
+# command slightly more robust.
 if [ -t 1 ]; then
     wget_progress_style=
+    wget_tries='--tries=2'
 else
     wget_progress_style=dot:giga
+    wget_timeout=30
+    wget_tries='--tries=5 --retry-connrefused --waitretry=5'
 fi
+set +x
 
 # This doesn't do any real work, just prints the configure options and make commands
 dryrun=no

@@ -226,7 +226,7 @@ fetch_http()
     # NOTE: the timeout is short, and we only try twice to access the
     # remote host. This is to improve performance when offline, or
     # the remote host is offline.
-    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/ ${url} ${overwrite_or_timestamp}"
+    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} ${wget_tries} --directory-prefix=${local_snapshots}/ ${url} ${overwrite_or_timestamp}"
     if test $? -gt 0; then
        error "${url} doesn't exist on the remote machine !"
        return 1
@@ -235,7 +235,7 @@ fetch_http()
        warning "downloaded file ${getfile} has zero data!"
        return 1
     fi
-    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} --tries=2 --directory-prefix=${local_snapshots}/ ${url}.asc ${overwrite_or_timestamp}${getfile_asc:-}"
+    dryrun "${wget_bin} ${wget_quiet:+-q} --timeout=${wget_timeout}${wget_progress_style:+ --progress=${wget_progress_style}} ${wget_tries} --directory-prefix=${local_snapshots}/ ${url}.asc ${overwrite_or_timestamp}${getfile_asc:-}"
     if test x"${dryrun}" != xyes -a ! -s ${local_snapshots}/${getfile}.asc; then
        warning "downloaded file ${getfile}.asc has zero data!"
     fi
