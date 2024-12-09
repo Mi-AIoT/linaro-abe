@@ -1,4 +1,22 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d9c877_69f6664a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000072
+      },
+      "writtenOn": "2024-12-09T12:08:05Z",
+      "side": 1,
+      "message": "At least some of the errors reported are due to the fact that the tests use the previous version of ABE to compare the results, and those build failed.",
+      "revId": "6602d197e58ca1021348ac50e1199854a82a417a",
+      "serverId": "f33910f19b7abb192b83adbd000000bf"
+    }
+  ],
   "submitRequirementResults": []
 }
